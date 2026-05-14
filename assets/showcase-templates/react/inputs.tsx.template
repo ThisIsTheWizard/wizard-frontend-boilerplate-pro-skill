@@ -1,0 +1,407 @@
+"use client";
+
+import { useState } from "react";
+
+import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
+import { CodeBlock } from "@/components/ui/code-block";
+import { Input } from "@/components/ui/input";
+import { RadioGroup } from "@/components/ui/radio-group";
+import { Select } from "@/components/ui/select";
+import { Switch } from "@/components/ui/switch";
+import { Textarea } from "@/components/ui/textarea";
+
+const BUTTON_CODE = `import { Button } from "@/components/ui/button";
+
+export function Example() {
+  return (
+    <div className="flex flex-wrap gap-2">
+      <Button>Default</Button>
+      <Button variant="secondary">Secondary</Button>
+      <Button variant="outline">Outline</Button>
+      <Button variant="ghost">Ghost</Button>
+      <Button variant="destructive">Destructive</Button>
+      <Button variant="link">Link</Button>
+    </div>
+  );
+}`;
+
+const INPUT_CODE = `import { Input } from "@/components/ui/input";
+
+export function Example() {
+  return (
+    <Input
+      helperText="We'll never share your email."
+      id="email"
+      label="Email address"
+      placeholder="you@example.com"
+      type="email"
+    />
+  );
+}`;
+
+const TEXTAREA_CODE = `import { Textarea } from "@/components/ui/textarea";
+
+export function Example() {
+  return (
+    <Textarea
+      helperText="Describe your project in a few sentences."
+      id="bio"
+      label="Bio"
+      placeholder="Tell us about yourself…"
+      rows={4}
+    />
+  );
+}`;
+
+const SELECT_CODE = `import { Select } from "@/components/ui/select";
+
+const FRAMEWORK_OPTIONS = [
+  { label: "Next.js", value: "nextjs" },
+  { label: "Remix", value: "remix" },
+  { label: "Astro", value: "astro" },
+  { label: "SvelteKit", value: "sveltekit" },
+];
+
+export function Example() {
+  return (
+    <Select
+      label="Framework"
+      options={FRAMEWORK_OPTIONS}
+      placeholder="Select a framework…"
+    />
+  );
+}`;
+
+const CHECKBOX_CODE = `import { useState } from "react";
+import { Checkbox } from "@/components/ui/checkbox";
+
+export function Example() {
+  const [checked, setChecked] = useState(false);
+
+  return (
+    <Checkbox
+      checked={checked}
+      id="terms"
+      label="Accept terms and conditions"
+      onCheckedChange={setChecked}
+    />
+  );
+}`;
+
+const RADIO_GROUP_CODE = `import { useState } from "react";
+import { RadioGroup } from "@/components/ui/radio-group";
+
+const PLAN_OPTIONS = [
+  { label: "Free", value: "free" },
+  { label: "Pro", value: "pro" },
+  { label: "Enterprise", value: "enterprise" },
+];
+
+export function Example() {
+  const [plan, setPlan] = useState("free");
+
+  return (
+    <RadioGroup
+      label="Plan"
+      onValueChange={setPlan}
+      options={PLAN_OPTIONS}
+      value={plan}
+    />
+  );
+}`;
+
+const SWITCH_CODE = `import { useState } from "react";
+import { Switch } from "@/components/ui/switch";
+
+export function Example() {
+  const [enabled, setEnabled] = useState(false);
+
+  return (
+    <Switch
+      checked={enabled}
+      id="notifications"
+      label="Email notifications"
+      onCheckedChange={setEnabled}
+    />
+  );
+}`;
+
+const FRAMEWORK_OPTIONS = [
+  { label: "Next.js", value: "nextjs" },
+  { label: "Remix", value: "remix" },
+  { label: "Astro", value: "astro" },
+  { label: "SvelteKit", value: "sveltekit" },
+];
+
+const PLAN_OPTIONS = [
+  { label: "Free", value: "free" },
+  { label: "Pro", value: "pro" },
+  { label: "Enterprise", value: "enterprise" },
+];
+
+export default function InputsPage() {
+  const [checkboxChecked, setCheckboxChecked] = useState(false);
+  const [framework, setFramework] = useState("");
+  const [notifications, setNotifications] = useState(false);
+  const [plan, setPlan] = useState("free");
+
+  return (
+    <div className="flex flex-col gap-16">
+      <div>
+        <h1 className="text-3xl font-bold tracking-tight text-foreground">
+          Inputs
+        </h1>
+        <p className="mt-2 text-muted-foreground">
+          Form controls for collecting user input — buttons, text fields,
+          selections, and toggles.
+        </p>
+      </div>
+
+      <section className="flex flex-col gap-4" id="button">
+        <div>
+          <h2 className="text-xl font-semibold text-foreground">Button</h2>
+          <p className="mt-1 text-sm text-muted-foreground">
+            Triggers an action or event with support for multiple visual variants
+            and sizes.
+          </p>
+        </div>
+        <div className="rounded-lg border border-border bg-card p-8">
+          <div className="flex flex-col gap-4">
+            <div className="flex flex-wrap gap-2">
+              <Button>Default</Button>
+              <Button variant="secondary">Secondary</Button>
+              <Button variant="outline">Outline</Button>
+              <Button variant="ghost">Ghost</Button>
+              <Button variant="destructive">Destructive</Button>
+              <Button variant="link">Link</Button>
+            </div>
+            <div className="flex flex-wrap items-center gap-2">
+              <Button size="sm">Small</Button>
+              <Button size="default">Default</Button>
+              <Button size="lg">Large</Button>
+              <Button disabled>Disabled</Button>
+              <Button loading>Loading</Button>
+            </div>
+          </div>
+        </div>
+        <CodeBlock
+          code={BUTTON_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="Button.tsx"
+          language="tsx"
+        />
+      </section>
+
+      <section className="flex flex-col gap-4" id="input">
+        <div>
+          <h2 className="text-xl font-semibold text-foreground">Input</h2>
+          <p className="mt-1 text-sm text-muted-foreground">
+            A single-line text field with optional label, helper text, and error
+            state.
+          </p>
+        </div>
+        <div className="rounded-lg border border-border bg-card p-8">
+          <div className="flex max-w-sm flex-col gap-4">
+            <Input
+              helperText="We'll never share your email."
+              id="email"
+              label="Email address"
+              placeholder="you@example.com"
+              type="email"
+            />
+            <Input
+              defaultValue="invalid user!"
+              error="Please enter a valid username."
+              id="username-error"
+              label="Username"
+            />
+            <Input
+              disabled
+              id="disabled-input"
+              label="Disabled"
+              placeholder="Not editable"
+            />
+          </div>
+        </div>
+        <CodeBlock
+          code={INPUT_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="Input.tsx"
+          language="tsx"
+        />
+      </section>
+
+      <section className="flex flex-col gap-4" id="textarea">
+        <div>
+          <h2 className="text-xl font-semibold text-foreground">Textarea</h2>
+          <p className="mt-1 text-sm text-muted-foreground">
+            A multi-line text input with label, helper text, and optional
+            auto-resize.
+          </p>
+        </div>
+        <div className="rounded-lg border border-border bg-card p-8">
+          <div className="flex max-w-sm flex-col gap-4">
+            <Textarea
+              helperText="Describe your project in a few sentences."
+              id="bio"
+              label="Bio"
+              placeholder="Tell us about yourself…"
+              rows={4}
+            />
+            <Textarea
+              error="Message is required."
+              id="message-error"
+              label="Message"
+              placeholder="Enter your message…"
+            />
+          </div>
+        </div>
+        <CodeBlock
+          code={TEXTAREA_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="Textarea.tsx"
+          language="tsx"
+        />
+      </section>
+
+      <section className="flex flex-col gap-4" id="select">
+        <div>
+          <h2 className="text-xl font-semibold text-foreground">Select</h2>
+          <p className="mt-1 text-sm text-muted-foreground">
+            A dropdown for picking a single value from a list, with keyboard
+            navigation and ARIA listbox semantics.
+          </p>
+        </div>
+        <div className="rounded-lg border border-border bg-card p-8">
+          <div className="flex max-w-sm flex-col gap-4">
+            <Select
+              label="Framework"
+              onChange={setFramework}
+              options={FRAMEWORK_OPTIONS}
+              placeholder="Select a framework…"
+              value={framework}
+            />
+            <Select
+              disabled
+              label="Disabled"
+              options={FRAMEWORK_OPTIONS}
+              placeholder="Not selectable"
+            />
+          </div>
+        </div>
+        <CodeBlock
+          code={SELECT_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="Select.tsx"
+          language="tsx"
+        />
+      </section>
+
+      <section className="flex flex-col gap-4" id="checkbox">
+        <div>
+          <h2 className="text-xl font-semibold text-foreground">Checkbox</h2>
+          <p className="mt-1 text-sm text-muted-foreground">
+            A binary toggle supporting checked, unchecked, and indeterminate
+            states with full keyboard and ARIA support.
+          </p>
+        </div>
+        <div className="rounded-lg border border-border bg-card p-8">
+          <div className="flex flex-col gap-3">
+            <Checkbox
+              checked={checkboxChecked}
+              id="terms"
+              label="Accept terms and conditions"
+              onCheckedChange={setCheckboxChecked}
+            />
+            <Checkbox
+              defaultChecked
+              id="checked-demo"
+              label="Checked by default"
+            />
+            <Checkbox
+              id="indeterminate-demo"
+              indeterminate
+              label="Indeterminate state"
+            />
+            <Checkbox disabled id="disabled-checkbox" label="Disabled" />
+          </div>
+        </div>
+        <CodeBlock
+          code={CHECKBOX_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="Checkbox.tsx"
+          language="tsx"
+        />
+      </section>
+
+      <section className="flex flex-col gap-4" id="radio-group">
+        <div>
+          <h2 className="text-xl font-semibold text-foreground">RadioGroup</h2>
+          <p className="mt-1 text-sm text-muted-foreground">
+            A set of mutually exclusive options with arrow-key navigation within
+            the group.
+          </p>
+        </div>
+        <div className="rounded-lg border border-border bg-card p-8">
+          <div className="flex flex-col gap-6 sm:flex-row sm:gap-16">
+            <RadioGroup
+              label="Plan (vertical)"
+              onValueChange={setPlan}
+              options={PLAN_OPTIONS}
+              value={plan}
+            />
+            <RadioGroup
+              label="Plan (horizontal)"
+              onValueChange={setPlan}
+              options={PLAN_OPTIONS}
+              orientation="horizontal"
+              value={plan}
+            />
+          </div>
+        </div>
+        <CodeBlock
+          code={RADIO_GROUP_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="RadioGroup.tsx"
+          language="tsx"
+        />
+      </section>
+
+      <section className="flex flex-col gap-4" id="switch">
+        <div>
+          <h2 className="text-xl font-semibold text-foreground">Switch</h2>
+          <p className="mt-1 text-sm text-muted-foreground">
+            An on/off toggle for binary settings, announced as a switch by
+            assistive technologies.
+          </p>
+        </div>
+        <div className="rounded-lg border border-border bg-card p-8">
+          <div className="flex flex-col gap-3">
+            <Switch
+              checked={notifications}
+              id="notifications"
+              label="Email notifications"
+              onCheckedChange={setNotifications}
+            />
+            <Switch defaultChecked id="marketing" label="Marketing emails" />
+            <Switch disabled id="disabled-switch" label="Disabled" />
+          </div>
+        </div>
+        <CodeBlock
+          code={SWITCH_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="Switch.tsx"
+          language="tsx"
+        />
+      </section>
+    </div>
+  );
+}
