@@ -33,7 +33,7 @@
 
 ## 5. Assets — showcase templates
 - [x] `assets/showcase-templates/react/layout.tsx.template`
-- [ ] `assets/showcase-templates/react/sidebar.tsx.template`
+- [x] `assets/showcase-templates/react/sidebar.tsx.template`
 - [ ] `assets/showcase-templates/react/inputs.tsx.template`
 - [ ] `assets/showcase-templates/react/display.tsx.template`
 - [ ] `assets/showcase-templates/react/feedback.tsx.template`

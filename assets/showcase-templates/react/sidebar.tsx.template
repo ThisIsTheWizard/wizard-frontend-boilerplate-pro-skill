@@ -1,0 +1,148 @@
+"use client";
+
+import { useEffect, useState } from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+
+import { cn } from "@/lib/utils";
+
+interface NavItem {
+  category: string;
+  components: string[];
+  slug: string;
+}
+
+interface SidebarProps {
+  onNavigate?: () => void;
+}
+
+const NAV_ITEMS: NavItem[] = [
+  {
+    category: "Data viz",
+    components: ["Chart", "DataTable", "Calendar"],
+    slug: "data-viz",
+  },
+  {
+    category: "Display",
+    components: ["Card", "Badge", "Avatar", "Separator", "Skeleton", "Table"],
+    slug: "display",
+  },
+  {
+    category: "Feedback",
+    components: ["Alert", "Toast", "Progress", "Tooltip", "Dialog"],
+    slug: "feedback",
+  },
+  {
+    category: "Inputs",
+    components: ["Button", "Input", "Textarea", "Select", "Checkbox", "RadioGroup", "Switch"],
+    slug: "inputs",
+  },
+  {
+    category: "Navigation",
+    components: ["Tabs", "Breadcrumb", "Pagination", "NavigationMenu"],
+    slug: "navigation",
+  },
+  {
+    category: "Overlay",
+    components: ["Popover", "DropdownMenu", "Sheet"],
+    slug: "overlay",
+  },
+];
+
+function toSlug(name: string): string {
+  return name
+    .replace(/[A-Z]/g, (char, offset: number) => (offset > 0 ? `-${char}` : char))
+    .toLowerCase();
+}
+
+export function Sidebar({ onNavigate }: SidebarProps) {
+  const pathname = usePathname();
+  const [activeAnchor, setActiveAnchor] = useState("");
+
+  const activeSlug = pathname.startsWith("/library/")
+    ? pathname.slice("/library/".length)
+    : "";
+
+  useEffect(() => {
+    setActiveAnchor("");
+
+    const sections = document.querySelectorAll<HTMLElement>("section[id]");
+    if (sections.length === 0) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            setActiveAnchor(entry.target.id);
+          }
+        }
+      },
+      { rootMargin: "-80px 0px -66% 0px" },
+    );
+
+    sections.forEach((section) => observer.observe(section));
+    return () => observer.disconnect();
+  }, [pathname]);
+
+  return (
+    <nav
+      aria-label="Component library navigation"
+      className="flex h-full flex-col"
+    >
+      <div className="flex h-16 shrink-0 items-center border-b border-border px-4">
+        <Link
+          className="text-sm font-semibold text-foreground hover:text-primary"
+          href="/library"
+          onClick={onNavigate}
+        >
+          Component Library
+        </Link>
+      </div>
+
+      <div className="flex-1 overflow-y-auto py-4">
+        {NAV_ITEMS.map(({ category, components, slug }) => {
+          const isCategoryActive = activeSlug === slug;
+
+          return (
+            <div className="px-3 py-1" key={slug}>
+              <Link
+                className={cn(
+                  "block rounded-md px-2 py-1.5 text-sm font-medium transition-colors hover:text-primary",
+                  isCategoryActive ? "text-primary" : "text-muted-foreground",
+                )}
+                href={`/library/${slug}`}
+                onClick={onNavigate}
+              >
+                {category}
+              </Link>
+
+              <div className="mt-0.5 space-y-0.5">
+                {components.map((component) => {
+                  const componentSlug = toSlug(component);
+                  const isAnchorActive =
+                    isCategoryActive && activeAnchor === componentSlug;
+
+                  return (
+                    <Link
+                      className={cn(
+                        "block rounded-md px-4 py-1 text-sm transition-colors hover:text-foreground",
+                        isAnchorActive
+                          ? "font-medium text-primary"
+                          : "text-muted-foreground",
+                      )}
+                      href={`/library/${slug}#${componentSlug}`}
+                      key={componentSlug}
+                      onClick={onNavigate}
+                    >
+                      {component}
+                    </Link>
+                  );
+                })}
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </nav>
+  );
+}
