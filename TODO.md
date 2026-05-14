@@ -66,12 +66,20 @@
 ## 9. Workflow doc
 - [ ] Write `workflow.md` — detailed playbook with verbatim commands for all 7 phases
 
-## 10. End-to-end validation (simulated runs)
+## 10. Public distribution files
+- [ ] Write `skill.json` — root manifest (name, version, owner, plugins array)
+- [ ] Write `.claude-plugin/plugin.json` — Claude Code plugin metadata (keywords, category, capabilities)
+- [ ] Write `.claude-plugin/marketplace.json` — marketplace distribution entry
+- [ ] Write `README.md` — public-facing repo documentation (distinct from `SKILL.md`)
+- [ ] Add `LICENSE` — MIT license
+- [ ] Create `.claude/skills/wizard-frontend-boilerplate-pro/` entry point (symlink or copy of `SKILL.md`)
+
+## 11. End-to-end validation (simulated runs)
 - [ ] **Run 1:** Next.js 15 + TS + Tailwind v4 + Modern Slate — dev server starts, all 6 routes render, theme toggle works, WCAG AA passes
 - [ ] **Run 2:** Vue 3.5 + TS + Tailwind v4 + Custom hex `#0ea5e9` / `#f59e0b` — same checks
 - [ ] **Run 3:** SvelteKit + TS + Tailwind v4 + Monochrome — same checks
 
-## 11. Portability check
+## 12. Portability check
 - [ ] Confirm `SKILL.md` contains no Claude-specific syntax (`<*>` tags, internal tool names)
 - [ ] Confirm `AGENTS.md` contains no Claude-specific syntax
 - [ ] Confirm all actions are shell commands or file edits executable by a generic agent
