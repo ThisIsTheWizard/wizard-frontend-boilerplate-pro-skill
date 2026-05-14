@@ -4,6 +4,17 @@ This file contains fully standalone implementations of all 28 components using
 only Tailwind utility classes. No external dependencies. Use these when
 `scripts/locate_ui_ux_pro_max.sh` fails and the sibling skill is unavailable.
 
+## Table of Contents
+
+- [Inputs](#inputs): Button, Input, Textarea, Select, Checkbox, RadioGroup, Switch
+- [Display](#display): Card, Badge, Avatar, Separator, Skeleton, Table
+- [Feedback](#feedback): Alert, Toast, Progress, Tooltip, Dialog
+- [Navigation](#navigation): Tabs, Breadcrumb, Pagination, NavigationMenu
+- [Overlay](#overlay): Popover, DropdownMenu, Sheet
+- [Data viz](#data-viz): Chart, DataTable, Calendar
+- [Utility helper](#utility-helper)
+- [Framework adaptation](#framework-adaptation)
+
 ---
 
 ## Inputs
