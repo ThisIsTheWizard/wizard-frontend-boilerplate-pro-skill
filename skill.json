@@ -1,18 +1,24 @@
 {
   "name": "wizard-frontend-boilerplate-pro",
   "version": "1.0.0",
-  "owner": "wizard-frontend-boilerplate-pro",
-  "description": "Scaffold production-ready frontend apps with Next.js, React, Vue, Nuxt, or Svelte with themed component showcase",
+  "author": "The Wizard",
+  "owner": "ThisIsTheWizard",
+  "description": "Scaffold production-ready frontend apps with Next.js, React, Vue, Nuxt, or SvelteKit — 28 UI components, OKLCH color palettes, light/dark theming, WCAG AA contrast.",
+  "entry": "SKILL.md",
+  "homepage": "https://github.com/ThisIsTheWizard/wizard-frontend-boilerplate-pro",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ThisIsTheWizard/wizard-frontend-boilerplate-pro.git"
+  },
   "plugins": [
     {
       "type": "skill",
       "name": "ui-ux-pro-max",
-      "source": "local"
+      "source": "local",
+      "optional": true,
+      "description": "Sibling skill used as component source. Falls back to built-in implementations when not installed."
     }
   ],
-  "dependencies": {
-    "ui-ux-pro-max": "local"
-  },
   "portable": true,
   "tested_agents": [
     "aider",
