@@ -22,7 +22,7 @@
 - [x] `references/ui-library/framework-adapters/react-adapter.md`
 - [x] `references/ui-library/framework-adapters/vue-adapter.md`
 - [x] `references/ui-library/framework-adapters/svelte-adapter.md`
-- [ ] `references/theming.md` — CSS var tokens, dark mode strategy
+- [x] `references/theming.md` — CSS var tokens, dark mode strategy
 - [ ] `references/component-catalog.md` — all 28 components (name, category, deps, props interface, source mapping)
 - [ ] `references/showcase-layout.md` — sidebar nav, header, category routing, CodeBlock utility
 - [ ] `references/portability.md` — notes for non-Claude agents, tested agent list
