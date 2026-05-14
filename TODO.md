@@ -10,7 +10,7 @@
 ## 3. Reference files (`references/`)
 - [x] `references/frameworks/nextjs.md` — create-next-app, App Router setup
 - [x] `references/frameworks/react-vite.md`
-- [ ] `references/frameworks/vue.md` — Vue 3.5+
+- [x] `references/frameworks/vue.md` — Vue 3.5+
 - [ ] `references/frameworks/nuxt.md` — Nuxt 4
 - [ ] `references/frameworks/svelte-kit.md` — Svelte 5
 - [ ] `references/tailwind/v4-setup.md` — @tailwindcss/postcss, @theme
