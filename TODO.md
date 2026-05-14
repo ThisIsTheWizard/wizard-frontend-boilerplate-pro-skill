@@ -19,7 +19,7 @@
 - [x] `references/tailwind/per-framework-gotchas.md`
 - [X] `references/ui-library/ui-ux-pro-max-bridge.md` — integration contract, search paths, name-mapping table, per-framework adaptation rules, graceful fallback section
 - [ ] `references/ui-library/custom-tailwind.md` — standalone fallback component implementations
-- [ ] `references/ui-library/framework-adapters/react-adapter.md`
+- [x] `references/ui-library/framework-adapters/react-adapter.md`
 - [ ] `references/ui-library/framework-adapters/vue-adapter.md`
 - [ ] `references/ui-library/framework-adapters/svelte-adapter.md`
 - [ ] `references/theming.md` — CSS var tokens, dark mode strategy
