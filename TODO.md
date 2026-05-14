@@ -55,13 +55,13 @@
 - [x] `assets/snippet-template.txt` — collapsible code-snippet block format
 
 ## 8. Scripts
-- [ ] `scripts/check_versions.sh` — query npm registry for latest versions
-- [ ] `scripts/generate_palette.py` — hex/OKLCH → 50–950 scale
-- [ ] `scripts/verify_contrast.py` — WCAG AA gate
-- [ ] `scripts/detect_package_manager.sh` — pnpm/yarn/npm/bun detection
-- [ ] `scripts/locate_ui_ux_pro_max.sh` — find sibling skill on disk
-- [ ] Validate all `.sh` files with `bash -n`
-- [ ] Validate all `.py` files with `python -m py_compile`
+- [x] `scripts/check_versions.sh` — query npm registry for latest versions
+- [x] `scripts/generate_palette.py` — hex/OKLCH → 50–950 scale
+- [x] `scripts/verify_contrast.py` — WCAG AA gate
+- [x] `scripts/detect_package_manager.sh` — pnpm/yarn/npm/bun detection
+- [x] `scripts/locate_ui_ux_pro_max.sh` — find sibling skill on disk
+- [x] Validate all `.sh` files with `bash -n`
+- [x] Validate all `.py` files with `python -m py_compile`
 
 ## 9. Workflow doc
 - [ ] Write `workflow.md` — detailed playbook with verbatim commands for all 7 phases
