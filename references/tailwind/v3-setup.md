@@ -165,12 +165,12 @@ v3 does not have a `@theme` block. Design tokens are declared in
   /* Palette scale — raw values (neutral) */
   --color-neutral-50: #f8fafc;
   --color-neutral-100: #f1f5f9;
-  /* … 50–950 … */
+  /* ... 50–950 ... */
   --color-neutral-950: #020617;
 
   /* Palette scale — raw values (accent) */
   --color-accent-50: #eef2ff;
-  /* … */
+  /* ... */
   --color-accent-950: #1e1b4b;
 
   /* Semantic tokens — light mode */
@@ -267,10 +267,10 @@ Components consume semantic tokens via CSS variables or the extended utilities.
 
 ```html
 <!-- Via extended utility (preferred) -->
-<div class="bg-background text-foreground border-border">…</div>
+<div class="bg-background text-foreground border-border">...</div>
 
 <!-- Via arbitrary value (fallback) -->
-<div class="bg-[var(--background)] text-[var(--foreground)]">…</div>
+<div class="bg-[var(--background)] text-[var(--foreground)]">...</div>
 ```
 
 Both forms work in v3. The extended utility form is preferred because it gives
@@ -289,10 +289,10 @@ the config above). The ThemeProvider in `assets/theme-provider/` toggles
 
 ```html
 <!-- Explicit dark variant -->
-<div class="bg-white dark:bg-surface">…</div>
+<div class="bg-white dark:bg-surface">...</div>
 
 <!-- Semantic token (no dark: variant needed) -->
-<div class="bg-background">…</div>
+<div class="bg-background">...</div>
 ```
 
 > Prefer semantic tokens. They avoid `dark:` duplication and keep component
