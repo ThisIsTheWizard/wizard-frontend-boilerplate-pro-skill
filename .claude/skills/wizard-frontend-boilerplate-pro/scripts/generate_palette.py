@@ -234,7 +234,7 @@ def emit_semantic_css() -> str:
   --ring: var(--color-accent-400);
 
   /* Primary / Accent */
-  --primary: var(--color-accent-500);
+  --primary: var(--color-accent-600);
   --primary-foreground: var(--color-neutral-50);
   --secondary: var(--color-neutral-200);
   --secondary-foreground: var(--color-neutral-900);
@@ -445,7 +445,7 @@ def main(argv: list[str] | None = None) -> int:
     accent_scale = generate_scale(aL, aC, aH)
 
     if fmt == "css":
-        print(emit_css_theme(neutral_scale, accent_scale))
+        print(emit_tokens_css(neutral_scale, accent_scale))
     elif fmt == "json":
         print(
             json.dumps(

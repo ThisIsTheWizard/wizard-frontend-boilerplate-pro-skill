@@ -119,7 +119,7 @@ SEMANTIC_PAIRS = [
     ("light / foreground on background",       "light", "neutral", "950", "neutral", "50"),
     ("light / muted-fg on background",         "light", "neutral", "500", "neutral", "50"),
     ("light / muted-fg on surface",            "light", "neutral", "500", "neutral", "100"),
-    ("light / primary-fg on primary",          "light", "neutral",  "50", "accent",  "500"),
+    ("light / primary-fg on primary",          "light", "neutral",  "50", "accent",  "600"),
     ("light / secondary-fg on secondary",      "light", "neutral", "900", "neutral", "200"),
     ("light / accent-fg on accent",            "light", "neutral", "900", "neutral", "100"),
     ("light / destructive-fg on destructive",  "light", "neutral",  "50", "neutral", "900"),
@@ -238,7 +238,7 @@ def main(argv: list[str] | None = None) -> int:
     if argv is None:
         argv = sys.argv[1:]
 
-    if not argv or argv[0] in ("-h", "--help"):
+    if argv and argv[0] in ("-h", "--help"):
         print(__doc__)
         return 0
 

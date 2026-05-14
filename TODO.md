@@ -75,11 +75,11 @@
 - [x] Create `.claude/skills/wizard-frontend-boilerplate-pro/` entry point (symlink or copy of `SKILL.md`)
 
 ## 11. End-to-end validation (simulated runs)
-- [ ] **Run 1:** Next.js 15 + TS + Tailwind v4 + Modern Slate — dev server starts, all 6 routes render, theme toggle works, WCAG AA passes
-- [ ] **Run 2:** Vue 3.5 + TS + Tailwind v4 + Custom hex `#0ea5e9` / `#f59e0b` — same checks
-- [ ] **Run 3:** SvelteKit + TS + Tailwind v4 + Monochrome — same checks
+- [x] **Run 1:** Next.js 15 + TS + Tailwind v4 + Modern Slate — dev server starts, all 6 routes render, theme toggle works, WCAG AA passes
+- [x] **Run 2:** Vue 3.5 + TS + Tailwind v4 + Custom hex `#0ea5e9` / `#f59e0b` — same checks
+- [x] **Run 3:** SvelteKit + TS + Tailwind v4 + Monochrome — same checks
 
 ## 12. Portability check
-- [ ] Confirm `SKILL.md` contains no Claude-specific syntax (`<*>` tags, internal tool names)
-- [ ] Confirm `AGENTS.md` contains no Claude-specific syntax
-- [ ] Confirm all actions are shell commands or file edits executable by a generic agent
+- [x] Confirm `SKILL.md` contains no Claude-specific syntax (`<*>` tags, internal tool names)
+- [x] Confirm `AGENTS.md` contains no Claude-specific syntax
+- [x] Confirm all actions are shell commands or file edits executable by a generic agent
