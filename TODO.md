@@ -14,7 +14,7 @@
 - [x] `references/frameworks/nuxt.md` — Nuxt 4
 - [x] `references/frameworks/svelte-kit.md` — Svelte 5
 - [x] All frontend app should have home page (/) redirected to /library page and components showcase will be shown in /library page. Update plan, existing created files and plan for next.
-- [ ] `references/tailwind/v4-setup.md` — @tailwindcss/postcss, @theme
+- [x] `references/tailwind/v4-setup.md` — @tailwindcss/postcss, @theme
 - [ ] `references/tailwind/v3-setup.md` — fallback
 - [ ] `references/tailwind/per-framework-gotchas.md`
 - [ ] `references/ui-library/ui-ux-pro-max-bridge.md` — integration contract, search paths, name-mapping table, per-framework adaptation rules, graceful fallback section
