@@ -32,7 +32,7 @@
 - [x] Generate `assets/color-presets.json` using the same algorithm (8 presets + custom slot, OKLCH 50–950 scales, light/dark CSS var mappings)
 
 ## 5. Assets — showcase templates
-- [ ] `assets/showcase-templates/react/layout.tsx.template`
+- [x] `assets/showcase-templates/react/layout.tsx.template`
 - [ ] `assets/showcase-templates/react/sidebar.tsx.template`
 - [ ] `assets/showcase-templates/react/inputs.tsx.template`
 - [ ] `assets/showcase-templates/react/display.tsx.template`
