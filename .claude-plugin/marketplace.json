@@ -1,0 +1,69 @@
+{
+  "id": "wizard-frontend-boilerplate-pro",
+  "name": "Wizard Frontend Boilerplate Pro",
+  "slug": "wizard-frontend-boilerplate-pro",
+  "description": "Scaffold production-ready frontend apps with Next.js, React, Vue, Nuxt, or Svelte with themed component showcase, design tokens, and light/dark theming",
+  "long_description": "A comprehensive skill for scaffolding production-ready frontend applications. Features include:\n\n- Support for Next.js, React + Vite, Vue 3, Nuxt 4, and SvelteKit\n- 28 pre-built UI components across 6 categories\n- Automatic color palette generation with OKLCH algorithm\n- Light/dark mode with FOUC prevention\n- Tailwind v4 support with @theme directive\n- Collapsible code snippets in showcase\n- WCAG AA compliant color contrast\n- Works with ui-ux-pro-max skill for enhanced UI/UX",
+  "logo": "https://raw.githubusercontent.com/wizard-frontend-boilerplate-pro/skill/main/assets/logo.svg",
+  "icon": "🧙",
+  "version": "1.0.0",
+  "author": {
+    "name": "Elias Shekh",
+    "url": "https://github.com/ThisIsTheWizard/wizard-frontend-boilerplate-pro"
+  },
+  "categories": ["frontend", "scaffolding", "ui-components", "theming"],
+  "tags": ["nextjs", "react", "vue", "nuxt", "svelte", "tailwind", "frontend", "boilerplate"],
+  "price": "free",
+  "license": "MIT",
+  "homepage": "https://github.com/wizard-frontend-boilerplate-pro/skill",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wizard-frontend-boilerplate-pro/skill.git"
+  },
+  "compatibility": {
+    "aider": ">=1.0.0",
+    "claude": ">=1.0.0",
+    "claude-code": ">=1.0.0",
+    "codex": ">=1.0.0",
+    "continue": ">=1.0.0",
+    "cursor": ">=1.0.0",
+    "gemini": ">=1.0.0",
+    "gemini-cli": ">=1.0.0",
+    "opencode": ">=1.0.0",
+    "tabby": ">=1.0.0",
+    "windsurf": ">=1.0.0"
+  },
+  "portable": true,
+  "tested_agents": [
+    "aider",
+    "claude",
+    "claude-code",
+    "codex",
+    "continue",
+    "cursor",
+    "gemini",
+    "gemini-cli",
+    "opencode",
+    "tabby",
+    "windsurf"
+  ],
+  "features": [
+    "7-phase scaffolding workflow",
+    "Framework-specific setup (Next.js, React, Vue, Nuxt, SvelteKit)",
+    "Interactive user interview for project configuration",
+    "Live package version resolution",
+    "Automatic color palette generation",
+    "28 UI components with showcase",
+    "Light/dark theme support",
+    "Tailwind v4 with @theme directive",
+    "Design tokens and CSS variables",
+    "WCAG AA color contrast validation"
+  ],
+  "screenshots": [],
+  "funding": {
+    "type": "github",
+    "url": "https://github.com/ThisIsTheWizard/wizard-frontend-boilerplate-pro"
+  },
+  "last_updated": "2025-05-14",
+  "compatibility_notes": "Works with any AI agent CLI (Aider, Claude, Claude Code, Codex, Continue, Cursor, Gemini, Gemini CLI, Opencode, Tabby, Windsurf). Uses standard shell commands and file operations. Pairs best with ui-ux-pro-max skill for enhanced UI/UX recommendations."
+}

@@ -1,0 +1,43 @@
+{
+  "name": "wizard-frontend-boilerplate-pro",
+  "version": "1.0.0",
+  "owner": "wizard-frontend-boilerplate-pro",
+  "description": "Scaffold production-ready frontend apps with Next.js, React, Vue, Nuxt, or Svelte with themed component showcase",
+  "plugins": [
+    {
+      "type": "skill",
+      "name": "ui-ux-pro-max",
+      "source": "local"
+    }
+  ],
+  "dependencies": {
+    "ui-ux-pro-max": "local"
+  },
+  "portable": true,
+  "tested_agents": [
+    "aider",
+    "claude",
+    "claude-code",
+    "codex",
+    "continue",
+    "cursor",
+    "gemini",
+    "gemini-cli",
+    "opencode",
+    "tabby",
+    "windsurf"
+  ],
+  "compatibility": {
+    "aider": ">=1.0.0",
+    "claude": ">=1.0.0",
+    "claude-code": ">=1.0.0",
+    "codex": ">=1.0.0",
+    "continue": ">=1.0.0",
+    "cursor": ">=1.0.0",
+    "gemini": ">=1.0.0",
+    "gemini-cli": ">=1.0.0",
+    "opencode": ">=1.0.0",
+    "tabby": ">=1.0.0",
+    "windsurf": ">=1.0.0"
+  }
+}

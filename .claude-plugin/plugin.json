@@ -1,0 +1,67 @@
+{
+  "schema_version": "v1",
+  "name_for_human": "Wizard Frontend Boilerplate Pro",
+  "name_for_machine": "wizard-frontend-boilerplate-pro",
+  "description": "Scaffold production-ready frontend apps with Next.js, React, Vue, Nuxt, or Svelte with themed component showcase, design tokens, and light/dark theming",
+  "logo": "https://raw.githubusercontent.com/ThisIsTheWizard/wizard-frontend-boilerplate-pro/skill/main/assets/logo.svg",
+  "icon": "🧙",
+  "categories": ["frontend", "scaffolding", "ui-components", "theming"],
+  "keywords": [
+    "nextjs",
+    "react",
+    "vue",
+    "nuxt",
+    "svelte",
+    "sveltekit",
+    "tailwind",
+    "frontend",
+    "boilerplate",
+    "starter",
+    "scaffold",
+    "component-library",
+    "showcase",
+    "theming",
+    "design-tokens"
+  ],
+  "capabilities": {
+    "scaffolding": {
+      "frameworks": ["nextjs", "react-vite", "vue", "nuxt", "sveltekit"],
+      "features": [
+        "component-showcase",
+        "color-palette-generator",
+        "design-tokens",
+        "light-dark-theme",
+        "tailwind-v4-support"
+      ]
+    },
+    "ui-components": {
+      "categories": ["inputs", "display", "feedback", "navigation", "overlay", "data-viz"],
+      "count": 28
+    }
+  },
+  "version": "10.0.0",
+  "compatibility": {
+    "aider": ">=1.0.0",
+    "claude": ">=1.0.0",
+    "claude-code": ">=1.0.0",
+    "codex": ">=1.0.0",
+    "continue": ">=1.0.0",
+    "cursor": ">=1.0.0",
+    "gemini": ">=1.0.0",
+    "gemini-cli": ">=1.0.0",
+    "opencode": ">=1.0.0",
+    "tabby": ">=1.0.0",
+    "windsurf": ">=1.0.0"
+  },
+  "portable": true,
+  "tested_agents": ["aider", "claude", "claude-code", "codex", "continue", "cursor", "gemini", "gemini-cli", "opencode", "tabby", "windsurf"],
+  "homepage": "https://github.com/ThisIsTheWizard/wizard-frontend-boilerplate-pro/skill",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ThisIsTheWizard/wizard-frontend-boilerplate-pro/skill.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ThisIsTheWizard/wizard-frontend-boilerplate-pro/skill/issues"
+  },
+  "license": "MIT"
+}

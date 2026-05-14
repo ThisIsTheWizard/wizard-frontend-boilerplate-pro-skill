@@ -67,12 +67,12 @@
 - [ ] Write `workflow.md` — detailed playbook with verbatim commands for all 7 phases
 
 ## 10. Public distribution files
-- [ ] Write `skill.json` — root manifest (name, version, owner, plugins array)
-- [ ] Write `.claude-plugin/plugin.json` — Claude Code plugin metadata (keywords, category, capabilities)
-- [ ] Write `.claude-plugin/marketplace.json` — marketplace distribution entry
-- [ ] Write `README.md` — public-facing repo documentation (distinct from `SKILL.md`)
-- [ ] Add `LICENSE` — MIT license
-- [ ] Create `.claude/skills/wizard-frontend-boilerplate-pro/` entry point (symlink or copy of `SKILL.md`)
+- [x] Write `skill.json` — root manifest (name, version, owner, plugins array)
+- [x] Write `.claude-plugin/plugin.json` — Claude Code plugin metadata (keywords, category, capabilities)
+- [x] Write `.claude-plugin/marketplace.json` — marketplace distribution entry
+- [x] Write `README.md` — public-facing repo documentation (distinct from `SKILL.md`)
+- [x] Add `LICENSE` — MIT license
+- [x] Create `.claude/skills/wizard-frontend-boilerplate-pro/` entry point (symlink or copy of `SKILL.md`)
 
 ## 11. End-to-end validation (simulated runs)
 - [ ] **Run 1:** Next.js 15 + TS + Tailwind v4 + Modern Slate — dev server starts, all 6 routes render, theme toggle works, WCAG AA passes
