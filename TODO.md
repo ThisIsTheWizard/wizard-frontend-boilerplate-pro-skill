@@ -64,7 +64,7 @@
 - [x] Validate all `.py` files with `python -m py_compile`
 
 ## 9. Workflow doc
-- [ ] Write `workflow.md` — detailed playbook with verbatim commands for all 7 phases
+- [x] Write `workflow.md` — detailed playbook with verbatim commands for all 7 phases
 
 ## 10. Public distribution files
 - [x] Write `skill.json` — root manifest (name, version, owner, plugins array)
