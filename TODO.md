@@ -21,7 +21,7 @@
 - [ ] `references/ui-library/custom-tailwind.md` — standalone fallback component implementations
 - [x] `references/ui-library/framework-adapters/react-adapter.md`
 - [x] `references/ui-library/framework-adapters/vue-adapter.md`
-- [ ] `references/ui-library/framework-adapters/svelte-adapter.md`
+- [x] `references/ui-library/framework-adapters/svelte-adapter.md`
 - [ ] `references/theming.md` — CSS var tokens, dark mode strategy
 - [ ] `references/component-catalog.md` — all 28 components (name, category, deps, props interface, source mapping)
 - [ ] `references/showcase-layout.md` — sidebar nav, header, category routing, CodeBlock utility
