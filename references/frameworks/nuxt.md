@@ -179,22 +179,43 @@ useHead({
 
 ## 5. Routing setup
 
-Nuxt uses **file-based routing** — no router config is needed. Create the six
-showcase page files and Nuxt generates the routes automatically.
+Nuxt uses **file-based routing** — no router config is needed. The home page
+at `/` redirects to `/library`, and all showcase pages live under `/library/`.
 
 ```bash
-# Create the six category pages (content added in Phase 6)
-touch pages/index.vue
-touch pages/inputs.vue
-touch pages/display.vue
-touch pages/feedback.vue
-touch pages/navigation.vue
-touch pages/overlay.vue
-touch "pages/data-viz.vue"
+# Home page that redirects to /library
+cat > pages/index.vue << 'EOF'
+<script setup lang="ts">
+await navigateTo("/library", { replace: true });
+</script>
+EOF
+
+# Library section pages (content added in Phase 6)
+mkdir -p pages/library
+touch pages/library/index.vue
+touch pages/library/inputs.vue
+touch pages/library/display.vue
+touch pages/library/feedback.vue
+touch pages/library/navigation.vue
+touch pages/library/overlay.vue
+touch "pages/library/data-viz.vue"
 ```
 
+The resulting URL structure:
+
+| File | URL |
+|---|---|
+| `pages/index.vue` | `/` → redirects to `/library` |
+| `pages/library/index.vue` | `/library` |
+| `pages/library/inputs.vue` | `/library/inputs` |
+| `pages/library/display.vue` | `/library/display` |
+| `pages/library/feedback.vue` | `/library/feedback` |
+| `pages/library/navigation.vue` | `/library/navigation` |
+| `pages/library/overlay.vue` | `/library/overlay` |
+| `pages/library/data-viz.vue` | `/library/data-viz` |
+
 > In the Nuxt 4 app directory layout, pages live at `app/pages/` — adjust the
-> `touch` paths above if `nuxi init` used that convention.
+> paths above if `nuxi init` used that convention.
 
 Create the default layout that wraps every page with Sidebar and Header. This
 file is the Nuxt equivalent of the root layout in Next.js or `AppLayout.vue`
@@ -331,13 +352,15 @@ After scaffold + cleanup + Phase 4 setup (standard root layout — not app direc
 ├── layouts/
 │   └── default.vue              # wraps Sidebar + Header + slot
 ├── pages/
-│   ├── index.vue
-│   ├── inputs.vue
-│   ├── display.vue
-│   ├── feedback.vue
-│   ├── navigation.vue
-│   ├── overlay.vue
-│   └── data-viz.vue
+│   ├── index.vue                # redirects to /library
+│   └── library/
+│       ├── index.vue            # /library landing
+│       ├── inputs.vue           # /library/inputs
+│       ├── display.vue          # /library/display
+│       ├── feedback.vue         # /library/feedback
+│       ├── navigation.vue       # /library/navigation
+│       ├── overlay.vue          # /library/overlay
+│       └── data-viz.vue         # /library/data-viz
 ├── utils/
 │   └── utils.ts                 # cn() helper
 ├── app.vue
@@ -356,7 +379,7 @@ the structure above shifts:
 │   ├── assets/styles/           # same contents
 │   ├── components/              # same contents
 │   ├── layouts/                 # same contents
-│   ├── pages/                   # same contents
+│   ├── pages/                   # same contents (with library/ subfolder)
 │   ├── utils/
 │   └── app.vue
 ├── nuxt.config.ts

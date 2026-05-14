@@ -121,7 +121,7 @@ fresh scaffold. These files are replaced by the showcase templates in Phase 6.
 
 ```bash
 # Remove boilerplate demo files
-rm -f src/app/page.tsx          # replaced by showcase home route
+rm -f src/app/page.tsx          # replaced by redirect below
 rm -f src/app/globals.css       # replaced by tokens.css import
 rm -rf public/next.svg
 rm -rf public/vercel.svg
@@ -151,6 +151,41 @@ Create the styles directory for Phase 4:
 
 ```bash
 mkdir -p src/styles
+```
+
+Write the home page that redirects to `/library`:
+
+```bash
+cat > src/app/page.tsx << 'EOF'
+import { redirect } from "next/navigation";
+
+export default function Home() {
+  redirect("/library");
+}
+EOF
+```
+
+Create the `/library` route group and its stub pages (Phase 6 fills in content):
+
+```bash
+mkdir -p src/app/library/inputs
+mkdir -p src/app/library/display
+mkdir -p src/app/library/feedback
+mkdir -p src/app/library/navigation
+mkdir -p src/app/library/overlay
+mkdir -p "src/app/library/data-viz"
+
+# Library landing page
+cat > src/app/library/page.tsx << 'EOF'
+export default function LibraryPage() {
+  return null;
+}
+EOF
+
+# Category page stubs (Phase 6 installs full content)
+for dir in inputs display feedback navigation overlay data-viz; do
+  echo 'export default function Page() { return null; }' > "src/app/library/$dir/page.tsx"
+done
 ```
 
 ---
@@ -222,7 +257,9 @@ After scaffold + cleanup + Phase 4 setup, the project should look like:
 │   └── favicon.ico
 ├── src/
 │   ├── app/
-│   │   ├── (showcase)/          # route group — added in Phase 6
+│   │   ├── library/             # showcase section — added in Phase 6
+│   │   │   ├── layout.tsx       # sidebar + header layout for /library/*
+│   │   │   ├── page.tsx         # /library landing with category links
 │   │   │   ├── inputs/
 │   │   │   │   └── page.tsx
 │   │   │   ├── display/
@@ -235,8 +272,8 @@ After scaffold + cleanup + Phase 4 setup, the project should look like:
 │   │   │   │   └── page.tsx
 │   │   │   └── data-viz/
 │   │   │       └── page.tsx
-│   │   ├── layout.tsx           # root layout with ThemeProvider + Sidebar
-│   │   ├── page.tsx             # home / landing
+│   │   ├── layout.tsx           # root layout with ThemeProvider only
+│   │   ├── page.tsx             # redirects to /library
 │   │   └── globals.css
 │   ├── components/
 │   │   ├── ui/                  # 28 components installed in Phase 5
@@ -254,8 +291,10 @@ After scaffold + cleanup + Phase 4 setup, the project should look like:
 └── package.json
 ```
 
-The `(showcase)` route group lets the six category routes share a nested
-layout that includes the Sidebar without adding `showcase` to the URL path.
+`src/app/layout.tsx` is the root layout — it mounts the `ThemeProvider` and
+sets `<html lang="en">` but does **not** render the Sidebar. The Sidebar lives
+in `src/app/library/layout.tsx` so it only appears on `/library/*` routes, not
+on the redirect page at `/`.
 
 ---
 

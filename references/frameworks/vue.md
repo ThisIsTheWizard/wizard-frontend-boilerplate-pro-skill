@@ -197,7 +197,8 @@ import AppLayout from "@/components/AppLayout.vue";
 ## 5. Router setup
 
 `create-vue --router` generates `src/router/index.ts` with two placeholder
-routes. Replace the entire file with the six showcase routes:
+routes. Replace the entire file with the showcase routes. `/` redirects to
+`/library` and all showcase pages are nested under `/library`:
 
 ```ts
 import { createRouter, createWebHistory } from "vue-router";
@@ -207,30 +208,34 @@ const router = createRouter({
   routes: [
     {
       path: "/",
-      component: () => import("@/views/HomeView.vue"),
+      redirect: "/library",
     },
     {
-      path: "/inputs",
+      path: "/library",
+      component: () => import("@/views/LibraryHomeView.vue"),
+    },
+    {
+      path: "/library/inputs",
       component: () => import("@/views/InputsView.vue"),
     },
     {
-      path: "/display",
+      path: "/library/display",
       component: () => import("@/views/DisplayView.vue"),
     },
     {
-      path: "/feedback",
+      path: "/library/feedback",
       component: () => import("@/views/FeedbackView.vue"),
     },
     {
-      path: "/navigation",
+      path: "/library/navigation",
       component: () => import("@/views/NavigationView.vue"),
     },
     {
-      path: "/overlay",
+      path: "/library/overlay",
       component: () => import("@/views/OverlayView.vue"),
     },
     {
-      path: "/data-viz",
+      path: "/library/data-viz",
       component: () => import("@/views/DataVizView.vue"),
     },
   ],
@@ -240,7 +245,10 @@ export default router;
 ```
 
 All routes use dynamic imports so Vue can code-split each category page. The
-actual view files are installed from `assets/showcase-templates/vue/` in Phase 6.
+`AppLayout.vue` component (installed in Phase 6) wraps `<RouterView />` with
+the persistent Sidebar and Header — it renders for every route including
+`/library` because it lives in `App.vue`. The actual view files are installed
+from `assets/showcase-templates/vue/` in Phase 6.
 
 ---
 
@@ -341,13 +349,13 @@ After scaffold + cleanup + Phase 4 setup:
 │   │   ├── Sidebar.vue          # Phase 6
 │   │   └── Header.vue           # Phase 6
 │   ├── views/
-│   │   ├── HomeView.vue
-│   │   ├── InputsView.vue
-│   │   ├── DisplayView.vue
-│   │   ├── FeedbackView.vue
-│   │   ├── NavigationView.vue
-│   │   ├── OverlayView.vue
-│   │   └── DataVizView.vue
+│   │   ├── LibraryHomeView.vue  # /library landing
+│   │   ├── InputsView.vue       # /library/inputs
+│   │   ├── DisplayView.vue      # /library/display
+│   │   ├── FeedbackView.vue     # /library/feedback
+│   │   ├── NavigationView.vue   # /library/navigation
+│   │   ├── OverlayView.vue      # /library/overlay
+│   │   └── DataVizView.vue      # /library/data-viz
 │   ├── router/
 │   │   └── index.ts
 │   ├── styles/

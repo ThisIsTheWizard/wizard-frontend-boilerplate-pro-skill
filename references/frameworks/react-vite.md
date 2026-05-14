@@ -171,9 +171,9 @@ showcase routes.
 Create `src/App.tsx` with a `BrowserRouter` wrapping the showcase layout:
 
 ```tsx
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import RootLayout from "./components/RootLayout";
-import Home from "./pages/Home";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import LibraryLayout from "./components/LibraryLayout";
+import LibraryHome from "./pages/LibraryHome";
 import InputsPage from "./pages/Inputs";
 import DisplayPage from "./pages/Display";
 import FeedbackPage from "./pages/Feedback";
@@ -185,8 +185,9 @@ export default function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<RootLayout />}>
-          <Route index element={<Home />} />
+        <Route path="/" element={<Navigate to="/library" replace />} />
+        <Route path="/library" element={<LibraryLayout />}>
+          <Route index element={<LibraryHome />} />
           <Route path="inputs" element={<InputsPage />} />
           <Route path="display" element={<DisplayPage />} />
           <Route path="feedback" element={<FeedbackPage />} />
@@ -200,8 +201,10 @@ export default function App() {
 }
 ```
 
-`RootLayout` renders `<Sidebar />`, `<Header />`, and `<Outlet />`. It is
+`LibraryLayout` renders `<Sidebar />`, `<Header />`, and `<Outlet />`. It is
 installed from `assets/showcase-templates/react/layout.tsx.template` in Phase 6.
+The `<Navigate to="/library" replace />` at `/` performs a client-side redirect
+so the browser URL always shows `/library` or deeper when the app is opened.
 
 ---
 
@@ -285,17 +288,17 @@ After scaffold + cleanup + Phase 4 setup:
 │   │   ├── ui/                  # 28 components — Phase 5
 │   │   │   └── ...
 │   │   ├── CodeBlock.tsx        # Phase 5c utility
-│   │   ├── RootLayout.tsx       # wraps Sidebar + Header + Outlet
+│   │   ├── LibraryLayout.tsx    # wraps Sidebar + Header + Outlet
 │   │   ├── Sidebar.tsx          # Phase 6
 │   │   └── Header.tsx           # Phase 6
 │   ├── pages/
-│   │   ├── Home.tsx
-│   │   ├── Inputs.tsx
-│   │   ├── Display.tsx
-│   │   ├── Feedback.tsx
-│   │   ├── Navigation.tsx
-│   │   ├── Overlay.tsx
-│   │   └── DataViz.tsx
+│   │   ├── LibraryHome.tsx      # /library landing
+│   │   ├── Inputs.tsx           # /library/inputs
+│   │   ├── Display.tsx          # /library/display
+│   │   ├── Feedback.tsx         # /library/feedback
+│   │   ├── Navigation.tsx       # /library/navigation
+│   │   ├── Overlay.tsx          # /library/overlay
+│   │   └── DataViz.tsx          # /library/data-viz
 │   ├── styles/
 │   │   └── tokens.css           # Phase 4
 │   ├── lib/

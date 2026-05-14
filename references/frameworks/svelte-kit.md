@@ -222,42 +222,71 @@ EOF
 ## 5. Routing setup
 
 SvelteKit uses **file-based routing** with a `+page.svelte` / `+layout.svelte`
-convention — no router config is needed. Create the six showcase routes now;
-Phase 6 populates their content from `assets/showcase-templates/svelte/`.
+convention — no router config is needed. The home page at `/` redirects to
+`/library`, and all showcase pages live under `/library/`. Create the full
+route tree now; Phase 6 populates content from `assets/showcase-templates/svelte/`.
 
 ```bash
-# Home route already exists at src/routes/+page.svelte
+# Home page redirects to /library
+cat > src/routes/+page.svelte << 'EOF'
+<script lang="ts">
+  import { goto } from "$app/navigation";
+  goto("/library", { replaceState: true });
+</script>
+EOF
 
-# Create the six category routes
-mkdir -p src/routes/inputs
-mkdir -p src/routes/display
-mkdir -p src/routes/feedback
-mkdir -p src/routes/navigation
-mkdir -p src/routes/overlay
-mkdir -p "src/routes/data-viz"
+# Library section routes
+mkdir -p src/routes/library/inputs
+mkdir -p src/routes/library/display
+mkdir -p src/routes/library/feedback
+mkdir -p src/routes/library/navigation
+mkdir -p src/routes/library/overlay
+mkdir -p "src/routes/library/data-viz"
 
-touch src/routes/inputs/+page.svelte
-touch src/routes/display/+page.svelte
-touch src/routes/feedback/+page.svelte
-touch src/routes/navigation/+page.svelte
-touch src/routes/overlay/+page.svelte
-touch "src/routes/data-viz/+page.svelte"
+touch src/routes/library/+page.svelte
+touch src/routes/library/+layout.svelte
+touch src/routes/library/inputs/+page.svelte
+touch src/routes/library/display/+page.svelte
+touch src/routes/library/feedback/+page.svelte
+touch src/routes/library/navigation/+page.svelte
+touch src/routes/library/overlay/+page.svelte
+touch "src/routes/library/data-viz/+page.svelte"
 ```
 
 The resulting URL structure:
 
 | File | URL |
 |---|---|
-| `src/routes/+page.svelte` | `/` |
-| `src/routes/inputs/+page.svelte` | `/inputs` |
-| `src/routes/display/+page.svelte` | `/display` |
-| `src/routes/feedback/+page.svelte` | `/feedback` |
-| `src/routes/navigation/+page.svelte` | `/navigation` |
-| `src/routes/overlay/+page.svelte` | `/overlay` |
-| `src/routes/data-viz/+page.svelte` | `/data-viz` |
+| `src/routes/+page.svelte` | `/` → redirects to `/library` |
+| `src/routes/library/+page.svelte` | `/library` |
+| `src/routes/library/inputs/+page.svelte` | `/library/inputs` |
+| `src/routes/library/display/+page.svelte` | `/library/display` |
+| `src/routes/library/feedback/+page.svelte` | `/library/feedback` |
+| `src/routes/library/navigation/+page.svelte` | `/library/navigation` |
+| `src/routes/library/overlay/+page.svelte` | `/library/overlay` |
+| `src/routes/library/data-viz/+page.svelte` | `/library/data-viz` |
 
-Create a `+layout.ts` at the root to disable prerendering — required so the
-theme provider's `localStorage` access works on the initial SSR request:
+The Sidebar + Header layout lives in `src/routes/library/+layout.svelte` — it
+only wraps `/library/*` routes, keeping the root layout lean. Stub it now:
+
+```bash
+cat > src/routes/library/+layout.svelte << 'EOF'
+<script lang="ts">
+  import type { Snippet } from "svelte";
+
+  let { children }: { children: Snippet } = $props();
+</script>
+
+<div class="flex min-h-screen bg-background text-foreground">
+  {@render children()}
+</div>
+EOF
+```
+
+Phase 6 replaces this stub with the full Sidebar + Header shell.
+
+Create a `+layout.ts` at the root to disable SSR — required so the theme
+provider's `localStorage` access works before hydration:
 
 ```bash
 cat > src/routes/+layout.ts << 'EOF'
@@ -270,9 +299,6 @@ EOF
 > mode). This avoids a `localStorage is not defined` error during server-side
 > rendering before the theme provider hydrates. If the user later needs SSR,
 > remove this file and update the theme provider to use `$effect` only.
-
-> Phase 6 replaces the root `+layout.svelte` stub with the full Sidebar +
-> Header layout shell.
 
 ---
 
@@ -375,21 +401,24 @@ After scaffold + cleanup + Phase 4 setup:
 │   │   │   └── utils.ts             # cn() helper
 │   │   └── index.ts                 # barrel export
 │   └── routes/
-│       ├── +layout.svelte           # Sidebar + Header shell
+│       ├── +layout.svelte           # root layout (globals import, ssr=false)
 │       ├── +layout.ts               # ssr = false, prerender = false
-│       ├── +page.svelte             # home
-│       ├── inputs/
-│       │   └── +page.svelte
-│       ├── display/
-│       │   └── +page.svelte
-│       ├── feedback/
-│       │   └── +page.svelte
-│       ├── navigation/
-│       │   └── +page.svelte
-│       ├── overlay/
-│       │   └── +page.svelte
-│       └── data-viz/
-│           └── +page.svelte
+│       ├── +page.svelte             # redirects to /library
+│       └── library/
+│           ├── +layout.svelte       # Sidebar + Header shell
+│           ├── +page.svelte         # /library landing
+│           ├── inputs/
+│           │   └── +page.svelte
+│           ├── display/
+│           │   └── +page.svelte
+│           ├── feedback/
+│           │   └── +page.svelte
+│           ├── navigation/
+│           │   └── +page.svelte
+│           ├── overlay/
+│           │   └── +page.svelte
+│           └── data-viz/
+│               └── +page.svelte
 ├── vite.config.ts
 ├── svelte.config.js
 ├── tsconfig.json

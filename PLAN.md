@@ -124,9 +124,13 @@ Each catalog entry specifies: name, category, peer dependencies (e.g. Recharts f
 
 - Persistent left **Sidebar** with category sections and component anchors within each route.
 - Top **Header** bar containing app name, GitHub link placeholder, and theme toggle.
-- Main content area: one route per category (`/inputs`, `/display`, `/feedback`, `/navigation`, `/overlay`, `/data-viz`).
+- Home route (`/`) redirects to `/library` — it never renders UI directly.
+- Main content area: `/library` is the showcase root; one route per category
+  (`/library/inputs`, `/library/display`, `/library/feedback`,
+  `/library/navigation`, `/library/overlay`, `/library/data-viz`).
+- `/library` landing page: summarizes what's in the showcase with quick links to each category.
+- The Sidebar + Header layout is scoped to `/library/*` routes only, so the redirect at `/` doesn't flash layout before navigating.
 - Each component block: heading, description, live rendered example, collapsible code snippet (using a built-in `<CodeBlock />` component installed alongside the 28 main components — technically a 29th utility component).
-- Home route (`/`) is a landing page summarizing what's in the showcase, with quick links to each category.
 
 ## Color presets (color-presets.json)
 
