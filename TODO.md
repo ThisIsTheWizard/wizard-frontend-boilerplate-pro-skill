@@ -25,7 +25,7 @@
 - [x] `references/theming.md` — CSS var tokens, dark mode strategy
 - [x] `references/component-catalog.md` — all 28 components (name, category, deps, props interface, source mapping)
 - [x] `references/showcase-layout.md` — sidebar nav, header, category routing, CodeBlock utility
-- [ ] `references/portability.md` — notes for non-Claude agents, tested agent list
+- [x] `references/portability.md` — notes for non-Claude agents, tested agent list
 
 ## 4. Assets — color system
 - [ ] Write `scripts/generate_palette.py` first (OKLCH algorithm)
