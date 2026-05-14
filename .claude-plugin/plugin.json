@@ -1,13 +1,15 @@
 {
-  "schema_version": "v1",
-  "name_for_human": "Wizard Frontend Boilerplate Pro",
-  "name_for_machine": "wizard-frontend-boilerplate-pro",
-  "description": "Scaffold production-ready frontend apps with Next.js, React, Vue, Nuxt, or SvelteKit — 28 UI components, OKLCH color palettes, light/dark theming, WCAG AA contrast.",
+  "name": "wizard-frontend-boilerplate-pro",
+  "description": "Scaffold production-ready frontend apps with Next.js, React, Vue, Nuxt, or SvelteKit. 7-phase interactive workflow: interview, version resolution, scaffold, OKLCH palette generation, 28 UI components, sidebar showcase with collapsible code snippets, and end-to-end verification. Light/dark mode, Tailwind v4, WCAG AA. Pairs with ui-ux-pro-max for enhanced component output.",
   "version": "1.0.0",
-  "entry_point": "SKILL.md",
-  "icon": "🧙",
-  "categories": ["frontend", "scaffolding", "ui-components", "theming"],
+  "author": {
+    "name": "The Wizard"
+  },
+  "license": "MIT",
   "keywords": [
+    "frontend",
+    "scaffold",
+    "boilerplate",
     "nextjs",
     "react",
     "vue",
@@ -16,81 +18,13 @@
     "sveltekit",
     "tailwind",
     "tailwind-v4",
-    "frontend",
-    "boilerplate",
-    "starter",
-    "scaffold",
     "component-library",
     "showcase",
-    "theming",
     "design-tokens",
     "oklch",
     "dark-mode",
     "wcag",
     "accessibility"
   ],
-  "capabilities": {
-    "scaffolding": {
-      "frameworks": ["nextjs", "react-vite", "vue", "nuxt", "sveltekit"],
-      "languages": ["typescript", "javascript"],
-      "tailwind_versions": ["v4", "v3"],
-      "package_managers": ["pnpm", "yarn", "npm", "bun"],
-      "phase_count": 7,
-      "interactive_interview": true,
-      "live_version_resolution": true
-    },
-    "theming": {
-      "color_presets": 8,
-      "custom_color_input": true,
-      "color_formats": ["hex", "oklch"],
-      "dark_mode": true,
-      "fouc_prevention": true,
-      "wcag_aa": true,
-      "token_system": "css-variables"
-    },
-    "ui_components": {
-      "categories": ["inputs", "display", "feedback", "navigation", "overlay", "data-viz"],
-      "count": 28,
-      "code_snippets": true,
-      "collapsible_showcase": true,
-      "sibling_skill": "ui-ux-pro-max",
-      "standalone_fallback": true
-    }
-  },
-  "portable": true,
-  "tested_agents": [
-    "aider",
-    "claude",
-    "claude-code",
-    "codex",
-    "continue",
-    "cursor",
-    "gemini",
-    "gemini-cli",
-    "opencode",
-    "tabby",
-    "windsurf"
-  ],
-  "compatibility": {
-    "aider": ">=1.0.0",
-    "claude": ">=1.0.0",
-    "claude-code": ">=1.0.0",
-    "codex": ">=1.0.0",
-    "continue": ">=1.0.0",
-    "cursor": ">=1.0.0",
-    "gemini": ">=1.0.0",
-    "gemini-cli": ">=1.0.0",
-    "opencode": ">=1.0.0",
-    "tabby": ">=1.0.0",
-    "windsurf": ">=1.0.0"
-  },
-  "homepage": "https://github.com/ThisIsTheWizard/wizard-frontend-boilerplate-pro",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/ThisIsTheWizard/wizard-frontend-boilerplate-pro.git"
-  },
-  "bugs": {
-    "url": "https://github.com/ThisIsTheWizard/wizard-frontend-boilerplate-pro/issues"
-  },
-  "license": "MIT"
+  "skills": ["./.claude/skills/wizard-frontend-boilerplate-pro"]
 }

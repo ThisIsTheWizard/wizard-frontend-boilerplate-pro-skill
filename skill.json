@@ -1,49 +1,47 @@
 {
   "name": "wizard-frontend-boilerplate-pro",
+  "displayName": "Wizard Frontend Boilerplate Pro",
+  "description": "Scaffold production-ready frontend apps with Next.js, React, Vue, Nuxt, or SvelteKit — 28 UI components, OKLCH color palettes, light/dark theming, WCAG AA contrast.",
   "version": "1.0.0",
   "author": "The Wizard",
-  "owner": "ThisIsTheWizard",
-  "description": "Scaffold production-ready frontend apps with Next.js, React, Vue, Nuxt, or SvelteKit — 28 UI components, OKLCH color palettes, light/dark theming, WCAG AA contrast.",
-  "entry": "SKILL.md",
-  "homepage": "https://github.com/ThisIsTheWizard/wizard-frontend-boilerplate-pro",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/ThisIsTheWizard/wizard-frontend-boilerplate-pro.git"
-  },
-  "plugins": [
-    {
-      "type": "skill",
-      "name": "ui-ux-pro-max",
-      "source": "local",
-      "optional": true,
-      "description": "Sibling skill used as component source. Falls back to built-in implementations when not installed."
-    }
+  "license": "MIT",
+  "homepage": "https://github.com/ThisIsTheWizard/wizard-frontend-boilerplate-pro-skill",
+  "repository": "https://github.com/ThisIsTheWizard/wizard-frontend-boilerplate-pro-skill",
+  "keywords": [
+    "frontend",
+    "scaffold",
+    "boilerplate",
+    "nextjs",
+    "react",
+    "vue",
+    "nuxt",
+    "svelte",
+    "sveltekit",
+    "tailwind",
+    "tailwind-v4",
+    "component-library",
+    "showcase",
+    "design-tokens",
+    "oklch",
+    "dark-mode",
+    "wcag"
   ],
-  "portable": true,
-  "tested_agents": [
-    "aider",
+  "platforms": [
     "claude",
-    "claude-code",
-    "codex",
-    "continue",
     "cursor",
+    "windsurf",
+    "copilot",
+    "codex",
     "gemini",
-    "gemini-cli",
     "opencode",
-    "tabby",
-    "windsurf"
+    "continue",
+    "roocode",
+    "kilocode",
+    "kiro",
+    "trae",
+    "warp",
+    "augment",
+    "aider"
   ],
-  "compatibility": {
-    "aider": ">=1.0.0",
-    "claude": ">=1.0.0",
-    "claude-code": ">=1.0.0",
-    "codex": ">=1.0.0",
-    "continue": ">=1.0.0",
-    "cursor": ">=1.0.0",
-    "gemini": ">=1.0.0",
-    "gemini-cli": ">=1.0.0",
-    "opencode": ">=1.0.0",
-    "tabby": ">=1.0.0",
-    "windsurf": ">=1.0.0"
-  }
+  "skills": ["./.claude/skills/wizard-frontend-boilerplate-pro"]
 }

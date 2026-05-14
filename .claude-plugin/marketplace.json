@@ -1,111 +1,49 @@
 {
-  "id": "wizard-frontend-boilerplate-pro",
-  "name": "Wizard Frontend Boilerplate Pro",
-  "slug": "wizard-frontend-boilerplate-pro",
-  "version": "1.0.0",
-  "description": "Scaffold production-ready frontend apps with Next.js, React, Vue, Nuxt, or SvelteKit — 28 UI components, OKLCH color palettes, light/dark theming, WCAG AA contrast.",
-  "long_description": "A seven-phase scaffolding skill that takes you from zero to a fully themed, component-showcased frontend app in one session.\n\n**Frameworks supported:** Next.js 15 (App Router), React + Vite, Vue 3.5+, Nuxt 4, SvelteKit (Svelte 5)\n\n**What you get out of the box:**\n- 28 UI components across 6 categories (Inputs, Display, Feedback, Navigation, Overlay, Data Viz)\n- Sidebar showcase with live rendered examples and collapsible code snippets per component\n- OKLCH color palette generator — 8 built-in presets or custom hex/OKLCH input\n- Three-layer CSS variable token system (palette → semantic → component)\n- Light and dark mode with FOUC-prevention inline script and localStorage persistence\n- Tailwind v4 (@theme directive) with v3 fallback when needed\n- WCAG AA contrast validation baked into the palette generation pipeline\n- TypeScript or JavaScript, any of four package managers (pnpm / yarn / npm / bun)\n\n**Optional pairing:** install alongside `ui-ux-pro-max` for higher-fidelity component output. Falls back to built-in Tailwind implementations when the sibling skill is not present.\n\n**Portability:** plain CommonMark only — no agent-specific syntax. All actions are shell commands or file writes, compatible with any agent that supports bash and file I/O.",
-  "icon": "🧙",
-  "author": {
-    "name": "The Wizard",
-    "handle": "ThisIsTheWizard",
-    "url": "https://github.com/ThisIsTheWizard"
+  "name": "wizard-frontend-boilerplate-pro-skill",
+  "id": "wizard-frontend-boilerplate-pro-skill",
+  "owner": {
+    "name": "ThisIsTheWizard"
   },
-  "categories": ["frontend", "scaffolding", "ui-components", "theming"],
-  "tags": [
-    "nextjs",
-    "react",
-    "vue",
-    "nuxt",
-    "svelte",
-    "sveltekit",
-    "tailwind",
-    "tailwind-v4",
-    "frontend",
-    "boilerplate",
-    "starter",
-    "scaffold",
-    "component-library",
-    "showcase",
-    "theming",
-    "design-tokens",
-    "oklch",
-    "dark-mode",
-    "wcag",
-    "accessibility"
-  ],
-  "price": "free",
-  "license": "MIT",
-  "homepage": "https://github.com/ThisIsTheWizard/wizard-frontend-boilerplate-pro",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/ThisIsTheWizard/wizard-frontend-boilerplate-pro.git"
+  "metadata": {
+    "description": "Scaffold production-ready frontend apps with Next.js, React, Vue, Nuxt, or SvelteKit — 28 UI components, OKLCH color palettes, light/dark theming, WCAG AA contrast.",
+    "version": "1.0.0"
   },
-  "bugs": {
-    "url": "https://github.com/ThisIsTheWizard/wizard-frontend-boilerplate-pro/issues"
-  },
-  "requirements": {
-    "node": ">=18.0.0",
-    "python": ">=3.10",
-    "shell": "bash"
-  },
-  "features": [
-    "7-phase interactive scaffolding workflow",
-    "Next.js, React + Vite, Vue 3, Nuxt 4, SvelteKit support",
-    "28 UI components with collapsible code snippet showcase",
-    "OKLCH palette generator — 8 presets + custom hex/OKLCH input",
-    "Three-layer CSS variable token system",
-    "Light/dark mode with FOUC prevention",
-    "Tailwind v4 (@theme) with v3 fallback",
-    "WCAG AA contrast validation",
-    "TypeScript and JavaScript support",
-    "pnpm, yarn, npm, bun auto-detection",
-    "Live npm registry version resolution",
-    "Optional ui-ux-pro-max integration with standalone fallback"
-  ],
-  "color_presets": [
-    "Modern Slate",
-    "Warm Earth",
-    "Fresh Mint",
-    "Royal",
-    "Sunset",
-    "Ocean",
-    "Forest",
-    "Monochrome",
-    "Custom"
-  ],
-  "portable": true,
-  "tested_agents": [
-    "aider",
-    "claude",
-    "claude-code",
-    "codex",
-    "continue",
-    "cursor",
-    "gemini",
-    "gemini-cli",
-    "opencode",
-    "tabby",
-    "windsurf"
-  ],
-  "compatibility": {
-    "aider": ">=1.0.0",
-    "claude": ">=1.0.0",
-    "claude-code": ">=1.0.0",
-    "codex": ">=1.0.0",
-    "continue": ">=1.0.0",
-    "cursor": ">=1.0.0",
-    "gemini": ">=1.0.0",
-    "gemini-cli": ">=1.0.0",
-    "opencode": ">=1.0.0",
-    "tabby": ">=1.0.0",
-    "windsurf": ">=1.0.0"
-  },
-  "compatibility_notes": "Works with any AI agent CLI that can read markdown, execute shell commands, and write files. Uses bash and Python 3 stdlib only — no pip installs required. Pairs best with ui-ux-pro-max skill for enhanced component output.",
-  "screenshots": [],
-  "funding": {
-    "type": "github",
-    "url": "https://github.com/sponsors/ThisIsTheWizard"
-  },
-  "last_updated": "2026-05-14"
+  "plugins": [
+    {
+      "name": "wizard-frontend-boilerplate-pro",
+      "source": "./",
+      "description": "A seven-phase scaffolding skill that takes you from zero to a fully themed, component-showcased frontend app in one session. Supports Next.js 15, React + Vite, Vue 3.5+, Nuxt 4, and SvelteKit (Svelte 5). Features 28 UI components across 6 categories, OKLCH palette generator with 8 presets, three-layer CSS variable token system, light/dark mode with FOUC prevention, Tailwind v4 support, and WCAG AA contrast validation. Optional pairing with ui-ux-pro-max for higher-fidelity component output — falls back to built-in Tailwind implementations when absent. Plain CommonMark only, all actions are shell commands or file writes.",
+      "version": "1.0.0",
+      "author": {
+        "name": "The Wizard",
+        "handle": "ThisIsTheWizard",
+        "url": "https://github.com/ThisIsTheWizard"
+      },
+      "keywords": [
+        "frontend",
+        "scaffold",
+        "boilerplate",
+        "nextjs",
+        "react",
+        "vue",
+        "nuxt",
+        "svelte",
+        "sveltekit",
+        "tailwind",
+        "tailwind-v4",
+        "component-library",
+        "showcase",
+        "design-tokens",
+        "oklch",
+        "dark-mode",
+        "wcag",
+        "accessibility"
+      ],
+      "category": "frontend",
+      "license": "MIT",
+      "homepage": "https://github.com/ThisIsTheWizard/wizard-frontend-boilerplate-pro-skill",
+      "repository": "https://github.com/ThisIsTheWizard/wizard-frontend-boilerplate-pro-skill",
+      "strict": false
+    }
+  ]
 }
