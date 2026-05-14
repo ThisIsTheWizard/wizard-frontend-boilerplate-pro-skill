@@ -11,7 +11,7 @@
 - [x] `references/frameworks/nextjs.md` — create-next-app, App Router setup
 - [x] `references/frameworks/react-vite.md`
 - [x] `references/frameworks/vue.md` — Vue 3.5+
-- [ ] `references/frameworks/nuxt.md` — Nuxt 4
+- [x] `references/frameworks/nuxt.md` — Nuxt 4
 - [ ] `references/frameworks/svelte-kit.md` — Svelte 5
 - [ ] `references/tailwind/v4-setup.md` — @tailwindcss/postcss, @theme
 - [ ] `references/tailwind/v3-setup.md` — fallback
