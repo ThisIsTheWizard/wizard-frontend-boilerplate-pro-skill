@@ -4,8 +4,8 @@
 - [x] Create full directory tree as defined in PLAN.md
 
 ## 2. Entry points
-- [ ] Write `SKILL.md` (≤400 lines, 7-phase workflow, references point to detail files)
-- [ ] Write `AGENTS.md` (one-line redirect to SKILL.md)
+- [x] Write `SKILL.md` (≤400 lines, 7-phase workflow, references point to detail files)
+- [x] Write `AGENTS.md` (one-line redirect to SKILL.md)
 
 ## 3. Reference files (`references/`)
 - [ ] `references/frameworks/nextjs.md` — create-next-app, App Router setup
