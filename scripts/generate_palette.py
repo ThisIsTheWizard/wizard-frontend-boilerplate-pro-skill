@@ -212,6 +212,90 @@ def emit_css_theme(
     return "\n".join(lines)
 
 
+def emit_semantic_css() -> str:
+    """Emit the static :root (light) and .dark semantic token blocks.
+
+    These blocks alias the generated palette scale vars to purpose-driven
+    semantic tokens.  The structure is identical for every preset; only the
+    underlying palette scale values change.
+    """
+    return """\
+:root {
+  /* Surface */
+  --background: var(--color-neutral-50);
+  --foreground: var(--color-neutral-950);
+  --surface: var(--color-neutral-100);
+  --muted: var(--color-neutral-300);
+  --muted-foreground: var(--color-neutral-500);
+
+  /* Borders */
+  --border: var(--color-neutral-200);
+  --input: var(--color-neutral-200);
+  --ring: var(--color-accent-400);
+
+  /* Primary / Accent */
+  --primary: var(--color-accent-500);
+  --primary-foreground: var(--color-neutral-50);
+  --secondary: var(--color-neutral-200);
+  --secondary-foreground: var(--color-neutral-900);
+  --accent: var(--color-neutral-100);
+  --accent-foreground: var(--color-neutral-900);
+
+  /* Destructive */
+  --destructive: var(--color-neutral-900);
+  --destructive-foreground: var(--color-neutral-50);
+
+  /* Component */
+  --card: var(--color-neutral-50);
+  --card-foreground: var(--color-neutral-950);
+  --popover: var(--color-neutral-50);
+  --popover-foreground: var(--color-neutral-950);
+
+  /* Radius */
+  --radius: var(--radius-md);
+}
+
+.dark {
+  /* Surface */
+  --background: var(--color-neutral-950);
+  --foreground: var(--color-neutral-50);
+  --surface: var(--color-neutral-900);
+  --muted: var(--color-neutral-600);
+  --muted-foreground: var(--color-neutral-400);
+
+  /* Borders */
+  --border: var(--color-neutral-800);
+  --input: var(--color-neutral-800);
+  --ring: var(--color-accent-400);
+
+  /* Primary / Accent */
+  --primary: var(--color-accent-400);
+  --primary-foreground: var(--color-neutral-950);
+  --secondary: var(--color-neutral-700);
+  --secondary-foreground: var(--color-neutral-50);
+  --accent: var(--color-neutral-800);
+  --accent-foreground: var(--color-neutral-50);
+
+  /* Destructive */
+  --destructive: var(--color-neutral-800);
+  --destructive-foreground: var(--color-neutral-50);
+
+  /* Component */
+  --card: var(--color-neutral-900);
+  --card-foreground: var(--color-neutral-50);
+  --popover: var(--color-neutral-900);
+  --popover-foreground: var(--color-neutral-50);
+}"""
+
+
+def emit_tokens_css(
+    neutral_scale: dict[int, tuple[float, float, float]],
+    accent_scale: dict[int, tuple[float, float, float]],
+) -> str:
+    """Emit a complete tokens.css file: @theme palette + semantic :root/.dark."""
+    return emit_css_theme(neutral_scale, accent_scale) + "\n\n" + emit_semantic_css()
+
+
 # ---------------------------------------------------------------------------
 # Built-in presets
 # ---------------------------------------------------------------------------
@@ -261,6 +345,7 @@ def build_preset_entry(name: str, neutral_hex: str, accent_hex: str) -> dict:
         },
         "monochrome": neutral_hex == accent_hex,
         "css": emit_css_theme(neutral_scale, accent_scale),
+        "tokens_css": emit_tokens_css(neutral_scale, accent_scale),
     }
 
 
@@ -277,6 +362,7 @@ def emit_presets_json() -> str:
             "accent": {"seed": None, "hue": None, "scale": {}},
             "monochrome": False,
             "css": "",
+            "tokens_css": "",
             "note": (
                 "Generated at runtime — run: "
                 "python generate_palette.py <neutral_hex> <accent_hex>"

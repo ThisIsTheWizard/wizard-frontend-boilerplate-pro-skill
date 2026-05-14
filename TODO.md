@@ -29,7 +29,7 @@
 
 ## 4. Assets — color system
 - [x] Write `scripts/generate_palette.py` first (OKLCH algorithm)
-- [ ] Generate `assets/color-presets.json` using the same algorithm (8 presets + custom slot, OKLCH 50–950 scales, light/dark CSS var mappings)
+- [x] Generate `assets/color-presets.json` using the same algorithm (8 presets + custom slot, OKLCH 50–950 scales, light/dark CSS var mappings)
 
 ## 5. Assets — showcase templates
 - [ ] `assets/showcase-templates/react/layout.tsx.template`
