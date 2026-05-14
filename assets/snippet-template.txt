@@ -1,0 +1,176 @@
+################################################################################
+# snippet-template.txt
+# Collapsible code-snippet block format for the /library showcase pages.
+#
+# Usage: copy the relevant FRAMEWORK BLOCK below into a category page.
+# Replace every {{PLACEHOLDER}} with the real value for the component.
+#
+# Placeholders
+#   {{COMPONENT_NAME}}    PascalCase component name, e.g. "Button"
+#   {{COMPONENT_SLUG}}    kebab-case anchor id, e.g. "button", "radio-group"
+#   {{COMPONENT_DESC}}    1-2 sentence plain-English description
+#   {{LANGUAGE}}          tsx | vue | svelte
+#   {{FILENAME}}          e.g. "Button.tsx", "Button.vue", "Button.svelte"
+#   {{SNIPPET}}           Minimal self-contained usage example (5-15 lines).
+#                         Must include imports. Must match the live preview.
+################################################################################
+
+
+################################################################################
+# REACT / NEXT.JS  (TSX)
+################################################################################
+
+<section id="{{COMPONENT_SLUG}}">
+  <h2>{{COMPONENT_NAME}}</h2>
+  <p>{{COMPONENT_DESC}}</p>
+
+  {/* Live preview */}
+  <div className="rounded-lg border border-border bg-card p-8 flex items-center justify-center">
+    {/* Render the live example here */}
+  </div>
+
+  {/* Collapsible code block */}
+  <CodeBlock
+    code={`{{SNIPPET}}`}
+    collapsible
+    defaultOpen={false}
+    filename="{{FILENAME}}"
+    language="{{LANGUAGE}}"
+  />
+</section>
+
+# Minimal snippet shape (TSX):
+#
+#   import { {{COMPONENT_NAME}} } from "@/components/ui/{{COMPONENT_SLUG}}";
+#
+#   export default function {{COMPONENT_NAME}}Demo() {
+#     return (
+#       <{{COMPONENT_NAME}}>Label</{{COMPONENT_NAME}}>
+#     );
+#   }
+#
+################################################################################
+
+
+################################################################################
+# VUE 3 / NUXT 4
+################################################################################
+
+<section :id="'{{COMPONENT_SLUG}}'">
+  <h2>{{COMPONENT_NAME}}</h2>
+  <p>{{COMPONENT_DESC}}</p>
+
+  <!-- Live preview -->
+  <div class="rounded-lg border border-border bg-card p-8 flex items-center justify-center">
+    <!-- Render the live example here -->
+  </div>
+
+  <!-- Collapsible code block -->
+  <CodeBlock
+    :code="snippet{{COMPONENT_NAME}}"
+    :collapsible="true"
+    :default-open="false"
+    filename="{{FILENAME}}"
+    language="{{LANGUAGE}}"
+  />
+</section>
+
+# In <script setup lang="ts"> at the top of the page:
+#
+#   const snippet{{COMPONENT_NAME}} = `{{SNIPPET}}`;
+#
+# Minimal snippet shape (Vue SFC):
+#
+#   <script setup lang="ts">
+#   import {{COMPONENT_NAME}} from "@/components/ui/{{COMPONENT_NAME}}.vue";
+#   </script>
+#
+#   <template>
+#     <{{COMPONENT_NAME}}>Label</{{COMPONENT_NAME}}>
+#   </template>
+#
+################################################################################
+
+
+################################################################################
+# SVELTEKIT (Svelte 5)
+################################################################################
+
+<section id="{{COMPONENT_SLUG}}">
+  <h2>{{COMPONENT_NAME}}</h2>
+  <p>{{COMPONENT_DESC}}</p>
+
+  <!-- Live preview -->
+  <div class="rounded-lg border border-border bg-card p-8 flex items-center justify-center">
+    <!-- Render the live example here -->
+  </div>
+
+  <!-- Collapsible code block -->
+  <CodeBlock
+    code={snippet{{COMPONENT_NAME}}}
+    collapsible
+    defaultOpen={false}
+    filename="{{FILENAME}}"
+    language="{{LANGUAGE}}"
+  />
+</section>
+
+# In <script lang="ts"> at the top of the page:
+#
+#   import CodeBlock from "$lib/components/ui/CodeBlock.svelte";
+#   import {{COMPONENT_NAME}} from "$lib/components/ui/{{COMPONENT_NAME}}.svelte";
+#
+#   const snippet{{COMPONENT_NAME}} = `{{SNIPPET}}`;
+#
+# Minimal snippet shape (Svelte 5 SFC):
+#
+#   <script lang="ts">
+#     import {{COMPONENT_NAME}} from "$lib/components/ui/{{COMPONENT_NAME}}.svelte";
+#   </script>
+#
+#   <{{COMPONENT_NAME}}>Label</{{COMPONENT_NAME}}>
+#
+################################################################################
+
+
+################################################################################
+# CODEBLOCK PROPS REFERENCE
+#
+# Prop            Type      Default   Notes
+# --------------- --------- --------- -------------------------------------------
+# code            string    required  Raw source text; shown verbatim in <pre>
+# language        string    "tsx"     Label only (no runtime highlighting)
+# filename        string    undefined Chip above the block (font-mono, xs, muted)
+# collapsible     boolean   false     Wrap in expand/collapse toggle
+# defaultOpen     boolean   true      Initial open state when collapsible=true
+# highlightedCode string    undefined Pre-highlighted HTML rendered with raw
+#                                     innerHTML; only use with trusted content
+# className       string    undefined Extra classes on the outer wrapper
+#
+# Behaviour
+#   - Collapsed label : "Show code" / expanded: "Hide code"
+#   - aria-expanded on toggle button; aria-controls points to <pre> id
+#   - Copy button     : top-right corner
+#                       aria-label "Copy code" -> "Copied!" for 2 s on success
+#   - <pre>           : role="region"
+#                       aria-label="{filename} code snippet" (or "Code snippet")
+#   - Zero external dependencies -- no syntax-highlighting library required
+################################################################################
+
+
+################################################################################
+# COMPONENT SECTION SPACING CONVENTIONS
+#
+#   Between sections         gap-16  (64 px)
+#   Within a section         gap-4   (16 px)
+#   Preview wrapper classes  rounded-lg border border-border bg-card p-8
+#   Preview inner alignment  flex items-center justify-center
+#
+# Anchor IDs (kebab-case)
+#   Button          -> #button
+#   RadioGroup      -> #radio-group
+#   NavigationMenu  -> #navigation-menu
+#   DropdownMenu    -> #dropdown-menu
+#   DataTable       -> #data-table
+#   All others      -> lowercase of the component name
+################################################################################

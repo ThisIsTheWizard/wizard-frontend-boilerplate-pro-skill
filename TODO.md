@@ -52,7 +52,7 @@
 - [x] `assets/theme-provider/svelte.ts`
 
 ## 7. Assets — misc
-- [ ] `assets/snippet-template.txt` — collapsible code-snippet block format
+- [x] `assets/snippet-template.txt` — collapsible code-snippet block format
 
 ## 8. Scripts
 - [ ] `scripts/check_versions.sh` — query npm registry for latest versions
