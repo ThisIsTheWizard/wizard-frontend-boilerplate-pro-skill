@@ -1,7 +1,7 @@
 # TODO — `wizard-frontend-boilerplate-pro` Skill Build
 
 ## 1. Directory structure
-- [ ] Create full directory tree as defined in PLAN.md
+- [x] Create full directory tree as defined in PLAN.md
 
 ## 2. Entry points
 - [ ] Write `SKILL.md` (≤400 lines, 7-phase workflow, references point to detail files)
