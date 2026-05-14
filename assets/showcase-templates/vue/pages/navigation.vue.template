@@ -1,0 +1,231 @@
+<script setup lang="ts">
+import { ref } from "vue";
+
+import { Breadcrumb } from "@/components/ui/breadcrumb";
+import { CodeBlock } from "@/components/ui/code-block";
+import { NavigationMenu } from "@/components/ui/navigation-menu";
+import { Pagination } from "@/components/ui/pagination";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+
+const TABS_CODE = `<script setup lang="ts">
+import { ref } from "vue";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+
+const tabValue = ref("account");
+<\/script>
+
+<template>
+  <Tabs :value="tabValue" @valueChange="val => (tabValue = val)">
+    <TabsList>
+      <TabsTrigger value="account">Account</TabsTrigger>
+      <TabsTrigger value="password">Password</TabsTrigger>
+      <TabsTrigger value="notifications">Notifications</TabsTrigger>
+    </TabsList>
+    <TabsContent value="account">
+      <p class="text-sm text-muted-foreground">Manage your account settings and preferences.</p>
+    </TabsContent>
+    <TabsContent value="password">
+      <p class="text-sm text-muted-foreground">Change your password and security options.</p>
+    </TabsContent>
+    <TabsContent value="notifications">
+      <p class="text-sm text-muted-foreground">Configure how you receive notifications.</p>
+    </TabsContent>
+  </Tabs>
+</template>`;
+
+const BREADCRUMB_CODE = `<script setup lang="ts">
+import { Breadcrumb } from "@/components/ui/breadcrumb";
+
+const BREADCRUMB_ITEMS = [
+  { label: "Home", href: "/" },
+  { label: "Library", href: "/library" },
+  { label: "Components" },
+];
+<\/script>
+
+<template>
+  <Breadcrumb :items="BREADCRUMB_ITEMS" />
+</template>`;
+
+const PAGINATION_CODE = `<script setup lang="ts">
+import { ref } from "vue";
+import { Pagination } from "@/components/ui/pagination";
+
+const currentPage = ref(1);
+<\/script>
+
+<template>
+  <Pagination
+    :current-page="currentPage"
+    :total-pages="10"
+    @pageChange="val => (currentPage = val)"
+  />
+</template>`;
+
+const NAV_MENU_CODE = `<script setup lang="ts">
+import { NavigationMenu } from "@/components/ui/navigation-menu";
+
+const NAV_ITEMS = [
+  {
+    label: "Products",
+    children: [
+      { label: "Overview", href: "/products" },
+      { label: "Pricing", href: "/products/pricing" },
+    ],
+  },
+  {
+    label: "Resources",
+    children: [
+      { label: "Docs", href: "/docs" },
+      { label: "Blog", href: "/blog" },
+    ],
+  },
+  { label: "About", href: "/about" },
+];
+<\/script>
+
+<template>
+  <NavigationMenu :items="NAV_ITEMS" />
+</template>`;
+
+const BREADCRUMB_ITEMS = [
+  { href: "/", label: "Home" },
+  { href: "/library", label: "Library" },
+  { label: "Components" },
+];
+
+const NAV_ITEMS = [
+  {
+    children: [
+      { href: "/products", label: "Overview" },
+      { href: "/products/pricing", label: "Pricing" },
+    ],
+    label: "Products",
+  },
+  {
+    children: [
+      { href: "/docs", label: "Docs" },
+      { href: "/blog", label: "Blog" },
+    ],
+    label: "Resources",
+  },
+  { href: "/about", label: "About" },
+];
+
+const currentPage = ref(1);
+const tabValue = ref("account");
+</script>
+
+<template>
+  <div class="flex flex-col gap-16">
+    <div>
+      <h1 class="text-3xl font-bold tracking-tight text-foreground">Navigation</h1>
+      <p class="mt-2 text-muted-foreground">
+        Components for moving between pages and sections — tabs, breadcrumbs, pagination, and menus.
+      </p>
+    </div>
+
+    <section class="flex flex-col gap-4" id="tabs">
+      <div>
+        <h2 class="text-xl font-semibold text-foreground">Tabs</h2>
+        <p class="mt-1 text-sm text-muted-foreground">
+          A tabbed interface with full ARIA tab pattern, keyboard navigation, and animated indicator.
+        </p>
+      </div>
+      <div class="rounded-lg border border-border bg-card p-8">
+        <Tabs :value="tabValue" @valueChange="val => (tabValue = val)">
+          <TabsList>
+            <TabsTrigger value="account">Account</TabsTrigger>
+            <TabsTrigger value="password">Password</TabsTrigger>
+            <TabsTrigger value="notifications">Notifications</TabsTrigger>
+          </TabsList>
+          <TabsContent value="account">
+            <p class="text-sm text-muted-foreground">
+              Manage your account settings and preferences.
+            </p>
+          </TabsContent>
+          <TabsContent value="password">
+            <p class="text-sm text-muted-foreground">
+              Change your password and security options.
+            </p>
+          </TabsContent>
+          <TabsContent value="notifications">
+            <p class="text-sm text-muted-foreground">
+              Configure how you receive notifications.
+            </p>
+          </TabsContent>
+        </Tabs>
+      </div>
+      <CodeBlock
+        :code="TABS_CODE"
+        :collapsible="true"
+        :default-open="false"
+        filename="Tabs.vue"
+        language="vue"
+      />
+    </section>
+
+    <section class="flex flex-col gap-4" id="breadcrumb">
+      <div>
+        <h2 class="text-xl font-semibold text-foreground">Breadcrumb</h2>
+        <p class="mt-1 text-sm text-muted-foreground">
+          A landmark trail showing the current page's location in the navigation hierarchy.
+        </p>
+      </div>
+      <div class="rounded-lg border border-border bg-card p-8">
+        <Breadcrumb :items="BREADCRUMB_ITEMS" />
+      </div>
+      <CodeBlock
+        :code="BREADCRUMB_CODE"
+        :collapsible="true"
+        :default-open="false"
+        filename="Breadcrumb.vue"
+        language="vue"
+      />
+    </section>
+
+    <section class="flex flex-col gap-4" id="pagination">
+      <div>
+        <h2 class="text-xl font-semibold text-foreground">Pagination</h2>
+        <p class="mt-1 text-sm text-muted-foreground">
+          Page navigation controls with previous/next buttons, page numbers, and ellipsis for large
+          ranges.
+        </p>
+      </div>
+      <div class="rounded-lg border border-border bg-card p-8">
+        <Pagination
+          :current-page="currentPage"
+          :total-pages="10"
+          @pageChange="val => (currentPage = val)"
+        />
+      </div>
+      <CodeBlock
+        :code="PAGINATION_CODE"
+        :collapsible="true"
+        :default-open="false"
+        filename="Pagination.vue"
+        language="vue"
+      />
+    </section>
+
+    <section class="flex flex-col gap-4" id="navigation-menu">
+      <div>
+        <h2 class="text-xl font-semibold text-foreground">NavigationMenu</h2>
+        <p class="mt-1 text-sm text-muted-foreground">
+          A horizontal menu bar with flyout submenus, keyboard navigation, and ARIA menubar
+          semantics.
+        </p>
+      </div>
+      <div class="rounded-lg border border-border bg-card p-8">
+        <NavigationMenu :items="NAV_ITEMS" />
+      </div>
+      <CodeBlock
+        :code="NAV_MENU_CODE"
+        :collapsible="true"
+        :default-open="false"
+        filename="NavigationMenu.vue"
+        language="vue"
+      />
+    </section>
+  </div>
+</template>

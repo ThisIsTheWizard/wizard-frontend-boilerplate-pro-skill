@@ -35,16 +35,16 @@
 - [x] `assets/showcase-templates/react/layout.tsx.template`
 - [x] `assets/showcase-templates/react/sidebar.tsx.template`
 - [x] `assets/showcase-templates/react/inputs.tsx.template`
-- [ ] `assets/showcase-templates/react/display.tsx.template`
-- [ ] `assets/showcase-templates/react/feedback.tsx.template`
-- [ ] `assets/showcase-templates/react/navigation.tsx.template`
-- [ ] `assets/showcase-templates/react/overlay.tsx.template`
-- [ ] `assets/showcase-templates/react/data-viz.tsx.template`
-- [ ] `assets/showcase-templates/vue/AppLayout.vue.template`
-- [ ] `assets/showcase-templates/vue/Sidebar.vue.template`
-- [ ] `assets/showcase-templates/vue/pages/` — 6 category page templates
-- [ ] `assets/showcase-templates/svelte/+layout.svelte.template`
-- [ ] `assets/showcase-templates/svelte/routes/` — 6 category route templates
+- [x] `assets/showcase-templates/react/display.tsx.template`
+- [x] `assets/showcase-templates/react/feedback.tsx.template`
+- [x] `assets/showcase-templates/react/navigation.tsx.template`
+- [x] `assets/showcase-templates/react/overlay.tsx.template`
+- [x] `assets/showcase-templates/react/data-viz.tsx.template`
+- [x] `assets/showcase-templates/vue/AppLayout.vue.template`
+- [x] `assets/showcase-templates/vue/Sidebar.vue.template`
+- [x] `assets/showcase-templates/vue/pages/` — 6 category page templates
+- [x] `assets/showcase-templates/svelte/+layout.svelte.template`
+- [x] `assets/showcase-templates/svelte/routes/` — 6 category route templates
 
 ## 6. Assets — theme providers
 - [ ] `assets/theme-provider/react.tsx` — localStorage + prefers-color-scheme + FOUC prevention

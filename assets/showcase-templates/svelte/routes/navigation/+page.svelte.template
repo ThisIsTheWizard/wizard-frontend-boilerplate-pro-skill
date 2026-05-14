@@ -1,0 +1,366 @@
+<script lang="ts">
+  import {
+    Breadcrumb,
+    BreadcrumbItem,
+    BreadcrumbLink,
+    BreadcrumbList,
+    BreadcrumbPage,
+    BreadcrumbSeparator,
+  } from "$lib/components/ui/breadcrumb";
+  import { CodeBlock } from "$lib/components/ui/code-block";
+  import {
+    NavigationMenu,
+    NavigationMenuContent,
+    NavigationMenuIndicator,
+    NavigationMenuItem,
+    NavigationMenuLink,
+    NavigationMenuList,
+    NavigationMenuTrigger,
+    NavigationMenuViewport,
+  } from "$lib/components/ui/navigation-menu";
+  import {
+    Pagination,
+    PaginationContent,
+    PaginationEllipsis,
+    PaginationItem,
+    PaginationLink,
+    PaginationNext,
+    PaginationPrevious,
+  } from "$lib/components/ui/pagination";
+  import { Tabs, TabsContent, TabsList, TabsTrigger } from "$lib/components/ui/tabs";
+
+  const BREADCRUMB_CODE = `<script lang="ts">
+  import {
+    Breadcrumb,
+    BreadcrumbItem,
+    BreadcrumbLink,
+    BreadcrumbList,
+    BreadcrumbPage,
+    BreadcrumbSeparator,
+  } from "$lib/components/ui/breadcrumb";
+<\/script>
+
+<Breadcrumb>
+  <BreadcrumbList>
+    <BreadcrumbItem>
+      <BreadcrumbLink href="#">Home</BreadcrumbLink>
+    </BreadcrumbItem>
+    <BreadcrumbSeparator />
+    <BreadcrumbItem>
+      <BreadcrumbLink href="#">Library</BreadcrumbLink>
+    </BreadcrumbItem>
+    <BreadcrumbSeparator />
+    <BreadcrumbItem>
+      <BreadcrumbPage>Components</BreadcrumbPage>
+    </BreadcrumbItem>
+  </BreadcrumbList>
+</Breadcrumb>`;
+
+  const NAVIGATION_MENU_CODE = `<script lang="ts">
+  import {
+    NavigationMenu,
+    NavigationMenuContent,
+    NavigationMenuIndicator,
+    NavigationMenuItem,
+    NavigationMenuLink,
+    NavigationMenuList,
+    NavigationMenuTrigger,
+    NavigationMenuViewport,
+  } from "$lib/components/ui/navigation-menu";
+<\/script>
+
+<NavigationMenu>
+  <NavigationMenuList>
+    <NavigationMenuItem>
+      <NavigationMenuTrigger>Products</NavigationMenuTrigger>
+      <NavigationMenuContent>
+        <NavigationMenuLink href="#">Analytics</NavigationMenuLink>
+        <NavigationMenuLink href="#">Automation</NavigationMenuLink>
+      </NavigationMenuContent>
+    </NavigationMenuItem>
+    <NavigationMenuItem>
+      <NavigationMenuTrigger>Docs</NavigationMenuTrigger>
+      <NavigationMenuContent>
+        <NavigationMenuLink href="#">Getting Started</NavigationMenuLink>
+        <NavigationMenuLink href="#">API Reference</NavigationMenuLink>
+      </NavigationMenuContent>
+    </NavigationMenuItem>
+    <NavigationMenuItem>
+      <NavigationMenuLink href="#">Blog</NavigationMenuLink>
+    </NavigationMenuItem>
+  </NavigationMenuList>
+  <NavigationMenuIndicator />
+  <NavigationMenuViewport />
+</NavigationMenu>`;
+
+  const PAGINATION_CODE = `<script lang="ts">
+  import {
+    Pagination,
+    PaginationContent,
+    PaginationEllipsis,
+    PaginationItem,
+    PaginationLink,
+    PaginationNext,
+    PaginationPrevious,
+  } from "$lib/components/ui/pagination";
+
+  let currentPage = $state(1);
+<\/script>
+
+<Pagination>
+  <PaginationContent>
+    <PaginationItem>
+      <PaginationPrevious
+        disabled={currentPage === 1}
+        onclick={() => (currentPage = Math.max(1, currentPage - 1))}
+      />
+    </PaginationItem>
+    <PaginationItem>
+      <PaginationLink
+        isActive={currentPage === 1}
+        onclick={() => (currentPage = 1)}
+      >
+        1
+      </PaginationLink>
+    </PaginationItem>
+    <PaginationItem>
+      <PaginationEllipsis />
+    </PaginationItem>
+    <PaginationItem>
+      <PaginationLink
+        isActive={currentPage === 10}
+        onclick={() => (currentPage = 10)}
+      >
+        10
+      </PaginationLink>
+    </PaginationItem>
+    <PaginationItem>
+      <PaginationNext
+        disabled={currentPage === 10}
+        onclick={() => (currentPage = Math.min(10, currentPage + 1))}
+      />
+    </PaginationItem>
+  </PaginationContent>
+</Pagination>`;
+
+  const TABS_CODE = `<script lang="ts">
+  import { Tabs, TabsContent, TabsList, TabsTrigger } from "$lib/components/ui/tabs";
+<\/script>
+
+<Tabs defaultValue="account">
+  <TabsList>
+    <TabsTrigger value="account">Account</TabsTrigger>
+    <TabsTrigger value="password">Password</TabsTrigger>
+    <TabsTrigger value="notifications">Notifications</TabsTrigger>
+  </TabsList>
+  <TabsContent value="account">
+    <p>Manage your account settings and preferences.</p>
+  </TabsContent>
+  <TabsContent value="password">
+    <p>Change your password and security settings.</p>
+  </TabsContent>
+  <TabsContent value="notifications">
+    <p>Configure how you receive notifications.</p>
+  </TabsContent>
+</Tabs>`;
+
+  let currentPage = $state(1);
+  let tabValue = $state("account");
+</script>
+
+<div class="flex flex-col gap-16">
+  <div>
+    <h1 class="text-3xl font-bold tracking-tight text-foreground">Navigation</h1>
+    <p class="mt-2 text-muted-foreground">
+      Route navigation, tabbed interfaces, and paginated content — tabs,
+      breadcrumbs, and menus.
+    </p>
+  </div>
+
+  <section class="flex flex-col gap-4" id="tabs">
+    <div>
+      <h2 class="text-xl font-semibold text-foreground">Tabs</h2>
+      <p class="mt-1 text-sm text-muted-foreground">
+        Organises related content into switchable panels with accessible keyboard
+        navigation.
+      </p>
+    </div>
+    <div class="rounded-lg border border-border bg-card p-8">
+      <Tabs onvaluechange={(val) => (tabValue = val)} value={tabValue}>
+        <TabsList>
+          <TabsTrigger value="account">Account</TabsTrigger>
+          <TabsTrigger value="password">Password</TabsTrigger>
+          <TabsTrigger value="notifications">Notifications</TabsTrigger>
+        </TabsList>
+        <TabsContent value="account">
+          <p class="text-sm text-muted-foreground">
+            Manage your account settings and preferences.
+          </p>
+        </TabsContent>
+        <TabsContent value="password">
+          <p class="text-sm text-muted-foreground">
+            Change your password and security settings.
+          </p>
+        </TabsContent>
+        <TabsContent value="notifications">
+          <p class="text-sm text-muted-foreground">
+            Configure how you receive notifications.
+          </p>
+        </TabsContent>
+      </Tabs>
+    </div>
+    <CodeBlock
+      code={TABS_CODE}
+      collapsible={true}
+      defaultOpen={false}
+      filename="Tabs.svelte"
+      language="svelte"
+    />
+  </section>
+
+  <section class="flex flex-col gap-4" id="breadcrumb">
+    <div>
+      <h2 class="text-xl font-semibold text-foreground">Breadcrumb</h2>
+      <p class="mt-1 text-sm text-muted-foreground">
+        Shows the user's current location within a site hierarchy with accessible
+        landmark navigation.
+      </p>
+    </div>
+    <div class="rounded-lg border border-border bg-card p-8">
+      <Breadcrumb>
+        <BreadcrumbList>
+          <BreadcrumbItem>
+            <BreadcrumbLink href="#">Home</BreadcrumbLink>
+          </BreadcrumbItem>
+          <BreadcrumbSeparator />
+          <BreadcrumbItem>
+            <BreadcrumbLink href="#">Library</BreadcrumbLink>
+          </BreadcrumbItem>
+          <BreadcrumbSeparator />
+          <BreadcrumbItem>
+            <BreadcrumbPage>Components</BreadcrumbPage>
+          </BreadcrumbItem>
+        </BreadcrumbList>
+      </Breadcrumb>
+    </div>
+    <CodeBlock
+      code={BREADCRUMB_CODE}
+      collapsible={true}
+      defaultOpen={false}
+      filename="Breadcrumb.svelte"
+      language="svelte"
+    />
+  </section>
+
+  <section class="flex flex-col gap-4" id="pagination">
+    <div>
+      <h2 class="text-xl font-semibold text-foreground">Pagination</h2>
+      <p class="mt-1 text-sm text-muted-foreground">
+        Splits large datasets across multiple pages with Previous, Next, and
+        numbered page links.
+      </p>
+    </div>
+    <div class="rounded-lg border border-border bg-card p-8">
+      <Pagination>
+        <PaginationContent>
+          <PaginationItem>
+            <PaginationPrevious
+              disabled={currentPage === 1}
+              onclick={() => (currentPage = Math.max(1, currentPage - 1))}
+            />
+          </PaginationItem>
+          <PaginationItem>
+            <PaginationLink
+              isActive={currentPage === 1}
+              onclick={() => (currentPage = 1)}
+            >
+              1
+            </PaginationLink>
+          </PaginationItem>
+          <PaginationItem>
+            <PaginationLink
+              isActive={currentPage === 2}
+              onclick={() => (currentPage = 2)}
+            >
+              2
+            </PaginationLink>
+          </PaginationItem>
+          <PaginationItem>
+            <PaginationEllipsis />
+          </PaginationItem>
+          <PaginationItem>
+            <PaginationLink
+              isActive={currentPage === 9}
+              onclick={() => (currentPage = 9)}
+            >
+              9
+            </PaginationLink>
+          </PaginationItem>
+          <PaginationItem>
+            <PaginationLink
+              isActive={currentPage === 10}
+              onclick={() => (currentPage = 10)}
+            >
+              10
+            </PaginationLink>
+          </PaginationItem>
+          <PaginationItem>
+            <PaginationNext
+              disabled={currentPage === 10}
+              onclick={() => (currentPage = Math.min(10, currentPage + 1))}
+            />
+          </PaginationItem>
+        </PaginationContent>
+      </Pagination>
+    </div>
+    <CodeBlock
+      code={PAGINATION_CODE}
+      collapsible={true}
+      defaultOpen={false}
+      filename="Pagination.svelte"
+      language="svelte"
+    />
+  </section>
+
+  <section class="flex flex-col gap-4" id="navigation-menu">
+    <div>
+      <h2 class="text-xl font-semibold text-foreground">NavigationMenu</h2>
+      <p class="mt-1 text-sm text-muted-foreground">
+        A top-level navigation bar with accessible flyout submenus and keyboard
+        navigation.
+      </p>
+    </div>
+    <div class="rounded-lg border border-border bg-card p-8">
+      <NavigationMenu>
+        <NavigationMenuList>
+          <NavigationMenuItem>
+            <NavigationMenuTrigger>Products</NavigationMenuTrigger>
+            <NavigationMenuContent>
+              <NavigationMenuLink href="#">Analytics</NavigationMenuLink>
+              <NavigationMenuLink href="#">Automation</NavigationMenuLink>
+            </NavigationMenuContent>
+          </NavigationMenuItem>
+          <NavigationMenuItem>
+            <NavigationMenuTrigger>Docs</NavigationMenuTrigger>
+            <NavigationMenuContent>
+              <NavigationMenuLink href="#">Getting Started</NavigationMenuLink>
+              <NavigationMenuLink href="#">API Reference</NavigationMenuLink>
+            </NavigationMenuContent>
+          </NavigationMenuItem>
+          <NavigationMenuItem>
+            <NavigationMenuLink href="#">Blog</NavigationMenuLink>
+          </NavigationMenuItem>
+        </NavigationMenuList>
+        <NavigationMenuIndicator />
+        <NavigationMenuViewport />
+      </NavigationMenu>
+    </div>
+    <CodeBlock
+      code={NAVIGATION_MENU_CODE}
+      collapsible={true}
+      defaultOpen={false}
+      filename="NavigationMenu.svelte"
+      language="svelte"
+    />
+  </section>
+</div>

@@ -1,0 +1,173 @@
+<script setup lang="ts">
+import { computed, onMounted, onUnmounted, ref, watch } from "vue";
+import { useRoute } from "vue-router";
+
+import { cn } from "@/lib/utils";
+
+interface NavItem {
+  category: string;
+  components: string[];
+  slug: string;
+}
+
+interface Props {
+  onNavigate?: () => void;
+}
+
+const props = withDefaults(defineProps<Props>(), {
+  onNavigate: undefined,
+});
+
+const NAV_ITEMS: NavItem[] = [
+  {
+    category: "Data viz",
+    components: ["Chart", "DataTable", "Calendar"],
+    slug: "data-viz",
+  },
+  {
+    category: "Display",
+    components: ["Card", "Badge", "Avatar", "Separator", "Skeleton", "Table"],
+    slug: "display",
+  },
+  {
+    category: "Feedback",
+    components: ["Alert", "Toast", "Progress", "Tooltip", "Dialog"],
+    slug: "feedback",
+  },
+  {
+    category: "Inputs",
+    components: [
+      "Button",
+      "Input",
+      "Textarea",
+      "Select",
+      "Checkbox",
+      "RadioGroup",
+      "Switch",
+    ],
+    slug: "inputs",
+  },
+  {
+    category: "Navigation",
+    components: ["Tabs", "Breadcrumb", "Pagination", "NavigationMenu"],
+    slug: "navigation",
+  },
+  {
+    category: "Overlay",
+    components: ["Popover", "DropdownMenu", "Sheet"],
+    slug: "overlay",
+  },
+];
+
+function toSlug(name: string): string {
+  return name
+    .replace(/[A-Z]/g, (char, offset: number) => (offset > 0 ? `-${char}` : char))
+    .toLowerCase();
+}
+
+const route = useRoute();
+const activeAnchor = ref("");
+
+const activeSlug = computed(() =>
+  route.path.startsWith("/library/") ? route.path.slice("/library/".length) : "",
+);
+
+let observer: IntersectionObserver | null = null;
+
+function initObserver() {
+  if (observer) {
+    observer.disconnect();
+    observer = null;
+  }
+
+  activeAnchor.value = "";
+
+  const sections = document.querySelectorAll<HTMLElement>("section[id]");
+  if (sections.length === 0) return;
+
+  observer = new IntersectionObserver(
+    (entries) => {
+      for (const entry of entries) {
+        if (entry.isIntersecting) {
+          activeAnchor.value = entry.target.id;
+        }
+      }
+    },
+    { rootMargin: "-80px 0px -66% 0px" },
+  );
+
+  sections.forEach((section) => observer!.observe(section));
+}
+
+onMounted(() => {
+  initObserver();
+});
+
+onUnmounted(() => {
+  if (observer) {
+    observer.disconnect();
+    observer = null;
+  }
+});
+
+watch(
+  () => route.path,
+  () => {
+    initObserver();
+  },
+);
+</script>
+
+<template>
+  <nav aria-label="Component library navigation" class="flex h-full flex-col">
+    <div class="flex h-16 shrink-0 items-center border-b border-border px-4">
+      <RouterLink
+        class="text-sm font-semibold text-foreground hover:text-primary"
+        to="/library"
+        @click="props.onNavigate?.()"
+      >
+        Component Library
+      </RouterLink>
+    </div>
+
+    <div class="flex-1 overflow-y-auto py-4">
+      <div
+        v-for="{ category, components, slug } in NAV_ITEMS"
+        :key="slug"
+        class="px-3 py-1"
+      >
+        <RouterLink
+          :class="
+            cn(
+              'block rounded-md px-2 py-1.5 text-sm font-medium transition-colors hover:text-primary',
+              activeSlug === slug ? 'text-primary' : 'text-muted-foreground',
+            )
+          "
+          :to="`/library/${slug}`"
+          @click="props.onNavigate?.()"
+        >
+          {{ category }}
+        </RouterLink>
+
+        <div class="mt-0.5 space-y-0.5">
+          <RouterLink
+            v-for="component in components"
+            :key="toSlug(component)"
+            :class="
+              cn(
+                'block rounded-md px-4 py-1 text-sm transition-colors hover:text-foreground',
+                activeSlug === slug && activeAnchor === toSlug(component)
+                  ? 'font-medium text-primary'
+                  : 'text-muted-foreground',
+              )
+            "
+            :to="`/library/${slug}#${toSlug(component)}`"
+            @click="props.onNavigate?.()"
+          >
+            {{ component }}
+          </RouterLink>
+        </div>
+      </div>
+    </div>
+  </nav>
+</template>

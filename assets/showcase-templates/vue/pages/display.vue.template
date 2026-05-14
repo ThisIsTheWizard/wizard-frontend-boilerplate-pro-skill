@@ -1,0 +1,352 @@
+<script setup lang="ts">
+import { Avatar } from "@/components/ui/avatar";
+import { Badge } from "@/components/ui/badge";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { CodeBlock } from "@/components/ui/code-block";
+import { Separator } from "@/components/ui/separator";
+import { Skeleton } from "@/components/ui/skeleton";
+import {
+  Table,
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
+import { Button } from "@/components/ui/button";
+
+const CARD_CODE = `<script setup lang="ts">
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+<\/script>
+
+<template>
+  <Card class="w-80">
+    <CardHeader>
+      <CardTitle>Project Alpha</CardTitle>
+      <CardDescription>A next-generation web application.</CardDescription>
+    </CardHeader>
+    <CardContent>
+      <p class="text-sm text-muted-foreground">
+        This project leverages modern tooling and design systems to deliver an outstanding user
+        experience across all devices.
+      </p>
+    </CardContent>
+    <CardFooter>
+      <Button variant="outline">Learn more</Button>
+    </CardFooter>
+  </Card>
+</template>`;
+
+const BADGE_CODE = `<script setup lang="ts">
+import { Badge } from "@/components/ui/badge";
+<\/script>
+
+<template>
+  <div class="flex flex-wrap gap-2">
+    <Badge>Default</Badge>
+    <Badge variant="secondary">Secondary</Badge>
+    <Badge variant="destructive">Destructive</Badge>
+    <Badge variant="outline">Outline</Badge>
+  </div>
+</template>`;
+
+const AVATAR_CODE = `<script setup lang="ts">
+import { Avatar } from "@/components/ui/avatar";
+<\/script>
+
+<template>
+  <div class="flex items-center gap-4">
+    <Avatar alt="Jane Doe" size="sm" src="https://i.pravatar.cc/150?img=1" />
+    <Avatar alt="Jane Doe" src="https://i.pravatar.cc/150?img=1" />
+    <Avatar alt="Jane Doe" size="lg" src="https://i.pravatar.cc/150?img=1" />
+    <Avatar alt="John Doe" fallback="JD" />
+  </div>
+</template>`;
+
+const SEPARATOR_CODE = `<script setup lang="ts">
+import { Separator } from "@/components/ui/separator";
+<\/script>
+
+<template>
+  <div class="flex flex-col gap-4">
+    <div>
+      <p class="text-sm text-muted-foreground">Above the line.</p>
+      <Separator class="my-3" />
+      <p class="text-sm text-muted-foreground">Below the line.</p>
+    </div>
+    <div class="flex items-center gap-3">
+      <span class="text-sm">Left</span>
+      <Separator class="h-4" orientation="vertical" />
+      <span class="text-sm">Right</span>
+    </div>
+  </div>
+</template>`;
+
+const SKELETON_CODE = `<script setup lang="ts">
+import { Skeleton } from "@/components/ui/skeleton";
+<\/script>
+
+<template>
+  <div class="flex items-center gap-4">
+    <Skeleton class="h-12 w-12 rounded-full" />
+    <div class="flex flex-col gap-2">
+      <Skeleton class="h-4 w-48" />
+      <Skeleton class="h-4 w-36" />
+      <Skeleton class="h-4 w-28" />
+    </div>
+  </div>
+</template>`;
+
+const TABLE_CODE = `<script setup lang="ts">
+import {
+  Table,
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
+<\/script>
+
+<template>
+  <Table>
+    <TableCaption>Team members</TableCaption>
+    <TableHeader>
+      <TableRow>
+        <TableHead scope="col">Name</TableHead>
+        <TableHead scope="col">Email</TableHead>
+        <TableHead scope="col">Role</TableHead>
+      </TableRow>
+    </TableHeader>
+    <TableBody>
+      <TableRow>
+        <TableCell>Alice Martin</TableCell>
+        <TableCell>alice@example.com</TableCell>
+        <TableCell>Admin</TableCell>
+      </TableRow>
+      <TableRow>
+        <TableCell>Bob Chen</TableCell>
+        <TableCell>bob@example.com</TableCell>
+        <TableCell>Developer</TableCell>
+      </TableRow>
+      <TableRow>
+        <TableCell>Carol White</TableCell>
+        <TableCell>carol@example.com</TableCell>
+        <TableCell>Designer</TableCell>
+      </TableRow>
+    </TableBody>
+  </Table>
+</template>`;
+</script>
+
+<template>
+  <div class="flex flex-col gap-16">
+    <div>
+      <h1 class="text-3xl font-bold tracking-tight text-foreground">Display</h1>
+      <p class="mt-2 text-muted-foreground">
+        Components for presenting content — cards, badges, avatars, separators, skeletons, and
+        tables.
+      </p>
+    </div>
+
+    <section class="flex flex-col gap-4" id="card">
+      <div>
+        <h2 class="text-xl font-semibold text-foreground">Card</h2>
+        <p class="mt-1 text-sm text-muted-foreground">
+          A surface for grouping related content with an optional header, body, and footer.
+        </p>
+      </div>
+      <div class="rounded-lg border border-border bg-card p-8">
+        <Card class="w-80">
+          <CardHeader>
+            <CardTitle>Project Alpha</CardTitle>
+            <CardDescription>A next-generation web application.</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <p class="text-sm text-muted-foreground">
+              This project leverages modern tooling and design systems to deliver an outstanding user
+              experience across all devices.
+            </p>
+          </CardContent>
+          <CardFooter>
+            <Button variant="outline">Learn more</Button>
+          </CardFooter>
+        </Card>
+      </div>
+      <CodeBlock
+        :code="CARD_CODE"
+        :collapsible="true"
+        :default-open="false"
+        filename="Card.vue"
+        language="vue"
+      />
+    </section>
+
+    <section class="flex flex-col gap-4" id="badge">
+      <div>
+        <h2 class="text-xl font-semibold text-foreground">Badge</h2>
+        <p class="mt-1 text-sm text-muted-foreground">
+          A small inline label for status, category, or count — with four visual variants.
+        </p>
+      </div>
+      <div class="rounded-lg border border-border bg-card p-8">
+        <div class="flex flex-wrap gap-2">
+          <Badge>Default</Badge>
+          <Badge variant="secondary">Secondary</Badge>
+          <Badge variant="destructive">Destructive</Badge>
+          <Badge variant="outline">Outline</Badge>
+        </div>
+      </div>
+      <CodeBlock
+        :code="BADGE_CODE"
+        :collapsible="true"
+        :default-open="false"
+        filename="Badge.vue"
+        language="vue"
+      />
+    </section>
+
+    <section class="flex flex-col gap-4" id="avatar">
+      <div>
+        <h2 class="text-xl font-semibold text-foreground">Avatar</h2>
+        <p class="mt-1 text-sm text-muted-foreground">
+          A circular image placeholder with automatic fallback to initials when the image fails to
+          load.
+        </p>
+      </div>
+      <div class="rounded-lg border border-border bg-card p-8">
+        <div class="flex flex-wrap items-center gap-4">
+          <Avatar alt="Jane Doe" size="sm" src="https://i.pravatar.cc/150?img=1" />
+          <Avatar alt="Jane Doe" src="https://i.pravatar.cc/150?img=1" />
+          <Avatar alt="Jane Doe" size="lg" src="https://i.pravatar.cc/150?img=1" />
+          <Avatar alt="John Doe" fallback="JD" />
+        </div>
+      </div>
+      <CodeBlock
+        :code="AVATAR_CODE"
+        :collapsible="true"
+        :default-open="false"
+        filename="Avatar.vue"
+        language="vue"
+      />
+    </section>
+
+    <section class="flex flex-col gap-4" id="separator">
+      <div>
+        <h2 class="text-xl font-semibold text-foreground">Separator</h2>
+        <p class="mt-1 text-sm text-muted-foreground">
+          A thin visual divider in horizontal or vertical orientation.
+        </p>
+      </div>
+      <div class="rounded-lg border border-border bg-card p-8">
+        <div class="flex flex-col gap-6">
+          <div>
+            <p class="text-sm text-muted-foreground">Above the line.</p>
+            <Separator class="my-3" />
+            <p class="text-sm text-muted-foreground">Below the line.</p>
+          </div>
+          <div class="flex items-center gap-3">
+            <span class="text-sm">Left</span>
+            <Separator class="h-4" orientation="vertical" />
+            <span class="text-sm">Right</span>
+          </div>
+        </div>
+      </div>
+      <CodeBlock
+        :code="SEPARATOR_CODE"
+        :collapsible="true"
+        :default-open="false"
+        filename="Separator.vue"
+        language="vue"
+      />
+    </section>
+
+    <section class="flex flex-col gap-4" id="skeleton">
+      <div>
+        <h2 class="text-xl font-semibold text-foreground">Skeleton</h2>
+        <p class="mt-1 text-sm text-muted-foreground">
+          Animated loading placeholders that mimic the shape of content being fetched.
+        </p>
+      </div>
+      <div class="rounded-lg border border-border bg-card p-8">
+        <div aria-busy="true" aria-label="Loading…" class="flex items-center gap-4">
+          <Skeleton class="h-12 w-12 rounded-full" />
+          <div class="flex flex-col gap-2">
+            <Skeleton class="h-4 w-48" />
+            <Skeleton class="h-4 w-36" />
+            <Skeleton class="h-4 w-28" />
+          </div>
+        </div>
+      </div>
+      <CodeBlock
+        :code="SKELETON_CODE"
+        :collapsible="true"
+        :default-open="false"
+        filename="Skeleton.vue"
+        language="vue"
+      />
+    </section>
+
+    <section class="flex flex-col gap-4" id="table">
+      <div>
+        <h2 class="text-xl font-semibold text-foreground">Table</h2>
+        <p class="mt-1 text-sm text-muted-foreground">
+          A semantic HTML table with styled header, body, and caption sub-components.
+        </p>
+      </div>
+      <div class="rounded-lg border border-border bg-card p-8">
+        <Table>
+          <TableCaption>Team members</TableCaption>
+          <TableHeader>
+            <TableRow>
+              <TableHead scope="col">Name</TableHead>
+              <TableHead scope="col">Email</TableHead>
+              <TableHead scope="col">Role</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            <TableRow>
+              <TableCell>Alice Martin</TableCell>
+              <TableCell>alice@example.com</TableCell>
+              <TableCell>Admin</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>Bob Chen</TableCell>
+              <TableCell>bob@example.com</TableCell>
+              <TableCell>Developer</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>Carol White</TableCell>
+              <TableCell>carol@example.com</TableCell>
+              <TableCell>Designer</TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
+      </div>
+      <CodeBlock
+        :code="TABLE_CODE"
+        :collapsible="true"
+        :default-open="false"
+        filename="Table.vue"
+        language="vue"
+      />
+    </section>
+  </div>
+</template>

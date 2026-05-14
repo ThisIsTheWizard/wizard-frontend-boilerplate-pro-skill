@@ -1,0 +1,354 @@
+"use client";
+
+import { useState } from "react";
+
+import { toast, Toaster } from "sonner";
+
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { Button } from "@/components/ui/button";
+import { CodeBlock } from "@/components/ui/code-block";
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import { Progress } from "@/components/ui/progress";
+import { Tooltip } from "@/components/ui/tooltip";
+
+const ALERT_CODE = `import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+
+export function Example() {
+  return (
+    <div className="flex flex-col gap-3">
+      <Alert>
+        <AlertTitle>Heads up</AlertTitle>
+        <AlertDescription>
+          You can add components to your app using the CLI.
+        </AlertDescription>
+      </Alert>
+      <Alert variant="success">
+        <AlertTitle>Success</AlertTitle>
+        <AlertDescription>Your changes have been saved.</AlertDescription>
+      </Alert>
+      <Alert variant="warning">
+        <AlertTitle>Warning</AlertTitle>
+        <AlertDescription>
+          Your subscription expires in 3 days.
+        </AlertDescription>
+      </Alert>
+      <Alert variant="destructive">
+        <AlertTitle>Error</AlertTitle>
+        <AlertDescription>
+          Something went wrong. Please try again.
+        </AlertDescription>
+      </Alert>
+    </div>
+  );
+}`;
+
+const TOAST_CODE = `import { toast, Toaster } from "sonner";
+import { Button } from "@/components/ui/button";
+
+// In your root layout:
+// <Toaster />
+
+export function Example() {
+  return (
+    <div className="flex flex-wrap gap-2">
+      <Button onClick={() => toast("Event has been created.")}>
+        Default
+      </Button>
+      <Button onClick={() => toast.success("Profile saved successfully.")} variant="outline">
+        Success
+      </Button>
+      <Button onClick={() => toast.error("Something went wrong.")} variant="outline">
+        Error
+      </Button>
+      <Button onClick={() => toast.warning("Unsaved changes detected.")} variant="outline">
+        Warning
+      </Button>
+    </div>
+  );
+}`;
+
+const PROGRESS_CODE = `import { Progress } from "@/components/ui/progress";
+
+export function Example() {
+  return (
+    <div className="flex flex-col gap-4">
+      <Progress label="25%" value={25} />
+      <Progress label="60%" value={60} />
+      <Progress label="100%" value={100} />
+      <Progress indeterminate label="Loading…" />
+    </div>
+  );
+}`;
+
+const TOOLTIP_CODE = `import { Button } from "@/components/ui/button";
+import { Tooltip } from "@/components/ui/tooltip";
+
+export function Example() {
+  return (
+    <div className="flex flex-wrap items-center gap-4">
+      <Tooltip content="Tooltip on top" side="top">
+        <Button variant="outline">Top</Button>
+      </Tooltip>
+      <Tooltip content="Tooltip on right" side="right">
+        <Button variant="outline">Right</Button>
+      </Tooltip>
+      <Tooltip content="Tooltip on bottom" side="bottom">
+        <Button variant="outline">Bottom</Button>
+      </Tooltip>
+      <Tooltip content="Tooltip on left" side="left">
+        <Button variant="outline">Left</Button>
+      </Tooltip>
+    </div>
+  );
+}`;
+
+const DIALOG_CODE = `import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+
+export function Example() {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <Dialog onOpenChange={setOpen} open={open}>
+      <DialogTrigger asChild>
+        <Button>Open dialog</Button>
+      </DialogTrigger>
+      <DialogContent>
+        <DialogHeader>
+          <DialogTitle>Confirm action</DialogTitle>
+          <DialogDescription>
+            This action cannot be undone. Are you sure you want to proceed?
+          </DialogDescription>
+        </DialogHeader>
+        <DialogFooter>
+          <DialogClose asChild>
+            <Button variant="outline">Cancel</Button>
+          </DialogClose>
+          <Button onClick={() => setOpen(false)}>Confirm</Button>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
+  );
+}`;
+
+export default function FeedbackPage() {
+  const [dialogOpen, setDialogOpen] = useState(false);
+
+  return (
+    <div className="flex flex-col gap-16">
+      <div>
+        <h1 className="text-3xl font-bold tracking-tight text-foreground">
+          Feedback
+        </h1>
+        <p className="mt-2 text-muted-foreground">
+          Status indicators, notifications, and modal interactions — alerts,
+          toasts, dialogs, and progress.
+        </p>
+      </div>
+
+      <section className="flex flex-col gap-4" id="alert">
+        <div>
+          <h2 className="text-xl font-semibold text-foreground">Alert</h2>
+          <p className="mt-1 text-sm text-muted-foreground">
+            An inline message banner for default, success, warning, and
+            destructive states.
+          </p>
+        </div>
+        <div className="rounded-lg border border-border bg-card p-8">
+          <div className="flex flex-col gap-3">
+            <Alert>
+              <AlertTitle>Heads up</AlertTitle>
+              <AlertDescription>
+                You can add components to your app using the CLI.
+              </AlertDescription>
+            </Alert>
+            <Alert variant="success">
+              <AlertTitle>Success</AlertTitle>
+              <AlertDescription>
+                Your changes have been saved.
+              </AlertDescription>
+            </Alert>
+            <Alert variant="warning">
+              <AlertTitle>Warning</AlertTitle>
+              <AlertDescription>
+                Your subscription expires in 3 days.
+              </AlertDescription>
+            </Alert>
+            <Alert variant="destructive">
+              <AlertTitle>Error</AlertTitle>
+              <AlertDescription>
+                Something went wrong. Please try again.
+              </AlertDescription>
+            </Alert>
+          </div>
+        </div>
+        <CodeBlock
+          code={ALERT_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="Alert.tsx"
+          language="tsx"
+        />
+      </section>
+
+      <section className="flex flex-col gap-4" id="toast">
+        <div>
+          <h2 className="text-xl font-semibold text-foreground">Toast</h2>
+          <p className="mt-1 text-sm text-muted-foreground">
+            Transient notification messages powered by Sonner, with default,
+            success, error, and warning variants.
+          </p>
+        </div>
+        <div className="rounded-lg border border-border bg-card p-8">
+          <Toaster />
+          <div className="flex flex-wrap gap-2">
+            <Button onClick={() => toast("Event has been created.")}>
+              Default
+            </Button>
+            <Button
+              onClick={() => toast.success("Profile saved successfully.")}
+              variant="outline"
+            >
+              Success
+            </Button>
+            <Button
+              onClick={() => toast.error("Something went wrong.")}
+              variant="outline"
+            >
+              Error
+            </Button>
+            <Button
+              onClick={() => toast.warning("Unsaved changes detected.")}
+              variant="outline"
+            >
+              Warning
+            </Button>
+          </div>
+        </div>
+        <CodeBlock
+          code={TOAST_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="Toast.tsx"
+          language="tsx"
+        />
+      </section>
+
+      <section className="flex flex-col gap-4" id="progress">
+        <div>
+          <h2 className="text-xl font-semibold text-foreground">Progress</h2>
+          <p className="mt-1 text-sm text-muted-foreground">
+            A horizontal bar showing determinate or indeterminate completion
+            status.
+          </p>
+        </div>
+        <div className="rounded-lg border border-border bg-card p-8">
+          <div className="flex flex-col gap-4">
+            <Progress label="25%" value={25} />
+            <Progress label="60%" value={60} />
+            <Progress label="100%" value={100} />
+            <Progress indeterminate label="Loading…" />
+          </div>
+        </div>
+        <CodeBlock
+          code={PROGRESS_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="Progress.tsx"
+          language="tsx"
+        />
+      </section>
+
+      <section className="flex flex-col gap-4" id="tooltip">
+        <div>
+          <h2 className="text-xl font-semibold text-foreground">Tooltip</h2>
+          <p className="mt-1 text-sm text-muted-foreground">
+            A floating label that appears on hover or focus, supporting top,
+            right, bottom, and left placement.
+          </p>
+        </div>
+        <div className="rounded-lg border border-border bg-card p-8">
+          <div className="flex flex-wrap items-center gap-4">
+            <Tooltip content="Tooltip on top" side="top">
+              <Button variant="outline">Top</Button>
+            </Tooltip>
+            <Tooltip content="Tooltip on right" side="right">
+              <Button variant="outline">Right</Button>
+            </Tooltip>
+            <Tooltip content="Tooltip on bottom" side="bottom">
+              <Button variant="outline">Bottom</Button>
+            </Tooltip>
+            <Tooltip content="Tooltip on left" side="left">
+              <Button variant="outline">Left</Button>
+            </Tooltip>
+          </div>
+        </div>
+        <CodeBlock
+          code={TOOLTIP_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="Tooltip.tsx"
+          language="tsx"
+        />
+      </section>
+
+      <section className="flex flex-col gap-4" id="dialog">
+        <div>
+          <h2 className="text-xl font-semibold text-foreground">Dialog</h2>
+          <p className="mt-1 text-sm text-muted-foreground">
+            A modal overlay with a trigger, header, body, and footer actions —
+            focus-trapped and accessible.
+          </p>
+        </div>
+        <div className="rounded-lg border border-border bg-card p-8">
+          <Dialog onOpenChange={setDialogOpen} open={dialogOpen}>
+            <DialogTrigger asChild>
+              <Button>Open dialog</Button>
+            </DialogTrigger>
+            <DialogContent>
+              <DialogHeader>
+                <DialogTitle>Confirm action</DialogTitle>
+                <DialogDescription>
+                  This action cannot be undone. Are you sure you want to
+                  proceed?
+                </DialogDescription>
+              </DialogHeader>
+              <DialogFooter>
+                <DialogClose asChild>
+                  <Button variant="outline">Cancel</Button>
+                </DialogClose>
+                <Button onClick={() => setDialogOpen(false)}>Confirm</Button>
+              </DialogFooter>
+            </DialogContent>
+          </Dialog>
+        </div>
+        <CodeBlock
+          code={DIALOG_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="Dialog.tsx"
+          language="tsx"
+        />
+      </section>
+    </div>
+  );
+}

@@ -1,0 +1,296 @@
+<script setup lang="ts">
+import { ref } from "vue";
+import { useToast } from "vue-toastification";
+
+import { Alert } from "@/components/ui/alert";
+import { Button } from "@/components/ui/button";
+import { CodeBlock } from "@/components/ui/code-block";
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import { Progress } from "@/components/ui/progress";
+import { Tooltip } from "@/components/ui/tooltip";
+
+const ALERT_CODE = `<script setup lang="ts">
+import { Alert } from "@/components/ui/alert";
+<\/script>
+
+<template>
+  <div class="flex flex-col gap-3">
+    <Alert title="Heads up!">
+      You can add components to your app using the CLI.
+    </Alert>
+    <Alert title="Success" variant="success">
+      Your changes have been saved successfully.
+    </Alert>
+    <Alert title="Warning" variant="warning">
+      This action cannot be undone. Please review before proceeding.
+    </Alert>
+    <Alert title="Error" variant="destructive">
+      Something went wrong. Please try again later.
+    </Alert>
+  </div>
+</template>`;
+
+const TOAST_CODE = `<script setup lang="ts">
+import { useToast } from "vue-toastification";
+import { Button } from "@/components/ui/button";
+
+const toast = useToast();
+<\/script>
+
+<template>
+  <div class="flex flex-wrap gap-2">
+    <Button variant="outline" @click="toast('Default notification')">Default</Button>
+    <Button variant="outline" @click="toast.success('Saved successfully!')">Success</Button>
+    <Button variant="outline" @click="toast.error('Something went wrong.')">Error</Button>
+    <Button variant="outline" @click="toast.warning('Proceed with caution.')">Warning</Button>
+  </div>
+</template>`;
+
+const PROGRESS_CODE = `<script setup lang="ts">
+import { Progress } from "@/components/ui/progress";
+<\/script>
+
+<template>
+  <div class="flex flex-col gap-4">
+    <Progress :value="25" label="25%" />
+    <Progress :value="60" label="60%" />
+    <Progress :value="100" label="Complete" />
+    <Progress :indeterminate="true" label="Loading…" />
+  </div>
+</template>`;
+
+const TOOLTIP_CODE = `<script setup lang="ts">
+import { Tooltip } from "@/components/ui/tooltip";
+import { Button } from "@/components/ui/button";
+<\/script>
+
+<template>
+  <div class="flex flex-wrap items-center gap-4">
+    <Tooltip content="Appears on top" side="top">
+      <Button variant="outline">Top</Button>
+    </Tooltip>
+    <Tooltip content="Appears on the right" side="right">
+      <Button variant="outline">Right</Button>
+    </Tooltip>
+    <Tooltip content="Appears on the bottom" side="bottom">
+      <Button variant="outline">Bottom</Button>
+    </Tooltip>
+    <Tooltip content="Appears on the left" side="left">
+      <Button variant="outline">Left</Button>
+    </Tooltip>
+  </div>
+</template>`;
+
+const DIALOG_CODE = `<script setup lang="ts">
+import { ref } from "vue";
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import { Button } from "@/components/ui/button";
+
+const dialogOpen = ref(false);
+<\/script>
+
+<template>
+  <Dialog :open="dialogOpen" @openChange="val => (dialogOpen = val)">
+    <DialogTrigger as-child>
+      <Button @click="dialogOpen = true">Open Dialog</Button>
+    </DialogTrigger>
+    <DialogContent>
+      <DialogHeader>
+        <DialogTitle>Are you sure?</DialogTitle>
+        <DialogDescription>
+          This action cannot be undone. This will permanently delete your account and remove your
+          data from our servers.
+        </DialogDescription>
+      </DialogHeader>
+      <DialogFooter>
+        <DialogClose as-child>
+          <Button variant="outline" @click="dialogOpen = false">Cancel</Button>
+        </DialogClose>
+        <Button variant="destructive" @click="dialogOpen = false">Delete account</Button>
+      </DialogFooter>
+    </DialogContent>
+  </Dialog>
+</template>`;
+
+const toast = useToast();
+const dialogOpen = ref(false);
+</script>
+
+<template>
+  <div class="flex flex-col gap-16">
+    <div>
+      <h1 class="text-3xl font-bold tracking-tight text-foreground">Feedback</h1>
+      <p class="mt-2 text-muted-foreground">
+        Components for communicating system status and user actions — alerts, toasts, progress
+        indicators, tooltips, and dialogs.
+      </p>
+    </div>
+
+    <section class="flex flex-col gap-4" id="alert">
+      <div>
+        <h2 class="text-xl font-semibold text-foreground">Alert</h2>
+        <p class="mt-1 text-sm text-muted-foreground">
+          Inline status messages with four severity variants.
+        </p>
+      </div>
+      <div class="rounded-lg border border-border bg-card p-8">
+        <div class="flex flex-col gap-3">
+          <Alert title="Heads up!">You can add components to your app using the CLI.</Alert>
+          <Alert title="Success" variant="success">
+            Your changes have been saved successfully.
+          </Alert>
+          <Alert title="Warning" variant="warning">
+            This action cannot be undone. Please review before proceeding.
+          </Alert>
+          <Alert title="Error" variant="destructive">
+            Something went wrong. Please try again later.
+          </Alert>
+        </div>
+      </div>
+      <CodeBlock
+        :code="ALERT_CODE"
+        :collapsible="true"
+        :default-open="false"
+        filename="Alert.vue"
+        language="vue"
+      />
+    </section>
+
+    <section class="flex flex-col gap-4" id="toast">
+      <div>
+        <h2 class="text-xl font-semibold text-foreground">Toast</h2>
+        <p class="mt-1 text-sm text-muted-foreground">
+          Brief auto-dismissing notifications triggered imperatively via
+          <code class="font-mono text-xs">vue-toastification</code>.
+        </p>
+      </div>
+      <div class="rounded-lg border border-border bg-card p-8">
+        <div class="flex flex-wrap gap-2">
+          <Button variant="outline" @click="toast('Default notification')">Default</Button>
+          <Button variant="outline" @click="toast.success('Saved successfully!')">Success</Button>
+          <Button variant="outline" @click="toast.error('Something went wrong.')">Error</Button>
+          <Button variant="outline" @click="toast.warning('Proceed with caution.')">Warning</Button>
+        </div>
+      </div>
+      <CodeBlock
+        :code="TOAST_CODE"
+        :collapsible="true"
+        :default-open="false"
+        filename="Toast.vue"
+        language="vue"
+      />
+    </section>
+
+    <section class="flex flex-col gap-4" id="progress">
+      <div>
+        <h2 class="text-xl font-semibold text-foreground">Progress</h2>
+        <p class="mt-1 text-sm text-muted-foreground">
+          A horizontal bar indicating task completion, with support for indeterminate state.
+        </p>
+      </div>
+      <div class="rounded-lg border border-border bg-card p-8">
+        <div class="flex flex-col gap-4">
+          <Progress :value="25" label="25%" />
+          <Progress :value="60" label="60%" />
+          <Progress :value="100" label="Complete" />
+          <Progress :indeterminate="true" label="Loading…" />
+        </div>
+      </div>
+      <CodeBlock
+        :code="PROGRESS_CODE"
+        :collapsible="true"
+        :default-open="false"
+        filename="Progress.vue"
+        language="vue"
+      />
+    </section>
+
+    <section class="flex flex-col gap-4" id="tooltip">
+      <div>
+        <h2 class="text-xl font-semibold text-foreground">Tooltip</h2>
+        <p class="mt-1 text-sm text-muted-foreground">
+          Contextual hints shown on hover or focus, with configurable side placement.
+        </p>
+      </div>
+      <div class="rounded-lg border border-border bg-card p-8">
+        <div class="flex flex-wrap items-center gap-4">
+          <Tooltip content="Appears on top" side="top">
+            <Button variant="outline">Top</Button>
+          </Tooltip>
+          <Tooltip content="Appears on the right" side="right">
+            <Button variant="outline">Right</Button>
+          </Tooltip>
+          <Tooltip content="Appears on the bottom" side="bottom">
+            <Button variant="outline">Bottom</Button>
+          </Tooltip>
+          <Tooltip content="Appears on the left" side="left">
+            <Button variant="outline">Left</Button>
+          </Tooltip>
+        </div>
+      </div>
+      <CodeBlock
+        :code="TOOLTIP_CODE"
+        :collapsible="true"
+        :default-open="false"
+        filename="Tooltip.vue"
+        language="vue"
+      />
+    </section>
+
+    <section class="flex flex-col gap-4" id="dialog">
+      <div>
+        <h2 class="text-xl font-semibold text-foreground">Dialog</h2>
+        <p class="mt-1 text-sm text-muted-foreground">
+          A modal overlay with focus trap, Escape-to-close, and ARIA dialog semantics.
+        </p>
+      </div>
+      <div class="rounded-lg border border-border bg-card p-8">
+        <Dialog :open="dialogOpen" @openChange="val => (dialogOpen = val)">
+          <DialogTrigger as-child>
+            <Button @click="dialogOpen = true">Open Dialog</Button>
+          </DialogTrigger>
+          <DialogContent>
+            <DialogHeader>
+              <DialogTitle>Are you sure?</DialogTitle>
+              <DialogDescription>
+                This action cannot be undone. This will permanently delete your account and remove
+                your data from our servers.
+              </DialogDescription>
+            </DialogHeader>
+            <DialogFooter>
+              <DialogClose as-child>
+                <Button variant="outline" @click="dialogOpen = false">Cancel</Button>
+              </DialogClose>
+              <Button variant="destructive" @click="dialogOpen = false">Delete account</Button>
+            </DialogFooter>
+          </DialogContent>
+        </Dialog>
+      </div>
+      <CodeBlock
+        :code="DIALOG_CODE"
+        :collapsible="true"
+        :default-open="false"
+        filename="Dialog.vue"
+        language="vue"
+      />
+    </section>
+  </div>
+</template>

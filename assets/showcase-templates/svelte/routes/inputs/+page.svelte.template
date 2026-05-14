@@ -1,0 +1,376 @@
+<script lang="ts">
+  import { Button } from "$lib/components/ui/button";
+  import { Checkbox } from "$lib/components/ui/checkbox";
+  import { CodeBlock } from "$lib/components/ui/code-block";
+  import { Input } from "$lib/components/ui/input";
+  import { RadioGroup } from "$lib/components/ui/radio-group";
+  import { Select } from "$lib/components/ui/select";
+  import { Switch } from "$lib/components/ui/switch";
+  import { Textarea } from "$lib/components/ui/textarea";
+
+  const BUTTON_CODE = `<script lang="ts">
+  import { Button } from "$lib/components/ui/button";
+<\/script>
+
+<div class="flex flex-wrap gap-2">
+  <Button>Default</Button>
+  <Button variant="secondary">Secondary</Button>
+  <Button variant="outline">Outline</Button>
+  <Button variant="ghost">Ghost</Button>
+  <Button variant="destructive">Destructive</Button>
+  <Button variant="link">Link</Button>
+</div>`;
+
+  const INPUT_CODE = `<script lang="ts">
+  import { Input } from "$lib/components/ui/input";
+<\/script>
+
+<Input
+  helperText="We'll never share your email."
+  id="email"
+  label="Email address"
+  placeholder="you@example.com"
+  type="email"
+/>`;
+
+  const TEXTAREA_CODE = `<script lang="ts">
+  import { Textarea } from "$lib/components/ui/textarea";
+<\/script>
+
+<Textarea
+  helperText="Describe your project in a few sentences."
+  id="bio"
+  label="Bio"
+  placeholder="Tell us about yourself…"
+  rows={4}
+/>`;
+
+  const SELECT_CODE = `<script lang="ts">
+  import { Select } from "$lib/components/ui/select";
+
+  const FRAMEWORK_OPTIONS = [
+    { label: "Next.js", value: "nextjs" },
+    { label: "Remix", value: "remix" },
+    { label: "Astro", value: "astro" },
+    { label: "SvelteKit", value: "sveltekit" },
+  ];
+
+  let framework = $state("");
+<\/script>
+
+<Select
+  label="Framework"
+  onchange={(val) => (framework = val)}
+  options={FRAMEWORK_OPTIONS}
+  placeholder="Select a framework…"
+  value={framework}
+/>`;
+
+  const CHECKBOX_CODE = `<script lang="ts">
+  import { Checkbox } from "$lib/components/ui/checkbox";
+
+  let checked = $state(false);
+<\/script>
+
+<Checkbox
+  {checked}
+  id="terms"
+  label="Accept terms and conditions"
+  oncheckedchange={(val) => (checked = val)}
+/>`;
+
+  const RADIO_GROUP_CODE = `<script lang="ts">
+  import { RadioGroup } from "$lib/components/ui/radio-group";
+
+  const PLAN_OPTIONS = [
+    { label: "Free", value: "free" },
+    { label: "Pro", value: "pro" },
+    { label: "Enterprise", value: "enterprise" },
+  ];
+
+  let plan = $state("free");
+<\/script>
+
+<RadioGroup
+  label="Plan"
+  onvaluechange={(val) => (plan = val)}
+  options={PLAN_OPTIONS}
+  value={plan}
+/>`;
+
+  const SWITCH_CODE = `<script lang="ts">
+  import { Switch } from "$lib/components/ui/switch";
+
+  let enabled = $state(false);
+<\/script>
+
+<Switch
+  checked={enabled}
+  id="notifications"
+  label="Email notifications"
+  oncheckedchange={(val) => (enabled = val)}
+/>`;
+
+  const FRAMEWORK_OPTIONS = [
+    { label: "Next.js", value: "nextjs" },
+    { label: "Remix", value: "remix" },
+    { label: "Astro", value: "astro" },
+    { label: "SvelteKit", value: "sveltekit" },
+  ];
+
+  const PLAN_OPTIONS = [
+    { label: "Free", value: "free" },
+    { label: "Pro", value: "pro" },
+    { label: "Enterprise", value: "enterprise" },
+  ];
+
+  let checkboxChecked = $state(false);
+  let framework = $state("");
+  let notifications = $state(false);
+  let plan = $state("free");
+</script>
+
+<div class="flex flex-col gap-16">
+  <div>
+    <h1 class="text-3xl font-bold tracking-tight text-foreground">Inputs</h1>
+    <p class="mt-2 text-muted-foreground">
+      Form controls for collecting user input — buttons, text fields, selections,
+      and toggles.
+    </p>
+  </div>
+
+  <section class="flex flex-col gap-4" id="button">
+    <div>
+      <h2 class="text-xl font-semibold text-foreground">Button</h2>
+      <p class="mt-1 text-sm text-muted-foreground">
+        Triggers an action or event with support for multiple visual variants and
+        sizes.
+      </p>
+    </div>
+    <div class="rounded-lg border border-border bg-card p-8">
+      <div class="flex flex-col gap-4">
+        <div class="flex flex-wrap gap-2">
+          <Button>Default</Button>
+          <Button variant="secondary">Secondary</Button>
+          <Button variant="outline">Outline</Button>
+          <Button variant="ghost">Ghost</Button>
+          <Button variant="destructive">Destructive</Button>
+          <Button variant="link">Link</Button>
+        </div>
+        <div class="flex flex-wrap items-center gap-2">
+          <Button size="sm">Small</Button>
+          <Button size="default">Default</Button>
+          <Button size="lg">Large</Button>
+          <Button disabled>Disabled</Button>
+          <Button loading>Loading</Button>
+        </div>
+      </div>
+    </div>
+    <CodeBlock
+      code={BUTTON_CODE}
+      collapsible={true}
+      defaultOpen={false}
+      filename="Button.svelte"
+      language="svelte"
+    />
+  </section>
+
+  <section class="flex flex-col gap-4" id="input">
+    <div>
+      <h2 class="text-xl font-semibold text-foreground">Input</h2>
+      <p class="mt-1 text-sm text-muted-foreground">
+        A single-line text field with optional label, helper text, and error state.
+      </p>
+    </div>
+    <div class="rounded-lg border border-border bg-card p-8">
+      <div class="flex max-w-sm flex-col gap-4">
+        <Input
+          helperText="We'll never share your email."
+          id="email"
+          label="Email address"
+          placeholder="you@example.com"
+          type="email"
+        />
+        <Input
+          error="Please enter a valid username."
+          id="username-error"
+          label="Username"
+          value="invalid user!"
+        />
+        <Input
+          disabled
+          id="disabled-input"
+          label="Disabled"
+          placeholder="Not editable"
+        />
+      </div>
+    </div>
+    <CodeBlock
+      code={INPUT_CODE}
+      collapsible={true}
+      defaultOpen={false}
+      filename="Input.svelte"
+      language="svelte"
+    />
+  </section>
+
+  <section class="flex flex-col gap-4" id="textarea">
+    <div>
+      <h2 class="text-xl font-semibold text-foreground">Textarea</h2>
+      <p class="mt-1 text-sm text-muted-foreground">
+        A multi-line text input with label, helper text, and optional auto-resize.
+      </p>
+    </div>
+    <div class="rounded-lg border border-border bg-card p-8">
+      <div class="flex max-w-sm flex-col gap-4">
+        <Textarea
+          helperText="Describe your project in a few sentences."
+          id="bio"
+          label="Bio"
+          placeholder="Tell us about yourself…"
+          rows={4}
+        />
+        <Textarea
+          error="Message is required."
+          id="message-error"
+          label="Message"
+          placeholder="Enter your message…"
+        />
+      </div>
+    </div>
+    <CodeBlock
+      code={TEXTAREA_CODE}
+      collapsible={true}
+      defaultOpen={false}
+      filename="Textarea.svelte"
+      language="svelte"
+    />
+  </section>
+
+  <section class="flex flex-col gap-4" id="select">
+    <div>
+      <h2 class="text-xl font-semibold text-foreground">Select</h2>
+      <p class="mt-1 text-sm text-muted-foreground">
+        A dropdown for picking a single value from a list, with keyboard navigation
+        and ARIA listbox semantics.
+      </p>
+    </div>
+    <div class="rounded-lg border border-border bg-card p-8">
+      <div class="flex max-w-sm flex-col gap-4">
+        <Select
+          label="Framework"
+          onchange={(val) => (framework = val)}
+          options={FRAMEWORK_OPTIONS}
+          placeholder="Select a framework…"
+          value={framework}
+        />
+        <Select
+          disabled
+          label="Disabled"
+          options={FRAMEWORK_OPTIONS}
+          placeholder="Not selectable"
+        />
+      </div>
+    </div>
+    <CodeBlock
+      code={SELECT_CODE}
+      collapsible={true}
+      defaultOpen={false}
+      filename="Select.svelte"
+      language="svelte"
+    />
+  </section>
+
+  <section class="flex flex-col gap-4" id="checkbox">
+    <div>
+      <h2 class="text-xl font-semibold text-foreground">Checkbox</h2>
+      <p class="mt-1 text-sm text-muted-foreground">
+        A binary toggle supporting checked, unchecked, and indeterminate states
+        with full keyboard and ARIA support.
+      </p>
+    </div>
+    <div class="rounded-lg border border-border bg-card p-8">
+      <div class="flex flex-col gap-3">
+        <Checkbox
+          checked={checkboxChecked}
+          id="terms"
+          label="Accept terms and conditions"
+          oncheckedchange={(val) => (checkboxChecked = val)}
+        />
+        <Checkbox defaultChecked id="checked-demo" label="Checked by default" />
+        <Checkbox id="indeterminate-demo" indeterminate label="Indeterminate state" />
+        <Checkbox disabled id="disabled-checkbox" label="Disabled" />
+      </div>
+    </div>
+    <CodeBlock
+      code={CHECKBOX_CODE}
+      collapsible={true}
+      defaultOpen={false}
+      filename="Checkbox.svelte"
+      language="svelte"
+    />
+  </section>
+
+  <section class="flex flex-col gap-4" id="radio-group">
+    <div>
+      <h2 class="text-xl font-semibold text-foreground">RadioGroup</h2>
+      <p class="mt-1 text-sm text-muted-foreground">
+        A set of mutually exclusive options with arrow-key navigation within the
+        group.
+      </p>
+    </div>
+    <div class="rounded-lg border border-border bg-card p-8">
+      <div class="flex flex-col gap-6 sm:flex-row sm:gap-16">
+        <RadioGroup
+          label="Plan (vertical)"
+          onvaluechange={(val) => (plan = val)}
+          options={PLAN_OPTIONS}
+          value={plan}
+        />
+        <RadioGroup
+          label="Plan (horizontal)"
+          onvaluechange={(val) => (plan = val)}
+          options={PLAN_OPTIONS}
+          orientation="horizontal"
+          value={plan}
+        />
+      </div>
+    </div>
+    <CodeBlock
+      code={RADIO_GROUP_CODE}
+      collapsible={true}
+      defaultOpen={false}
+      filename="RadioGroup.svelte"
+      language="svelte"
+    />
+  </section>
+
+  <section class="flex flex-col gap-4" id="switch">
+    <div>
+      <h2 class="text-xl font-semibold text-foreground">Switch</h2>
+      <p class="mt-1 text-sm text-muted-foreground">
+        An on/off toggle for binary settings, announced as a switch by assistive
+        technologies.
+      </p>
+    </div>
+    <div class="rounded-lg border border-border bg-card p-8">
+      <div class="flex flex-col gap-3">
+        <Switch
+          checked={notifications}
+          id="notifications"
+          label="Email notifications"
+          oncheckedchange={(val) => (notifications = val)}
+        />
+        <Switch defaultChecked id="marketing" label="Marketing emails" />
+        <Switch disabled id="disabled-switch" label="Disabled" />
+      </div>
+    </div>
+    <CodeBlock
+      code={SWITCH_CODE}
+      collapsible={true}
+      defaultOpen={false}
+      filename="Switch.svelte"
+      language="svelte"
+    />
+  </section>
+</div>
