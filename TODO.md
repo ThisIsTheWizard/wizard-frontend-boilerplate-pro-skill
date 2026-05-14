@@ -28,7 +28,7 @@
 - [x] `references/portability.md` — notes for non-Claude agents, tested agent list
 
 ## 4. Assets — color system
-- [ ] Write `scripts/generate_palette.py` first (OKLCH algorithm)
+- [x] Write `scripts/generate_palette.py` first (OKLCH algorithm)
 - [ ] Generate `assets/color-presets.json` using the same algorithm (8 presets + custom slot, OKLCH 50–950 scales, light/dark CSS var mappings)
 
 ## 5. Assets — showcase templates
