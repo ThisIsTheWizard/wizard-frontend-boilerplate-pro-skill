@@ -178,14 +178,14 @@
   </div>
 
   <section class="flex flex-col gap-4" id="tabs">
-    <div>
+    <div class="border-l-2 border-primary/40 pl-3">
       <h2 class="text-xl font-semibold text-foreground">Tabs</h2>
       <p class="mt-1 text-sm text-muted-foreground">
         Organises related content into switchable panels with accessible keyboard
         navigation.
       </p>
     </div>
-    <div class="rounded-lg border border-border bg-card p-8">
+    <div class="rounded-lg border border-border bg-muted/50 p-8">
       <Tabs onvaluechange={(val) => (tabValue = val)} value={tabValue}>
         <TabsList>
           <TabsTrigger value="account">Account</TabsTrigger>
@@ -219,14 +219,14 @@
   </section>
 
   <section class="flex flex-col gap-4" id="breadcrumb">
-    <div>
+    <div class="border-l-2 border-primary/40 pl-3">
       <h2 class="text-xl font-semibold text-foreground">Breadcrumb</h2>
       <p class="mt-1 text-sm text-muted-foreground">
         Shows the user's current location within a site hierarchy with accessible
         landmark navigation.
       </p>
     </div>
-    <div class="rounded-lg border border-border bg-card p-8">
+    <div class="rounded-lg border border-border bg-muted/50 p-8">
       <Breadcrumb>
         <BreadcrumbList>
           <BreadcrumbItem>
@@ -253,14 +253,14 @@
   </section>
 
   <section class="flex flex-col gap-4" id="pagination">
-    <div>
+    <div class="border-l-2 border-primary/40 pl-3">
       <h2 class="text-xl font-semibold text-foreground">Pagination</h2>
       <p class="mt-1 text-sm text-muted-foreground">
         Splits large datasets across multiple pages with Previous, Next, and
         numbered page links.
       </p>
     </div>
-    <div class="rounded-lg border border-border bg-card p-8">
+    <div class="rounded-lg border border-border bg-muted/50 p-8">
       <Pagination>
         <PaginationContent>
           <PaginationItem>
@@ -323,14 +323,14 @@
   </section>
 
   <section class="flex flex-col gap-4" id="navigation-menu">
-    <div>
+    <div class="border-l-2 border-primary/40 pl-3">
       <h2 class="text-xl font-semibold text-foreground">NavigationMenu</h2>
       <p class="mt-1 text-sm text-muted-foreground">
         A top-level navigation bar with accessible flyout submenus and keyboard
         navigation.
       </p>
     </div>
-    <div class="rounded-lg border border-border bg-card p-8">
+    <div class="rounded-lg border border-border bg-muted/50 p-8">
       <NavigationMenu>
         <NavigationMenuList>
           <NavigationMenuItem>

@@ -147,13 +147,13 @@
   </div>
 
   <section class="flex flex-col gap-4" id="chart">
-    <div>
+    <div class="border-l-2 border-primary/40 pl-3">
       <h2 class="text-xl font-semibold text-foreground">Chart</h2>
       <p class="mt-1 text-sm text-muted-foreground">
         A responsive line chart with tooltip, legend, and semantic colour tokens.
       </p>
     </div>
-    <div class="rounded-lg border border-border bg-card p-8">
+    <div class="rounded-lg border border-border bg-muted/50 p-8">
       <ChartContainer class="h-64 w-full" config={chartConfig}>
         <LineChart data={CHART_DATA}>
           <CartesianGrid strokeDasharray="3 3" />
@@ -176,14 +176,14 @@
   </section>
 
   <section class="flex flex-col gap-4" id="data-table">
-    <div>
+    <div class="border-l-2 border-primary/40 pl-3">
       <h2 class="text-xl font-semibold text-foreground">DataTable</h2>
       <p class="mt-1 text-sm text-muted-foreground">
         A fully-featured table with sorting, filtering, and pagination powered by
         TanStack Table.
       </p>
     </div>
-    <div class="rounded-lg border border-border bg-card p-8">
+    <div class="rounded-lg border border-border bg-muted/50 p-8">
       <DataTable
         columns={COLUMNS}
         data={TABLE_DATA}
@@ -202,14 +202,14 @@
   </section>
 
   <section class="flex flex-col gap-4" id="calendar">
-    <div>
+    <div class="border-l-2 border-primary/40 pl-3">
       <h2 class="text-xl font-semibold text-foreground">Calendar</h2>
       <p class="mt-1 text-sm text-muted-foreground">
         An interactive date picker supporting single, range, and multiple selection
         modes.
       </p>
     </div>
-    <div class="rounded-lg border border-border bg-card p-8">
+    <div class="rounded-lg border border-border bg-muted/50 p-8">
       <div class="flex flex-col gap-4">
         <Calendar
           mode="single"

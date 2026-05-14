@@ -132,14 +132,14 @@ export default function OverlayPage() {
       </div>
 
       <section className="flex flex-col gap-4" id="popover">
-        <div>
+        <div className="border-l-2 border-primary/40 pl-3">
           <h2 className="text-xl font-semibold text-foreground">Popover</h2>
           <p className="mt-1 text-sm text-muted-foreground">
             A floating panel anchored to a trigger element for contextual
             information or inline actions.
           </p>
         </div>
-        <div className="rounded-lg border border-border bg-card p-8">
+        <div className="rounded-lg border border-border bg-muted/50 p-8">
           <Popover onOpenChange={setPopoverOpen} open={popoverOpen}>
             <PopoverTrigger asChild>
               <Button variant="outline">Open Popover</Button>
@@ -168,7 +168,7 @@ export default function OverlayPage() {
       </section>
 
       <section className="flex flex-col gap-4" id="dropdown-menu">
-        <div>
+        <div className="border-l-2 border-primary/40 pl-3">
           <h2 className="text-xl font-semibold text-foreground">
             DropdownMenu
           </h2>
@@ -177,7 +177,7 @@ export default function OverlayPage() {
             and ARIA support.
           </p>
         </div>
-        <div className="rounded-lg border border-border bg-card p-8">
+        <div className="rounded-lg border border-border bg-muted/50 p-8">
           <DropdownMenu onOpenChange={setDropdownOpen} open={dropdownOpen}>
             <DropdownMenuTrigger asChild>
               <Button variant="outline">Options</Button>
@@ -201,14 +201,14 @@ export default function OverlayPage() {
       </section>
 
       <section className="flex flex-col gap-4" id="sheet">
-        <div>
+        <div className="border-l-2 border-primary/40 pl-3">
           <h2 className="text-xl font-semibold text-foreground">Sheet</h2>
           <p className="mt-1 text-sm text-muted-foreground">
             A slide-over panel that animates in from the edge of the screen for
             secondary content.
           </p>
         </div>
-        <div className="rounded-lg border border-border bg-card p-8">
+        <div className="rounded-lg border border-border bg-muted/50 p-8">
           <Sheet onOpenChange={setSheetOpen} open={sheetOpen}>
             <SheetTrigger asChild>
               <Button variant="outline">Open Sheet</Button>

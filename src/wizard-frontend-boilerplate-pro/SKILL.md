@@ -25,8 +25,8 @@ result end-to-end.
 
 ## Phase 1 — Interview
 
-Ask the following six questions **in order**. Accept defaults silently if the
-user provides them upfront. Never proceed to Phase 2 until all six answers are
+Ask the following seven questions **in order**. Accept defaults silently if the
+user provides them upfront. Never proceed to Phase 2 until all seven answers are
 confirmed.
 
 **Q1 — Framework**
@@ -64,10 +64,13 @@ for a neutral and an accent.
 | 8 | Monochrome | Neutral | — |
 | 9 | Custom | user hex/OKLCH | user hex/OKLCH |
 
-**Q6 — Project name and package manager**
+**Q6 — App name**
+Ask explicitly: "What would you like to name the project?" There is no default —
+a name is required before continuing.
+
+**Q7 — Package manager**
 Run `scripts/detect_package_manager.sh` to detect the active manager (pnpm /
-yarn / npm / bun), present the result, and ask for confirmation. Accept a
-different project name if the user wants one.
+yarn / npm / bun), present the result, and ask for confirmation.
 
 ---
 

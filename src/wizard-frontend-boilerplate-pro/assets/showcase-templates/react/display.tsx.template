@@ -172,14 +172,14 @@ export default function DisplayPage() {
       </div>
 
       <section className="flex flex-col gap-4" id="card">
-        <div>
+        <div className="border-l-2 border-primary/40 pl-3">
           <h2 className="text-xl font-semibold text-foreground">Card</h2>
           <p className="mt-1 text-sm text-muted-foreground">
             A surface for grouping related content with an optional header,
             body, and footer.
           </p>
         </div>
-        <div className="rounded-lg border border-border bg-card p-8">
+        <div className="rounded-lg border border-border bg-muted/50 p-8">
           <Card className="w-80">
             <CardHeader>
               <CardTitle>Project Alpha</CardTitle>
@@ -208,14 +208,14 @@ export default function DisplayPage() {
       </section>
 
       <section className="flex flex-col gap-4" id="badge">
-        <div>
+        <div className="border-l-2 border-primary/40 pl-3">
           <h2 className="text-xl font-semibold text-foreground">Badge</h2>
           <p className="mt-1 text-sm text-muted-foreground">
             A compact label for status, category, or count with four visual
             variants.
           </p>
         </div>
-        <div className="rounded-lg border border-border bg-card p-8">
+        <div className="rounded-lg border border-border bg-muted/50 p-8">
           <div className="flex flex-wrap gap-2">
             <Badge>Default</Badge>
             <Badge variant="secondary">Secondary</Badge>
@@ -233,14 +233,14 @@ export default function DisplayPage() {
       </section>
 
       <section className="flex flex-col gap-4" id="avatar">
-        <div>
+        <div className="border-l-2 border-primary/40 pl-3">
           <h2 className="text-xl font-semibold text-foreground">Avatar</h2>
           <p className="mt-1 text-sm text-muted-foreground">
             A circular user image that falls back to initials when no src is
             available, with small, default, and large sizes.
           </p>
         </div>
-        <div className="rounded-lg border border-border bg-card p-8">
+        <div className="rounded-lg border border-border bg-muted/50 p-8">
           <div className="flex items-center gap-4">
             <Avatar
               alt="Jane Doe"
@@ -261,14 +261,14 @@ export default function DisplayPage() {
       </section>
 
       <section className="flex flex-col gap-4" id="separator">
-        <div>
+        <div className="border-l-2 border-primary/40 pl-3">
           <h2 className="text-xl font-semibold text-foreground">Separator</h2>
           <p className="mt-1 text-sm text-muted-foreground">
             A thin dividing line for separating sections, available in
             horizontal and vertical orientations.
           </p>
         </div>
-        <div className="rounded-lg border border-border bg-card p-8">
+        <div className="rounded-lg border border-border bg-muted/50 p-8">
           <div className="flex flex-col gap-6">
             <div className="flex flex-col gap-2">
               <p className="text-sm text-muted-foreground">
@@ -296,14 +296,14 @@ export default function DisplayPage() {
       </section>
 
       <section className="flex flex-col gap-4" id="skeleton">
-        <div>
+        <div className="border-l-2 border-primary/40 pl-3">
           <h2 className="text-xl font-semibold text-foreground">Skeleton</h2>
           <p className="mt-1 text-sm text-muted-foreground">
             Animated placeholder blocks that mimic content layout during
             loading states.
           </p>
         </div>
-        <div className="rounded-lg border border-border bg-card p-8">
+        <div className="rounded-lg border border-border bg-muted/50 p-8">
           <div className="flex items-center gap-4">
             <Skeleton className="h-12 w-12 rounded-full" />
             <div className="flex flex-col gap-2">
@@ -323,14 +323,14 @@ export default function DisplayPage() {
       </section>
 
       <section className="flex flex-col gap-4" id="table">
-        <div>
+        <div className="border-l-2 border-primary/40 pl-3">
           <h2 className="text-xl font-semibold text-foreground">Table</h2>
           <p className="mt-1 text-sm text-muted-foreground">
             A structured grid for tabular data with header, body, and optional
             caption.
           </p>
         </div>
-        <div className="rounded-lg border border-border bg-card p-8">
+        <div className="rounded-lg border border-border bg-muted/50 p-8">
           <Table>
             <TableCaption>Team members list</TableCaption>
             <TableHeader>

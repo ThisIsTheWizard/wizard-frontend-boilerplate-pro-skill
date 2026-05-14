@@ -145,13 +145,13 @@ const dialogOpen = ref(false);
     </div>
 
     <section class="flex flex-col gap-4" id="alert">
-      <div>
+      <div class="border-l-2 border-primary/40 pl-3">
         <h2 class="text-xl font-semibold text-foreground">Alert</h2>
         <p class="mt-1 text-sm text-muted-foreground">
           Inline status messages with four severity variants.
         </p>
       </div>
-      <div class="rounded-lg border border-border bg-card p-8">
+      <div class="rounded-lg border border-border bg-muted/50 p-8">
         <div class="flex flex-col gap-3">
           <Alert title="Heads up!">You can add components to your app using the CLI.</Alert>
           <Alert title="Success" variant="success">
@@ -175,14 +175,14 @@ const dialogOpen = ref(false);
     </section>
 
     <section class="flex flex-col gap-4" id="toast">
-      <div>
+      <div class="border-l-2 border-primary/40 pl-3">
         <h2 class="text-xl font-semibold text-foreground">Toast</h2>
         <p class="mt-1 text-sm text-muted-foreground">
           Brief auto-dismissing notifications triggered imperatively via
           <code class="font-mono text-xs">vue-toastification</code>.
         </p>
       </div>
-      <div class="rounded-lg border border-border bg-card p-8">
+      <div class="rounded-lg border border-border bg-muted/50 p-8">
         <div class="flex flex-wrap gap-2">
           <Button variant="outline" @click="toast('Default notification')">Default</Button>
           <Button variant="outline" @click="toast.success('Saved successfully!')">Success</Button>
@@ -200,13 +200,13 @@ const dialogOpen = ref(false);
     </section>
 
     <section class="flex flex-col gap-4" id="progress">
-      <div>
+      <div class="border-l-2 border-primary/40 pl-3">
         <h2 class="text-xl font-semibold text-foreground">Progress</h2>
         <p class="mt-1 text-sm text-muted-foreground">
           A horizontal bar indicating task completion, with support for indeterminate state.
         </p>
       </div>
-      <div class="rounded-lg border border-border bg-card p-8">
+      <div class="rounded-lg border border-border bg-muted/50 p-8">
         <div class="flex flex-col gap-4">
           <Progress :value="25" label="25%" />
           <Progress :value="60" label="60%" />
@@ -224,13 +224,13 @@ const dialogOpen = ref(false);
     </section>
 
     <section class="flex flex-col gap-4" id="tooltip">
-      <div>
+      <div class="border-l-2 border-primary/40 pl-3">
         <h2 class="text-xl font-semibold text-foreground">Tooltip</h2>
         <p class="mt-1 text-sm text-muted-foreground">
           Contextual hints shown on hover or focus, with configurable side placement.
         </p>
       </div>
-      <div class="rounded-lg border border-border bg-card p-8">
+      <div class="rounded-lg border border-border bg-muted/50 p-8">
         <div class="flex flex-wrap items-center gap-4">
           <Tooltip content="Appears on top" side="top">
             <Button variant="outline">Top</Button>
@@ -256,13 +256,13 @@ const dialogOpen = ref(false);
     </section>
 
     <section class="flex flex-col gap-4" id="dialog">
-      <div>
+      <div class="border-l-2 border-primary/40 pl-3">
         <h2 class="text-xl font-semibold text-foreground">Dialog</h2>
         <p class="mt-1 text-sm text-muted-foreground">
           A modal overlay with focus trap, Escape-to-close, and ARIA dialog semantics.
         </p>
       </div>
-      <div class="rounded-lg border border-border bg-card p-8">
+      <div class="rounded-lg border border-border bg-muted/50 p-8">
         <Dialog :open="dialogOpen" @openChange="val => (dialogOpen = val)">
           <DialogTrigger as-child>
             <Button @click="dialogOpen = true">Open Dialog</Button>

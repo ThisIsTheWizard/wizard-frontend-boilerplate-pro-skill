@@ -115,14 +115,14 @@
   </div>
 
   <section class="flex flex-col gap-4" id="popover">
-    <div>
+    <div class="border-l-2 border-primary/40 pl-3">
       <h2 class="text-xl font-semibold text-foreground">Popover</h2>
       <p class="mt-1 text-sm text-muted-foreground">
         A floating panel anchored to a trigger element for contextual information
         or inline actions.
       </p>
     </div>
-    <div class="rounded-lg border border-border bg-card p-8">
+    <div class="rounded-lg border border-border bg-muted/50 p-8">
       <Popover onOpenChange={(val) => (popoverOpen = val)} open={popoverOpen}>
         <PopoverTrigger>
           <Button variant="outline">Open Popover</Button>
@@ -149,14 +149,14 @@
   </section>
 
   <section class="flex flex-col gap-4" id="dropdown-menu">
-    <div>
+    <div class="border-l-2 border-primary/40 pl-3">
       <h2 class="text-xl font-semibold text-foreground">DropdownMenu</h2>
       <p class="mt-1 text-sm text-muted-foreground">
         A menu of actions that appears below a trigger with full keyboard and ARIA
         support.
       </p>
     </div>
-    <div class="rounded-lg border border-border bg-card p-8">
+    <div class="rounded-lg border border-border bg-muted/50 p-8">
       <DropdownMenu
         onOpenChange={(val) => (dropdownOpen = val)}
         open={dropdownOpen}
@@ -183,14 +183,14 @@
   </section>
 
   <section class="flex flex-col gap-4" id="sheet">
-    <div>
+    <div class="border-l-2 border-primary/40 pl-3">
       <h2 class="text-xl font-semibold text-foreground">Sheet</h2>
       <p class="mt-1 text-sm text-muted-foreground">
         A slide-over panel that animates in from the edge of the screen for
         secondary content.
       </p>
     </div>
-    <div class="rounded-lg border border-border bg-card p-8">
+    <div class="rounded-lg border border-border bg-muted/50 p-8">
       <Sheet onOpenChange={(val) => (sheetOpen = val)} open={sheetOpen}>
         <SheetTrigger>
           <Button variant="outline">Open Sheet</Button>

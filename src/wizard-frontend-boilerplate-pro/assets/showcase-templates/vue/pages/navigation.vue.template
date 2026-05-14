@@ -126,13 +126,13 @@ const tabValue = ref("account");
     </div>
 
     <section class="flex flex-col gap-4" id="tabs">
-      <div>
+      <div class="border-l-2 border-primary/40 pl-3">
         <h2 class="text-xl font-semibold text-foreground">Tabs</h2>
         <p class="mt-1 text-sm text-muted-foreground">
           A tabbed interface with full ARIA tab pattern, keyboard navigation, and animated indicator.
         </p>
       </div>
-      <div class="rounded-lg border border-border bg-card p-8">
+      <div class="rounded-lg border border-border bg-muted/50 p-8">
         <Tabs :value="tabValue" @valueChange="val => (tabValue = val)">
           <TabsList>
             <TabsTrigger value="account">Account</TabsTrigger>
@@ -166,13 +166,13 @@ const tabValue = ref("account");
     </section>
 
     <section class="flex flex-col gap-4" id="breadcrumb">
-      <div>
+      <div class="border-l-2 border-primary/40 pl-3">
         <h2 class="text-xl font-semibold text-foreground">Breadcrumb</h2>
         <p class="mt-1 text-sm text-muted-foreground">
           A landmark trail showing the current page's location in the navigation hierarchy.
         </p>
       </div>
-      <div class="rounded-lg border border-border bg-card p-8">
+      <div class="rounded-lg border border-border bg-muted/50 p-8">
         <Breadcrumb :items="BREADCRUMB_ITEMS" />
       </div>
       <CodeBlock
@@ -185,14 +185,14 @@ const tabValue = ref("account");
     </section>
 
     <section class="flex flex-col gap-4" id="pagination">
-      <div>
+      <div class="border-l-2 border-primary/40 pl-3">
         <h2 class="text-xl font-semibold text-foreground">Pagination</h2>
         <p class="mt-1 text-sm text-muted-foreground">
           Page navigation controls with previous/next buttons, page numbers, and ellipsis for large
           ranges.
         </p>
       </div>
-      <div class="rounded-lg border border-border bg-card p-8">
+      <div class="rounded-lg border border-border bg-muted/50 p-8">
         <Pagination
           :current-page="currentPage"
           :total-pages="10"
@@ -209,14 +209,14 @@ const tabValue = ref("account");
     </section>
 
     <section class="flex flex-col gap-4" id="navigation-menu">
-      <div>
+      <div class="border-l-2 border-primary/40 pl-3">
         <h2 class="text-xl font-semibold text-foreground">NavigationMenu</h2>
         <p class="mt-1 text-sm text-muted-foreground">
           A horizontal menu bar with flyout submenus, keyboard navigation, and ARIA menubar
           semantics.
         </p>
       </div>
-      <div class="rounded-lg border border-border bg-card p-8">
+      <div class="rounded-lg border border-border bg-muted/50 p-8">
         <NavigationMenu :items="NAV_ITEMS" />
       </div>
       <CodeBlock

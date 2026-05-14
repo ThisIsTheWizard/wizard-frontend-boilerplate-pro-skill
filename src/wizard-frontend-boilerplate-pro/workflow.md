@@ -22,7 +22,7 @@ shown here, see `references/frameworks/<choice>.md`.
 
 ## Phase 1 — Interview
 
-Collect all six answers before running any commands. Never start Phase 2 early.
+Collect all seven answers before running any commands. Never start Phase 2 early.
 
 ```
 Q1  Framework?
@@ -53,9 +53,11 @@ Q5  Color theme?
     8) Monochrome     — neutral only, no accent hue
     9) Custom         — provide hex or oklch() values for neutral and accent
 
-Q6  Project name and package manager?
+Q6  App name?
+    Ask explicitly — no default. Required before continuing.
+
+Q7  Package manager?
     Run detect_package_manager.sh (see Phase 2), show detected PM, confirm.
-    Accept a different project name if the user specifies one.
 ```
 
 ---

@@ -135,14 +135,14 @@ const sheetOpen = ref(false);
     </div>
 
     <section class="flex flex-col gap-4" id="popover">
-      <div>
+      <div class="border-l-2 border-primary/40 pl-3">
         <h2 class="text-xl font-semibold text-foreground">Popover</h2>
         <p class="mt-1 text-sm text-muted-foreground">
           A non-modal floating panel anchored to a trigger element, dismissed by clicking outside or
           pressing Escape.
         </p>
       </div>
-      <div class="rounded-lg border border-border bg-card p-8">
+      <div class="rounded-lg border border-border bg-muted/50 p-8">
         <Popover :open="popoverOpen" @openChange="val => (popoverOpen = val)">
           <PopoverTrigger as-child>
             <Button variant="outline" @click="popoverOpen = true">Open Popover</Button>
@@ -172,14 +172,14 @@ const sheetOpen = ref(false);
     </section>
 
     <section class="flex flex-col gap-4" id="dropdown-menu">
-      <div>
+      <div class="border-l-2 border-primary/40 pl-3">
         <h2 class="text-xl font-semibold text-foreground">DropdownMenu</h2>
         <p class="mt-1 text-sm text-muted-foreground">
           A contextual menu with keyboard navigation, separators, and support for labels and nested
           items.
         </p>
       </div>
-      <div class="rounded-lg border border-border bg-card p-8">
+      <div class="rounded-lg border border-border bg-muted/50 p-8">
         <DropdownMenu :open="dropdownOpen" @openChange="val => (dropdownOpen = val)">
           <DropdownMenuTrigger as-child>
             <Button variant="outline">Options</Button>
@@ -203,13 +203,13 @@ const sheetOpen = ref(false);
     </section>
 
     <section class="flex flex-col gap-4" id="sheet">
-      <div>
+      <div class="border-l-2 border-primary/40 pl-3">
         <h2 class="text-xl font-semibold text-foreground">Sheet</h2>
         <p class="mt-1 text-sm text-muted-foreground">
           A slide-in panel from any screen edge with focus trap and ARIA dialog semantics.
         </p>
       </div>
-      <div class="rounded-lg border border-border bg-card p-8">
+      <div class="rounded-lg border border-border bg-muted/50 p-8">
         <Sheet :open="sheetOpen" @openChange="val => (sheetOpen = val)">
           <SheetTrigger as-child>
             <Button variant="outline" @click="sheetOpen = true">Open Sheet</Button>

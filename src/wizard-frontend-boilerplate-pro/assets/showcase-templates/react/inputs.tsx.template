@@ -159,14 +159,14 @@ export default function InputsPage() {
       </div>
 
       <section className="flex flex-col gap-4" id="button">
-        <div>
+        <div className="border-l-2 border-primary/40 pl-3">
           <h2 className="text-xl font-semibold text-foreground">Button</h2>
           <p className="mt-1 text-sm text-muted-foreground">
             Triggers an action or event with support for multiple visual variants
             and sizes.
           </p>
         </div>
-        <div className="rounded-lg border border-border bg-card p-8">
+        <div className="rounded-lg border border-border bg-muted/50 p-8">
           <div className="flex flex-col gap-4">
             <div className="flex flex-wrap gap-2">
               <Button>Default</Button>
@@ -195,14 +195,14 @@ export default function InputsPage() {
       </section>
 
       <section className="flex flex-col gap-4" id="input">
-        <div>
+        <div className="border-l-2 border-primary/40 pl-3">
           <h2 className="text-xl font-semibold text-foreground">Input</h2>
           <p className="mt-1 text-sm text-muted-foreground">
             A single-line text field with optional label, helper text, and error
             state.
           </p>
         </div>
-        <div className="rounded-lg border border-border bg-card p-8">
+        <div className="rounded-lg border border-border bg-muted/50 p-8">
           <div className="flex max-w-sm flex-col gap-4">
             <Input
               helperText="We'll never share your email."
@@ -235,14 +235,14 @@ export default function InputsPage() {
       </section>
 
       <section className="flex flex-col gap-4" id="textarea">
-        <div>
+        <div className="border-l-2 border-primary/40 pl-3">
           <h2 className="text-xl font-semibold text-foreground">Textarea</h2>
           <p className="mt-1 text-sm text-muted-foreground">
             A multi-line text input with label, helper text, and optional
             auto-resize.
           </p>
         </div>
-        <div className="rounded-lg border border-border bg-card p-8">
+        <div className="rounded-lg border border-border bg-muted/50 p-8">
           <div className="flex max-w-sm flex-col gap-4">
             <Textarea
               helperText="Describe your project in a few sentences."
@@ -269,14 +269,14 @@ export default function InputsPage() {
       </section>
 
       <section className="flex flex-col gap-4" id="select">
-        <div>
+        <div className="border-l-2 border-primary/40 pl-3">
           <h2 className="text-xl font-semibold text-foreground">Select</h2>
           <p className="mt-1 text-sm text-muted-foreground">
             A dropdown for picking a single value from a list, with keyboard
             navigation and ARIA listbox semantics.
           </p>
         </div>
-        <div className="rounded-lg border border-border bg-card p-8">
+        <div className="rounded-lg border border-border bg-muted/50 p-8">
           <div className="flex max-w-sm flex-col gap-4">
             <Select
               label="Framework"
@@ -303,14 +303,14 @@ export default function InputsPage() {
       </section>
 
       <section className="flex flex-col gap-4" id="checkbox">
-        <div>
+        <div className="border-l-2 border-primary/40 pl-3">
           <h2 className="text-xl font-semibold text-foreground">Checkbox</h2>
           <p className="mt-1 text-sm text-muted-foreground">
             A binary toggle supporting checked, unchecked, and indeterminate
             states with full keyboard and ARIA support.
           </p>
         </div>
-        <div className="rounded-lg border border-border bg-card p-8">
+        <div className="rounded-lg border border-border bg-muted/50 p-8">
           <div className="flex flex-col gap-3">
             <Checkbox
               checked={checkboxChecked}
@@ -341,14 +341,14 @@ export default function InputsPage() {
       </section>
 
       <section className="flex flex-col gap-4" id="radio-group">
-        <div>
+        <div className="border-l-2 border-primary/40 pl-3">
           <h2 className="text-xl font-semibold text-foreground">RadioGroup</h2>
           <p className="mt-1 text-sm text-muted-foreground">
             A set of mutually exclusive options with arrow-key navigation within
             the group.
           </p>
         </div>
-        <div className="rounded-lg border border-border bg-card p-8">
+        <div className="rounded-lg border border-border bg-muted/50 p-8">
           <div className="flex flex-col gap-6 sm:flex-row sm:gap-16">
             <RadioGroup
               label="Plan (vertical)"
@@ -375,14 +375,14 @@ export default function InputsPage() {
       </section>
 
       <section className="flex flex-col gap-4" id="switch">
-        <div>
+        <div className="border-l-2 border-primary/40 pl-3">
           <h2 className="text-xl font-semibold text-foreground">Switch</h2>
           <p className="mt-1 text-sm text-muted-foreground">
             An on/off toggle for binary settings, announced as a switch by
             assistive technologies.
           </p>
         </div>
-        <div className="rounded-lg border border-border bg-card p-8">
+        <div className="rounded-lg border border-border bg-muted/50 p-8">
           <div className="flex flex-col gap-3">
             <Switch
               checked={notifications}

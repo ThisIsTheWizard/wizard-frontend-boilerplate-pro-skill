@@ -193,14 +193,14 @@ export default function NavigationPage() {
       </div>
 
       <section className="flex flex-col gap-4" id="tabs">
-        <div>
+        <div className="border-l-2 border-primary/40 pl-3">
           <h2 className="text-xl font-semibold text-foreground">Tabs</h2>
           <p className="mt-1 text-sm text-muted-foreground">
             Organises related content into switchable panels with accessible
             keyboard navigation.
           </p>
         </div>
-        <div className="rounded-lg border border-border bg-card p-8">
+        <div className="rounded-lg border border-border bg-muted/50 p-8">
           <Tabs onValueChange={setTabValue} value={tabValue}>
             <TabsList>
               <TabsTrigger value="account">Account</TabsTrigger>
@@ -234,14 +234,14 @@ export default function NavigationPage() {
       </section>
 
       <section className="flex flex-col gap-4" id="breadcrumb">
-        <div>
+        <div className="border-l-2 border-primary/40 pl-3">
           <h2 className="text-xl font-semibold text-foreground">Breadcrumb</h2>
           <p className="mt-1 text-sm text-muted-foreground">
             Shows the user's current location within a site hierarchy with
             accessible landmark navigation.
           </p>
         </div>
-        <div className="rounded-lg border border-border bg-card p-8">
+        <div className="rounded-lg border border-border bg-muted/50 p-8">
           <Breadcrumb>
             <BreadcrumbList>
               <BreadcrumbItem>
@@ -268,14 +268,14 @@ export default function NavigationPage() {
       </section>
 
       <section className="flex flex-col gap-4" id="pagination">
-        <div>
+        <div className="border-l-2 border-primary/40 pl-3">
           <h2 className="text-xl font-semibold text-foreground">Pagination</h2>
           <p className="mt-1 text-sm text-muted-foreground">
             Splits large datasets across multiple pages with Previous, Next, and
             numbered page links.
           </p>
         </div>
-        <div className="rounded-lg border border-border bg-card p-8">
+        <div className="rounded-lg border border-border bg-muted/50 p-8">
           <Pagination>
             <PaginationContent>
               <PaginationItem>
@@ -338,7 +338,7 @@ export default function NavigationPage() {
       </section>
 
       <section className="flex flex-col gap-4" id="navigation-menu">
-        <div>
+        <div className="border-l-2 border-primary/40 pl-3">
           <h2 className="text-xl font-semibold text-foreground">
             NavigationMenu
           </h2>
@@ -347,7 +347,7 @@ export default function NavigationPage() {
             keyboard navigation.
           </p>
         </div>
-        <div className="rounded-lg border border-border bg-card p-8">
+        <div className="rounded-lg border border-border bg-muted/50 p-8">
           <NavigationMenu>
             <NavigationMenuList>
               <NavigationMenuItem>
