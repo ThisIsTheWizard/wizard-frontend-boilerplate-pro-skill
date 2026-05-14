@@ -47,9 +47,9 @@
 - [x] `assets/showcase-templates/svelte/routes/` — 6 category route templates
 
 ## 6. Assets — theme providers
-- [ ] `assets/theme-provider/react.tsx` — localStorage + prefers-color-scheme + FOUC prevention
-- [ ] `assets/theme-provider/vue.ts`
-- [ ] `assets/theme-provider/svelte.ts`
+- [x] `assets/theme-provider/react.tsx` — localStorage + prefers-color-scheme + FOUC prevention
+- [x] `assets/theme-provider/vue.ts`
+- [x] `assets/theme-provider/svelte.ts`
 
 ## 7. Assets — misc
 - [ ] `assets/snippet-template.txt` — collapsible code-snippet block format
