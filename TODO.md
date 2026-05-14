@@ -8,7 +8,7 @@
 - [x] Write `AGENTS.md` (one-line redirect to SKILL.md)
 
 ## 3. Reference files (`references/`)
-- [ ] `references/frameworks/nextjs.md` — create-next-app, App Router setup
+- [x] `references/frameworks/nextjs.md` — create-next-app, App Router setup
 - [ ] `references/frameworks/react-vite.md`
 - [ ] `references/frameworks/vue.md` — Vue 3.5+
 - [ ] `references/frameworks/nuxt.md` — Nuxt 4
