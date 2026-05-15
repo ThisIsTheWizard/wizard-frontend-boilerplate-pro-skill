@@ -15,19 +15,27 @@ description: >
 
 # wizard-frontend-boilerplate-pro
 
-Scaffold a production-ready frontend app with a themed component showcase in
-seven phases. The skill interviews the user, resolves live package versions,
-scaffolds the framework, generates a color palette, installs 28 UI components,
-builds a sidebar showcase with collapsible code snippets, and verifies the
-result end-to-end.
+Scaffold a production-ready frontend app with a themed component showcase.
+The skill asks five questions, auto-resolves package versions, scaffolds the
+framework, generates a color palette, installs UI components from the chosen
+library, builds a sidebar showcase with collapsible code snippets, and verifies
+the result end-to-end.
 
 ---
 
 ## Phase 1 — Interview
 
-Ask the following seven questions **in order**. Accept defaults silently if the
-user provides them upfront. Never proceed to Phase 2 until all seven answers are
-confirmed.
+Ask the following **five questions in order**. If the user already provided an
+answer upfront, accept it silently and skip that question. Never proceed to
+Phase 2 until all five answers are confirmed.
+
+Three values are resolved automatically — never ask for them:
+- **Version** → always latest stable
+- **Tailwind version** → auto-determined from the framework + UI library
+  combination (check `references/tailwind/per-framework-gotchas.md`; only
+  prompt the user if a conflict is detected)
+- **Package manager** → run `scripts/detect_package_manager.sh` silently; only
+  ask if detection is ambiguous
 
 **Q1 — Framework**
 Choose one:
@@ -37,17 +45,29 @@ Choose one:
 - Nuxt 4
 - SvelteKit (Svelte 5)
 
-**Q2 — Version**
-Latest stable (default) / specific version / LTS.
+**Q2 — UI library**
+Present only options compatible with the framework chosen in Q1. Store the
+answer as `UI_LIB`. Default: `custom` (zero extra deps, Tailwind-only).
+
+| # | Library | React/Next | Vue/Nuxt | SvelteKit |
+|---|---|---|---|---|
+| 0 | Custom Tailwind (default) | ✓ | ✓ | ✓ |
+| 1 | shadcn/ui | ✓ | ✓ (shadcn-vue) | ✓ (shadcn-svelte) |
+| 2 | Material UI | ✓ | — | — |
+| 3 | Bootstrap | ✓ | ✓ | ✓ |
+| 4 | DaisyUI | ✓ | ✓ | ✓ |
+| 5 | Chakra UI | ✓ | — | — |
+| 6 | Mantine | ✓ | — | — |
+| 7 | Ant Design | ✓ | — | — |
+| 8 | PrimeVue | — | ✓ | — |
+| 9 | Vuetify | — | ✓ | — |
+
+Do not offer options marked `—` for the chosen framework.
 
 **Q3 — Language**
-TypeScript (default) / JavaScript.
+TypeScript (default) / JavaScript. Accept silently if stated upfront.
 
-**Q4 — Tailwind version**
-v4 (default) / v3 (required for some framework + plugin combinations — see
-`references/tailwind/per-framework-gotchas.md` before defaulting).
-
-**Q5 — Color theme**
+**Q4 — Color theme**
 Present all eight presets with a one-line swatch description, plus a ninth
 "Custom" option. The user may pick a preset name or supply hex or OKLCH values
 for a neutral and an accent.
@@ -64,24 +84,27 @@ for a neutral and an accent.
 | 8 | Monochrome | Neutral | — |
 | 9 | Custom | user hex/OKLCH | user hex/OKLCH |
 
-**Q6 — App name**
+**Q5 — App name**
 Ask explicitly: "What would you like to name the project?" There is no default —
 a name is required before continuing.
 
-**Q7 — Package manager**
-Run `scripts/detect_package_manager.sh` to detect the active manager (pnpm /
-yarn / npm / bun), present the result, and ask for confirmation.
-
 ---
 
-## Phase 2 — Version resolution
+## Phase 2 — Auto-resolve
 
-1. Run `scripts/check_versions.sh` to query the npm registry for the latest
-   stable versions of all relevant packages (framework, TypeScript, Tailwind,
-   and any peer dependencies for the chosen preset).
-2. Present a table of resolved versions.
-3. Ask the user to confirm or override any version before continuing.
-4. Store the confirmed versions; use them verbatim in all install commands.
+Run immediately after the interview — no user interaction unless an anomaly
+occurs.
+
+1. **Package manager** — run `scripts/detect_package_manager.sh`. Store as
+   `PM`. Only ask the user if the script returns no result.
+2. **Versions** — run `scripts/check_versions.sh --json`. Store all resolved
+   versions as variables. Always use latest stable. Never re-query mid-session.
+3. **Tailwind compatibility** — check `references/tailwind/per-framework-gotchas.md`
+   for the chosen framework + UI library combination.
+   - No conflict → use Tailwind v4 silently.
+   - Conflict → use Tailwind v3, inform the user once.
+   - Non-Tailwind library (MUI, Chakra, Mantine, Ant Design, PrimeVue,
+     Vuetify) → skip Tailwind install entirely.
 
 Detail: `references/frameworks/<choice>.md` lists the exact package names to
 resolve per framework.
@@ -129,28 +152,50 @@ Detail: `references/theming.md`.
 
 ## Phase 5 — Component installation
 
-### 5a — Locate ui-ux-pro-max-skill
+### 5a — Route by UI_LIB
+
+Branch on the value of `UI_LIB` set in Phase 1 Q8:
+
+**`UI_LIB = custom` (default)**
 
 Run `scripts/locate_ui_ux_pro_max.sh`. The script searches:
 `~/.claude/skills/`, `~/skills/`, `/mnt/skills/`, and the current working
 directory. It prints the absolute path if found, or exits 1 if not.
 
+- **Skill found:** Pull all 28 components using
+  `references/ui-library/ui-ux-pro-max-bridge.md` + the appropriate
+  `references/ui-library/framework-adapters/<choice>-adapter.md`. Replace any
+  hard-coded colors with CSS variable tokens from Phase 4.
+- **Skill not found:** Fall back to `references/ui-library/custom-tailwind.md`
+  (minimal Tailwind-only implementations, zero external dependencies).
+
+Write each adapted component to `src/components/ui/<ComponentName>.<ext>`.
+
+**`UI_LIB = shadcn | mui | bootstrap | daisy | chakra | mantine | antd | primevue | vuetify`**
+
+Read `references/ui-library/<UI_LIB>.md`. Follow its setup, install, and
+theming steps exactly. The reference file covers:
+- Package install commands
+- Library-specific provider / plugin wiring
+- Theming bridge to the CSS variable tokens from Phase 4
+- Per-component install commands (where applicable, e.g. shadcn CLI)
+- Any peer dependencies beyond the core library
+
+Do **not** run `locate_ui_ux_pro_max.sh` when `UI_LIB` is a named library.
+
+The mapping of each catalog component to its native library equivalent is in
+`references/component-catalog.md` (Library Component Mapping section).
+
 ### 5b — Install components
 
-**If ui-ux-pro-max-skill is found:**
-Read its component catalog and pull each of the 28 components listed in
-`references/component-catalog.md`. For each component:
-1. Locate the source file in the sibling skill using the name-mapping table in
-   `references/ui-library/ui-ux-pro-max-bridge.md`.
-2. Adapt the source to the target framework syntax using
-   `references/ui-library/framework-adapters/<choice>-adapter.md`.
-3. Replace any hard-coded color values with the CSS variable tokens from Phase 4.
-4. Write the adapted file to `src/components/ui/<ComponentName>.<ext>`.
+Install all 28 components for the chosen library + framework combination. Write
+them to the same destination paths as the custom path:
 
-**If ui-ux-pro-max-skill is not found:**
-Fall back to `references/ui-library/custom-tailwind.md`. It contains minimal
-standalone implementations of all 28 components using only Tailwind classes and
-no external dependencies.
+| Framework | Destination |
+|---|---|
+| Next.js / React + Vite | `src/components/ui/<ComponentName>.tsx` |
+| Vue 3 / Nuxt 4 | `src/components/ui/<ComponentName>.vue` |
+| SvelteKit | `src/lib/components/ui/<ComponentName>.svelte` |
 
 ### 5c — Install CodeBlock utility
 
@@ -176,8 +221,17 @@ Full props interfaces, peer dependencies, and accessibility requirements:
 
 ## Phase 6 — Showcase routes
 
-Install the sidebar layout and six category routes from
-`assets/showcase-templates/<framework>/`.
+Resolve the template folder based on `UI_LIB`:
+
+| UI_LIB | Template folder |
+|---|---|
+| `custom` | `assets/showcase-templates/<framework>/` |
+| any named library | `assets/showcase-templates/<framework>-<UI_LIB>/` |
+
+Where `<framework>` is one of `react`, `vue`, or `svelte` (Next.js and
+React + Vite both use `react`; Nuxt 4 uses `vue`).
+
+Install the sidebar layout and six category routes from the resolved folder.
 
 ### Layout structure
 
@@ -273,8 +327,17 @@ manually unless the fix requires a decision only they can make.
 | `references/ui-library/framework-adapters/react-adapter.md` | JSX adaptation patterns |
 | `references/ui-library/framework-adapters/vue-adapter.md` | SFC / Composition API patterns |
 | `references/ui-library/framework-adapters/svelte-adapter.md` | Svelte 5 runes / snippets |
+| `references/ui-library/shadcn.md` | shadcn/ui setup, CLI commands, CSS var mapping |
+| `references/ui-library/mui.md` | Material UI setup, createTheme() bridge, SSR notes |
+| `references/ui-library/bootstrap.md` | Bootstrap setup, SCSS theming, per-framework adapters |
+| `references/ui-library/daisy.md` | DaisyUI Tailwind plugin setup and theming |
+| `references/ui-library/chakra.md` | Chakra UI provider setup and token bridge |
+| `references/ui-library/mantine.md` | Mantine provider, CSS variables mode, theming |
+| `references/ui-library/antd.md` | Ant Design ConfigProvider token bridge, Next.js notes |
+| `references/ui-library/primevue.md` | PrimeVue plugin setup and theming presets |
+| `references/ui-library/vuetify.md` | Vuetify createVuetify, blueprint, CSS var bridge |
 | `references/portability.md` | Notes for non-Claude agents, tested agent list |
-| `workflow.md` | Detailed playbook with verbatim commands for all 7 phases |
+| `workflow.md` | Detailed playbook with verbatim commands for all phases |
 
 ---
 

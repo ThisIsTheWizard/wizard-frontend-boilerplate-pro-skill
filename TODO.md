@@ -83,3 +83,79 @@
 - [x] Confirm `SKILL.md` contains no Claude-specific syntax (`<*>` tags, internal tool names)
 - [x] Confirm `AGENTS.md` contains no Claude-specific syntax
 - [x] Confirm all actions are shell commands or file edits executable by a generic agent
+
+## 13. Multi-library infrastructure — UI_LIB selection
+- [x] Update `SKILL.md` Phase 1 to add Q8 `UI_LIB` selection question with framework compatibility filter
+- [x] Update `SKILL.md` Phase 5 to route to `references/ui-library/<UI_LIB>.md` when `UI_LIB != custom`
+- [x] Update `SKILL.md` Phase 6 to use `assets/showcase-templates/<framework>-<UI_LIB>/` when `UI_LIB != custom`
+- [x] Update `SKILL.md` Reference index table with new `references/ui-library/<library>.md` entries
+- [x] Update `workflow.md` Phase 1 to add Q8 (UI library) with compatibility table
+- [x] Update `workflow.md` Phase 5 to add `UI_LIB` routing block replacing binary skill-found/custom logic
+- [x] Update `workflow.md` Phase 6 to resolve template folder by `UI_LIB`
+- [x] Add library component mapping table to `references/component-catalog.md`
+
+## 14. shadcn/ui — reference file
+- [ ] Write `references/ui-library/shadcn.md`
+  - CLI init (`npx shadcn@latest init`), component add commands
+  - Theming: CSS var 1:1 mapping to existing token system
+  - Per-framework notes: React (native), Vue (shadcn-vue), Svelte (shadcn-svelte)
+  - Peer deps per component
+
+## 15. shadcn/ui — showcase templates
+- [ ] `assets/showcase-templates/react-shadcn/` — layout + sidebar + 6 category pages (8 files)
+- [ ] `assets/showcase-templates/vue-shadcn/` — 8 files
+- [ ] `assets/showcase-templates/svelte-shadcn/` — 8 files
+
+## 16. Material UI — reference file
+- [ ] Write `references/ui-library/mui.md`
+  - `@mui/material`, `@emotion/react`, `@emotion/styled` install
+  - `createTheme()` bridge mapping existing CSS tokens to MUI palette/typography
+  - Next.js App Router SSR cache (`@mui/material-nextjs`) setup
+  - React-only constraint documented
+
+## 17. Material UI — showcase templates
+- [ ] `assets/showcase-templates/react-mui/` — 8 files using MUI native components
+
+## 18. Bootstrap — reference file
+- [ ] Write `references/ui-library/bootstrap.md`
+  - npm install: `react-bootstrap` / `bootstrap-vue-next` / svelte approach
+  - SCSS variable override strategy for theming bridge
+  - CDN alternative for prototyping
+
+## 19. Bootstrap — showcase templates
+- [ ] `assets/showcase-templates/react-bootstrap/` — 8 files
+- [ ] `assets/showcase-templates/vue-bootstrap/` — 8 files
+- [ ] `assets/showcase-templates/svelte-bootstrap/` — 8 files
+
+## 20. DaisyUI — reference file + templates
+- [ ] Write `references/ui-library/daisy.md` (Tailwind plugin, minimal bridge needed)
+- [ ] `assets/showcase-templates/react-daisy/` — 8 files
+- [ ] `assets/showcase-templates/vue-daisy/` — 8 files
+- [ ] `assets/showcase-templates/svelte-daisy/` — 8 files
+
+## 21. Chakra UI — reference file + templates
+- [ ] Write `references/ui-library/chakra.md` — `ChakraProvider` setup, token-to-CSS-var bridge
+- [ ] `assets/showcase-templates/react-chakra/` — 8 files
+
+## 22. Mantine — reference file + templates
+- [ ] Write `references/ui-library/mantine.md` — `MantineProvider`, CSS variables mode, theming
+- [ ] `assets/showcase-templates/react-mantine/` — 8 files
+
+## 23. Ant Design — reference file + templates
+- [ ] Write `references/ui-library/antd.md` — `ConfigProvider` theme tokens, Next.js App Router notes
+- [ ] `assets/showcase-templates/react-antd/` — 8 files
+
+## 24. PrimeVue — reference file + templates
+- [ ] Write `references/ui-library/primevue.md` — plugin setup, PrimeVue theming presets
+- [ ] `assets/showcase-templates/vue-primevue/` — 8 files
+
+## 25. Vuetify — reference file + templates
+- [ ] Write `references/ui-library/vuetify.md` — `createVuetify`, blueprint, CSS var bridge
+- [ ] `assets/showcase-templates/vue-vuetify/` — 8 files
+
+## 26. Multi-library end-to-end validation
+- [ ] Simulated run: Next.js + shadcn/ui — all 6 routes render, dark mode works
+- [ ] Simulated run: Next.js + MUI — theme bridge verified, SSR no flash
+- [ ] Simulated run: Vue + Bootstrap — all routes render, responsive
+- [ ] Confirm Phase 1 menu hides Vue-incompatible libraries when Vue is selected
+- [ ] Confirm existing `custom` path still works unchanged

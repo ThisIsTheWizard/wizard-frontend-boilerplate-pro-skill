@@ -22,7 +22,14 @@ shown here, see `references/frameworks/<choice>.md`.
 
 ## Phase 1 — Interview
 
-Collect all seven answers before running any commands. Never start Phase 2 early.
+Collect all **five answers** before running any commands. Never start Phase 2
+early. Three values are resolved automatically — do not ask:
+
+| Auto value | Rule |
+|---|---|
+| Version | Always latest stable. Use in all install commands. |
+| Tailwind version | Check `references/tailwind/per-framework-gotchas.md` after Q1 + Q2 are known. Default v4; switch to v3 silently if a conflict is detected, or prompt only if user input is needed. |
+| Package manager | Run `scripts/detect_package_manager.sh`. Store as `PM`. Only ask if the script returns ambiguous/no result. |
 
 ```
 Q1  Framework?
@@ -32,17 +39,33 @@ Q1  Framework?
     4) Nuxt 4
     5) SvelteKit (Svelte 5)
 
-Q2  Version?
-    [ latest stable (default) | specific e.g. "15.3.0" | LTS ]
+Q2  UI library?
+    Show only rows compatible with the framework chosen in Q1.
+    Default: 0 (Custom Tailwind — zero extra deps).
+
+    All frameworks:
+      0) Custom Tailwind  — no extra deps, Tailwind-only components
+      1) shadcn/ui        — React/Next (native), Vue (shadcn-vue), Svelte (shadcn-svelte)
+      3) Bootstrap        — react-bootstrap / bootstrap-vue-next / svelte
+      4) DaisyUI          — Tailwind plugin, works in all frameworks
+
+    React / Next.js only:
+      2) Material UI      — @mui/material + emotion
+      5) Chakra UI        — @chakra-ui/react
+      6) Mantine          — @mantine/core
+      7) Ant Design       — antd
+
+    Vue / Nuxt only:
+      8) PrimeVue         — primevue
+      9) Vuetify          — vuetify
+
+    Store the answer as UI_LIB (e.g. "shadcn", "mui", "bootstrap", "daisy",
+    "chakra", "mantine", "antd", "primevue", "vuetify", or "custom").
 
 Q3  Language?
     [ TypeScript (default) | JavaScript ]
 
-Q4  Tailwind version?
-    [ v4 (default) | v3 ]
-    Note: check references/tailwind/per-framework-gotchas.md before defaulting to v4.
-
-Q5  Color theme?
+Q4  Color theme?
     1) Modern Slate   — slate neutral + indigo accent
     2) Warm Earth     — stone neutral + amber accent
     3) Fresh Mint     — zinc neutral + emerald accent
@@ -53,16 +76,16 @@ Q5  Color theme?
     8) Monochrome     — neutral only, no accent hue
     9) Custom         — provide hex or oklch() values for neutral and accent
 
-Q6  App name?
-    Ask explicitly — no default. Required before continuing.
-
-Q7  Package manager?
-    Run detect_package_manager.sh (see Phase 2), show detected PM, confirm.
+Q5  App name?
+    No default. Required before continuing.
 ```
 
 ---
 
-## Phase 2 — Version resolution
+## Phase 2 — Auto-resolve
+
+Run both commands immediately after the interview. No user interaction needed
+unless an anomaly is found.
 
 ### 2a — Detect package manager
 
@@ -71,24 +94,21 @@ bash scripts/detect_package_manager.sh
 # Output: one of:  bun  |  pnpm  |  yarn  |  npm
 ```
 
-Store the output as `PM`. Use it in all subsequent `<package-manager>` placeholders.
+Store as `PM`. Only ask the user if the script returns no result or multiple
+candidates.
 
-### 2b — Query npm registry
-
-```bash
-bash scripts/check_versions.sh
-```
-
-For machine-readable output (useful when parsing inside a script):
+### 2b — Query latest versions
 
 ```bash
 bash scripts/check_versions.sh --json
 ```
 
-Present the result table to the user. Ask for confirmation or overrides before
-continuing. The packages that matter vary by framework:
+Store all resolved versions as variables (e.g. `NEXT_VERSION`, `TW_VERSION`).
+Use them verbatim in every install command — never re-query mid-session.
 
-| Framework | Key packages to confirm |
+Key packages per framework:
+
+| Framework | Packages resolved |
 |---|---|
 | Next.js | `next`, `react`, `react-dom`, `tailwindcss`, `@tailwindcss/postcss` |
 | React + Vite | `vite`, `react`, `react-dom`, `react-router-dom`, `tailwindcss`, `@tailwindcss/vite` |
@@ -96,8 +116,17 @@ continuing. The packages that matter vary by framework:
 | Nuxt 4 | `nuxt`, `vue`, `tailwindcss`, `@nuxtjs/tailwindcss` |
 | SvelteKit | `@sveltejs/kit`, `svelte`, `tailwindcss`, `@tailwindcss/vite` |
 
-Store confirmed versions as variables (e.g. `NEXT_VERSION`, `TW_VERSION`).
-Use them verbatim in install commands — never re-query inside the same session.
+### 2c — Tailwind compatibility check
+
+```bash
+# Check if the chosen framework + UI_LIB combo requires Tailwind v3
+grep -i "<FW>" references/tailwind/per-framework-gotchas.md
+```
+
+- If no conflict → set `TW_MAJOR=4`, proceed silently.
+- If conflict detected → set `TW_MAJOR=3`, inform the user once, continue.
+- If `UI_LIB` is `mui`, `chakra`, `mantine`, `antd`, `primevue`, or `vuetify`
+  and does not use Tailwind → skip Tailwind install entirely, set `TW_MAJOR=none`.
 
 ---
 
@@ -952,7 +981,11 @@ the raw `<script>` tag in the `<head>` of `index.html`.
 
 ## Phase 5 — Component installation
 
-### 5a — Locate sibling skill
+### 5a — Route by UI_LIB
+
+Branch on `UI_LIB`:
+
+#### UI_LIB = "custom" (default)
 
 ```bash
 bash scripts/locate_ui_ux_pro_max.sh
@@ -960,12 +993,9 @@ bash scripts/locate_ui_ux_pro_max.sh
 # Prints error to stderr and exits 1 if not found
 ```
 
-Store the result as `UI_SKILL_PATH`. If exit 1, proceed to the fallback path.
+Store the result as `UI_SKILL_PATH`.
 
-### 5b — Install 28 components
-
-**If sibling skill found** — for each of the 28 components:
-
+**If skill found** — for each of the 28 components:
 1. Find the source using the name-mapping table in
    `references/ui-library/ui-ux-pro-max-bridge.md`.
 2. Adapt to the target framework using
@@ -974,7 +1004,25 @@ Store the result as `UI_SKILL_PATH`. If exit 1, proceed to the fallback path.
    - **Vue** — SFC `<script setup>`, `defineProps`, `defineEmits`, `v-model`
    - **Svelte 5** — `$props()` rune, snippets (`{@render children()}`), `$state()`
 3. Replace any hard-coded color values with CSS variable tokens from Phase 4.
-4. Write the adapted file to:
+4. Write the adapted file to the destinations in the table below.
+
+**If skill not found** — use implementations from
+`references/ui-library/custom-tailwind.md` (minimal Tailwind-only, zero deps).
+Write them to the same destinations.
+
+#### UI_LIB = named library (shadcn | mui | bootstrap | daisy | chakra | mantine | antd | primevue | vuetify)
+
+Do **not** run `locate_ui_ux_pro_max.sh`. Instead:
+
+1. Read `references/ui-library/<UI_LIB>.md` in full.
+2. Follow its install, provider wiring, and theming steps exactly.
+3. Consult the Library Component Mapping table in
+   `references/component-catalog.md` to identify the native component for each
+   of the 28 catalog slots.
+4. Write thin wrapper files (if needed for consistent import paths) or
+   re-export library components directly to the destinations below.
+
+#### Component destinations (all paths)
 
 | Framework | Destination |
 |---|---|
@@ -982,9 +1030,7 @@ Store the result as `UI_SKILL_PATH`. If exit 1, proceed to the fallback path.
 | Vue 3 / Nuxt 4 | `src/components/ui/<ComponentName>.vue` |
 | SvelteKit | `src/lib/components/ui/<ComponentName>.svelte` |
 
-**If sibling skill not found** — use implementations from
-`references/ui-library/custom-tailwind.md`. These are minimal Tailwind-only
-variants with no external dependencies. Write them to the same destinations.
+### 5b — Install 28 components
 
 ### 5c — Install cn() utility
 
@@ -1024,16 +1070,41 @@ block to ~4 lines and expands it on click. Collapsed state is the default.
 
 ## Phase 6 — Showcase routes
 
-### 6a — Install layout templates
+### 6a — Resolve template folder
 
-Copy from `assets/showcase-templates/<framework>/` and place in the project:
+Determine the template source directory from `UI_LIB` and the framework family:
+
+```
+UI_LIB = "custom"  →  assets/showcase-templates/<framework-family>/
+UI_LIB = <other>   →  assets/showcase-templates/<framework-family>-<UI_LIB>/
+```
+
+Framework family mapping:
+
+| Framework | Family |
+|---|---|
+| Next.js | `react` |
+| React + Vite | `react` |
+| Vue 3 | `vue` |
+| Nuxt 4 | `vue` |
+| SvelteKit | `svelte` |
+
+Examples:
+- Next.js + custom → `assets/showcase-templates/react/`
+- Next.js + shadcn → `assets/showcase-templates/react-shadcn/`
+- Vue 3 + Bootstrap → `assets/showcase-templates/vue-bootstrap/`
+- SvelteKit + DaisyUI → `assets/showcase-templates/svelte-daisy/`
+
+### 6b — Install layout templates
+
+Copy from the resolved template folder and place in the project:
 
 | Framework | Template files | Destination |
 |---|---|---|
-| Next.js | `react/layout.tsx.template`, `react/sidebar.tsx.template` | `src/app/library/layout.tsx`, `src/components/Sidebar.tsx` |
-| React + Vite | `react/layout.tsx.template`, `react/sidebar.tsx.template` | `src/components/LibraryLayout.tsx`, `src/components/Sidebar.tsx` |
-| Vue 3 / Nuxt 4 | `vue/AppLayout.vue.template`, `vue/Sidebar.vue.template` | `src/components/AppLayout.vue`, `src/components/Sidebar.vue` |
-| SvelteKit | `svelte/+layout.svelte.template` | `src/routes/library/+layout.svelte` |
+| Next.js | `layout.tsx.template`, `sidebar.tsx.template` | `src/app/library/layout.tsx`, `src/components/Sidebar.tsx` |
+| React + Vite | `layout.tsx.template`, `sidebar.tsx.template` | `src/components/LibraryLayout.tsx`, `src/components/Sidebar.tsx` |
+| Vue 3 / Nuxt 4 | `AppLayout.vue.template`, `Sidebar.vue.template` | `src/components/AppLayout.vue`, `src/components/Sidebar.vue` |
+| SvelteKit | `+layout.svelte.template` | `src/routes/library/+layout.svelte` |
 
 Replace all `{{PLACEHOLDER}}` tokens in every copied file:
 
@@ -1045,10 +1116,10 @@ Replace all `{{PLACEHOLDER}}` tokens in every copied file:
 | `{{ACCENT_VAR}}` | `--color-accent` |
 | `{{IMPORT_ALIAS}}` | `@/` for React/Vue/Next.js; `$lib/` for SvelteKit |
 
-### 6b — Install category page templates
+### 6c — Install category page templates
 
-Copy the six category templates and write them to the routes established in
-Phase 3:
+Copy the six category templates from the resolved folder and write them to the
+routes established in Phase 3:
 
 | Category | React destination | Vue destination | Svelte destination |
 |---|---|---|---|
@@ -1061,7 +1132,7 @@ Phase 3:
 
 > For Next.js, templates go to `src/app/library/<category>/page.tsx` (not `src/pages/`).
 
-### 6c — Install /library landing page
+### 6d — Install /library landing page
 
 The `/library` landing is generated (not from a template). Compose six `<Card>`
 components — one per category — each containing:

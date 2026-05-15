@@ -887,3 +887,79 @@ Used exclusively in showcase routes to wrap every component example. Not part of
 | 26 | Chart | Data viz | recharts |
 | 27 | DataTable | Data viz | @tanstack/{react,vue,svelte}-table |
 | 28 | Calendar | Data viz | date-fns |
+
+---
+
+## Library component mapping
+
+How each of the 28 catalog components maps to native components in every supported UI library. Use this table when `UI_LIB` is set to a named library in Phase 5.
+
+Abbreviations: **custom** = hand-written thin wrapper; **n/a** = no native equivalent, compose from primitives; **—** = same name as catalog.
+
+### Inputs
+
+| Catalog component | shadcn/ui | Material UI | Bootstrap | DaisyUI | Chakra UI | Mantine | Ant Design | PrimeVue | Vuetify |
+|---|---|---|---|---|---|---|---|---|---|
+| Button | `Button` | `Button` | `Button` | `.btn` | `Button` | `Button` | `Button` | `Button` | `v-btn` |
+| Input | `Input` | `TextField` | `Form.Control` | `.input` | `Input` | `TextInput` | `Input` | `InputText` | `v-text-field` |
+| Textarea | `Textarea` | `TextField multiline` | `Form.Control as="textarea"` | `.textarea` | `Textarea` | `Textarea` | `Input.TextArea` | `Textarea` | `v-textarea` |
+| Select | `Select` | `Select` + `MenuItem` | `Form.Select` | `.select` | `NativeSelect` / `Select` | `Select` | `Select` | `Select` | `v-select` |
+| Checkbox | `Checkbox` | `Checkbox` | `Form.Check type="checkbox"` | `.checkbox` | `Checkbox` | `Checkbox` | `Checkbox` | `Checkbox` | `v-checkbox` |
+| RadioGroup | `RadioGroup` | `RadioGroup` + `Radio` | `Form.Check type="radio"` | `.radio` | `RadioGroup` + `Radio` | `Radio.Group` + `Radio` | `Radio.Group` | `RadioButton` | `v-radio-group` + `v-radio` |
+| Switch | `Switch` | `Switch` | `Form.Check type="switch"` | `.toggle` | `Switch` | `Switch` | `Switch` | `ToggleSwitch` | `v-switch` |
+
+### Display
+
+| Catalog component | shadcn/ui | Material UI | Bootstrap | DaisyUI | Chakra UI | Mantine | Ant Design | PrimeVue | Vuetify |
+|---|---|---|---|---|---|---|---|---|---|
+| Card | `Card` | `Card` + `CardContent` | `Card` | `.card` | `Card` | `Card` | `Card` | `Card` | `v-card` |
+| Badge | `Badge` | `Chip` | `Badge` | `.badge` | `Badge` | `Badge` | `Tag` / `Badge` | `Tag` / `Badge` | `v-chip` / `v-badge` |
+| Avatar | `Avatar` | `Avatar` | custom | `.avatar` | `Avatar` | `Avatar` | `Avatar` | `Avatar` | `v-avatar` |
+| Separator | `Separator` | `Divider` | `<hr>` / custom | `.divider` | `Divider` | `Divider` | `Divider` | `Divider` | `v-divider` |
+| Skeleton | `Skeleton` | `Skeleton` | `Placeholder` | `.skeleton` | `Skeleton` | `Skeleton` | `Skeleton` | `Skeleton` | `v-skeleton-loader` |
+| Table | `Table` | `Table` + sub-components | `Table` | `.table` | `Table` | `Table` | `Table` | `DataTable` (basic) | `v-table` |
+
+### Feedback
+
+| Catalog component | shadcn/ui | Material UI | Bootstrap | DaisyUI | Chakra UI | Mantine | Ant Design | PrimeVue | Vuetify |
+|---|---|---|---|---|---|---|---|---|---|
+| Alert | `Alert` | `Alert` | `Alert` | `.alert` | `Alert` | `Alert` | `Alert` | `Message` | `v-alert` |
+| Toast | `Sonner` (sonner) | `Snackbar` | `Toast` + `ToastContainer` | `.toast` | `Toaster` / `useToast` | `notifications` (@mantine/notifications) | `message` / `notification` | `Toast` | `v-snackbar` |
+| Progress | `Progress` | `LinearProgress` | `ProgressBar` | `.progress` | `Progress` | `Progress` | `Progress` | `ProgressBar` | `v-progress-linear` |
+| Tooltip | `Tooltip` | `Tooltip` | `Tooltip` (overlay) | `.tooltip` | `Tooltip` | `Tooltip` | `Tooltip` | `Tooltip` (directive) | `v-tooltip` |
+| Dialog | `Dialog` | `Dialog` | `Modal` | `.modal` | `Dialog` / `Modal` | `Modal` / `Dialog` | `Modal` | `Dialog` | `v-dialog` |
+
+### Navigation
+
+| Catalog component | shadcn/ui | Material UI | Bootstrap | DaisyUI | Chakra UI | Mantine | Ant Design | PrimeVue | Vuetify |
+|---|---|---|---|---|---|---|---|---|---|
+| Tabs | `Tabs` | `Tabs` + `Tab` | `Tabs` + `Tab` | `.tabs` | `Tabs` | `Tabs` | `Tabs` | `Tabs` + `TabList` | `v-tabs` + `v-tab` |
+| Breadcrumb | `Breadcrumb` | `Breadcrumbs` | `Breadcrumb` | `.breadcrumbs` | `Breadcrumb` | `Breadcrumbs` | `Breadcrumb` | `Breadcrumb` | `v-breadcrumbs` |
+| Pagination | `Pagination` | `Pagination` | `Pagination` | `.join` + `.btn` | custom | `Pagination` | `Pagination` | `Paginator` | `v-pagination` |
+| NavigationMenu | `NavigationMenu` | `Menu` + `MenuItem` | `Navbar` + `Nav` | `.menu` | custom | `NavLink` + custom | `Menu` | `Menubar` / `Menu` | `v-navigation-drawer` + `v-list` |
+
+### Overlay
+
+| Catalog component | shadcn/ui | Material UI | Bootstrap | DaisyUI | Chakra UI | Mantine | Ant Design | PrimeVue | Vuetify |
+|---|---|---|---|---|---|---|---|---|---|
+| Popover | `Popover` | `Popover` | `Popover` (overlay) | `.dropdown` (anchored) | `Popover` | `Popover` | `Popover` | `Popover` | `v-menu` (anchored) |
+| DropdownMenu | `DropdownMenu` | `Menu` + `MenuItem` | `Dropdown` | `.dropdown` | `Menu` | `Menu` | `Dropdown` | `Menu` / `TieredMenu` | `v-menu` |
+| Sheet | `Sheet` | `Drawer` | custom | `.drawer` | `Drawer` | `Drawer` | `Drawer` | `Drawer` | `v-navigation-drawer` |
+
+### Data viz
+
+| Catalog component | shadcn/ui | Material UI | Bootstrap | DaisyUI | Chakra UI | Mantine | Ant Design | PrimeVue | Vuetify |
+|---|---|---|---|---|---|---|---|---|---|
+| Chart | `ChartContainer` (recharts) | recharts (no native) | recharts | recharts | recharts | `@mantine/charts` | `@ant-design/charts` | `Chart` (Chart.js) | recharts |
+| DataTable | custom (TanStack Table) | `DataGrid` (@mui/x-data-grid) | custom (TanStack Table) | custom (TanStack Table) | custom (TanStack Table) | `@mantine/datatable` | `Table` (built-in) | `DataTable` (built-in) | `v-data-table` |
+| Calendar | `Calendar` (react-day-picker) | `DateCalendar` (@mui/x-date-pickers) | custom / react-datepicker | custom | custom | `Calendar` (@mantine/dates) | `Calendar` / `DatePicker` | `DatePicker` / `Calendar` | `v-date-picker` |
+
+### Notes
+
+- **shadcn/ui** components are installed one at a time via `npx shadcn@latest add <name>`. See `references/ui-library/shadcn.md` for the full add-command list.
+- **Material UI** `DataGrid` requires the separate `@mui/x-data-grid` package. `DateCalendar` requires `@mui/x-date-pickers` and a date adapter (`date-fns` or `dayjs`).
+- **Bootstrap** has no native Avatar, Sheet (Drawer), or NavigationMenu equivalent — write thin wrappers for those slots.
+- **DaisyUI** components are utility classes applied to standard HTML elements or framework components. No import — just apply the class. See `references/ui-library/daisy.md` for class→component mapping.
+- **Chakra UI** v3 renamed several components from v2. Always check the v3 docs. Pagination is not built-in; compose from `HStack` + `Button`.
+- **PrimeVue** `DataTable` is full-featured (sort, filter, pagination built-in) and covers both the `Table` and `DataTable` catalog slots.
+- **Vuetify** `v-data-table` also covers the basic `Table` slot if needed. Chart support requires recharts or a third-party Chart.js integration.
