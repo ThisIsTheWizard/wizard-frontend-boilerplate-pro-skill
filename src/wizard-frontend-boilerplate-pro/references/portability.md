@@ -86,13 +86,13 @@ The minimum capability set required to run this skill end-to-end:
 - **Write files** — write and overwrite files in the target project directory.
 - **Execute shell commands** — run `bash`, `python3`, `npm`/`pnpm`/`yarn`/`bun`,
   and framework CLIs (`npx`, `bunx`, etc.).
-- **Follow sequential instructions** — execute the seven phases in order,
+- **Follow sequential instructions** — execute the phases in order,
   waiting for each command to complete before the next.
-- **Ask the user questions** — Phase 1 is an interactive interview; the agent
-  must be able to prompt the user and capture their answers.
-- **Present formatted output** — the version table in Phase 2 and the color
-  preset table in Phase 1 are markdown tables; the agent should render or
-  display them clearly.
+- **Ask the user questions** — Phase 1 is an interactive interview (5
+  questions); the agent must be able to prompt the user and capture answers.
+- **Present formatted output** — the color preset table in Phase 1 and the
+  compatibility table in Phase 2 are markdown tables; the agent should render
+  or display them clearly.
 
 ---
 

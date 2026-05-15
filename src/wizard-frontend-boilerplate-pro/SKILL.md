@@ -49,20 +49,28 @@ Choose one:
 Present only options compatible with the framework chosen in Q1. Store the
 answer as `UI_LIB`. Default: `custom` (zero extra deps, Tailwind-only).
 
-| # | Library | React/Next | Vue/Nuxt | SvelteKit |
-|---|---|---|---|---|
-| 0 | Custom Tailwind (default) | ✓ | ✓ | ✓ |
-| 1 | shadcn/ui | ✓ | ✓ (shadcn-vue) | ✓ (shadcn-svelte) |
-| 2 | Material UI | ✓ | — | — |
-| 3 | Bootstrap | ✓ | ✓ | ✓ |
-| 4 | DaisyUI | ✓ | ✓ | ✓ |
-| 5 | Chakra UI | ✓ | — | — |
-| 6 | Mantine | ✓ | — | — |
-| 7 | Ant Design | ✓ | — | — |
-| 8 | PrimeVue | — | ✓ | — |
-| 9 | Vuetify | — | ✓ | — |
+| # | Library | Tailwind | React/Next | Vue/Nuxt | SvelteKit |
+|---|---|---|---|---|---|
+| 0 | Custom Tailwind (default) | ✓ | ✓ | ✓ | ✓ |
+| 1 | shadcn/ui | ✓ | ✓ | ✓ (shadcn-vue) | ✓ (shadcn-svelte) |
+| 2 | Material UI | — | ✓ | — | — |
+| 3 | Bootstrap | — | ✓ | ✓ | ✓ |
+| 4 | DaisyUI | ✓ | ✓ | ✓ | ✓ |
+| 5 | Chakra UI | — | ✓ | — | — |
+| 6 | Mantine | — | ✓ | — | — |
+| 7 | Ant Design | — | ✓ | — | — |
+| 8 | PrimeVue | — | — | ✓ | — |
+| 9 | Vuetify | — | — | ✓ | — |
+| 10 | Headless UI | ✓ | ✓ | ✓ | — |
+| 11 | NextUI / HeroUI | ✓ | ✓ | — | — |
+| 12 | Element Plus | — | — | ✓ | — |
 
-Do not offer options marked `—` for the chosen framework.
+The **Tailwind** column shows whether Tailwind CSS is included automatically
+(shadcn/ui, DaisyUI, Headless UI, and NextUI/HeroUI are built on Tailwind —
+selecting them always installs Tailwind). Libraries marked `—` in that column
+use their own CSS system; Tailwind is not installed.
+
+Do not offer options marked `—` in the framework columns for the chosen framework.
 
 **Q3 — Language**
 TypeScript (default) / JavaScript. Accept silently if stated upfront.
@@ -154,7 +162,7 @@ Detail: `references/theming.md`.
 
 ### 5a — Route by UI_LIB
 
-Branch on the value of `UI_LIB` set in Phase 1 Q8:
+Branch on the value of `UI_LIB` set in Phase 1 Q2:
 
 **`UI_LIB = custom` (default)**
 
@@ -171,7 +179,7 @@ directory. It prints the absolute path if found, or exits 1 if not.
 
 Write each adapted component to `src/components/ui/<ComponentName>.<ext>`.
 
-**`UI_LIB = shadcn | mui | bootstrap | daisy | chakra | mantine | antd | primevue | vuetify`**
+**`UI_LIB = shadcn | mui | bootstrap | daisy | chakra | mantine | antd | primevue | vuetify | headlessui | heroui | elementplus`**
 
 Read `references/ui-library/<UI_LIB>.md`. Follow its setup, install, and
 theming steps exactly. The reference file covers:
@@ -336,6 +344,9 @@ manually unless the fix requires a decision only they can make.
 | `references/ui-library/antd.md` | Ant Design ConfigProvider token bridge, Next.js notes |
 | `references/ui-library/primevue.md` | PrimeVue plugin setup and theming presets |
 | `references/ui-library/vuetify.md` | Vuetify createVuetify, blueprint, CSS var bridge |
+| `references/ui-library/headlessui.md` | Headless UI setup, Tailwind pairing, component patterns |
+| `references/ui-library/heroui.md` | NextUI/HeroUI setup, Tailwind config, theming |
+| `references/ui-library/elementplus.md` | Element Plus setup, SCSS theming, Vue/Nuxt wiring |
 | `references/portability.md` | Notes for non-Claude agents, tested agent list |
 | `workflow.md` | Detailed playbook with verbatim commands for all phases |
 

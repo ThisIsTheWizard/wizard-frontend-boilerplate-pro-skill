@@ -898,61 +898,61 @@ Abbreviations: **custom** = hand-written thin wrapper; **n/a** = no native equiv
 
 ### Inputs
 
-| Catalog component | shadcn/ui | Material UI | Bootstrap | DaisyUI | Chakra UI | Mantine | Ant Design | PrimeVue | Vuetify |
-|---|---|---|---|---|---|---|---|---|---|
-| Button | `Button` | `Button` | `Button` | `.btn` | `Button` | `Button` | `Button` | `Button` | `v-btn` |
-| Input | `Input` | `TextField` | `Form.Control` | `.input` | `Input` | `TextInput` | `Input` | `InputText` | `v-text-field` |
-| Textarea | `Textarea` | `TextField multiline` | `Form.Control as="textarea"` | `.textarea` | `Textarea` | `Textarea` | `Input.TextArea` | `Textarea` | `v-textarea` |
-| Select | `Select` | `Select` + `MenuItem` | `Form.Select` | `.select` | `NativeSelect` / `Select` | `Select` | `Select` | `Select` | `v-select` |
-| Checkbox | `Checkbox` | `Checkbox` | `Form.Check type="checkbox"` | `.checkbox` | `Checkbox` | `Checkbox` | `Checkbox` | `Checkbox` | `v-checkbox` |
-| RadioGroup | `RadioGroup` | `RadioGroup` + `Radio` | `Form.Check type="radio"` | `.radio` | `RadioGroup` + `Radio` | `Radio.Group` + `Radio` | `Radio.Group` | `RadioButton` | `v-radio-group` + `v-radio` |
-| Switch | `Switch` | `Switch` | `Form.Check type="switch"` | `.toggle` | `Switch` | `Switch` | `Switch` | `ToggleSwitch` | `v-switch` |
+| Catalog component | shadcn/ui | Material UI | Bootstrap | DaisyUI | Chakra UI | Mantine | Ant Design | PrimeVue | Vuetify | Headless UI | NextUI/HeroUI | Element Plus |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| Button | `Button` | `Button` | `Button` | `.btn` | `Button` | `Button` | `Button` | `Button` | `v-btn` | custom (Tailwind) | `Button` | `el-button` |
+| Input | `Input` | `TextField` | `Form.Control` | `.input` | `Input` | `TextInput` | `Input` | `InputText` | `v-text-field` | custom (Tailwind) | `Input` | `el-input` |
+| Textarea | `Textarea` | `TextField multiline` | `Form.Control as="textarea"` | `.textarea` | `Textarea` | `Textarea` | `Input.TextArea` | `Textarea` | `v-textarea` | custom (Tailwind) | `Textarea` | `el-input type="textarea"` |
+| Select | `Select` | `Select` + `MenuItem` | `Form.Select` | `.select` | `NativeSelect` / `Select` | `Select` | `Select` | `Select` | `v-select` | `Listbox` | `Select` | `el-select` |
+| Checkbox | `Checkbox` | `Checkbox` | `Form.Check type="checkbox"` | `.checkbox` | `Checkbox` | `Checkbox` | `Checkbox` | `Checkbox` | `v-checkbox` | custom (Tailwind) | `Checkbox` | `el-checkbox` |
+| RadioGroup | `RadioGroup` | `RadioGroup` + `Radio` | `Form.Check type="radio"` | `.radio` | `RadioGroup` + `Radio` | `Radio.Group` + `Radio` | `Radio.Group` | `RadioButton` | `v-radio-group` + `v-radio` | `RadioGroup` | `RadioGroup` | `el-radio-group` |
+| Switch | `Switch` | `Switch` | `Form.Check type="switch"` | `.toggle` | `Switch` | `Switch` | `Switch` | `ToggleSwitch` | `v-switch` | `Switch` | `Switch` | `el-switch` |
 
 ### Display
 
-| Catalog component | shadcn/ui | Material UI | Bootstrap | DaisyUI | Chakra UI | Mantine | Ant Design | PrimeVue | Vuetify |
-|---|---|---|---|---|---|---|---|---|---|
-| Card | `Card` | `Card` + `CardContent` | `Card` | `.card` | `Card` | `Card` | `Card` | `Card` | `v-card` |
-| Badge | `Badge` | `Chip` | `Badge` | `.badge` | `Badge` | `Badge` | `Tag` / `Badge` | `Tag` / `Badge` | `v-chip` / `v-badge` |
-| Avatar | `Avatar` | `Avatar` | custom | `.avatar` | `Avatar` | `Avatar` | `Avatar` | `Avatar` | `v-avatar` |
-| Separator | `Separator` | `Divider` | `<hr>` / custom | `.divider` | `Divider` | `Divider` | `Divider` | `Divider` | `v-divider` |
-| Skeleton | `Skeleton` | `Skeleton` | `Placeholder` | `.skeleton` | `Skeleton` | `Skeleton` | `Skeleton` | `Skeleton` | `v-skeleton-loader` |
-| Table | `Table` | `Table` + sub-components | `Table` | `.table` | `Table` | `Table` | `Table` | `DataTable` (basic) | `v-table` |
+| Catalog component | shadcn/ui | Material UI | Bootstrap | DaisyUI | Chakra UI | Mantine | Ant Design | PrimeVue | Vuetify | Headless UI | NextUI/HeroUI | Element Plus |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| Card | `Card` | `Card` + `CardContent` | `Card` | `.card` | `Card` | `Card` | `Card` | `Card` | `v-card` | custom (Tailwind) | `Card` | `el-card` |
+| Badge | `Badge` | `Chip` | `Badge` | `.badge` | `Badge` | `Badge` | `Tag` / `Badge` | `Tag` / `Badge` | `v-chip` / `v-badge` | custom (Tailwind) | `Chip` / `Badge` | `el-badge` / `el-tag` |
+| Avatar | `Avatar` | `Avatar` | custom | `.avatar` | `Avatar` | `Avatar` | `Avatar` | `Avatar` | `v-avatar` | custom (Tailwind) | `Avatar` | `el-avatar` |
+| Separator | `Separator` | `Divider` | `<hr>` / custom | `.divider` | `Divider` | `Divider` | `Divider` | `Divider` | `v-divider` | `<hr>` (Tailwind) | `Divider` | `el-divider` |
+| Skeleton | `Skeleton` | `Skeleton` | `Placeholder` | `.skeleton` | `Skeleton` | `Skeleton` | `Skeleton` | `Skeleton` | `v-skeleton-loader` | custom (Tailwind) | `Skeleton` | `el-skeleton` |
+| Table | `Table` | `Table` + sub-components | `Table` | `.table` | `Table` | `Table` | `Table` | `DataTable` (basic) | `v-table` | custom (Tailwind) | `Table` | `el-table` |
 
 ### Feedback
 
-| Catalog component | shadcn/ui | Material UI | Bootstrap | DaisyUI | Chakra UI | Mantine | Ant Design | PrimeVue | Vuetify |
-|---|---|---|---|---|---|---|---|---|---|
-| Alert | `Alert` | `Alert` | `Alert` | `.alert` | `Alert` | `Alert` | `Alert` | `Message` | `v-alert` |
-| Toast | `Sonner` (sonner) | `Snackbar` | `Toast` + `ToastContainer` | `.toast` | `Toaster` / `useToast` | `notifications` (@mantine/notifications) | `message` / `notification` | `Toast` | `v-snackbar` |
-| Progress | `Progress` | `LinearProgress` | `ProgressBar` | `.progress` | `Progress` | `Progress` | `Progress` | `ProgressBar` | `v-progress-linear` |
-| Tooltip | `Tooltip` | `Tooltip` | `Tooltip` (overlay) | `.tooltip` | `Tooltip` | `Tooltip` | `Tooltip` | `Tooltip` (directive) | `v-tooltip` |
-| Dialog | `Dialog` | `Dialog` | `Modal` | `.modal` | `Dialog` / `Modal` | `Modal` / `Dialog` | `Modal` | `Dialog` | `v-dialog` |
+| Catalog component | shadcn/ui | Material UI | Bootstrap | DaisyUI | Chakra UI | Mantine | Ant Design | PrimeVue | Vuetify | Headless UI | NextUI/HeroUI | Element Plus |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| Alert | `Alert` | `Alert` | `Alert` | `.alert` | `Alert` | `Alert` | `Alert` | `Message` | `v-alert` | custom (Tailwind) | `Alert` | `el-alert` |
+| Toast | `Sonner` (sonner) | `Snackbar` | `Toast` + `ToastContainer` | `.toast` | `Toaster` / `useToast` | `notifications` (@mantine/notifications) | `message` / `notification` | `Toast` | `v-snackbar` | sonner | sonner | `ElMessage` |
+| Progress | `Progress` | `LinearProgress` | `ProgressBar` | `.progress` | `Progress` | `Progress` | `Progress` | `ProgressBar` | `v-progress-linear` | custom (Tailwind) | `Progress` / `CircularProgress` | `el-progress` |
+| Tooltip | `Tooltip` | `Tooltip` | `Tooltip` (overlay) | `.tooltip` | `Tooltip` | `Tooltip` | `Tooltip` | `Tooltip` (directive) | `v-tooltip` | custom (Tailwind) | `Tooltip` | `el-tooltip` |
+| Dialog | `Dialog` | `Dialog` | `Modal` | `.modal` | `Dialog` / `Modal` | `Modal` / `Dialog` | `Modal` | `Dialog` | `v-dialog` | `Dialog` | `Modal` | `el-dialog` |
 
 ### Navigation
 
-| Catalog component | shadcn/ui | Material UI | Bootstrap | DaisyUI | Chakra UI | Mantine | Ant Design | PrimeVue | Vuetify |
-|---|---|---|---|---|---|---|---|---|---|
-| Tabs | `Tabs` | `Tabs` + `Tab` | `Tabs` + `Tab` | `.tabs` | `Tabs` | `Tabs` | `Tabs` | `Tabs` + `TabList` | `v-tabs` + `v-tab` |
-| Breadcrumb | `Breadcrumb` | `Breadcrumbs` | `Breadcrumb` | `.breadcrumbs` | `Breadcrumb` | `Breadcrumbs` | `Breadcrumb` | `Breadcrumb` | `v-breadcrumbs` |
-| Pagination | `Pagination` | `Pagination` | `Pagination` | `.join` + `.btn` | custom | `Pagination` | `Pagination` | `Paginator` | `v-pagination` |
-| NavigationMenu | `NavigationMenu` | `Menu` + `MenuItem` | `Navbar` + `Nav` | `.menu` | custom | `NavLink` + custom | `Menu` | `Menubar` / `Menu` | `v-navigation-drawer` + `v-list` |
+| Catalog component | shadcn/ui | Material UI | Bootstrap | DaisyUI | Chakra UI | Mantine | Ant Design | PrimeVue | Vuetify | Headless UI | NextUI/HeroUI | Element Plus |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| Tabs | `Tabs` | `Tabs` + `Tab` | `Tabs` + `Tab` | `.tabs` | `Tabs` | `Tabs` | `Tabs` | `Tabs` + `TabList` | `v-tabs` + `v-tab` | `TabGroup` + `Tab` | `Tabs` | `el-tabs` |
+| Breadcrumb | `Breadcrumb` | `Breadcrumbs` | `Breadcrumb` | `.breadcrumbs` | `Breadcrumb` | `Breadcrumbs` | `Breadcrumb` | `Breadcrumb` | `v-breadcrumbs` | custom (Tailwind) | `Breadcrumbs` | `el-breadcrumb` |
+| Pagination | `Pagination` | `Pagination` | `Pagination` | `.join` + `.btn` | custom | `Pagination` | `Pagination` | `Paginator` | `v-pagination` | custom (Tailwind) | `Pagination` | `el-pagination` |
+| NavigationMenu | `NavigationMenu` | `Menu` + `MenuItem` | `Navbar` + `Nav` | `.menu` | custom | `NavLink` + custom | `Menu` | `Menubar` / `Menu` | `v-navigation-drawer` + `v-list` | `Popover` + `Menu` | `Navbar` + `NavbarMenu` | `el-menu` |
 
 ### Overlay
 
-| Catalog component | shadcn/ui | Material UI | Bootstrap | DaisyUI | Chakra UI | Mantine | Ant Design | PrimeVue | Vuetify |
-|---|---|---|---|---|---|---|---|---|---|
-| Popover | `Popover` | `Popover` | `Popover` (overlay) | `.dropdown` (anchored) | `Popover` | `Popover` | `Popover` | `Popover` | `v-menu` (anchored) |
-| DropdownMenu | `DropdownMenu` | `Menu` + `MenuItem` | `Dropdown` | `.dropdown` | `Menu` | `Menu` | `Dropdown` | `Menu` / `TieredMenu` | `v-menu` |
-| Sheet | `Sheet` | `Drawer` | custom | `.drawer` | `Drawer` | `Drawer` | `Drawer` | `Drawer` | `v-navigation-drawer` |
+| Catalog component | shadcn/ui | Material UI | Bootstrap | DaisyUI | Chakra UI | Mantine | Ant Design | PrimeVue | Vuetify | Headless UI | NextUI/HeroUI | Element Plus |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| Popover | `Popover` | `Popover` | `Popover` (overlay) | `.dropdown` (anchored) | `Popover` | `Popover` | `Popover` | `Popover` | `v-menu` (anchored) | `Popover` | `Popover` | `el-popover` |
+| DropdownMenu | `DropdownMenu` | `Menu` + `MenuItem` | `Dropdown` | `.dropdown` | `Menu` | `Menu` | `Dropdown` | `Menu` / `TieredMenu` | `v-menu` | `Menu` | `Dropdown` | `el-dropdown` |
+| Sheet | `Sheet` | `Drawer` | custom | `.drawer` | `Drawer` | `Drawer` | `Drawer` | `Drawer` | `v-navigation-drawer` | `Dialog` (side variant) | `Drawer` | `el-drawer` |
 
 ### Data viz
 
-| Catalog component | shadcn/ui | Material UI | Bootstrap | DaisyUI | Chakra UI | Mantine | Ant Design | PrimeVue | Vuetify |
-|---|---|---|---|---|---|---|---|---|---|
-| Chart | `ChartContainer` (recharts) | recharts (no native) | recharts | recharts | recharts | `@mantine/charts` | `@ant-design/charts` | `Chart` (Chart.js) | recharts |
-| DataTable | custom (TanStack Table) | `DataGrid` (@mui/x-data-grid) | custom (TanStack Table) | custom (TanStack Table) | custom (TanStack Table) | `@mantine/datatable` | `Table` (built-in) | `DataTable` (built-in) | `v-data-table` |
-| Calendar | `Calendar` (react-day-picker) | `DateCalendar` (@mui/x-date-pickers) | custom / react-datepicker | custom | custom | `Calendar` (@mantine/dates) | `Calendar` / `DatePicker` | `DatePicker` / `Calendar` | `v-date-picker` |
+| Catalog component | shadcn/ui | Material UI | Bootstrap | DaisyUI | Chakra UI | Mantine | Ant Design | PrimeVue | Vuetify | Headless UI | NextUI/HeroUI | Element Plus |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| Chart | `ChartContainer` (recharts) | recharts (no native) | recharts | recharts | recharts | `@mantine/charts` | `@ant-design/charts` | `Chart` (Chart.js) | recharts | recharts | recharts | echarts / recharts |
+| DataTable | custom (TanStack Table) | `DataGrid` (@mui/x-data-grid) | custom (TanStack Table) | custom (TanStack Table) | custom (TanStack Table) | `@mantine/datatable` | `Table` (built-in) | `DataTable` (built-in) | `v-data-table` | custom (TanStack Table) | `Table` (built-in) | `el-table` / `el-table-v2` |
+| Calendar | `Calendar` (react-day-picker) | `DateCalendar` (@mui/x-date-pickers) | custom / react-datepicker | custom | custom | `Calendar` (@mantine/dates) | `Calendar` / `DatePicker` | `DatePicker` / `Calendar` | `v-date-picker` | custom | `Calendar` / `DatePicker` | `el-calendar` / `el-date-picker` |
 
 ### Notes
 
@@ -963,3 +963,6 @@ Abbreviations: **custom** = hand-written thin wrapper; **n/a** = no native equiv
 - **Chakra UI** v3 renamed several components from v2. Always check the v3 docs. Pagination is not built-in; compose from `HStack` + `Button`.
 - **PrimeVue** `DataTable` is full-featured (sort, filter, pagination built-in) and covers both the `Table` and `DataTable` catalog slots.
 - **Vuetify** `v-data-table` also covers the basic `Table` slot if needed. Chart support requires recharts or a third-party Chart.js integration.
+- **Headless UI** only provides ~10 components (Dialog, Listbox, Menu, Popover, RadioGroup, Switch, Tab, Disclosure, Combobox, Transition). All other catalog slots use custom Tailwind implementations. React: `@headlessui/react`; Vue: `@headlessui/vue`.
+- **NextUI/HeroUI** is React/Next.js only (`@heroui/react`). Built on Tailwind + Radix primitives. No built-in Toast — use sonner. `Table` covers basic display; add TanStack Table for advanced filtering/sorting.
+- **Element Plus** is Vue/Nuxt only (`element-plus`). `el-table` covers both `Table` and `DataTable` catalog slots (built-in sort, filter, pagination). Chart support pairs naturally with `echarts` (`vue-echarts`).
