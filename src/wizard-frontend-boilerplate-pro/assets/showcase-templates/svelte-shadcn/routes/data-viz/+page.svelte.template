@@ -1,0 +1,232 @@
+<script lang="ts">
+  import type { ColumnDef } from "@tanstack/svelte-table";
+  import { CartesianGrid, Line, LineChart, XAxis, YAxis } from "layerchart";
+
+  import { Calendar } from "$lib/components/ui/calendar";
+  import type { ChartConfig } from "$lib/components/ui/chart";
+  import {
+    ChartContainer,
+    ChartLegend,
+    ChartLegendContent,
+    ChartTooltip,
+    ChartTooltipContent,
+  } from "$lib/components/ui/chart";
+  import { CodeBlock } from "$lib/components/ui/code-block";
+  import { DataTable } from "$lib/components/ui/data-table";
+
+  const CALENDAR_CODE = `<script lang="ts">
+  import { Calendar } from "$lib/components/ui/calendar";
+
+  let selectedDate = $state<Date | undefined>(undefined);
+<\/script>
+
+<div class="flex flex-col gap-4">
+  <Calendar mode="single" onSelect={(date) => (selectedDate = date)} selected={selectedDate} />
+  <p class="text-sm text-muted-foreground">
+    {selectedDate ? selectedDate.toLocaleDateString() : "No date selected"}
+  </p>
+</div>`;
+
+  const CHART_CODE = `<script lang="ts">
+  import type { ChartConfig } from "$lib/components/ui/chart";
+  import {
+    ChartContainer,
+    ChartLegend,
+    ChartLegendContent,
+    ChartTooltip,
+    ChartTooltipContent,
+  } from "$lib/components/ui/chart";
+  import { CartesianGrid, Line, LineChart, XAxis, YAxis } from "layerchart";
+
+  const chartConfig = {
+    desktop: { color: "hsl(var(--primary))", label: "Desktop" },
+    mobile: { color: "hsl(var(--secondary))", label: "Mobile" },
+  } satisfies ChartConfig;
+
+  const DATA = [
+    { desktop: 186, mobile: 80, month: "Jan" },
+    { desktop: 305, mobile: 200, month: "Feb" },
+    { desktop: 237, mobile: 120, month: "Mar" },
+    { desktop: 73, mobile: 190, month: "Apr" },
+    { desktop: 209, mobile: 130, month: "May" },
+    { desktop: 214, mobile: 140, month: "Jun" },
+  ];
+<\/script>
+
+<ChartContainer class="h-64 w-full" config={chartConfig}>
+  <LineChart data={DATA}>
+    <CartesianGrid strokeDasharray="3 3" />
+    <XAxis dataKey="month" />
+    <YAxis />
+    <ChartTooltip content={ChartTooltipContent} />
+    <ChartLegend content={ChartLegendContent} />
+    <Line dataKey="desktop" stroke="var(--color-desktop)" type="monotone" />
+    <Line dataKey="mobile" stroke="var(--color-mobile)" type="monotone" />
+  </LineChart>
+</ChartContainer>`;
+
+  const DATA_TABLE_CODE = `<script lang="ts">
+  import type { ColumnDef } from "@tanstack/svelte-table";
+  import { DataTable } from "$lib/components/ui/data-table";
+
+  interface User {
+    email: string;
+    id: string;
+    name: string;
+    role: string;
+  }
+
+  const columns: ColumnDef<User>[] = [
+    { accessorKey: "name", header: "Name" },
+    { accessorKey: "email", header: "Email" },
+    { accessorKey: "role", header: "Role" },
+  ];
+
+  const data: User[] = [
+    { email: "alice@example.com", id: "1", name: "Alice Johnson", role: "Admin" },
+    { email: "bob@example.com", id: "2", name: "Bob Smith", role: "Editor" },
+    { email: "carol@example.com", id: "3", name: "Carol White", role: "Viewer" },
+  ];
+<\/script>
+
+<DataTable
+  {columns}
+  {data}
+  filterColumn="name"
+  filterPlaceholder="Filter by name…"
+  pageSize={5}
+/>`;
+
+  const CHART_DATA = [
+    { desktop: 186, mobile: 80, month: "Jan" },
+    { desktop: 305, mobile: 200, month: "Feb" },
+    { desktop: 237, mobile: 120, month: "Mar" },
+    { desktop: 73, mobile: 190, month: "Apr" },
+    { desktop: 209, mobile: 130, month: "May" },
+    { desktop: 214, mobile: 140, month: "Jun" },
+  ];
+
+  const chartConfig = {
+    desktop: { color: "hsl(var(--primary))", label: "Desktop" },
+    mobile: { color: "hsl(var(--secondary))", label: "Mobile" },
+  } satisfies ChartConfig;
+
+  interface User {
+    email: string;
+    id: string;
+    name: string;
+    role: string;
+  }
+
+  const COLUMNS: ColumnDef<User>[] = [
+    { accessorKey: "name", header: "Name" },
+    { accessorKey: "email", header: "Email" },
+    { accessorKey: "role", header: "Role" },
+  ];
+
+  const TABLE_DATA: User[] = [
+    { email: "alice@example.com", id: "1", name: "Alice Johnson", role: "Admin" },
+    { email: "bob@example.com", id: "2", name: "Bob Smith", role: "Editor" },
+    { email: "carol@example.com", id: "3", name: "Carol White", role: "Viewer" },
+    { email: "dan@example.com", id: "4", name: "Dan Brown", role: "Editor" },
+    { email: "eve@example.com", id: "5", name: "Eve Davis", role: "Viewer" },
+  ];
+
+  let selectedDate = $state<Date | undefined>(undefined);
+</script>
+
+<div class="flex flex-col gap-16">
+  <div>
+    <h1 class="text-3xl font-bold tracking-tight text-foreground">
+      Data &amp; Visualisation
+    </h1>
+    <p class="mt-2 text-muted-foreground">
+      Charts, interactive tables, and date pickers — built on layerchart, TanStack
+      Table, and date-fns.
+    </p>
+  </div>
+
+  <section class="flex flex-col gap-4" id="chart">
+    <div class="border-l-2 border-primary/40 pl-3">
+      <h2 class="text-xl font-semibold text-foreground">Chart</h2>
+      <p class="mt-1 text-sm text-muted-foreground">
+        A responsive line chart with tooltip, legend, and semantic colour tokens.
+      </p>
+    </div>
+    <div class="rounded-lg border border-border bg-muted/50 p-8">
+      <ChartContainer class="h-64 w-full" config={chartConfig}>
+        <LineChart data={CHART_DATA}>
+          <CartesianGrid strokeDasharray="3 3" />
+          <XAxis dataKey="month" />
+          <YAxis />
+          <ChartTooltip content={ChartTooltipContent} />
+          <ChartLegend content={ChartLegendContent} />
+          <Line dataKey="desktop" stroke="var(--color-desktop)" type="monotone" />
+          <Line dataKey="mobile" stroke="var(--color-mobile)" type="monotone" />
+        </LineChart>
+      </ChartContainer>
+    </div>
+    <CodeBlock
+      code={CHART_CODE}
+      collapsible={true}
+      defaultOpen={false}
+      filename="Chart.svelte"
+      language="svelte"
+    />
+  </section>
+
+  <section class="flex flex-col gap-4" id="data-table">
+    <div class="border-l-2 border-primary/40 pl-3">
+      <h2 class="text-xl font-semibold text-foreground">DataTable</h2>
+      <p class="mt-1 text-sm text-muted-foreground">
+        A fully-featured table with sorting, filtering, and pagination powered by
+        TanStack Table.
+      </p>
+    </div>
+    <div class="rounded-lg border border-border bg-muted/50 p-8">
+      <DataTable
+        columns={COLUMNS}
+        data={TABLE_DATA}
+        filterColumn="name"
+        filterPlaceholder="Filter by name…"
+        pageSize={5}
+      />
+    </div>
+    <CodeBlock
+      code={DATA_TABLE_CODE}
+      collapsible={true}
+      defaultOpen={false}
+      filename="DataTable.svelte"
+      language="svelte"
+    />
+  </section>
+
+  <section class="flex flex-col gap-4" id="calendar">
+    <div class="border-l-2 border-primary/40 pl-3">
+      <h2 class="text-xl font-semibold text-foreground">Calendar</h2>
+      <p class="mt-1 text-sm text-muted-foreground">
+        An interactive date picker supporting single, range, and multiple selection
+        modes.
+      </p>
+    </div>
+    <div class="rounded-lg border border-border bg-muted/50 p-8">
+      <div class="flex flex-col gap-4">
+        <Calendar
+          mode="single"
+          onSelect={(date) => (selectedDate = date)}
+          selected={selectedDate}
+        />
+        <p class="text-sm text-muted-foreground">
+          {selectedDate ? selectedDate.toLocaleDateString() : "No date selected"}
+        </p>
+      </div>
+    </div>
+    <CodeBlock
+      code={CALENDAR_CODE}
+      collapsible={true}
+      defaultOpen={false}
+      filename="Calendar.svelte"
+      language="svelte"
+    />
+  </section>
+</div>

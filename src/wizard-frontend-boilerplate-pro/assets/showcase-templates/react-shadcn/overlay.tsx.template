@@ -1,0 +1,242 @@
+"use client";
+
+import { useState } from "react";
+
+import { Button } from "@/components/ui/button";
+import { CodeBlock } from "@/components/ui/code-block";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import {
+  Sheet,
+  SheetClose,
+  SheetContent,
+  SheetDescription,
+  SheetFooter,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
+
+const POPOVER_CODE = `import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+
+export function Example() {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <Popover onOpenChange={setOpen} open={open}>
+      <PopoverTrigger asChild>
+        <Button variant="outline">Open Popover</Button>
+      </PopoverTrigger>
+      <PopoverContent>
+        <p className="text-sm">This is a popover with some helpful content.</p>
+        <Button onClick={() => setOpen(false)} size="sm" variant="ghost">
+          Close
+        </Button>
+      </PopoverContent>
+    </Popover>
+  );
+}`;
+
+const DROPDOWN_MENU_CODE = `import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+
+export function Example() {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <DropdownMenu onOpenChange={setOpen} open={open}>
+      <DropdownMenuTrigger asChild>
+        <Button variant="outline">Options</Button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent>
+        <DropdownMenuLabel>My Account</DropdownMenuLabel>
+        <DropdownMenuSeparator />
+        <DropdownMenuItem>Profile</DropdownMenuItem>
+        <DropdownMenuItem>Settings</DropdownMenuItem>
+        <DropdownMenuItem>Sign out</DropdownMenuItem>
+      </DropdownMenuContent>
+    </DropdownMenu>
+  );
+}`;
+
+const SHEET_CODE = `import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import {
+  Sheet,
+  SheetClose,
+  SheetContent,
+  SheetDescription,
+  SheetFooter,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
+
+export function Example() {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <Sheet onOpenChange={setOpen} open={open}>
+      <SheetTrigger asChild>
+        <Button variant="outline">Open Sheet</Button>
+      </SheetTrigger>
+      <SheetContent side="right">
+        <SheetHeader>
+          <SheetTitle>Edit Profile</SheetTitle>
+          <SheetDescription>
+            Make changes to your profile here. Click close when you are done.
+          </SheetDescription>
+        </SheetHeader>
+        <SheetFooter>
+          <SheetClose asChild>
+            <Button variant="outline">Close</Button>
+          </SheetClose>
+        </SheetFooter>
+      </SheetContent>
+    </Sheet>
+  );
+}`;
+
+export default function OverlayPage() {
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [popoverOpen, setPopoverOpen] = useState(false);
+  const [sheetOpen, setSheetOpen] = useState(false);
+
+  return (
+    <div className="flex flex-col gap-16">
+      <div>
+        <h1 className="text-3xl font-bold tracking-tight text-foreground">
+          Overlay
+        </h1>
+        <p className="mt-2 text-muted-foreground">
+          Floating panels, dropdown menus, and slide-over sheets for contextual
+          interactions.
+        </p>
+      </div>
+
+      <section className="flex flex-col gap-4" id="popover">
+        <div className="border-l-2 border-primary/40 pl-3">
+          <h2 className="text-xl font-semibold text-foreground">Popover</h2>
+          <p className="mt-1 text-sm text-muted-foreground">
+            A floating panel anchored to a trigger element for contextual
+            information or inline actions.
+          </p>
+        </div>
+        <div className="rounded-lg border border-border bg-muted/50 p-8">
+          <Popover onOpenChange={setPopoverOpen} open={popoverOpen}>
+            <PopoverTrigger asChild>
+              <Button variant="outline">Open Popover</Button>
+            </PopoverTrigger>
+            <PopoverContent>
+              <p className="text-sm">
+                This is a popover with some helpful content.
+              </p>
+              <Button
+                onClick={() => setPopoverOpen(false)}
+                size="sm"
+                variant="ghost"
+              >
+                Close
+              </Button>
+            </PopoverContent>
+          </Popover>
+        </div>
+        <CodeBlock
+          code={POPOVER_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="Popover.tsx"
+          language="tsx"
+        />
+      </section>
+
+      <section className="flex flex-col gap-4" id="dropdown-menu">
+        <div className="border-l-2 border-primary/40 pl-3">
+          <h2 className="text-xl font-semibold text-foreground">
+            DropdownMenu
+          </h2>
+          <p className="mt-1 text-sm text-muted-foreground">
+            A menu of actions that appears below a trigger with full keyboard
+            and ARIA support.
+          </p>
+        </div>
+        <div className="rounded-lg border border-border bg-muted/50 p-8">
+          <DropdownMenu onOpenChange={setDropdownOpen} open={dropdownOpen}>
+            <DropdownMenuTrigger asChild>
+              <Button variant="outline">Options</Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent>
+              <DropdownMenuLabel>My Account</DropdownMenuLabel>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem>Profile</DropdownMenuItem>
+              <DropdownMenuItem>Settings</DropdownMenuItem>
+              <DropdownMenuItem>Sign out</DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        </div>
+        <CodeBlock
+          code={DROPDOWN_MENU_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="DropdownMenu.tsx"
+          language="tsx"
+        />
+      </section>
+
+      <section className="flex flex-col gap-4" id="sheet">
+        <div className="border-l-2 border-primary/40 pl-3">
+          <h2 className="text-xl font-semibold text-foreground">Sheet</h2>
+          <p className="mt-1 text-sm text-muted-foreground">
+            A slide-over panel that animates in from the edge of the screen for
+            secondary content.
+          </p>
+        </div>
+        <div className="rounded-lg border border-border bg-muted/50 p-8">
+          <Sheet onOpenChange={setSheetOpen} open={sheetOpen}>
+            <SheetTrigger asChild>
+              <Button variant="outline">Open Sheet</Button>
+            </SheetTrigger>
+            <SheetContent side="right">
+              <SheetHeader>
+                <SheetTitle>Edit Profile</SheetTitle>
+                <SheetDescription>
+                  Make changes to your profile here. Click close when you are
+                  done.
+                </SheetDescription>
+              </SheetHeader>
+              <SheetFooter>
+                <SheetClose asChild>
+                  <Button variant="outline">Close</Button>
+                </SheetClose>
+              </SheetFooter>
+            </SheetContent>
+          </Sheet>
+        </div>
+        <CodeBlock
+          code={SHEET_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="Sheet.tsx"
+          language="tsx"
+        />
+      </section>
+    </div>
+  );
+}

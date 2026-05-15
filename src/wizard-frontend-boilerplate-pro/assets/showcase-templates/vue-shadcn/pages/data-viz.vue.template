@@ -1,0 +1,251 @@
+<script setup lang="ts">
+import { ref } from "vue";
+import type { ColumnDef } from "@tanstack/vue-table";
+
+import { Calendar } from "@/components/ui/calendar";
+import {
+  ChartContainer,
+  ChartLegend,
+  ChartLegendContent,
+  ChartTooltip,
+  ChartTooltipContent,
+} from "@/components/ui/chart";
+import { CodeBlock } from "@/components/ui/code-block";
+import { DataTable } from "@/components/ui/data-table";
+
+const CHART_CODE = `<script setup lang="ts">
+import {
+  ChartContainer,
+  ChartLegend,
+  ChartLegendContent,
+  ChartTooltip,
+  ChartTooltipContent,
+} from "@/components/ui/chart";
+
+// ChartContainer wraps your chosen chart library (e.g. vue-chartjs).
+// Provide a config object to map data keys to labels and CSS color tokens.
+const chartConfig = {
+  desktop: { color: "hsl(var(--chart-1))", label: "Desktop" },
+  mobile: { color: "hsl(var(--chart-2))", label: "Mobile" },
+};
+
+const chartData = [
+  { desktop: 186, mobile: 80, month: "January" },
+  { desktop: 305, mobile: 200, month: "February" },
+  { desktop: 237, mobile: 120, month: "March" },
+  { desktop: 73, mobile: 190, month: "April" },
+  { desktop: 209, mobile: 130, month: "May" },
+  { desktop: 214, mobile: 140, month: "June" },
+];
+<\/script>
+
+<template>
+  <!-- Replace the slot content with your chart library's component (e.g. BarChart from vue-chartjs) -->
+  <ChartContainer :config="chartConfig" class="h-64 w-full">
+    <ChartTooltip>
+      <ChartTooltipContent />
+    </ChartTooltip>
+    <ChartLegend>
+      <ChartLegendContent />
+    </ChartLegend>
+    <!-- <BarChart :data="chartData" ... /> -->
+  </ChartContainer>
+</template>`;
+
+const DATA_TABLE_CODE = `<script setup lang="ts">
+import type { ColumnDef } from "@tanstack/vue-table";
+import { DataTable } from "@/components/ui/data-table";
+
+interface User {
+  email: string;
+  id: number;
+  name: string;
+  role: string;
+}
+
+const columns: ColumnDef<User>[] = [
+  { accessorKey: "name", header: "Name" },
+  { accessorKey: "email", header: "Email" },
+  { accessorKey: "role", header: "Role" },
+];
+
+const data: User[] = [
+  { email: "alice@example.com", id: 1, name: "Alice Martin", role: "Admin" },
+  { email: "bob@example.com", id: 2, name: "Bob Chen", role: "Developer" },
+  { email: "carol@example.com", id: 3, name: "Carol White", role: "Designer" },
+  { email: "dave@example.com", id: 4, name: "Dave Kim", role: "Developer" },
+  { email: "eve@example.com", id: 5, name: "Eve Lopez", role: "Manager" },
+];
+<\/script>
+
+<template>
+  <DataTable :columns="columns" :data="data" filter-column="name" filter-placeholder="Filter by name…" />
+</template>`;
+
+const CALENDAR_CODE = `<script setup lang="ts">
+import { ref } from "vue";
+import { Calendar } from "@/components/ui/calendar";
+
+const selectedDate = ref<Date | undefined>(undefined);
+<\/script>
+
+<template>
+  <Calendar
+    :selected="selectedDate"
+    :show-outside-days="true"
+    mode="single"
+    @select="date => (selectedDate = date)"
+  />
+</template>`;
+
+interface User {
+  email: string;
+  id: number;
+  name: string;
+  role: string;
+}
+
+const chartConfig = {
+  desktop: { color: "hsl(var(--chart-1))", label: "Desktop" },
+  mobile: { color: "hsl(var(--chart-2))", label: "Mobile" },
+};
+
+const chartData = [
+  { desktop: 186, mobile: 80, month: "January" },
+  { desktop: 305, mobile: 200, month: "February" },
+  { desktop: 237, mobile: 120, month: "March" },
+  { desktop: 73, mobile: 190, month: "April" },
+  { desktop: 209, mobile: 130, month: "May" },
+  { desktop: 214, mobile: 140, month: "June" },
+];
+
+const columns: ColumnDef<User>[] = [
+  { accessorKey: "name", header: "Name" },
+  { accessorKey: "email", header: "Email" },
+  { accessorKey: "role", header: "Role" },
+];
+
+const tableData: User[] = [
+  { email: "alice@example.com", id: 1, name: "Alice Martin", role: "Admin" },
+  { email: "bob@example.com", id: 2, name: "Bob Chen", role: "Developer" },
+  { email: "carol@example.com", id: 3, name: "Carol White", role: "Designer" },
+  { email: "dave@example.com", id: 4, name: "Dave Kim", role: "Developer" },
+  { email: "eve@example.com", id: 5, name: "Eve Lopez", role: "Manager" },
+];
+
+const selectedDate = ref<Date | undefined>(undefined);
+</script>
+
+<template>
+  <div class="flex flex-col gap-16">
+    <div>
+      <h1 class="text-3xl font-bold tracking-tight text-foreground">Data Visualization</h1>
+      <p class="mt-2 text-muted-foreground">
+        Components for presenting structured and visual data — charts, data tables, and calendars.
+      </p>
+    </div>
+
+    <section class="flex flex-col gap-4" id="chart">
+      <div class="border-l-2 border-primary/40 pl-3">
+        <h2 class="text-xl font-semibold text-foreground">Chart</h2>
+        <p class="mt-1 text-sm text-muted-foreground">
+          A theming wrapper around your chart library (e.g.
+          <code class="font-mono text-xs">vue-chartjs</code>) that applies CSS color tokens and
+          provides consistent tooltip and legend sub-components.
+        </p>
+      </div>
+      <div class="rounded-lg border border-border bg-muted/50 p-8">
+        <!-- ChartContainer wraps the chart library component in a slot. -->
+        <!-- Replace the placeholder below with e.g. <BarChart :data="chartData" ... /> -->
+        <ChartContainer :config="chartConfig" class="h-64 w-full">
+          <ChartTooltip>
+            <ChartTooltipContent />
+          </ChartTooltip>
+          <ChartLegend>
+            <ChartLegendContent />
+          </ChartLegend>
+          <div
+            aria-label="Bar chart showing desktop and mobile traffic over six months"
+            class="flex h-full items-end gap-2"
+            role="img"
+          >
+            <div v-for="entry in chartData" :key="entry.month" class="flex flex-1 flex-col gap-1">
+              <div
+                :style="{ height: (entry.desktop / 310) * 100 + '%' }"
+                class="rounded-sm bg-[hsl(var(--chart-1))]"
+              />
+              <div
+                :style="{ height: (entry.mobile / 310) * 100 + '%' }"
+                class="rounded-sm bg-[hsl(var(--chart-2))]"
+              />
+            </div>
+          </div>
+        </ChartContainer>
+      </div>
+      <CodeBlock
+        :code="CHART_CODE"
+        :collapsible="true"
+        :default-open="false"
+        filename="Chart.vue"
+        language="vue"
+      />
+    </section>
+
+    <section class="flex flex-col gap-4" id="data-table">
+      <div class="border-l-2 border-primary/40 pl-3">
+        <h2 class="text-xl font-semibold text-foreground">DataTable</h2>
+        <p class="mt-1 text-sm text-muted-foreground">
+          A feature-rich table powered by
+          <code class="font-mono text-xs">@tanstack/vue-table</code> with sorting, filtering, column
+          visibility, and built-in pagination.
+        </p>
+      </div>
+      <div class="rounded-lg border border-border bg-muted/50 p-8">
+        <DataTable
+          :columns="columns"
+          :data="tableData"
+          filter-column="name"
+          filter-placeholder="Filter by name…"
+        />
+      </div>
+      <CodeBlock
+        :code="DATA_TABLE_CODE"
+        :collapsible="true"
+        :default-open="false"
+        filename="DataTable.vue"
+        language="vue"
+      />
+    </section>
+
+    <section class="flex flex-col gap-4" id="calendar">
+      <div class="border-l-2 border-primary/40 pl-3">
+        <h2 class="text-xl font-semibold text-foreground">Calendar</h2>
+        <p class="mt-1 text-sm text-muted-foreground">
+          A date picker grid with keyboard navigation, single/range/multiple selection, and
+          <code class="font-mono text-xs">date-fns</code> locale support.
+        </p>
+      </div>
+      <div class="rounded-lg border border-border bg-muted/50 p-8">
+        <div class="flex flex-col items-start gap-4">
+          <Calendar
+            :selected="selectedDate"
+            :show-outside-days="true"
+            mode="single"
+            @select="date => (selectedDate = date)"
+          />
+          <p v-if="selectedDate" class="text-sm text-muted-foreground">
+            Selected: {{ selectedDate.toLocaleDateString() }}
+          </p>
+          <p v-else class="text-sm text-muted-foreground">No date selected.</p>
+        </div>
+      </div>
+      <CodeBlock
+        :code="CALENDAR_CODE"
+        :collapsible="true"
+        :default-open="false"
+        filename="Calendar.vue"
+        language="vue"
+      />
+    </section>
+  </div>
+</template>

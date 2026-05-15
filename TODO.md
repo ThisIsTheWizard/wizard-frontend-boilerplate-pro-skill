@@ -95,16 +95,16 @@
 - [x] Add library component mapping table to `references/component-catalog.md`
 
 ## 14. shadcn/ui — reference file
-- [ ] Write `references/ui-library/shadcn.md`
+- [x] Write `references/ui-library/shadcn.md`
   - CLI init (`npx shadcn@latest init`), component add commands
   - Theming: CSS var 1:1 mapping to existing token system
   - Per-framework notes: React (native), Vue (shadcn-vue), Svelte (shadcn-svelte)
   - Peer deps per component
 
 ## 15. shadcn/ui — showcase templates
-- [ ] `assets/showcase-templates/react-shadcn/` — layout + sidebar + 6 category pages (8 files)
-- [ ] `assets/showcase-templates/vue-shadcn/` — 8 files
-- [ ] `assets/showcase-templates/svelte-shadcn/` — 8 files
+- [x] `assets/showcase-templates/react-shadcn/` — layout + sidebar + 6 category pages (8 files)
+- [x] `assets/showcase-templates/vue-shadcn/` — 8 files
+- [x] `assets/showcase-templates/svelte-shadcn/` — 8 files
 
 ## 16. Material UI — reference file
 - [ ] Write `references/ui-library/mui.md`

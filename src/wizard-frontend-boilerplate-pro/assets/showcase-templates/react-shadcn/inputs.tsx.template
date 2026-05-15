@@ -1,0 +1,447 @@
+"use client";
+
+import { useState } from "react";
+
+import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
+import { CodeBlock } from "@/components/ui/code-block";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Switch } from "@/components/ui/switch";
+import { Textarea } from "@/components/ui/textarea";
+
+const BUTTON_CODE = `import { Button } from "@/components/ui/button";
+
+export function Example() {
+  return (
+    <div className="flex flex-wrap gap-2">
+      <Button>Default</Button>
+      <Button variant="secondary">Secondary</Button>
+      <Button variant="outline">Outline</Button>
+      <Button variant="ghost">Ghost</Button>
+      <Button variant="destructive">Destructive</Button>
+      <Button variant="link">Link</Button>
+    </div>
+  );
+}`;
+
+const INPUT_CODE = `import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+
+export function Example() {
+  return (
+    <div className="flex flex-col gap-1.5">
+      <Label htmlFor="email">Email address</Label>
+      <Input id="email" placeholder="you@example.com" type="email" />
+      <p className="text-sm text-muted-foreground">
+        We'll never share your email.
+      </p>
+    </div>
+  );
+}`;
+
+const TEXTAREA_CODE = `import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
+
+export function Example() {
+  return (
+    <div className="flex flex-col gap-1.5">
+      <Label htmlFor="bio">Bio</Label>
+      <Textarea id="bio" placeholder="Tell us about yourself…" rows={4} />
+      <p className="text-sm text-muted-foreground">
+        Describe your project in a few sentences.
+      </p>
+    </div>
+  );
+}`;
+
+const SELECT_CODE = `import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Label } from "@/components/ui/label";
+
+export function Example() {
+  return (
+    <div className="flex flex-col gap-1.5">
+      <Label htmlFor="framework">Framework</Label>
+      <Select>
+        <SelectTrigger id="framework">
+          <SelectValue placeholder="Select a framework…" />
+        </SelectTrigger>
+        <SelectContent>
+          <SelectItem value="nextjs">Next.js</SelectItem>
+          <SelectItem value="remix">Remix</SelectItem>
+          <SelectItem value="astro">Astro</SelectItem>
+          <SelectItem value="sveltekit">SvelteKit</SelectItem>
+        </SelectContent>
+      </Select>
+    </div>
+  );
+}`;
+
+const CHECKBOX_CODE = `import { Checkbox } from "@/components/ui/checkbox";
+import { Label } from "@/components/ui/label";
+
+export function Example() {
+  return (
+    <div className="flex items-center gap-2">
+      <Checkbox id="terms" />
+      <Label htmlFor="terms">Accept terms and conditions</Label>
+    </div>
+  );
+}`;
+
+const RADIO_GROUP_CODE = `import { Label } from "@/components/ui/label";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+
+export function Example() {
+  return (
+    <RadioGroup defaultValue="free">
+      <div className="flex items-center gap-2">
+        <RadioGroupItem id="free" value="free" />
+        <Label htmlFor="free">Free</Label>
+      </div>
+      <div className="flex items-center gap-2">
+        <RadioGroupItem id="pro" value="pro" />
+        <Label htmlFor="pro">Pro</Label>
+      </div>
+      <div className="flex items-center gap-2">
+        <RadioGroupItem id="enterprise" value="enterprise" />
+        <Label htmlFor="enterprise">Enterprise</Label>
+      </div>
+    </RadioGroup>
+  );
+}`;
+
+const SWITCH_CODE = `import { Label } from "@/components/ui/label";
+import { Switch } from "@/components/ui/switch";
+
+export function Example() {
+  return (
+    <div className="flex items-center gap-2">
+      <Switch id="notifications" />
+      <Label htmlFor="notifications">Email notifications</Label>
+    </div>
+  );
+}`;
+
+export default function InputsPage() {
+  const [plan, setPlan] = useState("free");
+
+  return (
+    <div className="flex flex-col gap-16">
+      <div>
+        <h1 className="text-3xl font-bold tracking-tight text-foreground">
+          Inputs
+        </h1>
+        <p className="mt-2 text-muted-foreground">
+          Form controls for collecting user input — buttons, text fields,
+          selections, and toggles.
+        </p>
+      </div>
+
+      <section className="flex flex-col gap-4" id="button">
+        <div className="border-l-2 border-primary/40 pl-3">
+          <h2 className="text-xl font-semibold text-foreground">Button</h2>
+          <p className="mt-1 text-sm text-muted-foreground">
+            Triggers an action or event with support for multiple visual variants
+            and sizes.
+          </p>
+        </div>
+        <div className="rounded-lg border border-border bg-muted/50 p-8">
+          <div className="flex flex-col gap-4">
+            <div className="flex flex-wrap gap-2">
+              <Button>Default</Button>
+              <Button variant="secondary">Secondary</Button>
+              <Button variant="outline">Outline</Button>
+              <Button variant="ghost">Ghost</Button>
+              <Button variant="destructive">Destructive</Button>
+              <Button variant="link">Link</Button>
+            </div>
+            <div className="flex flex-wrap items-center gap-2">
+              <Button size="sm">Small</Button>
+              <Button size="default">Default</Button>
+              <Button size="lg">Large</Button>
+              <Button disabled>Disabled</Button>
+            </div>
+          </div>
+        </div>
+        <CodeBlock
+          code={BUTTON_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="Button.tsx"
+          language="tsx"
+        />
+      </section>
+
+      <section className="flex flex-col gap-4" id="input">
+        <div className="border-l-2 border-primary/40 pl-3">
+          <h2 className="text-xl font-semibold text-foreground">Input</h2>
+          <p className="mt-1 text-sm text-muted-foreground">
+            A single-line text field. Compose with{" "}
+            <code className="rounded bg-muted px-1 py-0.5 text-xs">Label</code>{" "}
+            and a helper paragraph for accessible labelling.
+          </p>
+        </div>
+        <div className="rounded-lg border border-border bg-muted/50 p-8">
+          <div className="flex max-w-sm flex-col gap-4">
+            <div className="flex flex-col gap-1.5">
+              <Label htmlFor="email-demo">Email address</Label>
+              <Input
+                id="email-demo"
+                placeholder="you@example.com"
+                type="email"
+              />
+              <p className="text-sm text-muted-foreground">
+                We'll never share your email.
+              </p>
+            </div>
+            <div className="flex flex-col gap-1.5">
+              <Label htmlFor="username-demo">Username</Label>
+              <Input
+                aria-invalid
+                className="border-destructive focus-visible:ring-destructive"
+                defaultValue="invalid user!"
+                id="username-demo"
+              />
+              <p className="text-sm text-destructive">
+                Please enter a valid username.
+              </p>
+            </div>
+            <div className="flex flex-col gap-1.5">
+              <Label htmlFor="disabled-demo">Disabled</Label>
+              <Input
+                disabled
+                id="disabled-demo"
+                placeholder="Not editable"
+              />
+            </div>
+          </div>
+        </div>
+        <CodeBlock
+          code={INPUT_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="Input.tsx"
+          language="tsx"
+        />
+      </section>
+
+      <section className="flex flex-col gap-4" id="textarea">
+        <div className="border-l-2 border-primary/40 pl-3">
+          <h2 className="text-xl font-semibold text-foreground">Textarea</h2>
+          <p className="mt-1 text-sm text-muted-foreground">
+            A multi-line text input. Compose with{" "}
+            <code className="rounded bg-muted px-1 py-0.5 text-xs">Label</code>{" "}
+            for accessible labelling.
+          </p>
+        </div>
+        <div className="rounded-lg border border-border bg-muted/50 p-8">
+          <div className="flex max-w-sm flex-col gap-4">
+            <div className="flex flex-col gap-1.5">
+              <Label htmlFor="bio-demo">Bio</Label>
+              <Textarea
+                id="bio-demo"
+                placeholder="Tell us about yourself…"
+                rows={4}
+              />
+              <p className="text-sm text-muted-foreground">
+                Describe your project in a few sentences.
+              </p>
+            </div>
+            <div className="flex flex-col gap-1.5">
+              <Label htmlFor="message-demo">Message</Label>
+              <Textarea
+                aria-invalid
+                className="border-destructive focus-visible:ring-destructive"
+                id="message-demo"
+                placeholder="Enter your message…"
+              />
+              <p className="text-sm text-destructive">Message is required.</p>
+            </div>
+          </div>
+        </div>
+        <CodeBlock
+          code={TEXTAREA_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="Textarea.tsx"
+          language="tsx"
+        />
+      </section>
+
+      <section className="flex flex-col gap-4" id="select">
+        <div className="border-l-2 border-primary/40 pl-3">
+          <h2 className="text-xl font-semibold text-foreground">Select</h2>
+          <p className="mt-1 text-sm text-muted-foreground">
+            A dropdown for picking a single value, using Radix UI's accessible
+            listbox pattern with sub-components.
+          </p>
+        </div>
+        <div className="rounded-lg border border-border bg-muted/50 p-8">
+          <div className="flex max-w-sm flex-col gap-4">
+            <div className="flex flex-col gap-1.5">
+              <Label htmlFor="framework-demo">Framework</Label>
+              <Select>
+                <SelectTrigger id="framework-demo">
+                  <SelectValue placeholder="Select a framework…" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="nextjs">Next.js</SelectItem>
+                  <SelectItem value="remix">Remix</SelectItem>
+                  <SelectItem value="astro">Astro</SelectItem>
+                  <SelectItem value="sveltekit">SvelteKit</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+            <div className="flex flex-col gap-1.5">
+              <Label htmlFor="disabled-select">Disabled</Label>
+              <Select disabled>
+                <SelectTrigger id="disabled-select">
+                  <SelectValue placeholder="Not selectable" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="nextjs">Next.js</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+          </div>
+        </div>
+        <CodeBlock
+          code={SELECT_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="Select.tsx"
+          language="tsx"
+        />
+      </section>
+
+      <section className="flex flex-col gap-4" id="checkbox">
+        <div className="border-l-2 border-primary/40 pl-3">
+          <h2 className="text-xl font-semibold text-foreground">Checkbox</h2>
+          <p className="mt-1 text-sm text-muted-foreground">
+            A binary toggle supporting checked and unchecked states. Pair with{" "}
+            <code className="rounded bg-muted px-1 py-0.5 text-xs">Label</code>{" "}
+            using matching <code className="rounded bg-muted px-1 py-0.5 text-xs">id</code>/
+            <code className="rounded bg-muted px-1 py-0.5 text-xs">htmlFor</code>.
+          </p>
+        </div>
+        <div className="rounded-lg border border-border bg-muted/50 p-8">
+          <div className="flex flex-col gap-3">
+            <div className="flex items-center gap-2">
+              <Checkbox id="terms-demo" />
+              <Label htmlFor="terms-demo">Accept terms and conditions</Label>
+            </div>
+            <div className="flex items-center gap-2">
+              <Checkbox defaultChecked id="checked-demo" />
+              <Label htmlFor="checked-demo">Checked by default</Label>
+            </div>
+            <div className="flex items-center gap-2">
+              <Checkbox disabled id="disabled-cb" />
+              <Label className="opacity-50" htmlFor="disabled-cb">
+                Disabled
+              </Label>
+            </div>
+          </div>
+        </div>
+        <CodeBlock
+          code={CHECKBOX_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="Checkbox.tsx"
+          language="tsx"
+        />
+      </section>
+
+      <section className="flex flex-col gap-4" id="radio-group">
+        <div className="border-l-2 border-primary/40 pl-3">
+          <h2 className="text-xl font-semibold text-foreground">RadioGroup</h2>
+          <p className="mt-1 text-sm text-muted-foreground">
+            Mutually exclusive options using{" "}
+            <code className="rounded bg-muted px-1 py-0.5 text-xs">RadioGroup</code> +{" "}
+            <code className="rounded bg-muted px-1 py-0.5 text-xs">RadioGroupItem</code> with
+            arrow-key navigation.
+          </p>
+        </div>
+        <div className="rounded-lg border border-border bg-muted/50 p-8">
+          <div className="flex flex-col gap-6 sm:flex-row sm:gap-16">
+            <RadioGroup
+              onValueChange={setPlan}
+              value={plan}
+            >
+              <div className="flex items-center gap-2">
+                <RadioGroupItem id="plan-free" value="free" />
+                <Label htmlFor="plan-free">Free</Label>
+              </div>
+              <div className="flex items-center gap-2">
+                <RadioGroupItem id="plan-pro" value="pro" />
+                <Label htmlFor="plan-pro">Pro</Label>
+              </div>
+              <div className="flex items-center gap-2">
+                <RadioGroupItem id="plan-enterprise" value="enterprise" />
+                <Label htmlFor="plan-enterprise">Enterprise</Label>
+              </div>
+            </RadioGroup>
+          </div>
+        </div>
+        <CodeBlock
+          code={RADIO_GROUP_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="RadioGroup.tsx"
+          language="tsx"
+        />
+      </section>
+
+      <section className="flex flex-col gap-4" id="switch">
+        <div className="border-l-2 border-primary/40 pl-3">
+          <h2 className="text-xl font-semibold text-foreground">Switch</h2>
+          <p className="mt-1 text-sm text-muted-foreground">
+            An on/off toggle. Pair with{" "}
+            <code className="rounded bg-muted px-1 py-0.5 text-xs">Label</code>{" "}
+            using matching <code className="rounded bg-muted px-1 py-0.5 text-xs">id</code>/
+            <code className="rounded bg-muted px-1 py-0.5 text-xs">htmlFor</code>.
+          </p>
+        </div>
+        <div className="rounded-lg border border-border bg-muted/50 p-8">
+          <div className="flex flex-col gap-3">
+            <div className="flex items-center gap-2">
+              <Switch id="notifications-demo" />
+              <Label htmlFor="notifications-demo">Email notifications</Label>
+            </div>
+            <div className="flex items-center gap-2">
+              <Switch defaultChecked id="marketing-demo" />
+              <Label htmlFor="marketing-demo">Marketing emails</Label>
+            </div>
+            <div className="flex items-center gap-2">
+              <Switch disabled id="disabled-switch" />
+              <Label className="opacity-50" htmlFor="disabled-switch">
+                Disabled
+              </Label>
+            </div>
+          </div>
+        </div>
+        <CodeBlock
+          code={SWITCH_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="Switch.tsx"
+          language="tsx"
+        />
+      </section>
+    </div>
+  );
+}

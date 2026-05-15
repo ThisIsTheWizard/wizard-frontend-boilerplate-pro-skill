@@ -1,0 +1,387 @@
+"use client";
+
+import { useState } from "react";
+
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from "@/components/ui/breadcrumb";
+import { CodeBlock } from "@/components/ui/code-block";
+import {
+  NavigationMenu,
+  NavigationMenuContent,
+  NavigationMenuIndicator,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+  NavigationMenuTrigger,
+  NavigationMenuViewport,
+} from "@/components/ui/navigation-menu";
+import {
+  Pagination,
+  PaginationContent,
+  PaginationEllipsis,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
+} from "@/components/ui/pagination";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+
+const TABS_CODE = `import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+
+export function Example() {
+  return (
+    <Tabs defaultValue="account">
+      <TabsList>
+        <TabsTrigger value="account">Account</TabsTrigger>
+        <TabsTrigger value="password">Password</TabsTrigger>
+        <TabsTrigger value="notifications">Notifications</TabsTrigger>
+      </TabsList>
+      <TabsContent value="account">
+        <p>Manage your account settings and preferences.</p>
+      </TabsContent>
+      <TabsContent value="password">
+        <p>Change your password and security settings.</p>
+      </TabsContent>
+      <TabsContent value="notifications">
+        <p>Configure how you receive notifications.</p>
+      </TabsContent>
+    </Tabs>
+  );
+}`;
+
+const BREADCRUMB_CODE = `import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from "@/components/ui/breadcrumb";
+
+export function Example() {
+  return (
+    <Breadcrumb>
+      <BreadcrumbList>
+        <BreadcrumbItem>
+          <BreadcrumbLink href="#">Home</BreadcrumbLink>
+        </BreadcrumbItem>
+        <BreadcrumbSeparator />
+        <BreadcrumbItem>
+          <BreadcrumbLink href="#">Library</BreadcrumbLink>
+        </BreadcrumbItem>
+        <BreadcrumbSeparator />
+        <BreadcrumbItem>
+          <BreadcrumbPage>Components</BreadcrumbPage>
+        </BreadcrumbItem>
+      </BreadcrumbList>
+    </Breadcrumb>
+  );
+}`;
+
+const PAGINATION_CODE = `import { useState } from "react";
+import {
+  Pagination,
+  PaginationContent,
+  PaginationEllipsis,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
+} from "@/components/ui/pagination";
+
+export function Example() {
+  const [currentPage, setCurrentPage] = useState(1);
+
+  return (
+    <Pagination>
+      <PaginationContent>
+        <PaginationItem>
+          <PaginationPrevious
+            disabled={currentPage === 1}
+            onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
+          />
+        </PaginationItem>
+        <PaginationItem>
+          <PaginationLink
+            isActive={currentPage === 1}
+            onClick={() => setCurrentPage(1)}
+          >
+            1
+          </PaginationLink>
+        </PaginationItem>
+        <PaginationItem>
+          <PaginationEllipsis />
+        </PaginationItem>
+        <PaginationItem>
+          <PaginationLink
+            isActive={currentPage === 10}
+            onClick={() => setCurrentPage(10)}
+          >
+            10
+          </PaginationLink>
+        </PaginationItem>
+        <PaginationItem>
+          <PaginationNext
+            disabled={currentPage === 10}
+            onClick={() => setCurrentPage((p) => Math.min(10, p + 1))}
+          />
+        </PaginationItem>
+      </PaginationContent>
+    </Pagination>
+  );
+}`;
+
+const NAVIGATION_MENU_CODE = `import {
+  NavigationMenu,
+  NavigationMenuContent,
+  NavigationMenuIndicator,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+  NavigationMenuTrigger,
+  NavigationMenuViewport,
+} from "@/components/ui/navigation-menu";
+
+export function Example() {
+  return (
+    <NavigationMenu>
+      <NavigationMenuList>
+        <NavigationMenuItem>
+          <NavigationMenuTrigger>Products</NavigationMenuTrigger>
+          <NavigationMenuContent>
+            <NavigationMenuLink href="#">Analytics</NavigationMenuLink>
+            <NavigationMenuLink href="#">Automation</NavigationMenuLink>
+          </NavigationMenuContent>
+        </NavigationMenuItem>
+        <NavigationMenuItem>
+          <NavigationMenuTrigger>Docs</NavigationMenuTrigger>
+          <NavigationMenuContent>
+            <NavigationMenuLink href="#">Getting Started</NavigationMenuLink>
+            <NavigationMenuLink href="#">API Reference</NavigationMenuLink>
+          </NavigationMenuContent>
+        </NavigationMenuItem>
+        <NavigationMenuItem>
+          <NavigationMenuLink href="#">Blog</NavigationMenuLink>
+        </NavigationMenuItem>
+      </NavigationMenuList>
+      <NavigationMenuIndicator />
+      <NavigationMenuViewport />
+    </NavigationMenu>
+  );
+}`;
+
+export default function NavigationPage() {
+  const [currentPage, setCurrentPage] = useState(1);
+  const [tabValue, setTabValue] = useState("account");
+
+  return (
+    <div className="flex flex-col gap-16">
+      <div>
+        <h1 className="text-3xl font-bold tracking-tight text-foreground">
+          Navigation
+        </h1>
+        <p className="mt-2 text-muted-foreground">
+          Route navigation, tabbed interfaces, and paginated content — tabs,
+          breadcrumbs, and menus.
+        </p>
+      </div>
+
+      <section className="flex flex-col gap-4" id="tabs">
+        <div className="border-l-2 border-primary/40 pl-3">
+          <h2 className="text-xl font-semibold text-foreground">Tabs</h2>
+          <p className="mt-1 text-sm text-muted-foreground">
+            Organises related content into switchable panels with accessible
+            keyboard navigation.
+          </p>
+        </div>
+        <div className="rounded-lg border border-border bg-muted/50 p-8">
+          <Tabs onValueChange={setTabValue} value={tabValue}>
+            <TabsList>
+              <TabsTrigger value="account">Account</TabsTrigger>
+              <TabsTrigger value="password">Password</TabsTrigger>
+              <TabsTrigger value="notifications">Notifications</TabsTrigger>
+            </TabsList>
+            <TabsContent value="account">
+              <p className="text-sm text-muted-foreground">
+                Manage your account settings and preferences.
+              </p>
+            </TabsContent>
+            <TabsContent value="password">
+              <p className="text-sm text-muted-foreground">
+                Change your password and security settings.
+              </p>
+            </TabsContent>
+            <TabsContent value="notifications">
+              <p className="text-sm text-muted-foreground">
+                Configure how you receive notifications.
+              </p>
+            </TabsContent>
+          </Tabs>
+        </div>
+        <CodeBlock
+          code={TABS_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="Tabs.tsx"
+          language="tsx"
+        />
+      </section>
+
+      <section className="flex flex-col gap-4" id="breadcrumb">
+        <div className="border-l-2 border-primary/40 pl-3">
+          <h2 className="text-xl font-semibold text-foreground">Breadcrumb</h2>
+          <p className="mt-1 text-sm text-muted-foreground">
+            Shows the user's current location within a site hierarchy with
+            accessible landmark navigation.
+          </p>
+        </div>
+        <div className="rounded-lg border border-border bg-muted/50 p-8">
+          <Breadcrumb>
+            <BreadcrumbList>
+              <BreadcrumbItem>
+                <BreadcrumbLink href="#">Home</BreadcrumbLink>
+              </BreadcrumbItem>
+              <BreadcrumbSeparator />
+              <BreadcrumbItem>
+                <BreadcrumbLink href="#">Library</BreadcrumbLink>
+              </BreadcrumbItem>
+              <BreadcrumbSeparator />
+              <BreadcrumbItem>
+                <BreadcrumbPage>Components</BreadcrumbPage>
+              </BreadcrumbItem>
+            </BreadcrumbList>
+          </Breadcrumb>
+        </div>
+        <CodeBlock
+          code={BREADCRUMB_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="Breadcrumb.tsx"
+          language="tsx"
+        />
+      </section>
+
+      <section className="flex flex-col gap-4" id="pagination">
+        <div className="border-l-2 border-primary/40 pl-3">
+          <h2 className="text-xl font-semibold text-foreground">Pagination</h2>
+          <p className="mt-1 text-sm text-muted-foreground">
+            Splits large datasets across multiple pages with Previous, Next, and
+            numbered page links.
+          </p>
+        </div>
+        <div className="rounded-lg border border-border bg-muted/50 p-8">
+          <Pagination>
+            <PaginationContent>
+              <PaginationItem>
+                <PaginationPrevious
+                  disabled={currentPage === 1}
+                  onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
+                />
+              </PaginationItem>
+              <PaginationItem>
+                <PaginationLink
+                  isActive={currentPage === 1}
+                  onClick={() => setCurrentPage(1)}
+                >
+                  1
+                </PaginationLink>
+              </PaginationItem>
+              <PaginationItem>
+                <PaginationLink
+                  isActive={currentPage === 2}
+                  onClick={() => setCurrentPage(2)}
+                >
+                  2
+                </PaginationLink>
+              </PaginationItem>
+              <PaginationItem>
+                <PaginationEllipsis />
+              </PaginationItem>
+              <PaginationItem>
+                <PaginationLink
+                  isActive={currentPage === 9}
+                  onClick={() => setCurrentPage(9)}
+                >
+                  9
+                </PaginationLink>
+              </PaginationItem>
+              <PaginationItem>
+                <PaginationLink
+                  isActive={currentPage === 10}
+                  onClick={() => setCurrentPage(10)}
+                >
+                  10
+                </PaginationLink>
+              </PaginationItem>
+              <PaginationItem>
+                <PaginationNext
+                  disabled={currentPage === 10}
+                  onClick={() => setCurrentPage((p) => Math.min(10, p + 1))}
+                />
+              </PaginationItem>
+            </PaginationContent>
+          </Pagination>
+        </div>
+        <CodeBlock
+          code={PAGINATION_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="Pagination.tsx"
+          language="tsx"
+        />
+      </section>
+
+      <section className="flex flex-col gap-4" id="navigation-menu">
+        <div className="border-l-2 border-primary/40 pl-3">
+          <h2 className="text-xl font-semibold text-foreground">
+            NavigationMenu
+          </h2>
+          <p className="mt-1 text-sm text-muted-foreground">
+            A top-level navigation bar with accessible flyout submenus and
+            keyboard navigation.
+          </p>
+        </div>
+        <div className="rounded-lg border border-border bg-muted/50 p-8">
+          <NavigationMenu>
+            <NavigationMenuList>
+              <NavigationMenuItem>
+                <NavigationMenuTrigger>Products</NavigationMenuTrigger>
+                <NavigationMenuContent>
+                  <NavigationMenuLink href="#">Analytics</NavigationMenuLink>
+                  <NavigationMenuLink href="#">Automation</NavigationMenuLink>
+                </NavigationMenuContent>
+              </NavigationMenuItem>
+              <NavigationMenuItem>
+                <NavigationMenuTrigger>Docs</NavigationMenuTrigger>
+                <NavigationMenuContent>
+                  <NavigationMenuLink href="#">
+                    Getting Started
+                  </NavigationMenuLink>
+                  <NavigationMenuLink href="#">API Reference</NavigationMenuLink>
+                </NavigationMenuContent>
+              </NavigationMenuItem>
+              <NavigationMenuItem>
+                <NavigationMenuLink href="#">Blog</NavigationMenuLink>
+              </NavigationMenuItem>
+            </NavigationMenuList>
+            <NavigationMenuIndicator />
+            <NavigationMenuViewport />
+          </NavigationMenu>
+        </div>
+        <CodeBlock
+          code={NAVIGATION_MENU_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="NavigationMenu.tsx"
+          language="tsx"
+        />
+      </section>
+    </div>
+  );
+}

@@ -1,0 +1,383 @@
+<script lang="ts">
+  import { Button } from "$lib/components/ui/button";
+  import { Checkbox } from "$lib/components/ui/checkbox";
+  import { CodeBlock } from "$lib/components/ui/code-block";
+  import { Input } from "$lib/components/ui/input";
+  import { Label } from "$lib/components/ui/label";
+  import { RadioGroup, RadioGroupItem } from "$lib/components/ui/radio-group";
+  import {
+    Select,
+    SelectContent,
+    SelectItem,
+    SelectTrigger,
+    SelectValue,
+  } from "$lib/components/ui/select";
+  import { Switch } from "$lib/components/ui/switch";
+  import { Textarea } from "$lib/components/ui/textarea";
+
+  let plan = $state("free");
+
+  const BUTTON_CODE = `<script lang="ts">
+  import { Button } from "$lib/components/ui/button";
+<\/script>
+
+<div class="flex flex-wrap gap-2">
+  <Button>Default</Button>
+  <Button variant="secondary">Secondary</Button>
+  <Button variant="outline">Outline</Button>
+  <Button variant="ghost">Ghost</Button>
+  <Button variant="destructive">Destructive</Button>
+  <Button variant="link">Link</Button>
+</div>`;
+
+  const INPUT_CODE = `<script lang="ts">
+  import { Input } from "$lib/components/ui/input";
+  import { Label } from "$lib/components/ui/label";
+<\/script>
+
+<div class="flex flex-col gap-1.5">
+  <Label for="email">Email address</Label>
+  <Input id="email" placeholder="you@example.com" type="email" />
+  <p class="text-sm text-muted-foreground">We'll never share your email.</p>
+</div>`;
+
+  const TEXTAREA_CODE = `<script lang="ts">
+  import { Label } from "$lib/components/ui/label";
+  import { Textarea } from "$lib/components/ui/textarea";
+<\/script>
+
+<div class="flex flex-col gap-1.5">
+  <Label for="bio">Bio</Label>
+  <Textarea id="bio" placeholder="Tell us about yourself…" rows={4} />
+  <p class="text-sm text-muted-foreground">
+    Describe your project in a few sentences.
+  </p>
+</div>`;
+
+  const SELECT_CODE = `<script lang="ts">
+  import {
+    Select, SelectContent, SelectItem,
+    SelectTrigger, SelectValue,
+  } from "$lib/components/ui/select";
+  import { Label } from "$lib/components/ui/label";
+<\/script>
+
+<div class="flex flex-col gap-1.5">
+  <Label for="framework">Framework</Label>
+  <Select>
+    <SelectTrigger id="framework">
+      <SelectValue placeholder="Select a framework…" />
+    </SelectTrigger>
+    <SelectContent>
+      <SelectItem value="nextjs">Next.js</SelectItem>
+      <SelectItem value="remix">Remix</SelectItem>
+      <SelectItem value="astro">Astro</SelectItem>
+      <SelectItem value="sveltekit">SvelteKit</SelectItem>
+    </SelectContent>
+  </Select>
+</div>`;
+
+  const CHECKBOX_CODE = `<script lang="ts">
+  import { Checkbox } from "$lib/components/ui/checkbox";
+  import { Label } from "$lib/components/ui/label";
+<\/script>
+
+<div class="flex items-center gap-2">
+  <Checkbox id="terms" />
+  <Label for="terms">Accept terms and conditions</Label>
+</div>`;
+
+  const RADIO_GROUP_CODE = `<script lang="ts">
+  import { RadioGroup, RadioGroupItem } from "$lib/components/ui/radio-group";
+  import { Label } from "$lib/components/ui/label";
+
+  let plan = $state("free");
+<\/script>
+
+<RadioGroup bind:value={plan}>
+  <div class="flex items-center gap-2">
+    <RadioGroupItem id="free" value="free" />
+    <Label for="free">Free</Label>
+  </div>
+  <div class="flex items-center gap-2">
+    <RadioGroupItem id="pro" value="pro" />
+    <Label for="pro">Pro</Label>
+  </div>
+  <div class="flex items-center gap-2">
+    <RadioGroupItem id="enterprise" value="enterprise" />
+    <Label for="enterprise">Enterprise</Label>
+  </div>
+</RadioGroup>`;
+
+  const SWITCH_CODE = `<script lang="ts">
+  import { Label } from "$lib/components/ui/label";
+  import { Switch } from "$lib/components/ui/switch";
+<\/script>
+
+<div class="flex items-center gap-2">
+  <Switch id="notifications" />
+  <Label for="notifications">Email notifications</Label>
+</div>`;
+</script>
+
+<div class="flex flex-col gap-16">
+  <div>
+    <h1 class="text-3xl font-bold tracking-tight text-foreground">Inputs</h1>
+    <p class="mt-2 text-muted-foreground">
+      Form controls for collecting user input — buttons, text fields,
+      selections, and toggles.
+    </p>
+  </div>
+
+  <section class="flex flex-col gap-4" id="button">
+    <div class="border-l-2 border-primary/40 pl-3">
+      <h2 class="text-xl font-semibold text-foreground">Button</h2>
+      <p class="mt-1 text-sm text-muted-foreground">
+        Triggers an action or event with support for multiple visual variants
+        and sizes.
+      </p>
+    </div>
+    <div class="rounded-lg border border-border bg-muted/50 p-8">
+      <div class="flex flex-col gap-4">
+        <div class="flex flex-wrap gap-2">
+          <Button>Default</Button>
+          <Button variant="secondary">Secondary</Button>
+          <Button variant="outline">Outline</Button>
+          <Button variant="ghost">Ghost</Button>
+          <Button variant="destructive">Destructive</Button>
+          <Button variant="link">Link</Button>
+        </div>
+        <div class="flex flex-wrap items-center gap-2">
+          <Button size="sm">Small</Button>
+          <Button size="default">Default</Button>
+          <Button size="lg">Large</Button>
+          <Button disabled>Disabled</Button>
+        </div>
+      </div>
+    </div>
+    <CodeBlock
+      code={BUTTON_CODE}
+      collapsible
+      defaultOpen={false}
+      filename="Button.svelte"
+      language="svelte"
+    />
+  </section>
+
+  <section class="flex flex-col gap-4" id="input">
+    <div class="border-l-2 border-primary/40 pl-3">
+      <h2 class="text-xl font-semibold text-foreground">Input</h2>
+      <p class="mt-1 text-sm text-muted-foreground">
+        A single-line text field. Compose with
+        <code class="rounded bg-muted px-1 py-0.5 text-xs">Label</code>
+        and a helper paragraph for accessible labelling.
+      </p>
+    </div>
+    <div class="rounded-lg border border-border bg-muted/50 p-8">
+      <div class="flex max-w-sm flex-col gap-4">
+        <div class="flex flex-col gap-1.5">
+          <Label for="email-demo">Email address</Label>
+          <Input id="email-demo" placeholder="you@example.com" type="email" />
+          <p class="text-sm text-muted-foreground">
+            We'll never share your email.
+          </p>
+        </div>
+        <div class="flex flex-col gap-1.5">
+          <Label for="disabled-demo">Disabled</Label>
+          <Input disabled id="disabled-demo" placeholder="Not editable" />
+        </div>
+      </div>
+    </div>
+    <CodeBlock
+      code={INPUT_CODE}
+      collapsible
+      defaultOpen={false}
+      filename="Input.svelte"
+      language="svelte"
+    />
+  </section>
+
+  <section class="flex flex-col gap-4" id="textarea">
+    <div class="border-l-2 border-primary/40 pl-3">
+      <h2 class="text-xl font-semibold text-foreground">Textarea</h2>
+      <p class="mt-1 text-sm text-muted-foreground">
+        A multi-line text input. Compose with
+        <code class="rounded bg-muted px-1 py-0.5 text-xs">Label</code>
+        for accessible labelling.
+      </p>
+    </div>
+    <div class="rounded-lg border border-border bg-muted/50 p-8">
+      <div class="flex max-w-sm flex-col gap-4">
+        <div class="flex flex-col gap-1.5">
+          <Label for="bio-demo">Bio</Label>
+          <Textarea id="bio-demo" placeholder="Tell us about yourself…" rows={4} />
+          <p class="text-sm text-muted-foreground">
+            Describe your project in a few sentences.
+          </p>
+        </div>
+      </div>
+    </div>
+    <CodeBlock
+      code={TEXTAREA_CODE}
+      collapsible
+      defaultOpen={false}
+      filename="Textarea.svelte"
+      language="svelte"
+    />
+  </section>
+
+  <section class="flex flex-col gap-4" id="select">
+    <div class="border-l-2 border-primary/40 pl-3">
+      <h2 class="text-xl font-semibold text-foreground">Select</h2>
+      <p class="mt-1 text-sm text-muted-foreground">
+        A dropdown using Radix sub-components:
+        <code class="rounded bg-muted px-1 py-0.5 text-xs">SelectTrigger</code>,
+        <code class="rounded bg-muted px-1 py-0.5 text-xs">SelectValue</code>,
+        <code class="rounded bg-muted px-1 py-0.5 text-xs">SelectContent</code>,
+        <code class="rounded bg-muted px-1 py-0.5 text-xs">SelectItem</code>.
+      </p>
+    </div>
+    <div class="rounded-lg border border-border bg-muted/50 p-8">
+      <div class="flex max-w-sm flex-col gap-4">
+        <div class="flex flex-col gap-1.5">
+          <Label for="framework-demo">Framework</Label>
+          <Select>
+            <SelectTrigger id="framework-demo">
+              <SelectValue placeholder="Select a framework…" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="nextjs">Next.js</SelectItem>
+              <SelectItem value="remix">Remix</SelectItem>
+              <SelectItem value="astro">Astro</SelectItem>
+              <SelectItem value="sveltekit">SvelteKit</SelectItem>
+            </SelectContent>
+          </Select>
+        </div>
+        <div class="flex flex-col gap-1.5">
+          <Label for="disabled-select">Disabled</Label>
+          <Select disabled>
+            <SelectTrigger id="disabled-select">
+              <SelectValue placeholder="Not selectable" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="nextjs">Next.js</SelectItem>
+            </SelectContent>
+          </Select>
+        </div>
+      </div>
+    </div>
+    <CodeBlock
+      code={SELECT_CODE}
+      collapsible
+      defaultOpen={false}
+      filename="Select.svelte"
+      language="svelte"
+    />
+  </section>
+
+  <section class="flex flex-col gap-4" id="checkbox">
+    <div class="border-l-2 border-primary/40 pl-3">
+      <h2 class="text-xl font-semibold text-foreground">Checkbox</h2>
+      <p class="mt-1 text-sm text-muted-foreground">
+        A binary toggle. Pair
+        <code class="rounded bg-muted px-1 py-0.5 text-xs">Checkbox</code>
+        with <code class="rounded bg-muted px-1 py-0.5 text-xs">Label</code>
+        using matching <code class="rounded bg-muted px-1 py-0.5 text-xs">id</code>/
+        <code class="rounded bg-muted px-1 py-0.5 text-xs">for</code>.
+      </p>
+    </div>
+    <div class="rounded-lg border border-border bg-muted/50 p-8">
+      <div class="flex flex-col gap-3">
+        <div class="flex items-center gap-2">
+          <Checkbox id="terms-demo" />
+          <Label for="terms-demo">Accept terms and conditions</Label>
+        </div>
+        <div class="flex items-center gap-2">
+          <Checkbox defaultChecked id="checked-demo" />
+          <Label for="checked-demo">Checked by default</Label>
+        </div>
+        <div class="flex items-center gap-2">
+          <Checkbox disabled id="disabled-cb" />
+          <Label class="opacity-50" for="disabled-cb">Disabled</Label>
+        </div>
+      </div>
+    </div>
+    <CodeBlock
+      code={CHECKBOX_CODE}
+      collapsible
+      defaultOpen={false}
+      filename="Checkbox.svelte"
+      language="svelte"
+    />
+  </section>
+
+  <section class="flex flex-col gap-4" id="radio-group">
+    <div class="border-l-2 border-primary/40 pl-3">
+      <h2 class="text-xl font-semibold text-foreground">RadioGroup</h2>
+      <p class="mt-1 text-sm text-muted-foreground">
+        Mutually exclusive options using
+        <code class="rounded bg-muted px-1 py-0.5 text-xs">RadioGroup</code> +
+        <code class="rounded bg-muted px-1 py-0.5 text-xs">RadioGroupItem</code>
+        with arrow-key navigation.
+      </p>
+    </div>
+    <div class="rounded-lg border border-border bg-muted/50 p-8">
+      <RadioGroup bind:value={plan}>
+        <div class="flex items-center gap-2">
+          <RadioGroupItem id="plan-free" value="free" />
+          <Label for="plan-free">Free</Label>
+        </div>
+        <div class="flex items-center gap-2">
+          <RadioGroupItem id="plan-pro" value="pro" />
+          <Label for="plan-pro">Pro</Label>
+        </div>
+        <div class="flex items-center gap-2">
+          <RadioGroupItem id="plan-enterprise" value="enterprise" />
+          <Label for="plan-enterprise">Enterprise</Label>
+        </div>
+      </RadioGroup>
+    </div>
+    <CodeBlock
+      code={RADIO_GROUP_CODE}
+      collapsible
+      defaultOpen={false}
+      filename="RadioGroup.svelte"
+      language="svelte"
+    />
+  </section>
+
+  <section class="flex flex-col gap-4" id="switch">
+    <div class="border-l-2 border-primary/40 pl-3">
+      <h2 class="text-xl font-semibold text-foreground">Switch</h2>
+      <p class="mt-1 text-sm text-muted-foreground">
+        An on/off toggle. Pair with
+        <code class="rounded bg-muted px-1 py-0.5 text-xs">Label</code>
+        using matching <code class="rounded bg-muted px-1 py-0.5 text-xs">id</code>/
+        <code class="rounded bg-muted px-1 py-0.5 text-xs">for</code>.
+      </p>
+    </div>
+    <div class="rounded-lg border border-border bg-muted/50 p-8">
+      <div class="flex flex-col gap-3">
+        <div class="flex items-center gap-2">
+          <Switch id="notifications-demo" />
+          <Label for="notifications-demo">Email notifications</Label>
+        </div>
+        <div class="flex items-center gap-2">
+          <Switch defaultChecked id="marketing-demo" />
+          <Label for="marketing-demo">Marketing emails</Label>
+        </div>
+        <div class="flex items-center gap-2">
+          <Switch disabled id="disabled-switch" />
+          <Label class="opacity-50" for="disabled-switch">Disabled</Label>
+        </div>
+      </div>
+    </div>
+    <CodeBlock
+      code={SWITCH_CODE}
+      collapsible
+      defaultOpen={false}
+      filename="Switch.svelte"
+      language="svelte"
+    />
+  </section>
+</div>
