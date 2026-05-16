@@ -1,0 +1,262 @@
+<script lang="ts">
+  import {
+    Button,
+    Dropdown,
+    DropdownItem,
+    DropdownMenu,
+    DropdownToggle,
+    Offcanvas,
+    OffcanvasBody,
+    OffcanvasHeader,
+    Popover,
+    PopoverBody,
+    PopoverHeader,
+  } from "@sveltestrap/sveltestrap";
+  import { CodeBlock } from "$lib/components/ui/code-block";
+
+  let showPopover = $state(false);
+  let dropdownOpen = $state(false);
+  let showOffcanvas = $state(false);
+
+  const POPOVER_CODE = `<script lang="ts">
+  import { Button, Popover, PopoverBody, PopoverHeader } from "@sveltestrap/sveltestrap";
+
+  let showPopover = $state(false);
+<\/script>
+
+<Button
+  color="outline-secondary"
+  id="popover-btn"
+  onclick={() => (showPopover = !showPopover)}
+>
+  Open Popover
+</Button>
+
+<Popover
+  isOpen={showPopover}
+  placement="bottom"
+  target="popover-btn"
+  toggle={() => (showPopover = false)}
+>
+  <PopoverHeader>Popover title</PopoverHeader>
+  <PopoverBody>
+    <p class="mb-0">This is a popover with some helpful content.</p>
+  </PopoverBody>
+</Popover>`;
+
+  const DROPDOWN_CODE = `<script lang="ts">
+  import {
+    Dropdown,
+    DropdownItem,
+    DropdownMenu,
+    DropdownToggle,
+  } from "@sveltestrap/sveltestrap";
+
+  let dropdownOpen = $state(false);
+<\/script>
+
+<Dropdown isOpen={dropdownOpen} toggle={() => (dropdownOpen = !dropdownOpen)}>
+  <DropdownToggle color="outline-secondary">Account</DropdownToggle>
+  <DropdownMenu>
+    <DropdownItem header>My Account</DropdownItem>
+    <DropdownItem divider />
+    <DropdownItem>Profile</DropdownItem>
+    <DropdownItem>Settings</DropdownItem>
+    <DropdownItem divider />
+    <DropdownItem class="text-danger">Sign out</DropdownItem>
+  </DropdownMenu>
+</Dropdown>`;
+
+  const OFFCANVAS_CODE = `<script lang="ts">
+  import {
+    Button,
+    Offcanvas,
+    OffcanvasBody,
+    OffcanvasHeader,
+  } from "@sveltestrap/sveltestrap";
+
+  let showOffcanvas = $state(false);
+<\/script>
+
+<Button color="outline-secondary" onclick={() => (showOffcanvas = true)}>Open Offcanvas</Button>
+
+<Offcanvas
+  isOpen={showOffcanvas}
+  placement="end"
+  toggle={() => (showOffcanvas = false)}
+>
+  <OffcanvasHeader toggle={() => (showOffcanvas = false)}>Edit Profile</OffcanvasHeader>
+  <OffcanvasBody>
+    <p class="text-body-secondary">
+      Make changes to your profile here. Click close when you are done.
+    </p>
+    <Button color="primary" onclick={() => (showOffcanvas = false)}>Save changes</Button>
+  </OffcanvasBody>
+</Offcanvas>`;
+</script>
+
+<div class="d-flex flex-column gap-4">
+  <div>
+    <h1 class="h4 mb-1">Overlay</h1>
+    <p class="text-body-secondary">
+      Floating panels, dropdown menus, and slide-over sheets for contextual interactions.
+    </p>
+  </div>
+
+  <!-- Popover -->
+  <section id="popover" class="mb-5">
+    <div class="mb-2 ps-3" style="border-left: 3px solid var(--bs-primary);">
+      <h5 class="mb-1">Popover</h5>
+      <p class="text-body-secondary mb-0 small">
+        A floating panel anchored to a trigger element by <code>id</code>. Set
+        <code>placement</code> to control which side it appears.
+      </p>
+    </div>
+    <div class="p-4 rounded-3 border bg-body-tertiary mb-3">
+      <div class="d-flex flex-wrap gap-3">
+        <Button
+          color="outline-secondary"
+          id="popover-btn"
+          onclick={() => (showPopover = !showPopover)}
+        >
+          {showPopover ? "Close Popover" : "Open Popover"}
+        </Button>
+
+        <Popover
+          isOpen={showPopover}
+          placement="bottom"
+          target="popover-btn"
+          toggle={() => (showPopover = false)}
+        >
+          <PopoverHeader>Popover title</PopoverHeader>
+          <PopoverBody>
+            <p class="mb-2">This is a popover with some helpful content.</p>
+            <Button color="outline-secondary" size="sm" onclick={() => (showPopover = false)}>
+              Close
+            </Button>
+          </PopoverBody>
+        </Popover>
+
+        <Button color="outline-secondary" id="popover-top-btn">Top Popover</Button>
+        <Popover placement="top" target="popover-top-btn">
+          <PopoverBody>Popover on top</PopoverBody>
+        </Popover>
+
+        <Button color="outline-secondary" id="popover-right-btn">Right Popover</Button>
+        <Popover placement="right" target="popover-right-btn">
+          <PopoverBody>Popover on right</PopoverBody>
+        </Popover>
+      </div>
+    </div>
+    <CodeBlock
+      code={POPOVER_CODE}
+      collapsible
+      defaultOpen={false}
+      filename="Popover.svelte"
+      language="svelte"
+    />
+  </section>
+  <hr class="my-2" />
+
+  <!-- Dropdown -->
+  <section id="dropdown-menu" class="mb-5">
+    <div class="mb-2 ps-3" style="border-left: 3px solid var(--bs-primary);">
+      <h5 class="mb-1">DropdownMenu</h5>
+      <p class="text-body-secondary mb-0 small">
+        A menu of actions below a toggle trigger. Supports header items, dividers, and destructive
+        actions.
+      </p>
+    </div>
+    <div class="p-4 rounded-3 border bg-body-tertiary mb-3">
+      <div class="d-flex flex-wrap gap-3">
+        <!-- Standard dropdown -->
+        <Dropdown isOpen={dropdownOpen} toggle={() => (dropdownOpen = !dropdownOpen)}>
+          <DropdownToggle color="outline-secondary">Account</DropdownToggle>
+          <DropdownMenu>
+            <DropdownItem header>My Account</DropdownItem>
+            <DropdownItem divider />
+            <DropdownItem>Profile</DropdownItem>
+            <DropdownItem>Settings</DropdownItem>
+            <DropdownItem>Billing</DropdownItem>
+            <DropdownItem divider />
+            <DropdownItem class="text-danger">Sign out</DropdownItem>
+          </DropdownMenu>
+        </Dropdown>
+
+        <!-- Split dropdown -->
+        <Dropdown isOpen={false} toggle={() => {}}>
+          <Button color="primary">Actions</Button>
+          <DropdownToggle color="primary" split />
+          <DropdownMenu>
+            <DropdownItem>Duplicate</DropdownItem>
+            <DropdownItem>Archive</DropdownItem>
+            <DropdownItem divider />
+            <DropdownItem class="text-danger">Delete</DropdownItem>
+          </DropdownMenu>
+        </Dropdown>
+      </div>
+    </div>
+    <CodeBlock
+      code={DROPDOWN_CODE}
+      collapsible
+      defaultOpen={false}
+      filename="DropdownMenu.svelte"
+      language="svelte"
+    />
+  </section>
+  <hr class="my-2" />
+
+  <!-- Offcanvas -->
+  <section id="offcanvas" class="mb-5">
+    <div class="mb-2 ps-3" style="border-left: 3px solid var(--bs-primary);">
+      <h5 class="mb-1">Offcanvas</h5>
+      <p class="text-body-secondary mb-0 small">
+        A slide-over panel that animates in from the edge of the screen. Controlled with
+        <code>isOpen</code>/<code>toggle</code> and positioned via <code>placement</code>.
+      </p>
+    </div>
+    <div class="p-4 rounded-3 border bg-body-tertiary mb-3">
+      <div class="d-flex flex-wrap gap-2">
+        <Button color="outline-secondary" onclick={() => (showOffcanvas = true)}>
+          Open Offcanvas (end)
+        </Button>
+      </div>
+    </div>
+    <CodeBlock
+      code={OFFCANVAS_CODE}
+      collapsible
+      defaultOpen={false}
+      filename="Offcanvas.svelte"
+      language="svelte"
+    />
+  </section>
+</div>
+
+<!-- Offcanvas rendered at root level -->
+<Offcanvas isOpen={showOffcanvas} placement="end" toggle={() => (showOffcanvas = false)}>
+  <OffcanvasHeader toggle={() => (showOffcanvas = false)}>Edit Profile</OffcanvasHeader>
+  <OffcanvasBody>
+    <p class="text-body-secondary">
+      Make changes to your profile here. Click close when you are done.
+    </p>
+    <div class="d-flex flex-column gap-2 mt-3">
+      <div class="mb-3">
+        <label class="form-label small fw-medium" for="off-name">Display name</label>
+        <input class="form-control" id="off-name" placeholder="Jane Doe" type="text" />
+      </div>
+      <div class="mb-3">
+        <label class="form-label small fw-medium" for="off-email">Email</label>
+        <input
+          class="form-control"
+          id="off-email"
+          placeholder="jane@example.com"
+          type="email"
+        />
+      </div>
+    </div>
+    <div class="d-flex gap-2 mt-3">
+      <Button color="primary" onclick={() => (showOffcanvas = false)}>Save changes</Button>
+      <Button color="outline-secondary" onclick={() => (showOffcanvas = false)}>Cancel</Button>
+    </div>
+  </OffcanvasBody>
+</Offcanvas>

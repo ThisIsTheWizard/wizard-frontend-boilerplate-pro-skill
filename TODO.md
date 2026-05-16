@@ -117,15 +117,15 @@
 - [x] `assets/showcase-templates/react-mui/` — 8 files using MUI native components
 
 ## 18. Bootstrap — reference file
-- [ ] Write `references/ui-library/bootstrap.md`
+- [x] Write `references/ui-library/bootstrap.md`
   - npm install: `react-bootstrap` / `bootstrap-vue-next` / svelte approach
   - SCSS variable override strategy for theming bridge
   - CDN alternative for prototyping
 
 ## 19. Bootstrap — showcase templates
-- [ ] `assets/showcase-templates/react-bootstrap/` — 8 files
-- [ ] `assets/showcase-templates/vue-bootstrap/` — 8 files
-- [ ] `assets/showcase-templates/svelte-bootstrap/` — 8 files
+- [x] `assets/showcase-templates/react-bootstrap/` — 8 files
+- [x] `assets/showcase-templates/vue-bootstrap/` — 8 files
+- [x] `assets/showcase-templates/svelte-bootstrap/` — 8 files
 
 ## 20. DaisyUI — reference file + templates
 - [ ] Write `references/ui-library/daisy.md` (Tailwind plugin, minimal bridge needed)

@@ -1,0 +1,350 @@
+<script setup lang="ts">
+import { ref } from "vue";
+
+import {
+  BAlert,
+  BButton,
+  BModal,
+  BProgress,
+  BProgressBar,
+  BToast,
+  BToastContainer,
+  BTooltip,
+} from "bootstrap-vue-next";
+
+import { CodeBlock } from "@/components/ui/code-block";
+
+const showInfo = ref(true);
+const showSuccess = ref(true);
+const showWarning = ref(true);
+const showDanger = ref(true);
+const showToast = ref(false);
+const toastVariant = ref("primary");
+const toastMessage = ref("Event has been created.");
+const showModal = ref(false);
+
+function triggerToast(variant: string, message: string) {
+  toastVariant.value = variant;
+  toastMessage.value = message;
+  showToast.value = true;
+}
+
+const ALERT_CODE = `<script setup lang="ts">
+import { ref } from "vue";
+import { BAlert } from "bootstrap-vue-next";
+
+const show = ref(true);
+<\/script>
+
+<template>
+  <div class="d-flex flex-column gap-2">
+    <BAlert v-model:show="show" variant="info">
+      <strong>Heads up!</strong> You can add components to your app using the CLI.
+    </BAlert>
+    <BAlert variant="success" :show="true">
+      <strong>Success!</strong> Profile saved successfully.
+    </BAlert>
+    <BAlert variant="warning" :show="true">
+      <strong>Warning!</strong> Unsaved changes detected.
+    </BAlert>
+    <BAlert dismissible variant="danger" :show="true">
+      <strong>Error!</strong> Something went wrong. Please try again.
+    </BAlert>
+  </div>
+</template>`;
+
+const TOAST_CODE = `<script setup lang="ts">
+import { ref } from "vue";
+import { BButton, BToast, BToastContainer } from "bootstrap-vue-next";
+
+const show = ref(false);
+<\/script>
+
+<!-- Place <BToastContainer /> once in your root layout. -->
+
+<template>
+  <BToastContainer position="top-end" class="p-3">
+    <BToast
+      v-model:show="show"
+      :auto-hide="true"
+      :delay="3000"
+      title="Notification"
+      variant="primary"
+    >
+      Event has been created.
+    </BToast>
+  </BToastContainer>
+  <BButton @click="show = true">Show Toast</BButton>
+</template>`;
+
+const PROGRESS_CODE = `<script setup lang="ts">
+import { BProgress, BProgressBar } from "bootstrap-vue-next";
+<\/script>
+
+<template>
+  <div class="d-flex flex-column gap-3">
+    <BProgress :max="100">
+      <BProgressBar :value="25" />
+    </BProgress>
+    <BProgress :max="100">
+      <BProgressBar :value="60" variant="success" />
+    </BProgress>
+    <BProgress :max="100">
+      <BProgressBar :value="100" animated variant="primary" />
+    </BProgress>
+  </div>
+</template>`;
+
+const TOOLTIP_CODE = `<script setup lang="ts">
+import { BButton, BTooltip } from "bootstrap-vue-next";
+<\/script>
+
+<template>
+  <div class="d-flex flex-wrap gap-3">
+    <BButton id="btn-top" variant="outline-secondary">Top</BButton>
+    <BTooltip target="btn-top" placement="top">Tooltip on top</BTooltip>
+
+    <BButton id="btn-right" variant="outline-secondary">Right</BButton>
+    <BTooltip target="btn-right" placement="right">Tooltip on right</BTooltip>
+
+    <BButton id="btn-bottom" variant="outline-secondary">Bottom</BButton>
+    <BTooltip target="btn-bottom" placement="bottom">Tooltip on bottom</BTooltip>
+
+    <BButton id="btn-left" variant="outline-secondary">Left</BButton>
+    <BTooltip target="btn-left" placement="left">Tooltip on left</BTooltip>
+  </div>
+</template>`;
+
+const MODAL_CODE = `<script setup lang="ts">
+import { ref } from "vue";
+import { BButton, BModal } from "bootstrap-vue-next";
+
+const show = ref(false);
+<\/script>
+
+<template>
+  <BButton @click="show = true">Open dialog</BButton>
+
+  <BModal
+    v-model:show="show"
+    cancel-title="Cancel"
+    centered
+    ok-title="Confirm"
+    title="Confirm action"
+    @ok="show = false"
+  >
+    This action cannot be undone. Are you sure you want to proceed?
+  </BModal>
+</template>`;
+</script>
+
+<template>
+  <div class="d-flex flex-column gap-4">
+    <div>
+      <h1 class="h4 mb-1">Feedback</h1>
+      <p class="text-body-secondary">
+        Status indicators, notifications, and modal interactions — alerts, toasts, dialogs, and
+        progress.
+      </p>
+    </div>
+
+    <!-- Alert -->
+    <section id="alert">
+      <div class="mb-2 ps-3" style="border-left: 3px solid var(--bs-primary)">
+        <h5 class="mb-1">Alert</h5>
+        <p class="text-body-secondary mb-0 small">
+          An inline message banner. <code>BAlert</code> supports
+          <code>info</code>, <code>success</code>, <code>warning</code>,
+          <code>danger</code> variants, and <code>dismissible</code> prop.
+        </p>
+      </div>
+      <div class="p-4 rounded-3 border bg-body-tertiary mb-3">
+        <div class="d-flex flex-column gap-2">
+          <BAlert v-model:show="showInfo" variant="info">
+            <strong>Heads up!</strong> You can add components to your app using the CLI.
+          </BAlert>
+          <BAlert v-model:show="showSuccess" variant="success">
+            <strong>Success!</strong> Profile saved successfully.
+          </BAlert>
+          <BAlert v-model:show="showWarning" variant="warning">
+            <strong>Warning!</strong> Unsaved changes detected.
+          </BAlert>
+          <BAlert v-model:show="showDanger" dismissible variant="danger">
+            <strong>Error!</strong> Something went wrong. Please try again.
+          </BAlert>
+        </div>
+      </div>
+      <CodeBlock
+        :code="ALERT_CODE"
+        collapsible
+        :default-open="false"
+        filename="Alert.vue"
+        language="vue"
+      />
+    </section>
+
+    <hr class="my-2" />
+
+    <!-- Toast -->
+    <section id="toast">
+      <div class="mb-2 ps-3" style="border-left: 3px solid var(--bs-primary)">
+        <h5 class="mb-1">Toast</h5>
+        <p class="text-body-secondary mb-0 small">
+          Transient notification messages using <code>BToast</code> inside a
+          <code>BToastContainer</code>. Place the container once in your root layout.
+        </p>
+      </div>
+      <div class="p-4 rounded-3 border bg-body-tertiary mb-3">
+        <BToastContainer class="p-3" position="top-end">
+          <BToast
+            v-model:show="showToast"
+            :auto-hide="true"
+            :delay="3000"
+            :variant="toastVariant"
+            title="Notification"
+          >
+            {{ toastMessage }}
+          </BToast>
+        </BToastContainer>
+        <div class="d-flex flex-wrap gap-2">
+          <BButton variant="primary" @click="triggerToast('primary', 'Event has been created.')">
+            Default
+          </BButton>
+          <BButton
+            variant="outline-success"
+            @click="triggerToast('success', 'Profile saved successfully.')"
+          >
+            Success
+          </BButton>
+          <BButton
+            variant="outline-danger"
+            @click="triggerToast('danger', 'Something went wrong.')"
+          >
+            Error
+          </BButton>
+          <BButton
+            variant="outline-warning"
+            @click="triggerToast('warning', 'Unsaved changes detected.')"
+          >
+            Warning
+          </BButton>
+        </div>
+      </div>
+      <CodeBlock
+        :code="TOAST_CODE"
+        collapsible
+        :default-open="false"
+        filename="Toast.vue"
+        language="vue"
+      />
+    </section>
+
+    <hr class="my-2" />
+
+    <!-- Progress -->
+    <section id="progress">
+      <div class="mb-2 ps-3" style="border-left: 3px solid var(--bs-primary)">
+        <h5 class="mb-1">Progress</h5>
+        <p class="text-body-secondary mb-0 small">
+          A horizontal bar showing completion status. Use <code>BProgress</code> +
+          <code>BProgressBar</code> with <code>:value</code> and optional
+          <code>animated</code> prop.
+        </p>
+      </div>
+      <div class="p-4 rounded-3 border bg-body-tertiary mb-3">
+        <div class="d-flex flex-column gap-3" style="max-width: 32rem">
+          <BProgress :max="100">
+            <BProgressBar :value="25" />
+          </BProgress>
+          <BProgress :max="100">
+            <BProgressBar :value="60" variant="success" />
+          </BProgress>
+          <BProgress :max="100">
+            <BProgressBar :value="85" animated variant="warning" />
+          </BProgress>
+          <BProgress :max="100">
+            <BProgressBar :value="100" variant="primary" />
+          </BProgress>
+        </div>
+      </div>
+      <CodeBlock
+        :code="PROGRESS_CODE"
+        collapsible
+        :default-open="false"
+        filename="Progress.vue"
+        language="vue"
+      />
+    </section>
+
+    <hr class="my-2" />
+
+    <!-- Tooltip -->
+    <section id="tooltip">
+      <div class="mb-2 ps-3" style="border-left: 3px solid var(--bs-primary)">
+        <h5 class="mb-1">Tooltip</h5>
+        <p class="text-body-secondary mb-0 small">
+          A floating label on hover using <code>BTooltip</code> bound to a
+          <code>target</code> element id. Supports <code>top</code>, <code>right</code>,
+          <code>bottom</code>, and <code>left</code> placements.
+        </p>
+      </div>
+      <div class="p-4 rounded-3 border bg-body-tertiary mb-3">
+        <div class="d-flex flex-wrap align-items-center gap-3">
+          <BButton id="tt-top" variant="outline-secondary">Top</BButton>
+          <BTooltip placement="top" target="tt-top">Tooltip on top</BTooltip>
+
+          <BButton id="tt-right" variant="outline-secondary">Right</BButton>
+          <BTooltip placement="right" target="tt-right">Tooltip on right</BTooltip>
+
+          <BButton id="tt-bottom" variant="outline-secondary">Bottom</BButton>
+          <BTooltip placement="bottom" target="tt-bottom">Tooltip on bottom</BTooltip>
+
+          <BButton id="tt-left" variant="outline-secondary">Left</BButton>
+          <BTooltip placement="left" target="tt-left">Tooltip on left</BTooltip>
+        </div>
+      </div>
+      <CodeBlock
+        :code="TOOLTIP_CODE"
+        collapsible
+        :default-open="false"
+        filename="Tooltip.vue"
+        language="vue"
+      />
+    </section>
+
+    <hr class="my-2" />
+
+    <!-- Dialog / Modal -->
+    <section id="dialog">
+      <div class="mb-2 ps-3" style="border-left: 3px solid var(--bs-primary)">
+        <h5 class="mb-1">Dialog</h5>
+        <p class="text-body-secondary mb-0 small">
+          A modal overlay using <code>BModal</code> with <code>v-model:show</code>,
+          <code>title</code>, <code>ok-title</code>, and <code>cancel-title</code> props.
+          The <code>centered</code> prop vertically centers the dialog.
+        </p>
+      </div>
+      <div class="p-4 rounded-3 border bg-body-tertiary mb-3">
+        <BButton variant="primary" @click="showModal = true">Open dialog</BButton>
+
+        <BModal
+          v-model:show="showModal"
+          cancel-title="Cancel"
+          centered
+          ok-title="Confirm"
+          title="Confirm action"
+          @ok="showModal = false"
+        >
+          This action cannot be undone. Are you sure you want to proceed?
+        </BModal>
+      </div>
+      <CodeBlock
+        :code="MODAL_CODE"
+        collapsible
+        :default-open="false"
+        filename="Dialog.vue"
+        language="vue"
+      />
+    </section>
+  </div>
+</template>

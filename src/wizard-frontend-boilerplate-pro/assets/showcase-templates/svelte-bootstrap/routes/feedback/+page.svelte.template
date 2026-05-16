@@ -1,0 +1,296 @@
+<script lang="ts">
+  import {
+    Alert,
+    Button,
+    Modal,
+    ModalBody,
+    ModalFooter,
+    ModalHeader,
+    Progress,
+    Toast,
+    ToastBody,
+    ToastHeader,
+    Tooltip,
+  } from "@sveltestrap/sveltestrap";
+  import { CodeBlock } from "$lib/components/ui/code-block";
+
+  let showModal = $state(false);
+  let showToast = $state(false);
+  let showSuccessToast = $state(false);
+  let alertVisible = $state(true);
+  let alertDismissible = $state(true);
+
+  const ALERT_CODE = `<script lang="ts">
+  import { Alert } from "@sveltestrap/sveltestrap";
+
+  let visible = $state(true);
+<\/script>
+
+<div class="d-flex flex-column gap-2">
+  <Alert color="info">
+    <strong>Heads up!</strong> You can add components using the CLI.
+  </Alert>
+  <Alert color="success">Profile updated successfully.</Alert>
+  <Alert color="warning">Unsaved changes detected.</Alert>
+  <Alert color="danger">Something went wrong. Please try again.</Alert>
+  <!-- Dismissible -->
+  <Alert color="info" dismissible isOpen={visible} toggle={() => (visible = false)}>
+    Dismissible alert — click the &times; to close.
+  </Alert>
+</div>`;
+
+  const TOAST_CODE = `<script lang="ts">
+  import { Button, Toast, ToastBody, ToastHeader } from "@sveltestrap/sveltestrap";
+
+  let showToast = $state(false);
+<\/script>
+
+<Button color="primary" onclick={() => (showToast = true)}>Show Toast</Button>
+
+<div class="position-fixed bottom-0 end-0 p-3" style="z-index: 1100;">
+  <Toast fade isOpen={showToast}>
+    <ToastHeader toggle={() => (showToast = false)}>Notification</ToastHeader>
+    <ToastBody>Event has been created successfully.</ToastBody>
+  </Toast>
+</div>`;
+
+  const PROGRESS_CODE = `<script lang="ts">
+  import { Progress } from "@sveltestrap/sveltestrap";
+<\/script>
+
+<div class="d-flex flex-column gap-3">
+  <Progress value={25} />
+  <Progress animated color="success" value={60} />
+  <Progress color="info" striped value={80} />
+  <Progress color="danger" value={100} />
+</div>`;
+
+  const TOOLTIP_CODE = `<script lang="ts">
+  import { Button, Tooltip } from "@sveltestrap/sveltestrap";
+<\/script>
+
+<div class="d-flex flex-wrap gap-3">
+  <Button color="outline-secondary" id="tip-top">Top</Button>
+  <Tooltip placement="top" target="tip-top">Tooltip on top</Tooltip>
+
+  <Button color="outline-secondary" id="tip-right">Right</Button>
+  <Tooltip placement="right" target="tip-right">Tooltip on right</Tooltip>
+
+  <Button color="outline-secondary" id="tip-bottom">Bottom</Button>
+  <Tooltip placement="bottom" target="tip-bottom">Tooltip on bottom</Tooltip>
+
+  <Button color="outline-secondary" id="tip-left">Left</Button>
+  <Tooltip placement="left" target="tip-left">Tooltip on left</Tooltip>
+</div>`;
+
+  const MODAL_CODE = `<script lang="ts">
+  import { Button, Modal, ModalBody, ModalFooter, ModalHeader } from "@sveltestrap/sveltestrap";
+
+  let showModal = $state(false);
+<\/script>
+
+<Button color="primary" onclick={() => (showModal = true)}>Open Modal</Button>
+
+<Modal centered isOpen={showModal} toggle={() => (showModal = false)}>
+  <ModalHeader toggle={() => (showModal = false)}>Confirm action</ModalHeader>
+  <ModalBody>
+    <p>This action cannot be undone. Are you sure you want to proceed?</p>
+  </ModalBody>
+  <ModalFooter>
+    <Button color="outline-secondary" onclick={() => (showModal = false)}>Cancel</Button>
+    <Button color="primary" onclick={() => (showModal = false)}>Confirm</Button>
+  </ModalFooter>
+</Modal>`;
+</script>
+
+<div class="d-flex flex-column gap-4">
+  <div>
+    <h1 class="h4 mb-1">Feedback</h1>
+    <p class="text-body-secondary">
+      Status indicators, notifications, and modal interactions — alerts, toasts, modals, and
+      progress bars.
+    </p>
+  </div>
+
+  <!-- Alert -->
+  <section id="alert" class="mb-5">
+    <div class="mb-2 ps-3" style="border-left: 3px solid var(--bs-primary);">
+      <h5 class="mb-1">Alert</h5>
+      <p class="text-body-secondary mb-0 small">
+        Inline message banners in contextual colours. Supports <code>dismissible</code> with
+        <code>isOpen</code>/<code>toggle</code>.
+      </p>
+    </div>
+    <div class="p-4 rounded-3 border bg-body-tertiary mb-3">
+      <div class="d-flex flex-column gap-2">
+        <Alert color="info">
+          <strong>Heads up!</strong> You can add components using the CLI.
+        </Alert>
+        <Alert color="success">Profile updated successfully.</Alert>
+        <Alert color="warning">Unsaved changes detected.</Alert>
+        <Alert color="danger">Something went wrong. Please try again.</Alert>
+        <Alert
+          color="info"
+          dismissible
+          isOpen={alertDismissible}
+          toggle={() => (alertDismissible = false)}
+        >
+          Dismissible alert — click &times; to close.
+        </Alert>
+        {#if !alertDismissible}
+          <Button
+            color="outline-secondary"
+            size="sm"
+            onclick={() => (alertDismissible = true)}
+          >
+            Restore dismissed alert
+          </Button>
+        {/if}
+      </div>
+    </div>
+    <CodeBlock
+      code={ALERT_CODE}
+      collapsible
+      defaultOpen={false}
+      filename="Alert.svelte"
+      language="svelte"
+    />
+  </section>
+  <hr class="my-2" />
+
+  <!-- Toast -->
+  <section id="toast" class="mb-5">
+    <div class="mb-2 ps-3" style="border-left: 3px solid var(--bs-primary);">
+      <h5 class="mb-1">Toast</h5>
+      <p class="text-body-secondary mb-0 small">
+        Transient notification messages. Place the <code>Toast</code> in a fixed container at the
+        corner of the viewport.
+      </p>
+    </div>
+    <div class="p-4 rounded-3 border bg-body-tertiary mb-3">
+      <div class="d-flex flex-wrap gap-2">
+        <Button color="primary" onclick={() => (showToast = true)}>Default Toast</Button>
+        <Button color="outline-success" onclick={() => (showSuccessToast = true)}>
+          Success Toast
+        </Button>
+      </div>
+    </div>
+    <CodeBlock
+      code={TOAST_CODE}
+      collapsible
+      defaultOpen={false}
+      filename="Toast.svelte"
+      language="svelte"
+    />
+  </section>
+
+  <!-- Toast portals -->
+  <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 1100;">
+    <Toast fade isOpen={showToast}>
+      <ToastHeader toggle={() => (showToast = false)}>Notification</ToastHeader>
+      <ToastBody>Event has been created successfully.</ToastBody>
+    </Toast>
+    <Toast fade isOpen={showSuccessToast}>
+      <ToastHeader class="text-success" toggle={() => (showSuccessToast = false)}>
+        Success
+      </ToastHeader>
+      <ToastBody>Profile saved successfully.</ToastBody>
+    </Toast>
+  </div>
+
+  <hr class="my-2" />
+
+  <!-- Progress -->
+  <section id="progress" class="mb-5">
+    <div class="mb-2 ps-3" style="border-left: 3px solid var(--bs-primary);">
+      <h5 class="mb-1">Progress</h5>
+      <p class="text-body-secondary mb-0 small">
+        A horizontal bar showing completion status. Pass <code>value</code> (0–100), and optionally
+        <code>color</code>, <code>animated</code>, or <code>striped</code>.
+      </p>
+    </div>
+    <div class="p-4 rounded-3 border bg-body-tertiary mb-3">
+      <div class="d-flex flex-column gap-3">
+        <Progress value={25} />
+        <Progress animated color="success" value={60} />
+        <Progress color="info" striped value={80} />
+        <Progress color="danger" value={100} />
+      </div>
+    </div>
+    <CodeBlock
+      code={PROGRESS_CODE}
+      collapsible
+      defaultOpen={false}
+      filename="Progress.svelte"
+      language="svelte"
+    />
+  </section>
+  <hr class="my-2" />
+
+  <!-- Tooltip -->
+  <section id="tooltip" class="mb-5">
+    <div class="mb-2 ps-3" style="border-left: 3px solid var(--bs-primary);">
+      <h5 class="mb-1">Tooltip</h5>
+      <p class="text-body-secondary mb-0 small">
+        A floating label on hover/focus. Target the trigger element by <code>id</code> and set
+        <code>placement</code>.
+      </p>
+    </div>
+    <div class="p-4 rounded-3 border bg-body-tertiary mb-3">
+      <div class="d-flex flex-wrap align-items-center gap-3">
+        <Button color="outline-secondary" id="tip-top">Top</Button>
+        <Tooltip placement="top" target="tip-top">Tooltip on top</Tooltip>
+
+        <Button color="outline-secondary" id="tip-right">Right</Button>
+        <Tooltip placement="right" target="tip-right">Tooltip on right</Tooltip>
+
+        <Button color="outline-secondary" id="tip-bottom">Bottom</Button>
+        <Tooltip placement="bottom" target="tip-bottom">Tooltip on bottom</Tooltip>
+
+        <Button color="outline-secondary" id="tip-left">Left</Button>
+        <Tooltip placement="left" target="tip-left">Tooltip on left</Tooltip>
+      </div>
+    </div>
+    <CodeBlock
+      code={TOOLTIP_CODE}
+      collapsible
+      defaultOpen={false}
+      filename="Tooltip.svelte"
+      language="svelte"
+    />
+  </section>
+  <hr class="my-2" />
+
+  <!-- Modal -->
+  <section id="modal" class="mb-5">
+    <div class="mb-2 ps-3" style="border-left: 3px solid var(--bs-primary);">
+      <h5 class="mb-1">Modal</h5>
+      <p class="text-body-secondary mb-0 small">
+        A modal overlay with a header, body, and footer actions — accessible and focus-trapped.
+        Use <code>isOpen</code>/<code>toggle</code> to control visibility.
+      </p>
+    </div>
+    <div class="p-4 rounded-3 border bg-body-tertiary mb-3">
+      <Button color="primary" onclick={() => (showModal = true)}>Open Modal</Button>
+    </div>
+    <CodeBlock
+      code={MODAL_CODE}
+      collapsible
+      defaultOpen={false}
+      filename="Modal.svelte"
+      language="svelte"
+    />
+  </section>
+</div>
+
+<!-- Modal rendered outside section to avoid stacking context issues -->
+<Modal centered isOpen={showModal} toggle={() => (showModal = false)}>
+  <ModalHeader toggle={() => (showModal = false)}>Confirm action</ModalHeader>
+  <ModalBody>
+    <p class="mb-0">This action cannot be undone. Are you sure you want to proceed?</p>
+  </ModalBody>
+  <ModalFooter>
+    <Button color="outline-secondary" onclick={() => (showModal = false)}>Cancel</Button>
+    <Button color="primary" onclick={() => (showModal = false)}>Confirm</Button>
+  </ModalFooter>
+</Modal>

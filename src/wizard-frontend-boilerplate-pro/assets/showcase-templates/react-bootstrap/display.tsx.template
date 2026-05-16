@@ -1,0 +1,391 @@
+"use client";
+
+import Badge from "react-bootstrap/Badge";
+import Button from "react-bootstrap/Button";
+import Card from "react-bootstrap/Card";
+import Placeholder from "react-bootstrap/Placeholder";
+import Table from "react-bootstrap/Table";
+
+import { CodeBlock } from "@/components/ui/code-block";
+
+const CARD_CODE = `import Button from "react-bootstrap/Button";
+import Card from "react-bootstrap/Card";
+
+export function Example() {
+  return (
+    <Card style={{ maxWidth: 320 }}>
+      <Card.Header>Featured</Card.Header>
+      <Card.Body>
+        <Card.Title>Project Alpha</Card.Title>
+        <Card.Text className="text-body-secondary">
+          This project aims to redefine how teams collaborate in real time.
+        </Card.Text>
+        <Button size="sm" variant="outline-primary">View details</Button>
+      </Card.Body>
+      <Card.Footer className="text-body-secondary small">
+        Last updated 3 mins ago
+      </Card.Footer>
+    </Card>
+  );
+}`;
+
+const BADGE_CODE = `import Badge from "react-bootstrap/Badge";
+
+export function Example() {
+  return (
+    <div className="d-flex flex-wrap gap-2">
+      <Badge bg="primary">Primary</Badge>
+      <Badge bg="success">Success</Badge>
+      <Badge bg="warning">Warning</Badge>
+      <Badge bg="danger">Danger</Badge>
+      <Badge bg="secondary">Secondary</Badge>
+      <Badge bg="info">Info</Badge>
+      <Badge bg="primary" pill>Pill</Badge>
+      <Badge bg="success" pill>Pill</Badge>
+    </div>
+  );
+}`;
+
+const AVATAR_CODE = `// Bootstrap has no Avatar component — compose with utility classes.
+export function Example() {
+  return (
+    <div className="d-flex align-items-center gap-3">
+      {/* Small */}
+      <div
+        className="rounded-circle d-inline-flex align-items-center justify-content-center bg-primary text-white fw-semibold"
+        style={{ height: 32, width: 32, fontSize: 12 }}
+      >
+        XS
+      </div>
+      {/* Medium (default) */}
+      <div
+        className="rounded-circle d-inline-flex align-items-center justify-content-center bg-primary text-white fw-semibold"
+        style={{ height: 40, width: 40, fontSize: 14 }}
+      >
+        MD
+      </div>
+      {/* Large */}
+      <div
+        className="rounded-circle d-inline-flex align-items-center justify-content-center bg-primary text-white fw-semibold"
+        style={{ height: 56, width: 56, fontSize: 18 }}
+      >
+        LG
+      </div>
+    </div>
+  );
+}`;
+
+const SEPARATOR_CODE = `export function Example() {
+  return (
+    <div className="d-flex flex-column gap-3">
+      {/* Horizontal */}
+      <div>
+        <p className="text-body-secondary small mb-0">Section one content.</p>
+        <hr />
+        <p className="text-body-secondary small mb-0">Section two content.</p>
+      </div>
+
+      {/* Vertical (.vr — Bootstrap 5.3) */}
+      <div className="d-flex align-items-center gap-2" style={{ height: 24 }}>
+        <span className="small">Left item</span>
+        <div className="vr" />
+        <span className="small">Right item</span>
+      </div>
+    </div>
+  );
+}`;
+
+const PLACEHOLDER_CODE = `import Card from "react-bootstrap/Card";
+import Placeholder from "react-bootstrap/Placeholder";
+
+export function Example() {
+  return (
+    <Card style={{ maxWidth: 320 }}>
+      <Card.Body>
+        <Placeholder animation="glow" as={Card.Title}>
+          <Placeholder xs={8} />
+        </Placeholder>
+        <Placeholder animation="glow" as={Card.Text}>
+          <Placeholder xs={12} />
+          <Placeholder xs={10} />
+          <Placeholder xs={6} />
+        </Placeholder>
+        <Placeholder.Button variant="primary" xs={6} />
+      </Card.Body>
+    </Card>
+  );
+}`;
+
+const TABLE_CODE = `import Table from "react-bootstrap/Table";
+
+export function Example() {
+  return (
+    <Table bordered hover responsive striped>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Role</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Alice Martin</td>
+          <td>alice@example.com</td>
+          <td>Admin</td>
+        </tr>
+        <tr>
+          <td>Bob Chen</td>
+          <td>bob@example.com</td>
+          <td>Editor</td>
+        </tr>
+        <tr>
+          <td>Carol White</td>
+          <td>carol@example.com</td>
+          <td>Viewer</td>
+        </tr>
+      </tbody>
+    </Table>
+  );
+}`;
+
+export default function DisplayPage() {
+  return (
+    <div className="d-flex flex-column gap-4">
+      <div>
+        <h1 className="h4 mb-1">Display</h1>
+        <p className="text-body-secondary">
+          Read-only visual elements for presenting content — cards, badges,
+          avatars, and data tables.
+        </p>
+      </div>
+
+      <section className="mb-2" id="card">
+        <div className="ps-3 mb-2" style={{ borderLeft: "3px solid var(--bs-primary)" }}>
+          <h5 className="mb-1">Card</h5>
+          <p className="text-body-secondary mb-0 small">
+            A surface for grouping related content. React-Bootstrap ships{" "}
+            <code>Card.Header</code>, <code>Card.Body</code>,{" "}
+            <code>Card.Title</code>, <code>Card.Text</code>, and{" "}
+            <code>Card.Footer</code> sub-components.
+          </p>
+        </div>
+        <div className="p-4 rounded-3 border bg-body-tertiary mb-3">
+          <Card style={{ maxWidth: 320 }}>
+            <Card.Header>Featured</Card.Header>
+            <Card.Body>
+              <Card.Title>Project Alpha</Card.Title>
+              <Card.Text className="text-body-secondary">
+                This project aims to redefine how teams collaborate in real time.
+              </Card.Text>
+              <Button size="sm" variant="outline-primary">View details</Button>
+            </Card.Body>
+            <Card.Footer className="text-body-secondary small">
+              Last updated 3 mins ago
+            </Card.Footer>
+          </Card>
+        </div>
+        <CodeBlock
+          code={CARD_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="Card.tsx"
+          language="tsx"
+        />
+      </section>
+
+      <hr className="my-4" />
+
+      <section className="mb-2" id="badge">
+        <div className="ps-3 mb-2" style={{ borderLeft: "3px solid var(--bs-primary)" }}>
+          <h5 className="mb-1">Badge</h5>
+          <p className="text-body-secondary mb-0 small">
+            A compact label for status, category, or count. Use the{" "}
+            <code>bg</code> prop for semantic colours and <code>pill</code> for
+            rounded variants.
+          </p>
+        </div>
+        <div className="p-4 rounded-3 border bg-body-tertiary mb-3">
+          <div className="d-flex flex-wrap gap-2">
+            <Badge bg="primary">Primary</Badge>
+            <Badge bg="success">Success</Badge>
+            <Badge bg="warning">Warning</Badge>
+            <Badge bg="danger">Danger</Badge>
+            <Badge bg="secondary">Secondary</Badge>
+            <Badge bg="info">Info</Badge>
+            <Badge bg="primary" pill>Pill Primary</Badge>
+            <Badge bg="success" pill>Pill Success</Badge>
+          </div>
+        </div>
+        <CodeBlock
+          code={BADGE_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="Badge.tsx"
+          language="tsx"
+        />
+      </section>
+
+      <hr className="my-4" />
+
+      <section className="mb-2" id="avatar">
+        <div className="ps-3 mb-2" style={{ borderLeft: "3px solid var(--bs-primary)" }}>
+          <h5 className="mb-1">Avatar</h5>
+          <p className="text-body-secondary mb-0 small">
+            Bootstrap has no Avatar component. Compose one using{" "}
+            <code>rounded-circle</code> and flex utilities on a{" "}
+            <code>{"<div>"}</code> — size via inline styles.
+          </p>
+        </div>
+        <div className="p-4 rounded-3 border bg-body-tertiary mb-3">
+          <div className="d-flex align-items-center gap-3">
+            <div
+              className="rounded-circle d-inline-flex align-items-center justify-content-center bg-primary text-white fw-semibold"
+              style={{ fontSize: 12, height: 32, width: 32 }}
+            >
+              XS
+            </div>
+            <div
+              className="rounded-circle d-inline-flex align-items-center justify-content-center bg-primary text-white fw-semibold"
+              style={{ fontSize: 14, height: 40, width: 40 }}
+            >
+              MD
+            </div>
+            <div
+              className="rounded-circle d-inline-flex align-items-center justify-content-center bg-primary text-white fw-semibold"
+              style={{ fontSize: 18, height: 56, width: 56 }}
+            >
+              LG
+            </div>
+          </div>
+        </div>
+        <CodeBlock
+          code={AVATAR_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="Avatar.tsx"
+          language="tsx"
+        />
+      </section>
+
+      <hr className="my-4" />
+
+      <section className="mb-2" id="separator">
+        <div className="ps-3 mb-2" style={{ borderLeft: "3px solid var(--bs-primary)" }}>
+          <h5 className="mb-1">Separator</h5>
+          <p className="text-body-secondary mb-0 small">
+            Use <code>{"<hr />"}</code> for horizontal rules and the Bootstrap
+            5.3 <code>.vr</code> class for vertical rules inside flex containers.
+          </p>
+        </div>
+        <div className="p-4 rounded-3 border bg-body-tertiary mb-3">
+          <div className="d-flex flex-column gap-3">
+            <div>
+              <p className="text-body-secondary small mb-0">Section one content.</p>
+              <hr />
+              <p className="text-body-secondary small mb-0">Section two content.</p>
+            </div>
+            <div className="d-flex align-items-center gap-2" style={{ height: 24 }}>
+              <span className="small">Left item</span>
+              <div className="vr" />
+              <span className="small">Right item</span>
+            </div>
+          </div>
+        </div>
+        <CodeBlock
+          code={SEPARATOR_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="Separator.tsx"
+          language="tsx"
+        />
+      </section>
+
+      <hr className="my-4" />
+
+      <section className="mb-2" id="placeholder">
+        <div className="ps-3 mb-2" style={{ borderLeft: "3px solid var(--bs-primary)" }}>
+          <h5 className="mb-1">Placeholder (Skeleton)</h5>
+          <p className="text-body-secondary mb-0 small">
+            Animated placeholder blocks using <code>Placeholder</code> +{" "}
+            <code>animation="glow"</code>. Use <code>xs</code> through{" "}
+            <code>col-12</code> widths and <code>Placeholder.Button</code> for
+            button skeletons.
+          </p>
+        </div>
+        <div className="p-4 rounded-3 border bg-body-tertiary mb-3">
+          <Card style={{ maxWidth: 320 }}>
+            <Card.Body>
+              <Placeholder animation="glow" as={Card.Title}>
+                <Placeholder xs={8} />
+              </Placeholder>
+              <Placeholder animation="glow" as={Card.Text}>
+                <Placeholder xs={12} />
+                {" "}
+                <Placeholder xs={10} />
+                {" "}
+                <Placeholder xs={6} />
+              </Placeholder>
+              <Placeholder.Button variant="primary" xs={6} />
+            </Card.Body>
+          </Card>
+        </div>
+        <CodeBlock
+          code={PLACEHOLDER_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="Placeholder.tsx"
+          language="tsx"
+        />
+      </section>
+
+      <hr className="my-4" />
+
+      <section className="mb-2" id="table">
+        <div className="ps-3 mb-2" style={{ borderLeft: "3px solid var(--bs-primary)" }}>
+          <h5 className="mb-1">Table</h5>
+          <p className="text-body-secondary mb-0 small">
+            A structured grid for tabular data. Use the <code>striped</code>,{" "}
+            <code>bordered</code>, <code>hover</code>, and{" "}
+            <code>responsive</code> props for common styling patterns.
+          </p>
+        </div>
+        <div className="p-4 rounded-3 border bg-body-tertiary mb-3">
+          <Table bordered hover responsive striped>
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Role</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Alice Martin</td>
+                <td>alice@example.com</td>
+                <td>Admin</td>
+              </tr>
+              <tr>
+                <td>Bob Chen</td>
+                <td>bob@example.com</td>
+                <td>Editor</td>
+              </tr>
+              <tr>
+                <td>Carol White</td>
+                <td>carol@example.com</td>
+                <td>Viewer</td>
+              </tr>
+            </tbody>
+          </Table>
+        </div>
+        <CodeBlock
+          code={TABLE_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="Table.tsx"
+          language="tsx"
+        />
+      </section>
+    </div>
+  );
+}

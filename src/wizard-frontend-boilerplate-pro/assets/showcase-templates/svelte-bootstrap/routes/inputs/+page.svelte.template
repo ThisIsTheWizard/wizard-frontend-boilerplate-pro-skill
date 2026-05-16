@@ -1,0 +1,383 @@
+<script lang="ts">
+  import {
+    Button,
+    Form,
+    FormGroup,
+    FormText,
+    Input,
+    InputGroup,
+    Label,
+  } from "@sveltestrap/sveltestrap";
+  import { CodeBlock } from "$lib/components/ui/code-block";
+
+  let plan = $state("free");
+  let notificationsEnabled = $state(false);
+  let termsAccepted = $state(false);
+
+  const BUTTON_CODE = `<script lang="ts">
+  import { Button } from "@sveltestrap/sveltestrap";
+<\/script>
+
+<div class="d-flex flex-wrap gap-2">
+  <Button color="primary">Primary</Button>
+  <Button color="secondary">Secondary</Button>
+  <Button color="outline-primary">Outline</Button>
+  <Button color="outline-secondary">Ghost</Button>
+  <Button color="danger">Danger</Button>
+  <Button color="link">Link</Button>
+</div>
+<div class="d-flex flex-wrap align-items-center gap-2 mt-2">
+  <Button color="primary" size="sm">Small</Button>
+  <Button color="primary">Default</Button>
+  <Button color="primary" size="lg">Large</Button>
+  <Button color="primary" disabled>Disabled</Button>
+</div>`;
+
+  const INPUT_CODE = `<script lang="ts">
+  import { FormGroup, Input, Label, FormText } from "@sveltestrap/sveltestrap";
+<\/script>
+
+<FormGroup>
+  <Label for="email">Email address</Label>
+  <Input id="email" placeholder="you@example.com" type="email" />
+  <FormText>We'll never share your email.</FormText>
+</FormGroup>`;
+
+  const TEXTAREA_CODE = `<script lang="ts">
+  import { FormGroup, Input, Label, FormText } from "@sveltestrap/sveltestrap";
+<\/script>
+
+<FormGroup>
+  <Label for="bio">Bio</Label>
+  <Input id="bio" placeholder="Tell us about yourself…" rows={4} type="textarea" />
+  <FormText>Describe your project in a few sentences.</FormText>
+</FormGroup>`;
+
+  const SELECT_CODE = `<script lang="ts">
+  import { FormGroup, Input, Label } from "@sveltestrap/sveltestrap";
+<\/script>
+
+<FormGroup>
+  <Label for="framework">Framework</Label>
+  <Input id="framework" type="select">
+    <option value="">Select a framework…</option>
+    <option value="nextjs">Next.js</option>
+    <option value="remix">Remix</option>
+    <option value="astro">Astro</option>
+    <option value="sveltekit">SvelteKit</option>
+  </Input>
+</FormGroup>`;
+
+  const CHECKBOX_CODE = `<script lang="ts">
+  import { Input, Label } from "@sveltestrap/sveltestrap";
+
+  let checked = $state(false);
+<\/script>
+
+<div class="form-check">
+  <Input bind:checked id="terms" type="checkbox" />
+  <Label check for="terms">Accept terms and conditions</Label>
+</div>`;
+
+  const RADIO_GROUP_CODE = `<script lang="ts">
+  import { Input, Label } from "@sveltestrap/sveltestrap";
+
+  let plan = $state("free");
+<\/script>
+
+<div class="d-flex flex-column gap-1">
+  <div class="form-check">
+    <Input bind:group={plan} id="plan-free" name="plan" type="radio" value="free" />
+    <Label check for="plan-free">Free</Label>
+  </div>
+  <div class="form-check">
+    <Input bind:group={plan} id="plan-pro" name="plan" type="radio" value="pro" />
+    <Label check for="plan-pro">Pro</Label>
+  </div>
+  <div class="form-check">
+    <Input bind:group={plan} id="plan-enterprise" name="plan" type="radio" value="enterprise" />
+    <Label check for="plan-enterprise">Enterprise</Label>
+  </div>
+</div>`;
+
+  const SWITCH_CODE = `<script lang="ts">
+  import { Input, Label } from "@sveltestrap/sveltestrap";
+
+  let enabled = $state(false);
+<\/script>
+
+<div class="form-check form-switch">
+  <Input bind:checked={enabled} id="notifications" role="switch" type="switch" />
+  <Label check for="notifications">Email notifications</Label>
+</div>`;
+</script>
+
+<div class="d-flex flex-column gap-4">
+  <div>
+    <h1 class="h4 mb-1">Inputs</h1>
+    <p class="text-body-secondary">
+      Form controls for collecting user input — buttons, text fields, selections, and toggles.
+    </p>
+  </div>
+
+  <!-- Button -->
+  <section id="button" class="mb-5">
+    <div class="mb-2 ps-3" style="border-left: 3px solid var(--bs-primary);">
+      <h5 class="mb-1">Button</h5>
+      <p class="text-body-secondary mb-0 small">
+        Triggers an action or event with support for multiple colours, outline variants, and sizes.
+      </p>
+    </div>
+    <div class="p-4 rounded-3 border bg-body-tertiary mb-3">
+      <div class="d-flex flex-column gap-3">
+        <div class="d-flex flex-wrap gap-2">
+          <Button color="primary">Primary</Button>
+          <Button color="secondary">Secondary</Button>
+          <Button color="outline-primary">Outline</Button>
+          <Button color="outline-secondary">Ghost</Button>
+          <Button color="danger">Danger</Button>
+          <Button color="link">Link</Button>
+        </div>
+        <div class="d-flex flex-wrap align-items-center gap-2">
+          <Button color="primary" size="sm">Small</Button>
+          <Button color="primary">Default</Button>
+          <Button color="primary" size="lg">Large</Button>
+          <Button color="primary" disabled>Disabled</Button>
+        </div>
+      </div>
+    </div>
+    <CodeBlock
+      code={BUTTON_CODE}
+      collapsible
+      defaultOpen={false}
+      filename="Button.svelte"
+      language="svelte"
+    />
+  </section>
+  <hr class="my-2" />
+
+  <!-- Input -->
+  <section id="input" class="mb-5">
+    <div class="mb-2 ps-3" style="border-left: 3px solid var(--bs-primary);">
+      <h5 class="mb-1">Input</h5>
+      <p class="text-body-secondary mb-0 small">
+        A single-line text field. Compose with <code>Label</code> and <code>FormText</code> for
+        accessible labelling.
+      </p>
+    </div>
+    <div class="p-4 rounded-3 border bg-body-tertiary mb-3">
+      <div style="max-width: 360px;">
+        <Form>
+          <FormGroup>
+            <Label for="email-demo">Email address</Label>
+            <Input id="email-demo" placeholder="you@example.com" type="email" />
+            <FormText>We'll never share your email.</FormText>
+          </FormGroup>
+          <FormGroup>
+            <Label for="disabled-demo">Disabled</Label>
+            <Input disabled id="disabled-demo" placeholder="Not editable" type="text" />
+          </FormGroup>
+          <FormGroup>
+            <Label for="valid-demo">Valid state</Label>
+            <Input id="valid-demo" type="text" valid value="Looks good!" />
+          </FormGroup>
+          <FormGroup>
+            <Label for="invalid-demo">Invalid state</Label>
+            <Input id="invalid-demo" invalid type="text" value="Wrong value" />
+          </FormGroup>
+        </Form>
+      </div>
+    </div>
+    <CodeBlock
+      code={INPUT_CODE}
+      collapsible
+      defaultOpen={false}
+      filename="Input.svelte"
+      language="svelte"
+    />
+  </section>
+  <hr class="my-2" />
+
+  <!-- Textarea -->
+  <section id="textarea" class="mb-5">
+    <div class="mb-2 ps-3" style="border-left: 3px solid var(--bs-primary);">
+      <h5 class="mb-1">Textarea</h5>
+      <p class="text-body-secondary mb-0 small">
+        A multi-line text input. Use <code>type="textarea"</code> on the
+        <code>Input</code> component with a <code>rows</code> prop.
+      </p>
+    </div>
+    <div class="p-4 rounded-3 border bg-body-tertiary mb-3">
+      <div style="max-width: 360px;">
+        <FormGroup>
+          <Label for="bio-demo">Bio</Label>
+          <Input id="bio-demo" placeholder="Tell us about yourself…" rows={4} type="textarea" />
+          <FormText>Describe your project in a few sentences.</FormText>
+        </FormGroup>
+      </div>
+    </div>
+    <CodeBlock
+      code={TEXTAREA_CODE}
+      collapsible
+      defaultOpen={false}
+      filename="Textarea.svelte"
+      language="svelte"
+    />
+  </section>
+  <hr class="my-2" />
+
+  <!-- Select -->
+  <section id="select" class="mb-5">
+    <div class="mb-2 ps-3" style="border-left: 3px solid var(--bs-primary);">
+      <h5 class="mb-1">Select</h5>
+      <p class="text-body-secondary mb-0 small">
+        A native dropdown using <code>Input type="select"</code> with nested <code>option</code>
+        elements.
+      </p>
+    </div>
+    <div class="p-4 rounded-3 border bg-body-tertiary mb-3">
+      <div style="max-width: 360px;">
+        <FormGroup>
+          <Label for="framework-demo">Framework</Label>
+          <Input id="framework-demo" type="select">
+            <option value="">Select a framework…</option>
+            <option value="nextjs">Next.js</option>
+            <option value="remix">Remix</option>
+            <option value="astro">Astro</option>
+            <option value="sveltekit">SvelteKit</option>
+          </Input>
+        </FormGroup>
+        <FormGroup>
+          <Label for="disabled-select">Disabled</Label>
+          <Input disabled id="disabled-select" type="select">
+            <option>Not selectable</option>
+          </Input>
+        </FormGroup>
+      </div>
+    </div>
+    <CodeBlock
+      code={SELECT_CODE}
+      collapsible
+      defaultOpen={false}
+      filename="Select.svelte"
+      language="svelte"
+    />
+  </section>
+  <hr class="my-2" />
+
+  <!-- Checkbox -->
+  <section id="checkbox" class="mb-5">
+    <div class="mb-2 ps-3" style="border-left: 3px solid var(--bs-primary);">
+      <h5 class="mb-1">Checkbox</h5>
+      <p class="text-body-secondary mb-0 small">
+        A binary toggle. Pair <code>Input type="checkbox"</code> with a <code>Label</code> using
+        matching <code>id</code>/<code>for</code>.
+      </p>
+    </div>
+    <div class="p-4 rounded-3 border bg-body-tertiary mb-3">
+      <div class="d-flex flex-column gap-2">
+        <div class="form-check">
+          <Input bind:checked={termsAccepted} id="terms-demo" type="checkbox" />
+          <Label check for="terms-demo">Accept terms and conditions</Label>
+        </div>
+        <div class="form-check">
+          <Input checked id="checked-demo" type="checkbox" />
+          <Label check for="checked-demo">Checked by default</Label>
+        </div>
+        <div class="form-check">
+          <Input disabled id="disabled-cb" type="checkbox" />
+          <Label check class="opacity-50" for="disabled-cb">Disabled</Label>
+        </div>
+      </div>
+    </div>
+    <CodeBlock
+      code={CHECKBOX_CODE}
+      collapsible
+      defaultOpen={false}
+      filename="Checkbox.svelte"
+      language="svelte"
+    />
+  </section>
+  <hr class="my-2" />
+
+  <!-- RadioGroup -->
+  <section id="radio-group" class="mb-5">
+    <div class="mb-2 ps-3" style="border-left: 3px solid var(--bs-primary);">
+      <h5 class="mb-1">RadioGroup</h5>
+      <p class="text-body-secondary mb-0 small">
+        Mutually exclusive options using <code>Input type="radio"</code> with a shared
+        <code>name</code> attribute and <code>bind:group</code>.
+      </p>
+    </div>
+    <div class="p-4 rounded-3 border bg-body-tertiary mb-3">
+      <div class="d-flex flex-column gap-1">
+        <div class="form-check">
+          <Input bind:group={plan} id="plan-free" name="plan" type="radio" value="free" />
+          <Label check for="plan-free">Free</Label>
+        </div>
+        <div class="form-check">
+          <Input bind:group={plan} id="plan-pro" name="plan" type="radio" value="pro" />
+          <Label check for="plan-pro">Pro</Label>
+        </div>
+        <div class="form-check">
+          <Input
+            bind:group={plan}
+            id="plan-enterprise"
+            name="plan"
+            type="radio"
+            value="enterprise"
+          />
+          <Label check for="plan-enterprise">Enterprise</Label>
+        </div>
+      </div>
+      <p class="text-body-secondary small mt-2 mb-0">Selected: <strong>{plan}</strong></p>
+    </div>
+    <CodeBlock
+      code={RADIO_GROUP_CODE}
+      collapsible
+      defaultOpen={false}
+      filename="RadioGroup.svelte"
+      language="svelte"
+    />
+  </section>
+  <hr class="my-2" />
+
+  <!-- Switch -->
+  <section id="switch" class="mb-5">
+    <div class="mb-2 ps-3" style="border-left: 3px solid var(--bs-primary);">
+      <h5 class="mb-1">Switch</h5>
+      <p class="text-body-secondary mb-0 small">
+        An on/off toggle using <code>Input type="switch"</code>. Pair with a <code>Label</code>
+        using matching <code>id</code>/<code>for</code>.
+      </p>
+    </div>
+    <div class="p-4 rounded-3 border bg-body-tertiary mb-3">
+      <div class="d-flex flex-column gap-2">
+        <div class="form-check form-switch">
+          <Input
+            bind:checked={notificationsEnabled}
+            id="notifications-demo"
+            role="switch"
+            type="switch"
+          />
+          <Label check for="notifications-demo">Email notifications</Label>
+        </div>
+        <div class="form-check form-switch">
+          <Input checked id="marketing-demo" role="switch" type="switch" />
+          <Label check for="marketing-demo">Marketing emails</Label>
+        </div>
+        <div class="form-check form-switch">
+          <Input disabled id="disabled-switch" role="switch" type="switch" />
+          <Label check class="opacity-50" for="disabled-switch">Disabled</Label>
+        </div>
+      </div>
+    </div>
+    <CodeBlock
+      code={SWITCH_CODE}
+      collapsible
+      defaultOpen={false}
+      filename="Switch.svelte"
+      language="svelte"
+    />
+  </section>
+</div>

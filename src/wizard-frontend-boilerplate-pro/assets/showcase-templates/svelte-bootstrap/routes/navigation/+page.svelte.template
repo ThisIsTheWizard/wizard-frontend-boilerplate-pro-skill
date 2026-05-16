@@ -1,0 +1,342 @@
+<script lang="ts">
+  import {
+    Breadcrumb,
+    BreadcrumbItem,
+    Nav,
+    NavItem,
+    NavLink,
+    Navbar,
+    NavbarBrand,
+    Pagination,
+    PaginationItem,
+    PaginationLink,
+    TabContent,
+    TabPane,
+  } from "@sveltestrap/sveltestrap";
+  import { CodeBlock } from "$lib/components/ui/code-block";
+
+  let activeTab = $state("account");
+  let currentPage = $state(1);
+  const TOTAL_PAGES = 10;
+
+  const TABS_CODE = `<script lang="ts">
+  import {
+    Nav,
+    NavItem,
+    NavLink,
+    TabContent,
+    TabPane,
+  } from "@sveltestrap/sveltestrap";
+
+  let activeTab = $state("account");
+<\/script>
+
+<Nav tabs>
+  <NavItem>
+    <NavLink active={activeTab === "account"} onclick={() => (activeTab = "account")}>
+      Account
+    </NavLink>
+  </NavItem>
+  <NavItem>
+    <NavLink active={activeTab === "password"} onclick={() => (activeTab = "password")}>
+      Password
+    </NavLink>
+  </NavItem>
+  <NavItem>
+    <NavLink active={activeTab === "notifications"} onclick={() => (activeTab = "notifications")}>
+      Notifications
+    </NavLink>
+  </NavItem>
+</Nav>
+<TabContent>
+  <TabPane active={activeTab === "account"} tabId="account">
+    <p class="pt-3 text-body-secondary">Manage your account settings and preferences.</p>
+  </TabPane>
+  <TabPane active={activeTab === "password"} tabId="password">
+    <p class="pt-3 text-body-secondary">Change your password and security settings.</p>
+  </TabPane>
+  <TabPane active={activeTab === "notifications"} tabId="notifications">
+    <p class="pt-3 text-body-secondary">Configure how you receive notifications.</p>
+  </TabPane>
+</TabContent>`;
+
+  const BREADCRUMB_CODE = `<script lang="ts">
+  import { Breadcrumb, BreadcrumbItem } from "@sveltestrap/sveltestrap";
+<\/script>
+
+<Breadcrumb>
+  <BreadcrumbItem href="#">Home</BreadcrumbItem>
+  <BreadcrumbItem href="#">Library</BreadcrumbItem>
+  <BreadcrumbItem active>Components</BreadcrumbItem>
+</Breadcrumb>`;
+
+  const PAGINATION_CODE = `<script lang="ts">
+  import { Pagination, PaginationItem, PaginationLink } from "@sveltestrap/sveltestrap";
+
+  let currentPage = $state(1);
+  const TOTAL_PAGES = 10;
+<\/script>
+
+<Pagination>
+  <PaginationItem disabled={currentPage === 1}>
+    <PaginationLink
+      previous
+      onclick={() => (currentPage = Math.max(1, currentPage - 1))}
+    />
+  </PaginationItem>
+  {#each Array.from({ length: TOTAL_PAGES }, (_, i) => i + 1) as page}
+    <PaginationItem active={currentPage === page}>
+      <PaginationLink onclick={() => (currentPage = page)}>{page}</PaginationLink>
+    </PaginationItem>
+  {/each}
+  <PaginationItem disabled={currentPage === TOTAL_PAGES}>
+    <PaginationLink
+      next
+      onclick={() => (currentPage = Math.min(TOTAL_PAGES, currentPage + 1))}
+    />
+  </PaginationItem>
+</Pagination>`;
+
+  const NAVBAR_CODE = `<script lang="ts">
+  import {
+    Nav,
+    NavItem,
+    NavLink,
+    Navbar,
+    NavbarBrand,
+  } from "@sveltestrap/sveltestrap";
+<\/script>
+
+<Navbar class="border rounded-3 px-3" color="body-tertiary" expand="md" light>
+  <NavbarBrand href="#">MyApp</NavbarBrand>
+  <Nav navbar>
+    <NavItem>
+      <NavLink href="#">Products</NavLink>
+    </NavItem>
+    <NavItem>
+      <NavLink href="#">Docs</NavLink>
+    </NavItem>
+    <NavItem>
+      <NavLink href="#">Blog</NavLink>
+    </NavItem>
+  </Nav>
+</Navbar>`;
+</script>
+
+<div class="d-flex flex-column gap-4">
+  <div>
+    <h1 class="h4 mb-1">Navigation</h1>
+    <p class="text-body-secondary">
+      Route navigation, tabbed interfaces, and paginated content — tabs, breadcrumbs, navbars, and
+      pagination.
+    </p>
+  </div>
+
+  <!-- Tabs -->
+  <section id="tabs" class="mb-5">
+    <div class="mb-2 ps-3" style="border-left: 3px solid var(--bs-primary);">
+      <h5 class="mb-1">Tabs</h5>
+      <p class="text-body-secondary mb-0 small">
+        Organises related content into switchable panels using <code>Nav tabs</code> +
+        <code>TabContent</code>/<code>TabPane</code>.
+      </p>
+    </div>
+    <div class="p-4 rounded-3 border bg-body-tertiary mb-3">
+      <Nav tabs>
+        <NavItem>
+          <NavLink active={activeTab === "account"} onclick={() => (activeTab = "account")}>
+            Account
+          </NavLink>
+        </NavItem>
+        <NavItem>
+          <NavLink active={activeTab === "password"} onclick={() => (activeTab = "password")}>
+            Password
+          </NavLink>
+        </NavItem>
+        <NavItem>
+          <NavLink
+            active={activeTab === "notifications"}
+            onclick={() => (activeTab = "notifications")}
+          >
+            Notifications
+          </NavLink>
+        </NavItem>
+      </Nav>
+      <TabContent>
+        <TabPane active={activeTab === "account"} tabId="account">
+          <p class="pt-3 text-body-secondary mb-0">
+            Manage your account settings and preferences.
+          </p>
+        </TabPane>
+        <TabPane active={activeTab === "password"} tabId="password">
+          <p class="pt-3 text-body-secondary mb-0">
+            Change your password and security settings.
+          </p>
+        </TabPane>
+        <TabPane active={activeTab === "notifications"} tabId="notifications">
+          <p class="pt-3 text-body-secondary mb-0">
+            Configure how you receive notifications.
+          </p>
+        </TabPane>
+      </TabContent>
+    </div>
+    <CodeBlock
+      code={TABS_CODE}
+      collapsible
+      defaultOpen={false}
+      filename="Tabs.svelte"
+      language="svelte"
+    />
+  </section>
+  <hr class="my-2" />
+
+  <!-- Breadcrumb -->
+  <section id="breadcrumb" class="mb-5">
+    <div class="mb-2 ps-3" style="border-left: 3px solid var(--bs-primary);">
+      <h5 class="mb-1">Breadcrumb</h5>
+      <p class="text-body-secondary mb-0 small">
+        Shows the user's current location within a site hierarchy. Mark the last item
+        <code>active</code>.
+      </p>
+    </div>
+    <div class="p-4 rounded-3 border bg-body-tertiary mb-3">
+      <div class="d-flex flex-column gap-3">
+        <Breadcrumb>
+          <BreadcrumbItem href="#">Home</BreadcrumbItem>
+          <BreadcrumbItem href="#">Library</BreadcrumbItem>
+          <BreadcrumbItem active>Components</BreadcrumbItem>
+        </Breadcrumb>
+        <Breadcrumb>
+          <BreadcrumbItem href="#">Dashboard</BreadcrumbItem>
+          <BreadcrumbItem href="#">Settings</BreadcrumbItem>
+          <BreadcrumbItem href="#">Account</BreadcrumbItem>
+          <BreadcrumbItem active>Profile</BreadcrumbItem>
+        </Breadcrumb>
+      </div>
+    </div>
+    <CodeBlock
+      code={BREADCRUMB_CODE}
+      collapsible
+      defaultOpen={false}
+      filename="Breadcrumb.svelte"
+      language="svelte"
+    />
+  </section>
+  <hr class="my-2" />
+
+  <!-- Pagination -->
+  <section id="pagination" class="mb-5">
+    <div class="mb-2 ps-3" style="border-left: 3px solid var(--bs-primary);">
+      <h5 class="mb-1">Pagination</h5>
+      <p class="text-body-secondary mb-0 small">
+        Splits large datasets across multiple pages with Previous, Next, and numbered page links.
+      </p>
+    </div>
+    <div class="p-4 rounded-3 border bg-body-tertiary mb-3">
+      <div class="d-flex flex-column gap-3">
+        <!-- Full page list (trimmed for readability) -->
+        <Pagination>
+          <PaginationItem disabled={currentPage === 1}>
+            <PaginationLink
+              previous
+              onclick={() => (currentPage = Math.max(1, currentPage - 1))}
+            />
+          </PaginationItem>
+          {#each [1, 2, 3, 4, 5] as p}
+            <PaginationItem active={currentPage === p}>
+              <PaginationLink onclick={() => (currentPage = p)}>{p}</PaginationLink>
+            </PaginationItem>
+          {/each}
+          <PaginationItem disabled>
+            <PaginationLink>…</PaginationLink>
+          </PaginationItem>
+          {#each [9, 10] as p}
+            <PaginationItem active={currentPage === p}>
+              <PaginationLink onclick={() => (currentPage = p)}>{p}</PaginationLink>
+            </PaginationItem>
+          {/each}
+          <PaginationItem disabled={currentPage === TOTAL_PAGES}>
+            <PaginationLink
+              next
+              onclick={() => (currentPage = Math.min(TOTAL_PAGES, currentPage + 1))}
+            />
+          </PaginationItem>
+        </Pagination>
+        <p class="text-body-secondary small mb-0">Current page: <strong>{currentPage}</strong></p>
+
+        <!-- Small size variant -->
+        <Pagination size="sm">
+          <PaginationItem disabled={currentPage === 1}>
+            <PaginationLink previous onclick={() => (currentPage = Math.max(1, currentPage - 1))} />
+          </PaginationItem>
+          {#each [1, 2, 3] as p}
+            <PaginationItem active={currentPage === p}>
+              <PaginationLink onclick={() => (currentPage = p)}>{p}</PaginationLink>
+            </PaginationItem>
+          {/each}
+          <PaginationItem disabled={currentPage === TOTAL_PAGES}>
+            <PaginationLink next onclick={() => (currentPage = Math.min(TOTAL_PAGES, currentPage + 1))} />
+          </PaginationItem>
+        </Pagination>
+      </div>
+    </div>
+    <CodeBlock
+      code={PAGINATION_CODE}
+      collapsible
+      defaultOpen={false}
+      filename="Pagination.svelte"
+      language="svelte"
+    />
+  </section>
+  <hr class="my-2" />
+
+  <!-- Navbar -->
+  <section id="navbar" class="mb-5">
+    <div class="mb-2 ps-3" style="border-left: 3px solid var(--bs-primary);">
+      <h5 class="mb-1">Navbar</h5>
+      <p class="text-body-secondary mb-0 small">
+        A top-level navigation bar with brand, links, and optional collapsing on mobile using
+        <code>expand</code>.
+      </p>
+    </div>
+    <div class="p-4 rounded-3 border bg-body-tertiary mb-3">
+      <div class="d-flex flex-column gap-3">
+        <!-- Light navbar -->
+        <Navbar class="border rounded-3 px-3" color="body-tertiary" expand="md" light>
+          <NavbarBrand href="#">MyApp</NavbarBrand>
+          <Nav navbar>
+            <NavItem>
+              <NavLink href="#">Products</NavLink>
+            </NavItem>
+            <NavItem>
+              <NavLink href="#">Docs</NavLink>
+            </NavItem>
+            <NavItem>
+              <NavLink href="#">Blog</NavLink>
+            </NavItem>
+          </Nav>
+        </Navbar>
+
+        <!-- Dark navbar -->
+        <Navbar class="border rounded-3 px-3" color="dark" dark expand="md">
+          <NavbarBrand class="text-white" href="#">DarkApp</NavbarBrand>
+          <Nav navbar>
+            <NavItem>
+              <NavLink class="text-white-50" href="#">Products</NavLink>
+            </NavItem>
+            <NavItem>
+              <NavLink class="text-white-50" href="#">Pricing</NavLink>
+            </NavItem>
+          </Nav>
+        </Navbar>
+      </div>
+    </div>
+    <CodeBlock
+      code={NAVBAR_CODE}
+      collapsible
+      defaultOpen={false}
+      filename="Navbar.svelte"
+      language="svelte"
+    />
+  </section>
+</div>

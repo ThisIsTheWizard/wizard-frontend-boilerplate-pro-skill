@@ -1,0 +1,223 @@
+<script setup lang="ts">
+import { ref } from "vue";
+
+import {
+  BBreadcrumb,
+  BNav,
+  BNavItem,
+  BNavbar,
+  BNavbarBrand,
+  BPagination,
+  BTabs,
+  BTab,
+} from "bootstrap-vue-next";
+
+import { CodeBlock } from "@/components/ui/code-block";
+
+const activeTab = ref(0);
+const currentPage = ref(1);
+
+const breadcrumbItems = [
+  { text: "Home", href: "#" },
+  { text: "Library", href: "#" },
+  { text: "Components", active: true },
+];
+
+const TABS_CODE = `<script setup lang="ts">
+import { ref } from "vue";
+import { BTab, BTabs } from "bootstrap-vue-next";
+
+const activeTab = ref(0);
+<\/script>
+
+<template>
+  <BTabs v-model="activeTab">
+    <BTab title="Account">
+      <p class="pt-3 text-body-secondary">Manage your account settings and preferences.</p>
+    </BTab>
+    <BTab title="Password">
+      <p class="pt-3 text-body-secondary">Change your password and security options.</p>
+    </BTab>
+    <BTab title="Notifications">
+      <p class="pt-3 text-body-secondary">Configure how you receive notifications.</p>
+    </BTab>
+  </BTabs>
+</template>`;
+
+const BREADCRUMB_CODE = `<script setup lang="ts">
+import { BBreadcrumb } from "bootstrap-vue-next";
+
+const items = [
+  { text: "Home", href: "#" },
+  { text: "Library", href: "#" },
+  { text: "Components", active: true },
+];
+<\/script>
+
+<template>
+  <BBreadcrumb :items="items" />
+</template>`;
+
+const PAGINATION_CODE = `<script setup lang="ts">
+import { ref } from "vue";
+import { BPagination } from "bootstrap-vue-next";
+
+const page = ref(1);
+<\/script>
+
+<template>
+  <BPagination
+    v-model="page"
+    :per-page="10"
+    :total-rows="100"
+    align="center"
+  />
+</template>`;
+
+const NAV_MENU_CODE = `<script setup lang="ts">
+import { BNav, BNavItem, BNavbar, BNavbarBrand } from "bootstrap-vue-next";
+<\/script>
+
+<template>
+  <BNavbar class="bg-body-tertiary rounded border px-3" toggleable="md">
+    <BNavbarBrand href="#">MyApp</BNavbarBrand>
+    <BNav class="ms-auto" navbar>
+      <BNavItem href="#">Products</BNavItem>
+      <BNavItem href="#">Resources</BNavItem>
+      <BNavItem href="#">About</BNavItem>
+    </BNav>
+  </BNavbar>
+</template>`;
+</script>
+
+<template>
+  <div class="d-flex flex-column gap-4">
+    <div>
+      <h1 class="h4 mb-1">Navigation</h1>
+      <p class="text-body-secondary">
+        Components for moving between pages and sections — tabs, breadcrumbs, pagination, and menus.
+      </p>
+    </div>
+
+    <!-- Tabs -->
+    <section id="tabs">
+      <div class="mb-2 ps-3" style="border-left: 3px solid var(--bs-primary)">
+        <h5 class="mb-1">Tabs</h5>
+        <p class="text-body-secondary mb-0 small">
+          A tabbed interface using <code>BTabs</code> + <code>BTab</code> with
+          <code>v-model</code> for the active index and a <code>title</code> prop per tab.
+        </p>
+      </div>
+      <div class="p-4 rounded-3 border bg-body-tertiary mb-3">
+        <BTabs v-model="activeTab">
+          <BTab title="Account">
+            <p class="pt-3 text-body-secondary small">
+              Manage your account settings and preferences.
+            </p>
+          </BTab>
+          <BTab title="Password">
+            <p class="pt-3 text-body-secondary small">
+              Change your password and security options.
+            </p>
+          </BTab>
+          <BTab title="Notifications">
+            <p class="pt-3 text-body-secondary small">
+              Configure how you receive notifications.
+            </p>
+          </BTab>
+        </BTabs>
+      </div>
+      <CodeBlock
+        :code="TABS_CODE"
+        collapsible
+        :default-open="false"
+        filename="Tabs.vue"
+        language="vue"
+      />
+    </section>
+
+    <hr class="my-2" />
+
+    <!-- Breadcrumb -->
+    <section id="breadcrumb">
+      <div class="mb-2 ps-3" style="border-left: 3px solid var(--bs-primary)">
+        <h5 class="mb-1">Breadcrumb</h5>
+        <p class="text-body-secondary mb-0 small">
+          A landmark trail showing the current location. Pass <code>:items</code> as an array
+          with <code>text</code>, <code>href</code>, and <code>active</code> properties.
+        </p>
+      </div>
+      <div class="p-4 rounded-3 border bg-body-tertiary mb-3">
+        <BBreadcrumb :items="breadcrumbItems" />
+      </div>
+      <CodeBlock
+        :code="BREADCRUMB_CODE"
+        collapsible
+        :default-open="false"
+        filename="Breadcrumb.vue"
+        language="vue"
+      />
+    </section>
+
+    <hr class="my-2" />
+
+    <!-- Pagination -->
+    <section id="pagination">
+      <div class="mb-2 ps-3" style="border-left: 3px solid var(--bs-primary)">
+        <h5 class="mb-1">Pagination</h5>
+        <p class="text-body-secondary mb-0 small">
+          Page navigation controls using <code>BPagination</code> with
+          <code>v-model</code>, <code>:total-rows</code>, and <code>:per-page</code>.
+        </p>
+      </div>
+      <div class="p-4 rounded-3 border bg-body-tertiary mb-3">
+        <BPagination
+          v-model="currentPage"
+          :per-page="10"
+          :total-rows="100"
+          align="center"
+        />
+        <p class="text-center text-body-secondary small mt-2">
+          Current page: {{ currentPage }}
+        </p>
+      </div>
+      <CodeBlock
+        :code="PAGINATION_CODE"
+        collapsible
+        :default-open="false"
+        filename="Pagination.vue"
+        language="vue"
+      />
+    </section>
+
+    <hr class="my-2" />
+
+    <!-- NavigationMenu -->
+    <section id="navigation-menu">
+      <div class="mb-2 ps-3" style="border-left: 3px solid var(--bs-primary)">
+        <h5 class="mb-1">NavigationMenu</h5>
+        <p class="text-body-secondary mb-0 small">
+          A horizontal nav bar using <code>BNavbar</code>, <code>BNavbarBrand</code>,
+          <code>BNav</code>, and <code>BNavItem</code> for site-level navigation.
+        </p>
+      </div>
+      <div class="p-4 rounded-3 border bg-body-tertiary mb-3">
+        <BNavbar class="bg-body rounded border px-3" toggleable="md">
+          <BNavbarBrand href="#">MyApp</BNavbarBrand>
+          <BNav class="ms-auto" navbar>
+            <BNavItem href="#">Products</BNavItem>
+            <BNavItem href="#">Resources</BNavItem>
+            <BNavItem href="#">About</BNavItem>
+          </BNav>
+        </BNavbar>
+      </div>
+      <CodeBlock
+        :code="NAV_MENU_CODE"
+        collapsible
+        :default-open="false"
+        filename="NavigationMenu.vue"
+        language="vue"
+      />
+    </section>
+  </div>
+</template>

@@ -1,0 +1,179 @@
+<script setup lang="ts">
+import { ref } from "vue";
+
+import {
+  BButton,
+  BDropdown,
+  BDropdownDivider,
+  BDropdownHeader,
+  BDropdownItem,
+  BOffcanvas,
+  BPopover,
+} from "bootstrap-vue-next";
+
+import { CodeBlock } from "@/components/ui/code-block";
+
+const showOffcanvas = ref(false);
+
+const POPOVER_CODE = `<script setup lang="ts">
+import { BButton, BPopover } from "bootstrap-vue-next";
+<\/script>
+
+<template>
+  <BButton id="popover-btn" variant="outline-secondary">Open Popover</BButton>
+
+  <BPopover target="popover-btn" title="Popover title" triggers="click">
+    <p class="mb-2 small text-body-secondary">
+      This is a popover. It can contain any content.
+    </p>
+    <BButton size="sm" variant="outline-primary">Action</BButton>
+  </BPopover>
+</template>`;
+
+const DROPDOWN_CODE = `<script setup lang="ts">
+import {
+  BDropdown,
+  BDropdownDivider,
+  BDropdownHeader,
+  BDropdownItem,
+} from "bootstrap-vue-next";
+<\/script>
+
+<template>
+  <BDropdown text="Account" variant="outline-secondary">
+    <BDropdownHeader>My Account</BDropdownHeader>
+    <BDropdownItem>Profile</BDropdownItem>
+    <BDropdownItem>Settings</BDropdownItem>
+    <BDropdownDivider />
+    <BDropdownItem variant="danger">Sign out</BDropdownItem>
+  </BDropdown>
+</template>`;
+
+const OFFCANVAS_CODE = `<script setup lang="ts">
+import { ref } from "vue";
+import { BButton, BOffcanvas } from "bootstrap-vue-next";
+
+const show = ref(false);
+<\/script>
+
+<template>
+  <BButton variant="outline-secondary" @click="show = true">Open Panel</BButton>
+
+  <BOffcanvas v-model:show="show" placement="end" title="Edit profile">
+    <p class="text-body-secondary small">
+      Make changes to your profile here.
+    </p>
+    <hr />
+    <div class="d-flex justify-content-end">
+      <BButton variant="outline-secondary" @click="show = false">Close</BButton>
+    </div>
+  </BOffcanvas>
+</template>`;
+</script>
+
+<template>
+  <div class="d-flex flex-column gap-4">
+    <div>
+      <h1 class="h4 mb-1">Overlay</h1>
+      <p class="text-body-secondary">
+        Floating UI components that render above the main content — popovers, dropdown menus,
+        and offcanvas panels.
+      </p>
+    </div>
+
+    <!-- Popover -->
+    <section id="popover">
+      <div class="mb-2 ps-3" style="border-left: 3px solid var(--bs-primary)">
+        <h5 class="mb-1">Popover</h5>
+        <p class="text-body-secondary mb-0 small">
+          A non-modal floating panel anchored to a trigger element via
+          <code>target</code> ID. Dismissed by clicking outside or via
+          <code>triggers="click"</code>.
+        </p>
+      </div>
+      <div class="p-4 rounded-3 border bg-body-tertiary mb-3">
+        <BButton id="popover-demo-btn" variant="outline-secondary">Open Popover</BButton>
+
+        <BPopover target="popover-demo-btn" title="Popover title" triggers="click">
+          <p class="mb-2 small text-body-secondary">
+            This is a popover. It can contain any content.
+          </p>
+          <BButton size="sm" variant="outline-primary">Action</BButton>
+        </BPopover>
+      </div>
+      <CodeBlock
+        :code="POPOVER_CODE"
+        collapsible
+        :default-open="false"
+        filename="Popover.vue"
+        language="vue"
+      />
+    </section>
+
+    <hr class="my-2" />
+
+    <!-- DropdownMenu -->
+    <section id="dropdown-menu">
+      <div class="mb-2 ps-3" style="border-left: 3px solid var(--bs-primary)">
+        <h5 class="mb-1">DropdownMenu</h5>
+        <p class="text-body-secondary mb-0 small">
+          A contextual menu using <code>BDropdown</code> with
+          <code>BDropdownItem</code>, <code>BDropdownHeader</code>, and
+          <code>BDropdownDivider</code>.
+        </p>
+      </div>
+      <div class="p-4 rounded-3 border bg-body-tertiary mb-3">
+        <BDropdown text="Account" variant="outline-secondary">
+          <BDropdownHeader>My Account</BDropdownHeader>
+          <BDropdownItem>Profile</BDropdownItem>
+          <BDropdownItem>Settings</BDropdownItem>
+          <BDropdownItem>Billing</BDropdownItem>
+          <BDropdownDivider />
+          <BDropdownItem variant="danger">Sign out</BDropdownItem>
+        </BDropdown>
+      </div>
+      <CodeBlock
+        :code="DROPDOWN_CODE"
+        collapsible
+        :default-open="false"
+        filename="DropdownMenu.vue"
+        language="vue"
+      />
+    </section>
+
+    <hr class="my-2" />
+
+    <!-- Sheet / Offcanvas -->
+    <section id="sheet">
+      <div class="mb-2 ps-3" style="border-left: 3px solid var(--bs-primary)">
+        <h5 class="mb-1">Sheet</h5>
+        <p class="text-body-secondary mb-0 small">
+          A slide-in panel using <code>BOffcanvas</code> with <code>v-model:show</code>,
+          <code>placement="end"</code>, and a <code>title</code> prop. Includes built-in
+          focus trap and ARIA dialog semantics.
+        </p>
+      </div>
+      <div class="p-4 rounded-3 border bg-body-tertiary mb-3">
+        <BButton variant="outline-secondary" @click="showOffcanvas = true">Open Sheet</BButton>
+
+        <BOffcanvas v-model:show="showOffcanvas" placement="end" title="Edit profile">
+          <p class="text-body-secondary small mb-3">
+            Make changes to your profile here. Click close when you're done.
+          </p>
+          <hr />
+          <div class="d-flex justify-content-end gap-2">
+            <BButton variant="outline-secondary" @click="showOffcanvas = false">Close</BButton>
+            <BButton variant="primary" @click="showOffcanvas = false">Save changes</BButton>
+          </div>
+        </BOffcanvas>
+      </div>
+      <CodeBlock
+        :code="OFFCANVAS_CODE"
+        collapsible
+        :default-open="false"
+        filename="Sheet.vue"
+        language="vue"
+      />
+    </section>
+  </div>
+</template>

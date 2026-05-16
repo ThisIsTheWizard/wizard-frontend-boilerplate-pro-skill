@@ -1,0 +1,371 @@
+<script setup lang="ts">
+import { ref } from "vue";
+
+import { BTable } from "bootstrap-vue-next";
+
+import { CodeBlock } from "@/components/ui/code-block";
+
+// ── Chart data ──────────────────────────────────────────────────────────────
+const chartData = [
+  { month: "January", desktop: 186, mobile: 80 },
+  { month: "February", desktop: 305, mobile: 200 },
+  { month: "March", desktop: 237, mobile: 120 },
+  { month: "April", desktop: 73, mobile: 190 },
+  { month: "May", desktop: 209, mobile: 130 },
+  { month: "June", desktop: 214, mobile: 140 },
+];
+
+const maxValue = Math.max(...chartData.flatMap((d) => [d.desktop, d.mobile]));
+
+// ── DataTable data ───────────────────────────────────────────────────────────
+interface User {
+  email: string;
+  id: number;
+  name: string;
+  role: string;
+}
+
+const tableItems: User[] = [
+  { id: 1, name: "Alice Martin", email: "alice@example.com", role: "Admin" },
+  { id: 2, name: "Bob Chen", email: "bob@example.com", role: "Developer" },
+  { id: 3, name: "Carol White", email: "carol@example.com", role: "Designer" },
+  { id: 4, name: "Dave Kim", email: "dave@example.com", role: "Developer" },
+  { id: 5, name: "Eve Lopez", email: "eve@example.com", role: "Manager" },
+];
+
+const tableFields = [
+  { key: "name", label: "Name", sortable: true },
+  { key: "email", label: "Email", sortable: true },
+  { key: "role", label: "Role", sortable: true },
+];
+
+// ── Calendar ─────────────────────────────────────────────────────────────────
+const selectedDate = ref<Date | null>(null);
+const today = new Date();
+const calendarYear = ref(today.getFullYear());
+const calendarMonth = ref(today.getMonth()); // 0-indexed
+
+const MONTH_NAMES = [
+  "January", "February", "March", "April", "May", "June",
+  "July", "August", "September", "October", "November", "December",
+];
+
+function getDaysInMonth(year: number, month: number) {
+  return new Date(year, month + 1, 0).getDate();
+}
+
+function getFirstDayOfMonth(year: number, month: number) {
+  return new Date(year, month, 1).getDay();
+}
+
+function selectDate(day: number) {
+  selectedDate.value = new Date(calendarYear.value, calendarMonth.value, day);
+}
+
+function prevMonth() {
+  if (calendarMonth.value === 0) {
+    calendarMonth.value = 11;
+    calendarYear.value--;
+  } else {
+    calendarMonth.value--;
+  }
+}
+
+function nextMonth() {
+  if (calendarMonth.value === 11) {
+    calendarMonth.value = 0;
+    calendarYear.value++;
+  } else {
+    calendarMonth.value++;
+  }
+}
+
+// ── Code snippets ────────────────────────────────────────────────────────────
+const CHART_CODE = `<script setup lang="ts">
+// Recharts (via react-recharts) is React-only.
+// For Vue, use vue-chartjs (Chart.js wrapper) or unovis.
+// Example with vue-chartjs:
+import { Bar } from "vue-chartjs";
+import {
+  BarElement,
+  CategoryScale,
+  Chart as ChartJS,
+  Legend,
+  LinearScale,
+  Title,
+  Tooltip,
+} from "chart.js";
+
+ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale);
+
+const chartData = {
+  labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
+  datasets: [
+    {
+      label: "Desktop",
+      backgroundColor: "rgba(var(--bs-primary-rgb), 0.8)",
+      data: [186, 305, 237, 73, 209, 214],
+    },
+    {
+      label: "Mobile",
+      backgroundColor: "rgba(var(--bs-success-rgb), 0.8)",
+      data: [80, 200, 120, 190, 130, 140],
+    },
+  ],
+};
+<\/script>
+
+<template>
+  <Bar :data="chartData" />
+</template>`;
+
+const DATA_TABLE_CODE = `<script setup lang="ts">
+import { BTable } from "bootstrap-vue-next";
+
+interface User {
+  email: string;
+  id: number;
+  name: string;
+  role: string;
+}
+
+const items: User[] = [
+  { id: 1, name: "Alice Martin", email: "alice@example.com", role: "Admin" },
+  { id: 2, name: "Bob Chen", email: "bob@example.com", role: "Developer" },
+  { id: 3, name: "Carol White", email: "carol@example.com", role: "Designer" },
+];
+
+const fields = [
+  { key: "name", label: "Name", sortable: true },
+  { key: "email", label: "Email", sortable: true },
+  { key: "role", label: "Role", sortable: true },
+];
+<\/script>
+
+<template>
+  <BTable :fields="fields" :items="items" bordered hover responsive striped />
+</template>`;
+
+const CALENDAR_CODE = `<script setup lang="ts">
+import { ref } from "vue";
+
+// Bootstrap does not include a calendar component.
+// Use v-calendar (https://vcalendar.io) for a full-featured date picker:
+//   npm install v-calendar @popperjs/core
+import { Calendar } from "v-calendar";
+import "v-calendar/style.css";
+
+const selectedDate = ref(null);
+<\/script>
+
+<template>
+  <Calendar v-model="selectedDate" />
+</template>`;
+</script>
+
+<template>
+  <div class="d-flex flex-column gap-4">
+    <div>
+      <h1 class="h4 mb-1">Data Visualization</h1>
+      <p class="text-body-secondary">
+        Components for presenting structured and visual data — charts, data tables, and calendars.
+      </p>
+    </div>
+
+    <!-- Chart -->
+    <section id="chart">
+      <div class="mb-2 ps-3" style="border-left: 3px solid var(--bs-primary)">
+        <h5 class="mb-1">Chart</h5>
+        <p class="text-body-secondary mb-0 small">
+          Bootstrap has no built-in chart component. Use
+          <code>vue-chartjs</code> (Chart.js wrapper) or <code>unovis</code> for Vue-native
+          charting. The preview below is a custom bar chart built with Bootstrap utility classes.
+        </p>
+      </div>
+      <div class="p-4 rounded-3 border bg-body-tertiary mb-3">
+        <!-- Custom bar chart preview using Bootstrap utilities -->
+        <div
+          aria-label="Bar chart showing desktop and mobile traffic over six months"
+          role="img"
+          style="height: 200px"
+        >
+          <div class="d-flex align-items-end gap-2 h-100">
+            <div
+              v-for="entry in chartData"
+              :key="entry.month"
+              class="d-flex flex-column align-items-center flex-grow-1 h-100"
+            >
+              <div class="d-flex align-items-end gap-1 flex-grow-1 w-100">
+                <div
+                  :style="{
+                    height: (entry.desktop / maxValue) * 100 + '%',
+                    background: 'rgba(var(--bs-primary-rgb), 0.8)',
+                  }"
+                  class="flex-grow-1 rounded-top"
+                />
+                <div
+                  :style="{
+                    height: (entry.mobile / maxValue) * 100 + '%',
+                    background: 'rgba(var(--bs-success-rgb), 0.8)',
+                  }"
+                  class="flex-grow-1 rounded-top"
+                />
+              </div>
+              <span class="text-body-secondary mt-1" style="font-size: 10px">
+                {{ entry.month.slice(0, 3) }}
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="d-flex gap-4 mt-3 justify-content-center">
+          <div class="d-flex align-items-center gap-2">
+            <div
+              class="rounded"
+              style="width: 12px; height: 12px; background: rgba(var(--bs-primary-rgb), 0.8)"
+            />
+            <span class="small text-body-secondary">Desktop</span>
+          </div>
+          <div class="d-flex align-items-center gap-2">
+            <div
+              class="rounded"
+              style="width: 12px; height: 12px; background: rgba(var(--bs-success-rgb), 0.8)"
+            />
+            <span class="small text-body-secondary">Mobile</span>
+          </div>
+        </div>
+      </div>
+      <CodeBlock
+        :code="CHART_CODE"
+        collapsible
+        :default-open="false"
+        filename="Chart.vue"
+        language="vue"
+      />
+    </section>
+
+    <hr class="my-2" />
+
+    <!-- DataTable -->
+    <section id="data-table">
+      <div class="mb-2 ps-3" style="border-left: 3px solid var(--bs-primary)">
+        <h5 class="mb-1">DataTable</h5>
+        <p class="text-body-secondary mb-0 small">
+          A sortable data table using <code>BTable</code> with <code>:items</code>,
+          <code>:fields</code>, and <code>sortable: true</code> per field. Add
+          <code>striped</code>, <code>hover</code>, <code>bordered</code>, and
+          <code>responsive</code> for styling.
+        </p>
+      </div>
+      <div class="p-4 rounded-3 border bg-body-tertiary mb-3">
+        <BTable
+          :fields="tableFields"
+          :items="tableItems"
+          bordered
+          hover
+          responsive
+          striped
+        />
+      </div>
+      <CodeBlock
+        :code="DATA_TABLE_CODE"
+        collapsible
+        :default-open="false"
+        filename="DataTable.vue"
+        language="vue"
+      />
+    </section>
+
+    <hr class="my-2" />
+
+    <!-- Calendar -->
+    <section id="calendar">
+      <div class="mb-2 ps-3" style="border-left: 3px solid var(--bs-primary)">
+        <h5 class="mb-1">Calendar</h5>
+        <p class="text-body-secondary mb-0 small">
+          Bootstrap does not ship a calendar component. Use
+          <code>v-calendar</code> (<code>npm install v-calendar</code>) for a full-featured
+          date picker with range selection and locale support. The preview below is a
+          minimal custom calendar built with Bootstrap utilities.
+        </p>
+      </div>
+      <div class="p-4 rounded-3 border bg-body-tertiary mb-3">
+        <!-- Minimal custom calendar preview -->
+        <div class="border rounded-3 p-3" style="max-width: 320px">
+          <!-- Month navigation -->
+          <div class="d-flex align-items-center justify-content-between mb-3">
+            <button class="btn btn-link p-1 text-body" type="button" @click="prevMonth">
+              <svg fill="none" height="16" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" width="16">
+                <polyline points="15 18 9 12 15 6" />
+              </svg>
+            </button>
+            <span class="fw-semibold small">
+              {{ MONTH_NAMES[calendarMonth] }} {{ calendarYear }}
+            </span>
+            <button class="btn btn-link p-1 text-body" type="button" @click="nextMonth">
+              <svg fill="none" height="16" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" width="16">
+                <polyline points="9 18 15 12 9 6" />
+              </svg>
+            </button>
+          </div>
+
+          <!-- Day headers -->
+          <div class="row g-0 mb-1">
+            <div
+              v-for="d in ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa']"
+              :key="d"
+              class="col text-center text-body-secondary"
+              style="font-size: 11px"
+            >
+              {{ d }}
+            </div>
+          </div>
+
+          <!-- Day grid -->
+          <div class="row g-1">
+            <!-- Leading empty cells -->
+            <div
+              v-for="n in getFirstDayOfMonth(calendarYear, calendarMonth)"
+              :key="`empty-${n}`"
+              class="col"
+            />
+            <!-- Day cells -->
+            <div
+              v-for="day in getDaysInMonth(calendarYear, calendarMonth)"
+              :key="day"
+              class="col text-center"
+            >
+              <button
+                :class="[
+                  'btn btn-sm w-100 p-1',
+                  selectedDate &&
+                  selectedDate.getFullYear() === calendarYear &&
+                  selectedDate.getMonth() === calendarMonth &&
+                  selectedDate.getDate() === day
+                    ? 'btn-primary'
+                    : 'btn-link text-body',
+                ]"
+                style="font-size: 13px; min-width: 32px"
+                type="button"
+                @click="selectDate(day)"
+              >
+                {{ day }}
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <p v-if="selectedDate" class="mt-3 small text-body-secondary">
+          Selected: {{ selectedDate.toLocaleDateString() }}
+        </p>
+        <p v-else class="mt-3 small text-body-secondary">No date selected.</p>
+      </div>
+      <CodeBlock
+        :code="CALENDAR_CODE"
+        collapsible
+        :default-open="false"
+        filename="Calendar.vue"
+        language="vue"
+      />
+    </section>
+  </div>
+</template>

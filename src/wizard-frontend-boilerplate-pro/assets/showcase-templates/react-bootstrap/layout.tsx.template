@@ -1,0 +1,176 @@
+"use client";
+
+import { useCallback, useEffect, useState } from "react";
+import type { ReactNode } from "react";
+import Link from "next/link";
+
+import Button from "react-bootstrap/Button";
+import Offcanvas from "react-bootstrap/Offcanvas";
+
+import { useTheme } from "@/components/ThemeProvider";
+
+import { Sidebar } from "./sidebar";
+
+const DRAWER_WIDTH = 256;
+
+function MenuIcon() {
+  return (
+    <svg
+      aria-hidden="true"
+      fill="none"
+      height="24"
+      stroke="currentColor"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth="2"
+      viewBox="0 0 24 24"
+      width="24"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <line x1="4" x2="20" y1="6" y2="6" />
+      <line x1="4" x2="20" y1="12" y2="12" />
+      <line x1="4" x2="20" y1="18" y2="18" />
+    </svg>
+  );
+}
+
+function MoonIcon() {
+  return (
+    <svg
+      aria-hidden="true"
+      fill="none"
+      height="18"
+      stroke="currentColor"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth="2"
+      viewBox="0 0 24 24"
+      width="18"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" />
+    </svg>
+  );
+}
+
+function SunIcon() {
+  return (
+    <svg
+      aria-hidden="true"
+      fill="none"
+      height="18"
+      stroke="currentColor"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth="2"
+      viewBox="0 0 24 24"
+      width="18"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <circle cx="12" cy="12" r="4" />
+      <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41" />
+    </svg>
+  );
+}
+
+export default function LibraryLayout({ children }: { children: ReactNode }) {
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const { theme, toggleTheme } = useTheme();
+
+  useEffect(() => {
+    document.documentElement.setAttribute("data-bs-theme", theme);
+  }, [theme]);
+
+  const handleDrawerToggle = useCallback(
+    () => setMobileOpen((open) => !open),
+    [],
+  );
+  const closeSidebar = useCallback(() => setMobileOpen(false), []);
+
+  return (
+    <div className="d-flex" style={{ minHeight: "100vh" }}>
+      {/* Desktop sidebar */}
+      <nav
+        aria-label="Component library navigation"
+        className="d-none d-md-flex flex-column flex-shrink-0"
+        style={{
+          background: "var(--bs-secondary-bg)",
+          borderRight: "1px solid var(--bs-border-color)",
+          height: "100vh",
+          overflowY: "auto",
+          position: "sticky",
+          top: 0,
+          width: DRAWER_WIDTH,
+        }}
+      >
+        <Sidebar onNavigate={closeSidebar} />
+      </nav>
+
+      {/* Mobile Offcanvas sidebar */}
+      <Offcanvas
+        onHide={() => setMobileOpen(false)}
+        placement="start"
+        show={mobileOpen}
+      >
+        <Offcanvas.Body className="p-0">
+          <Sidebar onNavigate={closeSidebar} />
+        </Offcanvas.Body>
+      </Offcanvas>
+
+      {/* Main area */}
+      <div className="d-flex flex-column flex-grow-1" style={{ minWidth: 0 }}>
+        {/* Sticky header */}
+        <header
+          className="d-flex align-items-center gap-2 px-3"
+          style={{
+            background: "var(--bs-body-bg)",
+            borderBottom: "1px solid var(--bs-border-color)",
+            height: 56,
+            position: "sticky",
+            top: 0,
+            zIndex: 1020,
+          }}
+        >
+          {/* Mobile hamburger */}
+          <Button
+            aria-expanded={mobileOpen}
+            aria-label="Open navigation menu"
+            className="d-md-none p-1"
+            onClick={handleDrawerToggle}
+            size="sm"
+            variant="outline-secondary"
+          >
+            <MenuIcon />
+          </Button>
+
+          {/* Mobile logo */}
+          <Link
+            className="d-md-none fw-semibold small text-decoration-none text-body flex-grow-1"
+            href="/library"
+          >
+            Component Library
+          </Link>
+
+          {/* Desktop spacer */}
+          <div className="d-none d-md-block flex-grow-1" />
+
+          {/* Theme toggle */}
+          <Button
+            aria-label={
+              theme === "dark" ? "Switch to light mode" : "Switch to dark mode"
+            }
+            className="p-1"
+            onClick={toggleTheme}
+            size="sm"
+            variant="outline-secondary"
+          >
+            {theme === "dark" ? <SunIcon /> : <MoonIcon />}
+          </Button>
+        </header>
+
+        {/* Page content */}
+        <main className="flex-grow-1 p-4 p-md-5">{children}</main>
+      </div>
+    </div>
+  );
+}

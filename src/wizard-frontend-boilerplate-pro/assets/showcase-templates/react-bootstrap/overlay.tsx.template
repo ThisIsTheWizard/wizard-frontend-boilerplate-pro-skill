@@ -1,0 +1,226 @@
+"use client";
+
+import { useState } from "react";
+
+import Button from "react-bootstrap/Button";
+import Dropdown from "react-bootstrap/Dropdown";
+import Offcanvas from "react-bootstrap/Offcanvas";
+import OverlayTrigger from "react-bootstrap/OverlayTrigger";
+import Popover from "react-bootstrap/Popover";
+
+import { CodeBlock } from "@/components/ui/code-block";
+
+const POPOVER_CODE = `import Button from "react-bootstrap/Button";
+import OverlayTrigger from "react-bootstrap/OverlayTrigger";
+import Popover from "react-bootstrap/Popover";
+
+export function Example() {
+  const popover = (
+    <Popover id="popover-basic">
+      <Popover.Header as="h3">Popover title</Popover.Header>
+      <Popover.Body>
+        This is a popover with some helpful content inside.
+      </Popover.Body>
+    </Popover>
+  );
+
+  return (
+    <OverlayTrigger overlay={popover} placement="bottom" trigger="click">
+      <Button variant="outline-secondary">Open Popover</Button>
+    </OverlayTrigger>
+  );
+}`;
+
+const DROPDOWN_CODE = `import Dropdown from "react-bootstrap/Dropdown";
+
+export function Example() {
+  return (
+    <Dropdown>
+      <Dropdown.Toggle variant="outline-secondary">Account</Dropdown.Toggle>
+      <Dropdown.Menu>
+        <Dropdown.Header>My Account</Dropdown.Header>
+        <Dropdown.Item href="#">Profile</Dropdown.Item>
+        <Dropdown.Item href="#">Settings</Dropdown.Item>
+        <Dropdown.Item href="#">Billing</Dropdown.Item>
+        <Dropdown.Divider />
+        <Dropdown.Item href="#">Log out</Dropdown.Item>
+      </Dropdown.Menu>
+    </Dropdown>
+  );
+}`;
+
+const OFFCANVAS_CODE = `import { useState } from "react";
+import Button from "react-bootstrap/Button";
+import Offcanvas from "react-bootstrap/Offcanvas";
+
+export function Example() {
+  const [show, setShow] = useState(false);
+
+  return (
+    <>
+      <Button onClick={() => setShow(true)} variant="outline-secondary">
+        Open Offcanvas
+      </Button>
+      <Offcanvas onHide={() => setShow(false)} placement="end" show={show}>
+        <Offcanvas.Header closeButton>
+          <Offcanvas.Title>Panel title</Offcanvas.Title>
+        </Offcanvas.Header>
+        <Offcanvas.Body>
+          <p className="text-body-secondary small">
+            This is a right-anchored offcanvas panel — Bootstrap&apos;s
+            equivalent of a sheet or drawer. Use it for filters, detail views,
+            or settings panels.
+          </p>
+          <Button
+            className="w-100 mt-3"
+            onClick={() => setShow(false)}
+            variant="outline-secondary"
+          >
+            Close
+          </Button>
+        </Offcanvas.Body>
+      </Offcanvas>
+    </>
+  );
+}`;
+
+const popoverContent = (
+  <Popover id="popover-demo">
+    <Popover.Header as="h3">Popover title</Popover.Header>
+    <Popover.Body>
+      This is a popover with some helpful content inside.
+    </Popover.Body>
+  </Popover>
+);
+
+export default function OverlayPage() {
+  const [showOffcanvas, setShowOffcanvas] = useState(false);
+
+  return (
+    <div className="d-flex flex-column gap-4">
+      <div>
+        <h1 className="h4 mb-1">Overlay</h1>
+        <p className="text-body-secondary">
+          Floating UI layers — popovers, contextual dropdowns, and side-panel
+          offcanvas sheets.
+        </p>
+      </div>
+
+      <section className="mb-2" id="popover">
+        <div className="ps-3 mb-2" style={{ borderLeft: "3px solid var(--bs-primary)" }}>
+          <h5 className="mb-1">Popover</h5>
+          <p className="text-body-secondary mb-0 small">
+            An anchored floating panel via <code>OverlayTrigger</code> wrapping
+            a <code>Popover</code>. Use <code>trigger="click"</code> for
+            explicit toggle behaviour and <code>placement</code> to control
+            direction.
+          </p>
+        </div>
+        <div className="p-4 rounded-3 border bg-body-tertiary mb-3">
+          <OverlayTrigger
+            overlay={popoverContent}
+            placement="bottom"
+            rootClose
+            trigger="click"
+          >
+            <Button variant="outline-secondary">Open Popover</Button>
+          </OverlayTrigger>
+        </div>
+        <CodeBlock
+          code={POPOVER_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="Popover.tsx"
+          language="tsx"
+        />
+      </section>
+
+      <hr className="my-4" />
+
+      <section className="mb-2" id="dropdown">
+        <div className="ps-3 mb-2" style={{ borderLeft: "3px solid var(--bs-primary)" }}>
+          <h5 className="mb-1">Dropdown</h5>
+          <p className="text-body-secondary mb-0 small">
+            A contextual menu using <code>Dropdown</code>,{" "}
+            <code>Dropdown.Toggle</code>, and <code>Dropdown.Menu</code>. Use{" "}
+            <code>Dropdown.Header</code> for section labels and{" "}
+            <code>Dropdown.Divider</code> for separators.
+          </p>
+        </div>
+        <div className="p-4 rounded-3 border bg-body-tertiary mb-3">
+          <Dropdown>
+            <Dropdown.Toggle variant="outline-secondary">Account</Dropdown.Toggle>
+            <Dropdown.Menu>
+              <Dropdown.Header>My Account</Dropdown.Header>
+              <Dropdown.Item href="#">Profile</Dropdown.Item>
+              <Dropdown.Item href="#">Settings</Dropdown.Item>
+              <Dropdown.Item href="#">Billing</Dropdown.Item>
+              <Dropdown.Divider />
+              <Dropdown.Item href="#">Log out</Dropdown.Item>
+            </Dropdown.Menu>
+          </Dropdown>
+        </div>
+        <CodeBlock
+          code={DROPDOWN_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="Dropdown.tsx"
+          language="tsx"
+        />
+      </section>
+
+      <hr className="my-4" />
+
+      <section className="mb-2" id="offcanvas">
+        <div className="ps-3 mb-2" style={{ borderLeft: "3px solid var(--bs-primary)" }}>
+          <h5 className="mb-1">Offcanvas</h5>
+          <p className="text-body-secondary mb-0 small">
+            A side panel that slides in from an edge — Bootstrap&apos;s
+            equivalent of a sheet. Set <code>placement="end"</code> for the
+            common right-hand pattern. Use{" "}
+            <code>Offcanvas.Header closeButton</code> for an accessible close
+            button.
+          </p>
+        </div>
+        <div className="p-4 rounded-3 border bg-body-tertiary mb-3">
+          <Button
+            onClick={() => setShowOffcanvas(true)}
+            variant="outline-secondary"
+          >
+            Open Offcanvas
+          </Button>
+        </div>
+        <Offcanvas
+          onHide={() => setShowOffcanvas(false)}
+          placement="end"
+          show={showOffcanvas}
+        >
+          <Offcanvas.Header closeButton>
+            <Offcanvas.Title>Panel title</Offcanvas.Title>
+          </Offcanvas.Header>
+          <Offcanvas.Body>
+            <p className="text-body-secondary small">
+              This is a right-anchored offcanvas panel — Bootstrap&apos;s
+              equivalent of a sheet or drawer. Use it for filters, detail views,
+              or settings panels.
+            </p>
+            <Button
+              className="w-100 mt-3"
+              onClick={() => setShowOffcanvas(false)}
+              variant="outline-secondary"
+            >
+              Close
+            </Button>
+          </Offcanvas.Body>
+        </Offcanvas>
+        <CodeBlock
+          code={OFFCANVAS_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="Offcanvas.tsx"
+          language="tsx"
+        />
+      </section>
+    </div>
+  );
+}

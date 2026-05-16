@@ -1,0 +1,370 @@
+<script setup lang="ts">
+import {
+  BBadge,
+  BButton,
+  BCard,
+  BCardBody,
+  BCardFooter,
+  BCardHeader,
+  BCardText,
+  BCardTitle,
+  BPlaceholder,
+  BPlaceholderWrapper,
+  BTable,
+} from "bootstrap-vue-next";
+
+import { CodeBlock } from "@/components/ui/code-block";
+
+const tableItems = [
+  { name: "Alice Martin", email: "alice@example.com", role: "Admin" },
+  { name: "Bob Chen", email: "bob@example.com", role: "Editor" },
+  { name: "Carol White", email: "carol@example.com", role: "Viewer" },
+];
+
+const tableFields = [
+  { key: "name", label: "Name" },
+  { key: "email", label: "Email" },
+  { key: "role", label: "Role" },
+];
+
+const CARD_CODE = `<script setup lang="ts">
+import { BButton, BCard, BCardBody, BCardFooter, BCardHeader, BCardText, BCardTitle } from "bootstrap-vue-next";
+<\/script>
+
+<template>
+  <BCard style="width: 20rem">
+    <BCardHeader>
+      <BCardTitle>Project Alpha</BCardTitle>
+    </BCardHeader>
+    <BCardBody>
+      <BCardText>
+        A next-generation web application that aims to redefine how teams collaborate in real time.
+      </BCardText>
+    </BCardBody>
+    <BCardFooter>
+      <BButton variant="outline-primary" size="sm">View details</BButton>
+    </BCardFooter>
+  </BCard>
+</template>`;
+
+const BADGE_CODE = `<script setup lang="ts">
+import { BBadge } from "bootstrap-vue-next";
+<\/script>
+
+<template>
+  <div class="d-flex flex-wrap gap-2">
+    <BBadge variant="primary">Primary</BBadge>
+    <BBadge variant="success">Success</BBadge>
+    <BBadge variant="warning">Warning</BBadge>
+    <BBadge variant="danger">Danger</BBadge>
+    <BBadge variant="secondary">Secondary</BBadge>
+    <BBadge variant="primary" pill>Pill</BBadge>
+  </div>
+</template>`;
+
+const AVATAR_CODE = `<template>
+  <div class="d-flex align-items-center gap-3">
+    <!-- Image avatar -->
+    <img
+      alt="Jane Doe"
+      class="rounded-circle"
+      src="https://i.pravatar.cc/150?img=1"
+      style="width: 40px; height: 40px; object-fit: cover"
+    />
+    <!-- Fallback initials avatar -->
+    <div
+      class="rounded-circle d-inline-flex align-items-center justify-content-center bg-primary text-white fw-semibold"
+      style="width: 40px; height: 40px; font-size: 0.875rem"
+    >
+      SM
+    </div>
+    <!-- Small -->
+    <div
+      class="rounded-circle d-inline-flex align-items-center justify-content-center bg-secondary text-white"
+      style="width: 32px; height: 32px; font-size: 0.75rem"
+    >
+      XS
+    </div>
+    <!-- Large -->
+    <div
+      class="rounded-circle d-inline-flex align-items-center justify-content-center bg-success text-white fw-bold"
+      style="width: 56px; height: 56px; font-size: 1.125rem"
+    >
+      LG
+    </div>
+  </div>
+</template>`;
+
+const SEPARATOR_CODE = `<template>
+  <div class="d-flex flex-column gap-3">
+    <div>
+      <p class="text-body-secondary small">Section one content.</p>
+      <hr class="my-2" />
+      <p class="text-body-secondary small">Section two content.</p>
+    </div>
+    <div class="d-flex align-items-center gap-3">
+      <span class="small">Left item</span>
+      <div class="vr" style="height: 16px"></div>
+      <span class="small">Right item</span>
+    </div>
+  </div>
+</template>`;
+
+const SKELETON_CODE = `<script setup lang="ts">
+import { BPlaceholder, BPlaceholderWrapper } from "bootstrap-vue-next";
+<\/script>
+
+<template>
+  <div class="d-flex align-items-center gap-3">
+    <BPlaceholderWrapper :loading="true">
+      <template #loading>
+        <div
+          class="rounded-circle"
+          style="width: 48px; height: 48px; background: var(--bs-secondary-bg)"
+        />
+      </template>
+    </BPlaceholderWrapper>
+    <div class="d-flex flex-column gap-2">
+      <BPlaceholder animation="glow" cols="8" />
+      <BPlaceholder animation="glow" cols="6" />
+      <BPlaceholder animation="glow" cols="4" />
+    </div>
+  </div>
+</template>`;
+
+const TABLE_CODE = `<script setup lang="ts">
+import { BTable } from "bootstrap-vue-next";
+
+const items = [
+  { name: "Alice Martin", email: "alice@example.com", role: "Admin" },
+  { name: "Bob Chen", email: "bob@example.com", role: "Editor" },
+];
+
+const fields = [
+  { key: "name", label: "Name" },
+  { key: "email", label: "Email" },
+  { key: "role", label: "Role" },
+];
+<\/script>
+
+<template>
+  <BTable :fields="fields" :items="items" bordered hover responsive />
+</template>`;
+</script>
+
+<template>
+  <div class="d-flex flex-column gap-4">
+    <div>
+      <h1 class="h4 mb-1">Display</h1>
+      <p class="text-body-secondary">
+        Read-only visual elements for presenting content — cards, badges, avatars, and data tables.
+      </p>
+    </div>
+
+    <!-- Card -->
+    <section id="card">
+      <div class="mb-2 ps-3" style="border-left: 3px solid var(--bs-primary)">
+        <h5 class="mb-1">Card</h5>
+        <p class="text-body-secondary mb-0 small">
+          A surface for grouping related content with an optional header, body, and footer.
+        </p>
+      </div>
+      <div class="p-4 rounded-3 border bg-body-tertiary mb-3">
+        <BCard style="width: 20rem">
+          <BCardHeader>
+            <BCardTitle>Project Alpha</BCardTitle>
+          </BCardHeader>
+          <BCardBody>
+            <BCardText>
+              A next-generation web application that aims to redefine how teams collaborate in real time.
+            </BCardText>
+          </BCardBody>
+          <BCardFooter>
+            <BButton size="sm" variant="outline-primary">View details</BButton>
+          </BCardFooter>
+        </BCard>
+      </div>
+      <CodeBlock
+        :code="CARD_CODE"
+        collapsible
+        :default-open="false"
+        filename="Card.vue"
+        language="vue"
+      />
+    </section>
+
+    <hr class="my-2" />
+
+    <!-- Badge -->
+    <section id="badge">
+      <div class="mb-2 ps-3" style="border-left: 3px solid var(--bs-primary)">
+        <h5 class="mb-1">Badge</h5>
+        <p class="text-body-secondary mb-0 small">
+          A compact label for status, category, or count. Use <code>pill</code> for rounded corners.
+        </p>
+      </div>
+      <div class="p-4 rounded-3 border bg-body-tertiary mb-3">
+        <div class="d-flex flex-wrap gap-2">
+          <BBadge variant="primary">Primary</BBadge>
+          <BBadge variant="success">Success</BBadge>
+          <BBadge variant="warning">Warning</BBadge>
+          <BBadge variant="danger">Danger</BBadge>
+          <BBadge variant="secondary">Secondary</BBadge>
+          <BBadge pill variant="primary">Pill</BBadge>
+        </div>
+      </div>
+      <CodeBlock
+        :code="BADGE_CODE"
+        collapsible
+        :default-open="false"
+        filename="Badge.vue"
+        language="vue"
+      />
+    </section>
+
+    <hr class="my-2" />
+
+    <!-- Avatar -->
+    <section id="avatar">
+      <div class="mb-2 ps-3" style="border-left: 3px solid var(--bs-primary)">
+        <h5 class="mb-1">Avatar</h5>
+        <p class="text-body-secondary mb-0 small">
+          A circular user image. Bootstrap has no built-in avatar component — use a
+          <code>rounded-circle</code> image or a <code>div</code> with initials as fallback.
+        </p>
+      </div>
+      <div class="p-4 rounded-3 border bg-body-tertiary mb-3">
+        <div class="d-flex align-items-center gap-3">
+          <img
+            alt="Jane Doe"
+            class="rounded-circle"
+            src="https://i.pravatar.cc/150?img=1"
+            style="height: 40px; object-fit: cover; width: 40px"
+          />
+          <div
+            class="rounded-circle d-inline-flex align-items-center justify-content-center bg-primary text-white fw-semibold"
+            style="font-size: 0.875rem; height: 40px; width: 40px"
+          >
+            SM
+          </div>
+          <div
+            class="rounded-circle d-inline-flex align-items-center justify-content-center bg-secondary text-white"
+            style="font-size: 0.75rem; height: 32px; width: 32px"
+          >
+            XS
+          </div>
+          <div
+            class="rounded-circle d-inline-flex align-items-center justify-content-center bg-success text-white fw-bold"
+            style="font-size: 1.125rem; height: 56px; width: 56px"
+          >
+            LG
+          </div>
+        </div>
+      </div>
+      <CodeBlock
+        :code="AVATAR_CODE"
+        collapsible
+        :default-open="false"
+        filename="Avatar.vue"
+        language="vue"
+      />
+    </section>
+
+    <hr class="my-2" />
+
+    <!-- Separator -->
+    <section id="separator">
+      <div class="mb-2 ps-3" style="border-left: 3px solid var(--bs-primary)">
+        <h5 class="mb-1">Separator</h5>
+        <p class="text-body-secondary mb-0 small">
+          A thin dividing line. Use <code>&lt;hr&gt;</code> horizontally and
+          <code>.vr</code> vertically.
+        </p>
+      </div>
+      <div class="p-4 rounded-3 border bg-body-tertiary mb-3">
+        <div class="d-flex flex-column gap-4">
+          <div>
+            <p class="text-body-secondary small mb-2">Section one content.</p>
+            <hr class="my-1" />
+            <p class="text-body-secondary small mb-0">Section two content.</p>
+          </div>
+          <div class="d-flex align-items-center gap-3">
+            <span class="small">Left item</span>
+            <div class="vr" style="height: 16px" />
+            <span class="small">Right item</span>
+          </div>
+        </div>
+      </div>
+      <CodeBlock
+        :code="SEPARATOR_CODE"
+        collapsible
+        :default-open="false"
+        filename="Separator.vue"
+        language="vue"
+      />
+    </section>
+
+    <hr class="my-2" />
+
+    <!-- Skeleton -->
+    <section id="skeleton">
+      <div class="mb-2 ps-3" style="border-left: 3px solid var(--bs-primary)">
+        <h5 class="mb-1">Skeleton</h5>
+        <p class="text-body-secondary mb-0 small">
+          Animated placeholder blocks using <code>BPlaceholder</code> with
+          <code>animation="glow"</code> that mimic content layout during loading.
+        </p>
+      </div>
+      <div class="p-4 rounded-3 border bg-body-tertiary mb-3">
+        <div class="d-flex align-items-center gap-3">
+          <div
+            class="rounded-circle placeholder"
+            style="height: 48px; width: 48px"
+          />
+          <div class="d-flex flex-column gap-2 flex-grow-1">
+            <BPlaceholder animation="glow" cols="8" />
+            <BPlaceholder animation="glow" cols="6" />
+            <BPlaceholder animation="glow" cols="4" />
+          </div>
+        </div>
+      </div>
+      <CodeBlock
+        :code="SKELETON_CODE"
+        collapsible
+        :default-open="false"
+        filename="Skeleton.vue"
+        language="vue"
+      />
+    </section>
+
+    <hr class="my-2" />
+
+    <!-- Table -->
+    <section id="table">
+      <div class="mb-2 ps-3" style="border-left: 3px solid var(--bs-primary)">
+        <h5 class="mb-1">Table</h5>
+        <p class="text-body-secondary mb-0 small">
+          A structured grid via <code>BTable</code> with <code>:items</code>,
+          <code>:fields</code>, <code>bordered</code>, <code>hover</code>, and
+          <code>responsive</code> props.
+        </p>
+      </div>
+      <div class="p-4 rounded-3 border bg-body-tertiary mb-3">
+        <BTable
+          :fields="tableFields"
+          :items="tableItems"
+          bordered
+          hover
+          responsive
+        />
+      </div>
+      <CodeBlock
+        :code="TABLE_CODE"
+        collapsible
+        :default-open="false"
+        filename="Table.vue"
+        language="vue"
+      />
+    </section>
+  </div>
+</template>

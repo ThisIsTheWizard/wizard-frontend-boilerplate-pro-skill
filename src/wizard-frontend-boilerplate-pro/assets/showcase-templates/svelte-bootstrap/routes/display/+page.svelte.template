@@ -1,0 +1,365 @@
+<script lang="ts">
+  import {
+    Badge,
+    Card,
+    CardBody,
+    CardFooter,
+    CardHeader,
+    CardSubtitle,
+    CardText,
+    CardTitle,
+    Placeholder,
+    PlaceholderButton,
+    Table,
+  } from "@sveltestrap/sveltestrap";
+  import { CodeBlock } from "$lib/components/ui/code-block";
+
+  const CARD_CODE = `<script lang="ts">
+  import {
+    Badge,
+    Card,
+    CardBody,
+    CardFooter,
+    CardHeader,
+    CardSubtitle,
+    CardText,
+    CardTitle,
+  } from "@sveltestrap/sveltestrap";
+<\/script>
+
+<Card style="max-width: 320px;">
+  <CardHeader>Featured</CardHeader>
+  <CardBody>
+    <CardTitle>Project Alpha</CardTitle>
+    <CardSubtitle class="mb-2 text-body-secondary">A next-generation web application.</CardSubtitle>
+    <CardText>
+      This project aims to redefine how teams collaborate in real time.
+    </CardText>
+    <a class="btn btn-outline-primary btn-sm" href="#">View details</a>
+  </CardBody>
+  <CardFooter class="text-body-secondary small">Updated 2 days ago</CardFooter>
+</Card>`;
+
+  const BADGE_CODE = `<script lang="ts">
+  import { Badge } from "@sveltestrap/sveltestrap";
+<\/script>
+
+<div class="d-flex flex-wrap gap-2">
+  <Badge color="primary">Primary</Badge>
+  <Badge color="secondary">Secondary</Badge>
+  <Badge color="success">Success</Badge>
+  <Badge color="danger">Danger</Badge>
+  <Badge color="warning">Warning</Badge>
+  <Badge color="info">Info</Badge>
+  <Badge color="primary" pill>Pill</Badge>
+</div>`;
+
+  const AVATAR_CODE = `<!-- Bootstrap does not ship an Avatar component.
+     Use a styled div with rounded-circle. -->
+
+<div class="d-flex align-items-center gap-3">
+  <!-- With image -->
+  <img
+    alt="Jane Doe"
+    class="rounded-circle"
+    height="40"
+    src="https://i.pravatar.cc/150?img=1"
+    width="40"
+  />
+  <!-- Initials fallback -->
+  <div
+    class="rounded-circle d-inline-flex align-items-center justify-content-center bg-primary text-white fw-semibold"
+    style="width: 40px; height: 40px; font-size: 14px;"
+  >
+    SM
+  </div>
+  <!-- Small -->
+  <div
+    class="rounded-circle d-inline-flex align-items-center justify-content-center bg-secondary text-white"
+    style="width: 28px; height: 28px; font-size: 11px;"
+  >
+    XS
+  </div>
+  <!-- Large -->
+  <div
+    class="rounded-circle d-inline-flex align-items-center justify-content-center bg-success text-white fw-bold"
+    style="width: 56px; height: 56px; font-size: 18px;"
+  >
+    LG
+  </div>
+</div>`;
+
+  const SKELETON_CODE = `<script lang="ts">
+  import { Placeholder, PlaceholderButton } from "@sveltestrap/sveltestrap";
+<\/script>
+
+<!-- Card skeleton -->
+<div class="card" aria-hidden="true" style="max-width: 300px;">
+  <div class="card-body">
+    <Placeholder animation="glow" tag="div">
+      <span class="placeholder col-6 mb-2 d-block"></span>
+      <span class="placeholder col-10 mb-1 d-block"></span>
+      <span class="placeholder col-8 mb-3 d-block"></span>
+      <PlaceholderButton color="primary" xs={6} />
+    </Placeholder>
+  </div>
+</div>`;
+
+  const TABLE_CODE = `<script lang="ts">
+  import { Table } from "@sveltestrap/sveltestrap";
+<\/script>
+
+<Table hover responsive striped>
+  <thead>
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Email</th>
+      <th scope="col">Role</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Alice Martin</td>
+      <td>alice@example.com</td>
+      <td>Admin</td>
+    </tr>
+    <tr>
+      <td>Bob Chen</td>
+      <td>bob@example.com</td>
+      <td>Editor</td>
+    </tr>
+  </tbody>
+</Table>`;
+</script>
+
+<div class="d-flex flex-column gap-4">
+  <div>
+    <h1 class="h4 mb-1">Display</h1>
+    <p class="text-body-secondary">
+      Read-only visual elements for presenting content — cards, badges, avatars, and data tables.
+    </p>
+  </div>
+
+  <!-- Card -->
+  <section id="card" class="mb-5">
+    <div class="mb-2 ps-3" style="border-left: 3px solid var(--bs-primary);">
+      <h5 class="mb-1">Card</h5>
+      <p class="text-body-secondary mb-0 small">
+        A surface for grouping related content with an optional header, body, and footer.
+      </p>
+    </div>
+    <div class="p-4 rounded-3 border bg-body-tertiary mb-3">
+      <Card style="max-width: 320px;">
+        <CardHeader>Featured</CardHeader>
+        <CardBody>
+          <CardTitle>Project Alpha</CardTitle>
+          <CardSubtitle class="mb-2 text-body-secondary">
+            A next-generation web application.
+          </CardSubtitle>
+          <CardText>
+            This project aims to redefine how teams collaborate in real time.
+          </CardText>
+          <a class="btn btn-outline-primary btn-sm" href="#">View details</a>
+        </CardBody>
+        <CardFooter class="text-body-secondary small">Updated 2 days ago</CardFooter>
+      </Card>
+    </div>
+    <CodeBlock
+      code={CARD_CODE}
+      collapsible
+      defaultOpen={false}
+      filename="Card.svelte"
+      language="svelte"
+    />
+  </section>
+  <hr class="my-2" />
+
+  <!-- Badge -->
+  <section id="badge" class="mb-5">
+    <div class="mb-2 ps-3" style="border-left: 3px solid var(--bs-primary);">
+      <h5 class="mb-1">Badge</h5>
+      <p class="text-body-secondary mb-0 small">
+        A compact label for status, category, or count. Supports all Bootstrap contextual colours
+        and a <code>pill</code> variant.
+      </p>
+    </div>
+    <div class="p-4 rounded-3 border bg-body-tertiary mb-3">
+      <div class="d-flex flex-wrap gap-2">
+        <Badge color="primary">Primary</Badge>
+        <Badge color="secondary">Secondary</Badge>
+        <Badge color="success">Success</Badge>
+        <Badge color="danger">Danger</Badge>
+        <Badge color="warning" class="text-dark">Warning</Badge>
+        <Badge color="info" class="text-dark">Info</Badge>
+        <Badge color="light" class="text-dark">Light</Badge>
+        <Badge color="dark">Dark</Badge>
+        <Badge color="primary" pill>Pill</Badge>
+        <Badge color="success" pill>Pill</Badge>
+      </div>
+    </div>
+    <CodeBlock
+      code={BADGE_CODE}
+      collapsible
+      defaultOpen={false}
+      filename="Badge.svelte"
+      language="svelte"
+    />
+  </section>
+  <hr class="my-2" />
+
+  <!-- Avatar -->
+  <section id="avatar" class="mb-5">
+    <div class="mb-2 ps-3" style="border-left: 3px solid var(--bs-primary);">
+      <h5 class="mb-1">Avatar</h5>
+      <p class="text-body-secondary mb-0 small">
+        Bootstrap does not ship an Avatar component. Use a <code>rounded-circle</code> image or a
+        styled <code>div</code> with initials as the fallback.
+      </p>
+    </div>
+    <div class="p-4 rounded-3 border bg-body-tertiary mb-3">
+      <div class="d-flex align-items-center gap-3 flex-wrap">
+        <!-- With image -->
+        <img
+          alt="Jane Doe"
+          class="rounded-circle"
+          height="40"
+          src="https://i.pravatar.cc/150?img=1"
+          width="40"
+        />
+        <!-- Initials -->
+        <div
+          class="rounded-circle d-inline-flex align-items-center justify-content-center bg-primary text-white fw-semibold"
+          style="width: 40px; height: 40px; font-size: 14px;"
+        >
+          SM
+        </div>
+        <!-- Small -->
+        <div
+          class="rounded-circle d-inline-flex align-items-center justify-content-center bg-secondary text-white"
+          style="width: 28px; height: 28px; font-size: 11px;"
+        >
+          XS
+        </div>
+        <!-- Large -->
+        <div
+          class="rounded-circle d-inline-flex align-items-center justify-content-center bg-success text-white fw-bold"
+          style="width: 56px; height: 56px; font-size: 18px;"
+        >
+          LG
+        </div>
+      </div>
+    </div>
+    <CodeBlock
+      code={AVATAR_CODE}
+      collapsible
+      defaultOpen={false}
+      filename="Avatar.svelte"
+      language="svelte"
+    />
+  </section>
+  <hr class="my-2" />
+
+  <!-- Skeleton -->
+  <section id="skeleton" class="mb-5">
+    <div class="mb-2 ps-3" style="border-left: 3px solid var(--bs-primary);">
+      <h5 class="mb-1">Skeleton</h5>
+      <p class="text-body-secondary mb-0 small">
+        Animated placeholder blocks using Bootstrap's <code>Placeholder</code> and
+        <code>PlaceholderButton</code> components with <code>animation="glow"</code>.
+      </p>
+    </div>
+    <div class="p-4 rounded-3 border bg-body-tertiary mb-3">
+      <div class="d-flex flex-column gap-4">
+        <!-- Inline skeleton -->
+        <div class="d-flex align-items-center gap-3">
+          <div
+            class="rounded-circle placeholder bg-secondary"
+            style="width: 48px; height: 48px; flex-shrink: 0;"
+          ></div>
+          <div class="flex-grow-1">
+            <Placeholder animation="glow" tag="div">
+              <span class="placeholder col-8 mb-1 d-block"></span>
+              <span class="placeholder col-6 mb-1 d-block"></span>
+              <span class="placeholder col-4 d-block"></span>
+            </Placeholder>
+          </div>
+        </div>
+        <!-- Card skeleton -->
+        <div aria-hidden="true" class="card" style="max-width: 280px;">
+          <div class="card-body">
+            <Placeholder animation="glow" tag="div">
+              <span class="placeholder col-6 mb-2 d-block rounded"></span>
+              <span class="placeholder col-10 mb-1 d-block rounded"></span>
+              <span class="placeholder col-8 mb-3 d-block rounded"></span>
+              <PlaceholderButton color="primary" xs={6} />
+            </Placeholder>
+          </div>
+        </div>
+      </div>
+    </div>
+    <CodeBlock
+      code={SKELETON_CODE}
+      collapsible
+      defaultOpen={false}
+      filename="Skeleton.svelte"
+      language="svelte"
+    />
+  </section>
+  <hr class="my-2" />
+
+  <!-- Table -->
+  <section id="table" class="mb-5">
+    <div class="mb-2 ps-3" style="border-left: 3px solid var(--bs-primary);">
+      <h5 class="mb-1">Table</h5>
+      <p class="text-body-secondary mb-0 small">
+        A structured grid using Bootstrap's <code>Table</code> component with <code>striped</code>,
+        <code>hover</code>, and <code>responsive</code> props.
+      </p>
+    </div>
+    <div class="p-4 rounded-3 border bg-body-tertiary mb-3">
+      <Table hover responsive striped>
+        <thead>
+          <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Email</th>
+            <th scope="col">Role</th>
+            <th scope="col">Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Alice Martin</td>
+            <td>alice@example.com</td>
+            <td>Admin</td>
+            <td><Badge color="success">Active</Badge></td>
+          </tr>
+          <tr>
+            <td>Bob Chen</td>
+            <td>bob@example.com</td>
+            <td>Editor</td>
+            <td><Badge color="success">Active</Badge></td>
+          </tr>
+          <tr>
+            <td>Carol White</td>
+            <td>carol@example.com</td>
+            <td>Viewer</td>
+            <td><Badge color="secondary">Inactive</Badge></td>
+          </tr>
+          <tr>
+            <td>Dan Brown</td>
+            <td>dan@example.com</td>
+            <td>Editor</td>
+            <td><Badge color="warning" class="text-dark">Pending</Badge></td>
+          </tr>
+        </tbody>
+      </Table>
+    </div>
+    <CodeBlock
+      code={TABLE_CODE}
+      collapsible
+      defaultOpen={false}
+      filename="Table.svelte"
+      language="svelte"
+    />
+  </section>
+</div>

@@ -1,0 +1,301 @@
+"use client";
+
+import { useState } from "react";
+
+import Breadcrumb from "react-bootstrap/Breadcrumb";
+import Nav from "react-bootstrap/Nav";
+import Navbar from "react-bootstrap/Navbar";
+import Pagination from "react-bootstrap/Pagination";
+import Tab from "react-bootstrap/Tab";
+
+import { CodeBlock } from "@/components/ui/code-block";
+
+const TABS_CODE = `import { useState } from "react";
+import Nav from "react-bootstrap/Nav";
+import Tab from "react-bootstrap/Tab";
+
+export function Example() {
+  const [activeTab, setActiveTab] = useState("account");
+
+  return (
+    <Tab.Container
+      activeKey={activeTab}
+      onSelect={(k) => setActiveTab(k ?? "account")}
+    >
+      <Nav variant="tabs">
+        <Nav.Item>
+          <Nav.Link eventKey="account">Account</Nav.Link>
+        </Nav.Item>
+        <Nav.Item>
+          <Nav.Link eventKey="password">Password</Nav.Link>
+        </Nav.Item>
+        <Nav.Item>
+          <Nav.Link eventKey="notifications">Notifications</Nav.Link>
+        </Nav.Item>
+      </Nav>
+      <Tab.Content className="pt-3">
+        <Tab.Pane eventKey="account">
+          <p className="text-body-secondary small">
+            Manage your account settings and preferences.
+          </p>
+        </Tab.Pane>
+        <Tab.Pane eventKey="password">
+          <p className="text-body-secondary small">
+            Change your password and security settings.
+          </p>
+        </Tab.Pane>
+        <Tab.Pane eventKey="notifications">
+          <p className="text-body-secondary small">
+            Configure how you receive notifications.
+          </p>
+        </Tab.Pane>
+      </Tab.Content>
+    </Tab.Container>
+  );
+}`;
+
+const BREADCRUMB_CODE = `import Breadcrumb from "react-bootstrap/Breadcrumb";
+
+export function Example() {
+  return (
+    <div className="d-flex flex-column gap-3">
+      <Breadcrumb>
+        <Breadcrumb.Item href="#">Home</Breadcrumb.Item>
+        <Breadcrumb.Item href="#">Library</Breadcrumb.Item>
+        <Breadcrumb.Item active>Components</Breadcrumb.Item>
+      </Breadcrumb>
+
+      <Breadcrumb>
+        <Breadcrumb.Item href="#">Dashboard</Breadcrumb.Item>
+        <Breadcrumb.Item href="#">Settings</Breadcrumb.Item>
+        <Breadcrumb.Item active>Profile</Breadcrumb.Item>
+      </Breadcrumb>
+    </div>
+  );
+}`;
+
+const PAGINATION_CODE = `import { useState } from "react";
+import Pagination from "react-bootstrap/Pagination";
+
+export function Example() {
+  const [page, setPage] = useState(1);
+
+  return (
+    <Pagination>
+      <Pagination.First onClick={() => setPage(1)} />
+      <Pagination.Prev onClick={() => setPage((p) => Math.max(1, p - 1))} />
+      {[1, 2, 3, 4, 5].map((n) => (
+        <Pagination.Item
+          active={page === n}
+          key={n}
+          onClick={() => setPage(n)}
+        >
+          {n}
+        </Pagination.Item>
+      ))}
+      <Pagination.Next onClick={() => setPage((p) => Math.min(5, p + 1))} />
+      <Pagination.Last onClick={() => setPage(5)} />
+    </Pagination>
+  );
+}`;
+
+const NAVBAR_CODE = `import Nav from "react-bootstrap/Nav";
+import Navbar from "react-bootstrap/Navbar";
+
+export function Example() {
+  return (
+    <Navbar className="border rounded-3 px-3" expand="md">
+      <Navbar.Brand href="#">Brand</Navbar.Brand>
+      <Navbar.Toggle aria-controls="demo-nav" />
+      <Navbar.Collapse id="demo-nav">
+        <Nav className="me-auto">
+          <Nav.Link href="#">Products</Nav.Link>
+          <Nav.Link href="#">Docs</Nav.Link>
+          <Nav.Link href="#">Pricing</Nav.Link>
+          <Nav.Link href="#">Blog</Nav.Link>
+        </Nav>
+      </Navbar.Collapse>
+    </Navbar>
+  );
+}`;
+
+export default function NavigationPage() {
+  const [activeTab, setActiveTab] = useState("account");
+  const [page, setPage] = useState(1);
+
+  return (
+    <div className="d-flex flex-column gap-4">
+      <div>
+        <h1 className="h4 mb-1">Navigation</h1>
+        <p className="text-body-secondary">
+          Components for moving users through content — tabs, breadcrumbs,
+          pagination, and navbars.
+        </p>
+      </div>
+
+      <section className="mb-2" id="tabs">
+        <div className="ps-3 mb-2" style={{ borderLeft: "3px solid var(--bs-primary)" }}>
+          <h5 className="mb-1">Tabs</h5>
+          <p className="text-body-secondary mb-0 small">
+            A segmented tab strip using <code>Tab.Container</code>,{" "}
+            <code>Nav</code> with <code>variant="tabs"</code>, and{" "}
+            <code>Tab.Content</code> / <code>Tab.Pane</code> for panels.
+          </p>
+        </div>
+        <div className="p-4 rounded-3 border bg-body-tertiary mb-3">
+          <Tab.Container
+            activeKey={activeTab}
+            onSelect={(k) => setActiveTab(k ?? "account")}
+          >
+            <Nav variant="tabs">
+              <Nav.Item>
+                <Nav.Link eventKey="account">Account</Nav.Link>
+              </Nav.Item>
+              <Nav.Item>
+                <Nav.Link eventKey="password">Password</Nav.Link>
+              </Nav.Item>
+              <Nav.Item>
+                <Nav.Link eventKey="notifications">Notifications</Nav.Link>
+              </Nav.Item>
+            </Nav>
+            <Tab.Content className="pt-3">
+              <Tab.Pane eventKey="account">
+                <p className="text-body-secondary small mb-0">
+                  Manage your account settings and preferences.
+                </p>
+              </Tab.Pane>
+              <Tab.Pane eventKey="password">
+                <p className="text-body-secondary small mb-0">
+                  Change your password and security settings.
+                </p>
+              </Tab.Pane>
+              <Tab.Pane eventKey="notifications">
+                <p className="text-body-secondary small mb-0">
+                  Configure how you receive notifications.
+                </p>
+              </Tab.Pane>
+            </Tab.Content>
+          </Tab.Container>
+        </div>
+        <CodeBlock
+          code={TABS_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="Tabs.tsx"
+          language="tsx"
+        />
+      </section>
+
+      <hr className="my-4" />
+
+      <section className="mb-2" id="breadcrumb">
+        <div className="ps-3 mb-2" style={{ borderLeft: "3px solid var(--bs-primary)" }}>
+          <h5 className="mb-1">Breadcrumb</h5>
+          <p className="text-body-secondary mb-0 small">
+            A hierarchical path indicator. Ancestor pages use{" "}
+            <code>Breadcrumb.Item href</code>; the current page uses{" "}
+            <code>active</code> (rendered as plain text, not a link).
+          </p>
+        </div>
+        <div className="p-4 rounded-3 border bg-body-tertiary mb-3">
+          <div className="d-flex flex-column gap-3">
+            <Breadcrumb>
+              <Breadcrumb.Item href="#">Home</Breadcrumb.Item>
+              <Breadcrumb.Item href="#">Library</Breadcrumb.Item>
+              <Breadcrumb.Item active>Components</Breadcrumb.Item>
+            </Breadcrumb>
+            <Breadcrumb>
+              <Breadcrumb.Item href="#">Dashboard</Breadcrumb.Item>
+              <Breadcrumb.Item href="#">Settings</Breadcrumb.Item>
+              <Breadcrumb.Item active>Profile</Breadcrumb.Item>
+            </Breadcrumb>
+          </div>
+        </div>
+        <CodeBlock
+          code={BREADCRUMB_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="Breadcrumb.tsx"
+          language="tsx"
+        />
+      </section>
+
+      <hr className="my-4" />
+
+      <section className="mb-2" id="pagination">
+        <div className="ps-3 mb-2" style={{ borderLeft: "3px solid var(--bs-primary)" }}>
+          <h5 className="mb-1">Pagination</h5>
+          <p className="text-body-secondary mb-0 small">
+            A numbered page navigator. Use{" "}
+            <code>Pagination.First</code>, <code>Pagination.Prev</code>,{" "}
+            <code>Pagination.Item</code>, <code>Pagination.Next</code>, and{" "}
+            <code>Pagination.Last</code>. Currently on page{" "}
+            <strong>{page}</strong>.
+          </p>
+        </div>
+        <div className="p-4 rounded-3 border bg-body-tertiary mb-3">
+          <Pagination>
+            <Pagination.First onClick={() => setPage(1)} />
+            <Pagination.Prev
+              onClick={() => setPage((p) => Math.max(1, p - 1))}
+            />
+            {[1, 2, 3, 4, 5].map((n) => (
+              <Pagination.Item
+                active={page === n}
+                key={n}
+                onClick={() => setPage(n)}
+              >
+                {n}
+              </Pagination.Item>
+            ))}
+            <Pagination.Next
+              onClick={() => setPage((p) => Math.min(5, p + 1))}
+            />
+            <Pagination.Last onClick={() => setPage(5)} />
+          </Pagination>
+        </div>
+        <CodeBlock
+          code={PAGINATION_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="Pagination.tsx"
+          language="tsx"
+        />
+      </section>
+
+      <hr className="my-4" />
+
+      <section className="mb-2" id="navbar">
+        <div className="ps-3 mb-2" style={{ borderLeft: "3px solid var(--bs-primary)" }}>
+          <h5 className="mb-1">Navbar</h5>
+          <p className="text-body-secondary mb-0 small">
+            A responsive navigation header. <code>Navbar.Toggle</code> and{" "}
+            <code>Navbar.Collapse</code> handle the mobile hamburger menu
+            automatically at the <code>expand</code> breakpoint.
+          </p>
+        </div>
+        <div className="p-4 rounded-3 border bg-body-tertiary mb-3">
+          <Navbar className="border rounded-3 px-3" expand="md">
+            <Navbar.Brand href="#">Brand</Navbar.Brand>
+            <Navbar.Toggle aria-controls="demo-navbar-nav" />
+            <Navbar.Collapse id="demo-navbar-nav">
+              <Nav className="me-auto">
+                <Nav.Link href="#">Products</Nav.Link>
+                <Nav.Link href="#">Docs</Nav.Link>
+                <Nav.Link href="#">Pricing</Nav.Link>
+                <Nav.Link href="#">Blog</Nav.Link>
+              </Nav>
+            </Navbar.Collapse>
+          </Navbar>
+        </div>
+        <CodeBlock
+          code={NAVBAR_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="Navbar.tsx"
+          language="tsx"
+        />
+      </section>
+    </div>
+  );
+}

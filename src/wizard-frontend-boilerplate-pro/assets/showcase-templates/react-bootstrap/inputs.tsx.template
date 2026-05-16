@@ -1,0 +1,525 @@
+"use client";
+
+import { useState } from "react";
+
+import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
+
+import { CodeBlock } from "@/components/ui/code-block";
+
+const BUTTON_CODE = `import Button from "react-bootstrap/Button";
+
+export function Example() {
+  return (
+    <div className="d-flex flex-column gap-2">
+      <div className="d-flex flex-wrap gap-2">
+        <Button variant="primary">Primary</Button>
+        <Button variant="outline-primary">Outline</Button>
+        <Button variant="secondary">Secondary</Button>
+        <Button variant="danger">Danger</Button>
+        <Button variant="link">Link</Button>
+      </div>
+      <div className="d-flex flex-wrap align-items-center gap-2">
+        <Button size="sm" variant="primary">Small</Button>
+        <Button variant="primary">Default</Button>
+        <Button size="lg" variant="primary">Large</Button>
+        <Button disabled variant="primary">Disabled</Button>
+      </div>
+    </div>
+  );
+}`;
+
+const FORM_CONTROL_CODE = `import Form from "react-bootstrap/Form";
+
+export function Example() {
+  return (
+    <div className="d-flex flex-column gap-3" style={{ maxWidth: 360 }}>
+      <Form.Group controlId="email">
+        <Form.Label>Email address</Form.Label>
+        <Form.Control placeholder="name@example.com" type="email" />
+        <Form.Text className="text-muted">
+          We&apos;ll never share your email.
+        </Form.Text>
+      </Form.Group>
+
+      <Form.Group controlId="username">
+        <Form.Label>Username</Form.Label>
+        <Form.Control defaultValue="invalid user!" isInvalid type="text" />
+        <Form.Control.Feedback type="invalid">
+          Please enter a valid username.
+        </Form.Control.Feedback>
+      </Form.Group>
+
+      <Form.Group controlId="disabled">
+        <Form.Label>Disabled</Form.Label>
+        <Form.Control disabled placeholder="Not editable" type="text" />
+      </Form.Group>
+    </div>
+  );
+}`;
+
+const TEXTAREA_CODE = `import Form from "react-bootstrap/Form";
+
+export function Example() {
+  return (
+    <div className="d-flex flex-column gap-3" style={{ maxWidth: 360 }}>
+      <Form.Group controlId="bio">
+        <Form.Label>Bio</Form.Label>
+        <Form.Control
+          as="textarea"
+          placeholder="Tell us about yourself…"
+          rows={4}
+        />
+        <Form.Text className="text-muted">
+          Describe your project in a few sentences.
+        </Form.Text>
+      </Form.Group>
+
+      <Form.Group controlId="message">
+        <Form.Label>Message</Form.Label>
+        <Form.Control as="textarea" isInvalid placeholder="Enter your message…" rows={3} />
+        <Form.Control.Feedback type="invalid">
+          Message is required.
+        </Form.Control.Feedback>
+      </Form.Group>
+    </div>
+  );
+}`;
+
+const FORM_SELECT_CODE = `import Form from "react-bootstrap/Form";
+
+export function Example() {
+  return (
+    <div className="d-flex flex-column gap-3" style={{ maxWidth: 360 }}>
+      <Form.Group controlId="framework">
+        <Form.Label>Framework</Form.Label>
+        <Form.Select>
+          <option value="">Select a framework…</option>
+          <option value="nextjs">Next.js</option>
+          <option value="remix">Remix</option>
+          <option value="astro">Astro</option>
+          <option value="sveltekit">SvelteKit</option>
+        </Form.Select>
+      </Form.Group>
+
+      <Form.Group controlId="framework-disabled">
+        <Form.Label>Disabled</Form.Label>
+        <Form.Select disabled>
+          <option value="">None</option>
+        </Form.Select>
+      </Form.Group>
+    </div>
+  );
+}`;
+
+const CHECKBOX_CODE = `import Form from "react-bootstrap/Form";
+
+export function Example() {
+  return (
+    <div className="d-flex flex-column gap-2">
+      <Form.Check
+        id="terms"
+        label="Accept terms and conditions"
+        type="checkbox"
+      />
+      <Form.Check
+        defaultChecked
+        id="marketing"
+        label="Checked by default"
+        type="checkbox"
+      />
+      <Form.Check
+        disabled
+        id="disabled-check"
+        label="Disabled"
+        type="checkbox"
+      />
+    </div>
+  );
+}`;
+
+const RADIO_GROUP_CODE = `import { useState } from "react";
+import Form from "react-bootstrap/Form";
+
+export function Example() {
+  const [plan, setPlan] = useState("free");
+
+  return (
+    <Form.Group>
+      <Form.Label className="fw-medium">Plan</Form.Label>
+      <Form.Check
+        checked={plan === "free"}
+        id="plan-free"
+        label="Free"
+        name="plan"
+        onChange={(e) => setPlan(e.target.value)}
+        type="radio"
+        value="free"
+      />
+      <Form.Check
+        checked={plan === "pro"}
+        id="plan-pro"
+        label="Pro"
+        name="plan"
+        onChange={(e) => setPlan(e.target.value)}
+        type="radio"
+        value="pro"
+      />
+      <Form.Check
+        checked={plan === "enterprise"}
+        id="plan-enterprise"
+        label="Enterprise"
+        name="plan"
+        onChange={(e) => setPlan(e.target.value)}
+        type="radio"
+        value="enterprise"
+      />
+    </Form.Group>
+  );
+}`;
+
+const SWITCH_CODE = `import Form from "react-bootstrap/Form";
+
+export function Example() {
+  return (
+    <div className="d-flex flex-column gap-2">
+      <Form.Check
+        id="email-notifications"
+        label="Email notifications"
+        type="switch"
+      />
+      <Form.Check
+        defaultChecked
+        id="marketing-emails"
+        label="Marketing emails"
+        type="switch"
+      />
+      <Form.Check
+        disabled
+        id="disabled-switch"
+        label="Disabled"
+        type="switch"
+      />
+    </div>
+  );
+}`;
+
+export default function InputsPage() {
+  const [plan, setPlan] = useState("free");
+  const [framework, setFramework] = useState("");
+
+  return (
+    <div className="d-flex flex-column gap-4">
+      <div>
+        <h1 className="h4 mb-1">Inputs</h1>
+        <p className="text-body-secondary">
+          Form controls for collecting user input — buttons, text fields,
+          selections, and toggles.
+        </p>
+      </div>
+
+      <section className="mb-2" id="button">
+        <div className="ps-3 mb-2" style={{ borderLeft: "3px solid var(--bs-primary)" }}>
+          <h5 className="mb-1">Button</h5>
+          <p className="text-body-secondary mb-0 small">
+            Triggers an action or event. React-Bootstrap ships{" "}
+            <code>primary</code>, <code>outline-*</code>, <code>secondary</code>,{" "}
+            <code>danger</code>, and <code>link</code> variants with full size
+            and disabled support.
+          </p>
+        </div>
+        <div className="p-4 rounded-3 border bg-body-tertiary mb-3">
+          <div className="d-flex flex-column gap-2">
+            <div className="d-flex flex-wrap gap-2">
+              <Button variant="primary">Primary</Button>
+              <Button variant="outline-primary">Outline</Button>
+              <Button variant="secondary">Secondary</Button>
+              <Button variant="danger">Danger</Button>
+              <Button variant="link">Link</Button>
+            </div>
+            <div className="d-flex flex-wrap align-items-center gap-2">
+              <Button size="sm" variant="primary">Small</Button>
+              <Button variant="primary">Default</Button>
+              <Button size="lg" variant="primary">Large</Button>
+              <Button disabled variant="primary">Disabled</Button>
+            </div>
+          </div>
+        </div>
+        <CodeBlock
+          code={BUTTON_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="Button.tsx"
+          language="tsx"
+        />
+      </section>
+
+      <hr className="my-4" />
+
+      <section className="mb-2" id="form-control">
+        <div className="ps-3 mb-2" style={{ borderLeft: "3px solid var(--bs-primary)" }}>
+          <h5 className="mb-1">Form.Control (Input)</h5>
+          <p className="text-body-secondary mb-0 small">
+            A text input using <code>Form.Group</code>, <code>Form.Label</code>,
+            and <code>Form.Control</code>. Add <code>isInvalid</code> and{" "}
+            <code>Form.Control.Feedback</code> for error states.
+          </p>
+        </div>
+        <div className="p-4 rounded-3 border bg-body-tertiary mb-3">
+          <div className="d-flex flex-column gap-3" style={{ maxWidth: 360 }}>
+            <Form.Group controlId="email-demo">
+              <Form.Label>Email address</Form.Label>
+              <Form.Control placeholder="name@example.com" type="email" />
+              <Form.Text className="text-muted">
+                We&apos;ll never share your email.
+              </Form.Text>
+            </Form.Group>
+
+            <Form.Group controlId="username-demo">
+              <Form.Label>Username</Form.Label>
+              <Form.Control defaultValue="invalid user!" isInvalid type="text" />
+              <Form.Control.Feedback type="invalid">
+                Please enter a valid username.
+              </Form.Control.Feedback>
+            </Form.Group>
+
+            <Form.Group controlId="disabled-demo">
+              <Form.Label>Disabled</Form.Label>
+              <Form.Control disabled placeholder="Not editable" type="text" />
+            </Form.Group>
+          </div>
+        </div>
+        <CodeBlock
+          code={FORM_CONTROL_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="FormControl.tsx"
+          language="tsx"
+        />
+      </section>
+
+      <hr className="my-4" />
+
+      <section className="mb-2" id="textarea">
+        <div className="ps-3 mb-2" style={{ borderLeft: "3px solid var(--bs-primary)" }}>
+          <h5 className="mb-1">Textarea</h5>
+          <p className="text-body-secondary mb-0 small">
+            A multi-line input via <code>Form.Control</code> with{" "}
+            <code>as="textarea"</code> and a <code>rows</code> prop.
+          </p>
+        </div>
+        <div className="p-4 rounded-3 border bg-body-tertiary mb-3">
+          <div className="d-flex flex-column gap-3" style={{ maxWidth: 360 }}>
+            <Form.Group controlId="bio-demo">
+              <Form.Label>Bio</Form.Label>
+              <Form.Control
+                as="textarea"
+                placeholder="Tell us about yourself…"
+                rows={4}
+              />
+              <Form.Text className="text-muted">
+                Describe your project in a few sentences.
+              </Form.Text>
+            </Form.Group>
+
+            <Form.Group controlId="message-demo">
+              <Form.Label>Message</Form.Label>
+              <Form.Control
+                as="textarea"
+                isInvalid
+                placeholder="Enter your message…"
+                rows={3}
+              />
+              <Form.Control.Feedback type="invalid">
+                Message is required.
+              </Form.Control.Feedback>
+            </Form.Group>
+          </div>
+        </div>
+        <CodeBlock
+          code={TEXTAREA_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="Textarea.tsx"
+          language="tsx"
+        />
+      </section>
+
+      <hr className="my-4" />
+
+      <section className="mb-2" id="form-select">
+        <div className="ps-3 mb-2" style={{ borderLeft: "3px solid var(--bs-primary)" }}>
+          <h5 className="mb-1">Form.Select</h5>
+          <p className="text-body-secondary mb-0 small">
+            A native <code>{"<select>"}</code> styled with Bootstrap. Pair with{" "}
+            <code>Form.Group</code> and <code>Form.Label</code> for full
+            accessibility.
+          </p>
+        </div>
+        <div className="p-4 rounded-3 border bg-body-tertiary mb-3">
+          <div className="d-flex flex-column gap-3" style={{ maxWidth: 360 }}>
+            <Form.Group controlId="framework-demo">
+              <Form.Label>Framework</Form.Label>
+              <Form.Select
+                onChange={(e) => setFramework(e.target.value)}
+                value={framework}
+              >
+                <option value="">Select a framework…</option>
+                <option value="nextjs">Next.js</option>
+                <option value="remix">Remix</option>
+                <option value="astro">Astro</option>
+                <option value="sveltekit">SvelteKit</option>
+              </Form.Select>
+            </Form.Group>
+
+            <Form.Group controlId="framework-disabled-demo">
+              <Form.Label>Disabled</Form.Label>
+              <Form.Select disabled>
+                <option value="">None</option>
+              </Form.Select>
+            </Form.Group>
+          </div>
+        </div>
+        <CodeBlock
+          code={FORM_SELECT_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="FormSelect.tsx"
+          language="tsx"
+        />
+      </section>
+
+      <hr className="my-4" />
+
+      <section className="mb-2" id="checkbox">
+        <div className="ps-3 mb-2" style={{ borderLeft: "3px solid var(--bs-primary)" }}>
+          <h5 className="mb-1">Checkbox</h5>
+          <p className="text-body-secondary mb-0 small">
+            A binary toggle using <code>Form.Check</code> with{" "}
+            <code>type="checkbox"</code>. The <code>label</code> prop wires the
+            visible label — no separate <code>htmlFor</code> needed.
+          </p>
+        </div>
+        <div className="p-4 rounded-3 border bg-body-tertiary mb-3">
+          <div className="d-flex flex-column gap-2">
+            <Form.Check
+              id="terms-demo"
+              label="Accept terms and conditions"
+              type="checkbox"
+            />
+            <Form.Check
+              defaultChecked
+              id="marketing-demo"
+              label="Checked by default"
+              type="checkbox"
+            />
+            <Form.Check
+              disabled
+              id="disabled-check-demo"
+              label="Disabled"
+              type="checkbox"
+            />
+          </div>
+        </div>
+        <CodeBlock
+          code={CHECKBOX_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="Checkbox.tsx"
+          language="tsx"
+        />
+      </section>
+
+      <hr className="my-4" />
+
+      <section className="mb-2" id="radio-group">
+        <div className="ps-3 mb-2" style={{ borderLeft: "3px solid var(--bs-primary)" }}>
+          <h5 className="mb-1">RadioGroup</h5>
+          <p className="text-body-secondary mb-0 small">
+            Mutually exclusive options using <code>Form.Check</code> with{" "}
+            <code>type="radio"</code> and a shared <code>name</code> attribute.
+          </p>
+        </div>
+        <div className="p-4 rounded-3 border bg-body-tertiary mb-3">
+          <Form.Group>
+            <Form.Label className="fw-medium">Plan</Form.Label>
+            <Form.Check
+              checked={plan === "free"}
+              id="plan-free-demo"
+              label="Free"
+              name="plan-demo"
+              onChange={(e) => setPlan(e.target.value)}
+              type="radio"
+              value="free"
+            />
+            <Form.Check
+              checked={plan === "pro"}
+              id="plan-pro-demo"
+              label="Pro"
+              name="plan-demo"
+              onChange={(e) => setPlan(e.target.value)}
+              type="radio"
+              value="pro"
+            />
+            <Form.Check
+              checked={plan === "enterprise"}
+              id="plan-enterprise-demo"
+              label="Enterprise"
+              name="plan-demo"
+              onChange={(e) => setPlan(e.target.value)}
+              type="radio"
+              value="enterprise"
+            />
+          </Form.Group>
+        </div>
+        <CodeBlock
+          code={RADIO_GROUP_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="RadioGroup.tsx"
+          language="tsx"
+        />
+      </section>
+
+      <hr className="my-4" />
+
+      <section className="mb-2" id="switch">
+        <div className="ps-3 mb-2" style={{ borderLeft: "3px solid var(--bs-primary)" }}>
+          <h5 className="mb-1">Switch</h5>
+          <p className="text-body-secondary mb-0 small">
+            An on/off toggle using <code>Form.Check</code> with{" "}
+            <code>type="switch"</code> — renders as a pill-shaped slide control.
+          </p>
+        </div>
+        <div className="p-4 rounded-3 border bg-body-tertiary mb-3">
+          <div className="d-flex flex-column gap-2">
+            <Form.Check
+              id="email-notifications-demo"
+              label="Email notifications"
+              type="switch"
+            />
+            <Form.Check
+              defaultChecked
+              id="marketing-emails-demo"
+              label="Marketing emails"
+              type="switch"
+            />
+            <Form.Check
+              disabled
+              id="disabled-switch-demo"
+              label="Disabled"
+              type="switch"
+            />
+          </div>
+        </div>
+        <CodeBlock
+          code={SWITCH_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="Switch.tsx"
+          language="tsx"
+        />
+      </section>
+    </div>
+  );
+}

@@ -1,0 +1,474 @@
+<script lang="ts">
+  import { onMount } from "svelte";
+  import { Table } from "@sveltestrap/sveltestrap";
+  import { CodeBlock } from "$lib/components/ui/code-block";
+
+  // recharts is client-only — import via onMount to avoid SSR issues in SvelteKit
+  let LineChart: typeof import("recharts").LineChart;
+  let Line: typeof import("recharts").Line;
+  let XAxis: typeof import("recharts").XAxis;
+  let YAxis: typeof import("recharts").YAxis;
+  let CartesianGrid: typeof import("recharts").CartesianGrid;
+  let RechartsTooltip: typeof import("recharts").Tooltip;
+  let Legend: typeof import("recharts").Legend;
+  let ResponsiveContainer: typeof import("recharts").ResponsiveContainer;
+  let chartReady = $state(false);
+
+  onMount(async () => {
+    const recharts = await import("recharts");
+    LineChart = recharts.LineChart;
+    Line = recharts.Line;
+    XAxis = recharts.XAxis;
+    YAxis = recharts.YAxis;
+    CartesianGrid = recharts.CartesianGrid;
+    RechartsTooltip = recharts.Tooltip;
+    Legend = recharts.Legend;
+    ResponsiveContainer = recharts.ResponsiveContainer;
+    chartReady = true;
+  });
+
+  const CHART_DATA = [
+    { desktop: 186, mobile: 80, month: "Jan" },
+    { desktop: 305, mobile: 200, month: "Feb" },
+    { desktop: 237, mobile: 120, month: "Mar" },
+    { desktop: 73, mobile: 190, month: "Apr" },
+    { desktop: 209, mobile: 130, month: "May" },
+    { desktop: 214, mobile: 140, month: "Jun" },
+  ];
+
+  // ── DataTable state ──────────────────────────────────────────────────
+  interface User {
+    email: string;
+    id: string;
+    name: string;
+    role: string;
+    status: string;
+  }
+
+  const TABLE_DATA: User[] = [
+    { email: "alice@example.com", id: "1", name: "Alice Johnson", role: "Admin", status: "Active" },
+    { email: "bob@example.com", id: "2", name: "Bob Smith", role: "Editor", status: "Active" },
+    { email: "carol@example.com", id: "3", name: "Carol White", role: "Viewer", status: "Inactive" },
+    { email: "dan@example.com", id: "4", name: "Dan Brown", role: "Editor", status: "Pending" },
+    { email: "eve@example.com", id: "5", name: "Eve Davis", role: "Viewer", status: "Active" },
+  ];
+
+  let filterQuery = $state("");
+  let sortKey = $state<keyof User>("name");
+  let sortAsc = $state(true);
+
+  const filteredRows = $derived(
+    TABLE_DATA.filter((row) =>
+      row.name.toLowerCase().includes(filterQuery.toLowerCase()),
+    ).sort((a, b) => {
+      const diff = a[sortKey].localeCompare(b[sortKey]);
+      return sortAsc ? diff : -diff;
+    }),
+  );
+
+  function toggleSort(key: keyof User) {
+    if (sortKey === key) {
+      sortAsc = !sortAsc;
+    } else {
+      sortKey = key;
+      sortAsc = true;
+    }
+  }
+
+  // ── Calendar state ───────────────────────────────────────────────────
+  let selectedDate = $state<Date | undefined>(undefined);
+
+  const today = new Date();
+  const currentYear = today.getFullYear();
+  const currentMonth = today.getMonth();
+  let calMonth = $state(currentMonth);
+  let calYear = $state(currentYear);
+
+  const calDays = $derived(() => {
+    const firstDay = new Date(calYear, calMonth, 1).getDay();
+    const daysInMonth = new Date(calYear, calMonth + 1, 0).getDate();
+    const blanks = Array.from({ length: firstDay }, (_, i) => i);
+    const days = Array.from({ length: daysInMonth }, (_, i) => i + 1);
+    return { blanks, days };
+  });
+
+  const MONTH_NAMES = [
+    "January", "February", "March", "April", "May", "June",
+    "July", "August", "September", "October", "November", "December",
+  ];
+
+  function prevMonth() {
+    if (calMonth === 0) {
+      calMonth = 11;
+      calYear -= 1;
+    } else {
+      calMonth -= 1;
+    }
+  }
+
+  function nextMonth() {
+    if (calMonth === 11) {
+      calMonth = 0;
+      calYear += 1;
+    } else {
+      calMonth += 1;
+    }
+  }
+
+  function selectDay(day: number) {
+    selectedDate = new Date(calYear, calMonth, day);
+  }
+
+  function isSelected(day: number) {
+    return (
+      selectedDate !== undefined &&
+      selectedDate.getFullYear() === calYear &&
+      selectedDate.getMonth() === calMonth &&
+      selectedDate.getDate() === day
+    );
+  }
+
+  function isToday(day: number) {
+    return (
+      today.getFullYear() === calYear &&
+      today.getMonth() === calMonth &&
+      today.getDate() === day
+    );
+  }
+
+  // ── Code snippets ────────────────────────────────────────────────────
+  const CHART_CODE = `<script lang="ts">
+  import { onMount } from "svelte";
+
+  // recharts is client-only in SvelteKit — dynamic import guards against SSR
+  let LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer;
+  let chartReady = $state(false);
+
+  onMount(async () => {
+    const recharts = await import("recharts");
+    ({ LineChart, Line, XAxis, YAxis, CartesianGrid,
+       Tooltip, Legend, ResponsiveContainer } = recharts);
+    chartReady = true;
+  });
+
+  const DATA = [
+    { desktop: 186, mobile: 80, month: "Jan" },
+    { desktop: 305, mobile: 200, month: "Feb" },
+    { desktop: 237, mobile: 120, month: "Mar" },
+    { desktop: 73, mobile: 190, month: "Apr" },
+    { desktop: 209, mobile: 130, month: "May" },
+    { desktop: 214, mobile: 140, month: "Jun" },
+  ];
+<\/script>
+
+{#if chartReady}
+  <svelte:component
+    this={ResponsiveContainer}
+    height={256}
+    width="100%"
+  >
+    <svelte:component this={LineChart} data={DATA}>
+      <svelte:component this={CartesianGrid} strokeDasharray="3 3" />
+      <svelte:component this={XAxis} dataKey="month" />
+      <svelte:component this={YAxis} />
+      <svelte:component this={Tooltip} />
+      <svelte:component this={Legend} />
+      <svelte:component this={Line} dataKey="desktop" stroke="var(--bs-primary)" type="monotone" />
+      <svelte:component this={Line} dataKey="mobile" stroke="var(--bs-success)" type="monotone" />
+    </svelte:component>
+  </svelte:component>
+{:else}
+  <div class="placeholder-glow" style="height: 256px;">
+    <span class="placeholder w-100 h-100 rounded-3"></span>
+  </div>
+{/if}`;
+
+  const DATA_TABLE_CODE = `<script lang="ts">
+  import { Table } from "@sveltestrap/sveltestrap";
+
+  interface User {
+    email: string;
+    id: string;
+    name: string;
+    role: string;
+  }
+
+  const data: User[] = [
+    { email: "alice@example.com", id: "1", name: "Alice Johnson", role: "Admin" },
+    { email: "bob@example.com", id: "2", name: "Bob Smith", role: "Editor" },
+  ];
+
+  let filterQuery = $state("");
+  let sortKey = $state<keyof User>("name");
+  let sortAsc = $state(true);
+
+  const filteredRows = $derived(
+    data
+      .filter((r) => r.name.toLowerCase().includes(filterQuery.toLowerCase()))
+      .sort((a, b) => {
+        const diff = a[sortKey].localeCompare(b[sortKey]);
+        return sortAsc ? diff : -diff;
+      }),
+  );
+<\/script>
+
+<input bind:value={filterQuery} class="form-control mb-3" placeholder="Filter by name…" />
+<Table hover responsive striped>
+  <thead>
+    <tr>
+      <th onclick={() => toggleSort("name")} style="cursor: pointer;">Name</th>
+      <th>Email</th>
+      <th>Role</th>
+    </tr>
+  </thead>
+  <tbody>
+    {#each filteredRows as row (row.id)}
+      <tr>
+        <td>{row.name}</td>
+        <td>{row.email}</td>
+        <td>{row.role}</td>
+      </tr>
+    {/each}
+  </tbody>
+</Table>`;
+
+  const CALENDAR_CODE = `<script lang="ts">
+  // No calendar component in Bootstrap / @sveltestrap/sveltestrap.
+  // Build a lightweight calendar with $state + $derived.
+  let selectedDate = $state<Date | undefined>(undefined);
+  let calMonth = $state(new Date().getMonth());
+  let calYear = $state(new Date().getFullYear());
+
+  const calDays = $derived(() => {
+    const firstDay = new Date(calYear, calMonth, 1).getDay();
+    const daysInMonth = new Date(calYear, calMonth + 1, 0).getDate();
+    return {
+      blanks: Array.from({ length: firstDay }),
+      days: Array.from({ length: daysInMonth }, (_, i) => i + 1),
+    };
+  });
+<\/script>
+
+<div class="border rounded-3 p-3" style="max-width: 320px;">
+  <!-- header with prev/next -->
+  ...
+</div>`;
+</script>
+
+<div class="d-flex flex-column gap-4">
+  <div>
+    <h1 class="h4 mb-1">Data &amp; Visualisation</h1>
+    <p class="text-body-secondary">
+      Charts, interactive tables, and date pickers — built on recharts, Bootstrap
+      <code>Table</code>, and a custom calendar.
+    </p>
+  </div>
+
+  <!-- Chart -->
+  <section id="chart" class="mb-5">
+    <div class="mb-2 ps-3" style="border-left: 3px solid var(--bs-primary);">
+      <h5 class="mb-1">Chart</h5>
+      <p class="text-body-secondary mb-0 small">
+        A responsive line chart powered by recharts. Imported dynamically inside
+        <code>onMount</code> to avoid SSR issues in SvelteKit.
+      </p>
+    </div>
+    <div class="p-4 rounded-3 border bg-body-tertiary mb-3">
+      {#if chartReady}
+        <svelte:component this={ResponsiveContainer} height={256} width="100%">
+          <svelte:component this={LineChart} data={CHART_DATA}>
+            <svelte:component this={CartesianGrid} strokeDasharray="3 3" />
+            <svelte:component this={XAxis} dataKey="month" />
+            <svelte:component this={YAxis} />
+            <svelte:component this={RechartsTooltip} />
+            <svelte:component this={Legend} />
+            <svelte:component
+              this={Line}
+              dataKey="desktop"
+              dot={false}
+              name="Desktop"
+              stroke="var(--bs-primary)"
+              strokeWidth={2}
+              type="monotone"
+            />
+            <svelte:component
+              this={Line}
+              dataKey="mobile"
+              dot={false}
+              name="Mobile"
+              stroke="var(--bs-success)"
+              strokeWidth={2}
+              type="monotone"
+            />
+          </svelte:component>
+        </svelte:component>
+      {:else}
+        <div class="placeholder-glow" style="height: 256px;">
+          <span class="placeholder w-100 h-100 rounded-3"></span>
+        </div>
+      {/if}
+    </div>
+    <CodeBlock
+      code={CHART_CODE}
+      collapsible
+      defaultOpen={false}
+      filename="Chart.svelte"
+      language="svelte"
+    />
+  </section>
+  <hr class="my-2" />
+
+  <!-- DataTable -->
+  <section id="data-table" class="mb-5">
+    <div class="mb-2 ps-3" style="border-left: 3px solid var(--bs-primary);">
+      <h5 class="mb-1">DataTable</h5>
+      <p class="text-body-secondary mb-0 small">
+        A client-side sortable and filterable table using Bootstrap's <code>Table</code> component
+        and Svelte 5 <code>$state</code>/<code>$derived</code> runes.
+      </p>
+    </div>
+    <div class="p-4 rounded-3 border bg-body-tertiary mb-3">
+      <input
+        bind:value={filterQuery}
+        class="form-control mb-3"
+        placeholder="Filter by name…"
+        type="text"
+      />
+      <Table hover responsive striped>
+        <thead>
+          <tr>
+            {#each (["name", "email", "role", "status"] as const) as key}
+              <th
+                onclick={() => toggleSort(key)}
+                style="cursor: pointer; user-select: none; white-space: nowrap;"
+              >
+                {key.charAt(0).toUpperCase() + key.slice(1)}
+                {#if sortKey === key}
+                  <span class="ms-1 text-body-tertiary" style="font-size: 10px;">
+                    {sortAsc ? "▲" : "▼"}
+                  </span>
+                {/if}
+              </th>
+            {/each}
+          </tr>
+        </thead>
+        <tbody>
+          {#each filteredRows as row (row.id)}
+            <tr>
+              <td>{row.name}</td>
+              <td>{row.email}</td>
+              <td>{row.role}</td>
+              <td>
+                <span
+                  class="badge {row.status === 'Active'
+                    ? 'bg-success'
+                    : row.status === 'Pending'
+                      ? 'bg-warning text-dark'
+                      : 'bg-secondary'}"
+                >
+                  {row.status}
+                </span>
+              </td>
+            </tr>
+          {/each}
+          {#if filteredRows.length === 0}
+            <tr>
+              <td class="text-center text-body-secondary py-3" colspan={4}>No results found.</td>
+            </tr>
+          {/if}
+        </tbody>
+      </Table>
+      <p class="text-body-secondary small mb-0">{filteredRows.length} of {TABLE_DATA.length} rows</p>
+    </div>
+    <CodeBlock
+      code={DATA_TABLE_CODE}
+      collapsible
+      defaultOpen={false}
+      filename="DataTable.svelte"
+      language="svelte"
+    />
+  </section>
+  <hr class="my-2" />
+
+  <!-- Calendar -->
+  <section id="calendar" class="mb-5">
+    <div class="mb-2 ps-3" style="border-left: 3px solid var(--bs-primary);">
+      <h5 class="mb-1">Calendar</h5>
+      <p class="text-body-secondary mb-0 small">
+        Bootstrap does not ship a calendar component. This lightweight implementation uses Svelte 5
+        <code>$state</code>/<code>$derived</code> runes with Bootstrap utility classes.
+      </p>
+    </div>
+    <div class="p-4 rounded-3 border bg-body-tertiary mb-3">
+      <div class="border rounded-3 p-3 bg-body" style="max-width: 320px;">
+        <!-- Month navigation -->
+        <div class="d-flex align-items-center justify-content-between mb-3">
+          <button
+            class="btn btn-sm btn-outline-secondary border-0 p-1"
+            onclick={prevMonth}
+            type="button"
+            aria-label="Previous month"
+          >
+            <svg fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="16">
+              <path d="M15 18l-6-6 6-6" />
+            </svg>
+          </button>
+          <span class="fw-semibold small">
+            {MONTH_NAMES[calMonth]} {calYear}
+          </span>
+          <button
+            class="btn btn-sm btn-outline-secondary border-0 p-1"
+            onclick={nextMonth}
+            type="button"
+            aria-label="Next month"
+          >
+            <svg fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="16">
+              <path d="M9 18l6-6-6-6" />
+            </svg>
+          </button>
+        </div>
+
+        <!-- Day-of-week headers -->
+        <div class="d-grid mb-1" style="grid-template-columns: repeat(7, 1fr); text-align: center;">
+          {#each ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"] as dayLabel}
+            <span class="text-body-tertiary" style="font-size: 11px; padding: 2px 0;">{dayLabel}</span>
+          {/each}
+        </div>
+
+        <!-- Day cells -->
+        <div class="d-grid" style="grid-template-columns: repeat(7, 1fr); gap: 2px;">
+          {#each calDays().blanks as _}
+            <div></div>
+          {/each}
+          {#each calDays().days as day}
+            <button
+              class="btn btn-sm p-0 rounded-2
+                {isSelected(day)
+                  ? 'btn-primary'
+                  : isToday(day)
+                    ? 'btn-outline-primary'
+                    : 'btn-outline-secondary border-0 text-body'}"
+              onclick={() => selectDay(day)}
+              style="height: 34px; width: 100%; font-size: 13px;"
+              type="button"
+            >
+              {day}
+            </button>
+          {/each}
+        </div>
+
+        <!-- Selected date display -->
+        <p class="text-body-secondary small mt-3 mb-0">
+          {selectedDate ? selectedDate.toLocaleDateString() : "No date selected"}
+        </p>
+      </div>
+    </div>
+    <CodeBlock
+      code={CALENDAR_CODE}
+      collapsible
+      defaultOpen={false}
+      filename="Calendar.svelte"
+      language="svelte"
+    />
+  </section>
+</div>

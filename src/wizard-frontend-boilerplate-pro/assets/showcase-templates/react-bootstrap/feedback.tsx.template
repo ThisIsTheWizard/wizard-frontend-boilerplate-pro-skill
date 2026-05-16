@@ -1,0 +1,384 @@
+"use client";
+
+import { useState } from "react";
+
+import Alert from "react-bootstrap/Alert";
+import Button from "react-bootstrap/Button";
+import Modal from "react-bootstrap/Modal";
+import OverlayTrigger from "react-bootstrap/OverlayTrigger";
+import ProgressBar from "react-bootstrap/ProgressBar";
+import Toast from "react-bootstrap/Toast";
+import ToastContainer from "react-bootstrap/ToastContainer";
+import Tooltip from "react-bootstrap/Tooltip";
+
+import { CodeBlock } from "@/components/ui/code-block";
+
+const ALERT_CODE = `import Alert from "react-bootstrap/Alert";
+
+export function Example() {
+  return (
+    <div className="d-flex flex-column gap-3">
+      <Alert variant="info">
+        <Alert.Heading>Heads up</Alert.Heading>
+        You can add components to your app using the CLI.
+      </Alert>
+      <Alert variant="success">
+        <Alert.Heading>Success</Alert.Heading>
+        Your profile has been saved successfully.
+      </Alert>
+      <Alert variant="warning">
+        <Alert.Heading>Warning</Alert.Heading>
+        Unsaved changes will be lost.
+      </Alert>
+      <Alert variant="danger">
+        <Alert.Heading>Error</Alert.Heading>
+        Something went wrong. Please try again.
+      </Alert>
+    </div>
+  );
+}`;
+
+const TOAST_CODE = `import { useState } from "react";
+import Button from "react-bootstrap/Button";
+import Toast from "react-bootstrap/Toast";
+import ToastContainer from "react-bootstrap/ToastContainer";
+
+type ToastVariant = "danger" | "primary" | "success" | "warning";
+
+export function Example() {
+  const [show, setShow] = useState(false);
+  const [variant, setVariant] = useState<ToastVariant>("primary");
+
+  const trigger = (v: ToastVariant) => { setVariant(v); setShow(true); };
+
+  return (
+    <>
+      <div className="d-flex flex-wrap gap-2">
+        <Button onClick={() => trigger("primary")} variant="primary">Default</Button>
+        <Button onClick={() => trigger("success")} variant="outline-success">Success</Button>
+        <Button onClick={() => trigger("danger")} variant="outline-danger">Error</Button>
+        <Button onClick={() => trigger("warning")} variant="outline-warning">Warning</Button>
+      </div>
+      <ToastContainer className="p-3" position="bottom-end">
+        <Toast
+          autohide
+          bg={variant}
+          delay={3000}
+          onClose={() => setShow(false)}
+          show={show}
+        >
+          <Toast.Header>
+            <strong className="me-auto">Notification</strong>
+          </Toast.Header>
+          <Toast.Body className="text-white">
+            {variant === "primary" && "Event has been created."}
+            {variant === "success" && "Profile saved successfully."}
+            {variant === "danger" && "Something went wrong."}
+            {variant === "warning" && "Unsaved changes detected."}
+          </Toast.Body>
+        </Toast>
+      </ToastContainer>
+    </>
+  );
+}`;
+
+const PROGRESS_CODE = `import ProgressBar from "react-bootstrap/ProgressBar";
+
+export function Example() {
+  return (
+    <div className="d-flex flex-column gap-3">
+      <ProgressBar now={25} />
+      <ProgressBar now={60} variant="success" />
+      <ProgressBar now={100} />
+      <ProgressBar animated now={75} variant="info" />
+    </div>
+  );
+}`;
+
+const TOOLTIP_CODE = `import Button from "react-bootstrap/Button";
+import OverlayTrigger from "react-bootstrap/OverlayTrigger";
+import Tooltip from "react-bootstrap/Tooltip";
+
+export function Example() {
+  return (
+    <div className="d-flex flex-wrap gap-3">
+      <OverlayTrigger overlay={<Tooltip>Tooltip on top</Tooltip>} placement="top">
+        <Button size="sm" variant="outline-secondary">Top</Button>
+      </OverlayTrigger>
+      <OverlayTrigger overlay={<Tooltip>Tooltip on right</Tooltip>} placement="right">
+        <Button size="sm" variant="outline-secondary">Right</Button>
+      </OverlayTrigger>
+      <OverlayTrigger overlay={<Tooltip>Tooltip on bottom</Tooltip>} placement="bottom">
+        <Button size="sm" variant="outline-secondary">Bottom</Button>
+      </OverlayTrigger>
+      <OverlayTrigger overlay={<Tooltip>Tooltip on left</Tooltip>} placement="left">
+        <Button size="sm" variant="outline-secondary">Left</Button>
+      </OverlayTrigger>
+    </div>
+  );
+}`;
+
+const MODAL_CODE = `import { useState } from "react";
+import Button from "react-bootstrap/Button";
+import Modal from "react-bootstrap/Modal";
+
+export function Example() {
+  const [show, setShow] = useState(false);
+
+  return (
+    <>
+      <Button onClick={() => setShow(true)} variant="primary">Open modal</Button>
+      <Modal centered onHide={() => setShow(false)} show={show}>
+        <Modal.Header closeButton>
+          <Modal.Title>Confirm action</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          This action cannot be undone. Are you sure you want to proceed?
+        </Modal.Body>
+        <Modal.Footer>
+          <Button onClick={() => setShow(false)} variant="outline-secondary">Cancel</Button>
+          <Button onClick={() => setShow(false)} variant="primary">Confirm</Button>
+        </Modal.Footer>
+      </Modal>
+    </>
+  );
+}`;
+
+type ToastVariant = "danger" | "primary" | "success" | "warning";
+
+const TOAST_MESSAGES: Record<ToastVariant, string> = {
+  danger: "Something went wrong.",
+  primary: "Event has been created.",
+  success: "Profile saved successfully.",
+  warning: "Unsaved changes detected.",
+};
+
+export default function FeedbackPage() {
+  const [showToast, setShowToast] = useState(false);
+  const [toastVariant, setToastVariant] = useState<ToastVariant>("primary");
+  const [showModal, setShowModal] = useState(false);
+
+  const triggerToast = (variant: ToastVariant) => {
+    setToastVariant(variant);
+    setShowToast(true);
+  };
+
+  return (
+    <div className="d-flex flex-column gap-4">
+      <div>
+        <h1 className="h4 mb-1">Feedback</h1>
+        <p className="text-body-secondary">
+          Status indicators, notifications, and modal interactions — alerts,
+          toasts, progress bars, tooltips, and modals.
+        </p>
+      </div>
+
+      <section className="mb-2" id="alert">
+        <div className="ps-3 mb-2" style={{ borderLeft: "3px solid var(--bs-primary)" }}>
+          <h5 className="mb-1">Alert</h5>
+          <p className="text-body-secondary mb-0 small">
+            An inline message banner. React-Bootstrap ships semantic variants:{" "}
+            <code>info</code>, <code>success</code>, <code>warning</code>, and{" "}
+            <code>danger</code> — use <code>Alert.Heading</code> for a title.
+          </p>
+        </div>
+        <div className="p-4 rounded-3 border bg-body-tertiary mb-3">
+          <div className="d-flex flex-column gap-3">
+            <Alert variant="info">
+              <Alert.Heading>Heads up</Alert.Heading>
+              You can add components to your app using the CLI.
+            </Alert>
+            <Alert variant="success">
+              <Alert.Heading>Success</Alert.Heading>
+              Your profile has been saved successfully.
+            </Alert>
+            <Alert variant="warning">
+              <Alert.Heading>Warning</Alert.Heading>
+              Unsaved changes will be lost.
+            </Alert>
+            <Alert variant="danger">
+              <Alert.Heading>Error</Alert.Heading>
+              Something went wrong. Please try again.
+            </Alert>
+          </div>
+        </div>
+        <CodeBlock
+          code={ALERT_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="Alert.tsx"
+          language="tsx"
+        />
+      </section>
+
+      <hr className="my-4" />
+
+      <section className="mb-2" id="toast">
+        <div className="ps-3 mb-2" style={{ borderLeft: "3px solid var(--bs-primary)" }}>
+          <h5 className="mb-1">Toast</h5>
+          <p className="text-body-secondary mb-0 small">
+            Dismissible notifications using <code>ToastContainer</code> +{" "}
+            <code>Toast</code>. Use the <code>bg</code> prop for severity colours
+            and <code>autohide</code> + <code>delay</code> for auto-dismiss.
+          </p>
+        </div>
+        <div className="p-4 rounded-3 border bg-body-tertiary mb-3">
+          <div className="d-flex flex-wrap gap-2">
+            <Button onClick={() => triggerToast("primary")} variant="primary">
+              Default
+            </Button>
+            <Button onClick={() => triggerToast("success")} variant="outline-success">
+              Success
+            </Button>
+            <Button onClick={() => triggerToast("danger")} variant="outline-danger">
+              Error
+            </Button>
+            <Button onClick={() => triggerToast("warning")} variant="outline-warning">
+              Warning
+            </Button>
+          </div>
+        </div>
+        <ToastContainer className="p-3" position="bottom-end">
+          <Toast
+            autohide
+            bg={toastVariant}
+            delay={3000}
+            onClose={() => setShowToast(false)}
+            show={showToast}
+          >
+            <Toast.Header>
+              <strong className="me-auto">Notification</strong>
+            </Toast.Header>
+            <Toast.Body className="text-white">
+              {TOAST_MESSAGES[toastVariant]}
+            </Toast.Body>
+          </Toast>
+        </ToastContainer>
+        <CodeBlock
+          code={TOAST_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="Toast.tsx"
+          language="tsx"
+        />
+      </section>
+
+      <hr className="my-4" />
+
+      <section className="mb-2" id="progress">
+        <div className="ps-3 mb-2" style={{ borderLeft: "3px solid var(--bs-primary)" }}>
+          <h5 className="mb-1">ProgressBar</h5>
+          <p className="text-body-secondary mb-0 small">
+            A horizontal progress bar. Pass <code>now</code> (0–100) and{" "}
+            <code>variant</code> for colour. Add <code>animated</code> for a
+            striped animation on active tasks.
+          </p>
+        </div>
+        <div className="p-4 rounded-3 border bg-body-tertiary mb-3">
+          <div className="d-flex flex-column gap-3">
+            <ProgressBar now={25} />
+            <ProgressBar now={60} variant="success" />
+            <ProgressBar now={100} />
+            <ProgressBar animated now={75} variant="info" />
+          </div>
+        </div>
+        <CodeBlock
+          code={PROGRESS_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="ProgressBar.tsx"
+          language="tsx"
+        />
+      </section>
+
+      <hr className="my-4" />
+
+      <section className="mb-2" id="tooltip">
+        <div className="ps-3 mb-2" style={{ borderLeft: "3px solid var(--bs-primary)" }}>
+          <h5 className="mb-1">Tooltip</h5>
+          <p className="text-body-secondary mb-0 small">
+            A floating label on hover/focus via <code>OverlayTrigger</code>{" "}
+            wrapping a <code>Tooltip</code>. Set <code>placement</code> to
+            control the direction.
+          </p>
+        </div>
+        <div className="p-4 rounded-3 border bg-body-tertiary mb-3">
+          <div className="d-flex flex-wrap gap-3">
+            <OverlayTrigger
+              overlay={<Tooltip id="tt-top">Tooltip on top</Tooltip>}
+              placement="top"
+            >
+              <Button size="sm" variant="outline-secondary">Top</Button>
+            </OverlayTrigger>
+            <OverlayTrigger
+              overlay={<Tooltip id="tt-right">Tooltip on right</Tooltip>}
+              placement="right"
+            >
+              <Button size="sm" variant="outline-secondary">Right</Button>
+            </OverlayTrigger>
+            <OverlayTrigger
+              overlay={<Tooltip id="tt-bottom">Tooltip on bottom</Tooltip>}
+              placement="bottom"
+            >
+              <Button size="sm" variant="outline-secondary">Bottom</Button>
+            </OverlayTrigger>
+            <OverlayTrigger
+              overlay={<Tooltip id="tt-left">Tooltip on left</Tooltip>}
+              placement="left"
+            >
+              <Button size="sm" variant="outline-secondary">Left</Button>
+            </OverlayTrigger>
+          </div>
+        </div>
+        <CodeBlock
+          code={TOOLTIP_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="Tooltip.tsx"
+          language="tsx"
+        />
+      </section>
+
+      <hr className="my-4" />
+
+      <section className="mb-2" id="modal">
+        <div className="ps-3 mb-2" style={{ borderLeft: "3px solid var(--bs-primary)" }}>
+          <h5 className="mb-1">Modal</h5>
+          <p className="text-body-secondary mb-0 small">
+            A focus-trapped modal overlay. Use <code>Modal.Header</code> with{" "}
+            <code>closeButton</code>, <code>Modal.Body</code>, and{" "}
+            <code>Modal.Footer</code> for a complete dialog layout.
+          </p>
+        </div>
+        <div className="p-4 rounded-3 border bg-body-tertiary mb-3">
+          <Button onClick={() => setShowModal(true)} variant="primary">
+            Open modal
+          </Button>
+        </div>
+        <Modal centered onHide={() => setShowModal(false)} show={showModal}>
+          <Modal.Header closeButton>
+            <Modal.Title>Confirm action</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            This action cannot be undone. Are you sure you want to proceed?
+          </Modal.Body>
+          <Modal.Footer>
+            <Button onClick={() => setShowModal(false)} variant="outline-secondary">
+              Cancel
+            </Button>
+            <Button onClick={() => setShowModal(false)} variant="primary">
+              Confirm
+            </Button>
+          </Modal.Footer>
+        </Modal>
+        <CodeBlock
+          code={MODAL_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="Modal.tsx"
+          language="tsx"
+        />
+      </section>
+    </div>
+  );
+}
