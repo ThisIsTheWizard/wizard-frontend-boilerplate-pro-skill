@@ -1,0 +1,327 @@
+"use client";
+
+import { useState } from "react";
+
+import Box from "@mui/material/Box";
+import Paper from "@mui/material/Paper";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import TableSortLabel from "@mui/material/TableSortLabel";
+import Typography from "@mui/material/Typography";
+import {
+  CartesianGrid,
+  Line,
+  LineChart,
+  ResponsiveContainer,
+  Tooltip,
+  XAxis,
+  YAxis,
+} from "recharts";
+
+import { CodeBlock } from "@/components/ui/code-block";
+
+const CHART_DATA = [
+  { desktop: 186, mobile: 80, month: "Jan" },
+  { desktop: 305, mobile: 200, month: "Feb" },
+  { desktop: 237, mobile: 120, month: "Mar" },
+  { desktop: 73, mobile: 190, month: "Apr" },
+  { desktop: 209, mobile: 130, month: "May" },
+  { desktop: 214, mobile: 140, month: "Jun" },
+];
+
+const CHART_CODE = `import {
+  CartesianGrid,
+  Line,
+  LineChart,
+  ResponsiveContainer,
+  Tooltip,
+  XAxis,
+  YAxis,
+} from "recharts";
+
+const DATA = [
+  { desktop: 186, mobile: 80, month: "Jan" },
+  { desktop: 305, mobile: 200, month: "Feb" },
+  { desktop: 237, mobile: 120, month: "Mar" },
+  { desktop: 73, mobile: 190, month: "Apr" },
+  { desktop: 209, mobile: 130, month: "May" },
+  { desktop: 214, mobile: 140, month: "Jun" },
+];
+
+export function Example() {
+  return (
+    <ResponsiveContainer height={256} width="100%">
+      <LineChart data={DATA}>
+        <CartesianGrid strokeDasharray="3 3" />
+        <XAxis dataKey="month" />
+        <YAxis />
+        <Tooltip />
+        <Line dataKey="desktop" stroke="var(--color-accent-500)" type="monotone" />
+        <Line dataKey="mobile" stroke="var(--color-accent-300)" type="monotone" />
+      </LineChart>
+    </ResponsiveContainer>
+  );
+}`;
+
+interface User {
+  email: string;
+  id: string;
+  name: string;
+  role: string;
+}
+
+const TABLE_DATA: User[] = [
+  { email: "alice@example.com", id: "1", name: "Alice Johnson", role: "Admin" },
+  { email: "bob@example.com", id: "2", name: "Bob Smith", role: "Editor" },
+  { email: "carol@example.com", id: "3", name: "Carol White", role: "Viewer" },
+  { email: "dan@example.com", id: "4", name: "Dan Lee", role: "Editor" },
+  { email: "eve@example.com", id: "5", name: "Eve Martinez", role: "Viewer" },
+];
+
+const DATA_TABLE_CODE = `import Paper from "@mui/material/Paper";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import TableSortLabel from "@mui/material/TableSortLabel";
+
+// For a full-featured sortable/paginated table, install @mui/x-data-grid:
+//   npm install @mui/x-data-grid
+// and replace this component with <DataGrid rows={rows} columns={columns} />.
+
+export function Example() {
+  return (
+    <TableContainer component={Paper} variant="outlined">
+      <Table aria-label="Users">
+        <TableHead>
+          <TableRow>
+            <TableCell>
+              <TableSortLabel active direction="asc">Name</TableSortLabel>
+            </TableCell>
+            <TableCell>Email</TableCell>
+            <TableCell>Role</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {rows.map((row) => (
+            <TableRow hover key={row.id}>
+              <TableCell>{row.name}</TableCell>
+              <TableCell>{row.email}</TableCell>
+              <TableCell>{row.role}</TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </TableContainer>
+  );
+}`;
+
+const CALENDAR_CODE = `// Requires: npm install @mui/x-date-pickers date-fns
+import { useState } from "react";
+import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
+import { DateCalendar } from "@mui/x-date-pickers/DateCalendar";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+
+export function Example() {
+  const [date, setDate] = useState<Date | null>(new Date());
+
+  return (
+    <LocalizationProvider dateAdapter={AdapterDateFns}>
+      <DateCalendar onChange={setDate} value={date} />
+    </LocalizationProvider>
+  );
+}`;
+
+type SortDir = "asc" | "desc";
+type SortKey = keyof Omit<User, "id">;
+
+function sortData(data: User[], key: SortKey, dir: SortDir): User[] {
+  return [...data].sort((a, b) => {
+    const result = a[key].localeCompare(b[key]);
+    return dir === "asc" ? result : -result;
+  });
+}
+
+export default function DataVizPage() {
+  const [sortKey, setSortKey] = useState<SortKey>("name");
+  const [sortDir, setSortDir] = useState<SortDir>("asc");
+
+  const handleSort = (key: SortKey) => {
+    if (sortKey === key) {
+      setSortDir((d) => (d === "asc" ? "desc" : "asc"));
+    } else {
+      setSortKey(key);
+      setSortDir("asc");
+    }
+  };
+
+  const sortedData = sortData(TABLE_DATA, sortKey, sortDir);
+
+  return (
+    <Box sx={{ display: "flex", flexDirection: "column", gap: 8 }}>
+      <Box>
+        <Typography gutterBottom variant="h4">
+          Data viz
+        </Typography>
+        <Typography color="text.secondary" variant="body1">
+          Charts, sortable tables, and date selection — using recharts, MUI
+          Table, and MUI X Date Pickers.
+        </Typography>
+      </Box>
+
+      <Box component="section" id="chart" sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
+        <Box sx={{ borderLeft: 3, borderColor: "primary.main", pl: 1.5 }}>
+          <Typography gutterBottom variant="h6">Chart</Typography>
+          <Typography color="text.secondary" variant="body2">
+            MUI does not ship a chart component. Use{" "}
+            <strong>recharts</strong> directly with{" "}
+            <code>ResponsiveContainer</code> for size-aware rendering. Reference
+            the skill's CSS variables for colours to stay in sync with the
+            active theme.
+          </Typography>
+        </Box>
+        <Box
+          sx={{
+            bgcolor: "background.default",
+            border: 1,
+            borderColor: "divider",
+            borderRadius: 2,
+            p: 4,
+          }}
+        >
+          <ResponsiveContainer height={256} width="100%">
+            <LineChart data={CHART_DATA}>
+              <CartesianGrid strokeDasharray="3 3" />
+              <XAxis dataKey="month" />
+              <YAxis />
+              <Tooltip />
+              <Line
+                dataKey="desktop"
+                name="Desktop"
+                stroke="var(--color-accent-500)"
+                type="monotone"
+              />
+              <Line
+                dataKey="mobile"
+                name="Mobile"
+                stroke="var(--color-accent-300)"
+                type="monotone"
+              />
+            </LineChart>
+          </ResponsiveContainer>
+        </Box>
+        <CodeBlock
+          code={CHART_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="Chart.tsx"
+          language="tsx"
+        />
+      </Box>
+
+      <Box component="section" id="data-table" sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
+        <Box sx={{ borderLeft: 3, borderColor: "primary.main", pl: 1.5 }}>
+          <Typography gutterBottom variant="h6">DataTable</Typography>
+          <Typography color="text.secondary" variant="body2">
+            A sortable table using MUI's <code>Table</code> +{" "}
+            <code>TableSortLabel</code>. For a full-featured grid with
+            pagination, filtering, and virtual scrolling, install{" "}
+            <code>@mui/x-data-grid</code> and replace this with{" "}
+            <code>{"<DataGrid rows={rows} columns={columns} />"}</code>.
+          </Typography>
+        </Box>
+        <Box
+          sx={{
+            bgcolor: "background.default",
+            border: 1,
+            borderColor: "divider",
+            borderRadius: 2,
+            p: 4,
+          }}
+        >
+          <TableContainer component={Paper} variant="outlined">
+            <Table aria-label="Users sortable table">
+              <TableHead>
+                <TableRow>
+                  {(["name", "email", "role"] as SortKey[]).map((key) => (
+                    <TableCell key={key}>
+                      <TableSortLabel
+                        active={sortKey === key}
+                        direction={sortKey === key ? sortDir : "asc"}
+                        onClick={() => handleSort(key)}
+                      >
+                        {key.charAt(0).toUpperCase() + key.slice(1)}
+                      </TableSortLabel>
+                    </TableCell>
+                  ))}
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {sortedData.map((row) => (
+                  <TableRow hover key={row.id}>
+                    <TableCell>{row.name}</TableCell>
+                    <TableCell>{row.email}</TableCell>
+                    <TableCell>{row.role}</TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
+        </Box>
+        <CodeBlock
+          code={DATA_TABLE_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="DataTable.tsx"
+          language="tsx"
+        />
+      </Box>
+
+      <Box component="section" id="calendar" sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
+        <Box sx={{ borderLeft: 3, borderColor: "primary.main", pl: 1.5 }}>
+          <Typography gutterBottom variant="h6">Calendar</Typography>
+          <Typography color="text.secondary" variant="body2">
+            Date selection using MUI X's <code>DateCalendar</code>. Requires
+            two additional packages:
+          </Typography>
+          <Typography
+            color="text.secondary"
+            component="pre"
+            sx={{ fontSize: 12, mt: 0.5 }}
+          >
+            npm install @mui/x-date-pickers date-fns
+          </Typography>
+        </Box>
+        <Box
+          sx={{
+            bgcolor: "background.default",
+            border: 1,
+            borderColor: "divider",
+            borderRadius: 2,
+            p: 4,
+          }}
+        >
+          <Typography color="text.secondary" variant="body2">
+            Calendar preview omitted — <code>DateCalendar</code> requires{" "}
+            <code>LocalizationProvider</code> and the{" "}
+            <code>@mui/x-date-pickers</code> package. See code snippet below for
+            the full setup.
+          </Typography>
+        </Box>
+        <CodeBlock
+          code={CALENDAR_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="Calendar.tsx"
+          language="tsx"
+        />
+      </Box>
+    </Box>
+  );
+}

@@ -1,0 +1,281 @@
+"use client";
+
+import { useState } from "react";
+
+import Box from "@mui/material/Box";
+import Breadcrumbs from "@mui/material/Breadcrumbs";
+import Button from "@mui/material/Button";
+import Link from "@mui/material/Link";
+import MuiLink from "@mui/material/Link";
+import Pagination from "@mui/material/Pagination";
+import Paper from "@mui/material/Paper";
+import Tab from "@mui/material/Tab";
+import Tabs from "@mui/material/Tabs";
+import Toolbar from "@mui/material/Toolbar";
+import Typography from "@mui/material/Typography";
+
+import { CodeBlock } from "@/components/ui/code-block";
+
+const TABS_CODE = `import { useState } from "react";
+import Box from "@mui/material/Box";
+import Tab from "@mui/material/Tab";
+import Tabs from "@mui/material/Tabs";
+import Typography from "@mui/material/Typography";
+
+export function Example() {
+  const [value, setValue] = useState(0);
+
+  return (
+    <Box>
+      <Tabs onChange={(_, v) => setValue(v)} value={value}>
+        <Tab label="Account" />
+        <Tab label="Password" />
+        <Tab label="Notifications" />
+      </Tabs>
+      <Box sx={{ pt: 2 }}>
+        {value === 0 && <Typography>Manage your account settings and preferences.</Typography>}
+        {value === 1 && <Typography>Change your password and security settings.</Typography>}
+        {value === 2 && <Typography>Configure how you receive notifications.</Typography>}
+      </Box>
+    </Box>
+  );
+}`;
+
+const BREADCRUMBS_CODE = `import Breadcrumbs from "@mui/material/Breadcrumbs";
+import Link from "@mui/material/Link";
+import Typography from "@mui/material/Typography";
+
+export function Example() {
+  return (
+    <Breadcrumbs aria-label="breadcrumb">
+      <Link color="inherit" href="#">Home</Link>
+      <Link color="inherit" href="#">Library</Link>
+      <Typography color="text.primary">Components</Typography>
+    </Breadcrumbs>
+  );
+}`;
+
+const PAGINATION_CODE = `import { useState } from "react";
+import Pagination from "@mui/material/Pagination";
+
+export function Example() {
+  const [page, setPage] = useState(1);
+
+  return (
+    <Pagination
+      count={10}
+      onChange={(_, p) => setPage(p)}
+      page={page}
+    />
+  );
+}`;
+
+const NAVIGATION_MENU_CODE = `import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Paper from "@mui/material/Paper";
+import Toolbar from "@mui/material/Toolbar";
+
+export function Example() {
+  return (
+    <Paper elevation={0} sx={{ border: 1, borderColor: "divider" }} variant="outlined">
+      <Toolbar variant="dense">
+        <Box sx={{ display: "flex", gap: 0.5 }}>
+          <Button size="small" variant="text">Products</Button>
+          <Button size="small" variant="text">Docs</Button>
+          <Button size="small" variant="text">Pricing</Button>
+          <Button size="small" variant="text">Blog</Button>
+        </Box>
+      </Toolbar>
+    </Paper>
+  );
+}`;
+
+interface TabPanelProps {
+  children: React.ReactNode;
+  index: number;
+  value: number;
+}
+
+function TabPanel({ children, index, value }: TabPanelProps) {
+  return (
+    <Box
+      aria-labelledby={`tab-${index}`}
+      hidden={value !== index}
+      id={`tabpanel-${index}`}
+      role="tabpanel"
+      sx={{ pt: 2 }}
+    >
+      {value === index && children}
+    </Box>
+  );
+}
+
+export default function NavigationPage() {
+  const [tabValue, setTabValue] = useState(0);
+  const [page, setPage] = useState(1);
+
+  return (
+    <Box sx={{ display: "flex", flexDirection: "column", gap: 8 }}>
+      <Box>
+        <Typography gutterBottom variant="h4">
+          Navigation
+        </Typography>
+        <Typography color="text.secondary" variant="body1">
+          Components for moving users through content — tabs, breadcrumbs,
+          pagination, and app bars.
+        </Typography>
+      </Box>
+
+      <Box component="section" id="tabs" sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
+        <Box sx={{ borderLeft: 3, borderColor: "primary.main", pl: 1.5 }}>
+          <Typography gutterBottom variant="h6">Tabs</Typography>
+          <Typography color="text.secondary" variant="body2">
+            A segmented tab strip using MUI's <code>Tabs</code> +{" "}
+            <code>Tab</code>. Drive panel visibility with an{" "}
+            <code>onChange</code> handler and integer value.
+          </Typography>
+        </Box>
+        <Box sx={{ bgcolor: "background.default", border: 1, borderColor: "divider", borderRadius: 2, p: 4 }}>
+          <Box>
+            <Tabs
+              aria-label="Content tabs"
+              onChange={(_, v: number) => setTabValue(v)}
+              value={tabValue}
+            >
+              <Tab id="tab-0" label="Account" />
+              <Tab id="tab-1" label="Password" />
+              <Tab id="tab-2" label="Notifications" />
+            </Tabs>
+            <TabPanel index={0} value={tabValue}>
+              <Typography color="text.secondary" variant="body2">
+                Manage your account settings and preferences.
+              </Typography>
+            </TabPanel>
+            <TabPanel index={1} value={tabValue}>
+              <Typography color="text.secondary" variant="body2">
+                Change your password and security settings.
+              </Typography>
+            </TabPanel>
+            <TabPanel index={2} value={tabValue}>
+              <Typography color="text.secondary" variant="body2">
+                Configure how you receive notifications.
+              </Typography>
+            </TabPanel>
+          </Box>
+        </Box>
+        <CodeBlock
+          code={TABS_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="Tabs.tsx"
+          language="tsx"
+        />
+      </Box>
+
+      <Box component="section" id="breadcrumbs" sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
+        <Box sx={{ borderLeft: 3, borderColor: "primary.main", pl: 1.5 }}>
+          <Typography gutterBottom variant="h6">Breadcrumbs</Typography>
+          <Typography color="text.secondary" variant="body2">
+            A hierarchical path indicator. The current page is rendered as{" "}
+            <code>Typography</code> (not a link); ancestors use{" "}
+            <code>Link</code> from MUI.
+          </Typography>
+        </Box>
+        <Box sx={{ bgcolor: "background.default", border: 1, borderColor: "divider", borderRadius: 2, p: 4 }}>
+          <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
+            <Breadcrumbs aria-label="breadcrumb">
+              <MuiLink color="inherit" href="#">
+                Home
+              </MuiLink>
+              <MuiLink color="inherit" href="#">
+                Library
+              </MuiLink>
+              <Typography color="text.primary">Components</Typography>
+            </Breadcrumbs>
+            <Breadcrumbs aria-label="breadcrumb" separator="›">
+              <MuiLink color="inherit" href="#">
+                Dashboard
+              </MuiLink>
+              <MuiLink color="inherit" href="#">
+                Settings
+              </MuiLink>
+              <Typography color="text.primary">Profile</Typography>
+            </Breadcrumbs>
+          </Box>
+        </Box>
+        <CodeBlock
+          code={BREADCRUMBS_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="Breadcrumbs.tsx"
+          language="tsx"
+        />
+      </Box>
+
+      <Box component="section" id="pagination" sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
+        <Box sx={{ borderLeft: 3, borderColor: "primary.main", pl: 1.5 }}>
+          <Typography gutterBottom variant="h6">Pagination</Typography>
+          <Typography color="text.secondary" variant="body2">
+            A numbered page navigator. Pass <code>count</code> (total pages),{" "}
+            <code>page</code> (current), and <code>onChange</code>. Currently
+            on page <strong>{page}</strong>.
+          </Typography>
+        </Box>
+        <Box sx={{ bgcolor: "background.default", border: 1, borderColor: "divider", borderRadius: 2, p: 4 }}>
+          <Box sx={{ display: "flex", flexDirection: "column", gap: 3 }}>
+            <Pagination
+              count={10}
+              onChange={(_, p) => setPage(p)}
+              page={page}
+            />
+            <Pagination color="primary" count={10} page={page} />
+            <Pagination count={10} disabled page={3} />
+          </Box>
+        </Box>
+        <CodeBlock
+          code={PAGINATION_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="Pagination.tsx"
+          language="tsx"
+        />
+      </Box>
+
+      <Box component="section" id="app-bar" sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
+        <Box sx={{ borderLeft: 3, borderColor: "primary.main", pl: 1.5 }}>
+          <Typography gutterBottom variant="h6">AppBar / NavigationMenu</Typography>
+          <Typography color="text.secondary" variant="body2">
+            MUI uses <code>AppBar</code> + <code>Toolbar</code> + text{" "}
+            <code>Button</code>s for horizontal navigation menus. There is no
+            direct equivalent to shadcn's <code>NavigationMenu</code> — use{" "}
+            <code>Menu</code> + <code>MenuItem</code> for mega-dropdown patterns
+            (see Overlay page).
+          </Typography>
+        </Box>
+        <Box sx={{ bgcolor: "background.default", border: 1, borderColor: "divider", borderRadius: 2, p: 4 }}>
+          <Paper
+            elevation={0}
+            sx={{ border: 1, borderColor: "divider" }}
+            variant="outlined"
+          >
+            <Toolbar variant="dense">
+              <Box sx={{ display: "flex", gap: 0.5 }}>
+                <Button size="small" variant="text">Products</Button>
+                <Button size="small" variant="text">Docs</Button>
+                <Button size="small" variant="text">Pricing</Button>
+                <Button size="small" variant="text">Blog</Button>
+              </Box>
+            </Toolbar>
+          </Paper>
+        </Box>
+        <CodeBlock
+          code={NAVIGATION_MENU_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="NavigationMenu.tsx"
+          language="tsx"
+        />
+      </Box>
+    </Box>
+  );
+}

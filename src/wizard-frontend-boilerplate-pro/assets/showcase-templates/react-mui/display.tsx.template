@@ -1,0 +1,359 @@
+"use client";
+
+import Avatar from "@mui/material/Avatar";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Card from "@mui/material/Card";
+import CardActions from "@mui/material/CardActions";
+import CardContent from "@mui/material/CardContent";
+import CardHeader from "@mui/material/CardHeader";
+import Chip from "@mui/material/Chip";
+import Divider from "@mui/material/Divider";
+import Paper from "@mui/material/Paper";
+import Skeleton from "@mui/material/Skeleton";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import Typography from "@mui/material/Typography";
+
+import { CodeBlock } from "@/components/ui/code-block";
+
+const CARD_CODE = `import Button from "@mui/material/Button";
+import Card from "@mui/material/Card";
+import CardActions from "@mui/material/CardActions";
+import CardContent from "@mui/material/CardContent";
+import CardHeader from "@mui/material/CardHeader";
+import Typography from "@mui/material/Typography";
+
+export function Example() {
+  return (
+    <Card sx={{ maxWidth: 320 }}>
+      <CardHeader
+        subheader="A next-generation web application."
+        title="Project Alpha"
+      />
+      <CardContent>
+        <Typography color="text.secondary" variant="body2">
+          This project aims to redefine how teams collaborate in real time.
+        </Typography>
+      </CardContent>
+      <CardActions>
+        <Button size="small" variant="outlined">View details</Button>
+      </CardActions>
+    </Card>
+  );
+}`;
+
+const CHIP_CODE = `import Chip from "@mui/material/Chip";
+
+export function Example() {
+  return (
+    <Box sx={{ display: "flex", flexWrap: "wrap", gap: 1 }}>
+      <Chip label="Default" />
+      <Chip color="primary" label="Primary" />
+      <Chip color="success" label="Success" />
+      <Chip color="warning" label="Warning" />
+      <Chip color="error" label="Error" />
+      <Chip label="Outlined" variant="outlined" />
+    </Box>
+  );
+}`;
+
+const AVATAR_CODE = `import Avatar from "@mui/material/Avatar";
+
+export function Example() {
+  return (
+    <Box sx={{ alignItems: "center", display: "flex", gap: 2 }}>
+      <Avatar alt="Jane Doe" src="https://i.pravatar.cc/150?img=1" />
+      <Avatar>SM</Avatar>
+      <Avatar sx={{ height: 32, width: 32 }}>
+        <Typography variant="caption">XS</Typography>
+      </Avatar>
+      <Avatar sx={{ height: 56, width: 56 }}>LG</Avatar>
+    </Box>
+  );
+}`;
+
+const DIVIDER_CODE = `import Divider from "@mui/material/Divider";
+
+export function Example() {
+  return (
+    <Box sx={{ display: "flex", flexDirection: "column", gap: 3 }}>
+      <Box>
+        <Typography color="text.secondary" variant="body2">Section one content.</Typography>
+        <Divider sx={{ my: 1 }} />
+        <Typography color="text.secondary" variant="body2">Section two content.</Typography>
+      </Box>
+      <Box sx={{ alignItems: "center", display: "flex", gap: 2, height: 24 }}>
+        <Typography variant="body2">Left item</Typography>
+        <Divider flexItem orientation="vertical" />
+        <Typography variant="body2">Right item</Typography>
+      </Box>
+    </Box>
+  );
+}`;
+
+const SKELETON_CODE = `import Skeleton from "@mui/material/Skeleton";
+
+export function Example() {
+  return (
+    <Box sx={{ alignItems: "center", display: "flex", gap: 2 }}>
+      <Skeleton height={48} variant="circular" width={48} />
+      <Box sx={{ display: "flex", flexDirection: "column", gap: 1 }}>
+        <Skeleton height={16} variant="rectangular" width={192} />
+        <Skeleton height={16} variant="rectangular" width={144} />
+        <Skeleton height={16} variant="rectangular" width={96} />
+      </Box>
+    </Box>
+  );
+}`;
+
+const TABLE_CODE = `import Paper from "@mui/material/Paper";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+
+export function Example() {
+  return (
+    <TableContainer component={Paper} variant="outlined">
+      <Table aria-label="Team members">
+        <TableHead>
+          <TableRow>
+            <TableCell>Name</TableCell>
+            <TableCell>Email</TableCell>
+            <TableCell>Role</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          <TableRow>
+            <TableCell>Alice Martin</TableCell>
+            <TableCell>alice@example.com</TableCell>
+            <TableCell>Admin</TableCell>
+          </TableRow>
+        </TableBody>
+      </Table>
+    </TableContainer>
+  );
+}`;
+
+export default function DisplayPage() {
+  return (
+    <Box sx={{ display: "flex", flexDirection: "column", gap: 8 }}>
+      <Box>
+        <Typography gutterBottom variant="h4">
+          Display
+        </Typography>
+        <Typography color="text.secondary" variant="body1">
+          Read-only visual elements for presenting content — cards, chips,
+          avatars, and data tables.
+        </Typography>
+      </Box>
+
+      <Box component="section" id="card" sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
+        <Box sx={{ borderLeft: 3, borderColor: "primary.main", pl: 1.5 }}>
+          <Typography gutterBottom variant="h6">Card</Typography>
+          <Typography color="text.secondary" variant="body2">
+            A surface for grouping related content. MUI ships{" "}
+            <code>CardHeader</code>, <code>CardContent</code>, and{" "}
+            <code>CardActions</code> sub-components.
+          </Typography>
+        </Box>
+        <Box sx={{ bgcolor: "background.default", border: 1, borderColor: "divider", borderRadius: 2, p: 4 }}>
+          <Card sx={{ maxWidth: 320 }}>
+            <CardHeader
+              subheader="A next-generation web application."
+              title="Project Alpha"
+            />
+            <CardContent>
+              <Typography color="text.secondary" variant="body2">
+                This project aims to redefine how teams collaborate in real time.
+              </Typography>
+            </CardContent>
+            <CardActions>
+              <Button size="small" variant="outlined">View details</Button>
+            </CardActions>
+          </Card>
+        </Box>
+        <CodeBlock
+          code={CARD_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="Card.tsx"
+          language="tsx"
+        />
+      </Box>
+
+      <Box component="section" id="chip" sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
+        <Box sx={{ borderLeft: 3, borderColor: "primary.main", pl: 1.5 }}>
+          <Typography gutterBottom variant="h6">Chip</Typography>
+          <Typography color="text.secondary" variant="body2">
+            MUI's equivalent of shadcn's Badge — a compact label for status,
+            category, or count with semantic colour variants.
+          </Typography>
+        </Box>
+        <Box sx={{ bgcolor: "background.default", border: 1, borderColor: "divider", borderRadius: 2, p: 4 }}>
+          <Box sx={{ display: "flex", flexWrap: "wrap", gap: 1 }}>
+            <Chip label="Default" />
+            <Chip color="primary" label="Primary" />
+            <Chip color="success" label="Success" />
+            <Chip color="warning" label="Warning" />
+            <Chip color="error" label="Error" />
+            <Chip label="Outlined" variant="outlined" />
+          </Box>
+        </Box>
+        <CodeBlock
+          code={CHIP_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="Chip.tsx"
+          language="tsx"
+        />
+      </Box>
+
+      <Box component="section" id="avatar" sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
+        <Box sx={{ borderLeft: 3, borderColor: "primary.main", pl: 1.5 }}>
+          <Typography gutterBottom variant="h6">Avatar</Typography>
+          <Typography color="text.secondary" variant="body2">
+            A user avatar with image and text-initials fallback. Pass{" "}
+            <code>src</code> and <code>alt</code>; the text fallback renders
+            automatically when the image fails.
+          </Typography>
+        </Box>
+        <Box sx={{ bgcolor: "background.default", border: 1, borderColor: "divider", borderRadius: 2, p: 4 }}>
+          <Box sx={{ alignItems: "center", display: "flex", gap: 2 }}>
+            <Avatar alt="Jane Doe" src="https://i.pravatar.cc/150?img=1" />
+            <Avatar>SM</Avatar>
+            <Avatar sx={{ height: 32, width: 32 }}>
+              <Typography variant="caption">XS</Typography>
+            </Avatar>
+            <Avatar sx={{ height: 56, width: 56 }}>LG</Avatar>
+          </Box>
+        </Box>
+        <CodeBlock
+          code={AVATAR_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="Avatar.tsx"
+          language="tsx"
+        />
+      </Box>
+
+      <Box component="section" id="divider" sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
+        <Box sx={{ borderLeft: 3, borderColor: "primary.main", pl: 1.5 }}>
+          <Typography gutterBottom variant="h6">Divider</Typography>
+          <Typography color="text.secondary" variant="body2">
+            A thin separator line. Use <code>orientation="vertical"</code> with{" "}
+            <code>flexItem</code> for inline vertical dividers.
+          </Typography>
+        </Box>
+        <Box sx={{ bgcolor: "background.default", border: 1, borderColor: "divider", borderRadius: 2, p: 4 }}>
+          <Box sx={{ display: "flex", flexDirection: "column", gap: 3 }}>
+            <Box>
+              <Typography color="text.secondary" variant="body2">
+                Section one content.
+              </Typography>
+              <Divider sx={{ my: 1 }} />
+              <Typography color="text.secondary" variant="body2">
+                Section two content.
+              </Typography>
+            </Box>
+            <Box sx={{ alignItems: "center", display: "flex", gap: 2, height: 24 }}>
+              <Typography variant="body2">Left item</Typography>
+              <Divider flexItem orientation="vertical" />
+              <Typography variant="body2">Right item</Typography>
+            </Box>
+          </Box>
+        </Box>
+        <CodeBlock
+          code={DIVIDER_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="Divider.tsx"
+          language="tsx"
+        />
+      </Box>
+
+      <Box component="section" id="skeleton" sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
+        <Box sx={{ borderLeft: 3, borderColor: "primary.main", pl: 1.5 }}>
+          <Typography gutterBottom variant="h6">Skeleton</Typography>
+          <Typography color="text.secondary" variant="body2">
+            Animated placeholder blocks that mimic content layout during loading
+            states. Use <code>variant="circular"</code> for avatars and{" "}
+            <code>variant="rectangular"</code> for text lines.
+          </Typography>
+        </Box>
+        <Box sx={{ bgcolor: "background.default", border: 1, borderColor: "divider", borderRadius: 2, p: 4 }}>
+          <Box sx={{ alignItems: "center", display: "flex", gap: 2 }}>
+            <Skeleton height={48} variant="circular" width={48} />
+            <Box sx={{ display: "flex", flexDirection: "column", gap: 1 }}>
+              <Skeleton height={16} variant="rectangular" width={192} />
+              <Skeleton height={16} variant="rectangular" width={144} />
+              <Skeleton height={16} variant="rectangular" width={96} />
+            </Box>
+          </Box>
+        </Box>
+        <CodeBlock
+          code={SKELETON_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="Skeleton.tsx"
+          language="tsx"
+        />
+      </Box>
+
+      <Box component="section" id="table" sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
+        <Box sx={{ borderLeft: 3, borderColor: "primary.main", pl: 1.5 }}>
+          <Typography gutterBottom variant="h6">Table</Typography>
+          <Typography color="text.secondary" variant="body2">
+            A structured grid for tabular data. Wrap in{" "}
+            <code>TableContainer</code> + <code>Paper</code> for scroll overflow
+            and border styling.
+          </Typography>
+        </Box>
+        <Box sx={{ bgcolor: "background.default", border: 1, borderColor: "divider", borderRadius: 2, p: 4 }}>
+          <TableContainer component={Paper} variant="outlined">
+            <Table aria-label="Team members">
+              <TableHead>
+                <TableRow>
+                  <TableCell>Name</TableCell>
+                  <TableCell>Email</TableCell>
+                  <TableCell>Role</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                <TableRow>
+                  <TableCell>Alice Martin</TableCell>
+                  <TableCell>alice@example.com</TableCell>
+                  <TableCell>Admin</TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableCell>Bob Chen</TableCell>
+                  <TableCell>bob@example.com</TableCell>
+                  <TableCell>Editor</TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableCell>Carol White</TableCell>
+                  <TableCell>carol@example.com</TableCell>
+                  <TableCell>Viewer</TableCell>
+                </TableRow>
+              </TableBody>
+            </Table>
+          </TableContainer>
+        </Box>
+        <CodeBlock
+          code={TABLE_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="Table.tsx"
+          language="tsx"
+        />
+      </Box>
+    </Box>
+  );
+}

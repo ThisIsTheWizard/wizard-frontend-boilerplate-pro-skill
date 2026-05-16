@@ -1,0 +1,262 @@
+"use client";
+
+import { useCallback, useMemo, useState } from "react";
+import type { ReactNode } from "react";
+import Link from "next/link";
+
+import AppBar from "@mui/material/AppBar";
+import Box from "@mui/material/Box";
+import CssBaseline from "@mui/material/CssBaseline";
+import Drawer from "@mui/material/Drawer";
+import IconButton from "@mui/material/IconButton";
+import Toolbar from "@mui/material/Toolbar";
+import Typography from "@mui/material/Typography";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+
+import { useTheme } from "@/components/ThemeProvider";
+
+import { Sidebar } from "./sidebar";
+
+const DRAWER_WIDTH = 256;
+
+function readCssVar(varName: string, fallback: string): string {
+  if (typeof window === "undefined") return fallback;
+  const el = document.createElement("div");
+  el.style.cssText = `position:absolute;visibility:hidden;background-color:var(${varName})`;
+  document.body.appendChild(el);
+  const value = getComputedStyle(el).backgroundColor;
+  document.body.removeChild(el);
+  return value || fallback;
+}
+
+function buildMuiTheme(mode: "dark" | "light") {
+  return createTheme({
+    palette: {
+      mode,
+      primary: {
+        main: readCssVar(
+          "--color-accent-500",
+          mode === "dark" ? "#818cf8" : "#4f46e5",
+        ),
+        contrastText: "#ffffff",
+      },
+      background: {
+        default: readCssVar(
+          "--background",
+          mode === "dark" ? "#0a0a0a" : "#fafafa",
+        ),
+        paper: readCssVar(
+          "--surface",
+          mode === "dark" ? "#171717" : "#ffffff",
+        ),
+      },
+      text: {
+        primary: readCssVar(
+          "--foreground",
+          mode === "dark" ? "#fafafa" : "#0a0a0a",
+        ),
+        secondary: readCssVar(
+          "--muted-foreground",
+          mode === "dark" ? "#a3a3a3" : "#737373",
+        ),
+      },
+      divider: readCssVar(
+        "--border",
+        mode === "dark" ? "#262626" : "#e5e5e5",
+      ),
+      error: {
+        main: readCssVar("--destructive", "#ef4444"),
+      },
+    },
+    shape: { borderRadius: 8 },
+    typography: {
+      fontFamily: "inherit",
+      button: { textTransform: "none" },
+    },
+    components: {
+      MuiAppBar: { defaultProps: { elevation: 0 } },
+      MuiButton: { defaultProps: { disableElevation: true } },
+      MuiCard: {
+        defaultProps: { elevation: 0 },
+        styleOverrides: {
+          root: { border: "1px solid", borderColor: "var(--border)" },
+        },
+      },
+    },
+  });
+}
+
+function MenuIcon() {
+  return (
+    <svg
+      aria-hidden="true"
+      fill="none"
+      height="24"
+      stroke="currentColor"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth="2"
+      viewBox="0 0 24 24"
+      width="24"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <line x1="4" x2="20" y1="6" y2="6" />
+      <line x1="4" x2="20" y1="12" y2="12" />
+      <line x1="4" x2="20" y1="18" y2="18" />
+    </svg>
+  );
+}
+
+function MoonIcon() {
+  return (
+    <svg
+      aria-hidden="true"
+      fill="none"
+      height="18"
+      stroke="currentColor"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth="2"
+      viewBox="0 0 24 24"
+      width="18"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" />
+    </svg>
+  );
+}
+
+function SunIcon() {
+  return (
+    <svg
+      aria-hidden="true"
+      fill="none"
+      height="18"
+      stroke="currentColor"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth="2"
+      viewBox="0 0 24 24"
+      width="18"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <circle cx="12" cy="12" r="4" />
+      <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41" />
+    </svg>
+  );
+}
+
+export default function LibraryLayout({ children }: { children: ReactNode }) {
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const { theme, toggleTheme } = useTheme();
+
+  const mode = theme === "dark" ? "dark" : "light";
+  const muiTheme = useMemo(() => buildMuiTheme(mode), [mode]);
+
+  const handleDrawerToggle = useCallback(
+    () => setMobileOpen((open) => !open),
+    [],
+  );
+  const closeSidebar = useCallback(() => setMobileOpen(false), []);
+
+  const drawer = <Sidebar onNavigate={closeSidebar} />;
+
+  return (
+    <ThemeProvider theme={muiTheme}>
+      <CssBaseline />
+      <Box sx={{ display: "flex", minHeight: "100vh" }}>
+        <Box
+          aria-label="Component library navigation"
+          component="nav"
+          sx={{ flexShrink: { md: 0 }, width: { md: DRAWER_WIDTH } }}
+        >
+          <Drawer
+            ModalProps={{ keepMounted: true }}
+            onClose={handleDrawerToggle}
+            open={mobileOpen}
+            sx={{
+              display: { md: "none", xs: "block" },
+              "& .MuiDrawer-paper": {
+                boxSizing: "border-box",
+                width: DRAWER_WIDTH,
+              },
+            }}
+            variant="temporary"
+          >
+            {drawer}
+          </Drawer>
+          <Drawer
+            open
+            sx={{
+              display: { md: "block", xs: "none" },
+              "& .MuiDrawer-paper": {
+                boxSizing: "border-box",
+                position: "relative",
+                width: DRAWER_WIDTH,
+              },
+            }}
+            variant="permanent"
+          >
+            {drawer}
+          </Drawer>
+        </Box>
+
+        <Box
+          sx={{ display: "flex", flexDirection: "column", flexGrow: 1, minWidth: 0 }}
+        >
+          <AppBar
+            color="inherit"
+            position="sticky"
+            sx={{ borderBottom: 1, borderColor: "divider" }}
+          >
+            <Toolbar sx={{ gap: 1, minHeight: "56px !important" }}>
+              <IconButton
+                aria-expanded={mobileOpen}
+                aria-label="Open navigation menu"
+                edge="start"
+                onClick={handleDrawerToggle}
+                size="small"
+                sx={{ display: { md: "none" } }}
+              >
+                <MenuIcon />
+              </IconButton>
+
+              <Typography
+                component={Link}
+                href="/library"
+                sx={{
+                  display: { md: "none" },
+                  flexGrow: 1,
+                  fontWeight: 600,
+                  textDecoration: "none",
+                }}
+                variant="body2"
+              >
+                Component Library
+              </Typography>
+
+              <Box sx={{ flexGrow: { md: 1, xs: 0 } }} />
+
+              <IconButton
+                aria-label={
+                  theme === "dark" ? "Switch to light mode" : "Switch to dark mode"
+                }
+                onClick={toggleTheme}
+                size="small"
+              >
+                {theme === "dark" ? <SunIcon /> : <MoonIcon />}
+              </IconButton>
+            </Toolbar>
+          </AppBar>
+
+          <Box
+            component="main"
+            sx={{ flexGrow: 1, p: { md: 4, xs: 3 } }}
+          >
+            {children}
+          </Box>
+        </Box>
+      </Box>
+    </ThemeProvider>
+  );
+}

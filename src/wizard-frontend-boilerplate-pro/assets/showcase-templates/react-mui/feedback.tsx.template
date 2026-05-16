@@ -1,0 +1,368 @@
+"use client";
+
+import { useState } from "react";
+
+import Alert from "@mui/material/Alert";
+import AlertTitle from "@mui/material/AlertTitle";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogTitle from "@mui/material/DialogTitle";
+import LinearProgress from "@mui/material/LinearProgress";
+import Snackbar from "@mui/material/Snackbar";
+import Tooltip from "@mui/material/Tooltip";
+import Typography from "@mui/material/Typography";
+
+import { CodeBlock } from "@/components/ui/code-block";
+
+const ALERT_CODE = `import Alert from "@mui/material/Alert";
+import AlertTitle from "@mui/material/AlertTitle";
+
+export function Example() {
+  return (
+    <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
+      <Alert severity="info">
+        <AlertTitle>Heads up</AlertTitle>
+        You can add components to your app using the CLI.
+      </Alert>
+      <Alert severity="success">
+        <AlertTitle>Success</AlertTitle>
+        Your profile has been saved successfully.
+      </Alert>
+      <Alert severity="warning">
+        <AlertTitle>Warning</AlertTitle>
+        Unsaved changes will be lost.
+      </Alert>
+      <Alert severity="error">
+        <AlertTitle>Error</AlertTitle>
+        Something went wrong. Please try again.
+      </Alert>
+    </Box>
+  );
+}`;
+
+const SNACKBAR_CODE = `import { useState } from "react";
+import Alert from "@mui/material/Alert";
+import Button from "@mui/material/Button";
+import Snackbar from "@mui/material/Snackbar";
+
+export function Example() {
+  const [open, setOpen] = useState(false);
+  const [severity, setSeverity] = useState<"error" | "info" | "success" | "warning">("info");
+
+  const show = (s: typeof severity) => { setSeverity(s); setOpen(true); };
+
+  return (
+    <>
+      <Box sx={{ display: "flex", flexWrap: "wrap", gap: 1 }}>
+        <Button onClick={() => show("info")} variant="contained">Default</Button>
+        <Button onClick={() => show("success")} variant="outlined">Success</Button>
+        <Button onClick={() => show("error")} variant="outlined">Error</Button>
+        <Button onClick={() => show("warning")} variant="outlined">Warning</Button>
+      </Box>
+      <Snackbar
+        anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
+        autoHideDuration={3000}
+        onClose={() => setOpen(false)}
+        open={open}
+      >
+        <Alert onClose={() => setOpen(false)} severity={severity} variant="filled">
+          {severity === "info" && "Event has been created."}
+          {severity === "success" && "Profile saved successfully."}
+          {severity === "error" && "Something went wrong."}
+          {severity === "warning" && "Unsaved changes detected."}
+        </Alert>
+      </Snackbar>
+    </>
+  );
+}`;
+
+const PROGRESS_CODE = `import LinearProgress from "@mui/material/LinearProgress";
+
+export function Example() {
+  return (
+    <Box sx={{ display: "flex", flexDirection: "column", gap: 3 }}>
+      <LinearProgress value={25} variant="determinate" />
+      <LinearProgress value={60} variant="determinate" />
+      <LinearProgress value={100} variant="determinate" />
+      <LinearProgress />
+    </Box>
+  );
+}`;
+
+const TOOLTIP_CODE = `import Button from "@mui/material/Button";
+import Tooltip from "@mui/material/Tooltip";
+
+export function Example() {
+  return (
+    <Box sx={{ display: "flex", flexWrap: "wrap", gap: 2 }}>
+      <Tooltip placement="top" title="Tooltip on top">
+        <Button variant="outlined">Top</Button>
+      </Tooltip>
+      <Tooltip placement="right" title="Tooltip on right">
+        <Button variant="outlined">Right</Button>
+      </Tooltip>
+      <Tooltip placement="bottom" title="Tooltip on bottom">
+        <Button variant="outlined">Bottom</Button>
+      </Tooltip>
+      <Tooltip placement="left" title="Tooltip on left">
+        <Button variant="outlined">Left</Button>
+      </Tooltip>
+    </Box>
+  );
+}`;
+
+const DIALOG_CODE = `import { useState } from "react";
+import Button from "@mui/material/Button";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogTitle from "@mui/material/DialogTitle";
+
+export function Example() {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <>
+      <Button onClick={() => setOpen(true)} variant="contained">Open dialog</Button>
+      <Dialog maxWidth="xs" fullWidth onClose={() => setOpen(false)} open={open}>
+        <DialogTitle>Confirm action</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            This action cannot be undone. Are you sure you want to proceed?
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => setOpen(false)} variant="outlined">Cancel</Button>
+          <Button onClick={() => setOpen(false)} variant="contained">Confirm</Button>
+        </DialogActions>
+      </Dialog>
+    </>
+  );
+}`;
+
+type SnackbarSeverity = "error" | "info" | "success" | "warning";
+
+export default function FeedbackPage() {
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
+  const [snackbarSeverity, setSnackbarSeverity] = useState<SnackbarSeverity>("info");
+  const [dialogOpen, setDialogOpen] = useState(false);
+
+  const showSnackbar = (severity: SnackbarSeverity) => {
+    setSnackbarSeverity(severity);
+    setSnackbarOpen(true);
+  };
+
+  const snackbarMessages: Record<SnackbarSeverity, string> = {
+    error: "Something went wrong.",
+    info: "Event has been created.",
+    success: "Profile saved successfully.",
+    warning: "Unsaved changes detected.",
+  };
+
+  return (
+    <Box sx={{ display: "flex", flexDirection: "column", gap: 8 }}>
+      <Box>
+        <Typography gutterBottom variant="h4">
+          Feedback
+        </Typography>
+        <Typography color="text.secondary" variant="body1">
+          Status indicators, notifications, and modal interactions — alerts,
+          snackbars, dialogs, and progress.
+        </Typography>
+      </Box>
+
+      <Box component="section" id="alert" sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
+        <Box sx={{ borderLeft: 3, borderColor: "primary.main", pl: 1.5 }}>
+          <Typography gutterBottom variant="h6">Alert</Typography>
+          <Typography color="text.secondary" variant="body2">
+            An inline message banner. MUI ships four semantic severities:{" "}
+            <code>info</code>, <code>success</code>, <code>warning</code>, and{" "}
+            <code>error</code> — no custom variants needed.
+          </Typography>
+        </Box>
+        <Box sx={{ bgcolor: "background.default", border: 1, borderColor: "divider", borderRadius: 2, p: 4 }}>
+          <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
+            <Alert severity="info">
+              <AlertTitle>Heads up</AlertTitle>
+              You can add components to your app using the CLI.
+            </Alert>
+            <Alert severity="success">
+              <AlertTitle>Success</AlertTitle>
+              Your profile has been saved successfully.
+            </Alert>
+            <Alert severity="warning">
+              <AlertTitle>Warning</AlertTitle>
+              Unsaved changes will be lost.
+            </Alert>
+            <Alert severity="error">
+              <AlertTitle>Error</AlertTitle>
+              Something went wrong. Please try again.
+            </Alert>
+          </Box>
+        </Box>
+        <CodeBlock
+          code={ALERT_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="Alert.tsx"
+          language="tsx"
+        />
+      </Box>
+
+      <Box component="section" id="snackbar" sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
+        <Box sx={{ borderLeft: 3, borderColor: "primary.main", pl: 1.5 }}>
+          <Typography gutterBottom variant="h6">Snackbar</Typography>
+          <Typography color="text.secondary" variant="body2">
+            MUI's toast equivalent — pair <code>Snackbar</code> with an{" "}
+            <code>Alert</code> child for severity-aware dismissible notifications
+            with <code>autoHideDuration</code>.
+          </Typography>
+        </Box>
+        <Box sx={{ bgcolor: "background.default", border: 1, borderColor: "divider", borderRadius: 2, p: 4 }}>
+          <Box sx={{ display: "flex", flexWrap: "wrap", gap: 1 }}>
+            <Button onClick={() => showSnackbar("info")} variant="contained">
+              Default
+            </Button>
+            <Button onClick={() => showSnackbar("success")} variant="outlined">
+              Success
+            </Button>
+            <Button onClick={() => showSnackbar("error")} variant="outlined">
+              Error
+            </Button>
+            <Button onClick={() => showSnackbar("warning")} variant="outlined">
+              Warning
+            </Button>
+          </Box>
+        </Box>
+        <Snackbar
+          anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
+          autoHideDuration={3000}
+          onClose={() => setSnackbarOpen(false)}
+          open={snackbarOpen}
+        >
+          <Alert
+            onClose={() => setSnackbarOpen(false)}
+            severity={snackbarSeverity}
+            variant="filled"
+          >
+            {snackbarMessages[snackbarSeverity]}
+          </Alert>
+        </Snackbar>
+        <CodeBlock
+          code={SNACKBAR_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="Snackbar.tsx"
+          language="tsx"
+        />
+      </Box>
+
+      <Box component="section" id="linear-progress" sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
+        <Box sx={{ borderLeft: 3, borderColor: "primary.main", pl: 1.5 }}>
+          <Typography gutterBottom variant="h6">LinearProgress</Typography>
+          <Typography color="text.secondary" variant="body2">
+            A horizontal progress bar. Use <code>variant="determinate"</code>{" "}
+            with a <code>value</code> (0–100) for known progress, or omit both
+            for an indeterminate animation.
+          </Typography>
+        </Box>
+        <Box sx={{ bgcolor: "background.default", border: 1, borderColor: "divider", borderRadius: 2, p: 4 }}>
+          <Box sx={{ display: "flex", flexDirection: "column", gap: 3 }}>
+            <LinearProgress value={25} variant="determinate" />
+            <LinearProgress value={60} variant="determinate" />
+            <LinearProgress value={100} variant="determinate" />
+            <LinearProgress />
+          </Box>
+        </Box>
+        <CodeBlock
+          code={PROGRESS_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="LinearProgress.tsx"
+          language="tsx"
+        />
+      </Box>
+
+      <Box component="section" id="tooltip" sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
+        <Box sx={{ borderLeft: 3, borderColor: "primary.main", pl: 1.5 }}>
+          <Typography gutterBottom variant="h6">Tooltip</Typography>
+          <Typography color="text.secondary" variant="body2">
+            A floating label on hover/focus. No provider wrapper required — set{" "}
+            <code>placement</code> to control the direction.
+          </Typography>
+        </Box>
+        <Box sx={{ bgcolor: "background.default", border: 1, borderColor: "divider", borderRadius: 2, p: 4 }}>
+          <Box sx={{ display: "flex", flexWrap: "wrap", gap: 2 }}>
+            <Tooltip placement="top" title="Tooltip on top">
+              <Button variant="outlined">Top</Button>
+            </Tooltip>
+            <Tooltip placement="right" title="Tooltip on right">
+              <Button variant="outlined">Right</Button>
+            </Tooltip>
+            <Tooltip placement="bottom" title="Tooltip on bottom">
+              <Button variant="outlined">Bottom</Button>
+            </Tooltip>
+            <Tooltip placement="left" title="Tooltip on left">
+              <Button variant="outlined">Left</Button>
+            </Tooltip>
+          </Box>
+        </Box>
+        <CodeBlock
+          code={TOOLTIP_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="Tooltip.tsx"
+          language="tsx"
+        />
+      </Box>
+
+      <Box component="section" id="dialog" sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
+        <Box sx={{ borderLeft: 3, borderColor: "primary.main", pl: 1.5 }}>
+          <Typography gutterBottom variant="h6">Dialog</Typography>
+          <Typography color="text.secondary" variant="body2">
+            A modal overlay with a trigger, header, body, and footer actions —
+            focus-trapped and accessible out of the box.
+          </Typography>
+        </Box>
+        <Box sx={{ bgcolor: "background.default", border: 1, borderColor: "divider", borderRadius: 2, p: 4 }}>
+          <Button onClick={() => setDialogOpen(true)} variant="contained">
+            Open dialog
+          </Button>
+        </Box>
+        <Dialog
+          fullWidth
+          maxWidth="xs"
+          onClose={() => setDialogOpen(false)}
+          open={dialogOpen}
+        >
+          <DialogTitle>Confirm action</DialogTitle>
+          <DialogContent>
+            <DialogContentText>
+              This action cannot be undone. Are you sure you want to proceed?
+            </DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={() => setDialogOpen(false)} variant="outlined">
+              Cancel
+            </Button>
+            <Button onClick={() => setDialogOpen(false)} variant="contained">
+              Confirm
+            </Button>
+          </DialogActions>
+        </Dialog>
+        <CodeBlock
+          code={DIALOG_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="Dialog.tsx"
+          language="tsx"
+        />
+      </Box>
+    </Box>
+  );
+}

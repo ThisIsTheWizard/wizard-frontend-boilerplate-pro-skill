@@ -1,0 +1,528 @@
+"use client";
+
+import { useState } from "react";
+
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Checkbox from "@mui/material/Checkbox";
+import Divider from "@mui/material/Divider";
+import FormControl from "@mui/material/FormControl";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import FormLabel from "@mui/material/FormLabel";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import Radio from "@mui/material/Radio";
+import RadioGroup from "@mui/material/RadioGroup";
+import Select from "@mui/material/Select";
+import Switch from "@mui/material/Switch";
+import TextField from "@mui/material/TextField";
+import Typography from "@mui/material/Typography";
+
+import { CodeBlock } from "@/components/ui/code-block";
+
+const BUTTON_CODE = `import Button from "@mui/material/Button";
+
+export function Example() {
+  return (
+    <Box sx={{ display: "flex", flexWrap: "wrap", gap: 1 }}>
+      <Button variant="contained">Contained</Button>
+      <Button variant="outlined">Outlined</Button>
+      <Button variant="text">Text</Button>
+      <Button color="error" variant="contained">Error</Button>
+      <Button disabled variant="contained">Disabled</Button>
+    </Box>
+  );
+}`;
+
+const TEXT_FIELD_CODE = `import TextField from "@mui/material/TextField";
+
+export function Example() {
+  return (
+    <Box sx={{ display: "flex", flexDirection: "column", gap: 2, maxWidth: 360 }}>
+      <TextField
+        helperText="We'll never share your email."
+        id="email"
+        label="Email address"
+        type="email"
+      />
+      <TextField
+        defaultValue="invalid user!"
+        error
+        helperText="Please enter a valid username."
+        id="username"
+        label="Username"
+      />
+      <TextField disabled id="disabled" label="Disabled" placeholder="Not editable" />
+    </Box>
+  );
+}`;
+
+const TEXTAREA_CODE = `import TextField from "@mui/material/TextField";
+
+export function Example() {
+  return (
+    <Box sx={{ display: "flex", flexDirection: "column", gap: 2, maxWidth: 360 }}>
+      <TextField
+        helperText="Describe your project in a few sentences."
+        id="bio"
+        label="Bio"
+        multiline
+        placeholder="Tell us about yourself…"
+        rows={4}
+      />
+      <TextField
+        error
+        helperText="Message is required."
+        id="message"
+        label="Message"
+        multiline
+        placeholder="Enter your message…"
+        rows={3}
+      />
+    </Box>
+  );
+}`;
+
+const SELECT_CODE = `import FormControl from "@mui/material/FormControl";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import Select from "@mui/material/Select";
+
+export function Example() {
+  const [value, setValue] = useState("");
+
+  return (
+    <Box sx={{ display: "flex", flexDirection: "column", gap: 2, maxWidth: 360 }}>
+      <FormControl fullWidth>
+        <InputLabel id="framework-label">Framework</InputLabel>
+        <Select
+          id="framework"
+          label="Framework"
+          labelId="framework-label"
+          onChange={(e) => setValue(e.target.value)}
+          value={value}
+        >
+          <MenuItem value="nextjs">Next.js</MenuItem>
+          <MenuItem value="remix">Remix</MenuItem>
+          <MenuItem value="astro">Astro</MenuItem>
+          <MenuItem value="sveltekit">SvelteKit</MenuItem>
+        </Select>
+      </FormControl>
+      <FormControl disabled fullWidth>
+        <InputLabel id="disabled-label">Disabled</InputLabel>
+        <Select label="Disabled" labelId="disabled-label" value="">
+          <MenuItem value="">None</MenuItem>
+        </Select>
+      </FormControl>
+    </Box>
+  );
+}`;
+
+const CHECKBOX_CODE = `import Checkbox from "@mui/material/Checkbox";
+import FormControlLabel from "@mui/material/FormControlLabel";
+
+export function Example() {
+  return (
+    <Box sx={{ display: "flex", flexDirection: "column", gap: 1 }}>
+      <FormControlLabel control={<Checkbox />} label="Accept terms and conditions" />
+      <FormControlLabel control={<Checkbox defaultChecked />} label="Checked by default" />
+      <FormControlLabel control={<Checkbox disabled />} disabled label="Disabled" />
+    </Box>
+  );
+}`;
+
+const RADIO_GROUP_CODE = `import FormControl from "@mui/material/FormControl";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import FormLabel from "@mui/material/FormLabel";
+import Radio from "@mui/material/Radio";
+import RadioGroup from "@mui/material/RadioGroup";
+
+export function Example() {
+  const [value, setValue] = useState("free");
+
+  return (
+    <FormControl>
+      <FormLabel>Plan</FormLabel>
+      <RadioGroup onChange={(e) => setValue(e.target.value)} value={value}>
+        <FormControlLabel control={<Radio />} label="Free" value="free" />
+        <FormControlLabel control={<Radio />} label="Pro" value="pro" />
+        <FormControlLabel control={<Radio />} label="Enterprise" value="enterprise" />
+      </RadioGroup>
+    </FormControl>
+  );
+}`;
+
+const SWITCH_CODE = `import FormControlLabel from "@mui/material/FormControlLabel";
+import Switch from "@mui/material/Switch";
+
+export function Example() {
+  return (
+    <Box sx={{ display: "flex", flexDirection: "column", gap: 1 }}>
+      <FormControlLabel control={<Switch />} label="Email notifications" />
+      <FormControlLabel control={<Switch defaultChecked />} label="Marketing emails" />
+      <FormControlLabel control={<Switch disabled />} disabled label="Disabled" />
+    </Box>
+  );
+}`;
+
+export default function InputsPage() {
+  const [plan, setPlan] = useState("free");
+  const [framework, setFramework] = useState("");
+
+  return (
+    <Box sx={{ display: "flex", flexDirection: "column", gap: 8 }}>
+      <Box>
+        <Typography gutterBottom variant="h4">
+          Inputs
+        </Typography>
+        <Typography color="text.secondary" variant="body1">
+          Form controls for collecting user input — buttons, text fields,
+          selections, and toggles.
+        </Typography>
+      </Box>
+
+      <Box component="section" id="button" sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
+        <Box sx={{ borderLeft: 3, borderColor: "primary.main", pl: 1.5 }}>
+          <Typography gutterBottom variant="h6">
+            Button
+          </Typography>
+          <Typography color="text.secondary" variant="body2">
+            Triggers an action or event. MUI ships{" "}
+            <code>contained</code>, <code>outlined</code>, and <code>text</code>{" "}
+            variants with full colour, size, and disabled support.
+          </Typography>
+        </Box>
+        <Box
+          sx={{
+            bgcolor: "background.default",
+            border: 1,
+            borderColor: "divider",
+            borderRadius: 2,
+            p: 4,
+          }}
+        >
+          <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
+            <Box sx={{ display: "flex", flexWrap: "wrap", gap: 1 }}>
+              <Button variant="contained">Contained</Button>
+              <Button variant="outlined">Outlined</Button>
+              <Button variant="text">Text</Button>
+              <Button color="error" variant="contained">Error</Button>
+            </Box>
+            <Box sx={{ alignItems: "center", display: "flex", flexWrap: "wrap", gap: 1 }}>
+              <Button size="small" variant="contained">Small</Button>
+              <Button size="medium" variant="contained">Medium</Button>
+              <Button size="large" variant="contained">Large</Button>
+              <Button disabled variant="contained">Disabled</Button>
+            </Box>
+          </Box>
+        </Box>
+        <CodeBlock
+          code={BUTTON_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="Button.tsx"
+          language="tsx"
+        />
+      </Box>
+
+      <Divider />
+
+      <Box component="section" id="text-field" sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
+        <Box sx={{ borderLeft: 3, borderColor: "primary.main", pl: 1.5 }}>
+          <Typography gutterBottom variant="h6">
+            TextField
+          </Typography>
+          <Typography color="text.secondary" variant="body2">
+            MUI's unified input component — replaces shadcn's separate{" "}
+            <code>Input</code> + <code>Label</code> pattern. Includes{" "}
+            <code>label</code>, <code>helperText</code>, and <code>error</code>{" "}
+            props out of the box.
+          </Typography>
+        </Box>
+        <Box
+          sx={{
+            bgcolor: "background.default",
+            border: 1,
+            borderColor: "divider",
+            borderRadius: 2,
+            p: 4,
+          }}
+        >
+          <Box sx={{ display: "flex", flexDirection: "column", gap: 2, maxWidth: 360 }}>
+            <TextField
+              helperText="We'll never share your email."
+              id="email-demo"
+              label="Email address"
+              type="email"
+            />
+            <TextField
+              defaultValue="invalid user!"
+              error
+              helperText="Please enter a valid username."
+              id="username-demo"
+              label="Username"
+            />
+            <TextField
+              disabled
+              id="disabled-demo"
+              label="Disabled"
+              placeholder="Not editable"
+            />
+          </Box>
+        </Box>
+        <CodeBlock
+          code={TEXT_FIELD_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="TextField.tsx"
+          language="tsx"
+        />
+      </Box>
+
+      <Divider />
+
+      <Box component="section" id="textarea" sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
+        <Box sx={{ borderLeft: 3, borderColor: "primary.main", pl: 1.5 }}>
+          <Typography gutterBottom variant="h6">
+            Textarea
+          </Typography>
+          <Typography color="text.secondary" variant="body2">
+            A multi-line text input via <code>TextField</code> with{" "}
+            <code>multiline</code> and <code>rows</code> props.
+          </Typography>
+        </Box>
+        <Box
+          sx={{
+            bgcolor: "background.default",
+            border: 1,
+            borderColor: "divider",
+            borderRadius: 2,
+            p: 4,
+          }}
+        >
+          <Box sx={{ display: "flex", flexDirection: "column", gap: 2, maxWidth: 360 }}>
+            <TextField
+              helperText="Describe your project in a few sentences."
+              id="bio-demo"
+              label="Bio"
+              multiline
+              placeholder="Tell us about yourself…"
+              rows={4}
+            />
+            <TextField
+              error
+              helperText="Message is required."
+              id="message-demo"
+              label="Message"
+              multiline
+              placeholder="Enter your message…"
+              rows={3}
+            />
+          </Box>
+        </Box>
+        <CodeBlock
+          code={TEXTAREA_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="Textarea.tsx"
+          language="tsx"
+        />
+      </Box>
+
+      <Divider />
+
+      <Box component="section" id="select" sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
+        <Box sx={{ borderLeft: 3, borderColor: "primary.main", pl: 1.5 }}>
+          <Typography gutterBottom variant="h6">
+            Select
+          </Typography>
+          <Typography color="text.secondary" variant="body2">
+            A dropdown for picking a single value. Compose{" "}
+            <code>FormControl</code> + <code>InputLabel</code> +{" "}
+            <code>Select</code> + <code>MenuItem</code> for full accessibility.
+          </Typography>
+        </Box>
+        <Box
+          sx={{
+            bgcolor: "background.default",
+            border: 1,
+            borderColor: "divider",
+            borderRadius: 2,
+            p: 4,
+          }}
+        >
+          <Box sx={{ display: "flex", flexDirection: "column", gap: 2, maxWidth: 360 }}>
+            <FormControl fullWidth>
+              <InputLabel id="framework-demo-label">Framework</InputLabel>
+              <Select
+                id="framework-demo"
+                label="Framework"
+                labelId="framework-demo-label"
+                onChange={(e) => setFramework(e.target.value)}
+                value={framework}
+              >
+                <MenuItem value="nextjs">Next.js</MenuItem>
+                <MenuItem value="remix">Remix</MenuItem>
+                <MenuItem value="astro">Astro</MenuItem>
+                <MenuItem value="sveltekit">SvelteKit</MenuItem>
+              </Select>
+            </FormControl>
+            <FormControl disabled fullWidth>
+              <InputLabel id="disabled-select-label">Disabled</InputLabel>
+              <Select label="Disabled" labelId="disabled-select-label" value="">
+                <MenuItem value="">None</MenuItem>
+              </Select>
+            </FormControl>
+          </Box>
+        </Box>
+        <CodeBlock
+          code={SELECT_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="Select.tsx"
+          language="tsx"
+        />
+      </Box>
+
+      <Divider />
+
+      <Box component="section" id="checkbox" sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
+        <Box sx={{ borderLeft: 3, borderColor: "primary.main", pl: 1.5 }}>
+          <Typography gutterBottom variant="h6">
+            Checkbox
+          </Typography>
+          <Typography color="text.secondary" variant="body2">
+            A binary toggle. Use <code>FormControlLabel</code> to pair the
+            checkbox with its visible label — no separate <code>htmlFor</code>{" "}
+            wiring required.
+          </Typography>
+        </Box>
+        <Box
+          sx={{
+            bgcolor: "background.default",
+            border: 1,
+            borderColor: "divider",
+            borderRadius: 2,
+            p: 4,
+          }}
+        >
+          <Box sx={{ display: "flex", flexDirection: "column", gap: 1 }}>
+            <FormControlLabel
+              control={<Checkbox />}
+              label="Accept terms and conditions"
+            />
+            <FormControlLabel
+              control={<Checkbox defaultChecked />}
+              label="Checked by default"
+            />
+            <FormControlLabel
+              control={<Checkbox disabled />}
+              disabled
+              label="Disabled"
+            />
+          </Box>
+        </Box>
+        <CodeBlock
+          code={CHECKBOX_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="Checkbox.tsx"
+          language="tsx"
+        />
+      </Box>
+
+      <Divider />
+
+      <Box component="section" id="radio-group" sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
+        <Box sx={{ borderLeft: 3, borderColor: "primary.main", pl: 1.5 }}>
+          <Typography gutterBottom variant="h6">
+            RadioGroup
+          </Typography>
+          <Typography color="text.secondary" variant="body2">
+            Mutually exclusive options using{" "}
+            <code>RadioGroup</code> + <code>FormControlLabel</code> +{" "}
+            <code>Radio</code> with arrow-key navigation.
+          </Typography>
+        </Box>
+        <Box
+          sx={{
+            bgcolor: "background.default",
+            border: 1,
+            borderColor: "divider",
+            borderRadius: 2,
+            p: 4,
+          }}
+        >
+          <FormControl>
+            <FormLabel>Plan</FormLabel>
+            <RadioGroup
+              onChange={(e) => setPlan(e.target.value)}
+              value={plan}
+            >
+              <FormControlLabel control={<Radio />} label="Free" value="free" />
+              <FormControlLabel control={<Radio />} label="Pro" value="pro" />
+              <FormControlLabel
+                control={<Radio />}
+                label="Enterprise"
+                value="enterprise"
+              />
+            </RadioGroup>
+          </FormControl>
+        </Box>
+        <CodeBlock
+          code={RADIO_GROUP_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="RadioGroup.tsx"
+          language="tsx"
+        />
+      </Box>
+
+      <Divider />
+
+      <Box component="section" id="switch" sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
+        <Box sx={{ borderLeft: 3, borderColor: "primary.main", pl: 1.5 }}>
+          <Typography gutterBottom variant="h6">
+            Switch
+          </Typography>
+          <Typography color="text.secondary" variant="body2">
+            An on/off toggle. Use <code>FormControlLabel</code> to attach a
+            visible label without manual <code>htmlFor</code> wiring.
+          </Typography>
+        </Box>
+        <Box
+          sx={{
+            bgcolor: "background.default",
+            border: 1,
+            borderColor: "divider",
+            borderRadius: 2,
+            p: 4,
+          }}
+        >
+          <Box sx={{ display: "flex", flexDirection: "column", gap: 1 }}>
+            <FormControlLabel
+              control={<Switch />}
+              label="Email notifications"
+            />
+            <FormControlLabel
+              control={<Switch defaultChecked />}
+              label="Marketing emails"
+            />
+            <FormControlLabel
+              control={<Switch disabled />}
+              disabled
+              label="Disabled"
+            />
+          </Box>
+        </Box>
+        <CodeBlock
+          code={SWITCH_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="Switch.tsx"
+          language="tsx"
+        />
+      </Box>
+    </Box>
+  );
+}

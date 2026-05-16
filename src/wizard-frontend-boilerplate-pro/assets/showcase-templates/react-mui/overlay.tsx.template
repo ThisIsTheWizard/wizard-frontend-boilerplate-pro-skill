@@ -1,0 +1,290 @@
+"use client";
+
+import { useRef, useState } from "react";
+
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Divider from "@mui/material/Divider";
+import Drawer from "@mui/material/Drawer";
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
+import Popover from "@mui/material/Popover";
+import Typography from "@mui/material/Typography";
+
+import { CodeBlock } from "@/components/ui/code-block";
+
+const POPOVER_CODE = `import { useRef, useState } from "react";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Popover from "@mui/material/Popover";
+import Typography from "@mui/material/Typography";
+
+export function Example() {
+  const anchorRef = useRef<HTMLButtonElement>(null);
+  const [open, setOpen] = useState(false);
+
+  return (
+    <>
+      <Button onClick={() => setOpen(true)} ref={anchorRef} variant="outlined">
+        Open Popover
+      </Button>
+      <Popover
+        anchorEl={anchorRef.current}
+        anchorOrigin={{ horizontal: "left", vertical: "bottom" }}
+        onClose={() => setOpen(false)}
+        open={open}
+        transformOrigin={{ horizontal: "left", vertical: "top" }}
+      >
+        <Box sx={{ p: 2 }}>
+          <Typography variant="body2">
+            This is a popover with some helpful content.
+          </Typography>
+          <Button onClick={() => setOpen(false)} size="small" sx={{ mt: 1 }}>
+            Close
+          </Button>
+        </Box>
+      </Popover>
+    </>
+  );
+}`;
+
+const MENU_CODE = `import { useState } from "react";
+import Button from "@mui/material/Button";
+import Divider from "@mui/material/Divider";
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
+
+export function Example() {
+  const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
+  const open = Boolean(anchorEl);
+
+  return (
+    <>
+      <Button
+        aria-controls={open ? "account-menu" : undefined}
+        aria-expanded={open}
+        aria-haspopup="true"
+        onClick={(e) => setAnchorEl(e.currentTarget)}
+        variant="outlined"
+      >
+        Account
+      </Button>
+      <Menu
+        anchorEl={anchorEl}
+        id="account-menu"
+        onClose={() => setAnchorEl(null)}
+        open={open}
+      >
+        <MenuItem disabled>
+          <Typography color="text.secondary" variant="caption">My Account</Typography>
+        </MenuItem>
+        <MenuItem onClick={() => setAnchorEl(null)}>Profile</MenuItem>
+        <MenuItem onClick={() => setAnchorEl(null)}>Settings</MenuItem>
+        <MenuItem onClick={() => setAnchorEl(null)}>Billing</MenuItem>
+        <Divider />
+        <MenuItem onClick={() => setAnchorEl(null)}>Log out</MenuItem>
+      </Menu>
+    </>
+  );
+}`;
+
+const DRAWER_CODE = `import { useState } from "react";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Divider from "@mui/material/Divider";
+import Drawer from "@mui/material/Drawer";
+import Typography from "@mui/material/Typography";
+
+export function Example() {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <>
+      <Button onClick={() => setOpen(true)} variant="outlined">Open drawer</Button>
+      <Drawer anchor="right" onClose={() => setOpen(false)} open={open}>
+        <Box sx={{ p: 3, width: 300 }}>
+          <Typography gutterBottom variant="h6">Panel title</Typography>
+          <Divider sx={{ mb: 2 }} />
+          <Typography color="text.secondary" variant="body2">
+            This is a right-anchored drawer — MUI's equivalent of shadcn's
+            Sheet component.
+          </Typography>
+          <Button
+            fullWidth
+            onClick={() => setOpen(false)}
+            sx={{ mt: 3 }}
+            variant="outlined"
+          >
+            Close
+          </Button>
+        </Box>
+      </Drawer>
+    </>
+  );
+}`;
+
+export default function OverlayPage() {
+  const popoverAnchorRef = useRef<HTMLButtonElement>(null);
+  const [popoverOpen, setPopoverOpen] = useState(false);
+  const [menuAnchorEl, setMenuAnchorEl] = useState<HTMLElement | null>(null);
+  const [drawerOpen, setDrawerOpen] = useState(false);
+
+  const menuOpen = Boolean(menuAnchorEl);
+
+  return (
+    <Box sx={{ display: "flex", flexDirection: "column", gap: 8 }}>
+      <Box>
+        <Typography gutterBottom variant="h4">
+          Overlay
+        </Typography>
+        <Typography color="text.secondary" variant="body1">
+          Floating UI layers — popovers, contextual menus, and side-panel
+          drawers.
+        </Typography>
+      </Box>
+
+      <Box component="section" id="popover" sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
+        <Box sx={{ borderLeft: 3, borderColor: "primary.main", pl: 1.5 }}>
+          <Typography gutterBottom variant="h6">Popover</Typography>
+          <Typography color="text.secondary" variant="body2">
+            An anchored floating panel. Pass{" "}
+            <code>anchorEl</code> (a ref or element) and{" "}
+            <code>anchorOrigin</code> / <code>transformOrigin</code> to control
+            positioning.
+          </Typography>
+        </Box>
+        <Box sx={{ bgcolor: "background.default", border: 1, borderColor: "divider", borderRadius: 2, p: 4 }}>
+          <Button
+            onClick={() => setPopoverOpen(true)}
+            ref={popoverAnchorRef}
+            variant="outlined"
+          >
+            Open Popover
+          </Button>
+          <Popover
+            anchorEl={popoverAnchorRef.current}
+            anchorOrigin={{ horizontal: "left", vertical: "bottom" }}
+            onClose={() => setPopoverOpen(false)}
+            open={popoverOpen}
+            transformOrigin={{ horizontal: "left", vertical: "top" }}
+          >
+            <Box sx={{ p: 2 }}>
+              <Typography variant="body2">
+                This is a popover with some helpful content.
+              </Typography>
+              <Button
+                onClick={() => setPopoverOpen(false)}
+                size="small"
+                sx={{ mt: 1 }}
+              >
+                Close
+              </Button>
+            </Box>
+          </Popover>
+        </Box>
+        <CodeBlock
+          code={POPOVER_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="Popover.tsx"
+          language="tsx"
+        />
+      </Box>
+
+      <Box component="section" id="menu" sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
+        <Box sx={{ borderLeft: 3, borderColor: "primary.main", pl: 1.5 }}>
+          <Typography gutterBottom variant="h6">Menu</Typography>
+          <Typography color="text.secondary" variant="body2">
+            A contextual dropdown list. Store the trigger element in state as{" "}
+            <code>anchorEl</code> and clear it on close. MUI's{" "}
+            <code>Menu</code> wraps <code>Popover</code> with list-specific ARIA
+            roles.
+          </Typography>
+        </Box>
+        <Box sx={{ bgcolor: "background.default", border: 1, borderColor: "divider", borderRadius: 2, p: 4 }}>
+          <Button
+            aria-controls={menuOpen ? "account-menu" : undefined}
+            aria-expanded={menuOpen}
+            aria-haspopup="true"
+            onClick={(e) => setMenuAnchorEl(e.currentTarget)}
+            variant="outlined"
+          >
+            Account
+          </Button>
+          <Menu
+            anchorEl={menuAnchorEl}
+            id="account-menu"
+            onClose={() => setMenuAnchorEl(null)}
+            open={menuOpen}
+          >
+            <MenuItem disabled>
+              <Typography color="text.secondary" variant="caption">
+                My Account
+              </Typography>
+            </MenuItem>
+            <MenuItem onClick={() => setMenuAnchorEl(null)}>Profile</MenuItem>
+            <MenuItem onClick={() => setMenuAnchorEl(null)}>Settings</MenuItem>
+            <MenuItem onClick={() => setMenuAnchorEl(null)}>Billing</MenuItem>
+            <Divider />
+            <MenuItem onClick={() => setMenuAnchorEl(null)}>Log out</MenuItem>
+          </Menu>
+        </Box>
+        <CodeBlock
+          code={MENU_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="Menu.tsx"
+          language="tsx"
+        />
+      </Box>
+
+      <Box component="section" id="drawer" sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
+        <Box sx={{ borderLeft: 3, borderColor: "primary.main", pl: 1.5 }}>
+          <Typography gutterBottom variant="h6">Drawer</Typography>
+          <Typography color="text.secondary" variant="body2">
+            A side panel that slides in from an edge — MUI's equivalent of
+            shadcn's Sheet. Set <code>anchor="right"</code> for the common
+            right-hand panel pattern.
+          </Typography>
+        </Box>
+        <Box sx={{ bgcolor: "background.default", border: 1, borderColor: "divider", borderRadius: 2, p: 4 }}>
+          <Button onClick={() => setDrawerOpen(true)} variant="outlined">
+            Open drawer
+          </Button>
+        </Box>
+        <Drawer
+          anchor="right"
+          onClose={() => setDrawerOpen(false)}
+          open={drawerOpen}
+        >
+          <Box sx={{ p: 3, width: 300 }}>
+            <Typography gutterBottom variant="h6">
+              Panel title
+            </Typography>
+            <Divider sx={{ mb: 2 }} />
+            <Typography color="text.secondary" variant="body2">
+              This is a right-anchored drawer — MUI's equivalent of shadcn's
+              Sheet component. Use it for filters, detail views, or settings
+              panels.
+            </Typography>
+            <Button
+              fullWidth
+              onClick={() => setDrawerOpen(false)}
+              sx={{ mt: 3 }}
+              variant="outlined"
+            >
+              Close
+            </Button>
+          </Box>
+        </Drawer>
+        <CodeBlock
+          code={DRAWER_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="Drawer.tsx"
+          language="tsx"
+        />
+      </Box>
+    </Box>
+  );
+}

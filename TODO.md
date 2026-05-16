@@ -107,14 +107,14 @@
 - [x] `assets/showcase-templates/svelte-shadcn/` — 8 files
 
 ## 16. Material UI — reference file
-- [ ] Write `references/ui-library/mui.md`
+- [x] Write `references/ui-library/mui.md`
   - `@mui/material`, `@emotion/react`, `@emotion/styled` install
   - `createTheme()` bridge mapping existing CSS tokens to MUI palette/typography
   - Next.js App Router SSR cache (`@mui/material-nextjs`) setup
   - React-only constraint documented
 
 ## 17. Material UI — showcase templates
-- [ ] `assets/showcase-templates/react-mui/` — 8 files using MUI native components
+- [x] `assets/showcase-templates/react-mui/` — 8 files using MUI native components
 
 ## 18. Bootstrap — reference file
 - [ ] Write `references/ui-library/bootstrap.md`
