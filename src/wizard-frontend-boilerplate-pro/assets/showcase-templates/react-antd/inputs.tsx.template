@@ -1,0 +1,478 @@
+"use client";
+
+import { useState } from "react";
+
+import {
+  Button,
+  Checkbox,
+  Divider,
+  Flex,
+  Input,
+  Radio,
+  Select,
+  Space,
+  Switch,
+  Typography,
+} from "antd";
+
+import { CodeBlock } from "@/components/ui/code-block";
+
+const { Text, Title } = Typography;
+
+const BUTTON_CODE = `import { Button, Flex, Space } from "antd";
+
+export function Example() {
+  return (
+    <Space direction="vertical" size="middle">
+      <Flex gap="small" wrap>
+        <Button type="primary">Primary</Button>
+        <Button type="default">Default</Button>
+        <Button type="dashed">Dashed</Button>
+        <Button type="text">Text</Button>
+        <Button type="link">Link</Button>
+      </Flex>
+      <Flex align="center" gap="small" wrap>
+        <Button size="small" type="primary">Small</Button>
+        <Button size="middle" type="primary">Middle</Button>
+        <Button size="large" type="primary">Large</Button>
+        <Button disabled type="primary">Disabled</Button>
+        <Button danger type="primary">Danger</Button>
+      </Flex>
+    </Space>
+  );
+}`;
+
+const INPUT_CODE = `import { Input, Space, Typography } from "antd";
+
+export function Example() {
+  return (
+    <Space direction="vertical" size="middle" style={{ maxWidth: 360, width: "100%" }}>
+      <div>
+        <Typography.Text strong style={{ display: "block", marginBottom: 4 }}>
+          Email address
+        </Typography.Text>
+        <Input placeholder="you@example.com" type="email" />
+        <Typography.Text style={{ color: "var(--muted-foreground)", fontSize: 12, marginTop: 4 }}>
+          We'll never share your email.
+        </Typography.Text>
+      </div>
+      <div>
+        <Typography.Text strong style={{ display: "block", marginBottom: 4 }}>
+          Username
+        </Typography.Text>
+        <Input defaultValue="invalid user!" status="error" />
+        <Typography.Text type="danger" style={{ fontSize: 12, marginTop: 4 }}>
+          Please enter a valid username.
+        </Typography.Text>
+      </div>
+      <div>
+        <Typography.Text strong style={{ display: "block", marginBottom: 4 }}>
+          Disabled
+        </Typography.Text>
+        <Input disabled placeholder="Not editable" />
+      </div>
+    </Space>
+  );
+}`;
+
+const TEXTAREA_CODE = `import { Input, Space, Typography } from "antd";
+
+export function Example() {
+  return (
+    <Space direction="vertical" size="middle" style={{ maxWidth: 360, width: "100%" }}>
+      <div>
+        <Typography.Text strong style={{ display: "block", marginBottom: 4 }}>
+          Bio
+        </Typography.Text>
+        <Input.TextArea
+          autoSize={{ maxRows: 6, minRows: 3 }}
+          placeholder="Tell us about yourself…"
+        />
+        <Typography.Text style={{ fontSize: 12, marginTop: 4 }} type="secondary">
+          Describe your project in a few sentences.
+        </Typography.Text>
+      </div>
+      <div>
+        <Typography.Text strong style={{ display: "block", marginBottom: 4 }}>
+          Message
+        </Typography.Text>
+        <Input.TextArea
+          autoSize={{ maxRows: 6, minRows: 3 }}
+          placeholder="Enter your message…"
+          status="error"
+        />
+        <Typography.Text style={{ fontSize: 12, marginTop: 4 }} type="danger">
+          Message is required.
+        </Typography.Text>
+      </div>
+    </Space>
+  );
+}`;
+
+const SELECT_CODE = `import { Select, Space, Typography } from "antd";
+
+export function Example() {
+  return (
+    <Space direction="vertical" size="middle" style={{ maxWidth: 360, width: "100%" }}>
+      <div>
+        <Typography.Text strong style={{ display: "block", marginBottom: 4 }}>
+          Framework
+        </Typography.Text>
+        <Select
+          options={[
+            { label: "Next.js", value: "nextjs" },
+            { label: "Remix", value: "remix" },
+            { label: "Astro", value: "astro" },
+            { label: "SvelteKit", value: "sveltekit" },
+          ]}
+          placeholder="Select framework"
+          style={{ width: "100%" }}
+        />
+      </div>
+    </Space>
+  );
+}`;
+
+const CHECKBOX_CODE = `import { Checkbox, Space } from "antd";
+
+export function Example() {
+  return (
+    <Space direction="vertical">
+      <Checkbox>Accept terms and conditions</Checkbox>
+      <Checkbox defaultChecked>Checked by default</Checkbox>
+      <Checkbox disabled>Disabled</Checkbox>
+    </Space>
+  );
+}`;
+
+const RADIO_GROUP_CODE = `import { Radio, Space, Typography } from "antd";
+
+export function Example() {
+  return (
+    <div>
+      <Typography.Text strong style={{ display: "block", marginBottom: 8 }}>
+        Select your plan
+      </Typography.Text>
+      <Radio.Group defaultValue="free">
+        <Space direction="vertical">
+          <Radio value="free">Free</Radio>
+          <Radio value="pro">Pro</Radio>
+          <Radio value="enterprise">Enterprise</Radio>
+        </Space>
+      </Radio.Group>
+    </div>
+  );
+}`;
+
+const SWITCH_CODE = `import { Space, Switch, Typography } from "antd";
+
+export function Example() {
+  return (
+    <Space direction="vertical" size="middle">
+      <Space>
+        <Switch />
+        <Typography.Text>Email notifications</Typography.Text>
+      </Space>
+      <Space>
+        <Switch defaultChecked />
+        <Typography.Text>Marketing emails</Typography.Text>
+      </Space>
+      <Space>
+        <Switch disabled />
+        <Typography.Text type="secondary">Disabled</Typography.Text>
+      </Space>
+    </Space>
+  );
+}`;
+
+export default function InputsPage() {
+  const [plan, setPlan] = useState("free");
+
+  return (
+    <div style={{ display: "flex", flexDirection: "column", gap: 64 }}>
+      <div>
+        <Title level={1}>Inputs</Title>
+        <Text type="secondary">
+          Form controls for collecting user input — buttons, fields, selections,
+          and toggles.
+        </Text>
+      </div>
+
+      {/* Button */}
+      <section id="button" style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+        <div style={{ borderLeft: "3px solid var(--color-accent-500)", paddingLeft: 12 }}>
+          <Title level={3} style={{ marginBottom: 4 }}>Button</Title>
+          <Text type="secondary">
+            Triggers an action or event. Ant Design ships{" "}
+            <code>type="primary"</code>, <code>"default"</code>,{" "}
+            <code>"dashed"</code>, <code>"text"</code>, and <code>"link"</code>{" "}
+            variants. Use the <code>danger</code> prop for destructive actions.
+          </Text>
+        </div>
+        <div style={{ border: "1px solid var(--border)", borderRadius: 8, padding: 24 }}>
+          <Space direction="vertical" size="middle">
+            <Flex gap="small" wrap>
+              <Button type="primary">Primary</Button>
+              <Button type="default">Default</Button>
+              <Button type="dashed">Dashed</Button>
+              <Button type="text">Text</Button>
+              <Button type="link">Link</Button>
+            </Flex>
+            <Flex align="center" gap="small" wrap>
+              <Button size="small" type="primary">Small</Button>
+              <Button size="middle" type="primary">Middle</Button>
+              <Button size="large" type="primary">Large</Button>
+              <Button disabled type="primary">Disabled</Button>
+              <Button danger type="primary">Danger</Button>
+            </Flex>
+          </Space>
+        </div>
+        <CodeBlock
+          code={BUTTON_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="Button.tsx"
+          language="tsx"
+        />
+      </section>
+
+      <Divider />
+
+      {/* Input */}
+      <section id="input" style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+        <div style={{ borderLeft: "3px solid var(--color-accent-500)", paddingLeft: 12 }}>
+          <Title level={3} style={{ marginBottom: 4 }}>Input</Title>
+          <Text type="secondary">
+            A single-line text field. Pass <code>status="error"</code> for
+            validation states. Ant Design's <code>Input</code> does not bundle a
+            label — compose with a <code>Typography.Text</code> element above the
+            input.
+          </Text>
+        </div>
+        <div style={{ border: "1px solid var(--border)", borderRadius: 8, padding: 24 }}>
+          <Space direction="vertical" size="middle" style={{ maxWidth: 360, width: "100%" }}>
+            <div>
+              <Text strong style={{ display: "block", marginBottom: 4 }}>
+                Email address
+              </Text>
+              <Input placeholder="you@example.com" type="email" />
+              <Text style={{ fontSize: 12, marginTop: 4 }} type="secondary">
+                We'll never share your email.
+              </Text>
+            </div>
+            <div>
+              <Text strong style={{ display: "block", marginBottom: 4 }}>
+                Username
+              </Text>
+              <Input defaultValue="invalid user!" status="error" />
+              <Text style={{ fontSize: 12, marginTop: 4 }} type="danger">
+                Please enter a valid username.
+              </Text>
+            </div>
+            <div>
+              <Text strong style={{ display: "block", marginBottom: 4 }}>
+                Disabled
+              </Text>
+              <Input disabled placeholder="Not editable" />
+            </div>
+          </Space>
+        </div>
+        <CodeBlock
+          code={INPUT_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="Input.tsx"
+          language="tsx"
+        />
+      </section>
+
+      <Divider />
+
+      {/* Textarea */}
+      <section id="textarea" style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+        <div style={{ borderLeft: "3px solid var(--color-accent-500)", paddingLeft: 12 }}>
+          <Title level={3} style={{ marginBottom: 4 }}>Textarea</Title>
+          <Text type="secondary">
+            A multi-line text input. Use <code>Input.TextArea</code> with{" "}
+            <code>autoSize</code> set to{" "}
+            <code>{"{ minRows, maxRows }"}</code> for a dynamically expanding
+            textarea instead of a fixed <code>rows</code> prop.
+          </Text>
+        </div>
+        <div style={{ border: "1px solid var(--border)", borderRadius: 8, padding: 24 }}>
+          <Space direction="vertical" size="middle" style={{ maxWidth: 360, width: "100%" }}>
+            <div>
+              <Text strong style={{ display: "block", marginBottom: 4 }}>Bio</Text>
+              <Input.TextArea
+                autoSize={{ maxRows: 6, minRows: 3 }}
+                placeholder="Tell us about yourself…"
+              />
+              <Text style={{ fontSize: 12, marginTop: 4 }} type="secondary">
+                Describe your project in a few sentences.
+              </Text>
+            </div>
+            <div>
+              <Text strong style={{ display: "block", marginBottom: 4 }}>Message</Text>
+              <Input.TextArea
+                autoSize={{ maxRows: 6, minRows: 3 }}
+                placeholder="Enter your message…"
+                status="error"
+              />
+              <Text style={{ fontSize: 12, marginTop: 4 }} type="danger">
+                Message is required.
+              </Text>
+            </div>
+          </Space>
+        </div>
+        <CodeBlock
+          code={TEXTAREA_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="Textarea.tsx"
+          language="tsx"
+        />
+      </section>
+
+      <Divider />
+
+      {/* Select */}
+      <section id="select" style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+        <div style={{ borderLeft: "3px solid var(--color-accent-500)", paddingLeft: 12 }}>
+          <Title level={3} style={{ marginBottom: 4 }}>Select</Title>
+          <Text type="secondary">
+            A searchable dropdown for picking a single value. Pass the{" "}
+            <code>options</code> prop as an array of{" "}
+            <code>{"{ label, value }"}</code> objects. Add{" "}
+            <code>showSearch</code> for filtering long option lists.
+          </Text>
+        </div>
+        <div style={{ border: "1px solid var(--border)", borderRadius: 8, padding: 24 }}>
+          <Space direction="vertical" size="middle" style={{ maxWidth: 360, width: "100%" }}>
+            <div>
+              <Text strong style={{ display: "block", marginBottom: 4 }}>Framework</Text>
+              <Select
+                options={[
+                  { label: "Next.js", value: "nextjs" },
+                  { label: "Remix", value: "remix" },
+                  { label: "Astro", value: "astro" },
+                  { label: "SvelteKit", value: "sveltekit" },
+                ]}
+                placeholder="Select framework"
+                style={{ width: "100%" }}
+              />
+            </div>
+          </Space>
+        </div>
+        <CodeBlock
+          code={SELECT_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="Select.tsx"
+          language="tsx"
+        />
+      </section>
+
+      <Divider />
+
+      {/* Checkbox */}
+      <section id="checkbox" style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+        <div style={{ borderLeft: "3px solid var(--color-accent-500)", paddingLeft: 12 }}>
+          <Title level={3} style={{ marginBottom: 4 }}>Checkbox</Title>
+          <Text type="secondary">
+            A binary toggle with a built-in label. The primary colour is driven
+            by <code>colorPrimary</code> in <code>ConfigProvider</code> — no per-component
+            colour prop needed. Use <code>Checkbox.Group</code> for multi-select
+            sets.
+          </Text>
+        </div>
+        <div style={{ border: "1px solid var(--border)", borderRadius: 8, padding: 24 }}>
+          <Space direction="vertical">
+            <Checkbox>Accept terms and conditions</Checkbox>
+            <Checkbox defaultChecked>Checked by default</Checkbox>
+            <Checkbox disabled>Disabled</Checkbox>
+          </Space>
+        </div>
+        <CodeBlock
+          code={CHECKBOX_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="Checkbox.tsx"
+          language="tsx"
+        />
+      </section>
+
+      <Divider />
+
+      {/* RadioGroup */}
+      <section id="radio-group" style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+        <div style={{ borderLeft: "3px solid var(--color-accent-500)", paddingLeft: 12 }}>
+          <Title level={3} style={{ marginBottom: 4 }}>RadioGroup</Title>
+          <Text type="secondary">
+            Mutually exclusive options using <code>Radio.Group</code> +{" "}
+            <code>Radio</code>. The group owns the <code>value</code> state;
+            individual radios only need a <code>value</code> prop. The primary
+            colour from <code>ConfigProvider</code> applies automatically.
+          </Text>
+        </div>
+        <div style={{ border: "1px solid var(--border)", borderRadius: 8, padding: 24 }}>
+          <div>
+            <Text strong style={{ display: "block", marginBottom: 8 }}>
+              Select your plan
+            </Text>
+            <Radio.Group onChange={(e) => setPlan(e.target.value)} value={plan}>
+              <Space direction="vertical">
+                <Radio value="free">Free</Radio>
+                <Radio value="pro">Pro</Radio>
+                <Radio value="enterprise">Enterprise</Radio>
+              </Space>
+            </Radio.Group>
+          </div>
+        </div>
+        <CodeBlock
+          code={RADIO_GROUP_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="RadioGroup.tsx"
+          language="tsx"
+        />
+      </section>
+
+      <Divider />
+
+      {/* Switch */}
+      <section id="switch" style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+        <div style={{ borderLeft: "3px solid var(--color-accent-500)", paddingLeft: 12 }}>
+          <Title level={3} style={{ marginBottom: 4 }}>Switch</Title>
+          <Text type="secondary">
+            An on/off toggle. The primary colour from <code>ConfigProvider</code>{" "}
+            applies automatically — no per-component colour prop needed. Compose
+            with <code>Space</code> and <code>Typography.Text</code> to add a label.
+          </Text>
+        </div>
+        <div style={{ border: "1px solid var(--border)", borderRadius: 8, padding: 24 }}>
+          <Space direction="vertical" size="middle">
+            <Space>
+              <Switch />
+              <Text>Email notifications</Text>
+            </Space>
+            <Space>
+              <Switch defaultChecked />
+              <Text>Marketing emails</Text>
+            </Space>
+            <Space>
+              <Switch disabled />
+              <Text type="secondary">Disabled</Text>
+            </Space>
+          </Space>
+        </div>
+        <CodeBlock
+          code={SWITCH_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="Switch.tsx"
+          language="tsx"
+        />
+      </section>
+    </div>
+  );
+}

@@ -142,8 +142,8 @@
 - [x] `assets/showcase-templates/react-mantine/` — 8 files
 
 ## 23. Ant Design — reference file + templates
-- [ ] Write `references/ui-library/antd.md` — `ConfigProvider` theme tokens, Next.js App Router notes
-- [ ] `assets/showcase-templates/react-antd/` — 8 files
+- [x] Write `references/ui-library/antd.md` — `ConfigProvider` theme tokens, Next.js App Router notes
+- [x] `assets/showcase-templates/react-antd/` — 8 files
 
 ## 24. PrimeVue — reference file + templates
 - [ ] Write `references/ui-library/primevue.md` — plugin setup, PrimeVue theming presets

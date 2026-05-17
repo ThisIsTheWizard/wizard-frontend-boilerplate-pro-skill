@@ -1,0 +1,283 @@
+"use client";
+
+import { useState } from "react";
+
+import { DatePicker, Divider, Table, Typography } from "antd";
+import type { TableProps } from "antd";
+import {
+  CartesianGrid,
+  Line,
+  LineChart,
+  ResponsiveContainer,
+  Tooltip,
+  XAxis,
+  YAxis,
+} from "recharts";
+
+import { CodeBlock } from "@/components/ui/code-block";
+
+const { Text, Title } = Typography;
+
+const CHART_DATA = [
+  { desktop: 186, mobile: 80, month: "Jan" },
+  { desktop: 305, mobile: 200, month: "Feb" },
+  { desktop: 237, mobile: 120, month: "Mar" },
+  { desktop: 73, mobile: 190, month: "Apr" },
+  { desktop: 209, mobile: 130, month: "May" },
+  { desktop: 214, mobile: 140, month: "Jun" },
+];
+
+const CHART_CODE = `// Requires: npm install recharts
+import {
+  CartesianGrid,
+  Line,
+  LineChart,
+  ResponsiveContainer,
+  Tooltip,
+  XAxis,
+  YAxis,
+} from "recharts";
+
+const DATA = [
+  { desktop: 186, mobile: 80, month: "Jan" },
+  { desktop: 305, mobile: 200, month: "Feb" },
+  { desktop: 237, mobile: 120, month: "Mar" },
+  { desktop: 73, mobile: 190, month: "Apr" },
+  { desktop: 209, mobile: 130, month: "May" },
+  { desktop: 214, mobile: 140, month: "Jun" },
+];
+
+export function Example() {
+  return (
+    <ResponsiveContainer height={256} width="100%">
+      <LineChart data={DATA}>
+        <CartesianGrid strokeDasharray="3 3" />
+        <XAxis dataKey="month" />
+        <YAxis />
+        <Tooltip />
+        <Line dataKey="desktop" stroke="var(--color-accent-500)" type="monotone" />
+        <Line dataKey="mobile" stroke="var(--color-accent-300)" type="monotone" />
+      </LineChart>
+    </ResponsiveContainer>
+  );
+}`;
+
+interface User {
+  email: string;
+  id: string;
+  name: string;
+  role: string;
+}
+
+const TABLE_DATA: User[] = [
+  { email: "alice@example.com", id: "1", name: "Alice Johnson", role: "Admin" },
+  { email: "bob@example.com", id: "2", name: "Bob Smith", role: "Editor" },
+  { email: "carol@example.com", id: "3", name: "Carol White", role: "Viewer" },
+  { email: "dan@example.com", id: "4", name: "Dan Lee", role: "Editor" },
+  { email: "eve@example.com", id: "5", name: "Eve Martinez", role: "Viewer" },
+];
+
+const DATA_TABLE_CODE = `// Ant Design's Table has built-in sorting — no extra package needed.
+import { Table } from "antd";
+import type { TableProps } from "antd";
+
+interface User {
+  email: string;
+  id: string;
+  name: string;
+  role: string;
+}
+
+const data: User[] = [
+  { email: "alice@example.com", id: "1", name: "Alice Johnson", role: "Admin" },
+  { email: "bob@example.com", id: "2", name: "Bob Smith", role: "Editor" },
+  { email: "carol@example.com", id: "3", name: "Carol White", role: "Viewer" },
+];
+
+const columns: TableProps<User>["columns"] = [
+  {
+    dataIndex: "name",
+    key: "name",
+    sorter: (a, b) => a.name.localeCompare(b.name),
+    title: "Name",
+  },
+  {
+    dataIndex: "email",
+    key: "email",
+    title: "Email",
+  },
+  {
+    dataIndex: "role",
+    key: "role",
+    sorter: (a, b) => a.role.localeCompare(b.role),
+    title: "Role",
+  },
+];
+
+export function Example() {
+  return (
+    <Table
+      bordered
+      columns={columns}
+      dataSource={data}
+      pagination={false}
+      rowKey="id"
+      size="middle"
+    />
+  );
+}`;
+
+const CALENDAR_CODE = `// DatePicker is built into antd — uses dayjs internally, no extra install needed.
+import { DatePicker } from "antd";
+import dayjs from "dayjs";
+
+export function Example() {
+  return (
+    <DatePicker
+      defaultValue={dayjs()}
+      // onChange fires with a dayjs object and the formatted string
+      onChange={(date, dateString) => console.log(date, dateString)}
+    />
+  );
+}`;
+
+const tableColumns: TableProps<User>["columns"] = [
+  {
+    dataIndex: "name",
+    key: "name",
+    sorter: (a, b) => a.name.localeCompare(b.name),
+    title: "Name",
+  },
+  {
+    dataIndex: "email",
+    key: "email",
+    title: "Email",
+  },
+  {
+    dataIndex: "role",
+    key: "role",
+    sorter: (a, b) => a.role.localeCompare(b.role),
+    title: "Role",
+  },
+];
+
+export default function DataVizPage() {
+  const [_selectedDate, setSelectedDate] = useState<string | null>(null);
+
+  return (
+    <div style={{ display: "flex", flexDirection: "column", gap: 64 }}>
+      <div>
+        <Title level={1}>Data viz</Title>
+        <Text type="secondary">
+          Charts, sortable tables, and date selection — using recharts, Ant
+          Design Table with built-in sorting, and antd DatePicker.
+        </Text>
+      </div>
+
+      {/* Chart */}
+      <section id="chart" style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+        <div style={{ borderLeft: "3px solid var(--color-accent-500)", paddingLeft: 12 }}>
+          <Title level={3} style={{ marginBottom: 4 }}>Chart</Title>
+          <Text type="secondary">
+            Ant Design does not ship a chart component in its core package. Use{" "}
+            <strong>recharts</strong> directly with{" "}
+            <code>ResponsiveContainer</code> for size-aware rendering. Reference
+            the skill's CSS variables for colours to stay in sync with the active
+            theme. Install with: <code>npm install recharts</code>
+          </Text>
+        </div>
+        <div style={{ border: "1px solid var(--border)", borderRadius: 8, padding: 24 }}>
+          <ResponsiveContainer height={256} width="100%">
+            <LineChart data={CHART_DATA}>
+              <CartesianGrid strokeDasharray="3 3" />
+              <XAxis dataKey="month" />
+              <YAxis />
+              <Tooltip />
+              <Line
+                dataKey="desktop"
+                name="Desktop"
+                stroke="var(--color-accent-500)"
+                type="monotone"
+              />
+              <Line
+                dataKey="mobile"
+                name="Mobile"
+                stroke="var(--color-accent-300)"
+                type="monotone"
+              />
+            </LineChart>
+          </ResponsiveContainer>
+        </div>
+        <CodeBlock
+          code={CHART_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="Chart.tsx"
+          language="tsx"
+        />
+      </section>
+
+      <Divider />
+
+      {/* DataTable */}
+      <section id="data-table" style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+        <div style={{ borderLeft: "3px solid var(--color-accent-500)", paddingLeft: 12 }}>
+          <Title level={3} style={{ marginBottom: 4 }}>DataTable</Title>
+          <Text type="secondary">
+            A sortable table using Ant Design's built-in <code>Table</code>{" "}
+            component. Add a <code>sorter</code> function to any column definition
+            to enable click-to-sort — no <code>@tanstack/react-table</code>{" "}
+            needed. Click a column header to toggle sort direction.
+          </Text>
+        </div>
+        <div style={{ border: "1px solid var(--border)", borderRadius: 8, padding: 24 }}>
+          <Table
+            bordered
+            columns={tableColumns}
+            dataSource={TABLE_DATA}
+            pagination={false}
+            rowKey="id"
+            size="middle"
+          />
+        </div>
+        <CodeBlock
+          code={DATA_TABLE_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="DataTable.tsx"
+          language="tsx"
+        />
+      </section>
+
+      <Divider />
+
+      {/* Calendar */}
+      <section id="calendar" style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+        <div style={{ borderLeft: "3px solid var(--color-accent-500)", paddingLeft: 12 }}>
+          <Title level={3} style={{ marginBottom: 4 }}>Calendar</Title>
+          <Text type="secondary">
+            Date selection using antd's <code>DatePicker</code>. Ant Design
+            bundles <code>dayjs</code> internally — no extra install needed. The{" "}
+            <code>onChange</code> callback receives a <code>dayjs</code> object
+            and the formatted date string. Use <code>DatePicker.RangePicker</code>{" "}
+            for date range selection.
+          </Text>
+        </div>
+        <div style={{ border: "1px solid var(--border)", borderRadius: 8, padding: 24 }}>
+          <DatePicker
+            onChange={(_date, dateString) =>
+              setSelectedDate(dateString as string)
+            }
+          />
+        </div>
+        <CodeBlock
+          code={CALENDAR_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="Calendar.tsx"
+          language="tsx"
+        />
+      </section>
+    </div>
+  );
+}

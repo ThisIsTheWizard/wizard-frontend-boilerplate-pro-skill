@@ -1,0 +1,217 @@
+"use client";
+
+import { useState } from "react";
+
+import {
+  Button,
+  Divider,
+  Drawer,
+  Dropdown,
+  Flex,
+  Popover,
+  Space,
+  Typography,
+} from "antd";
+import type { MenuProps } from "antd";
+
+import { CodeBlock } from "@/components/ui/code-block";
+
+const { Text, Title } = Typography;
+
+const POPOVER_CODE = `import { Button, Popover, Typography } from "antd";
+
+export function Example() {
+  return (
+    <Popover
+      content={
+        <div style={{ maxWidth: 240 }}>
+          <Typography.Text type="secondary">
+            This is a popover with some helpful content.
+          </Typography.Text>
+        </div>
+      }
+      title="Popover title"
+    >
+      <Button variant="outlined">Open Popover</Button>
+    </Popover>
+  );
+}`;
+
+const MENU_CODE = `import { Button, Dropdown } from "antd";
+import type { MenuProps } from "antd";
+
+const items: MenuProps["items"] = [
+  { key: "profile", label: "Profile" },
+  { key: "settings", label: "Settings" },
+  { key: "billing", label: "Billing" },
+  { type: "divider" },
+  { danger: true, key: "logout", label: "Log out" },
+];
+
+export function Example() {
+  return (
+    <Dropdown menu={{ items }} trigger={["click"]}>
+      <Button variant="outlined">Account</Button>
+    </Dropdown>
+  );
+}`;
+
+const DRAWER_CODE = `import { useState } from "react";
+import { Button, Drawer, Flex, Typography } from "antd";
+
+export function Example() {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <>
+      <Button variant="outlined" onClick={() => setOpen(true)}>
+        Open drawer
+      </Button>
+      <Drawer
+        onClose={() => setOpen(false)}
+        open={open}
+        placement="right"
+        title="Panel title"
+      >
+        <Typography.Text type="secondary">
+          This is a right-anchored drawer — Ant Design's equivalent of shadcn's
+          Sheet component. Use it for filters, detail views, or settings panels.
+        </Typography.Text>
+        <Flex justify="flex-end" style={{ marginTop: 24 }}>
+          <Button onClick={() => setOpen(false)}>Close</Button>
+        </Flex>
+      </Drawer>
+    </>
+  );
+}`;
+
+const dropdownItems: MenuProps["items"] = [
+  { key: "profile", label: "Profile" },
+  { key: "settings", label: "Settings" },
+  { key: "billing", label: "Billing" },
+  { type: "divider" },
+  { danger: true, key: "logout", label: "Log out" },
+];
+
+export default function OverlayPage() {
+  const [drawerOpen, setDrawerOpen] = useState(false);
+
+  return (
+    <div style={{ display: "flex", flexDirection: "column", gap: 64 }}>
+      <div>
+        <Title level={1}>Overlay</Title>
+        <Text type="secondary">
+          Floating UI layers — popovers, contextual menus, and side-panel
+          drawers.
+        </Text>
+      </div>
+
+      {/* Popover */}
+      <section id="popover" style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+        <div style={{ borderLeft: "3px solid var(--color-accent-500)", paddingLeft: 12 }}>
+          <Title level={3} style={{ marginBottom: 4 }}>Popover</Title>
+          <Text type="secondary">
+            An anchored floating panel. Ant Design's <code>Popover</code> accepts{" "}
+            <code>content</code> (React node) and <code>title</code> (string or
+            node). It wraps the trigger as its child. Use the{" "}
+            <code>placement</code> prop to control position and{" "}
+            <code>trigger</code> to switch between <code>"hover"</code> and{" "}
+            <code>"click"</code> behaviour.
+          </Text>
+        </div>
+        <div style={{ border: "1px solid var(--border)", borderRadius: 8, padding: 24 }}>
+          <Popover
+            content={
+              <div style={{ maxWidth: 240 }}>
+                <Text type="secondary">
+                  This is a popover with some helpful content.
+                </Text>
+              </div>
+            }
+            title="Popover title"
+          >
+            <Button variant="outlined">Open Popover</Button>
+          </Popover>
+        </div>
+        <CodeBlock
+          code={POPOVER_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="Popover.tsx"
+          language="tsx"
+        />
+      </section>
+
+      <Divider />
+
+      {/* Menu */}
+      <section id="menu" style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+        <div style={{ borderLeft: "3px solid var(--color-accent-500)", paddingLeft: 12 }}>
+          <Title level={3} style={{ marginBottom: 4 }}>Menu</Title>
+          <Text type="secondary">
+            A contextual dropdown list. Ant Design uses <code>Dropdown</code>{" "}
+            (not <code>Menu</code>) for this pattern. Pass an{" "}
+            <code>items</code> array to the <code>menu</code> prop. Use{" "}
+            <code>{"{ type: 'divider' }"}</code> for separators and{" "}
+            <code>danger: true</code> for destructive items. Set{" "}
+            <code>{"trigger={['click']}"}</code> for click-activated menus.
+          </Text>
+        </div>
+        <div style={{ border: "1px solid var(--border)", borderRadius: 8, padding: 24 }}>
+          <Dropdown menu={{ items: dropdownItems }} trigger={["click"]}>
+            <Button variant="outlined">Account</Button>
+          </Dropdown>
+        </div>
+        <CodeBlock
+          code={MENU_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="Menu.tsx"
+          language="tsx"
+        />
+      </section>
+
+      <Divider />
+
+      {/* Drawer */}
+      <section id="drawer" style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+        <div style={{ borderLeft: "3px solid var(--color-accent-500)", paddingLeft: 12 }}>
+          <Title level={3} style={{ marginBottom: 4 }}>Drawer</Title>
+          <Text type="secondary">
+            A side panel that slides in from an edge — Ant Design's equivalent of
+            shadcn's Sheet. Set <code>placement="right"</code> for the common
+            right-hand panel pattern. Pass <code>open</code>,{" "}
+            <code>onClose</code>, and <code>title</code> directly on{" "}
+            <code>Drawer</code>. Content renders as children.
+          </Text>
+        </div>
+        <div style={{ border: "1px solid var(--border)", borderRadius: 8, padding: 24 }}>
+          <Button onClick={() => setDrawerOpen(true)} variant="outlined">
+            Open drawer
+          </Button>
+        </div>
+        <Drawer
+          onClose={() => setDrawerOpen(false)}
+          open={drawerOpen}
+          placement="right"
+          title="Panel title"
+        >
+          <Text type="secondary">
+            This is a right-anchored drawer — Ant Design's equivalent of shadcn's
+            Sheet component. Use it for filters, detail views, or settings panels.
+          </Text>
+          <Flex justify="flex-end" style={{ marginTop: 24 }}>
+            <Button onClick={() => setDrawerOpen(false)}>Close</Button>
+          </Flex>
+        </Drawer>
+        <CodeBlock
+          code={DRAWER_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="Drawer.tsx"
+          language="tsx"
+        />
+      </section>
+    </div>
+  );
+}

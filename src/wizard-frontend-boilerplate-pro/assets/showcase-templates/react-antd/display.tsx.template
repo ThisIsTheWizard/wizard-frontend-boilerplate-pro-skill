@@ -1,0 +1,376 @@
+"use client";
+
+import {
+  Avatar,
+  Badge,
+  Button,
+  Card,
+  Divider,
+  Flex,
+  Skeleton,
+  Space,
+  Table,
+  Tag,
+  Typography,
+} from "antd";
+
+import { CodeBlock } from "@/components/ui/code-block";
+
+const { Text, Title } = Typography;
+
+const CARD_CODE = `import { Button, Card, Typography } from "antd";
+
+export function Example() {
+  return (
+    <Card style={{ maxWidth: 320 }}>
+      <Typography.Title level={5} style={{ marginBottom: 4 }}>
+        Project Alpha
+      </Typography.Title>
+      <Typography.Text type="secondary" style={{ display: "block", marginBottom: 8 }}>
+        A next-generation web application.
+      </Typography.Text>
+      <Typography.Text type="secondary" style={{ display: "block", marginBottom: 16 }}>
+        This project aims to redefine how teams collaborate in real time.
+      </Typography.Text>
+      <Button block type="default">View details</Button>
+    </Card>
+  );
+}`;
+
+const BADGE_CODE = `import { Badge, Flex, Space, Tag } from "antd";
+
+export function Example() {
+  return (
+    <Space direction="vertical" size="middle">
+      {/* Tag — for status labels and categories */}
+      <Flex gap="small" wrap>
+        <Tag color="blue">Default</Tag>
+        <Tag color="green">Success</Tag>
+        <Tag color="gold">Warning</Tag>
+        <Tag color="red">Error</Tag>
+        <Tag color="purple">Premium</Tag>
+      </Flex>
+
+      {/* Badge — for notification counts overlaid on elements */}
+      <Flex gap="large">
+        <Badge count={5}>
+          <div style={{ background: "#eee", borderRadius: 4, height: 32, width: 48 }} />
+        </Badge>
+        <Badge count={99}>
+          <div style={{ background: "#eee", borderRadius: 4, height: 32, width: 48 }} />
+        </Badge>
+        <Badge dot>
+          <div style={{ background: "#eee", borderRadius: 4, height: 32, width: 48 }} />
+        </Badge>
+      </Flex>
+    </Space>
+  );
+}`;
+
+const AVATAR_CODE = `import { Avatar, Space } from "antd";
+
+export function Example() {
+  return (
+    <Space align="center" size="middle">
+      <Avatar size={64} src="https://i.pravatar.cc/150?img=1" />
+      <Avatar size="large">SM</Avatar>
+      <Avatar size="default">MD</Avatar>
+      <Avatar size="small">XS</Avatar>
+    </Space>
+  );
+}`;
+
+const SEPARATOR_CODE = `import { Divider, Flex, Typography } from "antd";
+
+export function Example() {
+  return (
+    <div>
+      <Typography.Text type="secondary">Section one content.</Typography.Text>
+      <Divider />
+      <Typography.Text type="secondary">Section two content.</Typography.Text>
+      <Divider plain>or continue with</Divider>
+      <Flex align="center" style={{ height: 24 }}>
+        <Typography.Text>Left item</Typography.Text>
+        <Divider type="vertical" style={{ height: "100%" }} />
+        <Typography.Text>Right item</Typography.Text>
+      </Flex>
+    </div>
+  );
+}`;
+
+const SKELETON_CODE = `import { Flex, Skeleton } from "antd";
+
+export function Example() {
+  return (
+    <Skeleton avatar paragraph={{ rows: 2 }} />
+  );
+}`;
+
+const TABLE_CODE = `import { Table } from "antd";
+import type { TableProps } from "antd";
+
+interface User {
+  email: string;
+  key: string;
+  name: string;
+  role: string;
+}
+
+const columns: TableProps<User>["columns"] = [
+  { dataIndex: "name", key: "name", title: "Name" },
+  { dataIndex: "email", key: "email", title: "Email" },
+  { dataIndex: "role", key: "role", title: "Role" },
+];
+
+const data: User[] = [
+  { email: "alice@example.com", key: "1", name: "Alice Martin", role: "Admin" },
+  { email: "bob@example.com", key: "2", name: "Bob Chen", role: "Editor" },
+  { email: "carol@example.com", key: "3", name: "Carol White", role: "Viewer" },
+];
+
+export function Example() {
+  return (
+    <Table
+      bordered
+      columns={columns}
+      dataSource={data}
+      pagination={false}
+      size="middle"
+    />
+  );
+}`;
+
+const tableColumns = [
+  { dataIndex: "name", key: "name", title: "Name" },
+  { dataIndex: "email", key: "email", title: "Email" },
+  { dataIndex: "role", key: "role", title: "Role" },
+];
+
+const tableData = [
+  { email: "alice@example.com", key: "1", name: "Alice Martin", role: "Admin" },
+  { email: "bob@example.com", key: "2", name: "Bob Chen", role: "Editor" },
+  { email: "carol@example.com", key: "3", name: "Carol White", role: "Viewer" },
+];
+
+export default function DisplayPage() {
+  return (
+    <div style={{ display: "flex", flexDirection: "column", gap: 64 }}>
+      <div>
+        <Title level={1}>Display</Title>
+        <Text type="secondary">
+          Read-only visual elements for presenting content — cards, badges,
+          avatars, and data tables.
+        </Text>
+      </div>
+
+      {/* Card */}
+      <section id="card" style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+        <div style={{ borderLeft: "3px solid var(--color-accent-500)", paddingLeft: 12 }}>
+          <Title level={3} style={{ marginBottom: 4 }}>Card</Title>
+          <Text type="secondary">
+            A surface for grouping related content. Ant Design's <code>Card</code>{" "}
+            supports <code>cover</code> (image), <code>actions</code> (icon strip),
+            and <code>extra</code> (header-right slot) props out of the box.
+          </Text>
+        </div>
+        <div style={{ border: "1px solid var(--border)", borderRadius: 8, padding: 24 }}>
+          <Card style={{ maxWidth: 320 }}>
+            <Title level={5} style={{ marginBottom: 4 }}>Project Alpha</Title>
+            <Text style={{ display: "block", marginBottom: 8 }} type="secondary">
+              A next-generation web application.
+            </Text>
+            <Text style={{ display: "block", marginBottom: 16 }} type="secondary">
+              This project aims to redefine how teams collaborate in real time.
+            </Text>
+            <Button block type="default">View details</Button>
+          </Card>
+        </div>
+        <CodeBlock
+          code={CARD_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="Card.tsx"
+          language="tsx"
+        />
+      </section>
+
+      {/* Badge */}
+      <section id="badge" style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+        <div style={{ borderLeft: "3px solid var(--color-accent-500)", paddingLeft: 12 }}>
+          <Title level={3} style={{ marginBottom: 4 }}>Badge</Title>
+          <Text type="secondary">
+            Ant Design has two distinct components: <code>Tag</code> for status
+            labels and category indicators, and <code>Badge</code> for numeric
+            count overlays on other elements. Use <code>Tag</code> with named
+            colours for semantic labels; use <code>Badge</code> with{" "}
+            <code>count</code> for notification indicators.
+          </Text>
+        </div>
+        <div style={{ border: "1px solid var(--border)", borderRadius: 8, padding: 24 }}>
+          <Space direction="vertical" size="middle">
+            <Flex gap="small" wrap>
+              <Tag color="blue">Default</Tag>
+              <Tag color="green">Success</Tag>
+              <Tag color="gold">Warning</Tag>
+              <Tag color="red">Error</Tag>
+              <Tag color="purple">Premium</Tag>
+            </Flex>
+            <Flex gap={32}>
+              <Badge count={5}>
+                <div
+                  style={{
+                    background: "var(--border)",
+                    borderRadius: 4,
+                    height: 32,
+                    width: 48,
+                  }}
+                />
+              </Badge>
+              <Badge count={99}>
+                <div
+                  style={{
+                    background: "var(--border)",
+                    borderRadius: 4,
+                    height: 32,
+                    width: 48,
+                  }}
+                />
+              </Badge>
+              <Badge dot>
+                <div
+                  style={{
+                    background: "var(--border)",
+                    borderRadius: 4,
+                    height: 32,
+                    width: 48,
+                  }}
+                />
+              </Badge>
+            </Flex>
+          </Space>
+        </div>
+        <CodeBlock
+          code={BADGE_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="Badge.tsx"
+          language="tsx"
+        />
+      </section>
+
+      {/* Avatar */}
+      <section id="avatar" style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+        <div style={{ borderLeft: "3px solid var(--color-accent-500)", paddingLeft: 12 }}>
+          <Title level={3} style={{ marginBottom: 4 }}>Avatar</Title>
+          <Text type="secondary">
+            A user avatar with image and text-initials fallback. Place initials
+            as children when no <code>src</code> is provided. Use{" "}
+            <code>Avatar.Group</code> for stacked avatar clusters with an overflow
+            count.
+          </Text>
+        </div>
+        <div style={{ border: "1px solid var(--border)", borderRadius: 8, padding: 24 }}>
+          <Space align="center" size="middle">
+            <Avatar size={64} src="https://i.pravatar.cc/150?img=1" />
+            <Avatar size="large">SM</Avatar>
+            <Avatar size="default">MD</Avatar>
+            <Avatar size="small">XS</Avatar>
+          </Space>
+        </div>
+        <CodeBlock
+          code={AVATAR_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="Avatar.tsx"
+          language="tsx"
+        />
+      </section>
+
+      {/* Separator */}
+      <section id="separator" style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+        <div style={{ borderLeft: "3px solid var(--color-accent-500)", paddingLeft: 12 }}>
+          <Title level={3} style={{ marginBottom: 4 }}>Separator</Title>
+          <Text type="secondary">
+            A thin rule for dividing content. Ant Design calls it{" "}
+            <code>Divider</code>. Use <code>type="vertical"</code> with a fixed
+            height for inline separators. The <code>plain</code> prop adds centred
+            section labels without bold styling.
+          </Text>
+        </div>
+        <div style={{ border: "1px solid var(--border)", borderRadius: 8, padding: 24 }}>
+          <div>
+            <Text type="secondary">Section one content.</Text>
+            <Divider />
+            <Text type="secondary">Section two content.</Text>
+            <Divider plain>or continue with</Divider>
+            <Flex align="center" style={{ height: 24 }}>
+              <Text>Left item</Text>
+              <Divider style={{ height: "100%" }} type="vertical" />
+              <Text>Right item</Text>
+            </Flex>
+          </div>
+        </div>
+        <CodeBlock
+          code={SEPARATOR_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="Separator.tsx"
+          language="tsx"
+        />
+      </section>
+
+      {/* Skeleton */}
+      <section id="skeleton" style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+        <div style={{ borderLeft: "3px solid var(--color-accent-500)", paddingLeft: 12 }}>
+          <Title level={3} style={{ marginBottom: 4 }}>Skeleton</Title>
+          <Text type="secondary">
+            Animated placeholder blocks for loading states. Use the <code>avatar</code>{" "}
+            prop for a circular avatar placeholder and <code>paragraph</code> for line
+            blocks. Pass <code>active</code> for the pulsing animation or{" "}
+            <code>loading={"{false}"}</code> to render children when data arrives.
+          </Text>
+        </div>
+        <div style={{ border: "1px solid var(--border)", borderRadius: 8, padding: 24 }}>
+          <Skeleton active avatar paragraph={{ rows: 2 }} />
+        </div>
+        <CodeBlock
+          code={SKELETON_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="Skeleton.tsx"
+          language="tsx"
+        />
+      </section>
+
+      {/* Table */}
+      <section id="table" style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+        <div style={{ borderLeft: "3px solid var(--color-accent-500)", paddingLeft: 12 }}>
+          <Title level={3} style={{ marginBottom: 4 }}>Table</Title>
+          <Text type="secondary">
+            A structured grid for tabular data. Ant Design's <code>Table</code> uses{" "}
+            <code>columns</code> (column definitions) and <code>dataSource</code>{" "}
+            (row array). Each row needs a unique <code>key</code> field or a{" "}
+            <code>rowKey</code> prop. Built-in support for sorting, filtering, and
+            pagination.
+          </Text>
+        </div>
+        <div style={{ border: "1px solid var(--border)", borderRadius: 8, padding: 24 }}>
+          <Table
+            bordered
+            columns={tableColumns}
+            dataSource={tableData}
+            pagination={false}
+            size="middle"
+          />
+        </div>
+        <CodeBlock
+          code={TABLE_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="Table.tsx"
+          language="tsx"
+        />
+      </section>
+    </div>
+  );
+}

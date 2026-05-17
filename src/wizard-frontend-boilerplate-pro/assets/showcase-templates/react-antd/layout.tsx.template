@@ -1,0 +1,175 @@
+"use client";
+
+import { useCallback, useEffect, useState } from "react";
+import type { ReactNode } from "react";
+import Link from "next/link";
+
+import { MoonOutlined, SunOutlined } from "@ant-design/icons";
+import {
+  Button,
+  ConfigProvider,
+  Drawer,
+  Flex,
+  Layout,
+  theme as antdTheme,
+  Typography,
+} from "antd";
+
+import { useTheme } from "@/components/ThemeProvider";
+
+import { Sidebar } from "./sidebar";
+
+const { Content, Header, Sider } = Layout;
+
+const SIDER_WIDTH = 256;
+
+function useAccentColor(fallback = "#0ea5e9"): string {
+  const [color, setColor] = useState(fallback);
+
+  useEffect(() => {
+    const value = getComputedStyle(document.documentElement)
+      .getPropertyValue("--color-accent-500")
+      .trim();
+    if (value) setColor(value);
+  }, []);
+
+  return color;
+}
+
+export default function LibraryLayout({ children }: { children: ReactNode }) {
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const [broken, setBroken] = useState(false);
+  const { theme, toggleTheme } = useTheme();
+  const primaryColor = useAccentColor();
+
+  const isDark = theme === "dark";
+
+  const handleClose = useCallback(() => setMobileOpen(false), []);
+
+  return (
+    <ConfigProvider
+      theme={{
+        algorithm: isDark ? antdTheme.darkAlgorithm : antdTheme.defaultAlgorithm,
+        token: {
+          borderRadius: 6,
+          colorPrimary: primaryColor,
+        },
+      }}
+    >
+      <Layout style={{ minHeight: "100vh" }}>
+        {/* Desktop sidebar */}
+        <Sider
+          breakpoint="md"
+          collapsedWidth={0}
+          onBreakpoint={setBroken}
+          style={{
+            background: "var(--surface)",
+            borderRight: "1px solid var(--border)",
+            height: "100vh",
+            overflow: "auto",
+            position: "sticky",
+            top: 0,
+          }}
+          trigger={null}
+          width={SIDER_WIDTH}
+        >
+          <Sidebar onNavigate={handleClose} />
+        </Sider>
+
+        {/* Mobile sidebar drawer */}
+        <Drawer
+          onClose={handleClose}
+          open={mobileOpen}
+          placement="left"
+          styles={{ body: { padding: 0 } }}
+          title={null}
+          width={SIDER_WIDTH}
+        >
+          <Sidebar onNavigate={handleClose} />
+        </Drawer>
+
+        <Layout>
+          {/* Header */}
+          <Header
+            style={{
+              alignItems: "center",
+              background: "var(--background)",
+              borderBottom: "1px solid var(--border)",
+              display: "flex",
+              gap: 8,
+              height: 56,
+              lineHeight: "56px",
+              padding: "0 16px",
+              position: "sticky",
+              top: 0,
+              zIndex: 30,
+            }}
+          >
+            {broken && (
+              <Button
+                aria-label="Open navigation menu"
+                icon={
+                  <svg
+                    aria-hidden="true"
+                    fill="none"
+                    height="18"
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    viewBox="0 0 24 24"
+                    width="18"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <line x1="4" x2="20" y1="12" y2="12" />
+                    <line x1="4" x2="20" y1="6" y2="6" />
+                    <line x1="4" x2="20" y1="18" y2="18" />
+                  </svg>
+                }
+                onClick={() => setMobileOpen(true)}
+                size="small"
+                type="text"
+              />
+            )}
+
+            <Typography.Text
+              strong
+              style={{
+                color: "var(--foreground)",
+                flex: 1,
+                fontSize: 14,
+              }}
+            >
+              {broken ? (
+                <Link
+                  href="/library"
+                  style={{ color: "inherit", textDecoration: "none" }}
+                >
+                  Component Library
+                </Link>
+              ) : null}
+            </Typography.Text>
+
+            <Button
+              aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
+              icon={isDark ? <SunOutlined /> : <MoonOutlined />}
+              onClick={toggleTheme}
+              size="small"
+              type="text"
+            />
+          </Header>
+
+          {/* Page content */}
+          <Content
+            style={{
+              background: "var(--background)",
+              padding: 32,
+            }}
+          >
+            {children}
+          </Content>
+        </Layout>
+      </Layout>
+    </ConfigProvider>
+  );
+}

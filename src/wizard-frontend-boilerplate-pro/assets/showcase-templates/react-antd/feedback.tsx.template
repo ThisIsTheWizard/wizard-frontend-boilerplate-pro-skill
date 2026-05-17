@@ -1,0 +1,319 @@
+"use client";
+
+import { useState } from "react";
+
+import {
+  Alert,
+  Button,
+  Divider,
+  Flex,
+  message,
+  Modal,
+  Progress,
+  Space,
+  Tooltip,
+  Typography,
+} from "antd";
+
+import { CodeBlock } from "@/components/ui/code-block";
+
+const { Text, Title } = Typography;
+
+const ALERT_CODE = `import { Alert, Space } from "antd";
+
+export function Example() {
+  return (
+    <Space direction="vertical" style={{ width: "100%" }}>
+      <Alert message="Heads up — you can add components using the CLI." type="info" showIcon />
+      <Alert message="Your profile has been saved successfully." type="success" showIcon />
+      <Alert message="Unsaved changes will be lost." type="warning" showIcon />
+      <Alert message="Something went wrong. Please try again." type="error" showIcon />
+    </Space>
+  );
+}`;
+
+const TOAST_CODE = `import { Button, Flex, message } from "antd";
+
+export function Example() {
+  return (
+    <Flex gap="small" wrap>
+      <Button type="primary" onClick={() => message.success("Event has been created.")}>
+        Success
+      </Button>
+      <Button onClick={() => message.error("Something went wrong.")}>Error</Button>
+      <Button onClick={() => message.warning("Unsaved changes detected.")}>Warning</Button>
+      <Button onClick={() => message.info("Your message was delivered.")}>Info</Button>
+    </Flex>
+  );
+}`;
+
+const PROGRESS_CODE = `import { Progress, Space } from "antd";
+
+export function Example() {
+  return (
+    <Space direction="vertical" style={{ width: "100%", maxWidth: 480 }}>
+      <Progress percent={25} />
+      <Progress percent={60} status="active" />
+      <Progress percent={90} />
+      <Progress percent={100} />
+    </Space>
+  );
+}`;
+
+const TOOLTIP_CODE = `import { Button, Flex, Tooltip } from "antd";
+
+export function Example() {
+  return (
+    <Flex gap="small" wrap>
+      <Tooltip title="Tooltip on top" placement="top">
+        <Button variant="outlined">Top</Button>
+      </Tooltip>
+      <Tooltip title="Tooltip on right" placement="right">
+        <Button variant="outlined">Right</Button>
+      </Tooltip>
+      <Tooltip title="Tooltip on bottom" placement="bottom">
+        <Button variant="outlined">Bottom</Button>
+      </Tooltip>
+      <Tooltip title="Tooltip on left" placement="left">
+        <Button variant="outlined">Left</Button>
+      </Tooltip>
+    </Flex>
+  );
+}`;
+
+const DIALOG_CODE = `import { useState } from "react";
+import { Button, Modal, Typography } from "antd";
+
+export function Example() {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <>
+      <Button type="primary" onClick={() => setOpen(true)}>Open dialog</Button>
+      <Modal
+        centered
+        okText="Confirm"
+        onCancel={() => setOpen(false)}
+        onOk={() => setOpen(false)}
+        open={open}
+        title="Confirm action"
+      >
+        <Typography.Text>
+          This action cannot be undone. Are you sure you want to proceed?
+        </Typography.Text>
+      </Modal>
+    </>
+  );
+}`;
+
+export default function FeedbackPage() {
+  const [dialogOpen, setDialogOpen] = useState(false);
+
+  return (
+    <div style={{ display: "flex", flexDirection: "column", gap: 64 }}>
+      <div>
+        <Title level={1}>Feedback</Title>
+        <Text type="secondary">
+          Status indicators, notifications, and modal interactions — alerts,
+          toasts, dialogs, and progress.
+        </Text>
+      </div>
+
+      {/* Alert */}
+      <section id="alert" style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+        <div style={{ borderLeft: "3px solid var(--color-accent-500)", paddingLeft: 12 }}>
+          <Title level={3} style={{ marginBottom: 4 }}>Alert</Title>
+          <Text type="secondary">
+            An inline message banner. Pass <code>type</code> as{" "}
+            <code>"info"</code>, <code>"success"</code>, <code>"warning"</code>,
+            or <code>"error"</code>. Add <code>showIcon</code> for the matching
+            status icon. Use <code>description</code> for a secondary body text
+            below the message.
+          </Text>
+        </div>
+        <div style={{ border: "1px solid var(--border)", borderRadius: 8, padding: 24 }}>
+          <Space direction="vertical" style={{ width: "100%" }}>
+            <Alert
+              message="Heads up — you can add components using the CLI."
+              showIcon
+              type="info"
+            />
+            <Alert
+              message="Your profile has been saved successfully."
+              showIcon
+              type="success"
+            />
+            <Alert
+              message="Unsaved changes will be lost."
+              showIcon
+              type="warning"
+            />
+            <Alert
+              message="Something went wrong. Please try again."
+              showIcon
+              type="error"
+            />
+          </Space>
+        </div>
+        <CodeBlock
+          code={ALERT_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="Alert.tsx"
+          language="tsx"
+        />
+      </section>
+
+      <Divider />
+
+      {/* Toast */}
+      <section id="toast" style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+        <div style={{ borderLeft: "3px solid var(--color-accent-500)", paddingLeft: 12 }}>
+          <Title level={3} style={{ marginBottom: 4 }}>Toast</Title>
+          <Text type="secondary">
+            Ant Design's <code>message</code> API uses static methods:{" "}
+            <code>message.success()</code>, <code>message.error()</code>,{" "}
+            <code>message.warning()</code>, and <code>message.info()</code>. For
+            full <code>ConfigProvider</code> theming (dark mode colours), wrap
+            content in <code>{"<App>"}</code> and use{" "}
+            <code>{"App.useApp().message"}</code> instead.
+          </Text>
+        </div>
+        <div style={{ border: "1px solid var(--border)", borderRadius: 8, padding: 24 }}>
+          <Flex gap="small" wrap>
+            <Button
+              onClick={() => message.success("Event has been created.")}
+              type="primary"
+            >
+              Success toast
+            </Button>
+            <Button onClick={() => message.error("Something went wrong.")}>
+              Error toast
+            </Button>
+            <Button onClick={() => message.warning("Unsaved changes detected.")}>
+              Warning toast
+            </Button>
+            <Button onClick={() => message.info("Your message was delivered.")}>
+              Info toast
+            </Button>
+          </Flex>
+        </div>
+        <CodeBlock
+          code={TOAST_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="Toast.tsx"
+          language="tsx"
+        />
+      </section>
+
+      <Divider />
+
+      {/* Progress */}
+      <section id="progress" style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+        <div style={{ borderLeft: "3px solid var(--color-accent-500)", paddingLeft: 12 }}>
+          <Title level={3} style={{ marginBottom: 4 }}>Progress</Title>
+          <Text type="secondary">
+            A horizontal progress bar. Set <code>percent</code> (0–100). Use{" "}
+            <code>status="active"</code> for a striped animated fill, or{" "}
+            <code>status="exception"</code> for error states. The fill colour
+            tracks <code>colorPrimary</code> from <code>ConfigProvider</code>.
+          </Text>
+        </div>
+        <div style={{ border: "1px solid var(--border)", borderRadius: 8, padding: 24 }}>
+          <Space direction="vertical" style={{ maxWidth: 480, width: "100%" }}>
+            <Progress percent={25} />
+            <Progress percent={60} status="active" />
+            <Progress percent={90} />
+            <Progress percent={100} />
+          </Space>
+        </div>
+        <CodeBlock
+          code={PROGRESS_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="Progress.tsx"
+          language="tsx"
+        />
+      </section>
+
+      <Divider />
+
+      {/* Tooltip */}
+      <section id="tooltip" style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+        <div style={{ borderLeft: "3px solid var(--color-accent-500)", paddingLeft: 12 }}>
+          <Title level={3} style={{ marginBottom: 4 }}>Tooltip</Title>
+          <Text type="secondary">
+            A floating label on hover/focus. Ant Design's <code>Tooltip</code> is
+            a wrapper — place the trigger as its child. Set{" "}
+            <code>placement</code> to one of 12 positions. Use <code>title</code>{" "}
+            for the content (not <code>label</code>).
+          </Text>
+        </div>
+        <div style={{ border: "1px solid var(--border)", borderRadius: 8, padding: 24 }}>
+          <Flex gap="small" wrap>
+            <Tooltip placement="top" title="Tooltip on top">
+              <Button variant="outlined">Top</Button>
+            </Tooltip>
+            <Tooltip placement="right" title="Tooltip on right">
+              <Button variant="outlined">Right</Button>
+            </Tooltip>
+            <Tooltip placement="bottom" title="Tooltip on bottom">
+              <Button variant="outlined">Bottom</Button>
+            </Tooltip>
+            <Tooltip placement="left" title="Tooltip on left">
+              <Button variant="outlined">Left</Button>
+            </Tooltip>
+          </Flex>
+        </div>
+        <CodeBlock
+          code={TOOLTIP_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="Tooltip.tsx"
+          language="tsx"
+        />
+      </section>
+
+      <Divider />
+
+      {/* Dialog */}
+      <section id="dialog" style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+        <div style={{ borderLeft: "3px solid var(--color-accent-500)", paddingLeft: 12 }}>
+          <Title level={3} style={{ marginBottom: 4 }}>Dialog</Title>
+          <Text type="secondary">
+            A focus-trapped modal overlay. Ant Design calls it <code>Modal</code>.
+            Pass <code>open</code>, <code>onCancel</code>, <code>onOk</code>, and{" "}
+            <code>title</code>. The footer renders Cancel + OK buttons
+            automatically; pass <code>footer={"{null}"}</code> to suppress it.
+            Use <code>centered</code> for vertically centred positioning.
+          </Text>
+        </div>
+        <div style={{ border: "1px solid var(--border)", borderRadius: 8, padding: 24 }}>
+          <Button onClick={() => setDialogOpen(true)} type="primary">
+            Open dialog
+          </Button>
+        </div>
+        <Modal
+          centered
+          okText="Confirm"
+          onCancel={() => setDialogOpen(false)}
+          onOk={() => setDialogOpen(false)}
+          open={dialogOpen}
+          title="Confirm action"
+        >
+          <Text>
+            This action cannot be undone. Are you sure you want to proceed?
+          </Text>
+        </Modal>
+        <CodeBlock
+          code={DIALOG_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="Dialog.tsx"
+          language="tsx"
+        />
+      </section>
+    </div>
+  );
+}

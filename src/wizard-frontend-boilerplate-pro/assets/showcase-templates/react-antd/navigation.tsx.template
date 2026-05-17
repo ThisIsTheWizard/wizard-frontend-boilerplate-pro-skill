@@ -1,0 +1,233 @@
+"use client";
+
+import { useState } from "react";
+
+import { Breadcrumb, Divider, Flex, Pagination, Space, Tabs, Typography } from "antd";
+
+import { CodeBlock } from "@/components/ui/code-block";
+
+const { Text, Title } = Typography;
+
+const TABS_CODE = `import { Tabs, Typography } from "antd";
+
+export function Example() {
+  return (
+    <Tabs
+      defaultActiveKey="account"
+      items={[
+        {
+          children: (
+            <Typography.Text type="secondary">
+              Manage your account settings and preferences.
+            </Typography.Text>
+          ),
+          key: "account",
+          label: "Account",
+        },
+        {
+          children: (
+            <Typography.Text type="secondary">
+              Change your password and security settings.
+            </Typography.Text>
+          ),
+          key: "password",
+          label: "Password",
+        },
+        {
+          children: (
+            <Typography.Text type="secondary">
+              Configure how you receive notifications.
+            </Typography.Text>
+          ),
+          key: "notifications",
+          label: "Notifications",
+        },
+      ]}
+    />
+  );
+}`;
+
+const BREADCRUMB_CODE = `import { Breadcrumb, Space } from "antd";
+
+export function Example() {
+  return (
+    <Space direction="vertical">
+      <Breadcrumb
+        items={[
+          { href: "#", title: "Home" },
+          { href: "#", title: "Library" },
+          { title: "Components" },
+        ]}
+      />
+      <Breadcrumb
+        separator="›"
+        items={[
+          { href: "#", title: "Dashboard" },
+          { href: "#", title: "Settings" },
+          { title: "Profile" },
+        ]}
+      />
+    </Space>
+  );
+}`;
+
+const PAGINATION_CODE = `import { useState } from "react";
+import { Flex, Pagination } from "antd";
+
+export function Example() {
+  const [current, setCurrent] = useState(1);
+
+  return (
+    <Flex justify="center">
+      <Pagination
+        current={current}
+        onChange={setCurrent}
+        total={100}
+      />
+    </Flex>
+  );
+}`;
+
+export default function NavigationPage() {
+  const [current, setCurrent] = useState(1);
+
+  return (
+    <div style={{ display: "flex", flexDirection: "column", gap: 64 }}>
+      <div>
+        <Title level={1}>Navigation</Title>
+        <Text type="secondary">
+          Components for moving users through content — tabs, breadcrumbs, and
+          pagination.
+        </Text>
+      </div>
+
+      {/* Tabs */}
+      <section id="tabs" style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+        <div style={{ borderLeft: "3px solid var(--color-accent-500)", paddingLeft: 12 }}>
+          <Title level={3} style={{ marginBottom: 4 }}>Tabs</Title>
+          <Text type="secondary">
+            A segmented tab strip using <code>Tabs</code> with an{" "}
+            <code>items</code> array. Each item has <code>key</code>,{" "}
+            <code>label</code>, and <code>children</code>. The active indicator
+            colour tracks <code>colorPrimary</code> from{" "}
+            <code>ConfigProvider</code> automatically. No sub-component
+            composition required.
+          </Text>
+        </div>
+        <div style={{ border: "1px solid var(--border)", borderRadius: 8, padding: 24 }}>
+          <Tabs
+            defaultActiveKey="account"
+            items={[
+              {
+                children: (
+                  <Text type="secondary">
+                    Manage your account settings and preferences.
+                  </Text>
+                ),
+                key: "account",
+                label: "Account",
+              },
+              {
+                children: (
+                  <Text type="secondary">
+                    Change your password and security settings.
+                  </Text>
+                ),
+                key: "password",
+                label: "Password",
+              },
+              {
+                children: (
+                  <Text type="secondary">
+                    Configure how you receive notifications.
+                  </Text>
+                ),
+                key: "notifications",
+                label: "Notifications",
+              },
+            ]}
+          />
+        </div>
+        <CodeBlock
+          code={TABS_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="Tabs.tsx"
+          language="tsx"
+        />
+      </section>
+
+      <Divider />
+
+      {/* Breadcrumb */}
+      <section id="breadcrumb" style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+        <div style={{ borderLeft: "3px solid var(--color-accent-500)", paddingLeft: 12 }}>
+          <Title level={3} style={{ marginBottom: 4 }}>Breadcrumb</Title>
+          <Text type="secondary">
+            A hierarchical path indicator. Pass an <code>items</code> array where
+            each item has <code>title</code> and an optional <code>href</code>.
+            Items without <code>href</code> render as plain text (current page).
+            Customise the separator with the <code>separator</code> prop.
+          </Text>
+        </div>
+        <div style={{ border: "1px solid var(--border)", borderRadius: 8, padding: 24 }}>
+          <Space direction="vertical">
+            <Breadcrumb
+              items={[
+                { href: "#", title: "Home" },
+                { href: "#", title: "Library" },
+                { title: "Components" },
+              ]}
+            />
+            <Breadcrumb
+              items={[
+                { href: "#", title: "Dashboard" },
+                { href: "#", title: "Settings" },
+                { title: "Profile" },
+              ]}
+              separator="›"
+            />
+          </Space>
+        </div>
+        <CodeBlock
+          code={BREADCRUMB_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="Breadcrumb.tsx"
+          language="tsx"
+        />
+      </section>
+
+      <Divider />
+
+      {/* Pagination */}
+      <section id="pagination" style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+        <div style={{ borderLeft: "3px solid var(--color-accent-500)", paddingLeft: 12 }}>
+          <Title level={3} style={{ marginBottom: 4 }}>Pagination</Title>
+          <Text type="secondary">
+            A numbered page navigator. Pass <code>total</code> (total record
+            count, not page count), <code>current</code>, and{" "}
+            <code>onChange</code>. The default <code>pageSize</code> is 10.
+            Currently on page <strong>{current}</strong>.
+          </Text>
+        </div>
+        <div style={{ border: "1px solid var(--border)", borderRadius: 8, padding: 24 }}>
+          <Flex justify="center">
+            <Pagination
+              current={current}
+              onChange={setCurrent}
+              total={100}
+            />
+          </Flex>
+        </div>
+        <CodeBlock
+          code={PAGINATION_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="Pagination.tsx"
+          language="tsx"
+        />
+      </section>
+    </div>
+  );
+}
