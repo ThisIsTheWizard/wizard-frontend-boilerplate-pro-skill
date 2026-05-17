@@ -1,0 +1,218 @@
+<script lang="ts">
+  import { CodeBlock } from "$lib/components/ui/code-block";
+
+  type TabId = "account" | "notifications" | "password";
+
+  let activeTab = $state<TabId>("account");
+  let page = $state(1);
+
+  const TAB_CONTENT: Record<TabId, string> = {
+    account: "Manage your account settings and preferences.",
+    notifications: "Configure how you receive notifications.",
+    password: "Change your password and security settings.",
+  };
+
+  const TABS_LIST: { id: TabId; label: string }[] = [
+    { id: "account", label: "Account" },
+    { id: "password", label: "Password" },
+    { id: "notifications", label: "Notifications" },
+  ];
+
+  const TABS_CODE = `<script lang="ts">
+  type TabId = "account" | "notifications" | "password";
+  let active = $state<TabId>("account");
+  const content: Record<TabId, string> = {
+    account: "Manage your account settings and preferences.",
+    notifications: "Configure how you receive notifications.",
+    password: "Change your password and security settings.",
+  };
+<\/script>
+
+<div>
+  <div class="tabs tabs-bordered" role="tablist">
+    {#each [{ id: "account", label: "Account" }, { id: "password", label: "Password" }, { id: "notifications", label: "Notifications" }] as { id, label }}
+      <button
+        class="tab {active === id ? 'tab-active' : ''}"
+        onclick={() => { active = id; }}
+        role="tab"
+        type="button"
+      >{label}</button>
+    {/each}
+  </div>
+  <div class="pt-4">
+    <p class="text-base-content/60 text-sm">{content[active]}</p>
+  </div>
+</div>`;
+
+  const BREADCRUMBS_CODE = `<div class="flex flex-col gap-3">
+  <div class="breadcrumbs text-sm">
+    <ul>
+      <li><a href="#">Home</a></li>
+      <li><a href="#">Library</a></li>
+      <li>Components</li>
+    </ul>
+  </div>
+</div>`;
+
+  const PAGINATION_CODE = `<script lang="ts">
+  let page = $state(1);
+<\/script>
+
+<div class="join">
+  <button class="join-item btn btn-sm" onclick={() => { page = Math.max(1, page - 1); }} type="button">«</button>
+  {#each [1, 2, 3, 4, 5] as n}
+    <button
+      class="join-item btn btn-sm {page === n ? 'btn-active' : ''}"
+      onclick={() => { page = n; }}
+      type="button"
+    >{n}</button>
+  {/each}
+  <button class="join-item btn btn-sm" onclick={() => { page = Math.min(5, page + 1); }} type="button">»</button>
+</div>`;
+
+  const NAVBAR_CODE = `<div class="navbar bg-base-100 border border-base-300 rounded-box">
+  <div class="navbar-start">
+    <a class="btn btn-ghost text-lg font-bold">Brand</a>
+  </div>
+  <div class="navbar-end hidden md:flex">
+    <ul class="menu menu-horizontal px-1 gap-1">
+      <li><a>Products</a></li>
+      <li><a>Docs</a></li>
+      <li><a>Pricing</a></li>
+      <li><a>Blog</a></li>
+    </ul>
+  </div>
+</div>`;
+</script>
+
+<div class="flex flex-col gap-4">
+  <div>
+    <h1 class="text-xl font-semibold mb-1">Navigation</h1>
+    <p class="text-base-content/60 text-sm">
+      Components for moving users through content — tabs, breadcrumbs, pagination, and navbars.
+    </p>
+  </div>
+
+  <!-- Tabs -->
+  <section id="tabs" class="mb-2">
+    <div class="mb-2 pl-3" style="border-left: 3px solid var(--color-primary)">
+      <h5 class="font-semibold mb-1">Tabs</h5>
+      <p class="text-base-content/60 text-sm mb-0">
+        Tab strip using <code class="kbd kbd-sm">tabs tabs-bordered</code> with
+        <code class="kbd kbd-sm">tab</code> buttons. Mark active with
+        <code class="kbd kbd-sm">tab-active</code>.
+      </p>
+    </div>
+    <div class="bg-base-200 rounded-box p-4 mb-3">
+      <div>
+        <div class="tabs tabs-bordered" role="tablist">
+          {#each TABS_LIST as { id, label }}
+            <button
+              class="tab {activeTab === id ? 'tab-active' : ''}"
+              onclick={() => { activeTab = id; }}
+              role="tab"
+              type="button"
+            >{label}</button>
+          {/each}
+        </div>
+        <div class="pt-4">
+          <p class="text-base-content/60 text-sm mb-0">{TAB_CONTENT[activeTab]}</p>
+        </div>
+      </div>
+    </div>
+    <CodeBlock code={TABS_CODE} collapsible defaultOpen={false} filename="Tabs.svelte" language="svelte" />
+  </section>
+
+  <div class="divider my-2"></div>
+
+  <!-- Breadcrumbs -->
+  <section id="breadcrumbs" class="mb-2">
+    <div class="mb-2 pl-3" style="border-left: 3px solid var(--color-primary)">
+      <h5 class="font-semibold mb-1">Breadcrumbs</h5>
+      <p class="text-base-content/60 text-sm mb-0">
+        Hierarchical path using <code class="kbd kbd-sm">breadcrumbs</code> wrapping a
+        <code class="kbd kbd-sm">&lt;ul&gt;</code>. Current page is plain text; ancestors use
+        <code class="kbd kbd-sm">&lt;a&gt;</code>.
+      </p>
+    </div>
+    <div class="bg-base-200 rounded-box p-4 mb-3">
+      <div class="flex flex-col gap-3">
+        <div class="breadcrumbs text-sm">
+          <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Library</a></li>
+            <li>Components</li>
+          </ul>
+        </div>
+        <div class="breadcrumbs text-sm">
+          <ul>
+            <li><a href="#">Dashboard</a></li>
+            <li><a href="#">Settings</a></li>
+            <li>Profile</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <CodeBlock code={BREADCRUMBS_CODE} collapsible defaultOpen={false} filename="Breadcrumbs.svelte" language="svelte" />
+  </section>
+
+  <div class="divider my-2"></div>
+
+  <!-- Pagination -->
+  <section id="pagination" class="mb-2">
+    <div class="mb-2 pl-3" style="border-left: 3px solid var(--color-primary)">
+      <h5 class="font-semibold mb-1">Pagination</h5>
+      <p class="text-base-content/60 text-sm mb-0">
+        Page navigator using <code class="kbd kbd-sm">join</code> with
+        <code class="kbd kbd-sm">join-item btn btn-sm</code>. Apply
+        <code class="kbd kbd-sm">btn-active</code> to the current page.
+        Currently on page <strong>{page}</strong>.
+      </p>
+    </div>
+    <div class="bg-base-200 rounded-box p-4 mb-3">
+      <div class="join">
+        <button class="join-item btn btn-sm" onclick={() => { page = Math.max(1, page - 1); }} type="button">«</button>
+        {#each [1, 2, 3, 4, 5] as n}
+          <button
+            class="join-item btn btn-sm {page === n ? 'btn-active' : ''}"
+            onclick={() => { page = n; }}
+            type="button"
+          >{n}</button>
+        {/each}
+        <button class="join-item btn btn-sm" onclick={() => { page = Math.min(5, page + 1); }} type="button">»</button>
+      </div>
+    </div>
+    <CodeBlock code={PAGINATION_CODE} collapsible defaultOpen={false} filename="Pagination.svelte" language="svelte" />
+  </section>
+
+  <div class="divider my-2"></div>
+
+  <!-- Navbar -->
+  <section id="navbar" class="mb-2">
+    <div class="mb-2 pl-3" style="border-left: 3px solid var(--color-primary)">
+      <h5 class="font-semibold mb-1">Navbar</h5>
+      <p class="text-base-content/60 text-sm mb-0">
+        Responsive header using <code class="kbd kbd-sm">navbar</code> with
+        <code class="kbd kbd-sm">navbar-start</code> and
+        <code class="kbd kbd-sm">navbar-end</code> slots. Pair with
+        <code class="kbd kbd-sm">menu menu-horizontal</code> for desktop links.
+      </p>
+    </div>
+    <div class="bg-base-200 rounded-box p-4 mb-3">
+      <div class="navbar bg-base-100 border border-base-300 rounded-box">
+        <div class="navbar-start">
+          <a class="btn btn-ghost text-lg font-bold">Brand</a>
+        </div>
+        <div class="navbar-end hidden md:flex">
+          <ul class="menu menu-horizontal px-1 gap-1">
+            <li><a>Products</a></li>
+            <li><a>Docs</a></li>
+            <li><a>Pricing</a></li>
+            <li><a>Blog</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <CodeBlock code={NAVBAR_CODE} collapsible defaultOpen={false} filename="Navbar.svelte" language="svelte" />
+  </section>
+</div>

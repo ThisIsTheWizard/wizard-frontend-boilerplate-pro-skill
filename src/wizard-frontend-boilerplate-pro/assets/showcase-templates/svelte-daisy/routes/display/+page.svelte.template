@@ -1,0 +1,263 @@
+<script lang="ts">
+  import { CodeBlock } from "$lib/components/ui/code-block";
+
+  const CARD_CODE = `<div class="card bg-base-100 shadow-sm" style="max-width: 320px">
+  <div class="card-body">
+    <h2 class="card-title">Project Alpha</h2>
+    <p class="text-base-content/60 text-sm">
+      This project aims to redefine how teams collaborate in real time.
+    </p>
+    <div class="card-actions justify-end">
+      <button class="btn btn-primary btn-sm" type="button">View details</button>
+    </div>
+  </div>
+</div>`;
+
+  const BADGE_CODE = `<div class="flex flex-wrap gap-2">
+  <span class="badge badge-primary">Primary</span>
+  <span class="badge badge-secondary">Secondary</span>
+  <span class="badge badge-accent">Accent</span>
+  <span class="badge badge-success">Success</span>
+  <span class="badge badge-warning">Warning</span>
+  <span class="badge badge-error">Error</span>
+  <span class="badge badge-ghost">Ghost</span>
+  <span class="badge badge-outline badge-primary">Outline</span>
+</div>`;
+
+  const AVATAR_CODE = `<div class="flex items-center gap-4">
+  <div class="avatar placeholder">
+    <div class="bg-primary text-primary-content rounded-full w-8">
+      <span class="text-xs">XS</span>
+    </div>
+  </div>
+  <div class="avatar placeholder">
+    <div class="bg-primary text-primary-content rounded-full w-10">
+      <span class="text-sm">MD</span>
+    </div>
+  </div>
+  <div class="avatar online placeholder">
+    <div class="bg-secondary text-secondary-content rounded-full w-10">
+      <span class="text-sm">ON</span>
+    </div>
+  </div>
+</div>`;
+
+  const SEPARATOR_CODE = `<div class="flex flex-col gap-3">
+  <div>
+    <p class="text-base-content/60 text-sm">Section one.</p>
+    <div class="divider"></div>
+    <p class="text-base-content/60 text-sm">Section two.</p>
+  </div>
+  <div class="flex items-center" style="height: 32px">
+    <span class="text-sm">Left</span>
+    <div class="divider divider-horizontal mx-2"></div>
+    <span class="text-sm">Right</span>
+  </div>
+</div>`;
+
+  const SKELETON_CODE = `<div class="flex flex-col gap-4" style="max-width: 320px">
+  <div class="flex items-center gap-4">
+    <div class="skeleton w-12 h-12 rounded-full shrink-0"></div>
+    <div class="flex flex-col gap-2 flex-grow">
+      <div class="skeleton h-4 w-full"></div>
+      <div class="skeleton h-4 w-3/4"></div>
+    </div>
+  </div>
+  <div class="skeleton h-32 w-full rounded-box"></div>
+</div>`;
+
+  const TABLE_CODE = `<div class="overflow-x-auto">
+  <table class="table table-zebra">
+    <thead>
+      <tr><th>Name</th><th>Email</th><th>Role</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Alice Martin</td><td>alice@example.com</td><td>Admin</td></tr>
+      <tr><td>Bob Chen</td><td>bob@example.com</td><td>Editor</td></tr>
+      <tr><td>Carol White</td><td>carol@example.com</td><td>Viewer</td></tr>
+    </tbody>
+  </table>
+</div>`;
+</script>
+
+<div class="flex flex-col gap-4">
+  <div>
+    <h1 class="text-xl font-semibold mb-1">Display</h1>
+    <p class="text-base-content/60 text-sm">
+      Read-only visual elements — cards, badges, avatars, and data tables.
+    </p>
+  </div>
+
+  <!-- Card -->
+  <section id="card" class="mb-2">
+    <div class="mb-2 pl-3" style="border-left: 3px solid var(--color-primary)">
+      <h5 class="font-semibold mb-1">Card</h5>
+      <p class="text-base-content/60 text-sm mb-0">
+        Surface using <code class="kbd kbd-sm">card bg-base-100</code> with
+        <code class="kbd kbd-sm">card-body</code>, <code class="kbd kbd-sm">card-title</code>,
+        and <code class="kbd kbd-sm">card-actions</code>.
+      </p>
+    </div>
+    <div class="bg-base-200 rounded-box p-4 mb-3">
+      <div class="card bg-base-100 shadow-sm" style="max-width: 320px">
+        <div class="card-body">
+          <h2 class="card-title">Project Alpha</h2>
+          <p class="text-base-content/60 text-sm">This project aims to redefine how teams collaborate in real time.</p>
+          <div class="card-actions justify-end">
+            <button class="btn btn-primary btn-sm" type="button">View details</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <CodeBlock code={CARD_CODE} collapsible defaultOpen={false} filename="Card.svelte" language="svelte" />
+  </section>
+
+  <div class="divider my-2"></div>
+
+  <!-- Badge -->
+  <section id="badge" class="mb-2">
+    <div class="mb-2 pl-3" style="border-left: 3px solid var(--color-primary)">
+      <h5 class="font-semibold mb-1">Badge</h5>
+      <p class="text-base-content/60 text-sm mb-0">
+        Compact label using <code class="kbd kbd-sm">badge</code> with semantic colour and outline variants.
+      </p>
+    </div>
+    <div class="bg-base-200 rounded-box p-4 mb-3">
+      <div class="flex flex-wrap gap-2">
+        <span class="badge badge-primary">Primary</span>
+        <span class="badge badge-secondary">Secondary</span>
+        <span class="badge badge-accent">Accent</span>
+        <span class="badge badge-success">Success</span>
+        <span class="badge badge-warning">Warning</span>
+        <span class="badge badge-error">Error</span>
+        <span class="badge badge-ghost">Ghost</span>
+        <span class="badge badge-outline badge-primary">Outline</span>
+      </div>
+    </div>
+    <CodeBlock code={BADGE_CODE} collapsible defaultOpen={false} filename="Badge.svelte" language="svelte" />
+  </section>
+
+  <div class="divider my-2"></div>
+
+  <!-- Avatar -->
+  <section id="avatar" class="mb-2">
+    <div class="mb-2 pl-3" style="border-left: 3px solid var(--color-primary)">
+      <h5 class="font-semibold mb-1">Avatar</h5>
+      <p class="text-base-content/60 text-sm mb-0">
+        DaisyUI's <code class="kbd kbd-sm">avatar placeholder</code> pattern sized via <code class="kbd kbd-sm">w-*</code>.
+        Add <code class="kbd kbd-sm">online</code> for a presence dot.
+      </p>
+    </div>
+    <div class="bg-base-200 rounded-box p-4 mb-3">
+      <div class="flex items-center gap-4">
+        <div class="avatar placeholder">
+          <div class="bg-primary text-primary-content rounded-full w-8">
+            <span class="text-xs">XS</span>
+          </div>
+        </div>
+        <div class="avatar placeholder">
+          <div class="bg-primary text-primary-content rounded-full w-10">
+            <span class="text-sm">MD</span>
+          </div>
+        </div>
+        <div class="avatar placeholder">
+          <div class="bg-primary text-primary-content rounded-full w-14">
+            <span class="text-lg">LG</span>
+          </div>
+        </div>
+        <div class="avatar online placeholder">
+          <div class="bg-secondary text-secondary-content rounded-full w-10">
+            <span class="text-sm">ON</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <CodeBlock code={AVATAR_CODE} collapsible defaultOpen={false} filename="Avatar.svelte" language="svelte" />
+  </section>
+
+  <div class="divider my-2"></div>
+
+  <!-- Separator -->
+  <section id="separator" class="mb-2">
+    <div class="mb-2 pl-3" style="border-left: 3px solid var(--color-primary)">
+      <h5 class="font-semibold mb-1">Separator</h5>
+      <p class="text-base-content/60 text-sm mb-0">
+        <code class="kbd kbd-sm">divider</code> for horizontal;
+        <code class="kbd kbd-sm">divider divider-horizontal</code> for vertical inside a flex row.
+      </p>
+    </div>
+    <div class="bg-base-200 rounded-box p-4 mb-3">
+      <div class="flex flex-col gap-3">
+        <div>
+          <p class="text-base-content/60 text-sm mb-0">Section one content.</p>
+          <div class="divider"></div>
+          <p class="text-base-content/60 text-sm mb-0">Section two content.</p>
+        </div>
+        <div class="flex items-center" style="height: 32px">
+          <span class="text-sm">Left item</span>
+          <div class="divider divider-horizontal mx-2"></div>
+          <span class="text-sm">Right item</span>
+        </div>
+      </div>
+    </div>
+    <CodeBlock code={SEPARATOR_CODE} collapsible defaultOpen={false} filename="Separator.svelte" language="svelte" />
+  </section>
+
+  <div class="divider my-2"></div>
+
+  <!-- Skeleton -->
+  <section id="skeleton" class="mb-2">
+    <div class="mb-2 pl-3" style="border-left: 3px solid var(--color-primary)">
+      <h5 class="font-semibold mb-1">Skeleton</h5>
+      <p class="text-base-content/60 text-sm mb-0">
+        Animated placeholders using the <code class="kbd kbd-sm">skeleton</code> class with Tailwind dimensions.
+      </p>
+    </div>
+    <div class="bg-base-200 rounded-box p-4 mb-3">
+      <div class="flex flex-col gap-4" style="max-width: 320px">
+        <div class="flex items-center gap-4">
+          <div class="skeleton w-12 h-12 rounded-full shrink-0"></div>
+          <div class="flex flex-col gap-2 flex-grow">
+            <div class="skeleton h-4 w-full"></div>
+            <div class="skeleton h-4 w-3/4"></div>
+          </div>
+        </div>
+        <div class="skeleton h-32 w-full rounded-box"></div>
+        <div class="flex flex-col gap-2">
+          <div class="skeleton h-4 w-full"></div>
+          <div class="skeleton h-4 w-5/6"></div>
+          <div class="skeleton h-4 w-2/3"></div>
+        </div>
+      </div>
+    </div>
+    <CodeBlock code={SKELETON_CODE} collapsible defaultOpen={false} filename="Skeleton.svelte" language="svelte" />
+  </section>
+
+  <div class="divider my-2"></div>
+
+  <!-- Table -->
+  <section id="table" class="mb-2">
+    <div class="mb-2 pl-3" style="border-left: 3px solid var(--color-primary)">
+      <h5 class="font-semibold mb-1">Table</h5>
+      <p class="text-base-content/60 text-sm mb-0">
+        Structured grid using <code class="kbd kbd-sm">table table-zebra</code>
+        inside an <code class="kbd kbd-sm">overflow-x-auto</code> wrapper.
+      </p>
+    </div>
+    <div class="bg-base-200 rounded-box p-4 mb-3">
+      <div class="overflow-x-auto">
+        <table class="table table-zebra">
+          <thead>
+            <tr><th>Name</th><th>Email</th><th>Role</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Alice Martin</td><td>alice@example.com</td><td>Admin</td></tr>
+            <tr><td>Bob Chen</td><td>bob@example.com</td><td>Editor</td></tr>
+            <tr><td>Carol White</td><td>carol@example.com</td><td>Viewer</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <CodeBlock code={TABLE_CODE} collapsible defaultOpen={false} filename="Table.svelte" language="svelte" />
+  </section>
+</div>

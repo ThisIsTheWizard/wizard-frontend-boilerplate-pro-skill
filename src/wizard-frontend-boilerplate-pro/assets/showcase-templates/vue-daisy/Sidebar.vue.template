@@ -1,0 +1,175 @@
+<script setup lang="ts">
+import { computed, onUnmounted, ref, watch } from "vue";
+import { useRoute } from "vue-router";
+
+interface NavItem {
+  category: string;
+  components: string[];
+  icon: string;
+  slug: string;
+}
+
+interface Props {
+  onNavigate?: () => void;
+}
+
+const props = withDefaults(defineProps<Props>(), {
+  onNavigate: undefined,
+});
+
+const route = useRoute();
+const activeAnchor = ref("");
+
+const NAV_ITEMS: NavItem[] = [
+  {
+    category: "Data viz",
+    components: ["Chart", "DataTable", "Calendar"],
+    icon: "bar-chart",
+    slug: "data-viz",
+  },
+  {
+    category: "Display",
+    components: ["Card", "Badge", "Avatar", "Separator", "Skeleton", "Table"],
+    icon: "squares",
+    slug: "display",
+  },
+  {
+    category: "Feedback",
+    components: ["Alert", "Toast", "Progress", "Tooltip", "Modal"],
+    icon: "bell",
+    slug: "feedback",
+  },
+  {
+    category: "Inputs",
+    components: ["Button", "Input", "Textarea", "Select", "Checkbox", "RadioGroup", "Toggle"],
+    icon: "cursor",
+    slug: "inputs",
+  },
+  {
+    category: "Navigation",
+    components: ["Tabs", "Breadcrumbs", "Pagination", "Navbar"],
+    icon: "compass",
+    slug: "navigation",
+  },
+  {
+    category: "Overlay",
+    components: ["Tooltip", "Dropdown", "Drawer"],
+    icon: "layers",
+    slug: "overlay",
+  },
+];
+
+const activeSlug = computed(() => {
+  const path = route.path;
+  return path.startsWith("/library/") ? path.slice("/library/".length) : "";
+});
+
+const totalComponents = computed(() =>
+  NAV_ITEMS.reduce((acc, { components }) => acc + components.length, 0),
+);
+
+function toSlug(name: string): string {
+  return name
+    .replace(/[A-Z]/g, (char, offset: number) => (offset > 0 ? `-${char}` : char))
+    .toLowerCase();
+}
+
+let observer: IntersectionObserver | null = null;
+
+function setupObserver() {
+  if (observer) observer.disconnect();
+  activeAnchor.value = "";
+
+  const sections = document.querySelectorAll<HTMLElement>("section[id]");
+  if (sections.length === 0) return;
+
+  observer = new IntersectionObserver(
+    (entries) => {
+      for (const entry of entries) {
+        if (entry.isIntersecting) activeAnchor.value = entry.target.id;
+      }
+    },
+    { rootMargin: "-80px 0px -66% 0px" },
+  );
+  sections.forEach((s) => observer!.observe(s));
+}
+
+watch(() => route.path, setupObserver, { immediate: true });
+onUnmounted(() => observer?.disconnect());
+
+function handleNavigate() {
+  props.onNavigate?.();
+}
+</script>
+
+<template>
+  <div class="flex flex-col h-full">
+    <!-- Header -->
+    <div
+      class="flex items-center gap-2 px-3 border-b border-base-300 flex-shrink-0"
+      style="height: 56px"
+    >
+      <span class="text-primary">
+        <svg fill="none" height="20" viewBox="0 0 20 20" width="20">
+          <rect fill="currentColor" height="7" opacity="0.9" rx="1.5" width="7" x="2" y="2" />
+          <rect fill="currentColor" height="7" opacity="0.6" rx="1.5" width="7" x="11" y="2" />
+          <rect fill="currentColor" height="7" opacity="0.6" rx="1.5" width="7" x="2" y="11" />
+          <rect fill="currentColor" height="7" opacity="0.3" rx="1.5" width="7" x="11" y="11" />
+        </svg>
+      </span>
+      <RouterLink
+        class="font-semibold text-sm text-base-content no-underline hover:text-primary transition-colors"
+        to="/library"
+        @click="handleNavigate"
+      >
+        Component Library
+      </RouterLink>
+    </div>
+
+    <!-- Nav list -->
+    <div class="flex-grow overflow-y-auto py-2">
+      <div v-for="{ category, components, slug } in NAV_ITEMS" :key="slug" class="px-2 py-1">
+        <!-- Category link -->
+        <RouterLink
+          :class="[
+            'flex items-center gap-2 px-2 py-2 rounded-btn text-sm font-medium no-underline transition-colors',
+            activeSlug === slug
+              ? 'bg-primary text-primary-content'
+              : 'text-base-content hover:bg-base-200',
+          ]"
+          :to="`/library/${slug}`"
+          @click="handleNavigate"
+        >
+          <span class="flex-grow">{{ category }}</span>
+          <span class="badge badge-sm badge-ghost">{{ components.length }}</span>
+        </RouterLink>
+
+        <!-- Sub-items -->
+        <ul
+          class="list-none m-0 ms-3 mt-1 pl-3"
+          style="border-left: 1px solid oklch(var(--b3))"
+        >
+          <li v-for="component in components" :key="toSlug(component)">
+            <RouterLink
+              :class="[
+                'block px-2 py-1 rounded text-sm no-underline transition-colors',
+                activeSlug === slug && activeAnchor === toSlug(component)
+                  ? 'font-semibold text-primary'
+                  : 'text-base-content/60 hover:text-base-content',
+              ]"
+              :to="`/library/${slug}#${toSlug(component)}`"
+              @click="handleNavigate"
+            >
+              {{ component }}
+            </RouterLink>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="px-3 py-2 border-t border-base-300 flex-shrink-0">
+      <small class="text-base-content/50 text-xs">{{ totalComponents }} components</small>
+    </div>
+  </div>
+</template>

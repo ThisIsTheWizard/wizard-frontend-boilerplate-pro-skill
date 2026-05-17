@@ -1,0 +1,400 @@
+"use client";
+
+import { useRef, useState } from "react";
+
+import { CodeBlock } from "@/components/ui/code-block";
+
+const ALERT_CODE = `export function Example() {
+  return (
+    <div className="flex flex-col gap-3">
+      <div className="alert alert-info" role="alert">
+        <svg className="h-5 w-5 shrink-0" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" /><path d="M12 16v-4M12 8h.01" /></svg>
+        <div>
+          <h3 className="font-bold">Heads up</h3>
+          <div className="text-sm">You can add components to your app using the CLI.</div>
+        </div>
+      </div>
+      <div className="alert alert-success" role="alert">
+        <svg className="h-5 w-5 shrink-0" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" /><polyline points="22 4 12 14.01 9 11.01" /></svg>
+        <div>
+          <h3 className="font-bold">Success</h3>
+          <div className="text-sm">Your profile has been saved successfully.</div>
+        </div>
+      </div>
+      <div className="alert alert-warning" role="alert">
+        <svg className="h-5 w-5 shrink-0" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" /><line x1="12" x2="12" y1="9" y2="13" /><line x1="12" x2="12.01" y1="17" y2="17" /></svg>
+        <div>
+          <h3 className="font-bold">Warning</h3>
+          <div className="text-sm">Unsaved changes will be lost.</div>
+        </div>
+      </div>
+      <div className="alert alert-error" role="alert">
+        <svg className="h-5 w-5 shrink-0" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" /><line x1="15" x2="9" y1="9" y2="15" /><line x1="9" x2="15" y1="9" y2="15" /></svg>
+        <div>
+          <h3 className="font-bold">Error</h3>
+          <div className="text-sm">Something went wrong. Please try again.</div>
+        </div>
+      </div>
+    </div>
+  );
+}`;
+
+const TOAST_CODE = `import { useState } from "react";
+
+type ToastKind = "info" | "success" | "warning" | "error";
+
+const MESSAGES: Record<ToastKind, string> = {
+  error: "Something went wrong.",
+  info: "Event has been created.",
+  success: "Profile saved successfully.",
+  warning: "Unsaved changes detected.",
+};
+
+export function Example() {
+  const [toast, setToast] = useState<ToastKind | null>(null);
+
+  const show = (kind: ToastKind) => {
+    setToast(kind);
+    setTimeout(() => setToast(null), 3000);
+  };
+
+  return (
+    <>
+      <div className="flex flex-wrap gap-2">
+        <button className="btn btn-primary btn-sm" onClick={() => show("info")} type="button">Info</button>
+        <button className="btn btn-success btn-sm" onClick={() => show("success")} type="button">Success</button>
+        <button className="btn btn-error btn-sm" onClick={() => show("error")} type="button">Error</button>
+        <button className="btn btn-warning btn-sm" onClick={() => show("warning")} type="button">Warning</button>
+      </div>
+      {toast && (
+        <div className="toast toast-end toast-bottom z-50">
+          <div className={\`alert alert-\${toast}\`} role="alert">
+            <span className="text-sm">{MESSAGES[toast]}</span>
+          </div>
+        </div>
+      )}
+    </>
+  );
+}`;
+
+const PROGRESS_CODE = `export function Example() {
+  return (
+    <div className="flex flex-col gap-3">
+      <progress className="progress progress-primary w-full" max="100" value="25" />
+      <progress className="progress progress-success w-full" max="100" value="60" />
+      <progress className="progress progress-warning w-full" max="100" value="80" />
+      <progress className="progress progress-error w-full" max="100" value="40" />
+    </div>
+  );
+}`;
+
+const TOOLTIP_CODE = `export function Example() {
+  return (
+    <div className="flex flex-wrap gap-4">
+      <div className="tooltip tooltip-top" data-tip="Tooltip on top">
+        <button className="btn btn-sm btn-outline" type="button">Top</button>
+      </div>
+      <div className="tooltip tooltip-right" data-tip="Tooltip on right">
+        <button className="btn btn-sm btn-outline" type="button">Right</button>
+      </div>
+      <div className="tooltip tooltip-bottom" data-tip="Tooltip on bottom">
+        <button className="btn btn-sm btn-outline" type="button">Bottom</button>
+      </div>
+      <div className="tooltip tooltip-left" data-tip="Tooltip on left">
+        <button className="btn btn-sm btn-outline" type="button">Left</button>
+      </div>
+    </div>
+  );
+}`;
+
+const MODAL_CODE = `import { useRef } from "react";
+
+export function Example() {
+  const modalRef = useRef<HTMLDialogElement>(null);
+
+  return (
+    <>
+      <button
+        className="btn btn-primary"
+        onClick={() => modalRef.current?.showModal()}
+        type="button"
+      >
+        Open modal
+      </button>
+      <dialog className="modal" ref={modalRef}>
+        <div className="modal-box">
+          <h3 className="font-bold text-lg">Confirm action</h3>
+          <p className="py-4 text-base-content/70">
+            This action cannot be undone. Are you sure you want to proceed?
+          </p>
+          <div className="modal-action">
+            <form method="dialog">
+              <button className="btn btn-ghost" type="submit">Cancel</button>
+            </form>
+            <button
+              className="btn btn-primary"
+              onClick={() => modalRef.current?.close()}
+              type="button"
+            >
+              Confirm
+            </button>
+          </div>
+        </div>
+        <form className="modal-backdrop" method="dialog">
+          <button type="submit">close</button>
+        </form>
+      </dialog>
+    </>
+  );
+}`;
+
+type ToastKind = "error" | "info" | "success" | "warning";
+
+const TOAST_MESSAGES: Record<ToastKind, string> = {
+  error: "Something went wrong.",
+  info: "Event has been created.",
+  success: "Profile saved successfully.",
+  warning: "Unsaved changes detected.",
+};
+
+export default function FeedbackPage() {
+  const [toast, setToast] = useState<ToastKind | null>(null);
+  const modalRef = useRef<HTMLDialogElement>(null);
+
+  const showToast = (kind: ToastKind) => {
+    setToast(kind);
+    setTimeout(() => setToast(null), 3000);
+  };
+
+  return (
+    <div className="flex flex-col gap-4">
+      <div>
+        <h1 className="text-xl font-semibold mb-1">Feedback</h1>
+        <p className="text-base-content/60 text-sm">
+          Status indicators, notifications, and modal interactions — alerts,
+          toasts, progress bars, tooltips, and modals.
+        </p>
+      </div>
+
+      <section className="mb-2" id="alert">
+        <div className="mb-2 pl-3" style={{ borderLeft: "3px solid var(--color-primary)" }}>
+          <h5 className="font-semibold mb-1">Alert</h5>
+          <p className="text-base-content/60 text-sm mb-0">
+            Inline message banners using{" "}
+            <code className="kbd kbd-sm">alert</code> with semantic variants:{" "}
+            <code className="kbd kbd-sm">alert-info</code>,{" "}
+            <code className="kbd kbd-sm">alert-success</code>,{" "}
+            <code className="kbd kbd-sm">alert-warning</code>, and{" "}
+            <code className="kbd kbd-sm">alert-error</code>. Add an icon and
+            heading inside for rich messages.
+          </p>
+        </div>
+        <div className="bg-base-200 rounded-box p-4 mb-3">
+          <div className="flex flex-col gap-3">
+            <div className="alert alert-info" role="alert">
+              <svg className="h-5 w-5 shrink-0" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" /><path d="M12 16v-4M12 8h.01" /></svg>
+              <div>
+                <h3 className="font-bold text-sm">Heads up</h3>
+                <div className="text-xs">You can add components to your app using the CLI.</div>
+              </div>
+            </div>
+            <div className="alert alert-success" role="alert">
+              <svg className="h-5 w-5 shrink-0" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" /><polyline points="22 4 12 14.01 9 11.01" /></svg>
+              <div>
+                <h3 className="font-bold text-sm">Success</h3>
+                <div className="text-xs">Your profile has been saved successfully.</div>
+              </div>
+            </div>
+            <div className="alert alert-warning" role="alert">
+              <svg className="h-5 w-5 shrink-0" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" /><line x1="12" x2="12" y1="9" y2="13" /><line x1="12" x2="12.01" y1="17" y2="17" /></svg>
+              <div>
+                <h3 className="font-bold text-sm">Warning</h3>
+                <div className="text-xs">Unsaved changes will be lost.</div>
+              </div>
+            </div>
+            <div className="alert alert-error" role="alert">
+              <svg className="h-5 w-5 shrink-0" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" /><line x1="15" x2="9" y1="9" y2="15" /><line x1="9" x2="15" y1="9" y2="15" /></svg>
+              <div>
+                <h3 className="font-bold text-sm">Error</h3>
+                <div className="text-xs">Something went wrong. Please try again.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <CodeBlock
+          code={ALERT_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="Alert.tsx"
+          language="tsx"
+        />
+      </section>
+
+      <div className="divider my-2" />
+
+      <section className="mb-2" id="toast">
+        <div className="mb-2 pl-3" style={{ borderLeft: "3px solid var(--color-primary)" }}>
+          <h5 className="font-semibold mb-1">Toast</h5>
+          <p className="text-base-content/60 text-sm mb-0">
+            Temporary notifications using{" "}
+            <code className="kbd kbd-sm">toast toast-end toast-bottom</code> as
+            a fixed container, with an{" "}
+            <code className="kbd kbd-sm">alert</code> variant inside. Dismiss
+            after a timeout via <code className="kbd kbd-sm">setTimeout</code>.
+          </p>
+        </div>
+        <div className="bg-base-200 rounded-box p-4 mb-3">
+          <div className="flex flex-wrap gap-2">
+            <button className="btn btn-primary btn-sm" onClick={() => showToast("info")} type="button">Info</button>
+            <button className="btn btn-success btn-sm" onClick={() => showToast("success")} type="button">Success</button>
+            <button className="btn btn-error btn-sm" onClick={() => showToast("error")} type="button">Error</button>
+            <button className="btn btn-warning btn-sm" onClick={() => showToast("warning")} type="button">Warning</button>
+          </div>
+        </div>
+        {toast && (
+          <div className="toast toast-end toast-bottom z-50">
+            <div className={`alert alert-${toast}`} role="alert">
+              <span className="text-sm">{TOAST_MESSAGES[toast]}</span>
+            </div>
+          </div>
+        )}
+        <CodeBlock
+          code={TOAST_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="Toast.tsx"
+          language="tsx"
+        />
+      </section>
+
+      <div className="divider my-2" />
+
+      <section className="mb-2" id="progress">
+        <div className="mb-2 pl-3" style={{ borderLeft: "3px solid var(--color-primary)" }}>
+          <h5 className="font-semibold mb-1">Progress</h5>
+          <p className="text-base-content/60 text-sm mb-0">
+            A native <code className="kbd kbd-sm">{"<progress>"}</code> element
+            styled with <code className="kbd kbd-sm">progress progress-primary</code>.
+            Change the colour variant (
+            <code className="kbd kbd-sm">progress-success</code>,{" "}
+            <code className="kbd kbd-sm">progress-warning</code>,{" "}
+            <code className="kbd kbd-sm">progress-error</code>) and set{" "}
+            <code className="kbd kbd-sm">value</code> / <code className="kbd kbd-sm">max</code>{" "}
+            attributes.
+          </p>
+        </div>
+        <div className="bg-base-200 rounded-box p-4 mb-3">
+          <div className="flex flex-col gap-3">
+            <progress className="progress progress-primary w-full" max="100" value="25" />
+            <progress className="progress progress-success w-full" max="100" value="60" />
+            <progress className="progress progress-warning w-full" max="100" value="80" />
+            <progress className="progress progress-error w-full" max="100" value="40" />
+          </div>
+        </div>
+        <CodeBlock
+          code={PROGRESS_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="Progress.tsx"
+          language="tsx"
+        />
+      </section>
+
+      <div className="divider my-2" />
+
+      <section className="mb-2" id="tooltip">
+        <div className="mb-2 pl-3" style={{ borderLeft: "3px solid var(--color-primary)" }}>
+          <h5 className="font-semibold mb-1">Tooltip</h5>
+          <p className="text-base-content/60 text-sm mb-0">
+            A pure-CSS tooltip using the{" "}
+            <code className="kbd kbd-sm">tooltip</code> wrapper with a{" "}
+            <code className="kbd kbd-sm">data-tip</code> attribute. Direction
+            modifiers: <code className="kbd kbd-sm">tooltip-top</code>,{" "}
+            <code className="kbd kbd-sm">tooltip-right</code>,{" "}
+            <code className="kbd kbd-sm">tooltip-bottom</code>,{" "}
+            <code className="kbd kbd-sm">tooltip-left</code>.
+          </p>
+        </div>
+        <div className="bg-base-200 rounded-box p-4 mb-3">
+          <div className="flex flex-wrap gap-4">
+            <div className="tooltip tooltip-top" data-tip="Tooltip on top">
+              <button className="btn btn-sm btn-outline" type="button">Top</button>
+            </div>
+            <div className="tooltip tooltip-right" data-tip="Tooltip on right">
+              <button className="btn btn-sm btn-outline" type="button">Right</button>
+            </div>
+            <div className="tooltip tooltip-bottom" data-tip="Tooltip on bottom">
+              <button className="btn btn-sm btn-outline" type="button">Bottom</button>
+            </div>
+            <div className="tooltip tooltip-left" data-tip="Tooltip on left">
+              <button className="btn btn-sm btn-outline" type="button">Left</button>
+            </div>
+          </div>
+        </div>
+        <CodeBlock
+          code={TOOLTIP_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="Tooltip.tsx"
+          language="tsx"
+        />
+      </section>
+
+      <div className="divider my-2" />
+
+      <section className="mb-2" id="modal">
+        <div className="mb-2 pl-3" style={{ borderLeft: "3px solid var(--color-primary)" }}>
+          <h5 className="font-semibold mb-1">Modal</h5>
+          <p className="text-base-content/60 text-sm mb-0">
+            A focus-trapped dialog using the native{" "}
+            <code className="kbd kbd-sm">{"<dialog>"}</code> element with{" "}
+            <code className="kbd kbd-sm">modal</code> class. Open via{" "}
+            <code className="kbd kbd-sm">ref.current.showModal()</code>. Use{" "}
+            <code className="kbd kbd-sm">modal-box</code>,{" "}
+            <code className="kbd kbd-sm">modal-action</code>, and{" "}
+            <code className="kbd kbd-sm">modal-backdrop</code> for structure.
+          </p>
+        </div>
+        <div className="bg-base-200 rounded-box p-4 mb-3">
+          <button
+            className="btn btn-primary"
+            onClick={() => modalRef.current?.showModal()}
+            type="button"
+          >
+            Open modal
+          </button>
+        </div>
+        <dialog className="modal" ref={modalRef}>
+          <div className="modal-box">
+            <h3 className="font-bold text-lg">Confirm action</h3>
+            <p className="py-4 text-base-content/70 text-sm">
+              This action cannot be undone. Are you sure you want to proceed?
+            </p>
+            <div className="modal-action">
+              <form method="dialog">
+                <button className="btn btn-ghost" type="submit">Cancel</button>
+              </form>
+              <button
+                className="btn btn-primary"
+                onClick={() => modalRef.current?.close()}
+                type="button"
+              >
+                Confirm
+              </button>
+            </div>
+          </div>
+          <form className="modal-backdrop" method="dialog">
+            <button type="submit">close</button>
+          </form>
+        </dialog>
+        <CodeBlock
+          code={MODAL_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="Modal.tsx"
+          language="tsx"
+        />
+      </section>
+    </div>
+  );
+}

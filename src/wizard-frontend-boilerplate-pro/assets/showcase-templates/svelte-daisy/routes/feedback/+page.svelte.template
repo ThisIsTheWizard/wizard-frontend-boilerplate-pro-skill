@@ -1,0 +1,260 @@
+<script lang="ts">
+  import { CodeBlock } from "$lib/components/ui/code-block";
+
+  type ToastKind = "error" | "info" | "success" | "warning";
+
+  const TOAST_MESSAGES: Record<ToastKind, string> = {
+    error: "Something went wrong.",
+    info: "Event has been created.",
+    success: "Profile saved successfully.",
+    warning: "Unsaved changes detected.",
+  };
+
+  let toast = $state<ToastKind | null>(null);
+  let modalOpen = $state(false);
+  let toastTimer: ReturnType<typeof setTimeout> | null = null;
+  let modalRef = $state<HTMLDialogElement | null>(null);
+
+  function showToast(kind: ToastKind) {
+    if (toastTimer) clearTimeout(toastTimer);
+    toast = kind;
+    toastTimer = setTimeout(() => { toast = null; }, 3000);
+  }
+
+  const ALERT_CODE = `<div class="flex flex-col gap-3">
+  <div class="alert alert-info" role="alert">
+    <div><h3 class="font-bold text-sm">Heads up</h3><div class="text-xs">You can add components using the CLI.</div></div>
+  </div>
+  <div class="alert alert-success" role="alert">
+    <div><h3 class="font-bold text-sm">Success</h3><div class="text-xs">Your profile has been saved.</div></div>
+  </div>
+  <div class="alert alert-warning" role="alert">
+    <div><h3 class="font-bold text-sm">Warning</h3><div class="text-xs">Unsaved changes will be lost.</div></div>
+  </div>
+  <div class="alert alert-error" role="alert">
+    <div><h3 class="font-bold text-sm">Error</h3><div class="text-xs">Something went wrong.</div></div>
+  </div>
+</div>`;
+
+  const TOAST_CODE = `<script lang="ts">
+  let toast = $state<"info" | "success" | "error" | "warning" | null>(null);
+  function showToast(kind: typeof toast) {
+    toast = kind;
+    setTimeout(() => { toast = null; }, 3000);
+  }
+<\/script>
+
+<div class="flex flex-wrap gap-2">
+  <button class="btn btn-primary btn-sm" onclick={() => showToast("info")} type="button">Info</button>
+  <button class="btn btn-success btn-sm" onclick={() => showToast("success")} type="button">Success</button>
+</div>
+
+{#if toast}
+  <div class="toast toast-end toast-bottom z-50">
+    <div class="alert alert-{toast}" role="alert">
+      <span class="text-sm">{messages[toast]}</span>
+    </div>
+  </div>
+{/if}`;
+
+  const PROGRESS_CODE = `<div class="flex flex-col gap-3">
+  <progress class="progress progress-primary w-full" max="100" value="25"></progress>
+  <progress class="progress progress-success w-full" max="100" value="60"></progress>
+  <progress class="progress progress-warning w-full" max="100" value="80"></progress>
+  <progress class="progress progress-error w-full" max="100" value="40"></progress>
+</div>`;
+
+  const TOOLTIP_CODE = `<div class="flex flex-wrap gap-4">
+  <div class="tooltip tooltip-top" data-tip="Tooltip on top">
+    <button class="btn btn-sm btn-outline" type="button">Top</button>
+  </div>
+  <div class="tooltip tooltip-right" data-tip="Tooltip on right">
+    <button class="btn btn-sm btn-outline" type="button">Right</button>
+  </div>
+  <div class="tooltip tooltip-bottom" data-tip="Tooltip on bottom">
+    <button class="btn btn-sm btn-outline" type="button">Bottom</button>
+  </div>
+  <div class="tooltip tooltip-left" data-tip="Tooltip on left">
+    <button class="btn btn-sm btn-outline" type="button">Left</button>
+  </div>
+</div>`;
+
+  const MODAL_CODE = `<script lang="ts">
+  let modalRef = $state<HTMLDialogElement | null>(null);
+<\/script>
+
+<button class="btn btn-primary" onclick={() => modalRef?.showModal()} type="button">Open modal</button>
+
+<dialog bind:this={modalRef} class="modal">
+  <div class="modal-box">
+    <h3 class="font-bold text-lg">Confirm action</h3>
+    <p class="py-4 text-base-content/70 text-sm">This action cannot be undone.</p>
+    <div class="modal-action">
+      <form method="dialog">
+        <button class="btn btn-ghost" type="submit">Cancel</button>
+      </form>
+      <button class="btn btn-primary" onclick={() => modalRef?.close()} type="button">Confirm</button>
+    </div>
+  </div>
+  <form class="modal-backdrop" method="dialog">
+    <button type="submit">close</button>
+  </form>
+</dialog>`;
+</script>
+
+<div class="flex flex-col gap-4">
+  <div>
+    <h1 class="text-xl font-semibold mb-1">Feedback</h1>
+    <p class="text-base-content/60 text-sm">
+      Status indicators, notifications, and modal interactions.
+    </p>
+  </div>
+
+  <!-- Alert -->
+  <section id="alert" class="mb-2">
+    <div class="mb-2 pl-3" style="border-left: 3px solid var(--color-primary)">
+      <h5 class="font-semibold mb-1">Alert</h5>
+      <p class="text-base-content/60 text-sm mb-0">
+        Inline banners using <code class="kbd kbd-sm">alert</code> with
+        <code class="kbd kbd-sm">alert-info/success/warning/error</code>.
+      </p>
+    </div>
+    <div class="bg-base-200 rounded-box p-4 mb-3">
+      <div class="flex flex-col gap-3">
+        <div class="alert alert-info" role="alert">
+          <div><h3 class="font-bold text-sm">Heads up</h3><div class="text-xs">You can add components using the CLI.</div></div>
+        </div>
+        <div class="alert alert-success" role="alert">
+          <div><h3 class="font-bold text-sm">Success</h3><div class="text-xs">Your profile has been saved.</div></div>
+        </div>
+        <div class="alert alert-warning" role="alert">
+          <div><h3 class="font-bold text-sm">Warning</h3><div class="text-xs">Unsaved changes will be lost.</div></div>
+        </div>
+        <div class="alert alert-error" role="alert">
+          <div><h3 class="font-bold text-sm">Error</h3><div class="text-xs">Something went wrong.</div></div>
+        </div>
+      </div>
+    </div>
+    <CodeBlock code={ALERT_CODE} collapsible defaultOpen={false} filename="Alert.svelte" language="svelte" />
+  </section>
+
+  <div class="divider my-2"></div>
+
+  <!-- Toast -->
+  <section id="toast" class="mb-2">
+    <div class="mb-2 pl-3" style="border-left: 3px solid var(--color-primary)">
+      <h5 class="font-semibold mb-1">Toast</h5>
+      <p class="text-base-content/60 text-sm mb-0">
+        Temporary notification using <code class="kbd kbd-sm">toast toast-end toast-bottom</code>
+        as a fixed container, auto-dismissed with <code class="kbd kbd-sm">setTimeout</code>.
+      </p>
+    </div>
+    <div class="bg-base-200 rounded-box p-4 mb-3">
+      <div class="flex flex-wrap gap-2">
+        <button class="btn btn-primary btn-sm" onclick={() => showToast("info")} type="button">Info</button>
+        <button class="btn btn-success btn-sm" onclick={() => showToast("success")} type="button">Success</button>
+        <button class="btn btn-error btn-sm" onclick={() => showToast("error")} type="button">Error</button>
+        <button class="btn btn-warning btn-sm" onclick={() => showToast("warning")} type="button">Warning</button>
+      </div>
+    </div>
+    <CodeBlock code={TOAST_CODE} collapsible defaultOpen={false} filename="Toast.svelte" language="svelte" />
+  </section>
+
+  {#if toast}
+    <div class="toast toast-end toast-bottom z-50">
+      <div class="alert alert-{toast}" role="alert">
+        <span class="text-sm">{TOAST_MESSAGES[toast]}</span>
+      </div>
+    </div>
+  {/if}
+
+  <div class="divider my-2"></div>
+
+  <!-- Progress -->
+  <section id="progress" class="mb-2">
+    <div class="mb-2 pl-3" style="border-left: 3px solid var(--color-primary)">
+      <h5 class="font-semibold mb-1">Progress</h5>
+      <p class="text-base-content/60 text-sm mb-0">
+        Native <code class="kbd kbd-sm">&lt;progress&gt;</code> styled with
+        <code class="kbd kbd-sm">progress progress-primary</code>.
+      </p>
+    </div>
+    <div class="bg-base-200 rounded-box p-4 mb-3">
+      <div class="flex flex-col gap-3">
+        <progress class="progress progress-primary w-full" max="100" value="25"></progress>
+        <progress class="progress progress-success w-full" max="100" value="60"></progress>
+        <progress class="progress progress-warning w-full" max="100" value="80"></progress>
+        <progress class="progress progress-error w-full" max="100" value="40"></progress>
+      </div>
+    </div>
+    <CodeBlock code={PROGRESS_CODE} collapsible defaultOpen={false} filename="Progress.svelte" language="svelte" />
+  </section>
+
+  <div class="divider my-2"></div>
+
+  <!-- Tooltip -->
+  <section id="tooltip" class="mb-2">
+    <div class="mb-2 pl-3" style="border-left: 3px solid var(--color-primary)">
+      <h5 class="font-semibold mb-1">Tooltip</h5>
+      <p class="text-base-content/60 text-sm mb-0">
+        Pure-CSS tooltip via <code class="kbd kbd-sm">tooltip</code> and
+        <code class="kbd kbd-sm">data-tip</code>. Direction:
+        <code class="kbd kbd-sm">tooltip-top/right/bottom/left</code>.
+      </p>
+    </div>
+    <div class="bg-base-200 rounded-box p-4 mb-3">
+      <div class="flex flex-wrap gap-4">
+        <div class="tooltip tooltip-top" data-tip="Tooltip on top">
+          <button class="btn btn-sm btn-outline" type="button">Top</button>
+        </div>
+        <div class="tooltip tooltip-right" data-tip="Tooltip on right">
+          <button class="btn btn-sm btn-outline" type="button">Right</button>
+        </div>
+        <div class="tooltip tooltip-bottom" data-tip="Tooltip on bottom">
+          <button class="btn btn-sm btn-outline" type="button">Bottom</button>
+        </div>
+        <div class="tooltip tooltip-left" data-tip="Tooltip on left">
+          <button class="btn btn-sm btn-outline" type="button">Left</button>
+        </div>
+      </div>
+    </div>
+    <CodeBlock code={TOOLTIP_CODE} collapsible defaultOpen={false} filename="Tooltip.svelte" language="svelte" />
+  </section>
+
+  <div class="divider my-2"></div>
+
+  <!-- Modal -->
+  <section id="modal" class="mb-2">
+    <div class="mb-2 pl-3" style="border-left: 3px solid var(--color-primary)">
+      <h5 class="font-semibold mb-1">Modal</h5>
+      <p class="text-base-content/60 text-sm mb-0">
+        Native <code class="kbd kbd-sm">&lt;dialog&gt;</code> with
+        <code class="kbd kbd-sm">modal</code> class. Open via
+        <code class="kbd kbd-sm">bind:this</code> + <code class="kbd kbd-sm">showModal()</code>.
+      </p>
+    </div>
+    <div class="bg-base-200 rounded-box p-4 mb-3">
+      <button class="btn btn-primary" onclick={() => modalRef?.showModal()} type="button">Open modal</button>
+    </div>
+    <CodeBlock code={MODAL_CODE} collapsible defaultOpen={false} filename="Modal.svelte" language="svelte" />
+  </section>
+</div>
+
+<!-- Modal element -->
+<dialog bind:this={modalRef} class="modal">
+  <div class="modal-box">
+    <h3 class="font-bold text-lg">Confirm action</h3>
+    <p class="py-4 text-base-content/70 text-sm">
+      This action cannot be undone. Are you sure you want to proceed?
+    </p>
+    <div class="modal-action">
+      <form method="dialog">
+        <button class="btn btn-ghost" type="submit">Cancel</button>
+      </form>
+      <button class="btn btn-primary" onclick={() => modalRef?.close()} type="button">Confirm</button>
+    </div>
+  </div>
+  <form class="modal-backdrop" method="dialog">
+    <button type="submit">close</button>
+  </form>
+</dialog>

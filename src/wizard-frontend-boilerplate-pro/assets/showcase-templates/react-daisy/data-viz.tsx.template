@@ -1,0 +1,317 @@
+"use client";
+
+import { useState } from "react";
+
+import {
+  CartesianGrid,
+  Line,
+  LineChart,
+  ResponsiveContainer,
+  Tooltip,
+  XAxis,
+  YAxis,
+} from "recharts";
+
+import { CodeBlock } from "@/components/ui/code-block";
+
+const CHART_DATA = [
+  { desktop: 186, mobile: 80, month: "Jan" },
+  { desktop: 305, mobile: 200, month: "Feb" },
+  { desktop: 237, mobile: 120, month: "Mar" },
+  { desktop: 73, mobile: 190, month: "Apr" },
+  { desktop: 209, mobile: 130, month: "May" },
+  { desktop: 214, mobile: 140, month: "Jun" },
+];
+
+const CHART_CODE = `import {
+  CartesianGrid,
+  Line,
+  LineChart,
+  ResponsiveContainer,
+  Tooltip,
+  XAxis,
+  YAxis,
+} from "recharts";
+
+const DATA = [
+  { desktop: 186, mobile: 80, month: "Jan" },
+  { desktop: 305, mobile: 200, month: "Feb" },
+  { desktop: 237, mobile: 120, month: "Mar" },
+  { desktop: 73, mobile: 190, month: "Apr" },
+  { desktop: 209, mobile: 130, month: "May" },
+  { desktop: 214, mobile: 140, month: "Jun" },
+];
+
+// DaisyUI has no chart primitive — use recharts directly.
+export function Example() {
+  return (
+    <ResponsiveContainer height={256} width="100%">
+      <LineChart data={DATA}>
+        <CartesianGrid strokeDasharray="3 3" />
+        <XAxis dataKey="month" />
+        <YAxis />
+        <Tooltip />
+        <Line dataKey="desktop" name="Desktop" stroke="var(--color-primary)" type="monotone" />
+        <Line dataKey="mobile" name="Mobile" stroke="var(--color-secondary)" type="monotone" />
+      </LineChart>
+    </ResponsiveContainer>
+  );
+}`;
+
+interface User {
+  email: string;
+  id: string;
+  name: string;
+  role: string;
+}
+
+const TABLE_DATA: User[] = [
+  { email: "alice@example.com", id: "1", name: "Alice Johnson", role: "Admin" },
+  { email: "bob@example.com", id: "2", name: "Bob Smith", role: "Editor" },
+  { email: "carol@example.com", id: "3", name: "Carol White", role: "Viewer" },
+  { email: "dan@example.com", id: "4", name: "Dan Lee", role: "Editor" },
+  { email: "eve@example.com", id: "5", name: "Eve Martinez", role: "Viewer" },
+];
+
+const DATA_TABLE_CODE = `import { useState } from "react";
+
+interface User { email: string; id: string; name: string; role: string; }
+type SortDir = "asc" | "desc";
+type SortKey = keyof Omit<User, "id">;
+
+function sortData(data: User[], key: SortKey, dir: SortDir): User[] {
+  return [...data].sort((a, b) => {
+    const result = a[key].localeCompare(b[key]);
+    return dir === "asc" ? result : -result;
+  });
+}
+
+export function Example({ rows }: { rows: User[] }) {
+  const [sortKey, setSortKey] = useState<SortKey>("name");
+  const [sortDir, setSortDir] = useState<SortDir>("asc");
+
+  const handleSort = (key: SortKey) => {
+    if (sortKey === key) {
+      setSortDir((d) => (d === "asc" ? "desc" : "asc"));
+    } else {
+      setSortKey(key);
+      setSortDir("asc");
+    }
+  };
+
+  const sorted = sortData(rows, sortKey, sortDir);
+  const indicator = (key: SortKey) =>
+    sortKey === key ? (sortDir === "asc" ? " ↑" : " ↓") : "";
+
+  return (
+    <div className="overflow-x-auto">
+      <table className="table table-zebra">
+        <thead>
+          <tr>
+            {(["name", "email", "role"] as SortKey[]).map((key) => (
+              <th
+                className="cursor-pointer select-none hover:text-primary"
+                key={key}
+                onClick={() => handleSort(key)}
+              >
+                {key.charAt(0).toUpperCase() + key.slice(1)}
+                {indicator(key)}
+              </th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {sorted.map((row) => (
+            <tr key={row.id}>
+              <td>{row.name}</td>
+              <td>{row.email}</td>
+              <td>{row.role}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+}`;
+
+const CALENDAR_CODE = `// DaisyUI has no built-in date picker — use react-day-picker:
+//   npm install react-day-picker
+
+import { useState } from "react";
+import { DayPicker } from "react-day-picker";
+import "react-day-picker/dist/style.css";
+
+export function Example() {
+  const [selected, setSelected] = useState<Date | undefined>();
+
+  return (
+    <DayPicker
+      mode="single"
+      onSelect={setSelected}
+      selected={selected}
+    />
+  );
+}`;
+
+type SortDir = "asc" | "desc";
+type SortKey = keyof Omit<User, "id">;
+
+function sortData(data: User[], key: SortKey, dir: SortDir): User[] {
+  return [...data].sort((a, b) => {
+    const result = a[key].localeCompare(b[key]);
+    return dir === "asc" ? result : -result;
+  });
+}
+
+export default function DataVizPage() {
+  const [sortKey, setSortKey] = useState<SortKey>("name");
+  const [sortDir, setSortDir] = useState<SortDir>("asc");
+
+  const handleSort = (key: SortKey) => {
+    if (sortKey === key) {
+      setSortDir((d) => (d === "asc" ? "desc" : "asc"));
+    } else {
+      setSortKey(key);
+      setSortDir("asc");
+    }
+  };
+
+  const sortIndicator = (key: SortKey) =>
+    sortKey === key ? (sortDir === "asc" ? " ↑" : " ↓") : "";
+
+  const sortedData = sortData(TABLE_DATA, sortKey, sortDir);
+
+  return (
+    <div className="flex flex-col gap-4">
+      <div>
+        <h1 className="text-xl font-semibold mb-1">Data viz</h1>
+        <p className="text-base-content/60 text-sm">
+          Charts, sortable tables, and date selection — using recharts,
+          DaisyUI table classes, and react-day-picker.
+        </p>
+      </div>
+
+      <section className="mb-2" id="chart">
+        <div className="mb-2 pl-3" style={{ borderLeft: "3px solid var(--color-primary)" }}>
+          <h5 className="font-semibold mb-1">Chart</h5>
+          <p className="text-base-content/60 text-sm mb-0">
+            DaisyUI does not ship a chart component. Use{" "}
+            <strong>recharts</strong> directly with{" "}
+            <code className="kbd kbd-sm">ResponsiveContainer</code> for
+            size-aware rendering. Reference{" "}
+            <code className="kbd kbd-sm">var(--color-primary)</code> and{" "}
+            <code className="kbd kbd-sm">var(--color-secondary)</code> for
+            colours to stay in sync with the active DaisyUI theme.
+          </p>
+        </div>
+        <div className="bg-base-200 rounded-box p-4 mb-3">
+          <ResponsiveContainer height={256} width="100%">
+            <LineChart data={CHART_DATA}>
+              <CartesianGrid strokeDasharray="3 3" />
+              <XAxis dataKey="month" />
+              <YAxis />
+              <Tooltip />
+              <Line
+                dataKey="desktop"
+                name="Desktop"
+                stroke="var(--color-primary)"
+                type="monotone"
+              />
+              <Line
+                dataKey="mobile"
+                name="Mobile"
+                stroke="var(--color-secondary)"
+                type="monotone"
+              />
+            </LineChart>
+          </ResponsiveContainer>
+        </div>
+        <CodeBlock
+          code={CHART_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="Chart.tsx"
+          language="tsx"
+        />
+      </section>
+
+      <div className="divider my-2" />
+
+      <section className="mb-2" id="data-table">
+        <div className="mb-2 pl-3" style={{ borderLeft: "3px solid var(--color-primary)" }}>
+          <h5 className="font-semibold mb-1">DataTable</h5>
+          <p className="text-base-content/60 text-sm mb-0">
+            A sortable table using{" "}
+            <code className="kbd kbd-sm">table table-zebra</code> with
+            client-side sorting via <code className="kbd kbd-sm">useState</code>.
+            Click column headers to toggle ascending/descending order.
+          </p>
+        </div>
+        <div className="bg-base-200 rounded-box p-4 mb-3">
+          <div className="overflow-x-auto">
+            <table className="table table-zebra">
+              <thead>
+                <tr>
+                  {(["name", "email", "role"] as SortKey[]).map((key) => (
+                    <th
+                      className="cursor-pointer select-none hover:text-primary"
+                      key={key}
+                      onClick={() => handleSort(key)}
+                    >
+                      {key.charAt(0).toUpperCase() + key.slice(1)}
+                      {sortIndicator(key)}
+                    </th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                {sortedData.map((row) => (
+                  <tr key={row.id}>
+                    <td>{row.name}</td>
+                    <td>{row.email}</td>
+                    <td>{row.role}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <CodeBlock
+          code={DATA_TABLE_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="DataTable.tsx"
+          language="tsx"
+        />
+      </section>
+
+      <div className="divider my-2" />
+
+      <section className="mb-2" id="calendar">
+        <div className="mb-2 pl-3" style={{ borderLeft: "3px solid var(--color-primary)" }}>
+          <h5 className="font-semibold mb-1">Calendar</h5>
+          <p className="text-base-content/60 text-sm mb-0">
+            DaisyUI has no built-in date picker. Use{" "}
+            <strong>react-day-picker</strong> for calendar-style date selection.
+            Install with:
+          </p>
+          <code className="text-xs mt-1 block">npm install react-day-picker</code>
+        </div>
+        <div className="bg-base-200 rounded-box p-4 mb-3">
+          <p className="text-base-content/60 text-sm mb-0">
+            Calendar preview omitted — <code className="kbd kbd-sm">DayPicker</code>{" "}
+            requires importing its CSS alongside the component. See the code
+            snippet below for the full setup.
+          </p>
+        </div>
+        <CodeBlock
+          code={CALENDAR_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="Calendar.tsx"
+          language="tsx"
+        />
+      </section>
+    </div>
+  );
+}

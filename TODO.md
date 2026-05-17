@@ -128,10 +128,10 @@
 - [x] `assets/showcase-templates/svelte-bootstrap/` — 8 files
 
 ## 20. DaisyUI — reference file + templates
-- [ ] Write `references/ui-library/daisy.md` (Tailwind plugin, minimal bridge needed)
-- [ ] `assets/showcase-templates/react-daisy/` — 8 files
-- [ ] `assets/showcase-templates/vue-daisy/` — 8 files
-- [ ] `assets/showcase-templates/svelte-daisy/` — 8 files
+- [x] Write `references/ui-library/daisy.md` (Tailwind plugin, minimal bridge needed)
+- [x] `assets/showcase-templates/react-daisy/` — 8 files
+- [x] `assets/showcase-templates/vue-daisy/` — 8 files
+- [x] `assets/showcase-templates/svelte-daisy/` — 8 files
 
 ## 21. Chakra UI — reference file + templates
 - [ ] Write `references/ui-library/chakra.md` — `ChakraProvider` setup, token-to-CSS-var bridge

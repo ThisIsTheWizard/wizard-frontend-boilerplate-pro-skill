@@ -1,0 +1,283 @@
+"use client";
+
+import { useState } from "react";
+
+import { CodeBlock } from "@/components/ui/code-block";
+
+const TOOLTIP_CODE = `export function Example() {
+  return (
+    <div className="flex flex-wrap gap-4">
+      <div className="tooltip" data-tip="Always visible tooltip">
+        <button className="btn btn-primary btn-sm" type="button">Hover me</button>
+      </div>
+      <div className="tooltip tooltip-open" data-tip="Always open">
+        <button className="btn btn-outline btn-sm" type="button">Always open</button>
+      </div>
+      <div className="tooltip tooltip-primary" data-tip="Primary colour">
+        <button className="btn btn-ghost btn-sm" type="button">Primary</button>
+      </div>
+      <div className="tooltip tooltip-error" data-tip="Error colour">
+        <button className="btn btn-ghost btn-sm" type="button">Error</button>
+      </div>
+    </div>
+  );
+}`;
+
+const DROPDOWN_CODE = `export function Example() {
+  return (
+    <div className="flex flex-wrap gap-4">
+      <div className="dropdown">
+        <div className="btn btn-primary btn-sm" role="button" tabIndex={0}>
+          Actions ▾
+        </div>
+        <ul
+          className="dropdown-content menu bg-base-100 rounded-box z-10 w-44 p-2 shadow-lg"
+          tabIndex={0}
+        >
+          <li><a>Edit</a></li>
+          <li><a>Duplicate</a></li>
+          <li><hr /></li>
+          <li><a className="text-error">Delete</a></li>
+        </ul>
+      </div>
+
+      <div className="dropdown dropdown-end">
+        <div className="btn btn-outline btn-sm" role="button" tabIndex={0}>
+          Account ▾
+        </div>
+        <ul
+          className="dropdown-content menu bg-base-100 rounded-box z-10 w-44 p-2 shadow-lg"
+          tabIndex={0}
+        >
+          <li><a>Profile</a></li>
+          <li><a>Settings</a></li>
+          <li><a>Billing</a></li>
+          <li><hr /></li>
+          <li><a>Sign out</a></li>
+        </ul>
+      </div>
+    </div>
+  );
+}`;
+
+const DRAWER_CODE = `import { useState } from "react";
+
+export function Example() {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <div className="drawer" style={{ width: "100%", maxWidth: 480 }}>
+      <input
+        checked={open}
+        className="drawer-toggle"
+        id="demo-drawer"
+        onChange={() => setOpen((o) => !o)}
+        type="checkbox"
+      />
+      <div className="drawer-content">
+        <label className="btn btn-primary" htmlFor="demo-drawer">
+          Open drawer
+        </label>
+      </div>
+      <div className="drawer-side z-40">
+        <label
+          aria-label="close sidebar"
+          className="drawer-overlay"
+          htmlFor="demo-drawer"
+        />
+        <div className="menu bg-base-200 min-h-full w-64 p-4">
+          <p className="font-semibold mb-4">Drawer title</p>
+          <ul className="flex flex-col gap-1">
+            <li><a className="rounded-btn p-2 hover:bg-base-300">Dashboard</a></li>
+            <li><a className="rounded-btn p-2 hover:bg-base-300">Components</a></li>
+            <li><a className="rounded-btn p-2 hover:bg-base-300">Settings</a></li>
+          </ul>
+          <div className="mt-auto">
+            <button
+              className="btn btn-ghost btn-sm w-full"
+              onClick={() => setOpen(false)}
+              type="button"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}`;
+
+export default function OverlayPage() {
+  const [drawerOpen, setDrawerOpen] = useState(false);
+
+  return (
+    <div className="flex flex-col gap-4">
+      <div>
+        <h1 className="text-xl font-semibold mb-1">Overlay</h1>
+        <p className="text-base-content/60 text-sm">
+          Floating and layered UI — tooltips, dropdown menus, and side drawers.
+        </p>
+      </div>
+
+      <section className="mb-2" id="tooltip">
+        <div className="mb-2 pl-3" style={{ borderLeft: "3px solid var(--color-primary)" }}>
+          <h5 className="font-semibold mb-1">Tooltip</h5>
+          <p className="text-base-content/60 text-sm mb-0">
+            A pure-CSS tooltip via the{" "}
+            <code className="kbd kbd-sm">tooltip</code> wrapper and{" "}
+            <code className="kbd kbd-sm">data-tip</code> attribute — no
+            JavaScript required. Add{" "}
+            <code className="kbd kbd-sm">tooltip-open</code> to keep it always
+            visible, or colour modifiers like{" "}
+            <code className="kbd kbd-sm">tooltip-primary</code> and{" "}
+            <code className="kbd kbd-sm">tooltip-error</code>.
+          </p>
+        </div>
+        <div className="bg-base-200 rounded-box p-4 mb-3">
+          <div className="flex flex-wrap gap-4">
+            <div className="tooltip" data-tip="Always visible tooltip">
+              <button className="btn btn-primary btn-sm" type="button">Hover me</button>
+            </div>
+            <div className="tooltip tooltip-open" data-tip="Always open">
+              <button className="btn btn-outline btn-sm" type="button">Always open</button>
+            </div>
+            <div className="tooltip tooltip-primary" data-tip="Primary colour">
+              <button className="btn btn-ghost btn-sm" type="button">Primary</button>
+            </div>
+            <div className="tooltip tooltip-error" data-tip="Error colour">
+              <button className="btn btn-ghost btn-sm" type="button">Error</button>
+            </div>
+          </div>
+        </div>
+        <CodeBlock
+          code={TOOLTIP_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="Tooltip.tsx"
+          language="tsx"
+        />
+      </section>
+
+      <div className="divider my-2" />
+
+      <section className="mb-2" id="dropdown">
+        <div className="mb-2 pl-3" style={{ borderLeft: "3px solid var(--color-primary)" }}>
+          <h5 className="font-semibold mb-1">Dropdown</h5>
+          <p className="text-base-content/60 text-sm mb-0">
+            A CSS-driven dropdown using{" "}
+            <code className="kbd kbd-sm">dropdown</code> wrapper,{" "}
+            <code className="kbd kbd-sm">dropdown-content menu</code> for the
+            panel, and <code className="kbd kbd-sm">dropdown-end</code> to align
+            to the right. The panel shows on focus via{" "}
+            <code className="kbd kbd-sm">tabIndex</code>.
+          </p>
+        </div>
+        <div className="bg-base-200 rounded-box p-4 mb-3">
+          <div className="flex flex-wrap gap-4">
+            <div className="dropdown">
+              <div className="btn btn-primary btn-sm" role="button" tabIndex={0}>
+                Actions ▾
+              </div>
+              <ul
+                className="dropdown-content menu bg-base-100 rounded-box z-10 w-44 p-2 shadow-lg"
+                tabIndex={0}
+              >
+                <li><a>Edit</a></li>
+                <li><a>Duplicate</a></li>
+                <li><hr /></li>
+                <li><a className="text-error">Delete</a></li>
+              </ul>
+            </div>
+
+            <div className="dropdown dropdown-end">
+              <div className="btn btn-outline btn-sm" role="button" tabIndex={0}>
+                Account ▾
+              </div>
+              <ul
+                className="dropdown-content menu bg-base-100 rounded-box z-10 w-44 p-2 shadow-lg"
+                tabIndex={0}
+              >
+                <li><a>Profile</a></li>
+                <li><a>Settings</a></li>
+                <li><a>Billing</a></li>
+                <li><hr /></li>
+                <li><a>Sign out</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <CodeBlock
+          code={DROPDOWN_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="Dropdown.tsx"
+          language="tsx"
+        />
+      </section>
+
+      <div className="divider my-2" />
+
+      <section className="mb-2" id="drawer">
+        <div className="mb-2 pl-3" style={{ borderLeft: "3px solid var(--color-primary)" }}>
+          <h5 className="font-semibold mb-1">Drawer</h5>
+          <p className="text-base-content/60 text-sm mb-0">
+            A slide-in side panel using{" "}
+            <code className="kbd kbd-sm">drawer</code>,{" "}
+            <code className="kbd kbd-sm">drawer-toggle</code> (hidden checkbox),{" "}
+            <code className="kbd kbd-sm">drawer-content</code> for the main area,
+            and <code className="kbd kbd-sm">drawer-side</code> +{" "}
+            <code className="kbd kbd-sm">drawer-overlay</code> for the panel and
+            backdrop.
+          </p>
+        </div>
+        <div className="bg-base-200 rounded-box p-4 mb-3">
+          <div className="drawer" style={{ maxWidth: 480, width: "100%" }}>
+            <input
+              checked={drawerOpen}
+              className="drawer-toggle"
+              id="demo-drawer-showcase"
+              onChange={() => setDrawerOpen((o) => !o)}
+              type="checkbox"
+            />
+            <div className="drawer-content">
+              <label className="btn btn-primary" htmlFor="demo-drawer-showcase">
+                Open drawer
+              </label>
+            </div>
+            <div className="drawer-side z-40">
+              <label
+                aria-label="close sidebar"
+                className="drawer-overlay"
+                htmlFor="demo-drawer-showcase"
+              />
+              <div className="menu bg-base-200 min-h-full w-64 p-4">
+                <p className="font-semibold mb-4">Drawer title</p>
+                <ul className="flex flex-col gap-1">
+                  <li><a className="rounded-btn p-2 hover:bg-base-300">Dashboard</a></li>
+                  <li><a className="rounded-btn p-2 hover:bg-base-300">Components</a></li>
+                  <li><a className="rounded-btn p-2 hover:bg-base-300">Settings</a></li>
+                </ul>
+                <div className="mt-auto">
+                  <button
+                    className="btn btn-ghost btn-sm w-full"
+                    onClick={() => setDrawerOpen(false)}
+                    type="button"
+                  >
+                    Close
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <CodeBlock
+          code={DRAWER_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="Drawer.tsx"
+          language="tsx"
+        />
+      </section>
+    </div>
+  );
+}

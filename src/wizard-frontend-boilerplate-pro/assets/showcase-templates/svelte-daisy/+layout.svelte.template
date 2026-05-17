@@ -1,0 +1,107 @@
+<script lang="ts">
+  import type { Snippet } from "svelte";
+
+  // DaisyUI CSS is registered via @import "daisyui" in src/app.css — no import needed here.
+  import Sidebar from "./Sidebar.svelte";
+  import { useTheme } from "$lib/composables/useTheme";
+
+  interface Props {
+    children?: Snippet;
+  }
+
+  let { children }: Props = $props();
+
+  const { theme, toggleTheme } = useTheme();
+  let sidebarOpen = $state(false);
+
+  function closeSidebar() {
+    sidebarOpen = false;
+  }
+
+  $effect(() => {
+    document.documentElement.setAttribute("data-theme", theme);
+  });
+</script>
+
+<div class="flex min-h-screen" style="background: var(--color-base-100); color: var(--color-base-content)">
+  <!-- Desktop sidebar (fixed) -->
+  <aside
+    class="hidden md:flex flex-col border-r border-base-300 bg-base-200"
+    style="height: 100vh; left: 0; overflow-y: auto; position: fixed; top: 0; width: 256px; z-index: 100;"
+  >
+    <Sidebar onNavigate={closeSidebar} />
+  </aside>
+
+  <!-- Mobile sidebar overlay -->
+  {#if sidebarOpen}
+    <div class="fixed inset-0 z-40 flex md:hidden">
+      <div
+        class="fixed inset-0 bg-black/40"
+        onclick={() => { sidebarOpen = false; }}
+        role="presentation"
+      ></div>
+      <aside
+        class="relative z-50 flex flex-col bg-base-200 h-full overflow-y-auto"
+        style="width: 256px;"
+      >
+        <Sidebar onNavigate={closeSidebar} />
+      </aside>
+    </div>
+  {/if}
+
+  <!-- Content area -->
+  <div class="flex flex-col flex-grow min-w-0 md:ml-64">
+    <!-- Sticky header -->
+    <header
+      class="sticky top-0 z-30 flex items-center gap-2 px-3 bg-base-100 border-b border-base-300"
+      style="height: 56px;"
+    >
+      <!-- Hamburger — mobile only -->
+      <button
+        aria-expanded={sidebarOpen}
+        aria-label="Open navigation menu"
+        class="btn btn-ghost btn-sm btn-square md:hidden"
+        onclick={() => { sidebarOpen = !sidebarOpen; }}
+        type="button"
+      >
+        <svg fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="20">
+          <line x1="4" x2="20" y1="6" y2="6" />
+          <line x1="4" x2="20" y1="12" y2="12" />
+          <line x1="4" x2="20" y1="18" y2="18" />
+        </svg>
+      </button>
+
+      <!-- Mobile brand -->
+      <a class="md:hidden font-semibold text-sm flex-grow text-base-content no-underline" href="/library">
+        Component Library
+      </a>
+
+      <!-- Desktop spacer -->
+      <div class="hidden md:block flex-grow"></div>
+
+      <!-- Theme toggle -->
+      <button
+        aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
+        class="btn btn-ghost btn-sm btn-square"
+        onclick={toggleTheme}
+        type="button"
+      >
+        {#if theme === "dark"}
+          <svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="18">
+            <circle cx="12" cy="12" r="4" />
+            <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41" />
+          </svg>
+        {:else}
+          <svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="18">
+            <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" />
+          </svg>
+        {/if}
+      </button>
+    </header>
+
+    <!-- Page content -->
+    <main class="flex-grow p-4 md:p-8">
+      {@render children?.()}
+    </main>
+  </div>
+</div>

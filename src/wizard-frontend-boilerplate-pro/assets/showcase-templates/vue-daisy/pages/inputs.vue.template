@@ -1,0 +1,365 @@
+<script setup lang="ts">
+import { ref } from "vue";
+
+import { CodeBlock } from "@/components/ui/code-block";
+
+const plan = ref("free");
+
+const BUTTON_CODE = `<template>
+  <div class="flex flex-col gap-2">
+    <div class="flex flex-wrap gap-2">
+      <button class="btn btn-primary" type="button">Primary</button>
+      <button class="btn btn-outline btn-primary" type="button">Outline</button>
+      <button class="btn btn-secondary" type="button">Secondary</button>
+      <button class="btn btn-error" type="button">Error</button>
+      <button class="btn btn-ghost" type="button">Ghost</button>
+    </div>
+    <div class="flex flex-wrap items-center gap-2">
+      <button class="btn btn-primary btn-sm" type="button">Small</button>
+      <button class="btn btn-primary" type="button">Default</button>
+      <button class="btn btn-primary btn-lg" type="button">Large</button>
+      <button class="btn btn-primary btn-disabled" disabled type="button">Disabled</button>
+    </div>
+  </div>
+</template>`;
+
+const INPUT_CODE = `<template>
+  <div class="flex flex-col gap-3" style="max-width: 360px">
+    <label class="form-control w-full">
+      <div class="label"><span class="label-text">Email address</span></div>
+      <input class="input input-bordered w-full" placeholder="name@example.com" type="email" />
+      <div class="label">
+        <span class="label-text-alt text-base-content/60">We'll never share your email.</span>
+      </div>
+    </label>
+    <label class="form-control w-full">
+      <div class="label"><span class="label-text">Username</span></div>
+      <input class="input input-bordered input-error w-full" value="invalid user!" type="text" />
+      <div class="label">
+        <span class="label-text-alt text-error">Please enter a valid username.</span>
+      </div>
+    </label>
+  </div>
+</template>`;
+
+const TEXTAREA_CODE = `<template>
+  <div class="flex flex-col gap-3" style="max-width: 360px">
+    <label class="form-control w-full">
+      <div class="label"><span class="label-text">Bio</span></div>
+      <textarea class="textarea textarea-bordered w-full" placeholder="Tell us about yourself…" :rows="4" />
+      <div class="label">
+        <span class="label-text-alt text-base-content/60">Describe your project in a few sentences.</span>
+      </div>
+    </label>
+    <label class="form-control w-full">
+      <div class="label"><span class="label-text">Message</span></div>
+      <textarea class="textarea textarea-bordered textarea-error w-full" placeholder="Enter your message…" :rows="3" />
+      <div class="label">
+        <span class="label-text-alt text-error">Message is required.</span>
+      </div>
+    </label>
+  </div>
+</template>`;
+
+const SELECT_CODE = `<template>
+  <div class="flex flex-col gap-3" style="max-width: 360px">
+    <label class="form-control w-full">
+      <div class="label"><span class="label-text">Framework</span></div>
+      <select class="select select-bordered w-full">
+        <option disabled value="">Select a framework…</option>
+        <option value="nextjs">Next.js</option>
+        <option value="nuxt">Nuxt</option>
+        <option value="sveltekit">SvelteKit</option>
+        <option value="astro">Astro</option>
+      </select>
+    </label>
+  </div>
+</template>`;
+
+const CHECKBOX_CODE = `<template>
+  <div class="flex flex-col gap-3">
+    <label class="flex items-center gap-3 cursor-pointer">
+      <input class="checkbox checkbox-primary" type="checkbox" />
+      <span class="label-text">Accept terms and conditions</span>
+    </label>
+    <label class="flex items-center gap-3 cursor-pointer">
+      <input class="checkbox checkbox-primary" checked type="checkbox" />
+      <span class="label-text">Checked by default</span>
+    </label>
+    <label class="flex items-center gap-3 cursor-pointer opacity-50">
+      <input class="checkbox" disabled type="checkbox" />
+      <span class="label-text">Disabled</span>
+    </label>
+  </div>
+</template>`;
+
+const RADIO_CODE = `<script setup lang="ts">
+import { ref } from "vue";
+const plan = ref("free");
+<\/script>
+
+<template>
+  <div class="flex flex-col gap-2">
+    <span class="label-text font-medium">Plan</span>
+    <label v-for="value in ['free', 'pro', 'enterprise']" :key="value" class="flex items-center gap-3 cursor-pointer">
+      <input
+        v-model="plan"
+        class="radio radio-primary"
+        name="plan"
+        type="radio"
+        :value="value"
+      />
+      <span class="label-text capitalize">{{ value }}</span>
+    </label>
+  </div>
+</template>`;
+
+const TOGGLE_CODE = `<template>
+  <div class="flex flex-col gap-3">
+    <label class="flex items-center gap-3 cursor-pointer">
+      <input class="toggle toggle-primary" type="checkbox" />
+      <span class="label-text">Email notifications</span>
+    </label>
+    <label class="flex items-center gap-3 cursor-pointer">
+      <input class="toggle toggle-primary" checked type="checkbox" />
+      <span class="label-text">Marketing emails</span>
+    </label>
+    <label class="flex items-center gap-3 cursor-pointer opacity-50">
+      <input class="toggle" disabled type="checkbox" />
+      <span class="label-text">Disabled</span>
+    </label>
+  </div>
+</template>`;
+</script>
+
+<template>
+  <div class="flex flex-col gap-4">
+    <div>
+      <h1 class="text-xl font-semibold mb-1">Inputs</h1>
+      <p class="text-base-content/60 text-sm">
+        Form controls for collecting user input — buttons, text fields, selections, and toggles.
+      </p>
+    </div>
+
+    <!-- Button -->
+    <section id="button" class="mb-2">
+      <div class="mb-2 pl-3" style="border-left: 3px solid var(--color-primary)">
+        <h5 class="font-semibold mb-1">Button</h5>
+        <p class="text-base-content/60 text-sm mb-0">
+          DaisyUI's <code class="kbd kbd-sm">btn</code> with colour modifiers
+          (<code class="kbd kbd-sm">btn-primary</code>, <code class="kbd kbd-sm">btn-secondary</code>,
+          <code class="kbd kbd-sm">btn-error</code>, <code class="kbd kbd-sm">btn-ghost</code>,
+          <code class="kbd kbd-sm">btn-outline</code>), size modifiers, and disabled state.
+        </p>
+      </div>
+      <div class="bg-base-200 rounded-box p-4 mb-3">
+        <div class="flex flex-col gap-2">
+          <div class="flex flex-wrap gap-2">
+            <button class="btn btn-primary" type="button">Primary</button>
+            <button class="btn btn-outline btn-primary" type="button">Outline</button>
+            <button class="btn btn-secondary" type="button">Secondary</button>
+            <button class="btn btn-error" type="button">Error</button>
+            <button class="btn btn-ghost" type="button">Ghost</button>
+          </div>
+          <div class="flex flex-wrap items-center gap-2">
+            <button class="btn btn-primary btn-sm" type="button">Small</button>
+            <button class="btn btn-primary" type="button">Default</button>
+            <button class="btn btn-primary btn-lg" type="button">Large</button>
+            <button class="btn btn-primary btn-disabled" disabled type="button">Disabled</button>
+          </div>
+        </div>
+      </div>
+      <CodeBlock :code="BUTTON_CODE" collapsible :default-open="false" filename="Button.vue" language="vue" />
+    </section>
+
+    <div class="divider my-2" />
+
+    <!-- Input -->
+    <section id="input" class="mb-2">
+      <div class="mb-2 pl-3" style="border-left: 3px solid var(--color-primary)">
+        <h5 class="font-semibold mb-1">Input</h5>
+        <p class="text-base-content/60 text-sm mb-0">
+          A text field using <code class="kbd kbd-sm">input input-bordered</code>.
+          Wrap in <code class="kbd kbd-sm">form-control</code> for label and helper text slots.
+          Add <code class="kbd kbd-sm">input-error</code> for validation state.
+        </p>
+      </div>
+      <div class="bg-base-200 rounded-box p-4 mb-3">
+        <div class="flex flex-col gap-3" style="max-width: 360px">
+          <label class="form-control w-full">
+            <div class="label"><span class="label-text">Email address</span></div>
+            <input class="input input-bordered w-full" placeholder="name@example.com" type="email" />
+            <div class="label">
+              <span class="label-text-alt text-base-content/60">We'll never share your email.</span>
+            </div>
+          </label>
+          <label class="form-control w-full">
+            <div class="label"><span class="label-text">Username</span></div>
+            <input class="input input-bordered input-error w-full" value="invalid user!" type="text" />
+            <div class="label">
+              <span class="label-text-alt text-error">Please enter a valid username.</span>
+            </div>
+          </label>
+          <label class="form-control w-full">
+            <div class="label"><span class="label-text">Disabled</span></div>
+            <input class="input input-bordered w-full" disabled placeholder="Not editable" type="text" />
+          </label>
+        </div>
+      </div>
+      <CodeBlock :code="INPUT_CODE" collapsible :default-open="false" filename="Input.vue" language="vue" />
+    </section>
+
+    <div class="divider my-2" />
+
+    <!-- Textarea -->
+    <section id="textarea" class="mb-2">
+      <div class="mb-2 pl-3" style="border-left: 3px solid var(--color-primary)">
+        <h5 class="font-semibold mb-1">Textarea</h5>
+        <p class="text-base-content/60 text-sm mb-0">
+          A multi-line input using <code class="kbd kbd-sm">textarea textarea-bordered</code>.
+          Add <code class="kbd kbd-sm">textarea-error</code> for validation state.
+        </p>
+      </div>
+      <div class="bg-base-200 rounded-box p-4 mb-3">
+        <div class="flex flex-col gap-3" style="max-width: 360px">
+          <label class="form-control w-full">
+            <div class="label"><span class="label-text">Bio</span></div>
+            <textarea class="textarea textarea-bordered w-full" placeholder="Tell us about yourself…" :rows="4" />
+            <div class="label">
+              <span class="label-text-alt text-base-content/60">Describe your project in a few sentences.</span>
+            </div>
+          </label>
+          <label class="form-control w-full">
+            <div class="label"><span class="label-text">Message</span></div>
+            <textarea class="textarea textarea-bordered textarea-error w-full" placeholder="Enter your message…" :rows="3" />
+            <div class="label">
+              <span class="label-text-alt text-error">Message is required.</span>
+            </div>
+          </label>
+        </div>
+      </div>
+      <CodeBlock :code="TEXTAREA_CODE" collapsible :default-open="false" filename="Textarea.vue" language="vue" />
+    </section>
+
+    <div class="divider my-2" />
+
+    <!-- Select -->
+    <section id="select" class="mb-2">
+      <div class="mb-2 pl-3" style="border-left: 3px solid var(--color-primary)">
+        <h5 class="font-semibold mb-1">Select</h5>
+        <p class="text-base-content/60 text-sm mb-0">
+          A native <code class="kbd kbd-sm">&lt;select&gt;</code> styled with
+          <code class="kbd kbd-sm">select select-bordered</code>.
+        </p>
+      </div>
+      <div class="bg-base-200 rounded-box p-4 mb-3">
+        <div class="flex flex-col gap-3" style="max-width: 360px">
+          <label class="form-control w-full">
+            <div class="label"><span class="label-text">Framework</span></div>
+            <select class="select select-bordered w-full">
+              <option disabled value="">Select a framework…</option>
+              <option value="nextjs">Next.js</option>
+              <option value="nuxt">Nuxt</option>
+              <option value="sveltekit">SvelteKit</option>
+              <option value="astro">Astro</option>
+            </select>
+          </label>
+          <label class="form-control w-full">
+            <div class="label"><span class="label-text">Disabled</span></div>
+            <select class="select select-bordered w-full" disabled>
+              <option value="">None</option>
+            </select>
+          </label>
+        </div>
+      </div>
+      <CodeBlock :code="SELECT_CODE" collapsible :default-open="false" filename="Select.vue" language="vue" />
+    </section>
+
+    <div class="divider my-2" />
+
+    <!-- Checkbox -->
+    <section id="checkbox" class="mb-2">
+      <div class="mb-2 pl-3" style="border-left: 3px solid var(--color-primary)">
+        <h5 class="font-semibold mb-1">Checkbox</h5>
+        <p class="text-base-content/60 text-sm mb-0">
+          A binary toggle using <code class="kbd kbd-sm">checkbox checkbox-primary</code>.
+        </p>
+      </div>
+      <div class="bg-base-200 rounded-box p-4 mb-3">
+        <div class="flex flex-col gap-3">
+          <label class="flex items-center gap-3 cursor-pointer">
+            <input class="checkbox checkbox-primary" type="checkbox" />
+            <span class="label-text">Accept terms and conditions</span>
+          </label>
+          <label class="flex items-center gap-3 cursor-pointer">
+            <input class="checkbox checkbox-primary" checked type="checkbox" />
+            <span class="label-text">Checked by default</span>
+          </label>
+          <label class="flex items-center gap-3 cursor-pointer opacity-50">
+            <input class="checkbox" disabled type="checkbox" />
+            <span class="label-text">Disabled</span>
+          </label>
+        </div>
+      </div>
+      <CodeBlock :code="CHECKBOX_CODE" collapsible :default-open="false" filename="Checkbox.vue" language="vue" />
+    </section>
+
+    <div class="divider my-2" />
+
+    <!-- RadioGroup -->
+    <section id="radio-group" class="mb-2">
+      <div class="mb-2 pl-3" style="border-left: 3px solid var(--color-primary)">
+        <h5 class="font-semibold mb-1">RadioGroup</h5>
+        <p class="text-base-content/60 text-sm mb-0">
+          Mutually exclusive options using <code class="kbd kbd-sm">radio radio-primary</code>
+          with <code class="kbd kbd-sm">v-model</code> binding.
+        </p>
+      </div>
+      <div class="bg-base-200 rounded-box p-4 mb-3">
+        <div class="flex flex-col gap-2">
+          <span class="label-text font-medium">Plan</span>
+          <label v-for="value in ['free', 'pro', 'enterprise']" :key="value" class="flex items-center gap-3 cursor-pointer">
+            <input
+              v-model="plan"
+              class="radio radio-primary"
+              name="plan-demo"
+              type="radio"
+              :value="value"
+            />
+            <span class="label-text capitalize">{{ value }}</span>
+          </label>
+        </div>
+      </div>
+      <CodeBlock :code="RADIO_CODE" collapsible :default-open="false" filename="RadioGroup.vue" language="vue" />
+    </section>
+
+    <div class="divider my-2" />
+
+    <!-- Toggle -->
+    <section id="toggle" class="mb-2">
+      <div class="mb-2 pl-3" style="border-left: 3px solid var(--color-primary)">
+        <h5 class="font-semibold mb-1">Toggle</h5>
+        <p class="text-base-content/60 text-sm mb-0">
+          An on/off slide control using <code class="kbd kbd-sm">toggle toggle-primary</code>.
+        </p>
+      </div>
+      <div class="bg-base-200 rounded-box p-4 mb-3">
+        <div class="flex flex-col gap-3">
+          <label class="flex items-center gap-3 cursor-pointer">
+            <input class="toggle toggle-primary" type="checkbox" />
+            <span class="label-text">Email notifications</span>
+          </label>
+          <label class="flex items-center gap-3 cursor-pointer">
+            <input class="toggle toggle-primary" checked type="checkbox" />
+            <span class="label-text">Marketing emails</span>
+          </label>
+          <label class="flex items-center gap-3 cursor-pointer opacity-50">
+            <input class="toggle" disabled type="checkbox" />
+            <span class="label-text">Disabled</span>
+          </label>
+        </div>
+      </div>
+      <CodeBlock :code="TOGGLE_CODE" collapsible :default-open="false" filename="Toggle.vue" language="vue" />
+    </section>
+  </div>
+</template>

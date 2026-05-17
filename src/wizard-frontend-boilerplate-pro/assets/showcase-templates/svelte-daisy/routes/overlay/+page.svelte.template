@@ -1,0 +1,189 @@
+<script lang="ts">
+  import { CodeBlock } from "$lib/components/ui/code-block";
+
+  let drawerOpen = $state(false);
+
+  const TOOLTIP_CODE = `<div class="flex flex-wrap gap-4">
+  <div class="tooltip tooltip-top" data-tip="Tooltip on top">
+    <button class="btn btn-primary btn-sm" type="button">Hover me</button>
+  </div>
+  <div class="tooltip tooltip-open" data-tip="Always open">
+    <button class="btn btn-outline btn-sm" type="button">Always open</button>
+  </div>
+  <div class="tooltip tooltip-primary" data-tip="Primary colour">
+    <button class="btn btn-ghost btn-sm" type="button">Primary</button>
+  </div>
+  <div class="tooltip tooltip-error" data-tip="Error colour">
+    <button class="btn btn-ghost btn-sm" type="button">Error</button>
+  </div>
+</div>`;
+
+  const DROPDOWN_CODE = `<div class="flex flex-wrap gap-4">
+  <div class="dropdown">
+    <div class="btn btn-primary btn-sm" role="button" tabindex="0">Actions ▾</div>
+    <ul class="dropdown-content menu bg-base-100 rounded-box z-10 w-44 p-2 shadow-lg" tabindex="0">
+      <li><a>Edit</a></li>
+      <li><a>Duplicate</a></li>
+      <li><hr /></li>
+      <li><a class="text-error">Delete</a></li>
+    </ul>
+  </div>
+  <div class="dropdown dropdown-end">
+    <div class="btn btn-outline btn-sm" role="button" tabindex="0">Account ▾</div>
+    <ul class="dropdown-content menu bg-base-100 rounded-box z-10 w-44 p-2 shadow-lg" tabindex="0">
+      <li><a>Profile</a></li>
+      <li><a>Settings</a></li>
+      <li><hr /></li>
+      <li><a>Sign out</a></li>
+    </ul>
+  </div>
+</div>`;
+
+  const DRAWER_CODE = `<script lang="ts">
+  let drawerOpen = $state(false);
+<\/script>
+
+<div class="drawer" style="max-width: 480px; width: 100%">
+  <input
+    bind:checked={drawerOpen}
+    class="drawer-toggle"
+    id="demo-drawer"
+    type="checkbox"
+  />
+  <div class="drawer-content">
+    <label class="btn btn-primary" for="demo-drawer">Open drawer</label>
+  </div>
+  <div class="drawer-side z-40">
+    <label aria-label="close sidebar" class="drawer-overlay" for="demo-drawer"></label>
+    <div class="menu bg-base-200 min-h-full w-64 p-4">
+      <p class="font-semibold mb-4">Drawer title</p>
+      <ul class="flex flex-col gap-1">
+        <li><a class="rounded-btn p-2 hover:bg-base-300">Dashboard</a></li>
+        <li><a class="rounded-btn p-2 hover:bg-base-300">Components</a></li>
+        <li><a class="rounded-btn p-2 hover:bg-base-300">Settings</a></li>
+      </ul>
+      <div class="mt-auto">
+        <button class="btn btn-ghost btn-sm w-full" onclick={() => { drawerOpen = false; }} type="button">Close</button>
+      </div>
+    </div>
+  </div>
+</div>`;
+</script>
+
+<div class="flex flex-col gap-4">
+  <div>
+    <h1 class="text-xl font-semibold mb-1">Overlay</h1>
+    <p class="text-base-content/60 text-sm">
+      Floating and layered UI — tooltips, dropdown menus, and side drawers.
+    </p>
+  </div>
+
+  <!-- Tooltip -->
+  <section id="tooltip" class="mb-2">
+    <div class="mb-2 pl-3" style="border-left: 3px solid var(--color-primary)">
+      <h5 class="font-semibold mb-1">Tooltip</h5>
+      <p class="text-base-content/60 text-sm mb-0">
+        Pure-CSS tooltip via <code class="kbd kbd-sm">tooltip</code> wrapper and
+        <code class="kbd kbd-sm">data-tip</code>. Add
+        <code class="kbd kbd-sm">tooltip-open</code> to keep visible, or colour
+        modifiers like <code class="kbd kbd-sm">tooltip-primary</code>.
+      </p>
+    </div>
+    <div class="bg-base-200 rounded-box p-4 mb-3">
+      <div class="flex flex-wrap gap-4">
+        <div class="tooltip tooltip-top" data-tip="Tooltip on top">
+          <button class="btn btn-primary btn-sm" type="button">Hover me</button>
+        </div>
+        <div class="tooltip tooltip-open" data-tip="Always open">
+          <button class="btn btn-outline btn-sm" type="button">Always open</button>
+        </div>
+        <div class="tooltip tooltip-primary" data-tip="Primary colour">
+          <button class="btn btn-ghost btn-sm" type="button">Primary</button>
+        </div>
+        <div class="tooltip tooltip-error" data-tip="Error colour">
+          <button class="btn btn-ghost btn-sm" type="button">Error</button>
+        </div>
+      </div>
+    </div>
+    <CodeBlock code={TOOLTIP_CODE} collapsible defaultOpen={false} filename="Tooltip.svelte" language="svelte" />
+  </section>
+
+  <div class="divider my-2"></div>
+
+  <!-- Dropdown -->
+  <section id="dropdown" class="mb-2">
+    <div class="mb-2 pl-3" style="border-left: 3px solid var(--color-primary)">
+      <h5 class="font-semibold mb-1">Dropdown</h5>
+      <p class="text-base-content/60 text-sm mb-0">
+        CSS-driven dropdown using <code class="kbd kbd-sm">dropdown</code> wrapper and
+        <code class="kbd kbd-sm">dropdown-content menu</code>. No JS needed — opens on focus.
+      </p>
+    </div>
+    <div class="bg-base-200 rounded-box p-4 mb-3">
+      <div class="flex flex-wrap gap-4">
+        <div class="dropdown">
+          <div class="btn btn-primary btn-sm" role="button" tabindex="0">Actions ▾</div>
+          <ul class="dropdown-content menu bg-base-100 rounded-box z-10 w-44 p-2 shadow-lg" tabindex="0">
+            <li><a>Edit</a></li>
+            <li><a>Duplicate</a></li>
+            <li><hr /></li>
+            <li><a class="text-error">Delete</a></li>
+          </ul>
+        </div>
+        <div class="dropdown dropdown-end">
+          <div class="btn btn-outline btn-sm" role="button" tabindex="0">Account ▾</div>
+          <ul class="dropdown-content menu bg-base-100 rounded-box z-10 w-44 p-2 shadow-lg" tabindex="0">
+            <li><a>Profile</a></li>
+            <li><a>Settings</a></li>
+            <li><hr /></li>
+            <li><a>Sign out</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <CodeBlock code={DROPDOWN_CODE} collapsible defaultOpen={false} filename="Dropdown.svelte" language="svelte" />
+  </section>
+
+  <div class="divider my-2"></div>
+
+  <!-- Drawer -->
+  <section id="drawer" class="mb-2">
+    <div class="mb-2 pl-3" style="border-left: 3px solid var(--color-primary)">
+      <h5 class="font-semibold mb-1">Drawer</h5>
+      <p class="text-base-content/60 text-sm mb-0">
+        Slide-in side panel using <code class="kbd kbd-sm">drawer</code>,
+        <code class="kbd kbd-sm">drawer-toggle</code> (hidden checkbox bound via
+        <code class="kbd kbd-sm">bind:checked</code>), and
+        <code class="kbd kbd-sm">drawer-side</code> + <code class="kbd kbd-sm">drawer-overlay</code>.
+      </p>
+    </div>
+    <div class="bg-base-200 rounded-box p-4 mb-3">
+      <div class="drawer" style="max-width: 480px; width: 100%">
+        <input
+          bind:checked={drawerOpen}
+          class="drawer-toggle"
+          id="demo-drawer-svelte"
+          type="checkbox"
+        />
+        <div class="drawer-content">
+          <label class="btn btn-primary" for="demo-drawer-svelte">Open drawer</label>
+        </div>
+        <div class="drawer-side z-40">
+          <label aria-label="close sidebar" class="drawer-overlay" for="demo-drawer-svelte"></label>
+          <div class="menu bg-base-200 min-h-full w-64 p-4">
+            <p class="font-semibold mb-4">Drawer title</p>
+            <ul class="flex flex-col gap-1">
+              <li><a class="rounded-btn p-2 hover:bg-base-300">Dashboard</a></li>
+              <li><a class="rounded-btn p-2 hover:bg-base-300">Components</a></li>
+              <li><a class="rounded-btn p-2 hover:bg-base-300">Settings</a></li>
+            </ul>
+            <div class="mt-auto">
+              <button class="btn btn-ghost btn-sm w-full" onclick={() => { drawerOpen = false; }} type="button">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <CodeBlock code={DRAWER_CODE} collapsible defaultOpen={false} filename="Drawer.svelte" language="svelte" />
+  </section>
+</div>

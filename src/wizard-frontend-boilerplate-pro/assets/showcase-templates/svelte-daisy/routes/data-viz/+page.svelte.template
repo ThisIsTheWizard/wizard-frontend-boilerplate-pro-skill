@@ -1,0 +1,214 @@
+<script lang="ts">
+  import { derived, writable } from "svelte/store";
+
+  import {
+    CartesianGrid,
+    Line,
+    LineChart,
+    ResponsiveContainer,
+    Tooltip,
+    XAxis,
+    YAxis,
+  } from "recharts";
+
+  import { CodeBlock } from "$lib/components/ui/code-block";
+
+  const CHART_DATA = [
+    { desktop: 186, mobile: 80, month: "Jan" },
+    { desktop: 305, mobile: 200, month: "Feb" },
+    { desktop: 237, mobile: 120, month: "Mar" },
+    { desktop: 73, mobile: 190, month: "Apr" },
+    { desktop: 209, mobile: 130, month: "May" },
+    { desktop: 214, mobile: 140, month: "Jun" },
+  ];
+
+  interface User {
+    email: string;
+    id: string;
+    name: string;
+    role: string;
+  }
+
+  type SortDir = "asc" | "desc";
+  type SortKey = keyof Omit<User, "id">;
+
+  const TABLE_DATA: User[] = [
+    { email: "alice@example.com", id: "1", name: "Alice Johnson", role: "Admin" },
+    { email: "bob@example.com", id: "2", name: "Bob Smith", role: "Editor" },
+    { email: "carol@example.com", id: "3", name: "Carol White", role: "Viewer" },
+    { email: "dan@example.com", id: "4", name: "Dan Lee", role: "Editor" },
+    { email: "eve@example.com", id: "5", name: "Eve Martinez", role: "Viewer" },
+  ];
+
+  let sortKey = $state<SortKey>("name");
+  let sortDir = $state<SortDir>("asc");
+
+  function handleSort(key: SortKey) {
+    if (sortKey === key) {
+      sortDir = sortDir === "asc" ? "desc" : "asc";
+    } else {
+      sortKey = key;
+      sortDir = "asc";
+    }
+  }
+
+  let sortedData = $derived(
+    [...TABLE_DATA].sort((a, b) => {
+      const result = a[sortKey].localeCompare(b[sortKey]);
+      return sortDir === "asc" ? result : -result;
+    }),
+  );
+
+  function sortIndicator(key: SortKey) {
+    return sortKey === key ? (sortDir === "asc" ? " ↑" : " ↓") : "";
+  }
+
+  const SORT_KEYS: SortKey[] = ["name", "email", "role"];
+
+  const CHART_CODE = `// DaisyUI has no chart primitive — use recharts directly.
+import { CartesianGrid, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
+
+const DATA = [
+  { desktop: 186, mobile: 80, month: "Jan" },
+  { desktop: 305, mobile: 200, month: "Feb" },
+  // ...
+];`;
+
+  const DATA_TABLE_CODE = `<script lang="ts">
+  type SortDir = "asc" | "desc";
+  type SortKey = "email" | "name" | "role";
+  let sortKey = $state<SortKey>("name");
+  let sortDir = $state<SortDir>("asc");
+  function handleSort(key: SortKey) {
+    if (sortKey === key) sortDir = sortDir === "asc" ? "desc" : "asc";
+    else { sortKey = key; sortDir = "asc"; }
+  }
+  let sortedData = $derived([...rows].sort((a, b) => {
+    const r = a[sortKey].localeCompare(b[sortKey]);
+    return sortDir === "asc" ? r : -r;
+  }));
+<\/script>
+
+<div class="overflow-x-auto">
+  <table class="table table-zebra">
+    <thead>
+      <tr>
+        {#each ["name", "email", "role"] as key}
+          <th class="cursor-pointer select-none hover:text-primary" onclick={() => handleSort(key)}>
+            {key.charAt(0).toUpperCase() + key.slice(1)}{sortKey === key ? (sortDir === "asc" ? " ↑" : " ↓") : ""}
+          </th>
+        {/each}
+      </tr>
+    </thead>
+    <tbody>
+      {#each sortedData as row (row.id)}
+        <tr><td>{row.name}</td><td>{row.email}</td><td>{row.role}</td></tr>
+      {/each}
+    </tbody>
+  </table>
+</div>`;
+
+  const CALENDAR_CODE = `// DaisyUI has no built-in date picker.
+// For SvelteKit, use svelte-calendar or a headless date library:
+//   npm install @melt-ui/svelte
+
+// Or use react-day-picker in a Svelte wrapper.
+// See https://www.melt-ui.com/docs/builders/date-picker for a full example.`;
+</script>
+
+<div class="flex flex-col gap-4">
+  <div>
+    <h1 class="text-xl font-semibold mb-1">Data viz</h1>
+    <p class="text-base-content/60 text-sm">
+      Charts, sortable tables, and date selection — using recharts, DaisyUI table classes,
+      and @melt-ui/svelte.
+    </p>
+  </div>
+
+  <!-- Chart -->
+  <section id="chart" class="mb-2">
+    <div class="mb-2 pl-3" style="border-left: 3px solid var(--color-primary)">
+      <h5 class="font-semibold mb-1">Chart</h5>
+      <p class="text-base-content/60 text-sm mb-0">
+        DaisyUI has no chart primitive. Use <strong>recharts</strong> directly.
+        Reference <code class="kbd kbd-sm">var(--color-primary)</code> and
+        <code class="kbd kbd-sm">var(--color-secondary)</code> for stroke colours.
+      </p>
+    </div>
+    <div class="bg-base-200 rounded-box p-4 mb-3">
+      <ResponsiveContainer height={256} width="100%">
+        <LineChart data={CHART_DATA}>
+          <CartesianGrid strokeDasharray="3 3" />
+          <XAxis dataKey="month" />
+          <YAxis />
+          <Tooltip />
+          <Line dataKey="desktop" name="Desktop" stroke="var(--color-primary)" type="monotone" />
+          <Line dataKey="mobile" name="Mobile" stroke="var(--color-secondary)" type="monotone" />
+        </LineChart>
+      </ResponsiveContainer>
+    </div>
+    <CodeBlock code={CHART_CODE} collapsible defaultOpen={false} filename="Chart.svelte" language="svelte" />
+  </section>
+
+  <div class="divider my-2"></div>
+
+  <!-- DataTable -->
+  <section id="data-table" class="mb-2">
+    <div class="mb-2 pl-3" style="border-left: 3px solid var(--color-primary)">
+      <h5 class="font-semibold mb-1">DataTable</h5>
+      <p class="text-base-content/60 text-sm mb-0">
+        Sortable table using <code class="kbd kbd-sm">table table-zebra</code>
+        with Svelte 5 <code class="kbd kbd-sm">$derived</code> for reactive sorting.
+        Click column headers to toggle order.
+      </p>
+    </div>
+    <div class="bg-base-200 rounded-box p-4 mb-3">
+      <div class="overflow-x-auto">
+        <table class="table table-zebra">
+          <thead>
+            <tr>
+              {#each SORT_KEYS as key}
+                <th
+                  class="cursor-pointer select-none hover:text-primary"
+                  onclick={() => handleSort(key)}
+                >
+                  {key.charAt(0).toUpperCase() + key.slice(1)}{sortIndicator(key)}
+                </th>
+              {/each}
+            </tr>
+          </thead>
+          <tbody>
+            {#each sortedData as row (row.id)}
+              <tr>
+                <td>{row.name}</td>
+                <td>{row.email}</td>
+                <td>{row.role}</td>
+              </tr>
+            {/each}
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <CodeBlock code={DATA_TABLE_CODE} collapsible defaultOpen={false} filename="DataTable.svelte" language="svelte" />
+  </section>
+
+  <div class="divider my-2"></div>
+
+  <!-- Calendar -->
+  <section id="calendar" class="mb-2">
+    <div class="mb-2 pl-3" style="border-left: 3px solid var(--color-primary)">
+      <h5 class="font-semibold mb-1">Calendar</h5>
+      <p class="text-base-content/60 text-sm mb-0">
+        DaisyUI has no built-in date picker. For SvelteKit, use
+        <strong>@melt-ui/svelte</strong>:
+      </p>
+      <code class="text-xs mt-1 block">npm install @melt-ui/svelte</code>
+    </div>
+    <div class="bg-base-200 rounded-box p-4 mb-3">
+      <p class="text-base-content/60 text-sm mb-0">
+        Calendar preview omitted — see the code snippet for the Melt UI date picker setup.
+      </p>
+    </div>
+    <CodeBlock code={CALENDAR_CODE} collapsible defaultOpen={false} filename="Calendar.svelte" language="svelte" />
+  </section>
+</div>

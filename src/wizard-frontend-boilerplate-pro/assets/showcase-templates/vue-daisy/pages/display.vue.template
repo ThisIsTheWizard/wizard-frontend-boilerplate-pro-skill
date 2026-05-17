@@ -1,0 +1,324 @@
+<script setup lang="ts">
+import { CodeBlock } from "@/components/ui/code-block";
+
+const CARD_CODE = `<template>
+  <div class="card bg-base-100 shadow-sm" style="max-width: 320px">
+    <div class="card-body">
+      <h2 class="card-title">Project Alpha</h2>
+      <p class="text-base-content/60 text-sm">
+        This project aims to redefine how teams collaborate in real time.
+      </p>
+      <div class="card-actions justify-end">
+        <button class="btn btn-primary btn-sm" type="button">View details</button>
+      </div>
+    </div>
+  </div>
+</template>`;
+
+const BADGE_CODE = `<template>
+  <div class="flex flex-wrap gap-2">
+    <span class="badge badge-primary">Primary</span>
+    <span class="badge badge-secondary">Secondary</span>
+    <span class="badge badge-accent">Accent</span>
+    <span class="badge badge-success">Success</span>
+    <span class="badge badge-warning">Warning</span>
+    <span class="badge badge-error">Error</span>
+    <span class="badge badge-ghost">Ghost</span>
+    <span class="badge badge-outline badge-primary">Outline</span>
+  </div>
+</template>`;
+
+const AVATAR_CODE = `<template>
+  <div class="flex items-center gap-4">
+    <div class="avatar placeholder">
+      <div class="bg-primary text-primary-content rounded-full w-8">
+        <span class="text-xs">XS</span>
+      </div>
+    </div>
+    <div class="avatar placeholder">
+      <div class="bg-primary text-primary-content rounded-full w-10">
+        <span class="text-sm">MD</span>
+      </div>
+    </div>
+    <div class="avatar placeholder">
+      <div class="bg-primary text-primary-content rounded-full w-14">
+        <span class="text-lg">LG</span>
+      </div>
+    </div>
+    <div class="avatar online placeholder">
+      <div class="bg-secondary text-secondary-content rounded-full w-10">
+        <span class="text-sm">ON</span>
+      </div>
+    </div>
+  </div>
+</template>`;
+
+const SEPARATOR_CODE = `<template>
+  <div class="flex flex-col gap-3">
+    <div>
+      <p class="text-base-content/60 text-sm">Section one content.</p>
+      <div class="divider" />
+      <p class="text-base-content/60 text-sm">Section two content.</p>
+    </div>
+    <div class="flex items-center" style="height: 32px">
+      <span class="text-sm">Left item</span>
+      <div class="divider divider-horizontal mx-2" />
+      <span class="text-sm">Right item</span>
+    </div>
+  </div>
+</template>`;
+
+const SKELETON_CODE = `<template>
+  <div class="flex flex-col gap-4" style="max-width: 320px">
+    <div class="flex items-center gap-4">
+      <div class="skeleton w-12 h-12 rounded-full shrink-0" />
+      <div class="flex flex-col gap-2 flex-grow">
+        <div class="skeleton h-4 w-full" />
+        <div class="skeleton h-4 w-3/4" />
+      </div>
+    </div>
+    <div class="skeleton h-32 w-full rounded-box" />
+    <div class="flex flex-col gap-2">
+      <div class="skeleton h-4 w-full" />
+      <div class="skeleton h-4 w-5/6" />
+      <div class="skeleton h-4 w-2/3" />
+    </div>
+  </div>
+</template>`;
+
+const TABLE_CODE = `<template>
+  <div class="overflow-x-auto">
+    <table class="table table-zebra">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Role</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Alice Martin</td>
+          <td>alice@example.com</td>
+          <td>Admin</td>
+        </tr>
+        <tr>
+          <td>Bob Chen</td>
+          <td>bob@example.com</td>
+          <td>Editor</td>
+        </tr>
+        <tr>
+          <td>Carol White</td>
+          <td>carol@example.com</td>
+          <td>Viewer</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</template>`;
+</script>
+
+<template>
+  <div class="flex flex-col gap-4">
+    <div>
+      <h1 class="text-xl font-semibold mb-1">Display</h1>
+      <p class="text-base-content/60 text-sm">
+        Read-only visual elements for presenting content — cards, badges, avatars, and data tables.
+      </p>
+    </div>
+
+    <!-- Card -->
+    <section id="card" class="mb-2">
+      <div class="mb-2 pl-3" style="border-left: 3px solid var(--color-primary)">
+        <h5 class="font-semibold mb-1">Card</h5>
+        <p class="text-base-content/60 text-sm mb-0">
+          A surface using <code class="kbd kbd-sm">card bg-base-100</code> with
+          <code class="kbd kbd-sm">card-body</code>, <code class="kbd kbd-sm">card-title</code>,
+          and <code class="kbd kbd-sm">card-actions</code> sub-elements.
+        </p>
+      </div>
+      <div class="bg-base-200 rounded-box p-4 mb-3">
+        <div class="card bg-base-100 shadow-sm" style="max-width: 320px">
+          <div class="card-body">
+            <h2 class="card-title">Project Alpha</h2>
+            <p class="text-base-content/60 text-sm">
+              This project aims to redefine how teams collaborate in real time.
+            </p>
+            <div class="card-actions justify-end">
+              <button class="btn btn-primary btn-sm" type="button">View details</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <CodeBlock :code="CARD_CODE" collapsible :default-open="false" filename="Card.vue" language="vue" />
+    </section>
+
+    <div class="divider my-2" />
+
+    <!-- Badge -->
+    <section id="badge" class="mb-2">
+      <div class="mb-2 pl-3" style="border-left: 3px solid var(--color-primary)">
+        <h5 class="font-semibold mb-1">Badge</h5>
+        <p class="text-base-content/60 text-sm mb-0">
+          A compact label using <code class="kbd kbd-sm">badge</code> with semantic colour
+          and <code class="kbd kbd-sm">badge-outline</code> variants.
+        </p>
+      </div>
+      <div class="bg-base-200 rounded-box p-4 mb-3">
+        <div class="flex flex-wrap gap-2">
+          <span class="badge badge-primary">Primary</span>
+          <span class="badge badge-secondary">Secondary</span>
+          <span class="badge badge-accent">Accent</span>
+          <span class="badge badge-success">Success</span>
+          <span class="badge badge-warning">Warning</span>
+          <span class="badge badge-error">Error</span>
+          <span class="badge badge-ghost">Ghost</span>
+          <span class="badge badge-outline badge-primary">Outline</span>
+        </div>
+      </div>
+      <CodeBlock :code="BADGE_CODE" collapsible :default-open="false" filename="Badge.vue" language="vue" />
+    </section>
+
+    <div class="divider my-2" />
+
+    <!-- Avatar -->
+    <section id="avatar" class="mb-2">
+      <div class="mb-2 pl-3" style="border-left: 3px solid var(--color-primary)">
+        <h5 class="font-semibold mb-1">Avatar</h5>
+        <p class="text-base-content/60 text-sm mb-0">
+          DaisyUI's <code class="kbd kbd-sm">avatar placeholder</code> pattern sized
+          via <code class="kbd kbd-sm">w-*</code> on the inner div. Add
+          <code class="kbd kbd-sm">online</code> for a presence dot.
+        </p>
+      </div>
+      <div class="bg-base-200 rounded-box p-4 mb-3">
+        <div class="flex items-center gap-4">
+          <div class="avatar placeholder">
+            <div class="bg-primary text-primary-content rounded-full w-8">
+              <span class="text-xs">XS</span>
+            </div>
+          </div>
+          <div class="avatar placeholder">
+            <div class="bg-primary text-primary-content rounded-full w-10">
+              <span class="text-sm">MD</span>
+            </div>
+          </div>
+          <div class="avatar placeholder">
+            <div class="bg-primary text-primary-content rounded-full w-14">
+              <span class="text-lg">LG</span>
+            </div>
+          </div>
+          <div class="avatar online placeholder">
+            <div class="bg-secondary text-secondary-content rounded-full w-10">
+              <span class="text-sm">ON</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <CodeBlock :code="AVATAR_CODE" collapsible :default-open="false" filename="Avatar.vue" language="vue" />
+    </section>
+
+    <div class="divider my-2" />
+
+    <!-- Separator -->
+    <section id="separator" class="mb-2">
+      <div class="mb-2 pl-3" style="border-left: 3px solid var(--color-primary)">
+        <h5 class="font-semibold mb-1">Separator</h5>
+        <p class="text-base-content/60 text-sm mb-0">
+          Horizontal: <code class="kbd kbd-sm">divider</code>.
+          Vertical: <code class="kbd kbd-sm">divider divider-horizontal</code> inside a flex row.
+        </p>
+      </div>
+      <div class="bg-base-200 rounded-box p-4 mb-3">
+        <div class="flex flex-col gap-3">
+          <div>
+            <p class="text-base-content/60 text-sm mb-0">Section one content.</p>
+            <div class="divider" />
+            <p class="text-base-content/60 text-sm mb-0">Section two content.</p>
+          </div>
+          <div class="flex items-center" style="height: 32px">
+            <span class="text-sm">Left item</span>
+            <div class="divider divider-horizontal mx-2" />
+            <span class="text-sm">Right item</span>
+          </div>
+        </div>
+      </div>
+      <CodeBlock :code="SEPARATOR_CODE" collapsible :default-open="false" filename="Separator.vue" language="vue" />
+    </section>
+
+    <div class="divider my-2" />
+
+    <!-- Skeleton -->
+    <section id="skeleton" class="mb-2">
+      <div class="mb-2 pl-3" style="border-left: 3px solid var(--color-primary)">
+        <h5 class="font-semibold mb-1">Skeleton</h5>
+        <p class="text-base-content/60 text-sm mb-0">
+          Animated loading placeholders using the <code class="kbd kbd-sm">skeleton</code> class.
+          Size with standard Tailwind dimensions.
+        </p>
+      </div>
+      <div class="bg-base-200 rounded-box p-4 mb-3">
+        <div class="flex flex-col gap-4" style="max-width: 320px">
+          <div class="flex items-center gap-4">
+            <div class="skeleton w-12 h-12 rounded-full shrink-0" />
+            <div class="flex flex-col gap-2 flex-grow">
+              <div class="skeleton h-4 w-full" />
+              <div class="skeleton h-4 w-3/4" />
+            </div>
+          </div>
+          <div class="skeleton h-32 w-full rounded-box" />
+          <div class="flex flex-col gap-2">
+            <div class="skeleton h-4 w-full" />
+            <div class="skeleton h-4 w-5/6" />
+            <div class="skeleton h-4 w-2/3" />
+          </div>
+        </div>
+      </div>
+      <CodeBlock :code="SKELETON_CODE" collapsible :default-open="false" filename="Skeleton.vue" language="vue" />
+    </section>
+
+    <div class="divider my-2" />
+
+    <!-- Table -->
+    <section id="table" class="mb-2">
+      <div class="mb-2 pl-3" style="border-left: 3px solid var(--color-primary)">
+        <h5 class="font-semibold mb-1">Table</h5>
+        <p class="text-base-content/60 text-sm mb-0">
+          A structured grid using <code class="kbd kbd-sm">table table-zebra</code>
+          inside an <code class="kbd kbd-sm">overflow-x-auto</code> wrapper.
+        </p>
+      </div>
+      <div class="bg-base-200 rounded-box p-4 mb-3">
+        <div class="overflow-x-auto">
+          <table class="table table-zebra">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Role</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Alice Martin</td>
+                <td>alice@example.com</td>
+                <td>Admin</td>
+              </tr>
+              <tr>
+                <td>Bob Chen</td>
+                <td>bob@example.com</td>
+                <td>Editor</td>
+              </tr>
+              <tr>
+                <td>Carol White</td>
+                <td>carol@example.com</td>
+                <td>Viewer</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <CodeBlock :code="TABLE_CODE" collapsible :default-open="false" filename="Table.vue" language="vue" />
+    </section>
+  </div>
+</template>

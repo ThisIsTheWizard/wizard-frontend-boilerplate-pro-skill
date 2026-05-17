@@ -1,0 +1,392 @@
+"use client";
+
+import { CodeBlock } from "@/components/ui/code-block";
+
+const CARD_CODE = `export function Example() {
+  return (
+    <div className="card bg-base-100 shadow-sm" style={{ maxWidth: 320 }}>
+      <div className="card-body">
+        <h2 className="card-title">Project Alpha</h2>
+        <p className="text-base-content/60 text-sm">
+          This project aims to redefine how teams collaborate in real time.
+        </p>
+        <div className="card-actions justify-end">
+          <button className="btn btn-primary btn-sm" type="button">View details</button>
+        </div>
+      </div>
+    </div>
+  );
+}`;
+
+const BADGE_CODE = `export function Example() {
+  return (
+    <div className="flex flex-wrap gap-2">
+      <span className="badge badge-primary">Primary</span>
+      <span className="badge badge-secondary">Secondary</span>
+      <span className="badge badge-accent">Accent</span>
+      <span className="badge badge-success">Success</span>
+      <span className="badge badge-warning">Warning</span>
+      <span className="badge badge-error">Error</span>
+      <span className="badge badge-ghost">Ghost</span>
+      <span className="badge badge-outline badge-primary">Outline</span>
+    </div>
+  );
+}`;
+
+const AVATAR_CODE = `export function Example() {
+  return (
+    <div className="flex items-center gap-4">
+      <div className="avatar placeholder">
+        <div className="bg-primary text-primary-content rounded-full w-8">
+          <span className="text-xs">XS</span>
+        </div>
+      </div>
+      <div className="avatar placeholder">
+        <div className="bg-primary text-primary-content rounded-full w-10">
+          <span className="text-sm">MD</span>
+        </div>
+      </div>
+      <div className="avatar placeholder">
+        <div className="bg-primary text-primary-content rounded-full w-14">
+          <span className="text-lg">LG</span>
+        </div>
+      </div>
+      <div className="avatar online placeholder">
+        <div className="bg-secondary text-secondary-content rounded-full w-10">
+          <span className="text-sm">ON</span>
+        </div>
+      </div>
+    </div>
+  );
+}`;
+
+const SEPARATOR_CODE = `export function Example() {
+  return (
+    <div className="flex flex-col gap-3">
+      {/* Horizontal divider */}
+      <div>
+        <p className="text-base-content/60 text-sm mb-0">Section one content.</p>
+        <div className="divider" />
+        <p className="text-base-content/60 text-sm mb-0">Section two content.</p>
+      </div>
+
+      {/* Vertical divider — inside flex row */}
+      <div className="flex items-center" style={{ height: 32 }}>
+        <span className="text-sm">Left item</span>
+        <div className="divider divider-horizontal mx-2" />
+        <span className="text-sm">Right item</span>
+      </div>
+    </div>
+  );
+}`;
+
+const SKELETON_CODE = `export function Example() {
+  return (
+    <div className="flex flex-col gap-4" style={{ maxWidth: 320 }}>
+      <div className="flex items-center gap-4">
+        <div className="skeleton w-12 h-12 rounded-full shrink-0" />
+        <div className="flex flex-col gap-2 flex-grow">
+          <div className="skeleton h-4 w-full" />
+          <div className="skeleton h-4 w-3/4" />
+        </div>
+      </div>
+      <div className="skeleton h-32 w-full rounded-box" />
+      <div className="flex flex-col gap-2">
+        <div className="skeleton h-4 w-full" />
+        <div className="skeleton h-4 w-5/6" />
+        <div className="skeleton h-4 w-2/3" />
+      </div>
+    </div>
+  );
+}`;
+
+const TABLE_CODE = `export function Example() {
+  return (
+    <div className="overflow-x-auto">
+      <table className="table table-zebra">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Role</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Alice Martin</td>
+            <td>alice@example.com</td>
+            <td>Admin</td>
+          </tr>
+          <tr>
+            <td>Bob Chen</td>
+            <td>bob@example.com</td>
+            <td>Editor</td>
+          </tr>
+          <tr>
+            <td>Carol White</td>
+            <td>carol@example.com</td>
+            <td>Viewer</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  );
+}`;
+
+export default function DisplayPage() {
+  return (
+    <div className="flex flex-col gap-4">
+      <div>
+        <h1 className="text-xl font-semibold mb-1">Display</h1>
+        <p className="text-base-content/60 text-sm">
+          Read-only visual elements for presenting content — cards, badges,
+          avatars, and data tables.
+        </p>
+      </div>
+
+      <section className="mb-2" id="card">
+        <div className="mb-2 pl-3" style={{ borderLeft: "3px solid var(--color-primary)" }}>
+          <h5 className="font-semibold mb-1">Card</h5>
+          <p className="text-base-content/60 text-sm mb-0">
+            A surface for grouping related content using{" "}
+            <code className="kbd kbd-sm">card bg-base-100</code> with{" "}
+            <code className="kbd kbd-sm">card-body</code>,{" "}
+            <code className="kbd kbd-sm">card-title</code>, and{" "}
+            <code className="kbd kbd-sm">card-actions</code> sub-elements.
+          </p>
+        </div>
+        <div className="bg-base-200 rounded-box p-4 mb-3">
+          <div className="card bg-base-100 shadow-sm" style={{ maxWidth: 320 }}>
+            <div className="card-body">
+              <h2 className="card-title">Project Alpha</h2>
+              <p className="text-base-content/60 text-sm">
+                This project aims to redefine how teams collaborate in real time.
+              </p>
+              <div className="card-actions justify-end">
+                <button className="btn btn-primary btn-sm" type="button">
+                  View details
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <CodeBlock
+          code={CARD_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="Card.tsx"
+          language="tsx"
+        />
+      </section>
+
+      <div className="divider my-2" />
+
+      <section className="mb-2" id="badge">
+        <div className="mb-2 pl-3" style={{ borderLeft: "3px solid var(--color-primary)" }}>
+          <h5 className="font-semibold mb-1">Badge</h5>
+          <p className="text-base-content/60 text-sm mb-0">
+            A compact label for status or category. DaisyUI ships{" "}
+            <code className="kbd kbd-sm">badge-primary</code>,{" "}
+            <code className="kbd kbd-sm">badge-success</code>,{" "}
+            <code className="kbd kbd-sm">badge-warning</code>,{" "}
+            <code className="kbd kbd-sm">badge-error</code>,{" "}
+            <code className="kbd kbd-sm">badge-ghost</code>, and{" "}
+            <code className="kbd kbd-sm">badge-outline</code> variants.
+          </p>
+        </div>
+        <div className="bg-base-200 rounded-box p-4 mb-3">
+          <div className="flex flex-wrap gap-2">
+            <span className="badge badge-primary">Primary</span>
+            <span className="badge badge-secondary">Secondary</span>
+            <span className="badge badge-accent">Accent</span>
+            <span className="badge badge-success">Success</span>
+            <span className="badge badge-warning">Warning</span>
+            <span className="badge badge-error">Error</span>
+            <span className="badge badge-ghost">Ghost</span>
+            <span className="badge badge-outline badge-primary">Outline</span>
+          </div>
+        </div>
+        <CodeBlock
+          code={BADGE_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="Badge.tsx"
+          language="tsx"
+        />
+      </section>
+
+      <div className="divider my-2" />
+
+      <section className="mb-2" id="avatar">
+        <div className="mb-2 pl-3" style={{ borderLeft: "3px solid var(--color-primary)" }}>
+          <h5 className="font-semibold mb-1">Avatar</h5>
+          <p className="text-base-content/60 text-sm mb-0">
+            DaisyUI&apos;s <code className="kbd kbd-sm">avatar placeholder</code>{" "}
+            pattern sizes via <code className="kbd kbd-sm">w-*</code> utility
+            classes on the inner div. Add{" "}
+            <code className="kbd kbd-sm">online</code> or{" "}
+            <code className="kbd kbd-sm">offline</code> to the outer{" "}
+            <code className="kbd kbd-sm">avatar</code> for a presence indicator.
+          </p>
+        </div>
+        <div className="bg-base-200 rounded-box p-4 mb-3">
+          <div className="flex items-center gap-4">
+            <div className="avatar placeholder">
+              <div className="bg-primary text-primary-content rounded-full w-8">
+                <span className="text-xs">XS</span>
+              </div>
+            </div>
+            <div className="avatar placeholder">
+              <div className="bg-primary text-primary-content rounded-full w-10">
+                <span className="text-sm">MD</span>
+              </div>
+            </div>
+            <div className="avatar placeholder">
+              <div className="bg-primary text-primary-content rounded-full w-14">
+                <span className="text-lg">LG</span>
+              </div>
+            </div>
+            <div className="avatar online placeholder">
+              <div className="bg-secondary text-secondary-content rounded-full w-10">
+                <span className="text-sm">ON</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <CodeBlock
+          code={AVATAR_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="Avatar.tsx"
+          language="tsx"
+        />
+      </section>
+
+      <div className="divider my-2" />
+
+      <section className="mb-2" id="separator">
+        <div className="mb-2 pl-3" style={{ borderLeft: "3px solid var(--color-primary)" }}>
+          <h5 className="font-semibold mb-1">Separator</h5>
+          <p className="text-base-content/60 text-sm mb-0">
+            Use <code className="kbd kbd-sm">divider</code> for horizontal rules
+            and <code className="kbd kbd-sm">divider divider-horizontal</code>{" "}
+            inside a flex row for vertical rules.
+          </p>
+        </div>
+        <div className="bg-base-200 rounded-box p-4 mb-3">
+          <div className="flex flex-col gap-3">
+            <div>
+              <p className="text-base-content/60 text-sm mb-0">Section one content.</p>
+              <div className="divider" />
+              <p className="text-base-content/60 text-sm mb-0">Section two content.</p>
+            </div>
+            <div className="flex items-center" style={{ height: 32 }}>
+              <span className="text-sm">Left item</span>
+              <div className="divider divider-horizontal mx-2" />
+              <span className="text-sm">Right item</span>
+            </div>
+          </div>
+        </div>
+        <CodeBlock
+          code={SEPARATOR_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="Separator.tsx"
+          language="tsx"
+        />
+      </section>
+
+      <div className="divider my-2" />
+
+      <section className="mb-2" id="skeleton">
+        <div className="mb-2 pl-3" style={{ borderLeft: "3px solid var(--color-primary)" }}>
+          <h5 className="font-semibold mb-1">Skeleton</h5>
+          <p className="text-base-content/60 text-sm mb-0">
+            Animated loading placeholders using the{" "}
+            <code className="kbd kbd-sm">skeleton</code> class. Size with
+            standard Tailwind dimensions (<code className="kbd kbd-sm">h-4 w-full</code>,{" "}
+            <code className="kbd kbd-sm">w-12 h-12</code>) and{" "}
+            <code className="kbd kbd-sm">rounded-full</code> for circles.
+          </p>
+        </div>
+        <div className="bg-base-200 rounded-box p-4 mb-3">
+          <div className="flex flex-col gap-4" style={{ maxWidth: 320 }}>
+            <div className="flex items-center gap-4">
+              <div className="skeleton w-12 h-12 rounded-full shrink-0" />
+              <div className="flex flex-col gap-2 flex-grow">
+                <div className="skeleton h-4 w-full" />
+                <div className="skeleton h-4 w-3/4" />
+              </div>
+            </div>
+            <div className="skeleton h-32 w-full rounded-box" />
+            <div className="flex flex-col gap-2">
+              <div className="skeleton h-4 w-full" />
+              <div className="skeleton h-4 w-5/6" />
+              <div className="skeleton h-4 w-2/3" />
+            </div>
+          </div>
+        </div>
+        <CodeBlock
+          code={SKELETON_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="Skeleton.tsx"
+          language="tsx"
+        />
+      </section>
+
+      <div className="divider my-2" />
+
+      <section className="mb-2" id="table">
+        <div className="mb-2 pl-3" style={{ borderLeft: "3px solid var(--color-primary)" }}>
+          <h5 className="font-semibold mb-1">Table</h5>
+          <p className="text-base-content/60 text-sm mb-0">
+            A structured grid using{" "}
+            <code className="kbd kbd-sm">table table-zebra</code> inside an{" "}
+            <code className="kbd kbd-sm">overflow-x-auto</code> wrapper.
+            DaisyUI also ships <code className="kbd kbd-sm">table-sm</code>,{" "}
+            <code className="kbd kbd-sm">table-md</code>, and{" "}
+            <code className="kbd kbd-sm">table-lg</code> size modifiers.
+          </p>
+        </div>
+        <div className="bg-base-200 rounded-box p-4 mb-3">
+          <div className="overflow-x-auto">
+            <table className="table table-zebra">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Email</th>
+                  <th>Role</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Alice Martin</td>
+                  <td>alice@example.com</td>
+                  <td>Admin</td>
+                </tr>
+                <tr>
+                  <td>Bob Chen</td>
+                  <td>bob@example.com</td>
+                  <td>Editor</td>
+                </tr>
+                <tr>
+                  <td>Carol White</td>
+                  <td>carol@example.com</td>
+                  <td>Viewer</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <CodeBlock
+          code={TABLE_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="Table.tsx"
+          language="tsx"
+        />
+      </section>
+    </div>
+  );
+}

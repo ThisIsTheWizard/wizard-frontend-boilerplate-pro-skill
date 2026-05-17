@@ -1,0 +1,247 @@
+<script setup lang="ts">
+import { ref } from "vue";
+
+import { CodeBlock } from "@/components/ui/code-block";
+
+type TabId = "account" | "notifications" | "password";
+
+const activeTab = ref<TabId>("account");
+const page = ref(1);
+
+const TAB_CONTENT: Record<TabId, string> = {
+  account: "Manage your account settings and preferences.",
+  notifications: "Configure how you receive notifications.",
+  password: "Change your password and security settings.",
+};
+
+const TABS_LIST: { id: TabId; label: string }[] = [
+  { id: "account", label: "Account" },
+  { id: "password", label: "Password" },
+  { id: "notifications", label: "Notifications" },
+];
+
+const TABS_CODE = `<script setup lang="ts">
+import { ref } from "vue";
+type TabId = "account" | "notifications" | "password";
+const active = ref<TabId>("account");
+const content: Record<TabId, string> = {
+  account: "Manage your account settings and preferences.",
+  notifications: "Configure how you receive notifications.",
+  password: "Change your password and security settings.",
+};
+<\/script>
+
+<template>
+  <div>
+    <div class="tabs tabs-bordered" role="tablist">
+      <button
+        v-for="{ id, label } in [{ id: 'account', label: 'Account' }, { id: 'password', label: 'Password' }, { id: 'notifications', label: 'Notifications' }]"
+        :key="id"
+        :class="\`tab \${active === id ? 'tab-active' : ''}\`"
+        role="tab"
+        type="button"
+        @click="active = id"
+      >
+        {{ label }}
+      </button>
+    </div>
+    <div class="pt-4">
+      <p class="text-base-content/60 text-sm">{{ content[active] }}</p>
+    </div>
+  </div>
+</template>`;
+
+const BREADCRUMBS_CODE = `<template>
+  <div class="flex flex-col gap-3">
+    <div class="breadcrumbs text-sm">
+      <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Library</a></li>
+        <li>Components</li>
+      </ul>
+    </div>
+    <div class="breadcrumbs text-sm">
+      <ul>
+        <li><a href="#">Dashboard</a></li>
+        <li><a href="#">Settings</a></li>
+        <li>Profile</li>
+      </ul>
+    </div>
+  </div>
+</template>`;
+
+const PAGINATION_CODE = `<script setup lang="ts">
+import { ref } from "vue";
+const page = ref(1);
+<\/script>
+
+<template>
+  <div class="join">
+    <button class="join-item btn btn-sm" type="button" @click="page = Math.max(1, page - 1)">«</button>
+    <button
+      v-for="n in [1, 2, 3, 4, 5]"
+      :key="n"
+      :class="\`join-item btn btn-sm \${page === n ? 'btn-active' : ''}\`"
+      type="button"
+      @click="page = n"
+    >
+      {{ n }}
+    </button>
+    <button class="join-item btn btn-sm" type="button" @click="page = Math.min(5, page + 1)">»</button>
+  </div>
+</template>`;
+
+const NAVBAR_CODE = `<template>
+  <div class="navbar bg-base-100 border border-base-300 rounded-box">
+    <div class="navbar-start">
+      <a class="btn btn-ghost text-lg font-bold">Brand</a>
+    </div>
+    <div class="navbar-end hidden md:flex">
+      <ul class="menu menu-horizontal px-1 gap-1">
+        <li><a>Products</a></li>
+        <li><a>Docs</a></li>
+        <li><a>Pricing</a></li>
+        <li><a>Blog</a></li>
+      </ul>
+    </div>
+  </div>
+</template>`;
+</script>
+
+<template>
+  <div class="flex flex-col gap-4">
+    <div>
+      <h1 class="text-xl font-semibold mb-1">Navigation</h1>
+      <p class="text-base-content/60 text-sm">
+        Components for moving users through content — tabs, breadcrumbs, pagination, and navbars.
+      </p>
+    </div>
+
+    <!-- Tabs -->
+    <section id="tabs" class="mb-2">
+      <div class="mb-2 pl-3" style="border-left: 3px solid var(--color-primary)">
+        <h5 class="font-semibold mb-1">Tabs</h5>
+        <p class="text-base-content/60 text-sm mb-0">
+          A tab strip using <code class="kbd kbd-sm">tabs tabs-bordered</code> with
+          <code class="kbd kbd-sm">tab</code> buttons. Mark the active tab with
+          <code class="kbd kbd-sm">tab-active</code>.
+        </p>
+      </div>
+      <div class="bg-base-200 rounded-box p-4 mb-3">
+        <div>
+          <div class="tabs tabs-bordered" role="tablist">
+            <button
+              v-for="{ id, label } in TABS_LIST"
+              :key="id"
+              :class="`tab ${activeTab === id ? 'tab-active' : ''}`"
+              role="tab"
+              type="button"
+              @click="activeTab = id"
+            >
+              {{ label }}
+            </button>
+          </div>
+          <div class="pt-4">
+            <p class="text-base-content/60 text-sm mb-0">{{ TAB_CONTENT[activeTab] }}</p>
+          </div>
+        </div>
+      </div>
+      <CodeBlock :code="TABS_CODE" collapsible :default-open="false" filename="Tabs.vue" language="vue" />
+    </section>
+
+    <div class="divider my-2" />
+
+    <!-- Breadcrumbs -->
+    <section id="breadcrumbs" class="mb-2">
+      <div class="mb-2 pl-3" style="border-left: 3px solid var(--color-primary)">
+        <h5 class="font-semibold mb-1">Breadcrumbs</h5>
+        <p class="text-base-content/60 text-sm mb-0">
+          A hierarchical path indicator using <code class="kbd kbd-sm">breadcrumbs</code>
+          wrapping a <code class="kbd kbd-sm">&lt;ul&gt;</code>. Ancestor items use
+          <code class="kbd kbd-sm">&lt;a&gt;</code>; the current page is plain text.
+        </p>
+      </div>
+      <div class="bg-base-200 rounded-box p-4 mb-3">
+        <div class="flex flex-col gap-3">
+          <div class="breadcrumbs text-sm">
+            <ul>
+              <li><a href="#">Home</a></li>
+              <li><a href="#">Library</a></li>
+              <li>Components</li>
+            </ul>
+          </div>
+          <div class="breadcrumbs text-sm">
+            <ul>
+              <li><a href="#">Dashboard</a></li>
+              <li><a href="#">Settings</a></li>
+              <li>Profile</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <CodeBlock :code="BREADCRUMBS_CODE" collapsible :default-open="false" filename="Breadcrumbs.vue" language="vue" />
+    </section>
+
+    <div class="divider my-2" />
+
+    <!-- Pagination -->
+    <section id="pagination" class="mb-2">
+      <div class="mb-2 pl-3" style="border-left: 3px solid var(--color-primary)">
+        <h5 class="font-semibold mb-1">Pagination</h5>
+        <p class="text-base-content/60 text-sm mb-0">
+          A page navigator using <code class="kbd kbd-sm">join</code> with
+          <code class="kbd kbd-sm">join-item btn btn-sm</code> buttons.
+          Apply <code class="kbd kbd-sm">btn-active</code> to the current page.
+          Currently on page <strong>{{ page }}</strong>.
+        </p>
+      </div>
+      <div class="bg-base-200 rounded-box p-4 mb-3">
+        <div class="join">
+          <button class="join-item btn btn-sm" type="button" @click="page = Math.max(1, page - 1)">«</button>
+          <button
+            v-for="n in [1, 2, 3, 4, 5]"
+            :key="n"
+            :class="`join-item btn btn-sm ${page === n ? 'btn-active' : ''}`"
+            type="button"
+            @click="page = n"
+          >
+            {{ n }}
+          </button>
+          <button class="join-item btn btn-sm" type="button" @click="page = Math.min(5, page + 1)">»</button>
+        </div>
+      </div>
+      <CodeBlock :code="PAGINATION_CODE" collapsible :default-open="false" filename="Pagination.vue" language="vue" />
+    </section>
+
+    <div class="divider my-2" />
+
+    <!-- Navbar -->
+    <section id="navbar" class="mb-2">
+      <div class="mb-2 pl-3" style="border-left: 3px solid var(--color-primary)">
+        <h5 class="font-semibold mb-1">Navbar</h5>
+        <p class="text-base-content/60 text-sm mb-0">
+          A responsive header using <code class="kbd kbd-sm">navbar</code> with
+          <code class="kbd kbd-sm">navbar-start</code> and
+          <code class="kbd kbd-sm">navbar-end</code> slots. Pair with
+          <code class="kbd kbd-sm">menu menu-horizontal</code> for desktop links.
+        </p>
+      </div>
+      <div class="bg-base-200 rounded-box p-4 mb-3">
+        <div class="navbar bg-base-100 border border-base-300 rounded-box">
+          <div class="navbar-start">
+            <a class="btn btn-ghost text-lg font-bold">Brand</a>
+          </div>
+          <div class="navbar-end hidden md:flex">
+            <ul class="menu menu-horizontal px-1 gap-1">
+              <li><a>Products</a></li>
+              <li><a>Docs</a></li>
+              <li><a>Pricing</a></li>
+              <li><a>Blog</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <CodeBlock :code="NAVBAR_CODE" collapsible :default-open="false" filename="Navbar.vue" language="vue" />
+    </section>
+  </div>
+</template>

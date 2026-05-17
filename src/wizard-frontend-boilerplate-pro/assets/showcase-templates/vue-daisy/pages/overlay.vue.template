@@ -1,0 +1,201 @@
+<script setup lang="ts">
+import { ref } from "vue";
+
+import { CodeBlock } from "@/components/ui/code-block";
+
+const drawerOpen = ref(false);
+
+const TOOLTIP_CODE = `<template>
+  <div class="flex flex-wrap gap-4">
+    <div class="tooltip tooltip-top" data-tip="Tooltip on top">
+      <button class="btn btn-primary btn-sm" type="button">Hover me</button>
+    </div>
+    <div class="tooltip tooltip-open" data-tip="Always open">
+      <button class="btn btn-outline btn-sm" type="button">Always open</button>
+    </div>
+    <div class="tooltip tooltip-primary" data-tip="Primary colour">
+      <button class="btn btn-ghost btn-sm" type="button">Primary</button>
+    </div>
+    <div class="tooltip tooltip-error" data-tip="Error colour">
+      <button class="btn btn-ghost btn-sm" type="button">Error</button>
+    </div>
+  </div>
+</template>`;
+
+const DROPDOWN_CODE = `<template>
+  <div class="flex flex-wrap gap-4">
+    <div class="dropdown">
+      <div class="btn btn-primary btn-sm" role="button" tabindex="0">Actions ▾</div>
+      <ul class="dropdown-content menu bg-base-100 rounded-box z-10 w-44 p-2 shadow-lg" tabindex="0">
+        <li><a>Edit</a></li>
+        <li><a>Duplicate</a></li>
+        <li><hr /></li>
+        <li><a class="text-error">Delete</a></li>
+      </ul>
+    </div>
+    <div class="dropdown dropdown-end">
+      <div class="btn btn-outline btn-sm" role="button" tabindex="0">Account ▾</div>
+      <ul class="dropdown-content menu bg-base-100 rounded-box z-10 w-44 p-2 shadow-lg" tabindex="0">
+        <li><a>Profile</a></li>
+        <li><a>Settings</a></li>
+        <li><hr /></li>
+        <li><a>Sign out</a></li>
+      </ul>
+    </div>
+  </div>
+</template>`;
+
+const DRAWER_CODE = `<script setup lang="ts">
+import { ref } from "vue";
+const drawerOpen = ref(false);
+<\/script>
+
+<template>
+  <div class="drawer" style="max-width: 480px; width: 100%">
+    <input
+      id="demo-drawer"
+      v-model="drawerOpen"
+      class="drawer-toggle"
+      type="checkbox"
+    />
+    <div class="drawer-content">
+      <label class="btn btn-primary" for="demo-drawer">Open drawer</label>
+    </div>
+    <div class="drawer-side z-40">
+      <label aria-label="close sidebar" class="drawer-overlay" for="demo-drawer" />
+      <div class="menu bg-base-200 min-h-full w-64 p-4">
+        <p class="font-semibold mb-4">Drawer title</p>
+        <ul class="flex flex-col gap-1">
+          <li><a class="rounded-btn p-2 hover:bg-base-300">Dashboard</a></li>
+          <li><a class="rounded-btn p-2 hover:bg-base-300">Components</a></li>
+          <li><a class="rounded-btn p-2 hover:bg-base-300">Settings</a></li>
+        </ul>
+        <div class="mt-auto">
+          <button class="btn btn-ghost btn-sm w-full" type="button" @click="drawerOpen = false">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>`;
+</script>
+
+<template>
+  <div class="flex flex-col gap-4">
+    <div>
+      <h1 class="text-xl font-semibold mb-1">Overlay</h1>
+      <p class="text-base-content/60 text-sm">
+        Floating and layered UI — tooltips, dropdown menus, and side drawers.
+      </p>
+    </div>
+
+    <!-- Tooltip -->
+    <section id="tooltip" class="mb-2">
+      <div class="mb-2 pl-3" style="border-left: 3px solid var(--color-primary)">
+        <h5 class="font-semibold mb-1">Tooltip</h5>
+        <p class="text-base-content/60 text-sm mb-0">
+          Pure-CSS tooltip via <code class="kbd kbd-sm">tooltip</code> wrapper and
+          <code class="kbd kbd-sm">data-tip</code> attribute. Add
+          <code class="kbd kbd-sm">tooltip-open</code> to keep it always visible,
+          or colour modifiers like <code class="kbd kbd-sm">tooltip-primary</code>.
+        </p>
+      </div>
+      <div class="bg-base-200 rounded-box p-4 mb-3">
+        <div class="flex flex-wrap gap-4">
+          <div class="tooltip tooltip-top" data-tip="Tooltip on top">
+            <button class="btn btn-primary btn-sm" type="button">Hover me</button>
+          </div>
+          <div class="tooltip tooltip-open" data-tip="Always open">
+            <button class="btn btn-outline btn-sm" type="button">Always open</button>
+          </div>
+          <div class="tooltip tooltip-primary" data-tip="Primary colour">
+            <button class="btn btn-ghost btn-sm" type="button">Primary</button>
+          </div>
+          <div class="tooltip tooltip-error" data-tip="Error colour">
+            <button class="btn btn-ghost btn-sm" type="button">Error</button>
+          </div>
+        </div>
+      </div>
+      <CodeBlock :code="TOOLTIP_CODE" collapsible :default-open="false" filename="Tooltip.vue" language="vue" />
+    </section>
+
+    <div class="divider my-2" />
+
+    <!-- Dropdown -->
+    <section id="dropdown" class="mb-2">
+      <div class="mb-2 pl-3" style="border-left: 3px solid var(--color-primary)">
+        <h5 class="font-semibold mb-1">Dropdown</h5>
+        <p class="text-base-content/60 text-sm mb-0">
+          CSS-driven dropdown using <code class="kbd kbd-sm">dropdown</code> wrapper and
+          <code class="kbd kbd-sm">dropdown-content menu</code> for the panel.
+          <code class="kbd kbd-sm">dropdown-end</code> aligns it to the right.
+        </p>
+      </div>
+      <div class="bg-base-200 rounded-box p-4 mb-3">
+        <div class="flex flex-wrap gap-4">
+          <div class="dropdown">
+            <div class="btn btn-primary btn-sm" role="button" tabindex="0">Actions ▾</div>
+            <ul class="dropdown-content menu bg-base-100 rounded-box z-10 w-44 p-2 shadow-lg" tabindex="0">
+              <li><a>Edit</a></li>
+              <li><a>Duplicate</a></li>
+              <li><hr /></li>
+              <li><a class="text-error">Delete</a></li>
+            </ul>
+          </div>
+          <div class="dropdown dropdown-end">
+            <div class="btn btn-outline btn-sm" role="button" tabindex="0">Account ▾</div>
+            <ul class="dropdown-content menu bg-base-100 rounded-box z-10 w-44 p-2 shadow-lg" tabindex="0">
+              <li><a>Profile</a></li>
+              <li><a>Settings</a></li>
+              <li><hr /></li>
+              <li><a>Sign out</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <CodeBlock :code="DROPDOWN_CODE" collapsible :default-open="false" filename="Dropdown.vue" language="vue" />
+    </section>
+
+    <div class="divider my-2" />
+
+    <!-- Drawer -->
+    <section id="drawer" class="mb-2">
+      <div class="mb-2 pl-3" style="border-left: 3px solid var(--color-primary)">
+        <h5 class="font-semibold mb-1">Drawer</h5>
+        <p class="text-base-content/60 text-sm mb-0">
+          A slide-in side panel using <code class="kbd kbd-sm">drawer</code>,
+          <code class="kbd kbd-sm">drawer-toggle</code> (hidden checkbox), and
+          <code class="kbd kbd-sm">drawer-side</code> + <code class="kbd kbd-sm">drawer-overlay</code>.
+          Control open/close state via <code class="kbd kbd-sm">v-model</code> on the checkbox.
+        </p>
+      </div>
+      <div class="bg-base-200 rounded-box p-4 mb-3">
+        <div class="drawer" style="max-width: 480px; width: 100%">
+          <input
+            id="demo-drawer-vue"
+            v-model="drawerOpen"
+            class="drawer-toggle"
+            type="checkbox"
+          />
+          <div class="drawer-content">
+            <label class="btn btn-primary" for="demo-drawer-vue">Open drawer</label>
+          </div>
+          <div class="drawer-side z-40">
+            <label aria-label="close sidebar" class="drawer-overlay" for="demo-drawer-vue" />
+            <div class="menu bg-base-200 min-h-full w-64 p-4">
+              <p class="font-semibold mb-4">Drawer title</p>
+              <ul class="flex flex-col gap-1">
+                <li><a class="rounded-btn p-2 hover:bg-base-300">Dashboard</a></li>
+                <li><a class="rounded-btn p-2 hover:bg-base-300">Components</a></li>
+                <li><a class="rounded-btn p-2 hover:bg-base-300">Settings</a></li>
+              </ul>
+              <div class="mt-auto">
+                <button class="btn btn-ghost btn-sm w-full" type="button" @click="drawerOpen = false">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <CodeBlock :code="DRAWER_CODE" collapsible :default-open="false" filename="Drawer.vue" language="vue" />
+    </section>
+  </div>
+</template>

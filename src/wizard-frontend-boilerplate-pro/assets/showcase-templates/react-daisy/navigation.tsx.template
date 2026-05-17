@@ -1,0 +1,361 @@
+"use client";
+
+import { useState } from "react";
+
+import { CodeBlock } from "@/components/ui/code-block";
+
+const TABS_CODE = `import { useState } from "react";
+
+export function Example() {
+  const [active, setActive] = useState("account");
+
+  const tabs = [
+    { id: "account", label: "Account" },
+    { id: "password", label: "Password" },
+    { id: "notifications", label: "Notifications" },
+  ] as const;
+
+  const content: Record<typeof tabs[number]["id"], string> = {
+    account: "Manage your account settings and preferences.",
+    notifications: "Configure how you receive notifications.",
+    password: "Change your password and security settings.",
+  };
+
+  return (
+    <div>
+      <div className="tabs tabs-bordered" role="tablist">
+        {tabs.map(({ id, label }) => (
+          <button
+            className={\`tab \${active === id ? "tab-active" : ""}\`}
+            key={id}
+            onClick={() => setActive(id)}
+            role="tab"
+            type="button"
+          >
+            {label}
+          </button>
+        ))}
+      </div>
+      <div className="pt-4">
+        <p className="text-base-content/60 text-sm">{content[active]}</p>
+      </div>
+    </div>
+  );
+}`;
+
+const BREADCRUMBS_CODE = `export function Example() {
+  return (
+    <div className="flex flex-col gap-3">
+      <div className="breadcrumbs text-sm">
+        <ul>
+          <li><a href="#">Home</a></li>
+          <li><a href="#">Library</a></li>
+          <li>Components</li>
+        </ul>
+      </div>
+      <div className="breadcrumbs text-sm">
+        <ul>
+          <li><a href="#">Dashboard</a></li>
+          <li><a href="#">Settings</a></li>
+          <li>Profile</li>
+        </ul>
+      </div>
+    </div>
+  );
+}`;
+
+const PAGINATION_CODE = `import { useState } from "react";
+
+export function Example() {
+  const [page, setPage] = useState(1);
+  const pages = [1, 2, 3, 4, 5];
+
+  return (
+    <div className="join">
+      <button
+        className="join-item btn btn-sm"
+        onClick={() => setPage((p) => Math.max(1, p - 1))}
+        type="button"
+      >
+        «
+      </button>
+      {pages.map((n) => (
+        <button
+          className={\`join-item btn btn-sm \${page === n ? "btn-active" : ""}\`}
+          key={n}
+          onClick={() => setPage(n)}
+          type="button"
+        >
+          {n}
+        </button>
+      ))}
+      <button
+        className="join-item btn btn-sm"
+        onClick={() => setPage((p) => Math.min(5, p + 1))}
+        type="button"
+      >
+        »
+      </button>
+    </div>
+  );
+}`;
+
+const NAVBAR_CODE = `export function Example() {
+  return (
+    <div className="navbar bg-base-100 border border-base-300 rounded-box">
+      <div className="navbar-start">
+        <a className="btn btn-ghost text-lg font-bold">Brand</a>
+      </div>
+      <div className="navbar-end hidden md:flex">
+        <ul className="menu menu-horizontal px-1 gap-1">
+          <li><a>Products</a></li>
+          <li><a>Docs</a></li>
+          <li><a>Pricing</a></li>
+          <li><a>Blog</a></li>
+        </ul>
+      </div>
+      <div className="navbar-end md:hidden">
+        <div className="dropdown dropdown-end">
+          <div className="btn btn-ghost btn-sm btn-square" role="button" tabIndex={0}>
+            <svg fill="none" height="20" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" width="20"><line x1="4" x2="20" y1="6" y2="6" /><line x1="4" x2="20" y1="12" y2="12" /><line x1="4" x2="20" y1="18" y2="18" /></svg>
+          </div>
+          <ul className="dropdown-content menu bg-base-100 rounded-box w-36 p-2 shadow-lg z-10" tabIndex={0}>
+            <li><a>Products</a></li>
+            <li><a>Docs</a></li>
+            <li><a>Pricing</a></li>
+            <li><a>Blog</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  );
+}`;
+
+type TabId = "account" | "notifications" | "password";
+
+const TAB_CONTENT: Record<TabId, string> = {
+  account: "Manage your account settings and preferences.",
+  notifications: "Configure how you receive notifications.",
+  password: "Change your password and security settings.",
+};
+
+const TABS = [
+  { id: "account" as TabId, label: "Account" },
+  { id: "password" as TabId, label: "Password" },
+  { id: "notifications" as TabId, label: "Notifications" },
+];
+
+export default function NavigationPage() {
+  const [activeTab, setActiveTab] = useState<TabId>("account");
+  const [page, setPage] = useState(1);
+
+  return (
+    <div className="flex flex-col gap-4">
+      <div>
+        <h1 className="text-xl font-semibold mb-1">Navigation</h1>
+        <p className="text-base-content/60 text-sm">
+          Components for moving users through content — tabs, breadcrumbs,
+          pagination, and navbars.
+        </p>
+      </div>
+
+      <section className="mb-2" id="tabs">
+        <div className="mb-2 pl-3" style={{ borderLeft: "3px solid var(--color-primary)" }}>
+          <h5 className="font-semibold mb-1">Tabs</h5>
+          <p className="text-base-content/60 text-sm mb-0">
+            A tab strip using{" "}
+            <code className="kbd kbd-sm">tabs tabs-bordered</code> with{" "}
+            <code className="kbd kbd-sm">tab</code> buttons. Mark the active tab
+            with <code className="kbd kbd-sm">tab-active</code>. Also available:{" "}
+            <code className="kbd kbd-sm">tabs-lifted</code> and{" "}
+            <code className="kbd kbd-sm">tabs-boxed</code>.
+          </p>
+        </div>
+        <div className="bg-base-200 rounded-box p-4 mb-3">
+          <div>
+            <div className="tabs tabs-bordered" role="tablist">
+              {TABS.map(({ id, label }) => (
+                <button
+                  className={`tab ${activeTab === id ? "tab-active" : ""}`}
+                  key={id}
+                  onClick={() => setActiveTab(id)}
+                  role="tab"
+                  type="button"
+                >
+                  {label}
+                </button>
+              ))}
+            </div>
+            <div className="pt-4">
+              <p className="text-base-content/60 text-sm mb-0">
+                {TAB_CONTENT[activeTab]}
+              </p>
+            </div>
+          </div>
+        </div>
+        <CodeBlock
+          code={TABS_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="Tabs.tsx"
+          language="tsx"
+        />
+      </section>
+
+      <div className="divider my-2" />
+
+      <section className="mb-2" id="breadcrumbs">
+        <div className="mb-2 pl-3" style={{ borderLeft: "3px solid var(--color-primary)" }}>
+          <h5 className="font-semibold mb-1">Breadcrumbs</h5>
+          <p className="text-base-content/60 text-sm mb-0">
+            A hierarchical path indicator using the{" "}
+            <code className="kbd kbd-sm">breadcrumbs</code> class on a{" "}
+            <code className="kbd kbd-sm">{"<div>"}</code> wrapping an{" "}
+            <code className="kbd kbd-sm">{"<ul>"}</code>. Ancestor{" "}
+            <code className="kbd kbd-sm">{"<li>"}</code> items use{" "}
+            <code className="kbd kbd-sm">{"<a>"}</code>; the current page is plain
+            text.
+          </p>
+        </div>
+        <div className="bg-base-200 rounded-box p-4 mb-3">
+          <div className="flex flex-col gap-3">
+            <div className="breadcrumbs text-sm">
+              <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Library</a></li>
+                <li>Components</li>
+              </ul>
+            </div>
+            <div className="breadcrumbs text-sm">
+              <ul>
+                <li><a href="#">Dashboard</a></li>
+                <li><a href="#">Settings</a></li>
+                <li>Profile</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <CodeBlock
+          code={BREADCRUMBS_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="Breadcrumbs.tsx"
+          language="tsx"
+        />
+      </section>
+
+      <div className="divider my-2" />
+
+      <section className="mb-2" id="pagination">
+        <div className="mb-2 pl-3" style={{ borderLeft: "3px solid var(--color-primary)" }}>
+          <h5 className="font-semibold mb-1">Pagination</h5>
+          <p className="text-base-content/60 text-sm mb-0">
+            A page navigator using{" "}
+            <code className="kbd kbd-sm">join</code> with{" "}
+            <code className="kbd kbd-sm">join-item btn btn-sm</code> buttons.
+            Apply <code className="kbd kbd-sm">btn-active</code> to the current
+            page. Currently on page <strong>{page}</strong>.
+          </p>
+        </div>
+        <div className="bg-base-200 rounded-box p-4 mb-3">
+          <div className="join">
+            <button
+              className="join-item btn btn-sm"
+              onClick={() => setPage((p) => Math.max(1, p - 1))}
+              type="button"
+            >
+              «
+            </button>
+            {[1, 2, 3, 4, 5].map((n) => (
+              <button
+                className={`join-item btn btn-sm ${page === n ? "btn-active" : ""}`}
+                key={n}
+                onClick={() => setPage(n)}
+                type="button"
+              >
+                {n}
+              </button>
+            ))}
+            <button
+              className="join-item btn btn-sm"
+              onClick={() => setPage((p) => Math.min(5, p + 1))}
+              type="button"
+            >
+              »
+            </button>
+          </div>
+        </div>
+        <CodeBlock
+          code={PAGINATION_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="Pagination.tsx"
+          language="tsx"
+        />
+      </section>
+
+      <div className="divider my-2" />
+
+      <section className="mb-2" id="navbar">
+        <div className="mb-2 pl-3" style={{ borderLeft: "3px solid var(--color-primary)" }}>
+          <h5 className="font-semibold mb-1">Navbar</h5>
+          <p className="text-base-content/60 text-sm mb-0">
+            A responsive navigation header using{" "}
+            <code className="kbd kbd-sm">navbar</code> with{" "}
+            <code className="kbd kbd-sm">navbar-start</code>,{" "}
+            <code className="kbd kbd-sm">navbar-center</code>, and{" "}
+            <code className="kbd kbd-sm">navbar-end</code> slots. Pair with{" "}
+            <code className="kbd kbd-sm">menu menu-horizontal</code> for desktop
+            links and a <code className="kbd kbd-sm">dropdown</code> for mobile.
+          </p>
+        </div>
+        <div className="bg-base-200 rounded-box p-4 mb-3">
+          <div className="navbar bg-base-100 border border-base-300 rounded-box">
+            <div className="navbar-start">
+              <a className="btn btn-ghost text-lg font-bold">Brand</a>
+            </div>
+            <div className="navbar-end hidden md:flex">
+              <ul className="menu menu-horizontal px-1 gap-1">
+                <li><a>Products</a></li>
+                <li><a>Docs</a></li>
+                <li><a>Pricing</a></li>
+                <li><a>Blog</a></li>
+              </ul>
+            </div>
+            <div className="navbar-end md:hidden">
+              <div className="dropdown dropdown-end">
+                <div
+                  className="btn btn-ghost btn-sm btn-square"
+                  role="button"
+                  tabIndex={0}
+                >
+                  <svg fill="none" height="20" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" width="20">
+                    <line x1="4" x2="20" y1="6" y2="6" />
+                    <line x1="4" x2="20" y1="12" y2="12" />
+                    <line x1="4" x2="20" y1="18" y2="18" />
+                  </svg>
+                </div>
+                <ul
+                  className="dropdown-content menu bg-base-100 rounded-box w-36 p-2 shadow-lg z-10"
+                  tabIndex={0}
+                >
+                  <li><a>Products</a></li>
+                  <li><a>Docs</a></li>
+                  <li><a>Pricing</a></li>
+                  <li><a>Blog</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <CodeBlock
+          code={NAVBAR_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="Navbar.tsx"
+          language="tsx"
+        />
+      </section>
+    </div>
+  );
+}
