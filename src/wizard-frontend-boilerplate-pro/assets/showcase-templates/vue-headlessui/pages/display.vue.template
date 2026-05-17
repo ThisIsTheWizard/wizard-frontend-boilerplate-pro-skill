@@ -1,0 +1,226 @@
+<script setup lang="ts">
+import CodeBlock from "@/components/ui/CodeBlock.vue";
+
+const CARD_CODE = `<template>
+  <div class="w-80 rounded-xl border border-border bg-surface p-6 shadow-sm">
+    <div class="mb-1 text-lg font-semibold text-foreground">Project Alpha</div>
+    <div class="mb-4 text-sm text-muted-foreground">A next-generation web application.</div>
+    <p class="text-sm text-muted-foreground">This project aims to redefine how teams collaborate in real time.</p>
+    <div class="mt-6">
+      <button class="rounded-md border border-border px-4 py-2 text-sm font-medium text-foreground hover:bg-accent">View details</button>
+    </div>
+  </div>
+</template>`;
+
+const BADGE_CODE = `<template>
+  <div class="flex flex-wrap gap-2">
+    <span class="inline-flex items-center rounded-full bg-primary px-2.5 py-0.5 text-xs font-medium text-primary-foreground">Default</span>
+    <span class="inline-flex items-center rounded-full bg-muted px-2.5 py-0.5 text-xs font-medium text-muted-foreground">Secondary</span>
+    <span class="inline-flex items-center rounded-full bg-destructive px-2.5 py-0.5 text-xs font-medium text-white">Destructive</span>
+    <span class="inline-flex items-center rounded-full border border-border px-2.5 py-0.5 text-xs font-medium text-foreground">Outline</span>
+  </div>
+</template>`;
+
+const AVATAR_CODE = `<template>
+  <div class="flex items-center gap-4">
+    <div class="flex h-10 w-10 items-center justify-center overflow-hidden rounded-full bg-muted">
+      <img alt="Jane Doe" class="h-full w-full object-cover" src="https://i.pravatar.cc/150?img=1" />
+    </div>
+    <div class="flex h-10 w-10 items-center justify-center rounded-full bg-primary/20 text-sm font-medium text-primary">SM</div>
+    <div class="flex h-8 w-8 items-center justify-center rounded-full bg-primary/20 text-xs font-medium text-primary">XS</div>
+    <div class="flex h-14 w-14 items-center justify-center rounded-full bg-primary/20 text-lg font-medium text-primary">LG</div>
+  </div>
+</template>`;
+
+const SEPARATOR_CODE = `<template>
+  <div class="flex flex-col gap-6">
+    <div class="flex flex-col gap-2">
+      <p class="text-sm text-muted-foreground">Section one content.</p>
+      <hr class="border-border" />
+      <p class="text-sm text-muted-foreground">Section two content.</p>
+    </div>
+    <div class="flex items-center gap-4">
+      <span class="text-sm">Left item</span>
+      <div class="h-4 w-px bg-border" />
+      <span class="text-sm">Right item</span>
+    </div>
+  </div>
+</template>`;
+
+const SKELETON_CODE = `<template>
+  <div class="flex items-center gap-4">
+    <div class="h-12 w-12 animate-pulse rounded-full bg-muted" />
+    <div class="flex flex-col gap-2">
+      <div class="h-4 w-48 animate-pulse rounded bg-muted" />
+      <div class="h-4 w-36 animate-pulse rounded bg-muted" />
+      <div class="h-4 w-24 animate-pulse rounded bg-muted" />
+    </div>
+  </div>
+</template>`;
+
+const TABLE_CODE = `<template>
+  <table class="w-full text-sm">
+    <caption class="mb-2 text-sm text-muted-foreground">Team members list</caption>
+    <thead>
+      <tr class="border-b border-border">
+        <th scope="col" class="py-3 pr-4 text-left font-medium text-muted-foreground">Name</th>
+        <th scope="col" class="py-3 pr-4 text-left font-medium text-muted-foreground">Email</th>
+        <th scope="col" class="py-3 text-left font-medium text-muted-foreground">Role</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr v-for="member in team" :key="member.email" class="border-b border-border last:border-0">
+        <td class="py-3 pr-4 text-foreground">{{ member.name }}</td>
+        <td class="py-3 pr-4 text-foreground">{{ member.email }}</td>
+        <td class="py-3 text-foreground">{{ member.role }}</td>
+      </tr>
+    </tbody>
+  </table>
+</template>`;
+
+const TEAM = [
+  { name: "Alice Martin", email: "alice@example.com", role: "Admin" },
+  { name: "Bob Chen", email: "bob@example.com", role: "Editor" },
+  { name: "Carol White", email: "carol@example.com", role: "Viewer" },
+];
+</script>
+
+<template>
+  <div class="flex flex-col gap-16">
+    <div>
+      <h1 class="text-3xl font-bold tracking-tight text-foreground">Display</h1>
+      <p class="mt-2 text-muted-foreground">
+        Read-only visual elements styled with Tailwind — Headless UI provides no display primitives.
+      </p>
+    </div>
+
+    <section class="flex flex-col gap-4" id="card">
+      <div class="border-l-2 border-primary/40 pl-3">
+        <h2 class="text-xl font-semibold text-foreground">Card</h2>
+        <p class="mt-1 text-sm text-muted-foreground">A surface for grouping related content — pure Tailwind implementation.</p>
+      </div>
+      <div class="rounded-lg border border-border bg-muted/50 p-8">
+        <div class="w-80 rounded-xl border border-border bg-surface p-6 shadow-sm">
+          <div class="mb-1 text-lg font-semibold text-foreground">Project Alpha</div>
+          <div class="mb-4 text-sm text-muted-foreground">A next-generation web application.</div>
+          <p class="text-sm text-muted-foreground">This project aims to redefine how teams collaborate in real time.</p>
+          <div class="mt-6">
+            <button class="rounded-md border border-border px-4 py-2 text-sm font-medium text-foreground transition hover:bg-accent">View details</button>
+          </div>
+        </div>
+      </div>
+      <CodeBlock :code="CARD_CODE" :collapsible="true" :default-open="false" filename="Card.vue" language="vue" />
+    </section>
+
+    <section class="flex flex-col gap-4" id="badge">
+      <div class="border-l-2 border-primary/40 pl-3">
+        <h2 class="text-xl font-semibold text-foreground">Badge</h2>
+        <p class="mt-1 text-sm text-muted-foreground">A compact label for status or category — plain <code class="rounded bg-muted px-1 py-0.5 text-xs">span</code> with Tailwind variants.</p>
+      </div>
+      <div class="rounded-lg border border-border bg-muted/50 p-8">
+        <div class="flex flex-wrap gap-2">
+          <span class="inline-flex items-center rounded-full bg-primary px-2.5 py-0.5 text-xs font-medium text-primary-foreground">Default</span>
+          <span class="inline-flex items-center rounded-full bg-muted px-2.5 py-0.5 text-xs font-medium text-muted-foreground">Secondary</span>
+          <span class="inline-flex items-center rounded-full bg-destructive px-2.5 py-0.5 text-xs font-medium text-white">Destructive</span>
+          <span class="inline-flex items-center rounded-full border border-border px-2.5 py-0.5 text-xs font-medium text-foreground">Outline</span>
+        </div>
+      </div>
+      <CodeBlock :code="BADGE_CODE" :collapsible="true" :default-open="false" filename="Badge.vue" language="vue" />
+    </section>
+
+    <section class="flex flex-col gap-4" id="avatar">
+      <div class="border-l-2 border-primary/40 pl-3">
+        <h2 class="text-xl font-semibold text-foreground">Avatar</h2>
+        <p class="mt-1 text-sm text-muted-foreground">A circular user representation with image or initials fallback.</p>
+      </div>
+      <div class="rounded-lg border border-border bg-muted/50 p-8">
+        <div class="flex items-center gap-4">
+          <div class="flex h-10 w-10 items-center justify-center overflow-hidden rounded-full bg-muted">
+            <img alt="Jane Doe" class="h-full w-full object-cover" src="https://i.pravatar.cc/150?img=1" />
+          </div>
+          <div class="flex h-10 w-10 items-center justify-center rounded-full bg-primary/20 text-sm font-medium text-primary">SM</div>
+          <div class="flex h-8 w-8 items-center justify-center rounded-full bg-primary/20 text-xs font-medium text-primary">XS</div>
+          <div class="flex h-14 w-14 items-center justify-center rounded-full bg-primary/20 text-lg font-medium text-primary">LG</div>
+        </div>
+      </div>
+      <CodeBlock :code="AVATAR_CODE" :collapsible="true" :default-open="false" filename="Avatar.vue" language="vue" />
+    </section>
+
+    <section class="flex flex-col gap-4" id="separator">
+      <div class="border-l-2 border-primary/40 pl-3">
+        <h2 class="text-xl font-semibold text-foreground">Separator</h2>
+        <p class="mt-1 text-sm text-muted-foreground">A thin dividing line — <code class="rounded bg-muted px-1 py-0.5 text-xs">hr</code> or a <code class="rounded bg-muted px-1 py-0.5 text-xs">div</code> with <code class="rounded bg-muted px-1 py-0.5 text-xs">bg-border</code>.</p>
+      </div>
+      <div class="rounded-lg border border-border bg-muted/50 p-8">
+        <div class="flex flex-col gap-6">
+          <div class="flex flex-col gap-2">
+            <p class="text-sm text-muted-foreground">Section one content.</p>
+            <hr class="border-border" />
+            <p class="text-sm text-muted-foreground">Section two content.</p>
+          </div>
+          <div class="flex items-center gap-4">
+            <span class="text-sm">Left item</span>
+            <div class="h-4 w-px bg-border" />
+            <span class="text-sm">Right item</span>
+          </div>
+        </div>
+      </div>
+      <CodeBlock :code="SEPARATOR_CODE" :collapsible="true" :default-open="false" filename="Separator.vue" language="vue" />
+    </section>
+
+    <section class="flex flex-col gap-4" id="skeleton">
+      <div class="border-l-2 border-primary/40 pl-3">
+        <h2 class="text-xl font-semibold text-foreground">Skeleton</h2>
+        <p class="mt-1 text-sm text-muted-foreground">Animated placeholder blocks using <code class="rounded bg-muted px-1 py-0.5 text-xs">animate-pulse</code>.</p>
+      </div>
+      <div class="rounded-lg border border-border bg-muted/50 p-8">
+        <div class="flex flex-col gap-6">
+          <div class="flex items-center gap-4">
+            <div class="h-12 w-12 animate-pulse rounded-full bg-muted" />
+            <div class="flex flex-col gap-2">
+              <div class="h-4 w-48 animate-pulse rounded bg-muted" />
+              <div class="h-4 w-36 animate-pulse rounded bg-muted" />
+              <div class="h-4 w-24 animate-pulse rounded bg-muted" />
+            </div>
+          </div>
+          <div class="flex flex-col gap-2">
+            <div class="h-6 w-32 animate-pulse rounded bg-muted" />
+            <div class="h-4 w-full animate-pulse rounded bg-muted" />
+            <div class="h-4 w-full animate-pulse rounded bg-muted" />
+            <div class="h-4 w-2/3 animate-pulse rounded bg-muted" />
+          </div>
+        </div>
+      </div>
+      <CodeBlock :code="SKELETON_CODE" :collapsible="true" :default-open="false" filename="Skeleton.vue" language="vue" />
+    </section>
+
+    <section class="flex flex-col gap-4" id="table">
+      <div class="border-l-2 border-primary/40 pl-3">
+        <h2 class="text-xl font-semibold text-foreground">Table</h2>
+        <p class="mt-1 text-sm text-muted-foreground">A structured grid for tabular data — semantic HTML with Tailwind token classes.</p>
+      </div>
+      <div class="rounded-lg border border-border bg-muted/50 p-8">
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm">
+            <caption class="mb-2 text-sm text-muted-foreground">Team members list</caption>
+            <thead>
+              <tr class="border-b border-border">
+                <th class="py-3 pr-4 text-left font-medium text-muted-foreground" scope="col">Name</th>
+                <th class="py-3 pr-4 text-left font-medium text-muted-foreground" scope="col">Email</th>
+                <th class="py-3 text-left font-medium text-muted-foreground" scope="col">Role</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="member in TEAM" :key="member.email" class="border-b border-border last:border-0">
+                <td class="py-3 pr-4 text-foreground">{{ member.name }}</td>
+                <td class="py-3 pr-4 text-foreground">{{ member.email }}</td>
+                <td class="py-3 text-foreground">{{ member.role }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <CodeBlock :code="TABLE_CODE" :collapsible="true" :default-open="false" filename="Table.vue" language="vue" />
+    </section>
+  </div>
+</template>

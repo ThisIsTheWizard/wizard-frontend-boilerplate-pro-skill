@@ -1,0 +1,292 @@
+<script setup lang="ts">
+import CodeBlock from "@/components/CodeBlock.vue";
+
+const TABLE_ROWS = [
+  { email: "alice@example.com", name: "Alice Martin", role: "Admin" },
+  { email: "bob@example.com", name: "Bob Chen", role: "Editor" },
+  { email: "carol@example.com", name: "Carol White", role: "Viewer" },
+];
+
+const CARD_CODE = `<template>
+  <v-card class="w-80" variant="elevated">
+    <v-card-title>Project Alpha</v-card-title>
+    <v-card-subtitle>A next-generation web application.</v-card-subtitle>
+    <v-card-text>
+      <p class="text-sm text-muted-foreground">
+        This project aims to redefine how teams collaborate in real time.
+      </p>
+    </v-card-text>
+    <v-card-actions>
+      <v-btn color="primary" variant="outlined">View details</v-btn>
+    </v-card-actions>
+  </v-card>
+</template>`;
+
+const BADGE_CODE = `<template>
+  <div class="flex flex-wrap gap-2">
+    <v-chip color="primary">Primary</v-chip>
+    <v-chip color="success">Success</v-chip>
+    <v-chip color="info">Info</v-chip>
+    <v-chip color="warning">Warning</v-chip>
+    <v-chip color="error">Error</v-chip>
+    <v-chip color="secondary">Secondary</v-chip>
+    <v-chip color="primary" variant="outlined">Outlined</v-chip>
+  </div>
+</template>`;
+
+const AVATAR_CODE = `<template>
+  <div class="flex items-center gap-4">
+    <v-avatar image="https://i.pravatar.cc/150?img=1" size="large" />
+    <v-avatar color="primary" size="large">JD</v-avatar>
+    <v-avatar color="secondary">SM</v-avatar>
+    <v-avatar color="info" size="small">XS</v-avatar>
+  </div>
+</template>`;
+
+const DIVIDER_CODE = `<template>
+  <div class="flex flex-col gap-4">
+    <div class="flex flex-col gap-2">
+      <p class="text-sm text-muted-foreground">Section one content.</p>
+      <v-divider />
+      <p class="text-sm text-muted-foreground">Section two content.</p>
+    </div>
+    <div class="flex items-center gap-4" style="height: 2rem">
+      <span class="text-sm">Left item</span>
+      <v-divider vertical />
+      <span class="text-sm">Right item</span>
+    </div>
+  </div>
+</template>`;
+
+const SKELETON_CODE = `<template>
+  <div class="flex flex-col gap-3">
+    <v-skeleton-loader type="list-item-avatar-two-line" />
+    <v-skeleton-loader type="card" max-width="300" />
+  </div>
+</template>`;
+
+const TABLE_CODE = `<template>
+  <v-table density="comfortable">
+    <thead>
+      <tr>
+        <th class="text-left">Name</th>
+        <th class="text-left">Email</th>
+        <th class="text-left">Role</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Alice Martin</td>
+        <td>alice@example.com</td>
+        <td>Admin</td>
+      </tr>
+      <tr>
+        <td>Bob Chen</td>
+        <td>bob@example.com</td>
+        <td>Editor</td>
+      </tr>
+    </tbody>
+  </v-table>
+</template>`;
+</script>
+
+<template>
+  <div class="flex flex-col gap-16">
+    <div>
+      <h1 class="text-3xl font-bold tracking-tight text-foreground">Display</h1>
+      <p class="mt-2 text-muted-foreground">
+        Read-only visual elements for presenting content — cards, badges, avatars, and data tables.
+      </p>
+    </div>
+
+    <section class="flex flex-col gap-4" id="card">
+      <div class="border-l-2 border-primary/40 pl-3">
+        <h2 class="text-xl font-semibold text-foreground">Card</h2>
+        <p class="mt-1 text-sm text-muted-foreground">
+          A surface for grouping related content via
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">v-card</code> with
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">v-card-title</code>,
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">v-card-subtitle</code>,
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">v-card-text</code>, and
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">v-card-actions</code> slots.
+        </p>
+      </div>
+      <div class="rounded-lg border border-border bg-muted/50 p-8">
+        <v-card class="w-80" variant="elevated">
+          <v-card-title>Project Alpha</v-card-title>
+          <v-card-subtitle>A next-generation web application.</v-card-subtitle>
+          <v-card-text>
+            <p class="text-sm text-muted-foreground">
+              This project aims to redefine how teams collaborate in real time.
+            </p>
+          </v-card-text>
+          <v-card-actions>
+            <v-btn color="primary" variant="outlined">View details</v-btn>
+          </v-card-actions>
+        </v-card>
+      </div>
+      <CodeBlock
+        :code="CARD_CODE"
+        collapsible
+        :default-open="false"
+        filename="Card.vue"
+        language="vue"
+      />
+    </section>
+
+    <section class="flex flex-col gap-4" id="badge">
+      <div class="border-l-2 border-primary/40 pl-3">
+        <h2 class="text-xl font-semibold text-foreground">Badge</h2>
+        <p class="mt-1 text-sm text-muted-foreground">
+          A compact label for status or category via
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">v-chip</code>. Use the
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">color</code> and
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">variant</code> props (elevated, flat,
+          outlined, text, tonal).
+        </p>
+      </div>
+      <div class="rounded-lg border border-border bg-muted/50 p-8">
+        <div class="flex flex-wrap gap-2">
+          <v-chip color="primary">Primary</v-chip>
+          <v-chip color="success">Success</v-chip>
+          <v-chip color="info">Info</v-chip>
+          <v-chip color="warning">Warning</v-chip>
+          <v-chip color="error">Error</v-chip>
+          <v-chip color="secondary">Secondary</v-chip>
+          <v-chip color="primary" variant="outlined">Outlined</v-chip>
+          <v-chip color="primary" variant="tonal">Tonal</v-chip>
+        </div>
+      </div>
+      <CodeBlock
+        :code="BADGE_CODE"
+        collapsible
+        :default-open="false"
+        filename="Badge.vue"
+        language="vue"
+      />
+    </section>
+
+    <section class="flex flex-col gap-4" id="avatar">
+      <div class="border-l-2 border-primary/40 pl-3">
+        <h2 class="text-xl font-semibold text-foreground">Avatar</h2>
+        <p class="mt-1 text-sm text-muted-foreground">
+          A user image or initials via
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">v-avatar</code>. Use the
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">image</code> prop or slot content for
+          initials, and <code class="rounded bg-muted px-1 py-0.5 text-xs">color</code> for the
+          background.
+        </p>
+      </div>
+      <div class="rounded-lg border border-border bg-muted/50 p-8">
+        <div class="flex items-center gap-4">
+          <v-avatar image="https://i.pravatar.cc/150?img=1" size="large" />
+          <v-avatar color="primary" size="large">JD</v-avatar>
+          <v-avatar color="secondary">SM</v-avatar>
+          <v-avatar color="info" size="small">XS</v-avatar>
+        </div>
+      </div>
+      <CodeBlock
+        :code="AVATAR_CODE"
+        collapsible
+        :default-open="false"
+        filename="Avatar.vue"
+        language="vue"
+      />
+    </section>
+
+    <section class="flex flex-col gap-4" id="separator">
+      <div class="border-l-2 border-primary/40 pl-3">
+        <h2 class="text-xl font-semibold text-foreground">Separator</h2>
+        <p class="mt-1 text-sm text-muted-foreground">
+          A thin dividing line via
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">v-divider</code>. Add the
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">vertical</code> prop for inline
+          separators.
+        </p>
+      </div>
+      <div class="rounded-lg border border-border bg-muted/50 p-8">
+        <div class="flex flex-col gap-6">
+          <div class="flex flex-col gap-2">
+            <p class="text-sm text-muted-foreground">Section one content.</p>
+            <v-divider />
+            <p class="text-sm text-muted-foreground">Section two content.</p>
+          </div>
+          <div class="flex items-center gap-4" style="height: 2rem">
+            <span class="text-sm">Left item</span>
+            <v-divider vertical />
+            <span class="text-sm">Right item</span>
+          </div>
+        </div>
+      </div>
+      <CodeBlock
+        :code="DIVIDER_CODE"
+        collapsible
+        :default-open="false"
+        filename="Separator.vue"
+        language="vue"
+      />
+    </section>
+
+    <section class="flex flex-col gap-4" id="skeleton">
+      <div class="border-l-2 border-primary/40 pl-3">
+        <h2 class="text-xl font-semibold text-foreground">Skeleton</h2>
+        <p class="mt-1 text-sm text-muted-foreground">
+          Animated placeholder blocks via
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">v-skeleton-loader</code>. Use the
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">type</code> prop: card, list-item,
+          avatar, text, image, table.
+        </p>
+      </div>
+      <div class="rounded-lg border border-border bg-muted/50 p-8">
+        <div class="flex flex-col gap-3">
+          <v-skeleton-loader type="list-item-avatar-two-line" />
+          <v-skeleton-loader max-width="300" type="card" />
+        </div>
+      </div>
+      <CodeBlock
+        :code="SKELETON_CODE"
+        collapsible
+        :default-open="false"
+        filename="Skeleton.vue"
+        language="vue"
+      />
+    </section>
+
+    <section class="flex flex-col gap-4" id="table">
+      <div class="border-l-2 border-primary/40 pl-3">
+        <h2 class="text-xl font-semibold text-foreground">Table</h2>
+        <p class="mt-1 text-sm text-muted-foreground">
+          A styled table wrapper via
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">v-table</code>. Use standard HTML
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">thead</code> /
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">tbody</code> inside.
+        </p>
+      </div>
+      <div class="rounded-lg border border-border bg-muted/50 p-8">
+        <v-table density="comfortable">
+          <thead>
+            <tr>
+              <th class="text-left">Name</th>
+              <th class="text-left">Email</th>
+              <th class="text-left">Role</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="row in TABLE_ROWS" :key="row.email">
+              <td>{{ row.name }}</td>
+              <td>{{ row.email }}</td>
+              <td>{{ row.role }}</td>
+            </tr>
+          </tbody>
+        </v-table>
+      </div>
+      <CodeBlock
+        :code="TABLE_CODE"
+        collapsible
+        :default-open="false"
+        filename="Table.vue"
+        language="vue"
+      />
+    </section>
+  </div>
+</template>

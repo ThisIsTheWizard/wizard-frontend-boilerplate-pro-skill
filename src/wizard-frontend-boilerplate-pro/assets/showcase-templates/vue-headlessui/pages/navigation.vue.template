@@ -1,0 +1,219 @@
+<script setup lang="ts">
+import { ref } from "vue";
+import { Tab, TabGroup, TabList, TabPanel, TabPanels } from "@headlessui/vue";
+
+import CodeBlock from "@/components/ui/CodeBlock.vue";
+import { cn } from "@/lib/utils";
+
+const TABS_CODE = `<script setup lang="ts">
+import { Tab, TabGroup, TabList, TabPanel, TabPanels } from "@headlessui/vue";
+
+const tabs = ["Account", "Billing", "Security"];
+<\/script>
+
+<template>
+  <TabGroup>
+    <TabList class="flex gap-1 rounded-lg bg-muted p-1">
+      <Tab v-for="tab in tabs" :key="tab" v-slot="{ selected }" class="focus:outline-none">
+        <span :class="['block rounded-md px-3 py-1.5 text-sm font-medium transition', selected ? 'bg-background text-foreground shadow-sm' : 'text-muted-foreground hover:text-foreground']">
+          {{ tab }}
+        </span>
+      </Tab>
+    </TabList>
+    <TabPanels class="mt-4">
+      <TabPanel v-for="tab in tabs" :key="tab" class="text-sm text-muted-foreground">
+        {{ tab }} settings content goes here.
+      </TabPanel>
+    </TabPanels>
+  </TabGroup>
+</template>`;
+
+const BREADCRUMB_CODE = `<script setup lang="ts">
+const crumbs = [
+  { label: "Home", href: "/" },
+  { label: "Settings", href: "/settings" },
+  { label: "Profile", href: null },
+];
+<\/script>
+
+<template>
+  <nav aria-label="Breadcrumb">
+    <ol class="flex items-center gap-1 text-sm">
+      <li v-for="(crumb, i) in crumbs" :key="crumb.label" class="flex items-center gap-1">
+        <span v-if="i > 0" class="text-muted-foreground">/</span>
+        <a v-if="crumb.href" :href="crumb.href" class="text-muted-foreground transition-colors hover:text-foreground">{{ crumb.label }}</a>
+        <span v-else aria-current="page" class="font-medium text-foreground">{{ crumb.label }}</span>
+      </li>
+    </ol>
+  </nav>
+</template>`;
+
+const PAGINATION_CODE = `<script setup lang="ts">
+import { ref } from "vue";
+import { cn } from "@/lib/utils";
+
+const page = ref(1);
+const total = 5;
+<\/script>
+
+<template>
+  <nav aria-label="Pagination" class="flex items-center gap-1">
+    <button :disabled="page === 1" @click="page = Math.max(1, page - 1)" class="rounded-md border border-border px-3 py-1.5 text-sm hover:bg-accent disabled:opacity-50">Previous</button>
+    <button
+      v-for="p in total"
+      :key="p"
+      :aria-current="page === p ? 'page' : undefined"
+      :class="cn('rounded-md px-3 py-1.5 text-sm', page === p ? 'bg-primary text-primary-foreground' : 'border border-border hover:bg-accent')"
+      @click="page = p"
+    >{{ p }}</button>
+    <button :disabled="page === total" @click="page = Math.min(total, page + 1)" class="rounded-md border border-border px-3 py-1.5 text-sm hover:bg-accent disabled:opacity-50">Next</button>
+  </nav>
+</template>`;
+
+const NAV_MENU_CODE = `<template>
+  <nav aria-label="Main navigation">
+    <ul class="flex items-center gap-1">
+      <li v-for="(link, i) in links" :key="link">
+        <a :href="'#'" :class="i === 0 ? 'rounded-md bg-primary/10 px-3 py-2 text-sm font-medium text-primary' : 'rounded-md px-3 py-2 text-sm font-medium text-muted-foreground hover:bg-accent hover:text-foreground transition-colors'">
+          {{ link }}
+        </a>
+      </li>
+    </ul>
+  </nav>
+</template>`;
+
+const TABS = ["Account", "Billing", "Security", "Notifications"];
+const CRUMBS = [
+  { label: "Home", href: "/" },
+  { label: "Settings", href: "/settings" },
+  { label: "Profile", href: null as string | null },
+];
+const NAV_LINKS = ["Dashboard", "Projects", "Team", "Reports"];
+const TOTAL_PAGES = 5;
+
+const page = ref(1);
+</script>
+
+<template>
+  <div class="flex flex-col gap-16">
+    <div>
+      <h1 class="text-3xl font-bold tracking-tight text-foreground">Navigation</h1>
+      <p class="mt-2 text-muted-foreground">
+        Navigational components — Headless UI provides accessible Tabs; Breadcrumb, Pagination, and NavigationMenu are pure Tailwind.
+      </p>
+    </div>
+
+    <section class="flex flex-col gap-4" id="tabs">
+      <div class="border-l-2 border-primary/40 pl-3">
+        <h2 class="text-xl font-semibold text-foreground">Tabs</h2>
+        <p class="mt-1 text-sm text-muted-foreground">
+          Headless UI <code class="rounded bg-muted px-1 py-0.5 text-xs">TabGroup</code> — keyboard navigable with <code class="rounded bg-muted px-1 py-0.5 text-xs">v-slot="{ selected }"</code> state styling.
+        </p>
+      </div>
+      <div class="rounded-lg border border-border bg-muted/50 p-8">
+        <div class="max-w-md">
+          <TabGroup>
+            <TabList class="flex gap-1 rounded-lg bg-muted p-1">
+              <Tab v-for="tab in TABS" :key="tab" v-slot="{ selected }" class="focus:outline-none">
+                <span :class="['block rounded-md px-3 py-1.5 text-sm font-medium transition', selected ? 'bg-background text-foreground shadow-sm' : 'text-muted-foreground hover:text-foreground']">
+                  {{ tab }}
+                </span>
+              </Tab>
+            </TabList>
+            <TabPanels class="mt-4">
+              <TabPanel v-for="tab in TABS" :key="tab" class="text-sm text-muted-foreground">
+                {{ tab }} settings content goes here.
+              </TabPanel>
+            </TabPanels>
+          </TabGroup>
+        </div>
+      </div>
+      <CodeBlock :code="TABS_CODE" :collapsible="true" :default-open="false" filename="Tabs.vue" language="vue" />
+    </section>
+
+    <section class="flex flex-col gap-4" id="breadcrumb">
+      <div class="border-l-2 border-primary/40 pl-3">
+        <h2 class="text-xl font-semibold text-foreground">Breadcrumb</h2>
+        <p class="mt-1 text-sm text-muted-foreground">
+          A hierarchical path indicator using a semantic <code class="rounded bg-muted px-1 py-0.5 text-xs">nav</code> + <code class="rounded bg-muted px-1 py-0.5 text-xs">ol</code>.
+        </p>
+      </div>
+      <div class="rounded-lg border border-border bg-muted/50 p-8">
+        <nav aria-label="Breadcrumb">
+          <ol class="flex items-center gap-1 text-sm">
+            <li v-for="(crumb, i) in CRUMBS" :key="crumb.label" class="flex items-center gap-1">
+              <span v-if="i > 0" class="text-muted-foreground">/</span>
+              <a v-if="crumb.href" :href="crumb.href" class="text-muted-foreground transition-colors hover:text-foreground">{{ crumb.label }}</a>
+              <span v-else aria-current="page" class="font-medium text-foreground">{{ crumb.label }}</span>
+            </li>
+          </ol>
+        </nav>
+      </div>
+      <CodeBlock :code="BREADCRUMB_CODE" :collapsible="true" :default-open="false" filename="Breadcrumb.vue" language="vue" />
+    </section>
+
+    <section class="flex flex-col gap-4" id="pagination">
+      <div class="border-l-2 border-primary/40 pl-3">
+        <h2 class="text-xl font-semibold text-foreground">Pagination</h2>
+        <p class="mt-1 text-sm text-muted-foreground">
+          A page selector with Previous/Next controls — plain Tailwind with <code class="rounded bg-muted px-1 py-0.5 text-xs">aria-current="page"</code>.
+        </p>
+      </div>
+      <div class="rounded-lg border border-border bg-muted/50 p-8">
+        <nav aria-label="Pagination" class="flex items-center gap-1">
+          <button
+            :disabled="page === 1"
+            class="rounded-md border border-border px-3 py-1.5 text-sm transition hover:bg-accent disabled:opacity-50"
+            type="button"
+            @click="page = Math.max(1, page - 1)"
+          >
+            Previous
+          </button>
+          <button
+            v-for="p in TOTAL_PAGES"
+            :key="p"
+            :aria-current="page === p ? 'page' : undefined"
+            :class="cn('rounded-md px-3 py-1.5 text-sm transition', page === p ? 'bg-primary text-primary-foreground' : 'border border-border hover:bg-accent')"
+            type="button"
+            @click="page = p"
+          >
+            {{ p }}
+          </button>
+          <button
+            :disabled="page === TOTAL_PAGES"
+            class="rounded-md border border-border px-3 py-1.5 text-sm transition hover:bg-accent disabled:opacity-50"
+            type="button"
+            @click="page = Math.min(TOTAL_PAGES, page + 1)"
+          >
+            Next
+          </button>
+        </nav>
+      </div>
+      <CodeBlock :code="PAGINATION_CODE" :collapsible="true" :default-open="false" filename="Pagination.vue" language="vue" />
+    </section>
+
+    <section class="flex flex-col gap-4" id="navigation-menu">
+      <div class="border-l-2 border-primary/40 pl-3">
+        <h2 class="text-xl font-semibold text-foreground">NavigationMenu</h2>
+        <p class="mt-1 text-sm text-muted-foreground">
+          A top-level site navigation bar with active link highlighting — plain semantic HTML with Tailwind.
+        </p>
+      </div>
+      <div class="rounded-lg border border-border bg-muted/50 p-8">
+        <nav aria-label="Main navigation">
+          <ul class="flex items-center gap-1">
+            <li v-for="(link, i) in NAV_LINKS" :key="link">
+              <a
+                :class="i === 0 ? 'rounded-md bg-primary/10 px-3 py-2 text-sm font-medium text-primary' : 'rounded-md px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-foreground'"
+                href="#"
+              >
+                {{ link }}
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+      <CodeBlock :code="NAV_MENU_CODE" :collapsible="true" :default-open="false" filename="NavigationMenu.vue" language="vue" />
+    </section>
+  </div>
+</template>

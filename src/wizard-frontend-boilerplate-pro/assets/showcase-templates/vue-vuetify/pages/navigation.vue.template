@@ -1,0 +1,223 @@
+<script setup lang="ts">
+import { ref } from "vue";
+
+import CodeBlock from "@/components/CodeBlock.vue";
+
+const activeTab = ref("account");
+const currentPage = ref(1);
+
+const BREADCRUMB_ITEMS = [
+  { disabled: false, href: "/", title: "Home" },
+  { disabled: false, href: "/library", title: "Library" },
+  { disabled: true, title: "Navigation" },
+];
+
+const TABS_CODE = `<script setup lang="ts">
+import { ref } from "vue";
+const tab = ref("account");
+<\/script>
+
+<template>
+  <v-tabs v-model="tab" color="primary">
+    <v-tab value="account">Account</v-tab>
+    <v-tab value="password">Password</v-tab>
+    <v-tab value="notifications">Notifications</v-tab>
+  </v-tabs>
+  <v-window v-model="tab" class="mt-4">
+    <v-window-item value="account">
+      <p class="text-sm text-muted-foreground">Manage your account settings and preferences.</p>
+    </v-window-item>
+    <v-window-item value="password">
+      <p class="text-sm text-muted-foreground">Change your password and security options.</p>
+    </v-window-item>
+    <v-window-item value="notifications">
+      <p class="text-sm text-muted-foreground">Configure how you receive notifications.</p>
+    </v-window-item>
+  </v-window>
+</template>`;
+
+const BREADCRUMB_CODE = `<script setup lang="ts">
+const items = [
+  { title: "Home", href: "/", disabled: false },
+  { title: "Library", href: "/library", disabled: false },
+  { title: "Navigation", disabled: true },
+];
+<\/script>
+
+<template>
+  <v-breadcrumbs :items="items" />
+</template>`;
+
+const PAGINATION_CODE = `<script setup lang="ts">
+import { ref } from "vue";
+const page = ref(1);
+<\/script>
+
+<template>
+  <v-pagination v-model="page" :length="10" rounded="circle" />
+</template>`;
+
+const NAV_MENU_CODE = `<template>
+  <div class="flex items-center gap-1">
+    <v-menu>
+      <template #activator="{ props }">
+        <v-btn v-bind="props" variant="text">Products</v-btn>
+      </template>
+      <v-list>
+        <v-list-item href="/products" title="Overview" />
+        <v-list-item href="/products/pricing" title="Pricing" />
+      </v-list>
+    </v-menu>
+    <v-menu>
+      <template #activator="{ props }">
+        <v-btn v-bind="props" variant="text">Resources</v-btn>
+      </template>
+      <v-list>
+        <v-list-item href="/docs" title="Docs" />
+        <v-list-item href="/blog" title="Blog" />
+      </v-list>
+    </v-menu>
+    <v-btn href="/about" variant="text">About</v-btn>
+  </div>
+</template>`;
+</script>
+
+<template>
+  <div class="flex flex-col gap-16">
+    <div>
+      <h1 class="text-3xl font-bold tracking-tight text-foreground">Navigation</h1>
+      <p class="mt-2 text-muted-foreground">
+        Components for moving between pages and sections — tabs, breadcrumbs, pagination, and menus.
+      </p>
+    </div>
+
+    <section class="flex flex-col gap-4" id="tabs">
+      <div class="border-l-2 border-primary/40 pl-3">
+        <h2 class="text-xl font-semibold text-foreground">Tabs</h2>
+        <p class="mt-1 text-sm text-muted-foreground">
+          A tabbed interface via
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">v-tabs</code> +
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">v-tab</code> +
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">v-window</code> +
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">v-window-item</code>. Sync
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">v-model</code> between tabs and window.
+        </p>
+      </div>
+      <div class="rounded-lg border border-border bg-muted/50 p-8">
+        <v-tabs v-model="activeTab" color="primary">
+          <v-tab value="account">Account</v-tab>
+          <v-tab value="password">Password</v-tab>
+          <v-tab value="notifications">Notifications</v-tab>
+        </v-tabs>
+        <v-window v-model="activeTab" class="mt-4">
+          <v-window-item value="account">
+            <p class="text-sm text-muted-foreground">
+              Manage your account settings and preferences.
+            </p>
+          </v-window-item>
+          <v-window-item value="password">
+            <p class="text-sm text-muted-foreground">Change your password and security options.</p>
+          </v-window-item>
+          <v-window-item value="notifications">
+            <p class="text-sm text-muted-foreground">Configure how you receive notifications.</p>
+          </v-window-item>
+        </v-window>
+      </div>
+      <CodeBlock
+        :code="TABS_CODE"
+        collapsible
+        :default-open="false"
+        filename="Tabs.vue"
+        language="vue"
+      />
+    </section>
+
+    <section class="flex flex-col gap-4" id="breadcrumb">
+      <div class="border-l-2 border-primary/40 pl-3">
+        <h2 class="text-xl font-semibold text-foreground">Breadcrumb</h2>
+        <p class="mt-1 text-sm text-muted-foreground">
+          A landmark trail via
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">v-breadcrumbs</code>. Pass
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">:items</code> as an array of
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">{ title, href, disabled }</code>
+          objects.
+        </p>
+      </div>
+      <div class="rounded-lg border border-border bg-muted/50 p-8">
+        <v-breadcrumbs :items="BREADCRUMB_ITEMS" />
+      </div>
+      <CodeBlock
+        :code="BREADCRUMB_CODE"
+        collapsible
+        :default-open="false"
+        filename="Breadcrumb.vue"
+        language="vue"
+      />
+    </section>
+
+    <section class="flex flex-col gap-4" id="pagination">
+      <div class="border-l-2 border-primary/40 pl-3">
+        <h2 class="text-xl font-semibold text-foreground">Pagination</h2>
+        <p class="mt-1 text-sm text-muted-foreground">
+          Page navigation via
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">v-pagination</code>. Bind
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">v-model</code> (1-indexed page) and
+          pass <code class="rounded bg-muted px-1 py-0.5 text-xs">:length</code> for total pages.
+        </p>
+      </div>
+      <div class="rounded-lg border border-border bg-muted/50 p-8">
+        <v-pagination v-model="currentPage" color="primary" :length="10" rounded="circle" />
+      </div>
+      <CodeBlock
+        :code="PAGINATION_CODE"
+        collapsible
+        :default-open="false"
+        filename="Pagination.vue"
+        language="vue"
+      />
+    </section>
+
+    <section class="flex flex-col gap-4" id="navigation-menu">
+      <div class="border-l-2 border-primary/40 pl-3">
+        <h2 class="text-xl font-semibold text-foreground">NavigationMenu</h2>
+        <p class="mt-1 text-sm text-muted-foreground">
+          A horizontal menu bar built with
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">v-menu</code> +
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">v-list</code>. Use the
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">#activator="{ props }"</code> slot to
+          trigger each dropdown.
+        </p>
+      </div>
+      <div class="rounded-lg border border-border bg-muted/50 p-8">
+        <div class="flex items-center gap-1">
+          <v-menu>
+            <template #activator="{ props }">
+              <v-btn v-bind="props" variant="text">Products</v-btn>
+            </template>
+            <v-list>
+              <v-list-item href="/products" title="Overview" />
+              <v-list-item href="/products/pricing" title="Pricing" />
+            </v-list>
+          </v-menu>
+          <v-menu>
+            <template #activator="{ props }">
+              <v-btn v-bind="props" variant="text">Resources</v-btn>
+            </template>
+            <v-list>
+              <v-list-item href="/docs" title="Docs" />
+              <v-list-item href="/blog" title="Blog" />
+            </v-list>
+          </v-menu>
+          <v-btn href="/about" variant="text">About</v-btn>
+        </div>
+      </div>
+      <CodeBlock
+        :code="NAV_MENU_CODE"
+        collapsible
+        :default-open="false"
+        filename="NavigationMenu.vue"
+        language="vue"
+      />
+    </section>
+  </div>
+</template>

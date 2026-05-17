@@ -1,0 +1,353 @@
+<script setup lang="ts">
+import { computed, ref } from "vue";
+import {
+  Bar,
+  BarChart,
+  CartesianGrid,
+  Line,
+  LineChart,
+  ResponsiveContainer,
+  Tooltip,
+  XAxis,
+  YAxis,
+} from "vue-chartjs";
+
+import {
+  BarElement,
+  CategoryScale,
+  Chart as ChartJS,
+  Legend,
+  LinearScale,
+  LineElement,
+  PointElement,
+  Title,
+  Tooltip as ChartTooltip,
+} from "chart.js";
+
+import CodeBlock from "@/components/ui/CodeBlock.vue";
+import { cn } from "@/lib/utils";
+
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  LineElement,
+  PointElement,
+  Title,
+  ChartTooltip,
+  Legend,
+);
+
+const CHART_CODE = `<script setup lang="ts">
+import { Bar } from "vue-chartjs";
+import { BarElement, CategoryScale, Chart as ChartJS, Legend, LinearScale, Title, Tooltip } from "chart.js";
+
+ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
+
+const data = {
+  labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
+  datasets: [{
+    label: "Revenue",
+    data: [4200, 5800, 3900, 7100, 6400, 8200],
+    backgroundColor: "var(--color-primary)",
+    borderRadius: 4,
+  }],
+};
+
+const options = {
+  responsive: true,
+  plugins: { legend: { display: false } },
+  scales: {
+    x: { grid: { display: false } },
+    y: { grid: { color: "var(--color-border)" } },
+  },
+};
+<\/script>
+
+<template>
+  <Bar :data="data" :options="options" />
+</template>`;
+
+const DATA_TABLE_CODE = `<script setup lang="ts">
+import { computed, ref } from "vue";
+import { cn } from "@/lib/utils";
+
+const rows = [
+  { name: "Alice Martin", status: "Active", revenue: "$12,400", change: "+8%" },
+  { name: "Bob Chen",     status: "Active", revenue: "$9,800",  change: "+3%" },
+  { name: "Carol White",  status: "Paused", revenue: "$6,200",  change: "-2%" },
+];
+
+const sortAsc = ref(true);
+const sorted = computed(() =>
+  [...rows].sort((a, b) => sortAsc.value ? a.name.localeCompare(b.name) : b.name.localeCompare(a.name))
+);
+<\/script>
+
+<template>
+  <table class="w-full text-sm">
+    <thead>
+      <tr class="border-b border-border bg-muted/50">
+        <th scope="col" class="cursor-pointer px-4 py-3 text-left font-medium text-muted-foreground hover:text-foreground" @click="sortAsc = !sortAsc">
+          Name {{ sortAsc ? "↑" : "↓" }}
+        </th>
+        <th scope="col" class="px-4 py-3 text-left font-medium text-muted-foreground">Status</th>
+        <th scope="col" class="px-4 py-3 text-right font-medium text-muted-foreground">Revenue</th>
+        <th scope="col" class="px-4 py-3 text-right font-medium text-muted-foreground">Change</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr v-for="row in sorted" :key="row.name" class="border-b border-border last:border-0 hover:bg-muted/30">
+        <td class="px-4 py-3 font-medium text-foreground">{{ row.name }}</td>
+        <td class="px-4 py-3">
+          <span :class="cn('rounded-full px-2 py-0.5 text-xs font-medium', row.status === 'Active' ? 'bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400' : 'bg-muted text-muted-foreground')">{{ row.status }}</span>
+        </td>
+        <td class="px-4 py-3 text-right text-foreground">{{ row.revenue }}</td>
+        <td :class="cn('px-4 py-3 text-right font-medium', row.change.startsWith('+') ? 'text-green-600 dark:text-green-400' : 'text-destructive')">{{ row.change }}</td>
+      </tr>
+    </tbody>
+  </table>
+</template>`;
+
+const CALENDAR_CODE = `<script setup lang="ts">
+import { computed, ref } from "vue";
+import { cn } from "@/lib/utils";
+
+const today = new Date();
+const current = ref({ year: today.getFullYear(), month: today.getMonth() });
+
+const days = computed(() => {
+  const first = new Date(current.value.year, current.value.month, 1);
+  const last = new Date(current.value.year, current.value.month + 1, 0);
+  const blanks = Array.from({ length: first.getDay() }, (_, i) => ({ day: 0, key: \`b-\${i}\` }));
+  const filled = Array.from({ length: last.getDate() }, (_, i) => ({ day: i + 1, key: \`d-\${i + 1}\` }));
+  return [...blanks, ...filled];
+});
+
+function prevMonth() {
+  current.value = current.value.month === 0
+    ? { year: current.value.year - 1, month: 11 }
+    : { ...current.value, month: current.value.month - 1 };
+}
+function nextMonth() {
+  current.value = current.value.month === 11
+    ? { year: current.value.year + 1, month: 0 }
+    : { ...current.value, month: current.value.month + 1 };
+}
+<\/script>
+
+<template>
+  <div class="w-72 rounded-xl border border-border bg-surface p-4">
+    <div class="mb-3 flex items-center justify-between">
+      <button @click="prevMonth" class="rounded p-1 hover:bg-accent">◂</button>
+      <span class="text-sm font-semibold text-foreground">{{ new Date(current.year, current.month).toLocaleString("default", { month: "long", year: "numeric" }) }}</span>
+      <button @click="nextMonth" class="rounded p-1 hover:bg-accent">▸</button>
+    </div>
+    <div class="grid grid-cols-7 gap-1 text-center text-xs text-muted-foreground">
+      <div v-for="d in ['Su','Mo','Tu','We','Th','Fr','Sa']" :key="d">{{ d }}</div>
+      <button v-for="{ day, key } in days" :key="key" :disabled="!day" :class="cn('rounded py-1 text-sm', !day && 'invisible', day === today.getDate() && current.month === today.getMonth() && current.year === today.getFullYear() ? 'bg-primary font-semibold text-primary-foreground' : 'text-foreground hover:bg-accent')">{{ day || "" }}</button>
+    </div>
+  </div>
+</template>`;
+
+const today = new Date();
+const current = ref({ year: today.getFullYear(), month: today.getMonth() });
+const sortAsc = ref(true);
+
+const TABLE_ROWS = [
+  { name: "Alice Martin", status: "Active", revenue: "$12,400", change: "+8%" },
+  { name: "Bob Chen", status: "Active", revenue: "$9,800", change: "+3%" },
+  { name: "Carol White", status: "Paused", revenue: "$6,200", change: "-2%" },
+  { name: "Dan Kim", status: "Active", revenue: "$15,100", change: "+14%" },
+  { name: "Eve Torres", status: "Paused", revenue: "$4,300", change: "-6%" },
+];
+
+const sorted = computed(() =>
+  [...TABLE_ROWS].sort((a, b) =>
+    sortAsc.value ? a.name.localeCompare(b.name) : b.name.localeCompare(a.name),
+  ),
+);
+
+const days = computed(() => {
+  const first = new Date(current.value.year, current.value.month, 1);
+  const last = new Date(current.value.year, current.value.month + 1, 0);
+  const blanks = Array.from({ length: first.getDay() }, (_, i) => ({ day: 0, key: `b-${i}` }));
+  const filled = Array.from({ length: last.getDate() }, (_, i) => ({ day: i + 1, key: `d-${i + 1}` }));
+  return [...blanks, ...filled];
+});
+
+const monthLabel = computed(() =>
+  new Date(current.value.year, current.value.month).toLocaleString("default", {
+    month: "long",
+    year: "numeric",
+  }),
+);
+
+function prevMonth() {
+  current.value =
+    current.value.month === 0
+      ? { year: current.value.year - 1, month: 11 }
+      : { ...current.value, month: current.value.month - 1 };
+}
+function nextMonth() {
+  current.value =
+    current.value.month === 11
+      ? { year: current.value.year + 1, month: 0 }
+      : { ...current.value, month: current.value.month + 1 };
+}
+
+const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun"];
+const barChartData = computed(() => ({
+  labels: MONTHS,
+  datasets: [
+    {
+      label: "Revenue",
+      data: [4200, 5800, 3900, 7100, 6400, 8200],
+      backgroundColor: "var(--color-primary)",
+      borderRadius: 4,
+    },
+  ],
+}));
+
+const barChartOptions = {
+  responsive: true,
+  plugins: { legend: { display: false } },
+  scales: {
+    x: { grid: { display: false } },
+    y: { grid: { color: "var(--color-border)" } },
+  },
+};
+
+const lineChartData = computed(() => ({
+  labels: MONTHS,
+  datasets: [
+    {
+      label: "Users",
+      data: [320, 410, 280, 540, 490, 620],
+      borderColor: "var(--color-primary)",
+      backgroundColor: "transparent",
+      pointBackgroundColor: "var(--color-primary)",
+      tension: 0.4,
+    },
+  ],
+}));
+
+const lineChartOptions = {
+  responsive: true,
+  plugins: { legend: { display: false } },
+  scales: {
+    x: { grid: { display: false } },
+    y: { grid: { color: "var(--color-border)" } },
+  },
+};
+</script>
+
+<template>
+  <div class="flex flex-col gap-16">
+    <div>
+      <h1 class="text-3xl font-bold tracking-tight text-foreground">Data viz</h1>
+      <p class="mt-2 text-muted-foreground">
+        Data visualisation using vue-chartjs, a sortable DataTable, and a plain calendar grid. Headless UI has no data viz primitives.
+      </p>
+    </div>
+
+    <section class="flex flex-col gap-4" id="chart">
+      <div class="border-l-2 border-primary/40 pl-3">
+        <h2 class="text-xl font-semibold text-foreground">Chart</h2>
+        <p class="mt-1 text-sm text-muted-foreground">
+          Bar and line charts via <code class="rounded bg-muted px-1 py-0.5 text-xs">vue-chartjs</code> — colours reference CSS custom properties so they honour the active theme.
+        </p>
+      </div>
+      <div class="rounded-lg border border-border bg-muted/50 p-8">
+        <div class="flex flex-col gap-8">
+          <div>
+            <p class="mb-3 text-sm font-medium text-foreground">Monthly Revenue</p>
+            <Bar :data="barChartData" :options="barChartOptions" />
+          </div>
+          <div>
+            <p class="mb-3 text-sm font-medium text-foreground">New Users</p>
+            <Line :data="lineChartData" :options="lineChartOptions" />
+          </div>
+        </div>
+      </div>
+      <CodeBlock :code="CHART_CODE" :collapsible="true" :default-open="false" filename="Chart.vue" language="vue" />
+    </section>
+
+    <section class="flex flex-col gap-4" id="data-table">
+      <div class="border-l-2 border-primary/40 pl-3">
+        <h2 class="text-xl font-semibold text-foreground">DataTable</h2>
+        <p class="mt-1 text-sm text-muted-foreground">A sortable data table with status badges — plain HTML table with Tailwind.</p>
+      </div>
+      <div class="rounded-lg border border-border bg-muted/50 p-8">
+        <div class="overflow-x-auto rounded-lg border border-border">
+          <table class="w-full text-sm">
+            <thead>
+              <tr class="border-b border-border bg-muted/50">
+                <th
+                  class="cursor-pointer px-4 py-3 text-left font-medium text-muted-foreground hover:text-foreground"
+                  scope="col"
+                  @click="sortAsc = !sortAsc"
+                >
+                  Name {{ sortAsc ? "↑" : "↓" }}
+                </th>
+                <th class="px-4 py-3 text-left font-medium text-muted-foreground" scope="col">Status</th>
+                <th class="px-4 py-3 text-right font-medium text-muted-foreground" scope="col">Revenue</th>
+                <th class="px-4 py-3 text-right font-medium text-muted-foreground" scope="col">Change</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="row in sorted" :key="row.name" class="border-b border-border last:border-0 hover:bg-muted/30">
+                <td class="px-4 py-3 font-medium text-foreground">{{ row.name }}</td>
+                <td class="px-4 py-3">
+                  <span :class="cn('rounded-full px-2 py-0.5 text-xs font-medium', row.status === 'Active' ? 'bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400' : 'bg-muted text-muted-foreground')">
+                    {{ row.status }}
+                  </span>
+                </td>
+                <td class="px-4 py-3 text-right text-foreground">{{ row.revenue }}</td>
+                <td :class="cn('px-4 py-3 text-right font-medium', row.change.startsWith('+') ? 'text-green-600 dark:text-green-400' : 'text-destructive')">
+                  {{ row.change }}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <CodeBlock :code="DATA_TABLE_CODE" :collapsible="true" :default-open="false" filename="DataTable.vue" language="vue" />
+    </section>
+
+    <section class="flex flex-col gap-4" id="calendar">
+      <div class="border-l-2 border-primary/40 pl-3">
+        <h2 class="text-xl font-semibold text-foreground">Calendar</h2>
+        <p class="mt-1 text-sm text-muted-foreground">A month-view calendar grid with previous/next navigation — plain grid layout, no external dependency.</p>
+      </div>
+      <div class="rounded-lg border border-border bg-muted/50 p-8">
+        <div class="w-72 rounded-xl border border-border bg-surface p-4">
+          <div class="mb-3 flex items-center justify-between">
+            <button class="rounded p-1 text-muted-foreground transition hover:bg-accent hover:text-foreground" type="button" @click="prevMonth">◂</button>
+            <span class="text-sm font-semibold text-foreground">{{ monthLabel }}</span>
+            <button class="rounded p-1 text-muted-foreground transition hover:bg-accent hover:text-foreground" type="button" @click="nextMonth">▸</button>
+          </div>
+          <div class="grid grid-cols-7 gap-1 text-center text-xs text-muted-foreground">
+            <div v-for="d in ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa']" :key="d">{{ d }}</div>
+            <button
+              v-for="{ day, key } in days"
+              :key="key"
+              :class="cn(
+                'rounded py-1 text-sm transition',
+                !day && 'invisible',
+                day === today.getDate() && current.month === today.getMonth() && current.year === today.getFullYear()
+                  ? 'bg-primary font-semibold text-primary-foreground'
+                  : 'text-foreground hover:bg-accent',
+              )"
+              :disabled="!day"
+              type="button"
+            >
+              {{ day || "" }}
+            </button>
+          </div>
+        </div>
+      </div>
+      <CodeBlock :code="CALENDAR_CODE" :collapsible="true" :default-open="false" filename="Calendar.vue" language="vue" />
+    </section>
+  </div>
+</template>

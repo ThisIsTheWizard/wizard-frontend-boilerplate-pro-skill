@@ -1,0 +1,305 @@
+<script setup lang="ts">
+import { ref } from "vue";
+
+import Button from "primevue/button";
+import Dialog from "primevue/dialog";
+import Message from "primevue/message";
+import ProgressBar from "primevue/progressbar";
+import Toast from "primevue/toast";
+import { useToast } from "primevue/usetoast";
+
+import CodeBlock from "@/components/CodeBlock.vue";
+
+const dialogVisible = ref(false);
+const toast = useToast();
+
+function showToast(severity: "info" | "success" | "warn" | "error", summary: string, detail: string) {
+  toast.add({ detail, life: 3000, severity, summary });
+}
+
+const ALERT_CODE = `<script setup lang="ts">
+import Message from "primevue/message";
+<\/script>
+
+<template>
+  <div class="flex flex-col gap-3">
+    <Message severity="info">Heads up — you can add components using the CLI.</Message>
+    <Message severity="success">Profile saved successfully.</Message>
+    <Message severity="warn">Unsaved changes detected.</Message>
+    <Message severity="error">Something went wrong. Please try again.</Message>
+  </div>
+</template>`;
+
+const TOAST_CODE = `<script setup lang="ts">
+import Button from "primevue/button";
+import Toast from "primevue/toast";
+import { useToast } from "primevue/usetoast";
+
+// Requires app.use(ToastService) in main.ts
+const toast = useToast();
+<\/script>
+
+<!-- Place <Toast /> once in your root layout. -->
+
+<template>
+  <Toast />
+  <div class="flex flex-wrap gap-2">
+    <Button label="Info" severity="info" @click="toast.add({ severity: 'info', summary: 'Info', detail: 'Informational message.', life: 3000 })" />
+    <Button label="Success" severity="success" @click="toast.add({ severity: 'success', summary: 'Success', detail: 'Action completed.', life: 3000 })" />
+    <Button label="Warning" severity="warn" @click="toast.add({ severity: 'warn', summary: 'Warning', detail: 'Check your input.', life: 3000 })" />
+    <Button label="Error" severity="danger" @click="toast.add({ severity: 'error', summary: 'Error', detail: 'Something went wrong.', life: 3000 })" />
+  </div>
+</template>`;
+
+const PROGRESS_CODE = `<script setup lang="ts">
+import ProgressBar from "primevue/progressbar";
+<\/script>
+
+<template>
+  <div class="flex flex-col gap-4">
+    <ProgressBar :value="25" />
+    <ProgressBar :value="60" />
+    <ProgressBar :value="100" />
+    <ProgressBar mode="indeterminate" style="height: 6px" />
+  </div>
+</template>`;
+
+const TOOLTIP_CODE = `<script setup lang="ts">
+import Button from "primevue/button";
+// Requires app.directive("tooltip", Tooltip) in main.ts
+<\/script>
+
+<template>
+  <div class="flex flex-wrap items-center gap-4">
+    <Button v-tooltip.top="'Tooltip on top'" label="Top" outlined severity="primary" />
+    <Button v-tooltip.right="'Tooltip on right'" label="Right" outlined severity="primary" />
+    <Button v-tooltip.bottom="'Tooltip on bottom'" label="Bottom" outlined severity="primary" />
+    <Button v-tooltip.left="'Tooltip on left'" label="Left" outlined severity="primary" />
+  </div>
+</template>`;
+
+const DIALOG_CODE = `<script setup lang="ts">
+import { ref } from "vue";
+import Button from "primevue/button";
+import Dialog from "primevue/dialog";
+
+const visible = ref(false);
+<\/script>
+
+<template>
+  <Button label="Open dialog" @click="visible = true" />
+  <Dialog v-model:visible="visible" header="Confirm action" modal :style="{ width: '28rem' }">
+    <p class="text-sm text-muted-foreground">
+      This action cannot be undone. Are you sure you want to proceed?
+    </p>
+    <template #footer>
+      <Button label="Cancel" outlined severity="secondary" @click="visible = false" />
+      <Button label="Confirm" severity="primary" @click="visible = false" />
+    </template>
+  </Dialog>
+</template>`;
+</script>
+
+<template>
+  <div class="flex flex-col gap-16">
+    <Toast />
+
+    <div>
+      <h1 class="text-3xl font-bold tracking-tight text-foreground">Feedback</h1>
+      <p class="mt-2 text-muted-foreground">
+        Status indicators, notifications, and modal interactions — alerts, toasts, dialogs, and
+        progress.
+      </p>
+    </div>
+
+    <section class="flex flex-col gap-4" id="alert">
+      <div class="border-l-2 border-primary/40 pl-3">
+        <h2 class="text-xl font-semibold text-foreground">Alert</h2>
+        <p class="mt-1 text-sm text-muted-foreground">
+          An inline message banner via
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">Message</code>. Use the
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">severity</code> prop: info, success,
+          warn, error.
+        </p>
+      </div>
+      <div class="rounded-lg border border-border bg-muted/50 p-8">
+        <div class="flex flex-col gap-3">
+          <Message severity="info">Heads up — you can add components using the CLI.</Message>
+          <Message severity="success">Profile saved successfully.</Message>
+          <Message severity="warn">Unsaved changes detected.</Message>
+          <Message severity="error">Something went wrong. Please try again.</Message>
+        </div>
+      </div>
+      <CodeBlock
+        :code="ALERT_CODE"
+        collapsible
+        :default-open="false"
+        filename="Alert.vue"
+        language="vue"
+      />
+    </section>
+
+    <section class="flex flex-col gap-4" id="toast">
+      <div class="border-l-2 border-primary/40 pl-3">
+        <h2 class="text-xl font-semibold text-foreground">Toast</h2>
+        <p class="mt-1 text-sm text-muted-foreground">
+          Transient notifications via
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">useToast()</code>. Requires
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">app.use(ToastService)</code> in
+          main.ts and a single
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">&lt;Toast /&gt;</code> in the layout.
+        </p>
+      </div>
+      <div class="rounded-lg border border-border bg-muted/50 p-8">
+        <div class="flex flex-wrap gap-2">
+          <Button
+            label="Info"
+            severity="info"
+            @click="showToast('info', 'Info', 'Informational message.')"
+          />
+          <Button
+            label="Success"
+            severity="success"
+            @click="showToast('success', 'Success', 'Action completed successfully.')"
+          />
+          <Button
+            label="Warning"
+            severity="warn"
+            @click="showToast('warn', 'Warning', 'Check your input before continuing.')"
+          />
+          <Button
+            label="Error"
+            severity="danger"
+            @click="showToast('error', 'Error', 'Something went wrong.')"
+          />
+        </div>
+      </div>
+      <CodeBlock
+        :code="TOAST_CODE"
+        collapsible
+        :default-open="false"
+        filename="Toast.vue"
+        language="vue"
+      />
+    </section>
+
+    <section class="flex flex-col gap-4" id="progress">
+      <div class="border-l-2 border-primary/40 pl-3">
+        <h2 class="text-xl font-semibold text-foreground">Progress</h2>
+        <p class="mt-1 text-sm text-muted-foreground">
+          A horizontal bar showing completion via
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">ProgressBar</code>. Pass
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">:value</code> (0–100) or use
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">mode="indeterminate"</code>.
+        </p>
+      </div>
+      <div class="rounded-lg border border-border bg-muted/50 p-8">
+        <div class="flex flex-col gap-4">
+          <ProgressBar :value="25" />
+          <ProgressBar :value="60" />
+          <ProgressBar :value="100" />
+          <ProgressBar mode="indeterminate" style="height: 6px" />
+        </div>
+      </div>
+      <CodeBlock
+        :code="PROGRESS_CODE"
+        collapsible
+        :default-open="false"
+        filename="Progress.vue"
+        language="vue"
+      />
+    </section>
+
+    <section class="flex flex-col gap-4" id="tooltip">
+      <div class="border-l-2 border-primary/40 pl-3">
+        <h2 class="text-xl font-semibold text-foreground">Tooltip</h2>
+        <p class="mt-1 text-sm text-muted-foreground">
+          A floating label on hover via the
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">v-tooltip</code> directive. Use
+          position modifiers:
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">v-tooltip.top</code>,
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">.right</code>,
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">.bottom</code>,
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">.left</code>.
+        </p>
+      </div>
+      <div class="rounded-lg border border-border bg-muted/50 p-8">
+        <div class="flex flex-wrap items-center gap-4">
+          <Button
+            v-tooltip.top="'Tooltip on top'"
+            label="Top"
+            outlined
+            severity="primary"
+          />
+          <Button
+            v-tooltip.right="'Tooltip on right'"
+            label="Right"
+            outlined
+            severity="primary"
+          />
+          <Button
+            v-tooltip.bottom="'Tooltip on bottom'"
+            label="Bottom"
+            outlined
+            severity="primary"
+          />
+          <Button
+            v-tooltip.left="'Tooltip on left'"
+            label="Left"
+            outlined
+            severity="primary"
+          />
+        </div>
+      </div>
+      <CodeBlock
+        :code="TOOLTIP_CODE"
+        collapsible
+        :default-open="false"
+        filename="Tooltip.vue"
+        language="vue"
+      />
+    </section>
+
+    <section class="flex flex-col gap-4" id="dialog">
+      <div class="border-l-2 border-primary/40 pl-3">
+        <h2 class="text-xl font-semibold text-foreground">Dialog</h2>
+        <p class="mt-1 text-sm text-muted-foreground">
+          A modal overlay via
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">Dialog</code>. Bind
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">v-model:visible</code> and use the
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">#footer</code> slot for action
+          buttons.
+        </p>
+      </div>
+      <div class="rounded-lg border border-border bg-muted/50 p-8">
+        <Button label="Open dialog" @click="dialogVisible = true" />
+        <Dialog
+          v-model:visible="dialogVisible"
+          header="Confirm action"
+          modal
+          :style="{ width: '28rem' }"
+        >
+          <p class="text-sm text-muted-foreground">
+            This action cannot be undone. Are you sure you want to proceed?
+          </p>
+          <template #footer>
+            <Button
+              label="Cancel"
+              outlined
+              severity="secondary"
+              @click="dialogVisible = false"
+            />
+            <Button label="Confirm" severity="primary" @click="dialogVisible = false" />
+          </template>
+        </Dialog>
+      </div>
+      <CodeBlock
+        :code="DIALOG_CODE"
+        collapsible
+        :default-open="false"
+        filename="Dialog.vue"
+        language="vue"
+      />
+    </section>
+  </div>
+</template>

@@ -1,0 +1,302 @@
+<script setup lang="ts">
+import { ref } from "vue";
+
+import CodeBlock from "@/components/CodeBlock.vue";
+
+const dialogVisible = ref(false);
+const snackbarVisible = ref(false);
+const snackbarColor = ref("primary");
+const snackbarText = ref("");
+const progressValue = ref(60);
+
+function showSnackbar(color: string, text: string) {
+  snackbarColor.value = color;
+  snackbarText.value = text;
+  snackbarVisible.value = true;
+}
+
+const ALERT_CODE = `<template>
+  <div class="flex flex-col gap-3">
+    <v-alert type="info" variant="tonal">Heads up — you can add components using the CLI.</v-alert>
+    <v-alert type="success" variant="tonal">Profile saved successfully.</v-alert>
+    <v-alert type="warning" variant="tonal">Unsaved changes detected.</v-alert>
+    <v-alert type="error" variant="tonal">Something went wrong. Please try again.</v-alert>
+  </div>
+</template>`;
+
+const TOAST_CODE = `<script setup lang="ts">
+import { ref } from "vue";
+
+const visible = ref(false);
+const color = ref("primary");
+const text = ref("");
+
+function show(c: string, t: string) {
+  color.value = c;
+  text.value = t;
+  visible.value = true;
+}
+<\/script>
+
+<template>
+  <div class="flex flex-wrap gap-2">
+    <v-btn color="info" @click="show('info', 'Informational message.')">Info</v-btn>
+    <v-btn color="success" @click="show('success', 'Action completed.')">Success</v-btn>
+    <v-btn color="warning" @click="show('warning', 'Check your input.')">Warning</v-btn>
+    <v-btn color="error" @click="show('error', 'Something went wrong.')">Error</v-btn>
+  </div>
+  <v-snackbar v-model="visible" :color="color" :timeout="3000">
+    {{ text }}
+    <template #actions>
+      <v-btn variant="text" @click="visible = false">Close</v-btn>
+    </template>
+  </v-snackbar>
+</template>`;
+
+const PROGRESS_CODE = `<template>
+  <div class="flex flex-col gap-4">
+    <v-progress-linear :model-value="25" color="primary" rounded />
+    <v-progress-linear :model-value="60" color="primary" rounded />
+    <v-progress-linear :model-value="100" color="success" rounded />
+    <v-progress-linear color="primary" indeterminate rounded />
+  </div>
+</template>`;
+
+const TOOLTIP_CODE = `<template>
+  <div class="flex flex-wrap items-center gap-4">
+    <v-tooltip text="Tooltip on top" location="top">
+      <template #activator="{ props }">
+        <v-btn v-bind="props" color="primary" variant="outlined">Top</v-btn>
+      </template>
+    </v-tooltip>
+    <v-tooltip text="Tooltip on right" location="end">
+      <template #activator="{ props }">
+        <v-btn v-bind="props" color="primary" variant="outlined">Right</v-btn>
+      </template>
+    </v-tooltip>
+    <v-tooltip text="Tooltip on bottom" location="bottom">
+      <template #activator="{ props }">
+        <v-btn v-bind="props" color="primary" variant="outlined">Bottom</v-btn>
+      </template>
+    </v-tooltip>
+    <v-tooltip text="Tooltip on left" location="start">
+      <template #activator="{ props }">
+        <v-btn v-bind="props" color="primary" variant="outlined">Left</v-btn>
+      </template>
+    </v-tooltip>
+  </div>
+</template>`;
+
+const DIALOG_CODE = `<script setup lang="ts">
+import { ref } from "vue";
+const visible = ref(false);
+<\/script>
+
+<template>
+  <v-btn @click="visible = true">Open dialog</v-btn>
+  <v-dialog v-model="visible" max-width="480">
+    <v-card>
+      <v-card-title>Confirm action</v-card-title>
+      <v-card-text>
+        This action cannot be undone. Are you sure you want to proceed?
+      </v-card-text>
+      <v-card-actions>
+        <v-spacer />
+        <v-btn variant="outlined" @click="visible = false">Cancel</v-btn>
+        <v-btn color="primary" @click="visible = false">Confirm</v-btn>
+      </v-card-actions>
+    </v-card>
+  </v-dialog>
+</template>`;
+</script>
+
+<template>
+  <div class="flex flex-col gap-16">
+    <v-snackbar v-model="snackbarVisible" :color="snackbarColor" :timeout="3000">
+      {{ snackbarText }}
+      <template #actions>
+        <v-btn variant="text" @click="snackbarVisible = false">Close</v-btn>
+      </template>
+    </v-snackbar>
+
+    <div>
+      <h1 class="text-3xl font-bold tracking-tight text-foreground">Feedback</h1>
+      <p class="mt-2 text-muted-foreground">
+        Status indicators, notifications, and modal interactions — alerts, toasts, dialogs, and
+        progress.
+      </p>
+    </div>
+
+    <section class="flex flex-col gap-4" id="alert">
+      <div class="border-l-2 border-primary/40 pl-3">
+        <h2 class="text-xl font-semibold text-foreground">Alert</h2>
+        <p class="mt-1 text-sm text-muted-foreground">
+          An inline message banner via
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">v-alert</code>. Use the
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">type</code> prop (success/info/warning/
+          error) and <code class="rounded bg-muted px-1 py-0.5 text-xs">variant</code> (tonal/
+          outlined/flat/text).
+        </p>
+      </div>
+      <div class="rounded-lg border border-border bg-muted/50 p-8">
+        <div class="flex flex-col gap-3">
+          <v-alert type="info" variant="tonal">
+            Heads up — you can add components using the CLI.
+          </v-alert>
+          <v-alert type="success" variant="tonal">Profile saved successfully.</v-alert>
+          <v-alert type="warning" variant="tonal">Unsaved changes detected.</v-alert>
+          <v-alert type="error" variant="tonal">Something went wrong. Please try again.</v-alert>
+        </div>
+      </div>
+      <CodeBlock
+        :code="ALERT_CODE"
+        collapsible
+        :default-open="false"
+        filename="Alert.vue"
+        language="vue"
+      />
+    </section>
+
+    <section class="flex flex-col gap-4" id="toast">
+      <div class="border-l-2 border-primary/40 pl-3">
+        <h2 class="text-xl font-semibold text-foreground">Toast</h2>
+        <p class="mt-1 text-sm text-muted-foreground">
+          Transient notifications via
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">v-snackbar</code>. Bind
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">v-model</code> to show/hide and use
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">:timeout</code> for auto-dismiss (ms).
+        </p>
+      </div>
+      <div class="rounded-lg border border-border bg-muted/50 p-8">
+        <div class="flex flex-wrap gap-2">
+          <v-btn color="info" @click="showSnackbar('info', 'Informational message.')">
+            Info
+          </v-btn>
+          <v-btn color="success" @click="showSnackbar('success', 'Action completed successfully.')">
+            Success
+          </v-btn>
+          <v-btn color="warning" @click="showSnackbar('warning', 'Check your input before continuing.')">
+            Warning
+          </v-btn>
+          <v-btn color="error" @click="showSnackbar('error', 'Something went wrong.')">
+            Error
+          </v-btn>
+        </div>
+      </div>
+      <CodeBlock
+        :code="TOAST_CODE"
+        collapsible
+        :default-open="false"
+        filename="Toast.vue"
+        language="vue"
+      />
+    </section>
+
+    <section class="flex flex-col gap-4" id="progress">
+      <div class="border-l-2 border-primary/40 pl-3">
+        <h2 class="text-xl font-semibold text-foreground">Progress</h2>
+        <p class="mt-1 text-sm text-muted-foreground">
+          A horizontal bar via
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">v-progress-linear</code>. Bind
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">:model-value</code> (0–100) or use
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">indeterminate</code>.
+        </p>
+      </div>
+      <div class="rounded-lg border border-border bg-muted/50 p-8">
+        <div class="flex flex-col gap-4">
+          <v-progress-linear :model-value="25" color="primary" rounded />
+          <v-progress-linear :model-value="progressValue" color="primary" rounded />
+          <v-progress-linear :model-value="100" color="success" rounded />
+          <v-progress-linear color="primary" indeterminate rounded />
+        </div>
+      </div>
+      <CodeBlock
+        :code="PROGRESS_CODE"
+        collapsible
+        :default-open="false"
+        filename="Progress.vue"
+        language="vue"
+      />
+    </section>
+
+    <section class="flex flex-col gap-4" id="tooltip">
+      <div class="border-l-2 border-primary/40 pl-3">
+        <h2 class="text-xl font-semibold text-foreground">Tooltip</h2>
+        <p class="mt-1 text-sm text-muted-foreground">
+          A floating label via
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">v-tooltip</code>. Use the
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">#activator="{ props }"</code> slot to
+          bind the trigger, and <code class="rounded bg-muted px-1 py-0.5 text-xs">location</code>
+          for position.
+        </p>
+      </div>
+      <div class="rounded-lg border border-border bg-muted/50 p-8">
+        <div class="flex flex-wrap items-center gap-4">
+          <v-tooltip location="top" text="Tooltip on top">
+            <template #activator="{ props }">
+              <v-btn v-bind="props" color="primary" variant="outlined">Top</v-btn>
+            </template>
+          </v-tooltip>
+          <v-tooltip location="end" text="Tooltip on right">
+            <template #activator="{ props }">
+              <v-btn v-bind="props" color="primary" variant="outlined">Right</v-btn>
+            </template>
+          </v-tooltip>
+          <v-tooltip location="bottom" text="Tooltip on bottom">
+            <template #activator="{ props }">
+              <v-btn v-bind="props" color="primary" variant="outlined">Bottom</v-btn>
+            </template>
+          </v-tooltip>
+          <v-tooltip location="start" text="Tooltip on left">
+            <template #activator="{ props }">
+              <v-btn v-bind="props" color="primary" variant="outlined">Left</v-btn>
+            </template>
+          </v-tooltip>
+        </div>
+      </div>
+      <CodeBlock
+        :code="TOOLTIP_CODE"
+        collapsible
+        :default-open="false"
+        filename="Tooltip.vue"
+        language="vue"
+      />
+    </section>
+
+    <section class="flex flex-col gap-4" id="dialog">
+      <div class="border-l-2 border-primary/40 pl-3">
+        <h2 class="text-xl font-semibold text-foreground">Dialog</h2>
+        <p class="mt-1 text-sm text-muted-foreground">
+          A modal overlay via
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">v-dialog</code>. Bind
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">v-model</code> and set
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">max-width</code>. Use
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">v-card</code> inside for structure.
+        </p>
+      </div>
+      <div class="rounded-lg border border-border bg-muted/50 p-8">
+        <v-btn @click="dialogVisible = true">Open dialog</v-btn>
+        <v-dialog v-model="dialogVisible" max-width="480">
+          <v-card>
+            <v-card-title>Confirm action</v-card-title>
+            <v-card-text>
+              This action cannot be undone. Are you sure you want to proceed?
+            </v-card-text>
+            <v-card-actions>
+              <v-spacer />
+              <v-btn variant="outlined" @click="dialogVisible = false">Cancel</v-btn>
+              <v-btn color="primary" @click="dialogVisible = false">Confirm</v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-dialog>
+      </div>
+      <CodeBlock
+        :code="DIALOG_CODE"
+        collapsible
+        :default-open="false"
+        filename="Dialog.vue"
+        language="vue"
+      />
+    </section>
+  </div>
+</template>

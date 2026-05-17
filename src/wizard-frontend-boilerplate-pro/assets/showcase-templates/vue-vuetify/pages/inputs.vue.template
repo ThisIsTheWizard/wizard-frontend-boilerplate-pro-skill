@@ -1,0 +1,382 @@
+<script setup lang="ts">
+import { ref } from "vue";
+
+import CodeBlock from "@/components/CodeBlock.vue";
+
+const checkboxVal = ref(false);
+const checkboxChecked = ref(true);
+const emailVal = ref("");
+const plan = ref("free");
+const selectVal = ref(null);
+const switchVal = ref(false);
+const switchOn = ref(true);
+const textareaVal = ref("");
+
+const FRAMEWORK_ITEMS = ["Next.js", "Nuxt", "Astro", "SvelteKit"];
+
+const BUTTON_CODE = `<template>
+  <div class="flex flex-wrap gap-2">
+    <v-btn color="primary">Primary</v-btn>
+    <v-btn color="secondary">Secondary</v-btn>
+    <v-btn color="error">Danger</v-btn>
+    <v-btn color="primary" variant="outlined">Outlined</v-btn>
+    <v-btn color="primary" variant="text">Text</v-btn>
+    <v-btn disabled>Disabled</v-btn>
+  </div>
+</template>`;
+
+const INPUT_CODE = `<script setup lang="ts">
+import { ref } from "vue";
+const emailVal = ref("");
+<\/script>
+
+<template>
+  <div class="flex max-w-sm flex-col gap-4">
+    <v-text-field
+      v-model="emailVal"
+      hint="We'll never share your email."
+      label="Email address"
+      persistent-hint
+      placeholder="you@example.com"
+      type="email"
+      variant="outlined"
+    />
+    <v-text-field disabled label="Disabled" placeholder="Not editable" variant="outlined" />
+  </div>
+</template>`;
+
+const TEXTAREA_CODE = `<script setup lang="ts">
+import { ref } from "vue";
+const bio = ref("");
+<\/script>
+
+<template>
+  <div class="flex max-w-sm flex-col gap-1.5">
+    <v-textarea
+      v-model="bio"
+      hint="Describe your project in a few sentences."
+      label="Bio"
+      persistent-hint
+      placeholder="Tell us about yourself…"
+      :rows="4"
+      variant="outlined"
+    />
+  </div>
+</template>`;
+
+const SELECT_CODE = `<script setup lang="ts">
+import { ref } from "vue";
+const val = ref(null);
+const items = ["Next.js", "Nuxt", "Astro", "SvelteKit"];
+<\/script>
+
+<template>
+  <div class="flex max-w-sm flex-col gap-4">
+    <v-select
+      v-model="val"
+      :items="items"
+      label="Framework"
+      placeholder="Select a framework…"
+      variant="outlined"
+    />
+    <v-select disabled :items="items" label="Disabled" variant="outlined" />
+  </div>
+</template>`;
+
+const CHECKBOX_CODE = `<script setup lang="ts">
+import { ref } from "vue";
+const checked = ref(false);
+<\/script>
+
+<template>
+  <div class="flex flex-col gap-2">
+    <v-checkbox v-model="checked" hide-details label="Accept terms and conditions" />
+    <v-checkbox :model-value="true" hide-details label="Checked by default" />
+    <v-checkbox disabled hide-details label="Disabled" :model-value="false" />
+  </div>
+</template>`;
+
+const RADIO_GROUP_CODE = `<script setup lang="ts">
+import { ref } from "vue";
+const plan = ref("free");
+<\/script>
+
+<template>
+  <v-radio-group v-model="plan" hide-details>
+    <v-radio label="Free" value="free" />
+    <v-radio label="Pro" value="pro" />
+    <v-radio label="Enterprise" value="enterprise" />
+  </v-radio-group>
+</template>`;
+
+const SWITCH_CODE = `<script setup lang="ts">
+import { ref } from "vue";
+const enabled = ref(false);
+<\/script>
+
+<template>
+  <div class="flex flex-col gap-2">
+    <v-switch v-model="enabled" color="primary" hide-details label="Email notifications" />
+    <v-switch :model-value="true" color="primary" hide-details label="Marketing emails" />
+    <v-switch disabled hide-details label="Disabled" :model-value="false" />
+  </div>
+</template>`;
+</script>
+
+<template>
+  <div class="flex flex-col gap-16">
+    <div>
+      <h1 class="text-3xl font-bold tracking-tight text-foreground">Inputs</h1>
+      <p class="mt-2 text-muted-foreground">
+        Form controls for collecting user input — buttons, text fields, selections, and toggles.
+      </p>
+    </div>
+
+    <section class="flex flex-col gap-4" id="button">
+      <div class="border-l-2 border-primary/40 pl-3">
+        <h2 class="text-xl font-semibold text-foreground">Button</h2>
+        <p class="mt-1 text-sm text-muted-foreground">
+          Triggers an action via
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">v-btn</code>. Use the
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">color</code> and
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">variant</code> props (flat, outlined,
+          text, tonal, elevated, plain).
+        </p>
+      </div>
+      <div class="rounded-lg border border-border bg-muted/50 p-8">
+        <div class="flex flex-col gap-4">
+          <div class="flex flex-wrap gap-2">
+            <v-btn color="primary">Primary</v-btn>
+            <v-btn color="secondary">Secondary</v-btn>
+            <v-btn color="error">Danger</v-btn>
+            <v-btn color="success">Success</v-btn>
+          </div>
+          <div class="flex flex-wrap gap-2">
+            <v-btn color="primary" variant="outlined">Outlined</v-btn>
+            <v-btn color="primary" variant="text">Text</v-btn>
+            <v-btn color="primary" variant="tonal">Tonal</v-btn>
+            <v-btn disabled>Disabled</v-btn>
+          </div>
+          <div class="flex flex-wrap items-center gap-2">
+            <v-btn color="primary" size="small">Small</v-btn>
+            <v-btn color="primary">Default</v-btn>
+            <v-btn color="primary" size="large">Large</v-btn>
+          </div>
+        </div>
+      </div>
+      <CodeBlock
+        :code="BUTTON_CODE"
+        collapsible
+        :default-open="false"
+        filename="Button.vue"
+        language="vue"
+      />
+    </section>
+
+    <section class="flex flex-col gap-4" id="input">
+      <div class="border-l-2 border-primary/40 pl-3">
+        <h2 class="text-xl font-semibold text-foreground">Input</h2>
+        <p class="mt-1 text-sm text-muted-foreground">
+          A text field via
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">v-text-field</code>. Use
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">variant</code> (outlined/filled/
+          underlined/solo/plain) and
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">persistent-hint</code> for helper text.
+        </p>
+      </div>
+      <div class="rounded-lg border border-border bg-muted/50 p-8">
+        <div class="flex max-w-sm flex-col gap-4">
+          <v-text-field
+            v-model="emailVal"
+            hint="We'll never share your email."
+            label="Email address"
+            persistent-hint
+            placeholder="you@example.com"
+            type="email"
+            variant="outlined"
+          />
+          <v-text-field disabled label="Disabled" placeholder="Not editable" variant="outlined" />
+        </div>
+      </div>
+      <CodeBlock
+        :code="INPUT_CODE"
+        collapsible
+        :default-open="false"
+        filename="Input.vue"
+        language="vue"
+      />
+    </section>
+
+    <section class="flex flex-col gap-4" id="textarea">
+      <div class="border-l-2 border-primary/40 pl-3">
+        <h2 class="text-xl font-semibold text-foreground">Textarea</h2>
+        <p class="mt-1 text-sm text-muted-foreground">
+          A multi-line text input via
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">v-textarea</code>. Use
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">auto-grow</code> to expand with
+          content.
+        </p>
+      </div>
+      <div class="rounded-lg border border-border bg-muted/50 p-8">
+        <div class="flex max-w-sm flex-col">
+          <v-textarea
+            v-model="textareaVal"
+            hint="Describe your project in a few sentences."
+            label="Bio"
+            persistent-hint
+            placeholder="Tell us about yourself…"
+            :rows="4"
+            variant="outlined"
+          />
+        </div>
+      </div>
+      <CodeBlock
+        :code="TEXTAREA_CODE"
+        collapsible
+        :default-open="false"
+        filename="Textarea.vue"
+        language="vue"
+      />
+    </section>
+
+    <section class="flex flex-col gap-4" id="select">
+      <div class="border-l-2 border-primary/40 pl-3">
+        <h2 class="text-xl font-semibold text-foreground">Select</h2>
+        <p class="mt-1 text-sm text-muted-foreground">
+          A dropdown via
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">v-select</code>. Pass
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">:items</code> as a string array or
+          objects with <code class="rounded bg-muted px-1 py-0.5 text-xs">item-title</code> /
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">item-value</code>.
+        </p>
+      </div>
+      <div class="rounded-lg border border-border bg-muted/50 p-8">
+        <div class="flex max-w-sm flex-col gap-4">
+          <v-select
+            v-model="selectVal"
+            :items="FRAMEWORK_ITEMS"
+            label="Framework"
+            placeholder="Select a framework…"
+            variant="outlined"
+          />
+          <v-select disabled :items="FRAMEWORK_ITEMS" label="Disabled" variant="outlined" />
+        </div>
+      </div>
+      <CodeBlock
+        :code="SELECT_CODE"
+        collapsible
+        :default-open="false"
+        filename="Select.vue"
+        language="vue"
+      />
+    </section>
+
+    <section class="flex flex-col gap-4" id="checkbox">
+      <div class="border-l-2 border-primary/40 pl-3">
+        <h2 class="text-xl font-semibold text-foreground">Checkbox</h2>
+        <p class="mt-1 text-sm text-muted-foreground">
+          A binary toggle via
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">v-checkbox</code>. Use
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">hide-details</code> to suppress the
+          helper text slot.
+        </p>
+      </div>
+      <div class="rounded-lg border border-border bg-muted/50 p-8">
+        <div class="flex flex-col gap-1">
+          <v-checkbox
+            v-model="checkboxVal"
+            hide-details
+            label="Accept terms and conditions"
+          />
+          <v-checkbox
+            v-model="checkboxChecked"
+            color="primary"
+            hide-details
+            label="Checked by default"
+          />
+          <v-checkbox
+            disabled
+            hide-details
+            label="Disabled"
+            :model-value="false"
+          />
+        </div>
+      </div>
+      <CodeBlock
+        :code="CHECKBOX_CODE"
+        collapsible
+        :default-open="false"
+        filename="Checkbox.vue"
+        language="vue"
+      />
+    </section>
+
+    <section class="flex flex-col gap-4" id="radio-group">
+      <div class="border-l-2 border-primary/40 pl-3">
+        <h2 class="text-xl font-semibold text-foreground">RadioGroup</h2>
+        <p class="mt-1 text-sm text-muted-foreground">
+          Mutually exclusive options via
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">v-radio-group</code> +
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">v-radio</code>. Bind
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">v-model</code> on the group.
+        </p>
+      </div>
+      <div class="rounded-lg border border-border bg-muted/50 p-8">
+        <v-radio-group v-model="plan" color="primary" hide-details>
+          <v-radio label="Free" value="free" />
+          <v-radio label="Pro" value="pro" />
+          <v-radio label="Enterprise" value="enterprise" />
+        </v-radio-group>
+      </div>
+      <CodeBlock
+        :code="RADIO_GROUP_CODE"
+        collapsible
+        :default-open="false"
+        filename="RadioGroup.vue"
+        language="vue"
+      />
+    </section>
+
+    <section class="flex flex-col gap-4" id="switch">
+      <div class="border-l-2 border-primary/40 pl-3">
+        <h2 class="text-xl font-semibold text-foreground">Switch</h2>
+        <p class="mt-1 text-sm text-muted-foreground">
+          An on/off toggle via
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">v-switch</code>. Use
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">color</code> to style the active state
+          and <code class="rounded bg-muted px-1 py-0.5 text-xs">hide-details</code> for compact
+          layout.
+        </p>
+      </div>
+      <div class="rounded-lg border border-border bg-muted/50 p-8">
+        <div class="flex flex-col gap-1">
+          <v-switch
+            v-model="switchVal"
+            color="primary"
+            hide-details
+            label="Email notifications"
+          />
+          <v-switch
+            v-model="switchOn"
+            color="primary"
+            hide-details
+            label="Marketing emails"
+          />
+          <v-switch
+            disabled
+            hide-details
+            label="Disabled"
+            :model-value="false"
+          />
+        </div>
+      </div>
+      <CodeBlock
+        :code="SWITCH_CODE"
+        collapsible
+        :default-open="false"
+        filename="Switch.vue"
+        language="vue"
+      />
+    </section>
+  </div>
+</template>

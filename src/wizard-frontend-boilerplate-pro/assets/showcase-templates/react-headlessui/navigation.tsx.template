@@ -1,0 +1,351 @@
+"use client";
+
+import { useState } from "react";
+import {
+  Tab,
+  TabGroup,
+  TabList,
+  TabPanel,
+  TabPanels,
+} from "@headlessui/react";
+
+import { CodeBlock } from "@/components/ui/code-block";
+import { cn } from "@/lib/utils";
+
+const TABS_CODE = `import { Tab, TabGroup, TabList, TabPanel, TabPanels } from "@headlessui/react";
+
+const tabs = ["Account", "Billing", "Security"];
+
+export function Example() {
+  return (
+    <TabGroup>
+      <TabList className="flex gap-1 rounded-lg bg-muted p-1">
+        {tabs.map((t) => (
+          <Tab
+            key={t}
+            className="rounded-md px-3 py-1.5 text-sm font-medium text-muted-foreground transition focus:outline-none data-[selected]:bg-background data-[selected]:text-foreground data-[selected]:shadow-sm"
+          >
+            {t}
+          </Tab>
+        ))}
+      </TabList>
+      <TabPanels className="mt-4">
+        {tabs.map((t) => (
+          <TabPanel key={t} className="text-sm text-muted-foreground">
+            {t} settings content goes here.
+          </TabPanel>
+        ))}
+      </TabPanels>
+    </TabGroup>
+  );
+}`;
+
+const BREADCRUMB_CODE = `export function Example() {
+  const crumbs = [
+    { label: "Home", href: "/" },
+    { label: "Settings", href: "/settings" },
+    { label: "Profile", href: null },
+  ];
+
+  return (
+    <nav aria-label="Breadcrumb">
+      <ol className="flex items-center gap-1 text-sm">
+        {crumbs.map((crumb, i) => (
+          <li key={crumb.label} className="flex items-center gap-1">
+            {i > 0 && <span className="text-muted-foreground">/</span>}
+            {crumb.href ? (
+              <a href={crumb.href} className="text-muted-foreground hover:text-foreground transition-colors">
+                {crumb.label}
+              </a>
+            ) : (
+              <span aria-current="page" className="font-medium text-foreground">{crumb.label}</span>
+            )}
+          </li>
+        ))}
+      </ol>
+    </nav>
+  );
+}`;
+
+const PAGINATION_CODE = `import { useState } from "react";
+import { cn } from "@/lib/utils";
+
+export function Example() {
+  const [page, setPage] = useState(1);
+  const total = 5;
+
+  return (
+    <nav aria-label="Pagination" className="flex items-center gap-1">
+      <button
+        disabled={page === 1}
+        onClick={() => setPage((p) => Math.max(1, p - 1))}
+        className="rounded-md border border-border px-3 py-1.5 text-sm disabled:opacity-50 hover:bg-accent"
+      >
+        Previous
+      </button>
+      {Array.from({ length: total }, (_, i) => i + 1).map((p) => (
+        <button
+          key={p}
+          onClick={() => setPage(p)}
+          aria-current={page === p ? "page" : undefined}
+          className={cn("rounded-md px-3 py-1.5 text-sm", page === p ? "bg-primary text-primary-foreground" : "border border-border hover:bg-accent")}
+        >
+          {p}
+        </button>
+      ))}
+      <button
+        disabled={page === total}
+        onClick={() => setPage((p) => Math.min(total, p + 1))}
+        className="rounded-md border border-border px-3 py-1.5 text-sm disabled:opacity-50 hover:bg-accent"
+      >
+        Next
+      </button>
+    </nav>
+  );
+}`;
+
+const NAV_MENU_CODE = `export function Example() {
+  const links = ["Dashboard", "Projects", "Team", "Reports"];
+
+  return (
+    <nav aria-label="Main navigation">
+      <ul className="flex items-center gap-1">
+        {links.map((link, i) => (
+          <li key={link}>
+            <a
+              href="#"
+              className={i === 0 ? "rounded-md bg-primary/10 px-3 py-2 text-sm font-medium text-primary" : "rounded-md px-3 py-2 text-sm font-medium text-muted-foreground hover:bg-accent hover:text-foreground transition-colors"}
+            >
+              {link}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  );
+}`;
+
+const TABS = ["Account", "Billing", "Security", "Notifications"];
+const CRUMBS = [
+  { label: "Home", href: "/" },
+  { label: "Settings", href: "/settings" },
+  { label: "Profile", href: null as string | null },
+];
+const NAV_LINKS = ["Dashboard", "Projects", "Team", "Reports"];
+const TOTAL_PAGES = 5;
+
+export default function NavigationPage() {
+  const [page, setPage] = useState(1);
+
+  return (
+    <div className="flex flex-col gap-16">
+      <div>
+        <h1 className="text-3xl font-bold tracking-tight text-foreground">
+          Navigation
+        </h1>
+        <p className="mt-2 text-muted-foreground">
+          Navigational components — Headless UI provides fully accessible Tabs;
+          Breadcrumb, Pagination, and NavigationMenu are pure Tailwind.
+        </p>
+      </div>
+
+      <section className="flex flex-col gap-4" id="tabs">
+        <div className="border-l-2 border-primary/40 pl-3">
+          <h2 className="text-xl font-semibold text-foreground">Tabs</h2>
+          <p className="mt-1 text-sm text-muted-foreground">
+            Headless UI{" "}
+            <code className="rounded bg-muted px-1 py-0.5 text-xs">
+              TabGroup
+            </code>{" "}
+            — keyboard navigable with{" "}
+            <code className="rounded bg-muted px-1 py-0.5 text-xs">
+              data-[selected]
+            </code>{" "}
+            state styling.
+          </p>
+        </div>
+        <div className="rounded-lg border border-border bg-muted/50 p-8">
+          <div className="max-w-md">
+            <TabGroup>
+              <TabList className="flex gap-1 rounded-lg bg-muted p-1">
+                {TABS.map((t) => (
+                  <Tab
+                    className="rounded-md px-3 py-1.5 text-sm font-medium text-muted-foreground transition focus:outline-none data-[selected]:bg-background data-[selected]:text-foreground data-[selected]:shadow-sm"
+                    key={t}
+                  >
+                    {t}
+                  </Tab>
+                ))}
+              </TabList>
+              <TabPanels className="mt-4">
+                {TABS.map((t) => (
+                  <TabPanel
+                    className="text-sm text-muted-foreground"
+                    key={t}
+                  >
+                    {t} settings content goes here.
+                  </TabPanel>
+                ))}
+              </TabPanels>
+            </TabGroup>
+          </div>
+        </div>
+        <CodeBlock
+          code={TABS_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="Tabs.tsx"
+          language="tsx"
+        />
+      </section>
+
+      <section className="flex flex-col gap-4" id="breadcrumb">
+        <div className="border-l-2 border-primary/40 pl-3">
+          <h2 className="text-xl font-semibold text-foreground">Breadcrumb</h2>
+          <p className="mt-1 text-sm text-muted-foreground">
+            A hierarchical path indicator using a semantic{" "}
+            <code className="rounded bg-muted px-1 py-0.5 text-xs">nav</code>{" "}
+            +{" "}
+            <code className="rounded bg-muted px-1 py-0.5 text-xs">ol</code>{" "}
+            with{" "}
+            <code className="rounded bg-muted px-1 py-0.5 text-xs">
+              aria-current=&quot;page&quot;
+            </code>
+            .
+          </p>
+        </div>
+        <div className="rounded-lg border border-border bg-muted/50 p-8">
+          <nav aria-label="Breadcrumb">
+            <ol className="flex items-center gap-1 text-sm">
+              {CRUMBS.map((crumb, i) => (
+                <li className="flex items-center gap-1" key={crumb.label}>
+                  {i > 0 && (
+                    <span className="text-muted-foreground">/</span>
+                  )}
+                  {crumb.href ? (
+                    <a
+                      className="text-muted-foreground transition-colors hover:text-foreground"
+                      href={crumb.href}
+                    >
+                      {crumb.label}
+                    </a>
+                  ) : (
+                    <span
+                      aria-current="page"
+                      className="font-medium text-foreground"
+                    >
+                      {crumb.label}
+                    </span>
+                  )}
+                </li>
+              ))}
+            </ol>
+          </nav>
+        </div>
+        <CodeBlock
+          code={BREADCRUMB_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="Breadcrumb.tsx"
+          language="tsx"
+        />
+      </section>
+
+      <section className="flex flex-col gap-4" id="pagination">
+        <div className="border-l-2 border-primary/40 pl-3">
+          <h2 className="text-xl font-semibold text-foreground">Pagination</h2>
+          <p className="mt-1 text-sm text-muted-foreground">
+            A page selector with Previous/Next controls and numbered page
+            buttons — plain Tailwind with{" "}
+            <code className="rounded bg-muted px-1 py-0.5 text-xs">
+              aria-current=&quot;page&quot;
+            </code>
+            .
+          </p>
+        </div>
+        <div className="rounded-lg border border-border bg-muted/50 p-8">
+          <nav aria-label="Pagination" className="flex items-center gap-1">
+            <button
+              className="rounded-md border border-border px-3 py-1.5 text-sm transition hover:bg-accent disabled:opacity-50"
+              disabled={page === 1}
+              onClick={() => setPage((p) => Math.max(1, p - 1))}
+              type="button"
+            >
+              Previous
+            </button>
+            {Array.from({ length: TOTAL_PAGES }, (_, i) => i + 1).map((p) => (
+              <button
+                aria-current={page === p ? "page" : undefined}
+                className={cn(
+                  "rounded-md px-3 py-1.5 text-sm transition",
+                  page === p
+                    ? "bg-primary text-primary-foreground"
+                    : "border border-border hover:bg-accent",
+                )}
+                key={p}
+                onClick={() => setPage(p)}
+                type="button"
+              >
+                {p}
+              </button>
+            ))}
+            <button
+              className="rounded-md border border-border px-3 py-1.5 text-sm transition hover:bg-accent disabled:opacity-50"
+              disabled={page === TOTAL_PAGES}
+              onClick={() => setPage((p) => Math.min(TOTAL_PAGES, p + 1))}
+              type="button"
+            >
+              Next
+            </button>
+          </nav>
+        </div>
+        <CodeBlock
+          code={PAGINATION_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="Pagination.tsx"
+          language="tsx"
+        />
+      </section>
+
+      <section className="flex flex-col gap-4" id="navigation-menu">
+        <div className="border-l-2 border-primary/40 pl-3">
+          <h2 className="text-xl font-semibold text-foreground">
+            NavigationMenu
+          </h2>
+          <p className="mt-1 text-sm text-muted-foreground">
+            A top-level site navigation bar with active link highlighting —
+            plain semantic HTML with Tailwind token classes.
+          </p>
+        </div>
+        <div className="rounded-lg border border-border bg-muted/50 p-8">
+          <nav aria-label="Main navigation">
+            <ul className="flex items-center gap-1">
+              {NAV_LINKS.map((link, i) => (
+                <li key={link}>
+                  <a
+                    className={
+                      i === 0
+                        ? "rounded-md bg-primary/10 px-3 py-2 text-sm font-medium text-primary"
+                        : "rounded-md px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
+                    }
+                    href="#"
+                  >
+                    {link}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        </div>
+        <CodeBlock
+          code={NAV_MENU_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="NavigationMenu.tsx"
+          language="tsx"
+        />
+      </section>
+    </div>
+  );
+}

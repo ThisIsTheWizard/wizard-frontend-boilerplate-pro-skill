@@ -1,0 +1,181 @@
+<script setup lang="ts">
+import { ref } from "vue";
+
+import CodeBlock from "@/components/CodeBlock.vue";
+
+const drawerVisible = ref(false);
+const popoverVisible = ref(false);
+
+const POPOVER_CODE = `<script setup lang="ts">
+import { ref } from "vue";
+const open = ref(false);
+<\/script>
+
+<template>
+  <v-menu v-model="open" :close-on-content-click="false">
+    <template #activator="{ props }">
+      <v-btn v-bind="props" color="primary" variant="outlined">Open Popover</v-btn>
+    </template>
+    <v-card min-width="220">
+      <v-card-text>
+        <p class="text-sm text-muted-foreground">This is a popover. It can contain any content.</p>
+      </v-card-text>
+      <v-card-actions>
+        <v-btn size="small" variant="outlined" @click="open = false">Close</v-btn>
+      </v-card-actions>
+    </v-card>
+  </v-menu>
+</template>`;
+
+const DROPDOWN_CODE = `<template>
+  <v-menu>
+    <template #activator="{ props }">
+      <v-btn v-bind="props" color="primary" variant="outlined">Options</v-btn>
+    </template>
+    <v-list>
+      <v-list-subheader>My Account</v-list-subheader>
+      <v-list-item title="Profile" value="profile" />
+      <v-list-item title="Settings" value="settings" />
+      <v-list-item title="Billing" value="billing" />
+    </v-list>
+  </v-menu>
+</template>`;
+
+const SHEET_CODE = `<script setup lang="ts">
+import { ref } from "vue";
+const visible = ref(false);
+<\/script>
+
+<template>
+  <v-btn color="primary" variant="outlined" @click="visible = true">Open Sheet</v-btn>
+  <v-navigation-drawer v-model="visible" location="right" temporary width="320">
+    <div class="flex flex-col gap-4 p-6">
+      <h2 class="text-lg font-semibold text-foreground">Edit profile</h2>
+      <p class="text-sm text-muted-foreground">
+        Make changes to your profile here. Click save when you're done.
+      </p>
+      <div class="mt-auto flex gap-2 pt-4">
+        <v-btn variant="outlined" @click="visible = false">Close</v-btn>
+        <v-btn color="primary" @click="visible = false">Save</v-btn>
+      </div>
+    </div>
+  </v-navigation-drawer>
+</template>`;
+</script>
+
+<template>
+  <div class="flex flex-col gap-16">
+    <div>
+      <h1 class="text-3xl font-bold tracking-tight text-foreground">Overlay</h1>
+      <p class="mt-2 text-muted-foreground">
+        Floating UI components that render above the main content — popovers, dropdown menus, and
+        sheets.
+      </p>
+    </div>
+
+    <section class="flex flex-col gap-4" id="popover">
+      <div class="border-l-2 border-primary/40 pl-3">
+        <h2 class="text-xl font-semibold text-foreground">Popover</h2>
+        <p class="mt-1 text-sm text-muted-foreground">
+          A non-modal floating panel via
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">v-menu</code> with
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">:close-on-content-click="false"</code>.
+          Use the <code class="rounded bg-muted px-1 py-0.5 text-xs">#activator="{ props }"</code>
+          slot to bind the trigger.
+        </p>
+      </div>
+      <div class="rounded-lg border border-border bg-muted/50 p-8">
+        <v-menu v-model="popoverVisible" :close-on-content-click="false">
+          <template #activator="{ props }">
+            <v-btn v-bind="props" color="primary" variant="outlined">Open Popover</v-btn>
+          </template>
+          <v-card min-width="220">
+            <v-card-text>
+              <p class="text-sm text-muted-foreground">
+                This is a popover. It can contain any content.
+              </p>
+            </v-card-text>
+            <v-card-actions>
+              <v-btn size="small" variant="outlined" @click="popoverVisible = false">Close</v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-menu>
+      </div>
+      <CodeBlock
+        :code="POPOVER_CODE"
+        :collapsible="true"
+        :default-open="false"
+        filename="Popover.vue"
+        language="vue"
+      />
+    </section>
+
+    <section class="flex flex-col gap-4" id="dropdown-menu">
+      <div class="border-l-2 border-primary/40 pl-3">
+        <h2 class="text-xl font-semibold text-foreground">DropdownMenu</h2>
+        <p class="mt-1 text-sm text-muted-foreground">
+          A contextual popup menu via
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">v-menu</code> +
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">v-list</code>. Closes on item click by
+          default (<code class="rounded bg-muted px-1 py-0.5 text-xs">close-on-content-click</code>
+          is true by default).
+        </p>
+      </div>
+      <div class="rounded-lg border border-border bg-muted/50 p-8">
+        <v-menu>
+          <template #activator="{ props }">
+            <v-btn v-bind="props" color="primary" variant="outlined">Options</v-btn>
+          </template>
+          <v-list>
+            <v-list-subheader>My Account</v-list-subheader>
+            <v-list-item title="Profile" value="profile" />
+            <v-list-item title="Settings" value="settings" />
+            <v-list-item title="Billing" value="billing" />
+          </v-list>
+        </v-menu>
+      </div>
+      <CodeBlock
+        :code="DROPDOWN_CODE"
+        :collapsible="true"
+        :default-open="false"
+        filename="DropdownMenu.vue"
+        language="vue"
+      />
+    </section>
+
+    <section class="flex flex-col gap-4" id="sheet">
+      <div class="border-l-2 border-primary/40 pl-3">
+        <h2 class="text-xl font-semibold text-foreground">Sheet</h2>
+        <p class="mt-1 text-sm text-muted-foreground">
+          A slide-in panel via
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">v-navigation-drawer</code> with
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">temporary</code> and
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">location="right"</code>. Bind
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">v-model</code> to show/hide.
+        </p>
+      </div>
+      <div class="rounded-lg border border-border bg-muted/50 p-8">
+        <v-btn color="primary" variant="outlined" @click="drawerVisible = true">Open Sheet</v-btn>
+        <v-navigation-drawer v-model="drawerVisible" location="right" temporary width="320">
+          <div class="flex h-full flex-col gap-4 p-6">
+            <h2 class="text-lg font-semibold text-foreground">Edit profile</h2>
+            <p class="text-sm text-muted-foreground">
+              Make changes to your profile here. Click save when you're done.
+            </p>
+            <div class="mt-auto flex gap-2 pt-4">
+              <v-btn variant="outlined" @click="drawerVisible = false">Close</v-btn>
+              <v-btn color="primary" @click="drawerVisible = false">Save</v-btn>
+            </div>
+          </div>
+        </v-navigation-drawer>
+      </div>
+      <CodeBlock
+        :code="SHEET_CODE"
+        :collapsible="true"
+        :default-open="false"
+        filename="Sheet.vue"
+        language="vue"
+      />
+    </section>
+  </div>
+</template>

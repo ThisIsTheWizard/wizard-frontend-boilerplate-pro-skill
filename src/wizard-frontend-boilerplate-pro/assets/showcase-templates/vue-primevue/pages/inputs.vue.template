@@ -1,0 +1,440 @@
+<script setup lang="ts">
+import { ref } from "vue";
+
+import Button from "primevue/button";
+import Checkbox from "primevue/checkbox";
+import RadioButton from "primevue/radiobutton";
+import Select from "primevue/select";
+import Textarea from "primevue/textarea";
+import ToggleSwitch from "primevue/toggleswitch";
+import InputText from "primevue/inputtext";
+
+import CodeBlock from "@/components/CodeBlock.vue";
+
+const checkboxVal = ref(false);
+const checkboxChecked = ref(true);
+const emailVal = ref("");
+const plan = ref("free");
+const selectVal = ref(null);
+const switchVal = ref(false);
+const switchOn = ref(true);
+const textareaVal = ref("");
+
+const FRAMEWORK_OPTIONS = [
+  { label: "Next.js", value: "nextjs" },
+  { label: "Nuxt", value: "nuxt" },
+  { label: "Astro", value: "astro" },
+  { label: "SvelteKit", value: "sveltekit" },
+];
+
+const BUTTON_CODE = `<script setup lang="ts">
+import Button from "primevue/button";
+<\/script>
+
+<template>
+  <div class="flex flex-wrap gap-2">
+    <Button label="Primary" severity="primary" />
+    <Button label="Secondary" severity="secondary" />
+    <Button label="Danger" severity="danger" />
+    <Button label="Outlined" severity="primary" outlined />
+    <Button label="Text" severity="primary" text />
+    <Button disabled label="Disabled" />
+  </div>
+</template>`;
+
+const INPUT_CODE = `<script setup lang="ts">
+import { ref } from "vue";
+import InputText from "primevue/inputtext";
+<\/script>
+
+<template>
+  <div class="flex flex-col gap-1.5">
+    <label class="text-sm font-medium text-foreground" for="email">Email address</label>
+    <InputText id="email" v-model="emailVal" placeholder="you@example.com" type="email" />
+    <p class="text-sm text-muted-foreground">We'll never share your email.</p>
+  </div>
+</template>`;
+
+const TEXTAREA_CODE = `<script setup lang="ts">
+import { ref } from "vue";
+import Textarea from "primevue/textarea";
+<\/script>
+
+<template>
+  <div class="flex flex-col gap-1.5">
+    <label class="text-sm font-medium text-foreground" for="bio">Bio</label>
+    <Textarea id="bio" v-model="textareaVal" :rows="4" placeholder="Tell us about yourself…" />
+    <p class="text-sm text-muted-foreground">Describe your project in a few sentences.</p>
+  </div>
+</template>`;
+
+const SELECT_CODE = `<script setup lang="ts">
+import { ref } from "vue";
+import Select from "primevue/select";
+
+const selectVal = ref(null);
+const FRAMEWORK_OPTIONS = [
+  { label: "Next.js", value: "nextjs" },
+  { label: "Nuxt", value: "nuxt" },
+  { label: "Astro", value: "astro" },
+  { label: "SvelteKit", value: "sveltekit" },
+];
+<\/script>
+
+<template>
+  <div class="flex flex-col gap-1.5">
+    <label class="text-sm font-medium text-foreground" for="framework">Framework</label>
+    <Select
+      v-model="selectVal"
+      :options="FRAMEWORK_OPTIONS"
+      input-id="framework"
+      option-label="label"
+      option-value="value"
+      placeholder="Select a framework…"
+    />
+  </div>
+</template>`;
+
+const CHECKBOX_CODE = `<script setup lang="ts">
+import { ref } from "vue";
+import Checkbox from "primevue/checkbox";
+
+const checked = ref(false);
+<\/script>
+
+<template>
+  <div class="flex items-center gap-2">
+    <Checkbox v-model="checked" binary input-id="terms" />
+    <label class="text-sm font-medium text-foreground" for="terms">
+      Accept terms and conditions
+    </label>
+  </div>
+</template>`;
+
+const RADIO_GROUP_CODE = `<script setup lang="ts">
+import { ref } from "vue";
+import RadioButton from "primevue/radiobutton";
+
+const plan = ref("free");
+<\/script>
+
+<template>
+  <div class="flex flex-col gap-2">
+    <div class="flex items-center gap-2">
+      <RadioButton v-model="plan" input-id="plan-free" value="free" />
+      <label class="text-sm font-medium text-foreground" for="plan-free">Free</label>
+    </div>
+    <div class="flex items-center gap-2">
+      <RadioButton v-model="plan" input-id="plan-pro" value="pro" />
+      <label class="text-sm font-medium text-foreground" for="plan-pro">Pro</label>
+    </div>
+    <div class="flex items-center gap-2">
+      <RadioButton v-model="plan" input-id="plan-enterprise" value="enterprise" />
+      <label class="text-sm font-medium text-foreground" for="plan-enterprise">Enterprise</label>
+    </div>
+  </div>
+</template>`;
+
+const SWITCH_CODE = `<script setup lang="ts">
+import { ref } from "vue";
+import ToggleSwitch from "primevue/toggleswitch";
+
+const enabled = ref(false);
+<\/script>
+
+<template>
+  <div class="flex items-center gap-2">
+    <ToggleSwitch v-model="enabled" input-id="notifications" />
+    <label class="text-sm font-medium text-foreground" for="notifications">
+      Email notifications
+    </label>
+  </div>
+</template>`;
+</script>
+
+<template>
+  <div class="flex flex-col gap-16">
+    <div>
+      <h1 class="text-3xl font-bold tracking-tight text-foreground">Inputs</h1>
+      <p class="mt-2 text-muted-foreground">
+        Form controls for collecting user input — buttons, text fields, selections, and toggles.
+      </p>
+    </div>
+
+    <section class="flex flex-col gap-4" id="button">
+      <div class="border-l-2 border-primary/40 pl-3">
+        <h2 class="text-xl font-semibold text-foreground">Button</h2>
+        <p class="mt-1 text-sm text-muted-foreground">
+          Triggers an action or event. Use the
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">severity</code> prop for variants and
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">outlined</code> /
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">text</code> for appearance modifiers.
+        </p>
+      </div>
+      <div class="rounded-lg border border-border bg-muted/50 p-8">
+        <div class="flex flex-col gap-4">
+          <div class="flex flex-wrap gap-2">
+            <Button label="Primary" severity="primary" />
+            <Button label="Secondary" severity="secondary" />
+            <Button label="Danger" severity="danger" />
+            <Button label="Contrast" severity="contrast" />
+          </div>
+          <div class="flex flex-wrap gap-2">
+            <Button label="Outlined" outlined severity="primary" />
+            <Button label="Text" severity="primary" text />
+            <Button disabled label="Disabled" severity="primary" />
+          </div>
+          <div class="flex flex-wrap items-center gap-2">
+            <Button label="Small" severity="primary" size="small" />
+            <Button label="Default" severity="primary" />
+            <Button label="Large" severity="primary" size="large" />
+          </div>
+        </div>
+      </div>
+      <CodeBlock
+        :code="BUTTON_CODE"
+        collapsible
+        :default-open="false"
+        filename="Button.vue"
+        language="vue"
+      />
+    </section>
+
+    <section class="flex flex-col gap-4" id="input">
+      <div class="border-l-2 border-primary/40 pl-3">
+        <h2 class="text-xl font-semibold text-foreground">Input</h2>
+        <p class="mt-1 text-sm text-muted-foreground">
+          A single-line text field via
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">InputText</code>. Pair with a
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">&lt;label&gt;</code> using matching
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">input-id</code> /
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">for</code>.
+        </p>
+      </div>
+      <div class="rounded-lg border border-border bg-muted/50 p-8">
+        <div class="flex max-w-sm flex-col gap-4">
+          <div class="flex flex-col gap-1.5">
+            <label class="text-sm font-medium text-foreground" for="email-demo">Email address</label>
+            <InputText
+              id="email-demo"
+              v-model="emailVal"
+              placeholder="you@example.com"
+              type="email"
+            />
+            <p class="text-sm text-muted-foreground">We'll never share your email.</p>
+          </div>
+          <div class="flex flex-col gap-1.5">
+            <label class="text-sm font-medium text-foreground opacity-50" for="disabled-input">
+              Disabled
+            </label>
+            <InputText disabled id="disabled-input" placeholder="Not editable" />
+          </div>
+        </div>
+      </div>
+      <CodeBlock
+        :code="INPUT_CODE"
+        collapsible
+        :default-open="false"
+        filename="Input.vue"
+        language="vue"
+      />
+    </section>
+
+    <section class="flex flex-col gap-4" id="textarea">
+      <div class="border-l-2 border-primary/40 pl-3">
+        <h2 class="text-xl font-semibold text-foreground">Textarea</h2>
+        <p class="mt-1 text-sm text-muted-foreground">
+          A multi-line text input. Use
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">autoResize</code> to grow with
+          content.
+        </p>
+      </div>
+      <div class="rounded-lg border border-border bg-muted/50 p-8">
+        <div class="flex max-w-sm flex-col gap-1.5">
+          <label class="text-sm font-medium text-foreground" for="bio-demo">Bio</label>
+          <Textarea
+            id="bio-demo"
+            v-model="textareaVal"
+            :rows="4"
+            placeholder="Tell us about yourself…"
+          />
+          <p class="text-sm text-muted-foreground">Describe your project in a few sentences.</p>
+        </div>
+      </div>
+      <CodeBlock
+        :code="TEXTAREA_CODE"
+        collapsible
+        :default-open="false"
+        filename="Textarea.vue"
+        language="vue"
+      />
+    </section>
+
+    <section class="flex flex-col gap-4" id="select">
+      <div class="border-l-2 border-primary/40 pl-3">
+        <h2 class="text-xl font-semibold text-foreground">Select</h2>
+        <p class="mt-1 text-sm text-muted-foreground">
+          A dropdown replacement for the native
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">&lt;select&gt;</code>. Pass
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">:options</code> with
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">optionLabel</code> and
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">optionValue</code>.
+        </p>
+      </div>
+      <div class="rounded-lg border border-border bg-muted/50 p-8">
+        <div class="flex max-w-sm flex-col gap-4">
+          <div class="flex flex-col gap-1.5">
+            <label class="text-sm font-medium text-foreground" for="framework-demo">
+              Framework
+            </label>
+            <Select
+              v-model="selectVal"
+              :options="FRAMEWORK_OPTIONS"
+              input-id="framework-demo"
+              option-label="label"
+              option-value="value"
+              placeholder="Select a framework…"
+            />
+          </div>
+          <div class="flex flex-col gap-1.5">
+            <label class="text-sm font-medium text-foreground opacity-50" for="disabled-select">
+              Disabled
+            </label>
+            <Select
+              disabled
+              :options="FRAMEWORK_OPTIONS"
+              input-id="disabled-select"
+              option-label="label"
+              option-value="value"
+              placeholder="Not selectable"
+            />
+          </div>
+        </div>
+      </div>
+      <CodeBlock
+        :code="SELECT_CODE"
+        collapsible
+        :default-open="false"
+        filename="Select.vue"
+        language="vue"
+      />
+    </section>
+
+    <section class="flex flex-col gap-4" id="checkbox">
+      <div class="border-l-2 border-primary/40 pl-3">
+        <h2 class="text-xl font-semibold text-foreground">Checkbox</h2>
+        <p class="mt-1 text-sm text-muted-foreground">
+          A binary toggle. Use
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">binary</code> for boolean
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">v-model</code>. Pair with a label via
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">input-id</code>.
+        </p>
+      </div>
+      <div class="rounded-lg border border-border bg-muted/50 p-8">
+        <div class="flex flex-col gap-3">
+          <div class="flex items-center gap-2">
+            <Checkbox v-model="checkboxVal" binary input-id="terms-demo" />
+            <label class="text-sm font-medium text-foreground" for="terms-demo">
+              Accept terms and conditions
+            </label>
+          </div>
+          <div class="flex items-center gap-2">
+            <Checkbox v-model="checkboxChecked" binary input-id="checked-demo" />
+            <label class="text-sm font-medium text-foreground" for="checked-demo">
+              Checked by default
+            </label>
+          </div>
+          <div class="flex items-center gap-2">
+            <Checkbox binary disabled input-id="disabled-cb" :model-value="false" />
+            <label class="text-sm font-medium text-foreground opacity-50" for="disabled-cb">
+              Disabled
+            </label>
+          </div>
+        </div>
+      </div>
+      <CodeBlock
+        :code="CHECKBOX_CODE"
+        collapsible
+        :default-open="false"
+        filename="Checkbox.vue"
+        language="vue"
+      />
+    </section>
+
+    <section class="flex flex-col gap-4" id="radio-group">
+      <div class="border-l-2 border-primary/40 pl-3">
+        <h2 class="text-xl font-semibold text-foreground">RadioGroup</h2>
+        <p class="mt-1 text-sm text-muted-foreground">
+          Mutually exclusive options using
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">RadioButton</code> components sharing
+          the same <code class="rounded bg-muted px-1 py-0.5 text-xs">v-model</code>.
+        </p>
+      </div>
+      <div class="rounded-lg border border-border bg-muted/50 p-8">
+        <div class="flex flex-col gap-2">
+          <div class="flex items-center gap-2">
+            <RadioButton v-model="plan" input-id="plan-free" value="free" />
+            <label class="text-sm font-medium text-foreground" for="plan-free">Free</label>
+          </div>
+          <div class="flex items-center gap-2">
+            <RadioButton v-model="plan" input-id="plan-pro" value="pro" />
+            <label class="text-sm font-medium text-foreground" for="plan-pro">Pro</label>
+          </div>
+          <div class="flex items-center gap-2">
+            <RadioButton v-model="plan" input-id="plan-enterprise" value="enterprise" />
+            <label class="text-sm font-medium text-foreground" for="plan-enterprise">
+              Enterprise
+            </label>
+          </div>
+        </div>
+      </div>
+      <CodeBlock
+        :code="RADIO_GROUP_CODE"
+        collapsible
+        :default-open="false"
+        filename="RadioGroup.vue"
+        language="vue"
+      />
+    </section>
+
+    <section class="flex flex-col gap-4" id="switch">
+      <div class="border-l-2 border-primary/40 pl-3">
+        <h2 class="text-xl font-semibold text-foreground">Switch</h2>
+        <p class="mt-1 text-sm text-muted-foreground">
+          An on/off toggle via
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">ToggleSwitch</code>. Pair with a label
+          via <code class="rounded bg-muted px-1 py-0.5 text-xs">input-id</code>.
+        </p>
+      </div>
+      <div class="rounded-lg border border-border bg-muted/50 p-8">
+        <div class="flex flex-col gap-3">
+          <div class="flex items-center gap-2">
+            <ToggleSwitch v-model="switchVal" input-id="notifications-demo" />
+            <label class="text-sm font-medium text-foreground" for="notifications-demo">
+              Email notifications
+            </label>
+          </div>
+          <div class="flex items-center gap-2">
+            <ToggleSwitch v-model="switchOn" input-id="marketing-demo" />
+            <label class="text-sm font-medium text-foreground" for="marketing-demo">
+              Marketing emails
+            </label>
+          </div>
+          <div class="flex items-center gap-2">
+            <ToggleSwitch disabled input-id="disabled-switch" :model-value="false" />
+            <label class="text-sm font-medium text-foreground opacity-50" for="disabled-switch">
+              Disabled
+            </label>
+          </div>
+        </div>
+      </div>
+      <CodeBlock
+        :code="SWITCH_CODE"
+        collapsible
+        :default-open="false"
+        filename="Switch.vue"
+        language="vue"
+      />
+    </section>
+  </div>
+</template>

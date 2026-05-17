@@ -1,0 +1,222 @@
+<script setup lang="ts">
+import { ref } from "vue";
+
+import Chart from "primevue/chart";
+import Column from "primevue/column";
+import DataTable from "primevue/datatable";
+import DatePicker from "primevue/datepicker";
+
+import CodeBlock from "@/components/CodeBlock.vue";
+
+const selectedDate = ref<Date | null>(null);
+
+interface User {
+  email: string;
+  id: number;
+  name: string;
+  role: string;
+}
+
+const tableData: User[] = [
+  { email: "alice@example.com", id: 1, name: "Alice Martin", role: "Admin" },
+  { email: "bob@example.com", id: 2, name: "Bob Chen", role: "Developer" },
+  { email: "carol@example.com", id: 3, name: "Carol White", role: "Designer" },
+  { email: "dave@example.com", id: 4, name: "Dave Kim", role: "Developer" },
+  { email: "eve@example.com", id: 5, name: "Eve Lopez", role: "Manager" },
+];
+
+const chartData = {
+  datasets: [
+    {
+      backgroundColor: "rgba(59, 130, 246, 0.15)",
+      borderColor: "#3b82f6",
+      data: [65, 59, 80, 81, 56, 72],
+      fill: true,
+      label: "Sessions",
+      tension: 0.4,
+    },
+    {
+      backgroundColor: "rgba(16, 185, 129, 0.15)",
+      borderColor: "#10b981",
+      data: [28, 48, 40, 19, 86, 27],
+      fill: true,
+      label: "Conversions",
+      tension: 0.4,
+    },
+  ],
+  labels: ["January", "February", "March", "April", "May", "June"],
+};
+
+const chartOptions = {
+  plugins: {
+    legend: { position: "top" as const },
+  },
+  responsive: true,
+  scales: {
+    y: { beginAtZero: true },
+  },
+};
+
+const CHART_CODE = `<script setup lang="ts">
+import Chart from "primevue/chart";
+
+// PrimeVue Chart wraps Chart.js. Install: npm install chart.js
+
+const data = {
+  labels: ["January", "February", "March", "April", "May", "June"],
+  datasets: [
+    {
+      label: "Sessions",
+      data: [65, 59, 80, 81, 56, 72],
+      borderColor: "#3b82f6",
+      backgroundColor: "rgba(59, 130, 246, 0.15)",
+      fill: true,
+      tension: 0.4,
+    },
+  ],
+};
+
+const options = {
+  responsive: true,
+  plugins: { legend: { position: "top" } },
+  scales: { y: { beginAtZero: true } },
+};
+<\/script>
+
+<template>
+  <Chart type="line" :data="data" :options="options" />
+</template>`;
+
+const DATA_TABLE_CODE = `<script setup lang="ts">
+import Column from "primevue/column";
+import DataTable from "primevue/datatable";
+
+interface User {
+  email: string;
+  id: number;
+  name: string;
+  role: string;
+}
+
+const rows: User[] = [
+  { email: "alice@example.com", id: 1, name: "Alice Martin", role: "Admin" },
+  { email: "bob@example.com", id: 2, name: "Bob Chen", role: "Developer" },
+  { email: "carol@example.com", id: 3, name: "Carol White", role: "Designer" },
+];
+<\/script>
+
+<template>
+  <DataTable :value="rows" removable-sort>
+    <Column field="name" header="Name" sortable />
+    <Column field="email" header="Email" sortable />
+    <Column field="role" header="Role" sortable />
+  </DataTable>
+</template>`;
+
+const CALENDAR_CODE = `<script setup lang="ts">
+import { ref } from "vue";
+import DatePicker from "primevue/datepicker";
+
+const selectedDate = ref(null);
+<\/script>
+
+<template>
+  <div class="flex flex-col gap-3">
+    <DatePicker v-model="selectedDate" inline show-button-bar />
+    <p v-if="selectedDate" class="text-sm text-muted-foreground">
+      Selected: {{ new Date(selectedDate).toLocaleDateString() }}
+    </p>
+    <p v-else class="text-sm text-muted-foreground">No date selected.</p>
+  </div>
+</template>`;
+</script>
+
+<template>
+  <div class="flex flex-col gap-16">
+    <div>
+      <h1 class="text-3xl font-bold tracking-tight text-foreground">Data Visualization</h1>
+      <p class="mt-2 text-muted-foreground">
+        Components for presenting structured and visual data — charts, data tables, and calendars.
+      </p>
+    </div>
+
+    <section class="flex flex-col gap-4" id="chart">
+      <div class="border-l-2 border-primary/40 pl-3">
+        <h2 class="text-xl font-semibold text-foreground">Chart</h2>
+        <p class="mt-1 text-sm text-muted-foreground">
+          A wrapper around
+          <code class="font-mono text-xs">chart.js</code> via
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">Chart</code>. Install
+          <code class="font-mono text-xs">chart.js</code> separately. Supports line, bar, pie,
+          doughnut, and radar types.
+        </p>
+      </div>
+      <div class="rounded-lg border border-border bg-muted/50 p-8">
+        <Chart :data="chartData" :options="chartOptions" type="line" />
+      </div>
+      <CodeBlock
+        :code="CHART_CODE"
+        :collapsible="true"
+        :default-open="false"
+        filename="Chart.vue"
+        language="vue"
+      />
+    </section>
+
+    <section class="flex flex-col gap-4" id="data-table">
+      <div class="border-l-2 border-primary/40 pl-3">
+        <h2 class="text-xl font-semibold text-foreground">DataTable</h2>
+        <p class="mt-1 text-sm text-muted-foreground">
+          A feature-rich table via
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">DataTable</code> +
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">Column</code>. Add
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">sortable</code> to columns and
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">removableSort</code> to the table for
+          sortable columns.
+        </p>
+      </div>
+      <div class="rounded-lg border border-border bg-muted/50 p-8">
+        <DataTable :value="tableData" removable-sort>
+          <Column field="name" header="Name" sortable />
+          <Column field="email" header="Email" sortable />
+          <Column field="role" header="Role" sortable />
+        </DataTable>
+      </div>
+      <CodeBlock
+        :code="DATA_TABLE_CODE"
+        :collapsible="true"
+        :default-open="false"
+        filename="DataTable.vue"
+        language="vue"
+      />
+    </section>
+
+    <section class="flex flex-col gap-4" id="calendar">
+      <div class="border-l-2 border-primary/40 pl-3">
+        <h2 class="text-xl font-semibold text-foreground">Calendar</h2>
+        <p class="mt-1 text-sm text-muted-foreground">
+          An inline date picker via
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">DatePicker</code> with the
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">inline</code> prop. Supports single,
+          multiple, and range selection modes.
+        </p>
+      </div>
+      <div class="rounded-lg border border-border bg-muted/50 p-8">
+        <div class="flex flex-col items-start gap-3">
+          <DatePicker v-model="selectedDate" inline show-button-bar />
+          <p v-if="selectedDate" class="text-sm text-muted-foreground">
+            Selected: {{ new Date(selectedDate).toLocaleDateString() }}
+          </p>
+          <p v-else class="text-sm text-muted-foreground">No date selected.</p>
+        </div>
+      </div>
+      <CodeBlock
+        :code="CALENDAR_CODE"
+        :collapsible="true"
+        :default-open="false"
+        filename="Calendar.vue"
+        language="vue"
+      />
+    </section>
+  </div>
+</template>

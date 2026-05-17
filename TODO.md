@@ -146,20 +146,20 @@
 - [x] `assets/showcase-templates/react-antd/` — 8 files
 
 ## 24. PrimeVue — reference file + templates
-- [ ] Write `references/ui-library/primevue.md` — plugin setup, PrimeVue theming presets
-- [ ] `assets/showcase-templates/vue-primevue/` — 8 files
+- [x] Write `references/ui-library/primevue.md` — plugin setup, PrimeVue theming presets
+- [x] `assets/showcase-templates/vue-primevue/` — 8 files
 
 ## 25. Vuetify — reference file + templates
-- [ ] Write `references/ui-library/vuetify.md` — `createVuetify`, blueprint, CSS var bridge
-- [ ] `assets/showcase-templates/vue-vuetify/` — 8 files
+- [x] Write `references/ui-library/vuetify.md` — `createVuetify`, blueprint, CSS var bridge
+- [x] `assets/showcase-templates/vue-vuetify/` — 8 files
 
 ## 27. Headless UI — reference file + templates
-- [ ] Write `references/ui-library/headlessui.md`
+- [x] Write `references/ui-library/headlessui.md`
   - `@headlessui/react` (React) and `@headlessui/vue` (Vue) install + wiring
   - Component coverage map (which of the 28 slots are native vs custom Tailwind)
   - Tailwind pairing — always installed, pairs with existing token system
-- [ ] `assets/showcase-templates/react-headlessui/` — 8 files
-- [ ] `assets/showcase-templates/vue-headlessui/` — 8 files
+- [x] `assets/showcase-templates/react-headlessui/` — 8 files
+- [x] `assets/showcase-templates/vue-headlessui/` — 8 files
 
 ## 28. NextUI / HeroUI — reference file + templates
 - [ ] Write `references/ui-library/heroui.md`
@@ -176,8 +176,8 @@
 - [ ] `assets/showcase-templates/vue-elementplus/` — 8 files
 
 ## 26. Multi-library end-to-end validation
-- [ ] Simulated run: Next.js + shadcn/ui — all 6 routes render, dark mode works
-- [ ] Simulated run: Next.js + MUI — theme bridge verified, SSR no flash
-- [ ] Simulated run: Vue + Bootstrap — all routes render, responsive
-- [ ] Confirm Phase 1 menu hides Vue-incompatible libraries when Vue is selected
-- [ ] Confirm existing `custom` path still works unchanged
+- [x] Simulated run: Next.js + shadcn/ui — all 6 routes render, dark mode works
+- [x] Simulated run: Next.js + MUI — theme bridge verified, SSR no flash
+- [x] Simulated run: Vue + Bootstrap — all routes render, responsive
+- [x] Confirm Phase 1 menu hides Vue-incompatible libraries when Vue is selected
+- [x] Confirm existing `custom` path still works unchanged
