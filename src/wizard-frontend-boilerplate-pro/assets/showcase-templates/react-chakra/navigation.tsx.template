@@ -1,0 +1,295 @@
+"use client";
+
+import { useState } from "react";
+
+import {
+  Box,
+  Breadcrumb,
+  Button,
+  Flex,
+  Heading,
+  Pagination,
+  Separator,
+  Stack,
+  Tabs,
+  Text,
+} from "@chakra-ui/react";
+
+import { CodeBlock } from "@/components/ui/code-block";
+
+const TABS_CODE = `import { Box, Tabs, Text } from "@chakra-ui/react";
+
+export function Example() {
+  return (
+    <Tabs.Root colorPalette="brand" defaultValue="account">
+      <Tabs.List>
+        <Tabs.Trigger value="account">Account</Tabs.Trigger>
+        <Tabs.Trigger value="password">Password</Tabs.Trigger>
+        <Tabs.Trigger value="notifications">Notifications</Tabs.Trigger>
+      </Tabs.List>
+      <Box pt={4}>
+        <Tabs.Content value="account">
+          <Text color="var(--muted-foreground)">
+            Manage your account settings and preferences.
+          </Text>
+        </Tabs.Content>
+        <Tabs.Content value="password">
+          <Text color="var(--muted-foreground)">
+            Change your password and security settings.
+          </Text>
+        </Tabs.Content>
+        <Tabs.Content value="notifications">
+          <Text color="var(--muted-foreground)">
+            Configure how you receive notifications.
+          </Text>
+        </Tabs.Content>
+      </Box>
+    </Tabs.Root>
+  );
+}`;
+
+const BREADCRUMB_CODE = `import { Breadcrumb, Stack } from "@chakra-ui/react";
+
+export function Example() {
+  return (
+    <Stack gap={3}>
+      <Breadcrumb.Root>
+        <Breadcrumb.List>
+          <Breadcrumb.Item>
+            <Breadcrumb.Link href="#">Home</Breadcrumb.Link>
+          </Breadcrumb.Item>
+          <Breadcrumb.Separator />
+          <Breadcrumb.Item>
+            <Breadcrumb.Link href="#">Library</Breadcrumb.Link>
+          </Breadcrumb.Item>
+          <Breadcrumb.Separator />
+          <Breadcrumb.Item>
+            <Breadcrumb.CurrentLink>Components</Breadcrumb.CurrentLink>
+          </Breadcrumb.Item>
+        </Breadcrumb.List>
+      </Breadcrumb.Root>
+      <Breadcrumb.Root separator="›">
+        <Breadcrumb.List>
+          <Breadcrumb.Item>
+            <Breadcrumb.Link href="#">Dashboard</Breadcrumb.Link>
+          </Breadcrumb.Item>
+          <Breadcrumb.Separator />
+          <Breadcrumb.Item>
+            <Breadcrumb.Link href="#">Settings</Breadcrumb.Link>
+          </Breadcrumb.Item>
+          <Breadcrumb.Separator />
+          <Breadcrumb.Item>
+            <Breadcrumb.CurrentLink>Profile</Breadcrumb.CurrentLink>
+          </Breadcrumb.Item>
+        </Breadcrumb.List>
+      </Breadcrumb.Root>
+    </Stack>
+  );
+}`;
+
+const PAGINATION_CODE = `import { useState } from "react";
+import { Pagination } from "@chakra-ui/react";
+
+export function Example() {
+  const [page, setPage] = useState(1);
+
+  return (
+    <Pagination.Root
+      colorPalette="brand"
+      count={100}
+      onPageChange={(e) => setPage(e.page)}
+      page={page}
+      pageSize={10}
+    >
+      <Pagination.PrevTrigger asChild>
+        <button>Previous</button>
+      </Pagination.PrevTrigger>
+      <Pagination.Items />
+      <Pagination.NextTrigger asChild>
+        <button>Next</button>
+      </Pagination.NextTrigger>
+    </Pagination.Root>
+  );
+}`;
+
+export default function NavigationPage() {
+  const [page, setPage] = useState(1);
+
+  return (
+    <Box display="flex" flexDirection="column" gap={16}>
+      <Box>
+        <Heading mb={2} size="2xl">
+          Navigation
+        </Heading>
+        <Text color="var(--muted-foreground)">
+          Components for moving users through content — tabs, breadcrumbs,
+          and pagination.
+        </Text>
+      </Box>
+
+      {/* Tabs */}
+      <Box as="section" display="flex" flexDirection="column" gap={4} id="tabs">
+        <Box borderLeft="3px solid" borderColor="var(--color-accent-500)" pl={3}>
+          <Heading mb={1} size="md">Tabs</Heading>
+          <Text color="var(--muted-foreground)" fontSize="sm">
+            A segmented tab strip using <code>Tabs.Root</code> +{" "}
+            <code>Tabs.List</code> + <code>Tabs.Trigger</code> +{" "}
+            <code>Tabs.Content</code>. Match the <code>value</code> on{" "}
+            <code>Tabs.Trigger</code> and <code>Tabs.Content</code> for
+            automatic panel switching.
+          </Text>
+        </Box>
+        <Box
+          border="1px solid"
+          borderColor="var(--border)"
+          borderRadius="lg"
+          p={6}
+        >
+          <Tabs.Root colorPalette="brand" defaultValue="account">
+            <Tabs.List>
+              <Tabs.Trigger value="account">Account</Tabs.Trigger>
+              <Tabs.Trigger value="password">Password</Tabs.Trigger>
+              <Tabs.Trigger value="notifications">Notifications</Tabs.Trigger>
+            </Tabs.List>
+            <Box pt={4}>
+              <Tabs.Content value="account">
+                <Text color="var(--muted-foreground)" fontSize="sm">
+                  Manage your account settings and preferences.
+                </Text>
+              </Tabs.Content>
+              <Tabs.Content value="password">
+                <Text color="var(--muted-foreground)" fontSize="sm">
+                  Change your password and security settings.
+                </Text>
+              </Tabs.Content>
+              <Tabs.Content value="notifications">
+                <Text color="var(--muted-foreground)" fontSize="sm">
+                  Configure how you receive notifications.
+                </Text>
+              </Tabs.Content>
+            </Box>
+          </Tabs.Root>
+        </Box>
+        <CodeBlock
+          code={TABS_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="Tabs.tsx"
+          language="tsx"
+        />
+      </Box>
+
+      <Separator />
+
+      {/* Breadcrumb */}
+      <Box as="section" display="flex" flexDirection="column" gap={4} id="breadcrumb">
+        <Box borderLeft="3px solid" borderColor="var(--color-accent-500)" pl={3}>
+          <Heading mb={1} size="md">Breadcrumb</Heading>
+          <Text color="var(--muted-foreground)" fontSize="sm">
+            A hierarchical path indicator. Use{" "}
+            <code>Breadcrumb.Root</code> + <code>Breadcrumb.List</code> +{" "}
+            <code>Breadcrumb.Item</code> + <code>Breadcrumb.Link</code>.
+            The current page uses <code>Breadcrumb.CurrentLink</code> (no href,
+            rendered as non-interactive text). Add{" "}
+            <code>Breadcrumb.Separator</code> between items.
+          </Text>
+        </Box>
+        <Box
+          border="1px solid"
+          borderColor="var(--border)"
+          borderRadius="lg"
+          p={6}
+        >
+          <Stack gap={4}>
+            <Breadcrumb.Root>
+              <Breadcrumb.List>
+                <Breadcrumb.Item>
+                  <Breadcrumb.Link href="#">Home</Breadcrumb.Link>
+                </Breadcrumb.Item>
+                <Breadcrumb.Separator />
+                <Breadcrumb.Item>
+                  <Breadcrumb.Link href="#">Library</Breadcrumb.Link>
+                </Breadcrumb.Item>
+                <Breadcrumb.Separator />
+                <Breadcrumb.Item>
+                  <Breadcrumb.CurrentLink>Components</Breadcrumb.CurrentLink>
+                </Breadcrumb.Item>
+              </Breadcrumb.List>
+            </Breadcrumb.Root>
+            <Breadcrumb.Root separator="›">
+              <Breadcrumb.List>
+                <Breadcrumb.Item>
+                  <Breadcrumb.Link href="#">Dashboard</Breadcrumb.Link>
+                </Breadcrumb.Item>
+                <Breadcrumb.Separator />
+                <Breadcrumb.Item>
+                  <Breadcrumb.Link href="#">Settings</Breadcrumb.Link>
+                </Breadcrumb.Item>
+                <Breadcrumb.Separator />
+                <Breadcrumb.Item>
+                  <Breadcrumb.CurrentLink>Profile</Breadcrumb.CurrentLink>
+                </Breadcrumb.Item>
+              </Breadcrumb.List>
+            </Breadcrumb.Root>
+          </Stack>
+        </Box>
+        <CodeBlock
+          code={BREADCRUMB_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="Breadcrumb.tsx"
+          language="tsx"
+        />
+      </Box>
+
+      <Separator />
+
+      {/* Pagination */}
+      <Box as="section" display="flex" flexDirection="column" gap={4} id="pagination">
+        <Box borderLeft="3px solid" borderColor="var(--color-accent-500)" pl={3}>
+          <Heading mb={1} size="md">Pagination</Heading>
+          <Text color="var(--muted-foreground)" fontSize="sm">
+            A numbered page navigator. Use <code>Pagination.Root</code> with{" "}
+            <code>count</code> (total items), <code>pageSize</code>, and{" "}
+            <code>page</code>. Listen for changes with{" "}
+            <code>onPageChange</code>. Currently on page{" "}
+            <strong>{page}</strong>.
+          </Text>
+        </Box>
+        <Box
+          border="1px solid"
+          borderColor="var(--border)"
+          borderRadius="lg"
+          p={6}
+        >
+          <Stack gap={4}>
+            <Pagination.Root
+              colorPalette="brand"
+              count={100}
+              onPageChange={(e) => setPage(e.page)}
+              page={page}
+              pageSize={10}
+            >
+              <Flex align="center" gap={2}>
+                <Pagination.PrevTrigger asChild>
+                  <Button size="sm" variant="outline">Previous</Button>
+                </Pagination.PrevTrigger>
+                <Pagination.Items />
+                <Pagination.NextTrigger asChild>
+                  <Button size="sm" variant="outline">Next</Button>
+                </Pagination.NextTrigger>
+              </Flex>
+            </Pagination.Root>
+          </Stack>
+        </Box>
+        <CodeBlock
+          code={PAGINATION_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="Pagination.tsx"
+          language="tsx"
+        />
+      </Box>
+    </Box>
+  );
+}

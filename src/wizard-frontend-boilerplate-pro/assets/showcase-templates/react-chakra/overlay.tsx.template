@@ -1,0 +1,317 @@
+"use client";
+
+import { useState } from "react";
+
+import {
+  Box,
+  Button,
+  Drawer,
+  Flex,
+  Heading,
+  Menu,
+  Popover,
+  Portal,
+  Separator,
+  Stack,
+  Text,
+} from "@chakra-ui/react";
+
+import { CodeBlock } from "@/components/ui/code-block";
+
+const POPOVER_CODE = `import { Box, Button, Popover, Portal, Text } from "@chakra-ui/react";
+
+export function Example() {
+  return (
+    <Popover.Root>
+      <Popover.Trigger asChild>
+        <Button variant="outline">Open Popover</Button>
+      </Popover.Trigger>
+      <Portal>
+        <Popover.Positioner>
+          <Popover.Content>
+            <Popover.Arrow />
+            <Popover.Body>
+              <Box>
+                <Text fontWeight={600} mb={1}>Popover title</Text>
+                <Text color="var(--muted-foreground)" fontSize="sm">
+                  This is a popover with some helpful content.
+                </Text>
+              </Box>
+            </Popover.Body>
+            <Popover.CloseTrigger asChild>
+              <Button size="xs" variant="ghost" position="absolute" right={1} top={1}>
+                ✕
+              </Button>
+            </Popover.CloseTrigger>
+          </Popover.Content>
+        </Popover.Positioner>
+      </Portal>
+    </Popover.Root>
+  );
+}`;
+
+const MENU_CODE = `import { Button, Menu, Portal, Separator, Text } from "@chakra-ui/react";
+
+export function Example() {
+  return (
+    <Menu.Root>
+      <Menu.Trigger asChild>
+        <Button variant="outline">Account</Button>
+      </Menu.Trigger>
+      <Portal>
+        <Menu.Positioner>
+          <Menu.Content>
+            <Menu.Item value="label" disabled>
+              <Text color="var(--muted-foreground)" fontSize="xs">My Account</Text>
+            </Menu.Item>
+            <Menu.Item value="profile">Profile</Menu.Item>
+            <Menu.Item value="settings">Settings</Menu.Item>
+            <Menu.Item value="billing">Billing</Menu.Item>
+            <Menu.Separator />
+            <Menu.Item value="logout">Log out</Menu.Item>
+          </Menu.Content>
+        </Menu.Positioner>
+      </Portal>
+    </Menu.Root>
+  );
+}`;
+
+const DRAWER_CODE = `import { useState } from "react";
+import {
+  Box,
+  Button,
+  Drawer,
+  Portal,
+  Separator,
+  Text,
+} from "@chakra-ui/react";
+
+export function Example() {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <>
+      <Button onClick={() => setOpen(true)} variant="outline">
+        Open drawer
+      </Button>
+      <Drawer.Root
+        onOpenChange={(e) => setOpen(e.open)}
+        open={open}
+        placement="end"
+      >
+        <Portal>
+          <Drawer.Backdrop />
+          <Drawer.Positioner>
+            <Drawer.Content>
+              <Drawer.Header>
+                <Drawer.Title>Panel title</Drawer.Title>
+              </Drawer.Header>
+              <Drawer.Body>
+                <Text color="var(--muted-foreground)" fontSize="sm">
+                  This is a right-anchored drawer — Chakra's equivalent of
+                  shadcn's Sheet component. Use it for filters, detail views,
+                  or settings panels.
+                </Text>
+              </Drawer.Body>
+              <Drawer.Footer>
+                <Drawer.CloseTrigger asChild>
+                  <Button variant="outline">Close</Button>
+                </Drawer.CloseTrigger>
+              </Drawer.Footer>
+            </Drawer.Content>
+          </Drawer.Positioner>
+        </Portal>
+      </Drawer.Root>
+    </>
+  );
+}`;
+
+export default function OverlayPage() {
+  const [drawerOpen, setDrawerOpen] = useState(false);
+
+  return (
+    <Box display="flex" flexDirection="column" gap={16}>
+      <Box>
+        <Heading mb={2} size="2xl">
+          Overlay
+        </Heading>
+        <Text color="var(--muted-foreground)">
+          Floating UI layers — popovers, contextual menus, and side-panel
+          drawers.
+        </Text>
+      </Box>
+
+      {/* Popover */}
+      <Box as="section" display="flex" flexDirection="column" gap={4} id="popover">
+        <Box borderLeft="3px solid" borderColor="var(--color-accent-500)" pl={3}>
+          <Heading mb={1} size="md">Popover</Heading>
+          <Text color="var(--muted-foreground)" fontSize="sm">
+            An anchored floating panel. Compose{" "}
+            <code>Popover.Root</code> + <code>Popover.Trigger</code> +{" "}
+            <code>Popover.Positioner</code> + <code>Popover.Content</code>.
+            Wrap in a <code>Portal</code> to render at document root and avoid
+            z-index clipping.
+          </Text>
+        </Box>
+        <Box
+          border="1px solid"
+          borderColor="var(--border)"
+          borderRadius="lg"
+          p={6}
+        >
+          <Popover.Root>
+            <Popover.Trigger asChild>
+              <Button variant="outline">Open Popover</Button>
+            </Popover.Trigger>
+            <Portal>
+              <Popover.Positioner>
+                <Popover.Content>
+                  <Popover.Arrow />
+                  <Popover.Body>
+                    <Box>
+                      <Text fontWeight={600} mb={1}>Popover title</Text>
+                      <Text color="var(--muted-foreground)" fontSize="sm">
+                        This is a popover with some helpful content.
+                      </Text>
+                    </Box>
+                  </Popover.Body>
+                  <Popover.CloseTrigger asChild>
+                    <Button
+                      position="absolute"
+                      right={1}
+                      size="xs"
+                      top={1}
+                      variant="ghost"
+                    >
+                      ✕
+                    </Button>
+                  </Popover.CloseTrigger>
+                </Popover.Content>
+              </Popover.Positioner>
+            </Portal>
+          </Popover.Root>
+        </Box>
+        <CodeBlock
+          code={POPOVER_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="Popover.tsx"
+          language="tsx"
+        />
+      </Box>
+
+      <Separator />
+
+      {/* Menu */}
+      <Box as="section" display="flex" flexDirection="column" gap={4} id="menu">
+        <Box borderLeft="3px solid" borderColor="var(--color-accent-500)" pl={3}>
+          <Heading mb={1} size="md">Menu</Heading>
+          <Text color="var(--muted-foreground)" fontSize="sm">
+            A contextual dropdown list. Compose{" "}
+            <code>Menu.Root</code> + <code>Menu.Trigger</code> +{" "}
+            <code>Menu.Positioner</code> + <code>Menu.Content</code> +{" "}
+            <code>Menu.Item</code>. Each <code>Menu.Item</code> requires a
+            unique <code>value</code> prop. Use <code>Menu.Separator</code> for
+            dividers.
+          </Text>
+        </Box>
+        <Box
+          border="1px solid"
+          borderColor="var(--border)"
+          borderRadius="lg"
+          p={6}
+        >
+          <Menu.Root>
+            <Menu.Trigger asChild>
+              <Button variant="outline">Account</Button>
+            </Menu.Trigger>
+            <Portal>
+              <Menu.Positioner>
+                <Menu.Content>
+                  <Menu.Item disabled value="label">
+                    <Text color="var(--muted-foreground)" fontSize="xs">
+                      My Account
+                    </Text>
+                  </Menu.Item>
+                  <Menu.Item value="profile">Profile</Menu.Item>
+                  <Menu.Item value="settings">Settings</Menu.Item>
+                  <Menu.Item value="billing">Billing</Menu.Item>
+                  <Menu.Separator />
+                  <Menu.Item value="logout">Log out</Menu.Item>
+                </Menu.Content>
+              </Menu.Positioner>
+            </Portal>
+          </Menu.Root>
+        </Box>
+        <CodeBlock
+          code={MENU_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="Menu.tsx"
+          language="tsx"
+        />
+      </Box>
+
+      <Separator />
+
+      {/* Drawer */}
+      <Box as="section" display="flex" flexDirection="column" gap={4} id="drawer">
+        <Box borderLeft="3px solid" borderColor="var(--color-accent-500)" pl={3}>
+          <Heading mb={1} size="md">Drawer</Heading>
+          <Text color="var(--muted-foreground)" fontSize="sm">
+            A side panel that slides in from an edge — Chakra's equivalent of
+            shadcn's Sheet. Set <code>placement="end"</code> for the common
+            right-hand panel pattern. Compose{" "}
+            <code>Drawer.Root</code> + <code>Drawer.Backdrop</code> +{" "}
+            <code>Drawer.Positioner</code> + <code>Drawer.Content</code>.
+          </Text>
+        </Box>
+        <Box
+          border="1px solid"
+          borderColor="var(--border)"
+          borderRadius="lg"
+          p={6}
+        >
+          <Button onClick={() => setDrawerOpen(true)} variant="outline">
+            Open drawer
+          </Button>
+        </Box>
+        <Drawer.Root
+          onOpenChange={(e) => setDrawerOpen(e.open)}
+          open={drawerOpen}
+          placement="end"
+        >
+          <Portal>
+            <Drawer.Backdrop />
+            <Drawer.Positioner>
+              <Drawer.Content>
+                <Drawer.Header>
+                  <Drawer.Title>Panel title</Drawer.Title>
+                </Drawer.Header>
+                <Drawer.Body>
+                  <Text color="var(--muted-foreground)" fontSize="sm">
+                    This is a right-anchored drawer — Chakra's equivalent of
+                    shadcn's Sheet component. Use it for filters, detail views,
+                    or settings panels.
+                  </Text>
+                </Drawer.Body>
+                <Drawer.Footer>
+                  <Drawer.CloseTrigger asChild>
+                    <Button variant="outline">Close</Button>
+                  </Drawer.CloseTrigger>
+                </Drawer.Footer>
+              </Drawer.Content>
+            </Drawer.Positioner>
+          </Portal>
+        </Drawer.Root>
+        <CodeBlock
+          code={DRAWER_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="Drawer.tsx"
+          language="tsx"
+        />
+      </Box>
+    </Box>
+  );
+}

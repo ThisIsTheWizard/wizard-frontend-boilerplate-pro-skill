@@ -1,0 +1,528 @@
+"use client";
+
+import { useState } from "react";
+
+import {
+  Box,
+  Button,
+  Checkbox,
+  createListCollection,
+  Field,
+  Flex,
+  Heading,
+  Input,
+  RadioGroup,
+  Select,
+  Separator,
+  Stack,
+  Switch,
+  Text,
+  Textarea,
+} from "@chakra-ui/react";
+
+import { CodeBlock } from "@/components/ui/code-block";
+
+const BUTTON_CODE = `import { Box, Button } from "@chakra-ui/react";
+
+export function Example() {
+  return (
+    <Box>
+      <Flex wrap="wrap" gap={2} mb={3}>
+        <Button colorPalette="brand" variant="solid">Solid</Button>
+        <Button colorPalette="brand" variant="outline">Outline</Button>
+        <Button colorPalette="brand" variant="ghost">Ghost</Button>
+        <Button colorPalette="brand" variant="subtle">Subtle</Button>
+      </Flex>
+      <Flex align="center" wrap="wrap" gap={2}>
+        <Button colorPalette="brand" size="sm" variant="solid">Small</Button>
+        <Button colorPalette="brand" size="md" variant="solid">Medium</Button>
+        <Button colorPalette="brand" size="lg" variant="solid">Large</Button>
+        <Button colorPalette="brand" disabled variant="solid">Disabled</Button>
+      </Flex>
+    </Box>
+  );
+}`;
+
+const INPUT_CODE = `import { Field, Input, Stack } from "@chakra-ui/react";
+
+export function Example() {
+  return (
+    <Stack gap={4} maxW="360px">
+      <Field.Root>
+        <Field.Label>Email address</Field.Label>
+        <Input placeholder="you@example.com" type="email" />
+        <Field.HelperText>We'll never share your email.</Field.HelperText>
+      </Field.Root>
+      <Field.Root invalid>
+        <Field.Label>Username</Field.Label>
+        <Input defaultValue="invalid user!" />
+        <Field.ErrorText>Please enter a valid username.</Field.ErrorText>
+      </Field.Root>
+      <Field.Root disabled>
+        <Field.Label>Disabled</Field.Label>
+        <Input placeholder="Not editable" />
+      </Field.Root>
+    </Stack>
+  );
+}`;
+
+const TEXTAREA_CODE = `import { Field, Stack, Textarea } from "@chakra-ui/react";
+
+export function Example() {
+  return (
+    <Stack gap={4} maxW="360px">
+      <Field.Root>
+        <Field.Label>Bio</Field.Label>
+        <Textarea placeholder="Tell us about yourself…" rows={4} />
+        <Field.HelperText>Describe your project in a few sentences.</Field.HelperText>
+      </Field.Root>
+      <Field.Root invalid>
+        <Field.Label>Message</Field.Label>
+        <Textarea placeholder="Enter your message…" rows={3} />
+        <Field.ErrorText>Message is required.</Field.ErrorText>
+      </Field.Root>
+    </Stack>
+  );
+}`;
+
+const SELECT_CODE = `import { createListCollection, Field, Select, Stack } from "@chakra-ui/react";
+
+const frameworks = createListCollection({
+  items: [
+    { label: "Next.js", value: "nextjs" },
+    { label: "Remix", value: "remix" },
+    { label: "Astro", value: "astro" },
+    { label: "SvelteKit", value: "sveltekit" },
+  ],
+});
+
+export function Example() {
+  return (
+    <Stack gap={4} maxW="360px">
+      <Select.Root collection={frameworks} size="md">
+        <Select.Label>Framework</Select.Label>
+        <Select.Trigger>
+          <Select.ValueText placeholder="Select framework" />
+        </Select.Trigger>
+        <Select.Content>
+          {frameworks.items.map((item) => (
+            <Select.Item item={item} key={item.value}>
+              {item.label}
+            </Select.Item>
+          ))}
+        </Select.Content>
+      </Select.Root>
+    </Stack>
+  );
+}`;
+
+const CHECKBOX_CODE = `import { Checkbox, Stack } from "@chakra-ui/react";
+
+export function Example() {
+  return (
+    <Stack gap={2}>
+      <Checkbox.Root colorPalette="brand">
+        <Checkbox.Control />
+        <Checkbox.Label>Accept terms and conditions</Checkbox.Label>
+      </Checkbox.Root>
+      <Checkbox.Root colorPalette="brand" defaultChecked>
+        <Checkbox.Control />
+        <Checkbox.Label>Checked by default</Checkbox.Label>
+      </Checkbox.Root>
+      <Checkbox.Root colorPalette="brand" disabled>
+        <Checkbox.Control />
+        <Checkbox.Label>Disabled</Checkbox.Label>
+      </Checkbox.Root>
+    </Stack>
+  );
+}`;
+
+const RADIO_GROUP_CODE = `import { RadioGroup, Stack } from "@chakra-ui/react";
+
+export function Example() {
+  return (
+    <RadioGroup.Root colorPalette="brand" defaultValue="free">
+      <Stack gap={2}>
+        <RadioGroup.Item value="free">
+          <RadioGroup.ItemControl />
+          <RadioGroup.ItemText>Free</RadioGroup.ItemText>
+        </RadioGroup.Item>
+        <RadioGroup.Item value="pro">
+          <RadioGroup.ItemControl />
+          <RadioGroup.ItemText>Pro</RadioGroup.ItemText>
+        </RadioGroup.Item>
+        <RadioGroup.Item value="enterprise">
+          <RadioGroup.ItemControl />
+          <RadioGroup.ItemText>Enterprise</RadioGroup.ItemText>
+        </RadioGroup.Item>
+      </Stack>
+    </RadioGroup.Root>
+  );
+}`;
+
+const SWITCH_CODE = `import { Stack, Switch } from "@chakra-ui/react";
+
+export function Example() {
+  return (
+    <Stack gap={2}>
+      <Switch.Root colorPalette="brand">
+        <Switch.Control />
+        <Switch.Label>Email notifications</Switch.Label>
+      </Switch.Root>
+      <Switch.Root colorPalette="brand" defaultChecked>
+        <Switch.Control />
+        <Switch.Label>Marketing emails</Switch.Label>
+      </Switch.Root>
+      <Switch.Root colorPalette="brand" disabled>
+        <Switch.Control />
+        <Switch.Label>Disabled</Switch.Label>
+      </Switch.Root>
+    </Stack>
+  );
+}`;
+
+const frameworkCollection = createListCollection({
+  items: [
+    { label: "Next.js", value: "nextjs" },
+    { label: "Remix", value: "remix" },
+    { label: "Astro", value: "astro" },
+    { label: "SvelteKit", value: "sveltekit" },
+  ],
+});
+
+export default function InputsPage() {
+  const [plan, setPlan] = useState("free");
+
+  return (
+    <Box display="flex" flexDirection="column" gap={16}>
+      <Box>
+        <Heading mb={2} size="2xl">
+          Inputs
+        </Heading>
+        <Text color="var(--muted-foreground)">
+          Form controls for collecting user input — buttons, fields,
+          selections, and toggles.
+        </Text>
+      </Box>
+
+      {/* Button */}
+      <Box as="section" display="flex" flexDirection="column" gap={4} id="button">
+        <Box borderLeft="3px solid" borderColor="var(--color-accent-500)" pl={3}>
+          <Heading mb={1} size="md">
+            Button
+          </Heading>
+          <Text color="var(--muted-foreground)" fontSize="sm">
+            Triggers an action or event. Chakra ships{" "}
+            <code>solid</code>, <code>outline</code>, <code>ghost</code>, and{" "}
+            <code>subtle</code> variants. Use <code>colorPalette="brand"</code>{" "}
+            to apply the active skill colour.
+          </Text>
+        </Box>
+        <Box
+          border="1px solid"
+          borderColor="var(--border)"
+          borderRadius="lg"
+          p={6}
+        >
+          <Stack gap={3}>
+            <Flex gap={2} wrap="wrap">
+              <Button colorPalette="brand" variant="solid">Solid</Button>
+              <Button colorPalette="brand" variant="outline">Outline</Button>
+              <Button colorPalette="brand" variant="ghost">Ghost</Button>
+              <Button colorPalette="brand" variant="subtle">Subtle</Button>
+            </Flex>
+            <Flex align="center" gap={2} wrap="wrap">
+              <Button colorPalette="brand" size="sm" variant="solid">Small</Button>
+              <Button colorPalette="brand" size="md" variant="solid">Medium</Button>
+              <Button colorPalette="brand" size="lg" variant="solid">Large</Button>
+              <Button colorPalette="brand" disabled variant="solid">Disabled</Button>
+            </Flex>
+          </Stack>
+        </Box>
+        <CodeBlock
+          code={BUTTON_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="Button.tsx"
+          language="tsx"
+        />
+      </Box>
+
+      <Separator />
+
+      {/* Input */}
+      <Box as="section" display="flex" flexDirection="column" gap={4} id="input">
+        <Box borderLeft="3px solid" borderColor="var(--color-accent-500)" pl={3}>
+          <Heading mb={1} size="md">
+            Input
+          </Heading>
+          <Text color="var(--muted-foreground)" fontSize="sm">
+            A single-line text field. Compose <code>Field.Root</code> +{" "}
+            <code>Field.Label</code> + <code>Input</code> +{" "}
+            <code>Field.HelperText</code> / <code>Field.ErrorText</code>. Pass{" "}
+            <code>invalid</code> on <code>Field.Root</code> to activate error
+            styling.
+          </Text>
+        </Box>
+        <Box
+          border="1px solid"
+          borderColor="var(--border)"
+          borderRadius="lg"
+          p={6}
+        >
+          <Stack gap={4} maxW="360px">
+            <Field.Root>
+              <Field.Label>Email address</Field.Label>
+              <Input placeholder="you@example.com" type="email" />
+              <Field.HelperText>We'll never share your email.</Field.HelperText>
+            </Field.Root>
+            <Field.Root invalid>
+              <Field.Label>Username</Field.Label>
+              <Input defaultValue="invalid user!" />
+              <Field.ErrorText>Please enter a valid username.</Field.ErrorText>
+            </Field.Root>
+            <Field.Root disabled>
+              <Field.Label>Disabled</Field.Label>
+              <Input placeholder="Not editable" />
+            </Field.Root>
+          </Stack>
+        </Box>
+        <CodeBlock
+          code={INPUT_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="Input.tsx"
+          language="tsx"
+        />
+      </Box>
+
+      <Separator />
+
+      {/* Textarea */}
+      <Box as="section" display="flex" flexDirection="column" gap={4} id="textarea">
+        <Box borderLeft="3px solid" borderColor="var(--color-accent-500)" pl={3}>
+          <Heading mb={1} size="md">
+            Textarea
+          </Heading>
+          <Text color="var(--muted-foreground)" fontSize="sm">
+            A multi-line text input. Wrap in <code>Field.Root</code> for label
+            and helper text support — the same pattern as{" "}
+            <code>Input</code>.
+          </Text>
+        </Box>
+        <Box
+          border="1px solid"
+          borderColor="var(--border)"
+          borderRadius="lg"
+          p={6}
+        >
+          <Stack gap={4} maxW="360px">
+            <Field.Root>
+              <Field.Label>Bio</Field.Label>
+              <Textarea placeholder="Tell us about yourself…" rows={4} />
+              <Field.HelperText>
+                Describe your project in a few sentences.
+              </Field.HelperText>
+            </Field.Root>
+            <Field.Root invalid>
+              <Field.Label>Message</Field.Label>
+              <Textarea placeholder="Enter your message…" rows={3} />
+              <Field.ErrorText>Message is required.</Field.ErrorText>
+            </Field.Root>
+          </Stack>
+        </Box>
+        <CodeBlock
+          code={TEXTAREA_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="Textarea.tsx"
+          language="tsx"
+        />
+      </Box>
+
+      <Separator />
+
+      {/* Select */}
+      <Box as="section" display="flex" flexDirection="column" gap={4} id="select">
+        <Box borderLeft="3px solid" borderColor="var(--color-accent-500)" pl={3}>
+          <Heading mb={1} size="md">
+            Select
+          </Heading>
+          <Text color="var(--muted-foreground)" fontSize="sm">
+            A dropdown for picking a single value. Use{" "}
+            <code>createListCollection</code> to define items, then compose{" "}
+            <code>Select.Root</code> + <code>Select.Trigger</code> +{" "}
+            <code>Select.Content</code> + <code>Select.Item</code>.
+          </Text>
+        </Box>
+        <Box
+          border="1px solid"
+          borderColor="var(--border)"
+          borderRadius="lg"
+          p={6}
+        >
+          <Stack gap={4} maxW="360px">
+            <Select.Root collection={frameworkCollection} size="md">
+              <Select.Label>Framework</Select.Label>
+              <Select.Trigger>
+                <Select.ValueText placeholder="Select framework" />
+              </Select.Trigger>
+              <Select.Content>
+                {frameworkCollection.items.map((item) => (
+                  <Select.Item item={item} key={item.value}>
+                    {item.label}
+                  </Select.Item>
+                ))}
+              </Select.Content>
+            </Select.Root>
+          </Stack>
+        </Box>
+        <CodeBlock
+          code={SELECT_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="Select.tsx"
+          language="tsx"
+        />
+      </Box>
+
+      <Separator />
+
+      {/* Checkbox */}
+      <Box as="section" display="flex" flexDirection="column" gap={4} id="checkbox">
+        <Box borderLeft="3px solid" borderColor="var(--color-accent-500)" pl={3}>
+          <Heading mb={1} size="md">
+            Checkbox
+          </Heading>
+          <Text color="var(--muted-foreground)" fontSize="sm">
+            A binary toggle. Compose <code>Checkbox.Root</code> +{" "}
+            <code>Checkbox.Control</code> + <code>Checkbox.Label</code>. Add{" "}
+            <code>colorPalette="brand"</code> for the active colour.
+          </Text>
+        </Box>
+        <Box
+          border="1px solid"
+          borderColor="var(--border)"
+          borderRadius="lg"
+          p={6}
+        >
+          <Stack gap={2}>
+            <Checkbox.Root colorPalette="brand">
+              <Checkbox.Control />
+              <Checkbox.Label>Accept terms and conditions</Checkbox.Label>
+            </Checkbox.Root>
+            <Checkbox.Root colorPalette="brand" defaultChecked>
+              <Checkbox.Control />
+              <Checkbox.Label>Checked by default</Checkbox.Label>
+            </Checkbox.Root>
+            <Checkbox.Root colorPalette="brand" disabled>
+              <Checkbox.Control />
+              <Checkbox.Label>Disabled</Checkbox.Label>
+            </Checkbox.Root>
+          </Stack>
+        </Box>
+        <CodeBlock
+          code={CHECKBOX_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="Checkbox.tsx"
+          language="tsx"
+        />
+      </Box>
+
+      <Separator />
+
+      {/* RadioGroup */}
+      <Box as="section" display="flex" flexDirection="column" gap={4} id="radio-group">
+        <Box borderLeft="3px solid" borderColor="var(--color-accent-500)" pl={3}>
+          <Heading mb={1} size="md">
+            RadioGroup
+          </Heading>
+          <Text color="var(--muted-foreground)" fontSize="sm">
+            Mutually exclusive options using <code>RadioGroup.Root</code> +{" "}
+            <code>RadioGroup.Item</code> + <code>RadioGroup.ItemControl</code> +{" "}
+            <code>RadioGroup.ItemText</code>. Arrow-key navigation is built in.
+          </Text>
+        </Box>
+        <Box
+          border="1px solid"
+          borderColor="var(--border)"
+          borderRadius="lg"
+          p={6}
+        >
+          <RadioGroup.Root
+            colorPalette="brand"
+            onValueChange={(details) => setPlan(details.value)}
+            value={plan}
+          >
+            <Stack gap={2}>
+              <RadioGroup.Item value="free">
+                <RadioGroup.ItemControl />
+                <RadioGroup.ItemText>Free</RadioGroup.ItemText>
+              </RadioGroup.Item>
+              <RadioGroup.Item value="pro">
+                <RadioGroup.ItemControl />
+                <RadioGroup.ItemText>Pro</RadioGroup.ItemText>
+              </RadioGroup.Item>
+              <RadioGroup.Item value="enterprise">
+                <RadioGroup.ItemControl />
+                <RadioGroup.ItemText>Enterprise</RadioGroup.ItemText>
+              </RadioGroup.Item>
+            </Stack>
+          </RadioGroup.Root>
+        </Box>
+        <CodeBlock
+          code={RADIO_GROUP_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="RadioGroup.tsx"
+          language="tsx"
+        />
+      </Box>
+
+      <Separator />
+
+      {/* Switch */}
+      <Box as="section" display="flex" flexDirection="column" gap={4} id="switch">
+        <Box borderLeft="3px solid" borderColor="var(--color-accent-500)" pl={3}>
+          <Heading mb={1} size="md">
+            Switch
+          </Heading>
+          <Text color="var(--muted-foreground)" fontSize="sm">
+            An on/off toggle. Compose <code>Switch.Root</code> +{" "}
+            <code>Switch.Control</code> + <code>Switch.Label</code>. The label
+            is inline and accessible without manual <code>htmlFor</code> wiring.
+          </Text>
+        </Box>
+        <Box
+          border="1px solid"
+          borderColor="var(--border)"
+          borderRadius="lg"
+          p={6}
+        >
+          <Stack gap={2}>
+            <Switch.Root colorPalette="brand">
+              <Switch.Control />
+              <Switch.Label>Email notifications</Switch.Label>
+            </Switch.Root>
+            <Switch.Root colorPalette="brand" defaultChecked>
+              <Switch.Control />
+              <Switch.Label>Marketing emails</Switch.Label>
+            </Switch.Root>
+            <Switch.Root colorPalette="brand" disabled>
+              <Switch.Control />
+              <Switch.Label>Disabled</Switch.Label>
+            </Switch.Root>
+          </Stack>
+        </Box>
+        <CodeBlock
+          code={SWITCH_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="Switch.tsx"
+          language="tsx"
+        />
+      </Box>
+    </Box>
+  );
+}

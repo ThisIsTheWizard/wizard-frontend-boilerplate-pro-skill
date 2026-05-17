@@ -1,0 +1,246 @@
+"use client";
+
+import { useCallback, useState } from "react";
+import type { ReactNode } from "react";
+import Link from "next/link";
+
+import {
+  Box,
+  Button,
+  ChakraProvider,
+  createSystem,
+  defaultConfig,
+  defineConfig,
+  Flex,
+  Text,
+} from "@chakra-ui/react";
+
+import { useTheme } from "@/components/ThemeProvider";
+
+import { Sidebar } from "./sidebar";
+
+const DRAWER_WIDTH = 256;
+
+const chakraSystem = createSystem(
+  defaultConfig,
+  defineConfig({
+    globalCss: {
+      body: {
+        bg: "var(--background)",
+        color: "var(--foreground)",
+      },
+    },
+    theme: {
+      semanticTokens: {
+        colors: {
+          "chakra-body-bg": { value: "var(--background)" },
+          "chakra-body-text": { value: "var(--foreground)" },
+          "chakra-border-color": { value: "var(--border)" },
+          "chakra-subtle-bg": { value: "var(--surface)" },
+          "chakra-subtle-text": { value: "var(--muted-foreground)" },
+        },
+      },
+      tokens: {
+        colors: {
+          brand: {
+            50: { value: "var(--color-accent-50)" },
+            100: { value: "var(--color-accent-100)" },
+            200: { value: "var(--color-accent-200)" },
+            300: { value: "var(--color-accent-300)" },
+            400: { value: "var(--color-accent-400)" },
+            500: { value: "var(--color-accent-500)" },
+            600: { value: "var(--color-accent-600)" },
+            700: { value: "var(--color-accent-700)" },
+            800: { value: "var(--color-accent-800)" },
+            900: { value: "var(--color-accent-900)" },
+            950: { value: "var(--color-accent-950)" },
+          },
+        },
+      },
+    },
+  }),
+);
+
+function MenuIcon() {
+  return (
+    <svg
+      aria-hidden="true"
+      fill="none"
+      height="24"
+      stroke="currentColor"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth="2"
+      viewBox="0 0 24 24"
+      width="24"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <line x1="4" x2="20" y1="6" y2="6" />
+      <line x1="4" x2="20" y1="12" y2="12" />
+      <line x1="4" x2="20" y1="18" y2="18" />
+    </svg>
+  );
+}
+
+function MoonIcon() {
+  return (
+    <svg
+      aria-hidden="true"
+      fill="none"
+      height="18"
+      stroke="currentColor"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth="2"
+      viewBox="0 0 24 24"
+      width="18"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" />
+    </svg>
+  );
+}
+
+function SunIcon() {
+  return (
+    <svg
+      aria-hidden="true"
+      fill="none"
+      height="18"
+      stroke="currentColor"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth="2"
+      viewBox="0 0 24 24"
+      width="18"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <circle cx="12" cy="12" r="4" />
+      <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41" />
+    </svg>
+  );
+}
+
+export default function LibraryLayout({ children }: { children: ReactNode }) {
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const { theme, toggleTheme } = useTheme();
+
+  const handleDrawerToggle = useCallback(
+    () => setMobileOpen((open) => !open),
+    [],
+  );
+  const closeSidebar = useCallback(() => setMobileOpen(false), []);
+
+  return (
+    <ChakraProvider value={chakraSystem}>
+      <Flex minH="100vh">
+        {/* Desktop sidebar */}
+        <Box
+          aria-label="Component library navigation"
+          as="nav"
+          display={{ base: "none", md: "flex" }}
+          flexDirection="column"
+          flexShrink={0}
+          w={`${DRAWER_WIDTH}px`}
+          borderRight="1px solid"
+          borderColor="var(--border)"
+          bg="var(--surface)"
+        >
+          <Sidebar onNavigate={closeSidebar} />
+        </Box>
+
+        {/* Mobile sidebar overlay */}
+        {mobileOpen && (
+          <Box
+            position="fixed"
+            inset={0}
+            zIndex={40}
+            display={{ base: "flex", md: "none" }}
+          >
+            <Box
+              position="absolute"
+              inset={0}
+              bg="blackAlpha.600"
+              onClick={handleDrawerToggle}
+            />
+            <Box
+              position="relative"
+              zIndex={50}
+              w={`${DRAWER_WIDTH}px`}
+              bg="var(--surface)"
+              borderRight="1px solid"
+              borderColor="var(--border)"
+              overflowY="auto"
+            >
+              <Sidebar onNavigate={closeSidebar} />
+            </Box>
+          </Box>
+        )}
+
+        {/* Main content */}
+        <Flex direction="column" flex={1} minW={0}>
+          {/* Header */}
+          <Box
+            as="header"
+            position="sticky"
+            top={0}
+            zIndex={30}
+            borderBottom="1px solid"
+            borderColor="var(--border)"
+            bg="var(--background)"
+          >
+            <Flex align="center" gap={2} h="56px" px={3}>
+              <Button
+                aria-expanded={mobileOpen}
+                aria-label="Open navigation menu"
+                display={{ base: "flex", md: "none" }}
+                onClick={handleDrawerToggle}
+                size="sm"
+                variant="ghost"
+              >
+                <MenuIcon />
+              </Button>
+
+              <Text
+                as={Link}
+                href="/library"
+                display={{ base: "block", md: "none" }}
+                flex={1}
+                fontSize="sm"
+                fontWeight={600}
+                textDecoration="none"
+                color="var(--foreground)"
+                _hover={{ color: "var(--color-accent-500)" }}
+              >
+                Component Library
+              </Text>
+
+              <Box flex={{ base: 0, md: 1 }} />
+
+              <Button
+                aria-label={
+                  theme === "dark" ? "Switch to light mode" : "Switch to dark mode"
+                }
+                onClick={toggleTheme}
+                size="sm"
+                variant="ghost"
+              >
+                {theme === "dark" ? <SunIcon /> : <MoonIcon />}
+              </Button>
+            </Flex>
+          </Box>
+
+          {/* Page content */}
+          <Box
+            as="main"
+            flex={1}
+            p={{ base: 4, md: 8 }}
+            bg="var(--background)"
+          >
+            {children}
+          </Box>
+        </Flex>
+      </Flex>
+    </ChakraProvider>
+  );
+}

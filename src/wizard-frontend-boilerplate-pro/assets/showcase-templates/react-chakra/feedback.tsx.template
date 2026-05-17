@@ -1,0 +1,583 @@
+"use client";
+
+import { useState } from "react";
+
+import {
+  Alert,
+  Box,
+  Button,
+  createToaster,
+  Dialog,
+  Flex,
+  Heading,
+  Portal,
+  Progress,
+  Separator,
+  Stack,
+  Text,
+  Toaster,
+  Tooltip,
+} from "@chakra-ui/react";
+
+import { CodeBlock } from "@/components/ui/code-block";
+
+const toaster = createToaster({
+  placement: "bottom-end",
+});
+
+const ALERT_CODE = `import { Alert, Stack } from "@chakra-ui/react";
+
+export function Example() {
+  return (
+    <Stack gap={3}>
+      <Alert.Root status="info">
+        <Alert.Indicator />
+        <Box>
+          <Alert.Title>Heads up</Alert.Title>
+          <Alert.Description>
+            You can add components to your app using the CLI.
+          </Alert.Description>
+        </Box>
+      </Alert.Root>
+      <Alert.Root status="success">
+        <Alert.Indicator />
+        <Box>
+          <Alert.Title>Success</Alert.Title>
+          <Alert.Description>Your profile has been saved successfully.</Alert.Description>
+        </Box>
+      </Alert.Root>
+      <Alert.Root status="warning">
+        <Alert.Indicator />
+        <Box>
+          <Alert.Title>Warning</Alert.Title>
+          <Alert.Description>Unsaved changes will be lost.</Alert.Description>
+        </Box>
+      </Alert.Root>
+      <Alert.Root status="error">
+        <Alert.Indicator />
+        <Box>
+          <Alert.Title>Error</Alert.Title>
+          <Alert.Description>Something went wrong. Please try again.</Alert.Description>
+        </Box>
+      </Alert.Root>
+    </Stack>
+  );
+}`;
+
+const TOAST_CODE = `import { createToaster, Button, Flex, Portal, Toaster } from "@chakra-ui/react";
+
+// Create a toaster instance (singleton — define outside component)
+const toaster = createToaster({ placement: "bottom-end" });
+
+export function Example() {
+  return (
+    <>
+      <Flex gap={2} wrap="wrap">
+        <Button
+          colorPalette="brand"
+          onClick={() =>
+            toaster.create({
+              description: "Event has been created.",
+              title: "Success",
+              type: "success",
+            })
+          }
+          variant="solid"
+        >
+          Success toast
+        </Button>
+        <Button
+          onClick={() =>
+            toaster.create({
+              description: "Something went wrong.",
+              title: "Error",
+              type: "error",
+            })
+          }
+          variant="outline"
+        >
+          Error toast
+        </Button>
+      </Flex>
+      {/* Mount Toaster once in your layout or page root */}
+      <Portal>
+        <Toaster toaster={toaster} />
+      </Portal>
+    </>
+  );
+}`;
+
+const PROGRESS_CODE = `import { Box, Progress, Stack, Text } from "@chakra-ui/react";
+
+export function Example() {
+  return (
+    <Stack gap={4} maxW="480px">
+      <Box>
+        <Text fontSize="sm" mb={1}>25%</Text>
+        <Progress.Root colorPalette="brand" value={25}>
+          <Progress.Track>
+            <Progress.Range />
+          </Progress.Track>
+        </Progress.Root>
+      </Box>
+      <Box>
+        <Text fontSize="sm" mb={1}>60%</Text>
+        <Progress.Root colorPalette="brand" value={60}>
+          <Progress.Track>
+            <Progress.Range />
+          </Progress.Track>
+        </Progress.Root>
+      </Box>
+      <Box>
+        <Text fontSize="sm" mb={1}>90%</Text>
+        <Progress.Root colorPalette="brand" value={90}>
+          <Progress.Track>
+            <Progress.Range />
+          </Progress.Track>
+        </Progress.Root>
+      </Box>
+    </Stack>
+  );
+}`;
+
+const TOOLTIP_CODE = `import { Button, Flex, Tooltip } from "@chakra-ui/react";
+
+export function Example() {
+  return (
+    <Flex gap={3} wrap="wrap">
+      <Tooltip.Root positioning={{ placement: "top" }}>
+        <Tooltip.Trigger asChild>
+          <Button variant="outline">Top</Button>
+        </Tooltip.Trigger>
+        <Tooltip.Positioner>
+          <Tooltip.Content>Tooltip on top</Tooltip.Content>
+        </Tooltip.Positioner>
+      </Tooltip.Root>
+      <Tooltip.Root positioning={{ placement: "right" }}>
+        <Tooltip.Trigger asChild>
+          <Button variant="outline">Right</Button>
+        </Tooltip.Trigger>
+        <Tooltip.Positioner>
+          <Tooltip.Content>Tooltip on right</Tooltip.Content>
+        </Tooltip.Positioner>
+      </Tooltip.Root>
+      <Tooltip.Root positioning={{ placement: "bottom" }}>
+        <Tooltip.Trigger asChild>
+          <Button variant="outline">Bottom</Button>
+        </Tooltip.Trigger>
+        <Tooltip.Positioner>
+          <Tooltip.Content>Tooltip on bottom</Tooltip.Content>
+        </Tooltip.Positioner>
+      </Tooltip.Root>
+    </Flex>
+  );
+}`;
+
+const DIALOG_CODE = `import { useState } from "react";
+import { Button, Dialog, Portal, Text } from "@chakra-ui/react";
+
+export function Example() {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <>
+      <Button colorPalette="brand" onClick={() => setOpen(true)} variant="solid">
+        Open dialog
+      </Button>
+      <Dialog.Root onOpenChange={(e) => setOpen(e.open)} open={open}>
+        <Portal>
+          <Dialog.Backdrop />
+          <Dialog.Positioner>
+            <Dialog.Content maxW="sm">
+              <Dialog.Header>
+                <Dialog.Title>Confirm action</Dialog.Title>
+              </Dialog.Header>
+              <Dialog.Body>
+                <Text>
+                  This action cannot be undone. Are you sure you want to proceed?
+                </Text>
+              </Dialog.Body>
+              <Dialog.Footer>
+                <Dialog.ActionTrigger asChild>
+                  <Button variant="outline">Cancel</Button>
+                </Dialog.ActionTrigger>
+                <Button colorPalette="brand" onClick={() => setOpen(false)}>
+                  Confirm
+                </Button>
+              </Dialog.Footer>
+              <Dialog.CloseTrigger asChild>
+                <Button size="sm" variant="ghost" position="absolute" right={2} top={2}>
+                  ✕
+                </Button>
+              </Dialog.CloseTrigger>
+            </Dialog.Content>
+          </Dialog.Positioner>
+        </Portal>
+      </Dialog.Root>
+    </>
+  );
+}`;
+
+export default function FeedbackPage() {
+  const [dialogOpen, setDialogOpen] = useState(false);
+
+  return (
+    <Box display="flex" flexDirection="column" gap={16}>
+      <Box>
+        <Heading mb={2} size="2xl">
+          Feedback
+        </Heading>
+        <Text color="var(--muted-foreground)">
+          Status indicators, notifications, and modal interactions — alerts,
+          toasts, dialogs, and progress.
+        </Text>
+      </Box>
+
+      {/* Alert */}
+      <Box as="section" display="flex" flexDirection="column" gap={4} id="alert">
+        <Box borderLeft="3px solid" borderColor="var(--color-accent-500)" pl={3}>
+          <Heading mb={1} size="md">Alert</Heading>
+          <Text color="var(--muted-foreground)" fontSize="sm">
+            An inline message banner. Compose <code>Alert.Root</code> with a{" "}
+            <code>status</code> prop (<code>info</code>, <code>success</code>,{" "}
+            <code>warning</code>, <code>error</code>), an{" "}
+            <code>Alert.Indicator</code> for the icon, and{" "}
+            <code>Alert.Title</code> / <code>Alert.Description</code>.
+          </Text>
+        </Box>
+        <Box
+          border="1px solid"
+          borderColor="var(--border)"
+          borderRadius="lg"
+          p={6}
+        >
+          <Stack gap={3}>
+            <Alert.Root status="info">
+              <Alert.Indicator />
+              <Box>
+                <Alert.Title>Heads up</Alert.Title>
+                <Alert.Description>
+                  You can add components to your app using the CLI.
+                </Alert.Description>
+              </Box>
+            </Alert.Root>
+            <Alert.Root status="success">
+              <Alert.Indicator />
+              <Box>
+                <Alert.Title>Success</Alert.Title>
+                <Alert.Description>
+                  Your profile has been saved successfully.
+                </Alert.Description>
+              </Box>
+            </Alert.Root>
+            <Alert.Root status="warning">
+              <Alert.Indicator />
+              <Box>
+                <Alert.Title>Warning</Alert.Title>
+                <Alert.Description>Unsaved changes will be lost.</Alert.Description>
+              </Box>
+            </Alert.Root>
+            <Alert.Root status="error">
+              <Alert.Indicator />
+              <Box>
+                <Alert.Title>Error</Alert.Title>
+                <Alert.Description>
+                  Something went wrong. Please try again.
+                </Alert.Description>
+              </Box>
+            </Alert.Root>
+          </Stack>
+        </Box>
+        <CodeBlock
+          code={ALERT_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="Alert.tsx"
+          language="tsx"
+        />
+      </Box>
+
+      <Separator />
+
+      {/* Toast */}
+      <Box as="section" display="flex" flexDirection="column" gap={4} id="toast">
+        <Box borderLeft="3px solid" borderColor="var(--color-accent-500)" pl={3}>
+          <Heading mb={1} size="md">Toast</Heading>
+          <Text color="var(--muted-foreground)" fontSize="sm">
+            Chakra uses <code>createToaster()</code> to create a toaster
+            instance (defined outside the component as a singleton). Call{" "}
+            <code>toaster.create({"{ title, description, type }"})</code> to
+            trigger a toast. Mount <code>{"<Toaster toaster={toaster} />"}</code>{" "}
+            once in your layout inside a <code>{"<Portal>"}</code>.
+          </Text>
+        </Box>
+        <Box
+          border="1px solid"
+          borderColor="var(--border)"
+          borderRadius="lg"
+          p={6}
+        >
+          <Flex gap={2} wrap="wrap">
+            <Button
+              colorPalette="brand"
+              onClick={() =>
+                toaster.create({
+                  description: "Event has been created.",
+                  title: "Success",
+                  type: "success",
+                })
+              }
+              variant="solid"
+            >
+              Success toast
+            </Button>
+            <Button
+              onClick={() =>
+                toaster.create({
+                  description: "Something went wrong.",
+                  title: "Error",
+                  type: "error",
+                })
+              }
+              variant="outline"
+            >
+              Error toast
+            </Button>
+            <Button
+              onClick={() =>
+                toaster.create({
+                  description: "Unsaved changes detected.",
+                  title: "Warning",
+                  type: "warning",
+                })
+              }
+              variant="outline"
+            >
+              Warning toast
+            </Button>
+            <Button
+              onClick={() =>
+                toaster.create({
+                  description: "Your message was delivered.",
+                  title: "Info",
+                  type: "info",
+                })
+              }
+              variant="outline"
+            >
+              Info toast
+            </Button>
+          </Flex>
+        </Box>
+        <Portal>
+          <Toaster toaster={toaster} />
+        </Portal>
+        <CodeBlock
+          code={TOAST_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="Toast.tsx"
+          language="tsx"
+        />
+      </Box>
+
+      <Separator />
+
+      {/* Progress */}
+      <Box as="section" display="flex" flexDirection="column" gap={4} id="progress">
+        <Box borderLeft="3px solid" borderColor="var(--color-accent-500)" pl={3}>
+          <Heading mb={1} size="md">Progress</Heading>
+          <Text color="var(--muted-foreground)" fontSize="sm">
+            A horizontal progress bar using <code>Progress.Root</code> +{" "}
+            <code>Progress.Track</code> + <code>Progress.Range</code>. Set{" "}
+            <code>value</code> (0–100) on <code>Progress.Root</code>.
+          </Text>
+        </Box>
+        <Box
+          border="1px solid"
+          borderColor="var(--border)"
+          borderRadius="lg"
+          p={6}
+        >
+          <Stack gap={4} maxW="480px">
+            <Box>
+              <Text color="var(--muted-foreground)" fontSize="sm" mb={1}>25%</Text>
+              <Progress.Root colorPalette="brand" value={25}>
+                <Progress.Track>
+                  <Progress.Range />
+                </Progress.Track>
+              </Progress.Root>
+            </Box>
+            <Box>
+              <Text color="var(--muted-foreground)" fontSize="sm" mb={1}>60%</Text>
+              <Progress.Root colorPalette="brand" value={60}>
+                <Progress.Track>
+                  <Progress.Range />
+                </Progress.Track>
+              </Progress.Root>
+            </Box>
+            <Box>
+              <Text color="var(--muted-foreground)" fontSize="sm" mb={1}>90%</Text>
+              <Progress.Root colorPalette="brand" value={90}>
+                <Progress.Track>
+                  <Progress.Range />
+                </Progress.Track>
+              </Progress.Root>
+            </Box>
+          </Stack>
+        </Box>
+        <CodeBlock
+          code={PROGRESS_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="Progress.tsx"
+          language="tsx"
+        />
+      </Box>
+
+      <Separator />
+
+      {/* Tooltip */}
+      <Box as="section" display="flex" flexDirection="column" gap={4} id="tooltip">
+        <Box borderLeft="3px solid" borderColor="var(--color-accent-500)" pl={3}>
+          <Heading mb={1} size="md">Tooltip</Heading>
+          <Text color="var(--muted-foreground)" fontSize="sm">
+            A floating label on hover/focus. Compose{" "}
+            <code>Tooltip.Root</code> + <code>Tooltip.Trigger</code> +{" "}
+            <code>Tooltip.Positioner</code> + <code>Tooltip.Content</code>. Set{" "}
+            placement via{" "}
+            <code>{"positioning={{ placement: 'top' }}"}</code>.
+          </Text>
+        </Box>
+        <Box
+          border="1px solid"
+          borderColor="var(--border)"
+          borderRadius="lg"
+          p={6}
+        >
+          <Flex gap={3} wrap="wrap">
+            <Tooltip.Root positioning={{ placement: "top" }}>
+              <Tooltip.Trigger asChild>
+                <Button variant="outline">Top</Button>
+              </Tooltip.Trigger>
+              <Tooltip.Positioner>
+                <Tooltip.Content>Tooltip on top</Tooltip.Content>
+              </Tooltip.Positioner>
+            </Tooltip.Root>
+            <Tooltip.Root positioning={{ placement: "right" }}>
+              <Tooltip.Trigger asChild>
+                <Button variant="outline">Right</Button>
+              </Tooltip.Trigger>
+              <Tooltip.Positioner>
+                <Tooltip.Content>Tooltip on right</Tooltip.Content>
+              </Tooltip.Positioner>
+            </Tooltip.Root>
+            <Tooltip.Root positioning={{ placement: "bottom" }}>
+              <Tooltip.Trigger asChild>
+                <Button variant="outline">Bottom</Button>
+              </Tooltip.Trigger>
+              <Tooltip.Positioner>
+                <Tooltip.Content>Tooltip on bottom</Tooltip.Content>
+              </Tooltip.Positioner>
+            </Tooltip.Root>
+            <Tooltip.Root positioning={{ placement: "left" }}>
+              <Tooltip.Trigger asChild>
+                <Button variant="outline">Left</Button>
+              </Tooltip.Trigger>
+              <Tooltip.Positioner>
+                <Tooltip.Content>Tooltip on left</Tooltip.Content>
+              </Tooltip.Positioner>
+            </Tooltip.Root>
+          </Flex>
+        </Box>
+        <CodeBlock
+          code={TOOLTIP_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="Tooltip.tsx"
+          language="tsx"
+        />
+      </Box>
+
+      <Separator />
+
+      {/* Dialog */}
+      <Box as="section" display="flex" flexDirection="column" gap={4} id="dialog">
+        <Box borderLeft="3px solid" borderColor="var(--color-accent-500)" pl={3}>
+          <Heading mb={1} size="md">Dialog</Heading>
+          <Text color="var(--muted-foreground)" fontSize="sm">
+            A focus-trapped modal overlay. Compose{" "}
+            <code>Dialog.Root</code> + <code>Dialog.Backdrop</code> +{" "}
+            <code>Dialog.Positioner</code> + <code>Dialog.Content</code> with{" "}
+            <code>Dialog.Header</code>, <code>Dialog.Body</code>, and{" "}
+            <code>Dialog.Footer</code>. Wrap in a <code>Portal</code> to render
+            at document root.
+          </Text>
+        </Box>
+        <Box
+          border="1px solid"
+          borderColor="var(--border)"
+          borderRadius="lg"
+          p={6}
+        >
+          <Button
+            colorPalette="brand"
+            onClick={() => setDialogOpen(true)}
+            variant="solid"
+          >
+            Open dialog
+          </Button>
+        </Box>
+        <Dialog.Root
+          onOpenChange={(e) => setDialogOpen(e.open)}
+          open={dialogOpen}
+        >
+          <Portal>
+            <Dialog.Backdrop />
+            <Dialog.Positioner>
+              <Dialog.Content maxW="sm">
+                <Dialog.Header>
+                  <Dialog.Title>Confirm action</Dialog.Title>
+                </Dialog.Header>
+                <Dialog.Body>
+                  <Text>
+                    This action cannot be undone. Are you sure you want to proceed?
+                  </Text>
+                </Dialog.Body>
+                <Dialog.Footer>
+                  <Dialog.ActionTrigger asChild>
+                    <Button variant="outline">Cancel</Button>
+                  </Dialog.ActionTrigger>
+                  <Button
+                    colorPalette="brand"
+                    onClick={() => setDialogOpen(false)}
+                  >
+                    Confirm
+                  </Button>
+                </Dialog.Footer>
+                <Dialog.CloseTrigger asChild>
+                  <Button
+                    position="absolute"
+                    right={2}
+                    size="sm"
+                    top={2}
+                    variant="ghost"
+                  >
+                    ✕
+                  </Button>
+                </Dialog.CloseTrigger>
+              </Dialog.Content>
+            </Dialog.Positioner>
+          </Portal>
+        </Dialog.Root>
+        <CodeBlock
+          code={DIALOG_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="Dialog.tsx"
+          language="tsx"
+        />
+      </Box>
+    </Box>
+  );
+}

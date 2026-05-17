@@ -134,8 +134,8 @@
 - [x] `assets/showcase-templates/svelte-daisy/` — 8 files
 
 ## 21. Chakra UI — reference file + templates
-- [ ] Write `references/ui-library/chakra.md` — `ChakraProvider` setup, token-to-CSS-var bridge
-- [ ] `assets/showcase-templates/react-chakra/` — 8 files
+- [x] Write `references/ui-library/chakra.md` — `ChakraProvider` setup, token-to-CSS-var bridge
+- [x] `assets/showcase-templates/react-chakra/` — 8 files
 
 ## 22. Mantine — reference file + templates
 - [ ] Write `references/ui-library/mantine.md` — `MantineProvider`, CSS variables mode, theming

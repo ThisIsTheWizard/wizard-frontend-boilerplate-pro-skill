@@ -1,0 +1,414 @@
+"use client";
+
+import {
+  Avatar,
+  Badge,
+  Box,
+  Button,
+  Card,
+  Flex,
+  Heading,
+  Separator,
+  Skeleton,
+  Stack,
+  Table,
+  Text,
+} from "@chakra-ui/react";
+
+import { CodeBlock } from "@/components/ui/code-block";
+
+const CARD_CODE = `import { Box, Button, Card, Text } from "@chakra-ui/react";
+
+export function Example() {
+  return (
+    <Card.Root maxW="320px">
+      <Card.Header>
+        <Box>
+          <Text fontWeight={600}>Project Alpha</Text>
+          <Text color="var(--muted-foreground)" fontSize="sm">
+            A next-generation web application.
+          </Text>
+        </Box>
+      </Card.Header>
+      <Card.Body>
+        <Text color="var(--muted-foreground)" fontSize="sm">
+          This project aims to redefine how teams collaborate in real time.
+        </Text>
+      </Card.Body>
+      <Card.Footer>
+        <Button colorPalette="brand" size="sm" variant="outline">
+          View details
+        </Button>
+      </Card.Footer>
+    </Card.Root>
+  );
+}`;
+
+const BADGE_CODE = `import { Badge, Flex } from "@chakra-ui/react";
+
+export function Example() {
+  return (
+    <Flex wrap="wrap" gap={2}>
+      <Badge colorPalette="brand" variant="solid">Solid</Badge>
+      <Badge colorPalette="brand" variant="subtle">Subtle</Badge>
+      <Badge colorPalette="brand" variant="outline">Outline</Badge>
+      <Badge colorPalette="brand" variant="surface">Surface</Badge>
+      <Badge colorPalette="green" variant="subtle">Success</Badge>
+      <Badge colorPalette="yellow" variant="subtle">Warning</Badge>
+      <Badge colorPalette="red" variant="subtle">Error</Badge>
+    </Flex>
+  );
+}`;
+
+const AVATAR_CODE = `import { Avatar, Flex } from "@chakra-ui/react";
+
+export function Example() {
+  return (
+    <Flex align="center" gap={3}>
+      <Avatar.Root size="2xl">
+        <Avatar.Image alt="Jane Doe" src="https://i.pravatar.cc/150?img=1" />
+        <Avatar.Fallback>JD</Avatar.Fallback>
+      </Avatar.Root>
+      <Avatar.Root size="xl">
+        <Avatar.Fallback>SM</Avatar.Fallback>
+      </Avatar.Root>
+      <Avatar.Root size="md">
+        <Avatar.Fallback>MD</Avatar.Fallback>
+      </Avatar.Root>
+      <Avatar.Root size="sm">
+        <Avatar.Fallback>XS</Avatar.Fallback>
+      </Avatar.Root>
+    </Flex>
+  );
+}`;
+
+const SEPARATOR_CODE = `import { Box, Separator, Text } from "@chakra-ui/react";
+
+export function Example() {
+  return (
+    <Box display="flex" flexDirection="column" gap={4}>
+      <Box>
+        <Text color="var(--muted-foreground)" fontSize="sm">Section one content.</Text>
+        <Separator my={3} />
+        <Text color="var(--muted-foreground)" fontSize="sm">Section two content.</Text>
+      </Box>
+      <Box alignItems="center" display="flex" gap={3} h="24px">
+        <Text fontSize="sm">Left item</Text>
+        <Separator h="full" orientation="vertical" />
+        <Text fontSize="sm">Right item</Text>
+      </Box>
+    </Box>
+  );
+}`;
+
+const SKELETON_CODE = `import { Box, Flex, Skeleton } from "@chakra-ui/react";
+
+export function Example() {
+  return (
+    <Flex align="center" gap={3}>
+      <Skeleton borderRadius="full" h="48px" w="48px" />
+      <Box display="flex" flexDirection="column" gap={2}>
+        <Skeleton h="16px" w="192px" />
+        <Skeleton h="16px" w="144px" />
+        <Skeleton h="16px" w="96px" />
+      </Box>
+    </Flex>
+  );
+}`;
+
+const TABLE_CODE = `import { Table } from "@chakra-ui/react";
+
+export function Example() {
+  return (
+    <Table.Root variant="outline">
+      <Table.Header>
+        <Table.Row>
+          <Table.ColumnHeader>Name</Table.ColumnHeader>
+          <Table.ColumnHeader>Email</Table.ColumnHeader>
+          <Table.ColumnHeader>Role</Table.ColumnHeader>
+        </Table.Row>
+      </Table.Header>
+      <Table.Body>
+        <Table.Row>
+          <Table.Cell>Alice Martin</Table.Cell>
+          <Table.Cell>alice@example.com</Table.Cell>
+          <Table.Cell>Admin</Table.Cell>
+        </Table.Row>
+        <Table.Row>
+          <Table.Cell>Bob Chen</Table.Cell>
+          <Table.Cell>bob@example.com</Table.Cell>
+          <Table.Cell>Editor</Table.Cell>
+        </Table.Row>
+      </Table.Body>
+    </Table.Root>
+  );
+}`;
+
+export default function DisplayPage() {
+  return (
+    <Box display="flex" flexDirection="column" gap={16}>
+      <Box>
+        <Heading mb={2} size="2xl">
+          Display
+        </Heading>
+        <Text color="var(--muted-foreground)">
+          Read-only visual elements for presenting content — cards, badges,
+          avatars, and data tables.
+        </Text>
+      </Box>
+
+      {/* Card */}
+      <Box as="section" display="flex" flexDirection="column" gap={4} id="card">
+        <Box borderLeft="3px solid" borderColor="var(--color-accent-500)" pl={3}>
+          <Heading mb={1} size="md">Card</Heading>
+          <Text color="var(--muted-foreground)" fontSize="sm">
+            A surface for grouping related content. Chakra ships{" "}
+            <code>Card.Header</code>, <code>Card.Body</code>, and{" "}
+            <code>Card.Footer</code> sub-components.
+          </Text>
+        </Box>
+        <Box
+          border="1px solid"
+          borderColor="var(--border)"
+          borderRadius="lg"
+          p={6}
+        >
+          <Card.Root maxW="320px">
+            <Card.Header>
+              <Box>
+                <Text fontWeight={600}>Project Alpha</Text>
+                <Text color="var(--muted-foreground)" fontSize="sm">
+                  A next-generation web application.
+                </Text>
+              </Box>
+            </Card.Header>
+            <Card.Body>
+              <Text color="var(--muted-foreground)" fontSize="sm">
+                This project aims to redefine how teams collaborate in real time.
+              </Text>
+            </Card.Body>
+            <Card.Footer>
+              <Button colorPalette="brand" size="sm" variant="outline">
+                View details
+              </Button>
+            </Card.Footer>
+          </Card.Root>
+        </Box>
+        <CodeBlock
+          code={CARD_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="Card.tsx"
+          language="tsx"
+        />
+      </Box>
+
+      {/* Badge */}
+      <Box as="section" display="flex" flexDirection="column" gap={4} id="badge">
+        <Box borderLeft="3px solid" borderColor="var(--color-accent-500)" pl={3}>
+          <Heading mb={1} size="md">Badge</Heading>
+          <Text color="var(--muted-foreground)" fontSize="sm">
+            A compact label for status, category, or count. Chakra ships{" "}
+            <code>solid</code>, <code>subtle</code>, <code>outline</code>, and{" "}
+            <code>surface</code> variants. Use <code>colorPalette</code> for
+            semantic colours.
+          </Text>
+        </Box>
+        <Box
+          border="1px solid"
+          borderColor="var(--border)"
+          borderRadius="lg"
+          p={6}
+        >
+          <Flex gap={2} wrap="wrap">
+            <Badge colorPalette="brand" variant="solid">Solid</Badge>
+            <Badge colorPalette="brand" variant="subtle">Subtle</Badge>
+            <Badge colorPalette="brand" variant="outline">Outline</Badge>
+            <Badge colorPalette="brand" variant="surface">Surface</Badge>
+            <Badge colorPalette="green" variant="subtle">Success</Badge>
+            <Badge colorPalette="yellow" variant="subtle">Warning</Badge>
+            <Badge colorPalette="red" variant="subtle">Error</Badge>
+          </Flex>
+        </Box>
+        <CodeBlock
+          code={BADGE_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="Badge.tsx"
+          language="tsx"
+        />
+      </Box>
+
+      {/* Avatar */}
+      <Box as="section" display="flex" flexDirection="column" gap={4} id="avatar">
+        <Box borderLeft="3px solid" borderColor="var(--color-accent-500)" pl={3}>
+          <Heading mb={1} size="md">Avatar</Heading>
+          <Text color="var(--muted-foreground)" fontSize="sm">
+            A user avatar with image and text-initials fallback. Compose{" "}
+            <code>Avatar.Root</code> + <code>Avatar.Image</code> +{" "}
+            <code>Avatar.Fallback</code>. Control size with the{" "}
+            <code>size</code> prop.
+          </Text>
+        </Box>
+        <Box
+          border="1px solid"
+          borderColor="var(--border)"
+          borderRadius="lg"
+          p={6}
+        >
+          <Flex align="center" gap={3}>
+            <Avatar.Root size="2xl">
+              <Avatar.Image alt="Jane Doe" src="https://i.pravatar.cc/150?img=1" />
+              <Avatar.Fallback>JD</Avatar.Fallback>
+            </Avatar.Root>
+            <Avatar.Root size="xl">
+              <Avatar.Fallback>SM</Avatar.Fallback>
+            </Avatar.Root>
+            <Avatar.Root size="md">
+              <Avatar.Fallback>MD</Avatar.Fallback>
+            </Avatar.Root>
+            <Avatar.Root size="sm">
+              <Avatar.Fallback>XS</Avatar.Fallback>
+            </Avatar.Root>
+          </Flex>
+        </Box>
+        <CodeBlock
+          code={AVATAR_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="Avatar.tsx"
+          language="tsx"
+        />
+      </Box>
+
+      {/* Separator */}
+      <Box as="section" display="flex" flexDirection="column" gap={4} id="separator">
+        <Box borderLeft="3px solid" borderColor="var(--color-accent-500)" pl={3}>
+          <Heading mb={1} size="md">Separator</Heading>
+          <Text color="var(--muted-foreground)" fontSize="sm">
+            A thin rule for dividing content. Use{" "}
+            <code>orientation="vertical"</code> with a fixed height for inline
+            vertical separators.
+          </Text>
+        </Box>
+        <Box
+          border="1px solid"
+          borderColor="var(--border)"
+          borderRadius="lg"
+          p={6}
+        >
+          <Box display="flex" flexDirection="column" gap={4}>
+            <Box>
+              <Text color="var(--muted-foreground)" fontSize="sm">
+                Section one content.
+              </Text>
+              <Separator my={3} />
+              <Text color="var(--muted-foreground)" fontSize="sm">
+                Section two content.
+              </Text>
+            </Box>
+            <Flex align="center" gap={3} h="24px">
+              <Text fontSize="sm">Left item</Text>
+              <Separator h="full" orientation="vertical" />
+              <Text fontSize="sm">Right item</Text>
+            </Flex>
+          </Box>
+        </Box>
+        <CodeBlock
+          code={SEPARATOR_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="Separator.tsx"
+          language="tsx"
+        />
+      </Box>
+
+      {/* Skeleton */}
+      <Box as="section" display="flex" flexDirection="column" gap={4} id="skeleton">
+        <Box borderLeft="3px solid" borderColor="var(--color-accent-500)" pl={3}>
+          <Heading mb={1} size="md">Skeleton</Heading>
+          <Text color="var(--muted-foreground)" fontSize="sm">
+            Animated placeholder blocks for loading states. Set{" "}
+            <code>borderRadius="full"</code> for circular avatar placeholders;
+            leave it default for text-line shapes.
+          </Text>
+        </Box>
+        <Box
+          border="1px solid"
+          borderColor="var(--border)"
+          borderRadius="lg"
+          p={6}
+        >
+          <Flex align="center" gap={3}>
+            <Skeleton borderRadius="full" h="48px" w="48px" />
+            <Stack gap={2}>
+              <Skeleton h="16px" w="192px" />
+              <Skeleton h="16px" w="144px" />
+              <Skeleton h="16px" w="96px" />
+            </Stack>
+          </Flex>
+        </Box>
+        <CodeBlock
+          code={SKELETON_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="Skeleton.tsx"
+          language="tsx"
+        />
+      </Box>
+
+      {/* Table */}
+      <Box as="section" display="flex" flexDirection="column" gap={4} id="table">
+        <Box borderLeft="3px solid" borderColor="var(--color-accent-500)" pl={3}>
+          <Heading mb={1} size="md">Table</Heading>
+          <Text color="var(--muted-foreground)" fontSize="sm">
+            A structured grid for tabular data. Chakra uses compound components:{" "}
+            <code>Table.Root</code> + <code>Table.Header</code> +{" "}
+            <code>Table.Body</code> + <code>Table.Row</code> +{" "}
+            <code>Table.ColumnHeader</code> + <code>Table.Cell</code>.
+          </Text>
+        </Box>
+        <Box
+          border="1px solid"
+          borderColor="var(--border)"
+          borderRadius="lg"
+          p={6}
+        >
+          <Table.Root variant="outline">
+            <Table.Header>
+              <Table.Row>
+                <Table.ColumnHeader>Name</Table.ColumnHeader>
+                <Table.ColumnHeader>Email</Table.ColumnHeader>
+                <Table.ColumnHeader>Role</Table.ColumnHeader>
+              </Table.Row>
+            </Table.Header>
+            <Table.Body>
+              <Table.Row>
+                <Table.Cell>Alice Martin</Table.Cell>
+                <Table.Cell>alice@example.com</Table.Cell>
+                <Table.Cell>Admin</Table.Cell>
+              </Table.Row>
+              <Table.Row>
+                <Table.Cell>Bob Chen</Table.Cell>
+                <Table.Cell>bob@example.com</Table.Cell>
+                <Table.Cell>Editor</Table.Cell>
+              </Table.Row>
+              <Table.Row>
+                <Table.Cell>Carol White</Table.Cell>
+                <Table.Cell>carol@example.com</Table.Cell>
+                <Table.Cell>Viewer</Table.Cell>
+              </Table.Row>
+            </Table.Body>
+          </Table.Root>
+        </Box>
+        <CodeBlock
+          code={TABLE_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="Table.tsx"
+          language="tsx"
+        />
+      </Box>
+    </Box>
+  );
+}
