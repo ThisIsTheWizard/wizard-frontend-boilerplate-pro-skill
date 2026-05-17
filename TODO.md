@@ -153,7 +153,7 @@
 - [x] Write `references/ui-library/vuetify.md` — `createVuetify`, blueprint, CSS var bridge
 - [x] `assets/showcase-templates/vue-vuetify/` — 8 files
 
-## 27. Headless UI — reference file + templates
+## 26. Headless UI — reference file + templates
 - [x] Write `references/ui-library/headlessui.md`
   - `@headlessui/react` (React) and `@headlessui/vue` (Vue) install + wiring
   - Component coverage map (which of the 28 slots are native vs custom Tailwind)
@@ -161,21 +161,21 @@
 - [x] `assets/showcase-templates/react-headlessui/` — 8 files
 - [x] `assets/showcase-templates/vue-headlessui/` — 8 files
 
-## 28. NextUI / HeroUI — reference file + templates
+## 27. NextUI / HeroUI — reference file + templates
 - [ ] Write `references/ui-library/heroui.md`
   - `@heroui/react` install, `HeroUIProvider` wiring, Tailwind config
   - Theming bridge: map existing CSS variable tokens to HeroUI theme config
   - React/Next.js only constraint noted
 - [ ] `assets/showcase-templates/react-heroui/` — 8 files
 
-## 29. Element Plus — reference file + templates
+## 28. Element Plus — reference file + templates
 - [ ] Write `references/ui-library/elementplus.md`
   - `element-plus` install, auto-import setup (`unplugin-vue-components`)
   - SCSS variable override strategy for theming bridge to CSS tokens
   - Vue/Nuxt only constraint noted; echarts pairing for Chart slot
 - [ ] `assets/showcase-templates/vue-elementplus/` — 8 files
 
-## 26. Multi-library end-to-end validation
+## 29. Multi-library end-to-end validation
 - [x] Simulated run: Next.js + shadcn/ui — all 6 routes render, dark mode works
 - [x] Simulated run: Next.js + MUI — theme bridge verified, SSR no flash
 - [x] Simulated run: Vue + Bootstrap — all routes render, responsive
