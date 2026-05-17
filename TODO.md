@@ -138,8 +138,8 @@
 - [x] `assets/showcase-templates/react-chakra/` — 8 files
 
 ## 22. Mantine — reference file + templates
-- [ ] Write `references/ui-library/mantine.md` — `MantineProvider`, CSS variables mode, theming
-- [ ] `assets/showcase-templates/react-mantine/` — 8 files
+- [x] Write `references/ui-library/mantine.md` — `MantineProvider`, CSS variables mode, theming
+- [x] `assets/showcase-templates/react-mantine/` — 8 files
 
 ## 23. Ant Design — reference file + templates
 - [ ] Write `references/ui-library/antd.md` — `ConfigProvider` theme tokens, Next.js App Router notes

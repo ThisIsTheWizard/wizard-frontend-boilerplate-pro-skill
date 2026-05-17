@@ -1,0 +1,344 @@
+"use client";
+
+import { useMemo, useState } from "react";
+
+import {
+  Box,
+  Divider,
+  Table,
+  Text,
+  Title,
+} from "@mantine/core";
+import {
+  type ColumnDef,
+  flexRender,
+  getCoreRowModel,
+  getSortedRowModel,
+  type SortingState,
+  useReactTable,
+} from "@tanstack/react-table";
+import {
+  CartesianGrid,
+  Line,
+  LineChart,
+  ResponsiveContainer,
+  Tooltip,
+  XAxis,
+  YAxis,
+} from "recharts";
+
+import { CodeBlock } from "@/components/ui/code-block";
+
+const CHART_DATA = [
+  { desktop: 186, mobile: 80, month: "Jan" },
+  { desktop: 305, mobile: 200, month: "Feb" },
+  { desktop: 237, mobile: 120, month: "Mar" },
+  { desktop: 73, mobile: 190, month: "Apr" },
+  { desktop: 209, mobile: 130, month: "May" },
+  { desktop: 214, mobile: 140, month: "Jun" },
+];
+
+const CHART_CODE = `import {
+  CartesianGrid,
+  Line,
+  LineChart,
+  ResponsiveContainer,
+  Tooltip,
+  XAxis,
+  YAxis,
+} from "recharts";
+
+const DATA = [
+  { desktop: 186, mobile: 80, month: "Jan" },
+  { desktop: 305, mobile: 200, month: "Feb" },
+  { desktop: 237, mobile: 120, month: "Mar" },
+  { desktop: 73, mobile: 190, month: "Apr" },
+  { desktop: 209, mobile: 130, month: "May" },
+  { desktop: 214, mobile: 140, month: "Jun" },
+];
+
+export function Example() {
+  return (
+    <ResponsiveContainer height={256} width="100%">
+      <LineChart data={DATA}>
+        <CartesianGrid strokeDasharray="3 3" />
+        <XAxis dataKey="month" />
+        <YAxis />
+        <Tooltip />
+        <Line dataKey="desktop" stroke="var(--color-accent-500)" type="monotone" />
+        <Line dataKey="mobile" stroke="var(--color-accent-300)" type="monotone" />
+      </LineChart>
+    </ResponsiveContainer>
+  );
+}`;
+
+interface User {
+  email: string;
+  id: string;
+  name: string;
+  role: string;
+}
+
+const TABLE_DATA: User[] = [
+  { email: "alice@example.com", id: "1", name: "Alice Johnson", role: "Admin" },
+  { email: "bob@example.com", id: "2", name: "Bob Smith", role: "Editor" },
+  { email: "carol@example.com", id: "3", name: "Carol White", role: "Viewer" },
+  { email: "dan@example.com", id: "4", name: "Dan Lee", role: "Editor" },
+  { email: "eve@example.com", id: "5", name: "Eve Martinez", role: "Viewer" },
+];
+
+const DATA_TABLE_CODE = `// Requires: npm install @tanstack/react-table
+import {
+  type ColumnDef,
+  flexRender,
+  getCoreRowModel,
+  getSortedRowModel,
+  type SortingState,
+  useReactTable,
+} from "@tanstack/react-table";
+import { Table } from "@mantine/core";
+import { useState } from "react";
+
+const columns: ColumnDef<User>[] = [
+  { accessorKey: "name", header: "Name" },
+  { accessorKey: "email", header: "Email" },
+  { accessorKey: "role", header: "Role" },
+];
+
+export function Example() {
+  const [sorting, setSorting] = useState<SortingState>([]);
+
+  const table = useReactTable({
+    columns,
+    data: rows,
+    getCoreRowModel: getCoreRowModel(),
+    getSortedRowModel: getSortedRowModel(),
+    onSortingChange: setSorting,
+    state: { sorting },
+  });
+
+  return (
+    <Table highlightOnHover withColumnBorders withTableBorder>
+      <Table.Thead>
+        {table.getHeaderGroups().map((hg) => (
+          <Table.Tr key={hg.id}>
+            {hg.headers.map((header) => (
+              <Table.Th
+                key={header.id}
+                onClick={header.column.getToggleSortingHandler()}
+                style={{ cursor: "pointer", userSelect: "none" }}
+              >
+                {flexRender(header.column.columnDef.header, header.getContext())}
+                {header.column.getIsSorted() === "asc" ? " ↑" : header.column.getIsSorted() === "desc" ? " ↓" : " ↕"}
+              </Table.Th>
+            ))}
+          </Table.Tr>
+        ))}
+      </Table.Thead>
+      <Table.Tbody>
+        {table.getRowModel().rows.map((row) => (
+          <Table.Tr key={row.id}>
+            {row.getVisibleCells().map((cell) => (
+              <Table.Td key={cell.id}>
+                {flexRender(cell.column.columnDef.cell, cell.getContext())}
+              </Table.Td>
+            ))}
+          </Table.Tr>
+        ))}
+      </Table.Tbody>
+    </Table>
+  );
+}`;
+
+const CALENDAR_CODE = `// Requires: npm install react-day-picker
+// Also add react-day-picker CSS to your global stylesheet:
+//   @import "react-day-picker/style.css";
+import { useState } from "react";
+import { DayPicker } from "react-day-picker";
+import "react-day-picker/style.css";
+
+export function Example() {
+  const [selected, setSelected] = useState<Date | undefined>(new Date());
+
+  return (
+    <DayPicker
+      mode="single"
+      onSelect={setSelected}
+      selected={selected}
+      // Customise colours to match the skill's active palette:
+      style={{
+        "--rdp-accent-color": "var(--color-accent-500)",
+        "--rdp-accent-background-color": "var(--color-accent-100)",
+      } as React.CSSProperties}
+    />
+  );
+}`;
+
+const columns: ColumnDef<User>[] = [
+  { accessorKey: "name", header: "Name" },
+  { accessorKey: "email", header: "Email" },
+  { accessorKey: "role", header: "Role" },
+];
+
+export default function DataVizPage() {
+  const [sorting, setSorting] = useState<SortingState>([]);
+
+  const table = useReactTable({
+    columns,
+    data: TABLE_DATA,
+    getCoreRowModel: getCoreRowModel(),
+    getSortedRowModel: getSortedRowModel(),
+    onSortingChange: setSorting,
+    state: { sorting },
+  });
+
+  return (
+    <Box display="flex" style={{ flexDirection: "column", gap: 64 }}>
+      <Box>
+        <Title mb="xs" order={1}>
+          Data viz
+        </Title>
+        <Text c="dimmed">
+          Charts, sortable tables, and date selection — using recharts, Mantine
+          Table with TanStack Table, and react-day-picker.
+        </Text>
+      </Box>
+
+      {/* Chart */}
+      <Box component="section" id="chart" style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+        <Box pl="sm" style={{ borderLeft: "3px solid var(--color-accent-500)" }}>
+          <Title mb={4} order={3}>Chart</Title>
+          <Text c="dimmed" fz="sm">
+            Mantine does not ship a chart component in its core package. Use{" "}
+            <strong>recharts</strong> directly with{" "}
+            <code>ResponsiveContainer</code> for size-aware rendering. Reference
+            the skill's CSS variables for colours to stay in sync with the
+            active theme.
+          </Text>
+        </Box>
+        <Box p="xl" style={{ border: "1px solid var(--border)", borderRadius: 8 }}>
+          <ResponsiveContainer height={256} width="100%">
+            <LineChart data={CHART_DATA}>
+              <CartesianGrid strokeDasharray="3 3" />
+              <XAxis dataKey="month" />
+              <YAxis />
+              <Tooltip />
+              <Line
+                dataKey="desktop"
+                name="Desktop"
+                stroke="var(--color-accent-500)"
+                type="monotone"
+              />
+              <Line
+                dataKey="mobile"
+                name="Mobile"
+                stroke="var(--color-accent-300)"
+                type="monotone"
+              />
+            </LineChart>
+          </ResponsiveContainer>
+        </Box>
+        <CodeBlock
+          code={CHART_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="Chart.tsx"
+          language="tsx"
+        />
+      </Box>
+
+      <Divider />
+
+      {/* DataTable */}
+      <Box component="section" id="data-table" style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+        <Box pl="sm" style={{ borderLeft: "3px solid var(--color-accent-500)" }}>
+          <Title mb={4} order={3}>DataTable</Title>
+          <Text c="dimmed" fz="sm">
+            A sortable table using Mantine's <code>Table</code> components and{" "}
+            <code>@tanstack/react-table</code> for headless sorting logic. Click
+            a column header to toggle sort direction. Install with:{" "}
+            <code>npm install @tanstack/react-table</code>
+          </Text>
+        </Box>
+        <Box p="xl" style={{ border: "1px solid var(--border)", borderRadius: 8 }}>
+          <Table highlightOnHover withColumnBorders withTableBorder>
+            <Table.Thead>
+              {table.getHeaderGroups().map((hg) => (
+                <Table.Tr key={hg.id}>
+                  {hg.headers.map((header) => (
+                    <Table.Th
+                      key={header.id}
+                      onClick={header.column.getToggleSortingHandler()}
+                      style={{ cursor: "pointer", userSelect: "none" }}
+                    >
+                      {flexRender(
+                        header.column.columnDef.header,
+                        header.getContext(),
+                      )}
+                      {header.column.getIsSorted() === "asc"
+                        ? " ↑"
+                        : header.column.getIsSorted() === "desc"
+                          ? " ↓"
+                          : " ↕"}
+                    </Table.Th>
+                  ))}
+                </Table.Tr>
+              ))}
+            </Table.Thead>
+            <Table.Tbody>
+              {table.getRowModel().rows.map((row) => (
+                <Table.Tr key={row.id}>
+                  {row.getVisibleCells().map((cell) => (
+                    <Table.Td key={cell.id}>
+                      {flexRender(
+                        cell.column.columnDef.cell,
+                        cell.getContext(),
+                      )}
+                    </Table.Td>
+                  ))}
+                </Table.Tr>
+              ))}
+            </Table.Tbody>
+          </Table>
+        </Box>
+        <CodeBlock
+          code={DATA_TABLE_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="DataTable.tsx"
+          language="tsx"
+        />
+      </Box>
+
+      <Divider />
+
+      {/* Calendar */}
+      <Box component="section" id="calendar" style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+        <Box pl="sm" style={{ borderLeft: "3px solid var(--color-accent-500)" }}>
+          <Title mb={4} order={3}>Calendar</Title>
+          <Text c="dimmed" fz="sm">
+            Date selection using <code>react-day-picker</code>. Mantine core has
+            no built-in calendar — this is the recommended lightweight approach.
+            Install with: <code>npm install react-day-picker</code>. Set{" "}
+            <code>--rdp-accent-color</code> via the <code>style</code> prop to
+            match the active skill palette.
+          </Text>
+        </Box>
+        <Box p="xl" style={{ border: "1px solid var(--border)", borderRadius: 8 }}>
+          <Text c="dimmed" fz="sm">
+            Calendar preview omitted — <code>react-day-picker</code> requires
+            its CSS import. See code snippet below for the full setup including
+            CSS variable integration.
+          </Text>
+        </Box>
+        <CodeBlock
+          code={CALENDAR_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="Calendar.tsx"
+          language="tsx"
+        />
+      </Box>
+    </Box>
+  );
+}

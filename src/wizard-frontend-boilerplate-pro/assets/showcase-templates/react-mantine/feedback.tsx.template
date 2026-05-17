@@ -1,0 +1,400 @@
+"use client";
+
+import { useState } from "react";
+
+import {
+  Alert,
+  Box,
+  Button,
+  Divider,
+  Flex,
+  Modal,
+  Progress,
+  Stack,
+  Text,
+  Title,
+  Tooltip,
+} from "@mantine/core";
+import { notifications } from "@mantine/notifications";
+
+import { CodeBlock } from "@/components/ui/code-block";
+
+const ALERT_CODE = `import { Alert, Stack } from "@mantine/core";
+
+export function Example() {
+  return (
+    <Stack gap="sm">
+      <Alert color="blue" title="Heads up" variant="light">
+        You can add components to your app using the CLI.
+      </Alert>
+      <Alert color="green" title="Success" variant="light">
+        Your profile has been saved successfully.
+      </Alert>
+      <Alert color="yellow" title="Warning" variant="light">
+        Unsaved changes will be lost.
+      </Alert>
+      <Alert color="red" title="Error" variant="light">
+        Something went wrong. Please try again.
+      </Alert>
+    </Stack>
+  );
+}`;
+
+const TOAST_CODE = `// Requires: npm install @mantine/notifications
+// 1. Mount <Notifications /> once in your root layout inside MantineProvider
+// 2. Call notifications.show() from any component
+import { Button } from "@mantine/core";
+import { notifications } from "@mantine/notifications";
+
+export function Example() {
+  return (
+    <Button
+      color="brand"
+      onClick={() =>
+        notifications.show({
+          color: "green",
+          message: "Your changes have been saved.",
+          title: "Success",
+        })
+      }
+      variant="filled"
+    >
+      Show toast
+    </Button>
+  );
+}`;
+
+const PROGRESS_CODE = `import { Box, Progress, Stack, Text } from "@mantine/core";
+
+export function Example() {
+  return (
+    <Stack gap="md" maw={480}>
+      <Box>
+        <Text c="dimmed" fz="sm" mb={4}>25%</Text>
+        <Progress color="brand" radius="xl" value={25} />
+      </Box>
+      <Box>
+        <Text c="dimmed" fz="sm" mb={4}>60%</Text>
+        <Progress color="brand" radius="xl" value={60} />
+      </Box>
+      <Box>
+        <Text c="dimmed" fz="sm" mb={4}>90%</Text>
+        <Progress color="brand" radius="xl" value={90} />
+      </Box>
+    </Stack>
+  );
+}`;
+
+const TOOLTIP_CODE = `import { Button, Flex, Tooltip } from "@mantine/core";
+
+export function Example() {
+  return (
+    <Flex gap="sm" wrap="wrap">
+      <Tooltip label="Tooltip on top" position="top">
+        <Button variant="outline">Top</Button>
+      </Tooltip>
+      <Tooltip label="Tooltip on right" position="right">
+        <Button variant="outline">Right</Button>
+      </Tooltip>
+      <Tooltip label="Tooltip on bottom" position="bottom">
+        <Button variant="outline">Bottom</Button>
+      </Tooltip>
+      <Tooltip label="Tooltip on left" position="left">
+        <Button variant="outline">Left</Button>
+      </Tooltip>
+    </Flex>
+  );
+}`;
+
+const DIALOG_CODE = `import { useState } from "react";
+import { Button, Modal, Text } from "@mantine/core";
+
+export function Example() {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <>
+      <Button color="brand" onClick={() => setOpen(true)} variant="filled">
+        Open dialog
+      </Button>
+      <Modal
+        centered
+        onClose={() => setOpen(false)}
+        opened={open}
+        title="Confirm action"
+      >
+        <Text fz="sm">
+          This action cannot be undone. Are you sure you want to proceed?
+        </Text>
+        <Flex gap="sm" justify="flex-end" mt="lg">
+          <Button onClick={() => setOpen(false)} variant="default">
+            Cancel
+          </Button>
+          <Button color="brand" onClick={() => setOpen(false)} variant="filled">
+            Confirm
+          </Button>
+        </Flex>
+      </Modal>
+    </>
+  );
+}`;
+
+export default function FeedbackPage() {
+  const [dialogOpen, setDialogOpen] = useState(false);
+
+  return (
+    <Box display="flex" style={{ flexDirection: "column", gap: 64 }}>
+      <Box>
+        <Title mb="xs" order={1}>
+          Feedback
+        </Title>
+        <Text c="dimmed">
+          Status indicators, notifications, and modal interactions — alerts,
+          toasts, dialogs, and progress.
+        </Text>
+      </Box>
+
+      {/* Alert */}
+      <Box component="section" id="alert" style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+        <Box pl="sm" style={{ borderLeft: "3px solid var(--color-accent-500)" }}>
+          <Title mb={4} order={3}>Alert</Title>
+          <Text c="dimmed" fz="sm">
+            An inline message banner. Pass <code>color</code> (blue, green,
+            yellow, red) and <code>title</code> directly on the{" "}
+            <code>Alert</code> component. Use <code>variant="light"</code> for
+            subtle backgrounds or <code>"filled"</code> for high emphasis.
+          </Text>
+        </Box>
+        <Box p="xl" style={{ border: "1px solid var(--border)", borderRadius: 8 }}>
+          <Stack gap="sm">
+            <Alert color="blue" title="Heads up" variant="light">
+              You can add components to your app using the CLI.
+            </Alert>
+            <Alert color="green" title="Success" variant="light">
+              Your profile has been saved successfully.
+            </Alert>
+            <Alert color="yellow" title="Warning" variant="light">
+              Unsaved changes will be lost.
+            </Alert>
+            <Alert color="red" title="Error" variant="light">
+              Something went wrong. Please try again.
+            </Alert>
+          </Stack>
+        </Box>
+        <CodeBlock
+          code={ALERT_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="Alert.tsx"
+          language="tsx"
+        />
+      </Box>
+
+      <Divider />
+
+      {/* Toast */}
+      <Box component="section" id="toast" style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+        <Box pl="sm" style={{ borderLeft: "3px solid var(--color-accent-500)" }}>
+          <Title mb={4} order={3}>Toast</Title>
+          <Text c="dimmed" fz="sm">
+            Mantine uses <code>notifications.show()</code> from{" "}
+            <code>@mantine/notifications</code>. Mount{" "}
+            <code>{"<Notifications />"}</code> once inside{" "}
+            <code>MantineProvider</code> in your root layout. No instance
+            creation needed — call <code>notifications.show()</code> directly
+            from any component.
+          </Text>
+        </Box>
+        <Box p="xl" style={{ border: "1px solid var(--border)", borderRadius: 8 }}>
+          <Flex gap="sm" wrap="wrap">
+            <Button
+              color="brand"
+              onClick={() =>
+                notifications.show({
+                  color: "green",
+                  message: "Event has been created.",
+                  title: "Success",
+                })
+              }
+              variant="filled"
+            >
+              Success toast
+            </Button>
+            <Button
+              onClick={() =>
+                notifications.show({
+                  color: "red",
+                  message: "Something went wrong.",
+                  title: "Error",
+                })
+              }
+              variant="outline"
+            >
+              Error toast
+            </Button>
+            <Button
+              onClick={() =>
+                notifications.show({
+                  color: "yellow",
+                  message: "Unsaved changes detected.",
+                  title: "Warning",
+                })
+              }
+              variant="outline"
+            >
+              Warning toast
+            </Button>
+            <Button
+              onClick={() =>
+                notifications.show({
+                  color: "blue",
+                  message: "Your message was delivered.",
+                  title: "Info",
+                })
+              }
+              variant="outline"
+            >
+              Info toast
+            </Button>
+          </Flex>
+        </Box>
+        <CodeBlock
+          code={TOAST_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="Toast.tsx"
+          language="tsx"
+        />
+      </Box>
+
+      <Divider />
+
+      {/* Progress */}
+      <Box component="section" id="progress" style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+        <Box pl="sm" style={{ borderLeft: "3px solid var(--color-accent-500)" }}>
+          <Title mb={4} order={3}>Progress</Title>
+          <Text c="dimmed" fz="sm">
+            A horizontal progress bar. Set <code>value</code> (0–100),{" "}
+            <code>color</code>, and <code>radius</code>. Use{" "}
+            <code>animated</code> for indeterminate loading states.
+          </Text>
+        </Box>
+        <Box p="xl" style={{ border: "1px solid var(--border)", borderRadius: 8 }}>
+          <Stack gap="md" maw={480}>
+            <Box>
+              <Text c="dimmed" fz="sm" mb={4}>25%</Text>
+              <Progress color="brand" radius="xl" value={25} />
+            </Box>
+            <Box>
+              <Text c="dimmed" fz="sm" mb={4}>60%</Text>
+              <Progress color="brand" radius="xl" value={60} />
+            </Box>
+            <Box>
+              <Text c="dimmed" fz="sm" mb={4}>90%</Text>
+              <Progress color="brand" radius="xl" value={90} />
+            </Box>
+          </Stack>
+        </Box>
+        <CodeBlock
+          code={PROGRESS_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="Progress.tsx"
+          language="tsx"
+        />
+      </Box>
+
+      <Divider />
+
+      {/* Tooltip */}
+      <Box component="section" id="tooltip" style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+        <Box pl="sm" style={{ borderLeft: "3px solid var(--color-accent-500)" }}>
+          <Title mb={4} order={3}>Tooltip</Title>
+          <Text c="dimmed" fz="sm">
+            A floating label on hover/focus. Mantine's <code>Tooltip</code> is
+            a wrapper — place the trigger as its child. Set{" "}
+            <code>position</code> to <code>"top"</code>,{" "}
+            <code>"right"</code>, <code>"bottom"</code>, or{" "}
+            <code>"left"</code>.
+          </Text>
+        </Box>
+        <Box p="xl" style={{ border: "1px solid var(--border)", borderRadius: 8 }}>
+          <Flex gap="sm" wrap="wrap">
+            <Tooltip label="Tooltip on top" position="top">
+              <Button variant="outline">Top</Button>
+            </Tooltip>
+            <Tooltip label="Tooltip on right" position="right">
+              <Button variant="outline">Right</Button>
+            </Tooltip>
+            <Tooltip label="Tooltip on bottom" position="bottom">
+              <Button variant="outline">Bottom</Button>
+            </Tooltip>
+            <Tooltip label="Tooltip on left" position="left">
+              <Button variant="outline">Left</Button>
+            </Tooltip>
+          </Flex>
+        </Box>
+        <CodeBlock
+          code={TOOLTIP_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="Tooltip.tsx"
+          language="tsx"
+        />
+      </Box>
+
+      <Divider />
+
+      {/* Dialog */}
+      <Box component="section" id="dialog" style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+        <Box pl="sm" style={{ borderLeft: "3px solid var(--color-accent-500)" }}>
+          <Title mb={4} order={3}>Dialog</Title>
+          <Text c="dimmed" fz="sm">
+            A focus-trapped modal overlay. Mantine calls it{" "}
+            <code>Modal</code>. Pass <code>opened</code>, <code>onClose</code>,
+            and <code>title</code>. Use <code>centered</code> for vertically
+            centred positioning. Content is rendered as children.
+          </Text>
+        </Box>
+        <Box p="xl" style={{ border: "1px solid var(--border)", borderRadius: 8 }}>
+          <Button
+            color="brand"
+            onClick={() => setDialogOpen(true)}
+            variant="filled"
+          >
+            Open dialog
+          </Button>
+        </Box>
+        <Modal
+          centered
+          onClose={() => setDialogOpen(false)}
+          opened={dialogOpen}
+          title="Confirm action"
+        >
+          <Text fz="sm">
+            This action cannot be undone. Are you sure you want to proceed?
+          </Text>
+          <Flex gap="sm" justify="flex-end" mt="lg">
+            <Button onClick={() => setDialogOpen(false)} variant="default">
+              Cancel
+            </Button>
+            <Button
+              color="brand"
+              onClick={() => setDialogOpen(false)}
+              variant="filled"
+            >
+              Confirm
+            </Button>
+          </Flex>
+        </Modal>
+        <CodeBlock
+          code={DIALOG_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="Dialog.tsx"
+          language="tsx"
+        />
+      </Box>
+    </Box>
+  );
+}

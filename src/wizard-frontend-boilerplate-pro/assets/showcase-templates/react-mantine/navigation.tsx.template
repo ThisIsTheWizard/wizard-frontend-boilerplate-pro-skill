@@ -1,0 +1,224 @@
+"use client";
+
+import { useState } from "react";
+
+import {
+  Anchor,
+  Box,
+  Breadcrumbs,
+  Button,
+  Divider,
+  Flex,
+  Group,
+  Pagination,
+  Stack,
+  Tabs,
+  Text,
+  Title,
+} from "@mantine/core";
+
+import { CodeBlock } from "@/components/ui/code-block";
+
+const TABS_CODE = `import { Box, Tabs, Text } from "@mantine/core";
+
+export function Example() {
+  return (
+    <Tabs color="brand" defaultValue="account">
+      <Tabs.List>
+        <Tabs.Tab value="account">Account</Tabs.Tab>
+        <Tabs.Tab value="password">Password</Tabs.Tab>
+        <Tabs.Tab value="notifications">Notifications</Tabs.Tab>
+      </Tabs.List>
+      <Box pt="md">
+        <Tabs.Panel value="account">
+          <Text c="dimmed" fz="sm">
+            Manage your account settings and preferences.
+          </Text>
+        </Tabs.Panel>
+        <Tabs.Panel value="password">
+          <Text c="dimmed" fz="sm">
+            Change your password and security settings.
+          </Text>
+        </Tabs.Panel>
+        <Tabs.Panel value="notifications">
+          <Text c="dimmed" fz="sm">
+            Configure how you receive notifications.
+          </Text>
+        </Tabs.Panel>
+      </Box>
+    </Tabs>
+  );
+}`;
+
+const BREADCRUMB_CODE = `import { Anchor, Breadcrumbs, Stack } from "@mantine/core";
+
+export function Example() {
+  return (
+    <Stack gap="sm">
+      <Breadcrumbs>
+        <Anchor href="#" fz="sm">Home</Anchor>
+        <Anchor href="#" fz="sm">Library</Anchor>
+        <span>Components</span>
+      </Breadcrumbs>
+      <Breadcrumbs separator="›">
+        <Anchor href="#" fz="sm">Dashboard</Anchor>
+        <Anchor href="#" fz="sm">Settings</Anchor>
+        <span>Profile</span>
+      </Breadcrumbs>
+    </Stack>
+  );
+}`;
+
+const PAGINATION_CODE = `import { useState } from "react";
+import { Group, Pagination } from "@mantine/core";
+
+export function Example() {
+  const [page, setPage] = useState(1);
+
+  return (
+    <Group justify="center">
+      <Pagination
+        color="brand"
+        onChange={setPage}
+        total={10}
+        value={page}
+      />
+    </Group>
+  );
+}`;
+
+export default function NavigationPage() {
+  const [page, setPage] = useState(1);
+
+  return (
+    <Box display="flex" style={{ flexDirection: "column", gap: 64 }}>
+      <Box>
+        <Title mb="xs" order={1}>
+          Navigation
+        </Title>
+        <Text c="dimmed">
+          Components for moving users through content — tabs, breadcrumbs,
+          and pagination.
+        </Text>
+      </Box>
+
+      {/* Tabs */}
+      <Box component="section" id="tabs" style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+        <Box pl="sm" style={{ borderLeft: "3px solid var(--color-accent-500)" }}>
+          <Title mb={4} order={3}>Tabs</Title>
+          <Text c="dimmed" fz="sm">
+            A segmented tab strip using <code>Tabs</code> +{" "}
+            <code>Tabs.List</code> + <code>Tabs.Tab</code> +{" "}
+            <code>Tabs.Panel</code>. Match the <code>value</code> on{" "}
+            <code>Tabs.Tab</code> and <code>Tabs.Panel</code> for automatic
+            panel switching. Set <code>color="brand"</code> for the active
+            indicator colour.
+          </Text>
+        </Box>
+        <Box p="xl" style={{ border: "1px solid var(--border)", borderRadius: 8 }}>
+          <Tabs color="brand" defaultValue="account">
+            <Tabs.List>
+              <Tabs.Tab value="account">Account</Tabs.Tab>
+              <Tabs.Tab value="password">Password</Tabs.Tab>
+              <Tabs.Tab value="notifications">Notifications</Tabs.Tab>
+            </Tabs.List>
+            <Box pt="md">
+              <Tabs.Panel value="account">
+                <Text c="dimmed" fz="sm">
+                  Manage your account settings and preferences.
+                </Text>
+              </Tabs.Panel>
+              <Tabs.Panel value="password">
+                <Text c="dimmed" fz="sm">
+                  Change your password and security settings.
+                </Text>
+              </Tabs.Panel>
+              <Tabs.Panel value="notifications">
+                <Text c="dimmed" fz="sm">
+                  Configure how you receive notifications.
+                </Text>
+              </Tabs.Panel>
+            </Box>
+          </Tabs>
+        </Box>
+        <CodeBlock
+          code={TABS_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="Tabs.tsx"
+          language="tsx"
+        />
+      </Box>
+
+      <Divider />
+
+      {/* Breadcrumb */}
+      <Box component="section" id="breadcrumb" style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+        <Box pl="sm" style={{ borderLeft: "3px solid var(--color-accent-500)" }}>
+          <Title mb={4} order={3}>Breadcrumb</Title>
+          <Text c="dimmed" fz="sm">
+            A hierarchical path indicator. Mantine's{" "}
+            <code>Breadcrumbs</code> wraps any array of React nodes, inserting
+            a separator between each. Use <code>Anchor</code> for clickable
+            items and a plain <code>{"<span>"}</code> for the current
+            (non-interactive) page. The <code>separator</code> prop customises
+            the divider character.
+          </Text>
+        </Box>
+        <Box p="xl" style={{ border: "1px solid var(--border)", borderRadius: 8 }}>
+          <Stack gap="md">
+            <Breadcrumbs>
+              <Anchor fz="sm" href="#">Home</Anchor>
+              <Anchor fz="sm" href="#">Library</Anchor>
+              <Text fz="sm">Components</Text>
+            </Breadcrumbs>
+            <Breadcrumbs separator="›">
+              <Anchor fz="sm" href="#">Dashboard</Anchor>
+              <Anchor fz="sm" href="#">Settings</Anchor>
+              <Text fz="sm">Profile</Text>
+            </Breadcrumbs>
+          </Stack>
+        </Box>
+        <CodeBlock
+          code={BREADCRUMB_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="Breadcrumb.tsx"
+          language="tsx"
+        />
+      </Box>
+
+      <Divider />
+
+      {/* Pagination */}
+      <Box component="section" id="pagination" style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+        <Box pl="sm" style={{ borderLeft: "3px solid var(--color-accent-500)" }}>
+          <Title mb={4} order={3}>Pagination</Title>
+          <Text c="dimmed" fz="sm">
+            A numbered page navigator. Pass <code>total</code> (page count),{" "}
+            <code>value</code>, and <code>onChange</code>. Mantine's{" "}
+            <code>Pagination</code> renders prev/next buttons and ellipsis
+            automatically. Currently on page <strong>{page}</strong>.
+          </Text>
+        </Box>
+        <Box p="xl" style={{ border: "1px solid var(--border)", borderRadius: 8 }}>
+          <Group justify="center">
+            <Pagination
+              color="brand"
+              onChange={setPage}
+              total={10}
+              value={page}
+            />
+          </Group>
+        </Box>
+        <CodeBlock
+          code={PAGINATION_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="Pagination.tsx"
+          language="tsx"
+        />
+      </Box>
+    </Box>
+  );
+}

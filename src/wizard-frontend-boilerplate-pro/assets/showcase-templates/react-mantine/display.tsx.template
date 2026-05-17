@@ -1,0 +1,352 @@
+"use client";
+
+import {
+  Avatar,
+  Badge,
+  Box,
+  Button,
+  Card,
+  Divider,
+  Flex,
+  Group,
+  Skeleton,
+  Stack,
+  Table,
+  Text,
+  Title,
+} from "@mantine/core";
+
+import { CodeBlock } from "@/components/ui/code-block";
+
+const CARD_CODE = `import { Box, Button, Card, Text } from "@mantine/core";
+
+export function Example() {
+  return (
+    <Card maw={320} padding="lg" radius="md" shadow="sm" withBorder>
+      <Box mb="xs">
+        <Text fw={600}>Project Alpha</Text>
+        <Text c="dimmed" fz="sm">A next-generation web application.</Text>
+      </Box>
+      <Text c="dimmed" fz="sm" mb="md">
+        This project aims to redefine how teams collaborate in real time.
+      </Text>
+      <Button color="brand" fullWidth mt="auto" radius="md" size="sm" variant="outline">
+        View details
+      </Button>
+    </Card>
+  );
+}`;
+
+const BADGE_CODE = `import { Badge, Flex } from "@mantine/core";
+
+export function Example() {
+  return (
+    <Flex gap="sm" wrap="wrap">
+      <Badge color="brand" variant="filled">Filled</Badge>
+      <Badge color="brand" variant="light">Light</Badge>
+      <Badge color="brand" variant="outline">Outline</Badge>
+      <Badge color="brand" variant="dot">Dot</Badge>
+      <Badge color="green" variant="light">Success</Badge>
+      <Badge color="yellow" variant="light">Warning</Badge>
+      <Badge color="red" variant="light">Error</Badge>
+    </Flex>
+  );
+}`;
+
+const AVATAR_CODE = `import { Avatar, Flex } from "@mantine/core";
+
+export function Example() {
+  return (
+    <Flex align="center" gap="md">
+      <Avatar alt="Jane Doe" radius="xl" size="xl" src="https://i.pravatar.cc/150?img=1" />
+      <Avatar color="brand" radius="xl" size="lg">SM</Avatar>
+      <Avatar color="brand" radius="xl" size="md">MD</Avatar>
+      <Avatar color="brand" radius="xl" size="sm">XS</Avatar>
+    </Flex>
+  );
+}`;
+
+const SEPARATOR_CODE = `import { Box, Divider, Flex, Text } from "@mantine/core";
+
+export function Example() {
+  return (
+    <Box>
+      <Box>
+        <Text c="dimmed" fz="sm">Section one content.</Text>
+        <Divider my="md" />
+        <Text c="dimmed" fz="sm">Section two content.</Text>
+      </Box>
+      <Flex align="center" gap="md" h={24} mt="md">
+        <Text fz="sm">Left item</Text>
+        <Divider h="100%" orientation="vertical" />
+        <Text fz="sm">Right item</Text>
+      </Flex>
+    </Box>
+  );
+}`;
+
+const SKELETON_CODE = `import { Box, Flex, Skeleton } from "@mantine/core";
+
+export function Example() {
+  return (
+    <Flex align="center" gap="md">
+      <Skeleton circle h={48} w={48} />
+      <Box>
+        <Skeleton h={14} mb={8} w={192} />
+        <Skeleton h={14} mb={8} w={144} />
+        <Skeleton h={14} w={96} />
+      </Box>
+    </Flex>
+  );
+}`;
+
+const TABLE_CODE = `import { Table } from "@mantine/core";
+
+export function Example() {
+  return (
+    <Table highlightOnHover striped withColumnBorders withTableBorder>
+      <Table.Thead>
+        <Table.Tr>
+          <Table.Th>Name</Table.Th>
+          <Table.Th>Email</Table.Th>
+          <Table.Th>Role</Table.Th>
+        </Table.Tr>
+      </Table.Thead>
+      <Table.Tbody>
+        <Table.Tr>
+          <Table.Td>Alice Martin</Table.Td>
+          <Table.Td>alice@example.com</Table.Td>
+          <Table.Td>Admin</Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+          <Table.Td>Bob Chen</Table.Td>
+          <Table.Td>bob@example.com</Table.Td>
+          <Table.Td>Editor</Table.Td>
+        </Table.Tr>
+      </Table.Tbody>
+    </Table>
+  );
+}`;
+
+export default function DisplayPage() {
+  return (
+    <Box display="flex" style={{ flexDirection: "column", gap: 64 }}>
+      <Box>
+        <Title mb="xs" order={1}>
+          Display
+        </Title>
+        <Text c="dimmed">
+          Read-only visual elements for presenting content — cards, badges,
+          avatars, and data tables.
+        </Text>
+      </Box>
+
+      {/* Card */}
+      <Box component="section" id="card" style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+        <Box pl="sm" style={{ borderLeft: "3px solid var(--color-accent-500)" }}>
+          <Title mb={4} order={3}>Card</Title>
+          <Text c="dimmed" fz="sm">
+            A surface for grouping related content. Mantine's{" "}
+            <code>Card</code> uses <code>Card.Section</code> for full-bleed
+            areas (images, maps). Use <code>withBorder</code> and{" "}
+            <code>shadow</code> props for visual elevation.
+          </Text>
+        </Box>
+        <Box p="xl" style={{ border: "1px solid var(--border)", borderRadius: 8 }}>
+          <Card maw={320} padding="lg" radius="md" shadow="sm" withBorder>
+            <Box mb="xs">
+              <Text fw={600}>Project Alpha</Text>
+              <Text c="dimmed" fz="sm">A next-generation web application.</Text>
+            </Box>
+            <Text c="dimmed" fz="sm" mb="md">
+              This project aims to redefine how teams collaborate in real time.
+            </Text>
+            <Button color="brand" fullWidth mt="auto" radius="md" size="sm" variant="outline">
+              View details
+            </Button>
+          </Card>
+        </Box>
+        <CodeBlock
+          code={CARD_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="Card.tsx"
+          language="tsx"
+        />
+      </Box>
+
+      {/* Badge */}
+      <Box component="section" id="badge" style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+        <Box pl="sm" style={{ borderLeft: "3px solid var(--color-accent-500)" }}>
+          <Title mb={4} order={3}>Badge</Title>
+          <Text c="dimmed" fz="sm">
+            A compact label for status, category, or count. Mantine ships{" "}
+            <code>filled</code>, <code>light</code>, <code>outline</code>, and{" "}
+            <code>dot</code> variants. Use Mantine's named colours or{" "}
+            <code>"brand"</code> for the active palette.
+          </Text>
+        </Box>
+        <Box p="xl" style={{ border: "1px solid var(--border)", borderRadius: 8 }}>
+          <Flex gap="sm" wrap="wrap">
+            <Badge color="brand" variant="filled">Filled</Badge>
+            <Badge color="brand" variant="light">Light</Badge>
+            <Badge color="brand" variant="outline">Outline</Badge>
+            <Badge color="brand" variant="dot">Dot</Badge>
+            <Badge color="green" variant="light">Success</Badge>
+            <Badge color="yellow" variant="light">Warning</Badge>
+            <Badge color="red" variant="light">Error</Badge>
+          </Flex>
+        </Box>
+        <CodeBlock
+          code={BADGE_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="Badge.tsx"
+          language="tsx"
+        />
+      </Box>
+
+      {/* Avatar */}
+      <Box component="section" id="avatar" style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+        <Box pl="sm" style={{ borderLeft: "3px solid var(--color-accent-500)" }}>
+          <Title mb={4} order={3}>Avatar</Title>
+          <Text c="dimmed" fz="sm">
+            A user avatar with image and text-initials fallback. Mantine's{" "}
+            <code>Avatar</code> is a single component — place the initials as{" "}
+            children when no <code>src</code> is provided. Use{" "}
+            <code>color</code> to tint the background.
+          </Text>
+        </Box>
+        <Box p="xl" style={{ border: "1px solid var(--border)", borderRadius: 8 }}>
+          <Group align="center" gap="md">
+            <Avatar alt="Jane Doe" radius="xl" size="xl" src="https://i.pravatar.cc/150?img=1" />
+            <Avatar color="brand" radius="xl" size="lg">SM</Avatar>
+            <Avatar color="brand" radius="xl" size="md">MD</Avatar>
+            <Avatar color="brand" radius="xl" size="sm">XS</Avatar>
+          </Group>
+        </Box>
+        <CodeBlock
+          code={AVATAR_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="Avatar.tsx"
+          language="tsx"
+        />
+      </Box>
+
+      {/* Separator */}
+      <Box component="section" id="separator" style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+        <Box pl="sm" style={{ borderLeft: "3px solid var(--color-accent-500)" }}>
+          <Title mb={4} order={3}>Separator</Title>
+          <Text c="dimmed" fz="sm">
+            A thin rule for dividing content. Mantine calls it{" "}
+            <code>Divider</code>. Use <code>orientation="vertical"</code> with a
+            fixed height for inline vertical separators. The{" "}
+            <code>label</code> prop adds centred section labels.
+          </Text>
+        </Box>
+        <Box p="xl" style={{ border: "1px solid var(--border)", borderRadius: 8 }}>
+          <Box>
+            <Box>
+              <Text c="dimmed" fz="sm">Section one content.</Text>
+              <Divider my="md" />
+              <Text c="dimmed" fz="sm">Section two content.</Text>
+            </Box>
+            <Flex align="center" gap="md" h={24} mt="md">
+              <Text fz="sm">Left item</Text>
+              <Divider h="100%" orientation="vertical" />
+              <Text fz="sm">Right item</Text>
+            </Flex>
+          </Box>
+        </Box>
+        <CodeBlock
+          code={SEPARATOR_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="Separator.tsx"
+          language="tsx"
+        />
+      </Box>
+
+      {/* Skeleton */}
+      <Box component="section" id="skeleton" style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+        <Box pl="sm" style={{ borderLeft: "3px solid var(--color-accent-500)" }}>
+          <Title mb={4} order={3}>Skeleton</Title>
+          <Text c="dimmed" fz="sm">
+            Animated placeholder blocks for loading states. Use{" "}
+            <code>circle</code> for avatar placeholders;{" "}
+            <code>radius</code> for rounded text lines. Pass{" "}
+            <code>animate=&#123;false&#125;</code> to disable the pulse.
+          </Text>
+        </Box>
+        <Box p="xl" style={{ border: "1px solid var(--border)", borderRadius: 8 }}>
+          <Flex align="center" gap="md">
+            <Skeleton circle h={48} w={48} />
+            <Box>
+              <Skeleton h={14} mb={8} w={192} />
+              <Skeleton h={14} mb={8} w={144} />
+              <Skeleton h={14} w={96} />
+            </Box>
+          </Flex>
+        </Box>
+        <CodeBlock
+          code={SKELETON_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="Skeleton.tsx"
+          language="tsx"
+        />
+      </Box>
+
+      {/* Table */}
+      <Box component="section" id="table" style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+        <Box pl="sm" style={{ borderLeft: "3px solid var(--color-accent-500)" }}>
+          <Title mb={4} order={3}>Table</Title>
+          <Text c="dimmed" fz="sm">
+            A structured grid for tabular data. Mantine uses{" "}
+            <code>Table</code> + <code>Table.Thead</code> /{" "}
+            <code>Table.Tbody</code> + <code>Table.Tr</code> /{" "}
+            <code>Table.Th</code> / <code>Table.Td</code>. Enable{" "}
+            <code>striped</code>, <code>highlightOnHover</code>, and{" "}
+            <code>withColumnBorders</code> for readability.
+          </Text>
+        </Box>
+        <Box p="xl" style={{ border: "1px solid var(--border)", borderRadius: 8 }}>
+          <Table highlightOnHover striped withColumnBorders withTableBorder>
+            <Table.Thead>
+              <Table.Tr>
+                <Table.Th>Name</Table.Th>
+                <Table.Th>Email</Table.Th>
+                <Table.Th>Role</Table.Th>
+              </Table.Tr>
+            </Table.Thead>
+            <Table.Tbody>
+              <Table.Tr>
+                <Table.Td>Alice Martin</Table.Td>
+                <Table.Td>alice@example.com</Table.Td>
+                <Table.Td>Admin</Table.Td>
+              </Table.Tr>
+              <Table.Tr>
+                <Table.Td>Bob Chen</Table.Td>
+                <Table.Td>bob@example.com</Table.Td>
+                <Table.Td>Editor</Table.Td>
+              </Table.Tr>
+              <Table.Tr>
+                <Table.Td>Carol White</Table.Td>
+                <Table.Td>carol@example.com</Table.Td>
+                <Table.Td>Viewer</Table.Td>
+              </Table.Tr>
+            </Table.Tbody>
+          </Table>
+        </Box>
+        <CodeBlock
+          code={TABLE_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="Table.tsx"
+          language="tsx"
+        />
+      </Box>
+    </Box>
+  );
+}

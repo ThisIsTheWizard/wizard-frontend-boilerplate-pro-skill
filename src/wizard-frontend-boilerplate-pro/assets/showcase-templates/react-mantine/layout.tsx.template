@@ -1,0 +1,218 @@
+"use client";
+
+import "@mantine/core/styles.css";
+import "@mantine/notifications/styles.css";
+
+import { useCallback, useState } from "react";
+import type { ReactNode } from "react";
+import Link from "next/link";
+
+import {
+  ActionIcon,
+  Box,
+  Burger,
+  createTheme,
+  Flex,
+  MantineProvider,
+  type MantineColorsTuple,
+  Overlay,
+  Text,
+} from "@mantine/core";
+import { Notifications } from "@mantine/notifications";
+
+import { useTheme } from "@/components/ThemeProvider";
+
+import { Sidebar } from "./sidebar";
+
+const DRAWER_WIDTH = 256;
+
+const brandColors: MantineColorsTuple = [
+  "var(--color-accent-50)",
+  "var(--color-accent-100)",
+  "var(--color-accent-200)",
+  "var(--color-accent-300)",
+  "var(--color-accent-400)",
+  "var(--color-accent-500)",
+  "var(--color-accent-600)",
+  "var(--color-accent-700)",
+  "var(--color-accent-800)",
+  "var(--color-accent-900)",
+];
+
+const mantineTheme = createTheme({
+  colors: { brand: brandColors },
+  defaultRadius: "md",
+  fontFamily: "inherit",
+  primaryColor: "brand",
+  primaryShade: { dark: 4, light: 5 },
+});
+
+function MoonIcon() {
+  return (
+    <svg
+      aria-hidden="true"
+      fill="none"
+      height="18"
+      stroke="currentColor"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth="2"
+      viewBox="0 0 24 24"
+      width="18"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" />
+    </svg>
+  );
+}
+
+function SunIcon() {
+  return (
+    <svg
+      aria-hidden="true"
+      fill="none"
+      height="18"
+      stroke="currentColor"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth="2"
+      viewBox="0 0 24 24"
+      width="18"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <circle cx="12" cy="12" r="4" />
+      <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41" />
+    </svg>
+  );
+}
+
+export default function LibraryLayout({ children }: { children: ReactNode }) {
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const { theme, toggleTheme } = useTheme();
+
+  const handleDrawerToggle = useCallback(
+    () => setMobileOpen((open) => !open),
+    [],
+  );
+  const closeSidebar = useCallback(() => setMobileOpen(false), []);
+
+  return (
+    <MantineProvider forceColorScheme={theme} theme={mantineTheme}>
+      <Notifications />
+      <Flex mih="100vh">
+        {/* Desktop sidebar */}
+        <Box
+          aria-label="Component library navigation"
+          component="nav"
+          display={{ base: "none", md: "flex" } as never}
+          style={{
+            background: "var(--surface)",
+            borderRight: "1px solid var(--border)",
+            flexDirection: "column",
+            flexShrink: 0,
+            width: DRAWER_WIDTH,
+          }}
+        >
+          <Sidebar onNavigate={closeSidebar} />
+        </Box>
+
+        {/* Mobile sidebar overlay */}
+        {mobileOpen && (
+          <Box
+            display={{ base: "flex", md: "none" } as never}
+            style={{
+              bottom: 0,
+              left: 0,
+              position: "fixed",
+              right: 0,
+              top: 0,
+              zIndex: 40,
+            }}
+          >
+            <Overlay
+              color="#000"
+              onClick={handleDrawerToggle}
+              opacity={0.6}
+              style={{ zIndex: 40 }}
+            />
+            <Box
+              style={{
+                background: "var(--surface)",
+                borderRight: "1px solid var(--border)",
+                bottom: 0,
+                left: 0,
+                overflowY: "auto",
+                position: "absolute",
+                top: 0,
+                width: DRAWER_WIDTH,
+                zIndex: 50,
+              }}
+            >
+              <Sidebar onNavigate={closeSidebar} />
+            </Box>
+          </Box>
+        )}
+
+        {/* Main content */}
+        <Flex direction="column" flex={1} style={{ minWidth: 0 }}>
+          {/* Header */}
+          <Box
+            component="header"
+            style={{
+              background: "var(--background)",
+              borderBottom: "1px solid var(--border)",
+              position: "sticky",
+              top: 0,
+              zIndex: 30,
+            }}
+          >
+            <Flex align="center" gap="xs" h={56} px="sm">
+              <Burger
+                aria-label="Open navigation menu"
+                display={{ base: "flex", md: "none" } as never}
+                onClick={handleDrawerToggle}
+                opened={mobileOpen}
+                size="sm"
+              />
+
+              <Text
+                c="var(--foreground)"
+                component={Link}
+                display={{ base: "block", md: "none" } as never}
+                fw={600}
+                fz="sm"
+                href="/library"
+                style={{ flex: 1, textDecoration: "none" }}
+              >
+                Component Library
+              </Text>
+
+              <Box style={{ flex: 1 }} visibleFrom="md" />
+
+              <ActionIcon
+                aria-label={
+                  theme === "dark" ? "Switch to light mode" : "Switch to dark mode"
+                }
+                onClick={toggleTheme}
+                size="md"
+                variant="subtle"
+              >
+                {theme === "dark" ? <SunIcon /> : <MoonIcon />}
+              </ActionIcon>
+            </Flex>
+          </Box>
+
+          {/* Page content */}
+          <Box
+            component="main"
+            flex={1}
+            p={{ base: "md", md: "xl" }}
+            style={{ background: "var(--background)" }}
+          >
+            {children}
+          </Box>
+        </Flex>
+      </Flex>
+    </MantineProvider>
+  );
+}

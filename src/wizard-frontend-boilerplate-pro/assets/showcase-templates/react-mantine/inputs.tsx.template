@@ -1,0 +1,408 @@
+"use client";
+
+import { useState } from "react";
+
+import {
+  Box,
+  Button,
+  Checkbox,
+  Divider,
+  Flex,
+  Radio,
+  Select,
+  Stack,
+  Switch,
+  Text,
+  Textarea,
+  TextInput,
+  Title,
+} from "@mantine/core";
+
+import { CodeBlock } from "@/components/ui/code-block";
+
+const BUTTON_CODE = `import { Button, Flex, Stack } from "@mantine/core";
+
+export function Example() {
+  return (
+    <Stack gap="sm">
+      <Flex gap="sm" wrap="wrap">
+        <Button color="brand" variant="filled">Filled</Button>
+        <Button color="brand" variant="outline">Outline</Button>
+        <Button color="brand" variant="light">Light</Button>
+        <Button color="brand" variant="subtle">Subtle</Button>
+      </Flex>
+      <Flex align="center" gap="sm" wrap="wrap">
+        <Button color="brand" size="xs" variant="filled">XSmall</Button>
+        <Button color="brand" size="sm" variant="filled">Small</Button>
+        <Button color="brand" size="md" variant="filled">Medium</Button>
+        <Button color="brand" size="lg" variant="filled">Large</Button>
+        <Button color="brand" disabled variant="filled">Disabled</Button>
+      </Flex>
+    </Stack>
+  );
+}`;
+
+const INPUT_CODE = `import { Stack, TextInput } from "@mantine/core";
+
+export function Example() {
+  return (
+    <Stack gap="md" maw={360}>
+      <TextInput
+        description="We'll never share your email."
+        label="Email address"
+        placeholder="you@example.com"
+        type="email"
+      />
+      <TextInput
+        defaultValue="invalid user!"
+        error="Please enter a valid username."
+        label="Username"
+      />
+      <TextInput
+        disabled
+        label="Disabled"
+        placeholder="Not editable"
+      />
+    </Stack>
+  );
+}`;
+
+const TEXTAREA_CODE = `import { Stack, Textarea } from "@mantine/core";
+
+export function Example() {
+  return (
+    <Stack gap="md" maw={360}>
+      <Textarea
+        autosize
+        description="Describe your project in a few sentences."
+        label="Bio"
+        maxRows={6}
+        minRows={3}
+        placeholder="Tell us about yourself…"
+      />
+      <Textarea
+        error="Message is required."
+        label="Message"
+        minRows={3}
+        placeholder="Enter your message…"
+      />
+    </Stack>
+  );
+}`;
+
+const SELECT_CODE = `import { Select, Stack } from "@mantine/core";
+
+export function Example() {
+  return (
+    <Stack gap="md" maw={360}>
+      <Select
+        data={[
+          { label: "Next.js", value: "nextjs" },
+          { label: "Remix", value: "remix" },
+          { label: "Astro", value: "astro" },
+          { label: "SvelteKit", value: "sveltekit" },
+        ]}
+        label="Framework"
+        placeholder="Select framework"
+      />
+    </Stack>
+  );
+}`;
+
+const CHECKBOX_CODE = `import { Checkbox, Stack } from "@mantine/core";
+
+export function Example() {
+  return (
+    <Stack gap="sm">
+      <Checkbox color="brand" label="Accept terms and conditions" />
+      <Checkbox color="brand" defaultChecked label="Checked by default" />
+      <Checkbox color="brand" disabled label="Disabled" />
+    </Stack>
+  );
+}`;
+
+const RADIO_GROUP_CODE = `import { Radio, Stack } from "@mantine/core";
+
+export function Example() {
+  return (
+    <Radio.Group defaultValue="free" label="Select your plan">
+      <Stack gap="sm" mt="xs">
+        <Radio color="brand" label="Free" value="free" />
+        <Radio color="brand" label="Pro" value="pro" />
+        <Radio color="brand" label="Enterprise" value="enterprise" />
+      </Stack>
+    </Radio.Group>
+  );
+}`;
+
+const SWITCH_CODE = `import { Stack, Switch } from "@mantine/core";
+
+export function Example() {
+  return (
+    <Stack gap="sm">
+      <Switch color="brand" label="Email notifications" />
+      <Switch color="brand" defaultChecked label="Marketing emails" />
+      <Switch color="brand" disabled label="Disabled" />
+    </Stack>
+  );
+}`;
+
+export default function InputsPage() {
+  const [plan, setPlan] = useState("free");
+
+  return (
+    <Box display="flex" style={{ flexDirection: "column", gap: 64 }}>
+      <Box>
+        <Title mb="xs" order={1}>
+          Inputs
+        </Title>
+        <Text c="dimmed">
+          Form controls for collecting user input — buttons, fields,
+          selections, and toggles.
+        </Text>
+      </Box>
+
+      {/* Button */}
+      <Box component="section" id="button" style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+        <Box pl="sm" style={{ borderLeft: "3px solid var(--color-accent-500)" }}>
+          <Title mb={4} order={3}>Button</Title>
+          <Text c="dimmed" fz="sm">
+            Triggers an action or event. Mantine ships{" "}
+            <code>filled</code>, <code>outline</code>, <code>light</code>, and{" "}
+            <code>subtle</code> variants. Pass <code>color="brand"</code> to
+            apply the active skill colour.
+          </Text>
+        </Box>
+        <Box p="xl" style={{ border: "1px solid var(--border)", borderRadius: 8 }}>
+          <Stack gap="sm">
+            <Flex gap="sm" wrap="wrap">
+              <Button color="brand" variant="filled">Filled</Button>
+              <Button color="brand" variant="outline">Outline</Button>
+              <Button color="brand" variant="light">Light</Button>
+              <Button color="brand" variant="subtle">Subtle</Button>
+            </Flex>
+            <Flex align="center" gap="sm" wrap="wrap">
+              <Button color="brand" size="xs" variant="filled">XSmall</Button>
+              <Button color="brand" size="sm" variant="filled">Small</Button>
+              <Button color="brand" size="md" variant="filled">Medium</Button>
+              <Button color="brand" size="lg" variant="filled">Large</Button>
+              <Button color="brand" disabled variant="filled">Disabled</Button>
+            </Flex>
+          </Stack>
+        </Box>
+        <CodeBlock
+          code={BUTTON_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="Button.tsx"
+          language="tsx"
+        />
+      </Box>
+
+      <Divider />
+
+      {/* Input */}
+      <Box component="section" id="input" style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+        <Box pl="sm" style={{ borderLeft: "3px solid var(--color-accent-500)" }}>
+          <Title mb={4} order={3}>Input</Title>
+          <Text c="dimmed" fz="sm">
+            A single-line text field. Mantine's <code>TextInput</code> bundles
+            the label, description, and error message into a single component —
+            no wrapper composition required.
+          </Text>
+        </Box>
+        <Box p="xl" style={{ border: "1px solid var(--border)", borderRadius: 8 }}>
+          <Stack gap="md" maw={360}>
+            <TextInput
+              description="We'll never share your email."
+              label="Email address"
+              placeholder="you@example.com"
+              type="email"
+            />
+            <TextInput
+              defaultValue="invalid user!"
+              error="Please enter a valid username."
+              label="Username"
+            />
+            <TextInput
+              disabled
+              label="Disabled"
+              placeholder="Not editable"
+            />
+          </Stack>
+        </Box>
+        <CodeBlock
+          code={INPUT_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="Input.tsx"
+          language="tsx"
+        />
+      </Box>
+
+      <Divider />
+
+      {/* Textarea */}
+      <Box component="section" id="textarea" style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+        <Box pl="sm" style={{ borderLeft: "3px solid var(--color-accent-500)" }}>
+          <Title mb={4} order={3}>Textarea</Title>
+          <Text c="dimmed" fz="sm">
+            A multi-line text input with built-in autosize support. Use{" "}
+            <code>autosize</code> + <code>minRows</code> / <code>maxRows</code>{" "}
+            instead of a fixed <code>rows</code> prop for a better UX.
+          </Text>
+        </Box>
+        <Box p="xl" style={{ border: "1px solid var(--border)", borderRadius: 8 }}>
+          <Stack gap="md" maw={360}>
+            <Textarea
+              autosize
+              description="Describe your project in a few sentences."
+              label="Bio"
+              maxRows={6}
+              minRows={3}
+              placeholder="Tell us about yourself…"
+            />
+            <Textarea
+              error="Message is required."
+              label="Message"
+              minRows={3}
+              placeholder="Enter your message…"
+            />
+          </Stack>
+        </Box>
+        <CodeBlock
+          code={TEXTAREA_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="Textarea.tsx"
+          language="tsx"
+        />
+      </Box>
+
+      <Divider />
+
+      {/* Select */}
+      <Box component="section" id="select" style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+        <Box pl="sm" style={{ borderLeft: "3px solid var(--color-accent-500)" }}>
+          <Title mb={4} order={3}>Select</Title>
+          <Text c="dimmed" fz="sm">
+            A searchable dropdown for picking a single value. Pass the{" "}
+            <code>data</code> prop as an array of{" "}
+            <code>{"{ label, value }"}</code> objects. Use{" "}
+            <code>searchable</code> for long lists.
+          </Text>
+        </Box>
+        <Box p="xl" style={{ border: "1px solid var(--border)", borderRadius: 8 }}>
+          <Stack gap="md" maw={360}>
+            <Select
+              data={[
+                { label: "Next.js", value: "nextjs" },
+                { label: "Remix", value: "remix" },
+                { label: "Astro", value: "astro" },
+                { label: "SvelteKit", value: "sveltekit" },
+              ]}
+              label="Framework"
+              placeholder="Select framework"
+            />
+          </Stack>
+        </Box>
+        <CodeBlock
+          code={SELECT_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="Select.tsx"
+          language="tsx"
+        />
+      </Box>
+
+      <Divider />
+
+      {/* Checkbox */}
+      <Box component="section" id="checkbox" style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+        <Box pl="sm" style={{ borderLeft: "3px solid var(--color-accent-500)" }}>
+          <Title mb={4} order={3}>Checkbox</Title>
+          <Text c="dimmed" fz="sm">
+            A binary toggle with a built-in label. Pass <code>color="brand"</code>{" "}
+            for the active colour. No wrapper composition required.
+          </Text>
+        </Box>
+        <Box p="xl" style={{ border: "1px solid var(--border)", borderRadius: 8 }}>
+          <Stack gap="sm">
+            <Checkbox color="brand" label="Accept terms and conditions" />
+            <Checkbox color="brand" defaultChecked label="Checked by default" />
+            <Checkbox color="brand" disabled label="Disabled" />
+          </Stack>
+        </Box>
+        <CodeBlock
+          code={CHECKBOX_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="Checkbox.tsx"
+          language="tsx"
+        />
+      </Box>
+
+      <Divider />
+
+      {/* RadioGroup */}
+      <Box component="section" id="radio-group" style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+        <Box pl="sm" style={{ borderLeft: "3px solid var(--color-accent-500)" }}>
+          <Title mb={4} order={3}>RadioGroup</Title>
+          <Text c="dimmed" fz="sm">
+            Mutually exclusive options using <code>Radio.Group</code> +{" "}
+            <code>Radio</code>. The group manages value state; individual radios
+            just need a <code>value</code> and <code>label</code>.
+          </Text>
+        </Box>
+        <Box p="xl" style={{ border: "1px solid var(--border)", borderRadius: 8 }}>
+          <Radio.Group
+            label="Select your plan"
+            onChange={setPlan}
+            value={plan}
+          >
+            <Stack gap="sm" mt="xs">
+              <Radio color="brand" label="Free" value="free" />
+              <Radio color="brand" label="Pro" value="pro" />
+              <Radio color="brand" label="Enterprise" value="enterprise" />
+            </Stack>
+          </Radio.Group>
+        </Box>
+        <CodeBlock
+          code={RADIO_GROUP_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="RadioGroup.tsx"
+          language="tsx"
+        />
+      </Box>
+
+      <Divider />
+
+      {/* Switch */}
+      <Box component="section" id="switch" style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+        <Box pl="sm" style={{ borderLeft: "3px solid var(--color-accent-500)" }}>
+          <Title mb={4} order={3}>Switch</Title>
+          <Text c="dimmed" fz="sm">
+            An on/off toggle with an inline label. Pass <code>color="brand"</code>{" "}
+            for the active colour. No wrapper composition required — the label is
+            accessible out of the box.
+          </Text>
+        </Box>
+        <Box p="xl" style={{ border: "1px solid var(--border)", borderRadius: 8 }}>
+          <Stack gap="sm">
+            <Switch color="brand" label="Email notifications" />
+            <Switch color="brand" defaultChecked label="Marketing emails" />
+            <Switch color="brand" disabled label="Disabled" />
+          </Stack>
+        </Box>
+        <CodeBlock
+          code={SWITCH_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="Switch.tsx"
+          language="tsx"
+        />
+      </Box>
+    </Box>
+  );
+}
