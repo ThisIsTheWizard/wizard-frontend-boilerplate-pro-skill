@@ -69,7 +69,6 @@ npx create-next-app@<resolved-version> <project-name> \
   --app \
   --src-dir \
   --import-alias "@/*" \
-  --no-turbopack \
   --yes
 ```
 
@@ -83,7 +82,6 @@ npx create-next-app@<resolved-version> <project-name> \
   --app \
   --src-dir \
   --import-alias "@/*" \
-  --no-turbopack \
   --yes
 ```
 
@@ -95,9 +93,6 @@ npx create-next-app@<resolved-version> <project-name> \
 
 > `--src-dir` places all application code under `src/`, which is required for
 > the showcase template paths to resolve correctly.
-
-> `--no-turbopack` keeps the build chain consistent across environments. Enable
-> Turbopack only if the user explicitly requests it.
 
 ---
 

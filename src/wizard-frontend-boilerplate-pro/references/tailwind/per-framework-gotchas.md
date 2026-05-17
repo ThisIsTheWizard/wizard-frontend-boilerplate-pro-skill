@@ -32,8 +32,8 @@ In `globals.css`, place `@import "tailwindcss"` before any other import
 ### Turbopack
 
 Turbopack (enabled via `--turbopack`) has known Tailwind v4 scan issues in
-Next.js 15 early releases. Disable it with `--no-turbopack` unless the user
-requests it.
+Next.js 15 early releases. Disable it with `--no-turbopack` if the user
+requests for it.
 
 ---
 

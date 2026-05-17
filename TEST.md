@@ -162,7 +162,6 @@ Good. For Next.js with Tailwind v4:
 1. Need to use `@tailwindcss/postcss` 
 2. Delete `tailwind.config.ts`
 3. Place `@import "tailwindcss"` before other imports
-4. Use `--no-turbopack`
 
 Now let me scaffold the project. The project name is "my-app", the package manager is pnpm, and the Next.js version is 16.2.6.
 
