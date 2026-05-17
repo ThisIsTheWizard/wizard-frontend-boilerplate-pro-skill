@@ -1,0 +1,276 @@
+<script setup lang="ts">
+import CodeBlock from "@/components/CodeBlock.vue";
+
+const TABLE_ROWS = [
+  { email: "alice@example.com", name: "Alice Martin", role: "Admin" },
+  { email: "bob@example.com", name: "Bob Chen", role: "Editor" },
+  { email: "carol@example.com", name: "Carol White", role: "Viewer" },
+];
+
+const CARD_CODE = `<template>
+  <el-card class="w-80" header="Project Alpha">
+    <p class="text-sm text-muted-foreground">
+      A next-generation web application. This project aims to redefine how teams collaborate in real time.
+    </p>
+    <template #footer>
+      <el-button type="primary" plain>View details</el-button>
+    </template>
+  </el-card>
+</template>`;
+
+const BADGE_CODE = `<template>
+  <div class="flex flex-wrap items-center gap-4">
+    <el-badge :value="5" type="primary">
+      <el-button>Messages</el-button>
+    </el-badge>
+    <el-badge :value="12" type="danger">
+      <el-button>Alerts</el-button>
+    </el-badge>
+    <el-badge is-dot type="success">
+      <el-button>Status</el-button>
+    </el-badge>
+  </div>
+</template>`;
+
+const AVATAR_CODE = `<template>
+  <div class="flex items-center gap-4">
+    <el-avatar :size="56" src="https://i.pravatar.cc/150?img=1" />
+    <el-avatar :size="56">JD</el-avatar>
+    <el-avatar>SM</el-avatar>
+    <el-avatar :size="32">XS</el-avatar>
+  </div>
+</template>`;
+
+const DIVIDER_CODE = `<template>
+  <div class="flex flex-col gap-4">
+    <div class="flex flex-col gap-2">
+      <p class="text-sm text-muted-foreground">Section one content.</p>
+      <el-divider />
+      <p class="text-sm text-muted-foreground">Section two content.</p>
+    </div>
+    <div class="flex items-center" style="height: 2rem">
+      <span class="text-sm">Left item</span>
+      <el-divider direction="vertical" />
+      <span class="text-sm">Right item</span>
+    </div>
+  </div>
+</template>`;
+
+const SKELETON_CODE = `<template>
+  <el-skeleton :rows="3" animated />
+</template>`;
+
+const TABLE_CODE = `<template>
+  <el-table :data="rows" stripe border>
+    <el-table-column prop="name" label="Name" />
+    <el-table-column prop="email" label="Email" />
+    <el-table-column prop="role" label="Role" />
+  </el-table>
+</template>`;
+</script>
+
+<template>
+  <div class="flex flex-col gap-16">
+    <div>
+      <h1 class="text-3xl font-bold tracking-tight text-foreground">Display</h1>
+      <p class="mt-2 text-muted-foreground">
+        Read-only visual elements for presenting content — cards, badges, avatars, and data tables.
+      </p>
+    </div>
+
+    <section class="flex flex-col gap-4" id="card">
+      <div class="border-l-2 border-primary/40 pl-3">
+        <h2 class="text-xl font-semibold text-foreground">Card</h2>
+        <p class="mt-1 text-sm text-muted-foreground">
+          A surface for grouping related content via
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">el-card</code>. Use the
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">header</code> prop or slot, and
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">shadow</code> (always/hover/never) for
+          shadow style.
+        </p>
+      </div>
+      <div class="rounded-lg border border-border bg-muted/50 p-8">
+        <el-card class="w-80" header="Project Alpha" shadow="hover">
+          <p class="text-sm text-muted-foreground">
+            A next-generation web application. This project aims to redefine how teams collaborate in
+            real time.
+          </p>
+          <template #footer>
+            <el-button plain type="primary">View details</el-button>
+          </template>
+        </el-card>
+      </div>
+      <CodeBlock
+        :code="CARD_CODE"
+        collapsible
+        :default-open="false"
+        filename="Card.vue"
+        language="vue"
+      />
+    </section>
+
+    <section class="flex flex-col gap-4" id="badge">
+      <div class="border-l-2 border-primary/40 pl-3">
+        <h2 class="text-xl font-semibold text-foreground">Badge</h2>
+        <p class="mt-1 text-sm text-muted-foreground">
+          A floating label wrapping another element via
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">el-badge</code>. Use
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">:value</code> for counts,
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">is-dot</code> for dot indicators, and
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">type</code> for colour.
+        </p>
+      </div>
+      <div class="rounded-lg border border-border bg-muted/50 p-8">
+        <div class="flex flex-wrap items-center gap-6">
+          <el-badge :value="5" type="primary">
+            <el-button>Messages</el-button>
+          </el-badge>
+          <el-badge :value="12" type="danger">
+            <el-button>Alerts</el-button>
+          </el-badge>
+          <el-badge is-dot type="success">
+            <el-button>Online</el-button>
+          </el-badge>
+          <el-badge :value="99" :max="99" type="warning">
+            <el-button>Max capped</el-button>
+          </el-badge>
+        </div>
+      </div>
+      <CodeBlock
+        :code="BADGE_CODE"
+        collapsible
+        :default-open="false"
+        filename="Badge.vue"
+        language="vue"
+      />
+    </section>
+
+    <section class="flex flex-col gap-4" id="avatar">
+      <div class="border-l-2 border-primary/40 pl-3">
+        <h2 class="text-xl font-semibold text-foreground">Avatar</h2>
+        <p class="mt-1 text-sm text-muted-foreground">
+          A circular or square user image via
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">el-avatar</code>. Use the
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">src</code> prop for images or slot
+          content for initials fallback.
+        </p>
+      </div>
+      <div class="rounded-lg border border-border bg-muted/50 p-8">
+        <div class="flex items-center gap-4">
+          <el-avatar :size="56" src="https://i.pravatar.cc/150?img=1" />
+          <el-avatar :size="56">JD</el-avatar>
+          <el-avatar>SM</el-avatar>
+          <el-avatar :size="32">XS</el-avatar>
+          <el-avatar :size="56" shape="square">SQ</el-avatar>
+        </div>
+      </div>
+      <CodeBlock
+        :code="AVATAR_CODE"
+        collapsible
+        :default-open="false"
+        filename="Avatar.vue"
+        language="vue"
+      />
+    </section>
+
+    <section class="flex flex-col gap-4" id="separator">
+      <div class="border-l-2 border-primary/40 pl-3">
+        <h2 class="text-xl font-semibold text-foreground">Separator</h2>
+        <p class="mt-1 text-sm text-muted-foreground">
+          A thin dividing line via
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">el-divider</code>. Use
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">direction="vertical"</code> for inline
+          separators and
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">content-position</code> for label
+          alignment.
+        </p>
+      </div>
+      <div class="rounded-lg border border-border bg-muted/50 p-8">
+        <div class="flex flex-col gap-6">
+          <div class="flex flex-col gap-2">
+            <p class="text-sm text-muted-foreground">Section one content.</p>
+            <el-divider />
+            <p class="text-sm text-muted-foreground">Section two content.</p>
+          </div>
+          <el-divider content-position="left">Or</el-divider>
+          <div class="flex items-center" style="height: 2rem">
+            <span class="text-sm">Left item</span>
+            <el-divider direction="vertical" />
+            <span class="text-sm">Right item</span>
+          </div>
+        </div>
+      </div>
+      <CodeBlock
+        :code="DIVIDER_CODE"
+        collapsible
+        :default-open="false"
+        filename="Separator.vue"
+        language="vue"
+      />
+    </section>
+
+    <section class="flex flex-col gap-4" id="skeleton">
+      <div class="border-l-2 border-primary/40 pl-3">
+        <h2 class="text-xl font-semibold text-foreground">Skeleton</h2>
+        <p class="mt-1 text-sm text-muted-foreground">
+          Animated placeholder blocks via
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">el-skeleton</code>. Pass
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">:rows</code> for line count and
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">animated</code> for the shimmer effect.
+        </p>
+      </div>
+      <div class="rounded-lg border border-border bg-muted/50 p-8">
+        <div class="flex flex-col gap-6">
+          <el-skeleton :rows="3" animated />
+          <el-skeleton animated>
+            <template #template>
+              <div class="flex items-center gap-4">
+                <el-skeleton-item variant="circle" style="width: 3rem; height: 3rem" />
+                <div class="flex flex-col gap-2">
+                  <el-skeleton-item variant="p" style="width: 12rem" />
+                  <el-skeleton-item variant="p" style="width: 9rem" />
+                  <el-skeleton-item variant="p" style="width: 6rem" />
+                </div>
+              </div>
+            </template>
+          </el-skeleton>
+        </div>
+      </div>
+      <CodeBlock
+        :code="SKELETON_CODE"
+        collapsible
+        :default-open="false"
+        filename="Skeleton.vue"
+        language="vue"
+      />
+    </section>
+
+    <section class="flex flex-col gap-4" id="table">
+      <div class="border-l-2 border-primary/40 pl-3">
+        <h2 class="text-xl font-semibold text-foreground">Table</h2>
+        <p class="mt-1 text-sm text-muted-foreground">
+          A structured grid via
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">el-table</code> +
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">el-table-column</code>. Bind
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">:data</code> to your row array and use
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">prop</code> /
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">label</code> on each column.
+        </p>
+      </div>
+      <div class="rounded-lg border border-border bg-muted/50 p-8">
+        <el-table :data="TABLE_ROWS" border stripe style="width: 100%">
+          <el-table-column label="Name" prop="name" />
+          <el-table-column label="Email" prop="email" />
+          <el-table-column label="Role" prop="role" />
+        </el-table>
+      </div>
+      <CodeBlock
+        :code="TABLE_CODE"
+        collapsible
+        :default-open="false"
+        filename="Table.vue"
+        language="vue"
+      />
+    </section>
+  </div>
+</template>

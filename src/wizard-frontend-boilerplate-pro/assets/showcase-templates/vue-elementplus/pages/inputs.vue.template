@@ -1,0 +1,381 @@
+<script setup lang="ts">
+import { ref } from "vue";
+
+import CodeBlock from "@/components/CodeBlock.vue";
+
+const checkboxVal = ref(false);
+const checkboxChecked = ref(true);
+const emailVal = ref("");
+const plan = ref("free");
+const selectVal = ref<string | null>(null);
+const switchVal = ref(false);
+const switchOn = ref(true);
+const textareaVal = ref("");
+
+const FRAMEWORK_OPTIONS = [
+  { label: "Next.js", value: "nextjs" },
+  { label: "Nuxt", value: "nuxt" },
+  { label: "Astro", value: "astro" },
+  { label: "SvelteKit", value: "sveltekit" },
+];
+
+const BUTTON_CODE = `<template>
+  <div class="flex flex-wrap gap-2">
+    <el-button type="primary">Primary</el-button>
+    <el-button type="success">Success</el-button>
+    <el-button type="warning">Warning</el-button>
+    <el-button type="danger">Danger</el-button>
+    <el-button type="info">Info</el-button>
+    <el-button type="primary" plain>Plain</el-button>
+    <el-button disabled>Disabled</el-button>
+  </div>
+</template>`;
+
+const INPUT_CODE = `<script setup lang="ts">
+import { ref } from "vue";
+const emailVal = ref("");
+<\/script>
+
+<template>
+  <div class="flex flex-col gap-1.5">
+    <label class="text-sm font-medium text-foreground" for="email">Email address</label>
+    <el-input id="email" v-model="emailVal" placeholder="you@example.com" type="email" clearable />
+    <p class="text-sm text-muted-foreground">We'll never share your email.</p>
+  </div>
+</template>`;
+
+const TEXTAREA_CODE = `<script setup lang="ts">
+import { ref } from "vue";
+const bio = ref("");
+<\/script>
+
+<template>
+  <div class="flex flex-col gap-1.5">
+    <label class="text-sm font-medium text-foreground" for="bio">Bio</label>
+    <el-input id="bio" v-model="bio" type="textarea" :rows="4" placeholder="Tell us about yourself…" />
+    <p class="text-sm text-muted-foreground">Describe your project in a few sentences.</p>
+  </div>
+</template>`;
+
+const SELECT_CODE = `<script setup lang="ts">
+import { ref } from "vue";
+const val = ref(null);
+const options = [
+  { label: "Next.js", value: "nextjs" },
+  { label: "Nuxt", value: "nuxt" },
+  { label: "Astro", value: "astro" },
+  { label: "SvelteKit", value: "sveltekit" },
+];
+<\/script>
+
+<template>
+  <div class="flex flex-col gap-1.5">
+    <label class="text-sm font-medium text-foreground" for="framework">Framework</label>
+    <el-select id="framework" v-model="val" placeholder="Select a framework…" clearable>
+      <el-option v-for="opt in options" :key="opt.value" :label="opt.label" :value="opt.value" />
+    </el-select>
+  </div>
+</template>`;
+
+const CHECKBOX_CODE = `<script setup lang="ts">
+import { ref } from "vue";
+const checked = ref(false);
+<\/script>
+
+<template>
+  <div class="flex items-center gap-2">
+    <el-checkbox v-model="checked">Accept terms and conditions</el-checkbox>
+  </div>
+</template>`;
+
+const RADIO_GROUP_CODE = `<script setup lang="ts">
+import { ref } from "vue";
+const plan = ref("free");
+<\/script>
+
+<template>
+  <el-radio-group v-model="plan">
+    <el-radio value="free">Free</el-radio>
+    <el-radio value="pro">Pro</el-radio>
+    <el-radio value="enterprise">Enterprise</el-radio>
+  </el-radio-group>
+</template>`;
+
+const SWITCH_CODE = `<script setup lang="ts">
+import { ref } from "vue";
+const enabled = ref(false);
+<\/script>
+
+<template>
+  <div class="flex items-center gap-2">
+    <el-switch v-model="enabled" />
+    <span class="text-sm font-medium text-foreground">Email notifications</span>
+  </div>
+</template>`;
+</script>
+
+<template>
+  <div class="flex flex-col gap-16">
+    <div>
+      <h1 class="text-3xl font-bold tracking-tight text-foreground">Inputs</h1>
+      <p class="mt-2 text-muted-foreground">
+        Form controls built with Element Plus — buttons, text fields, selections, and toggles.
+      </p>
+    </div>
+
+    <section class="flex flex-col gap-4" id="button">
+      <div class="border-l-2 border-primary/40 pl-3">
+        <h2 class="text-xl font-semibold text-foreground">Button</h2>
+        <p class="mt-1 text-sm text-muted-foreground">
+          Element Plus
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">el-button</code>. Use the
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">type</code> prop for colour variants:
+          primary, success, warning, danger, info. Add
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">plain</code>,
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">round</code>, or
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">circle</code> for appearance.
+        </p>
+      </div>
+      <div class="rounded-lg border border-border bg-muted/50 p-8">
+        <div class="flex flex-col gap-4">
+          <div class="flex flex-wrap gap-2">
+            <el-button type="primary">Primary</el-button>
+            <el-button type="success">Success</el-button>
+            <el-button type="warning">Warning</el-button>
+            <el-button type="danger">Danger</el-button>
+            <el-button type="info">Info</el-button>
+          </div>
+          <div class="flex flex-wrap gap-2">
+            <el-button type="primary" plain>Plain</el-button>
+            <el-button type="primary" round>Round</el-button>
+            <el-button type="primary" :loading="true">Loading</el-button>
+            <el-button disabled>Disabled</el-button>
+          </div>
+          <div class="flex flex-wrap items-center gap-2">
+            <el-button size="small" type="primary">Small</el-button>
+            <el-button type="primary">Default</el-button>
+            <el-button size="large" type="primary">Large</el-button>
+          </div>
+        </div>
+      </div>
+      <CodeBlock
+        :code="BUTTON_CODE"
+        collapsible
+        :default-open="false"
+        filename="Button.vue"
+        language="vue"
+      />
+    </section>
+
+    <section class="flex flex-col gap-4" id="input">
+      <div class="border-l-2 border-primary/40 pl-3">
+        <h2 class="text-xl font-semibold text-foreground">Input</h2>
+        <p class="mt-1 text-sm text-muted-foreground">
+          A single-line text field via
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">el-input</code>. Use
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">clearable</code> for a clear button and
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">show-password</code> for password fields.
+        </p>
+      </div>
+      <div class="rounded-lg border border-border bg-muted/50 p-8">
+        <div class="flex max-w-sm flex-col gap-4">
+          <div class="flex flex-col gap-1.5">
+            <label class="text-sm font-medium text-foreground" for="email-demo">Email address</label>
+            <el-input
+              id="email-demo"
+              v-model="emailVal"
+              clearable
+              placeholder="you@example.com"
+              type="email"
+            />
+            <p class="text-sm text-muted-foreground">We'll never share your email.</p>
+          </div>
+          <div class="flex flex-col gap-1.5">
+            <label class="text-sm font-medium text-foreground opacity-50" for="disabled-input">
+              Disabled
+            </label>
+            <el-input disabled id="disabled-input" placeholder="Not editable" />
+          </div>
+        </div>
+      </div>
+      <CodeBlock
+        :code="INPUT_CODE"
+        collapsible
+        :default-open="false"
+        filename="Input.vue"
+        language="vue"
+      />
+    </section>
+
+    <section class="flex flex-col gap-4" id="textarea">
+      <div class="border-l-2 border-primary/40 pl-3">
+        <h2 class="text-xl font-semibold text-foreground">Textarea</h2>
+        <p class="mt-1 text-sm text-muted-foreground">
+          A multi-line input via
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">el-input type="textarea"</code>. Use
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">:rows</code> for fixed height or
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">autosize</code> to grow with content.
+        </p>
+      </div>
+      <div class="rounded-lg border border-border bg-muted/50 p-8">
+        <div class="flex max-w-sm flex-col gap-1.5">
+          <label class="text-sm font-medium text-foreground" for="bio-demo">Bio</label>
+          <el-input
+            id="bio-demo"
+            v-model="textareaVal"
+            :rows="4"
+            placeholder="Tell us about yourself…"
+            type="textarea"
+          />
+          <p class="text-sm text-muted-foreground">Describe your project in a few sentences.</p>
+        </div>
+      </div>
+      <CodeBlock
+        :code="TEXTAREA_CODE"
+        collapsible
+        :default-open="false"
+        filename="Textarea.vue"
+        language="vue"
+      />
+    </section>
+
+    <section class="flex flex-col gap-4" id="select">
+      <div class="border-l-2 border-primary/40 pl-3">
+        <h2 class="text-xl font-semibold text-foreground">Select</h2>
+        <p class="mt-1 text-sm text-muted-foreground">
+          A dropdown via
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">el-select</code> +
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">el-option</code>. Add
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">filterable</code> for search,
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">clearable</code> for a reset button.
+        </p>
+      </div>
+      <div class="rounded-lg border border-border bg-muted/50 p-8">
+        <div class="flex max-w-sm flex-col gap-4">
+          <div class="flex flex-col gap-1.5">
+            <label class="text-sm font-medium text-foreground" for="framework-demo">
+              Framework
+            </label>
+            <el-select
+              id="framework-demo"
+              v-model="selectVal"
+              clearable
+              filterable
+              placeholder="Select a framework…"
+            >
+              <el-option
+                v-for="opt in FRAMEWORK_OPTIONS"
+                :key="opt.value"
+                :label="opt.label"
+                :value="opt.value"
+              />
+            </el-select>
+          </div>
+          <div class="flex flex-col gap-1.5">
+            <label class="text-sm font-medium text-foreground opacity-50" for="disabled-select">
+              Disabled
+            </label>
+            <el-select disabled id="disabled-select" placeholder="Not selectable">
+              <el-option label="Option" value="opt" />
+            </el-select>
+          </div>
+        </div>
+      </div>
+      <CodeBlock
+        :code="SELECT_CODE"
+        collapsible
+        :default-open="false"
+        filename="Select.vue"
+        language="vue"
+      />
+    </section>
+
+    <section class="flex flex-col gap-4" id="checkbox">
+      <div class="border-l-2 border-primary/40 pl-3">
+        <h2 class="text-xl font-semibold text-foreground">Checkbox</h2>
+        <p class="mt-1 text-sm text-muted-foreground">
+          A binary toggle via
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">el-checkbox</code>. Use
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">el-checkbox-group</code> for multi-value
+          groups.
+        </p>
+      </div>
+      <div class="rounded-lg border border-border bg-muted/50 p-8">
+        <div class="flex flex-col gap-3">
+          <el-checkbox v-model="checkboxVal">Accept terms and conditions</el-checkbox>
+          <el-checkbox v-model="checkboxChecked">Checked by default</el-checkbox>
+          <el-checkbox disabled :model-value="false">Disabled</el-checkbox>
+        </div>
+      </div>
+      <CodeBlock
+        :code="CHECKBOX_CODE"
+        collapsible
+        :default-open="false"
+        filename="Checkbox.vue"
+        language="vue"
+      />
+    </section>
+
+    <section class="flex flex-col gap-4" id="radio-group">
+      <div class="border-l-2 border-primary/40 pl-3">
+        <h2 class="text-xl font-semibold text-foreground">RadioGroup</h2>
+        <p class="mt-1 text-sm text-muted-foreground">
+          Mutually exclusive options via
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">el-radio-group</code> +
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">el-radio</code>. Bind
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">v-model</code> on the group.
+        </p>
+      </div>
+      <div class="rounded-lg border border-border bg-muted/50 p-8">
+        <el-radio-group v-model="plan" class="flex flex-col gap-2">
+          <el-radio value="free">Free</el-radio>
+          <el-radio value="pro">Pro</el-radio>
+          <el-radio value="enterprise">Enterprise</el-radio>
+        </el-radio-group>
+      </div>
+      <CodeBlock
+        :code="RADIO_GROUP_CODE"
+        collapsible
+        :default-open="false"
+        filename="RadioGroup.vue"
+        language="vue"
+      />
+    </section>
+
+    <section class="flex flex-col gap-4" id="switch">
+      <div class="border-l-2 border-primary/40 pl-3">
+        <h2 class="text-xl font-semibold text-foreground">Switch</h2>
+        <p class="mt-1 text-sm text-muted-foreground">
+          An on/off toggle via
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">el-switch</code>. Supports
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">active-text</code>,
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">inactive-text</code>, and
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">active-color</code> customisation.
+        </p>
+      </div>
+      <div class="rounded-lg border border-border bg-muted/50 p-8">
+        <div class="flex flex-col gap-3">
+          <div class="flex items-center gap-2">
+            <el-switch v-model="switchVal" />
+            <span class="text-sm font-medium text-foreground">Email notifications</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <el-switch v-model="switchOn" />
+            <span class="text-sm font-medium text-foreground">Marketing emails</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <el-switch disabled :model-value="false" />
+            <span class="text-sm font-medium text-foreground opacity-50">Disabled</span>
+          </div>
+        </div>
+      </div>
+      <CodeBlock
+        :code="SWITCH_CODE"
+        collapsible
+        :default-open="false"
+        filename="Switch.vue"
+        language="vue"
+      />
+    </section>
+  </div>
+</template>

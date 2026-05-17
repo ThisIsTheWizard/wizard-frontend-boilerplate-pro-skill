@@ -1,0 +1,400 @@
+"use client";
+
+import {
+  Avatar,
+  Badge,
+  Card,
+  CardBody,
+  CardFooter,
+  CardHeader,
+  Divider,
+  Skeleton,
+  Table,
+  TableBody,
+  TableCell,
+  TableColumn,
+  TableHeader,
+  TableRow,
+} from "@heroui/react";
+
+import { CodeBlock } from "@/components/ui/code-block";
+
+const CARD_CODE = `import { Card, CardHeader, CardBody, CardFooter, Button } from "@heroui/react";
+
+export function Example() {
+  return (
+    <Card className="w-80">
+      <CardHeader className="flex flex-col items-start gap-1">
+        <h3 className="text-lg font-semibold text-foreground">Project Alpha</h3>
+        <p className="text-sm text-muted-foreground">A next-generation web application.</p>
+      </CardHeader>
+      <CardBody>
+        <p className="text-sm text-muted-foreground">
+          This project aims to redefine how teams collaborate in real time.
+        </p>
+      </CardBody>
+      <CardFooter>
+        <Button variant="bordered" size="sm">View details</Button>
+      </CardFooter>
+    </Card>
+  );
+}`;
+
+const BADGE_CODE = `import { Badge, Avatar } from "@heroui/react";
+
+export function Example() {
+  return (
+    <div className="flex flex-wrap gap-4">
+      <Badge content="5" color="primary">
+        <Avatar name="JD" />
+      </Badge>
+      <Badge content="!" color="danger" shape="circle">
+        <Avatar name="BC" />
+      </Badge>
+      <Badge content="New" color="success">
+        <Avatar name="CW" />
+      </Badge>
+    </div>
+  );
+}`;
+
+const AVATAR_CODE = `import { Avatar } from "@heroui/react";
+
+export function Example() {
+  return (
+    <div className="flex items-center gap-4">
+      <Avatar src="https://i.pravatar.cc/150?img=1" name="Jane Doe" size="lg" />
+      <Avatar name="JD" size="lg" color="primary" />
+      <Avatar name="SM" color="secondary" />
+      <Avatar name="XS" size="sm" color="warning" />
+    </div>
+  );
+}`;
+
+const DIVIDER_CODE = `import { Divider } from "@heroui/react";
+
+export function Example() {
+  return (
+    <div className="flex flex-col gap-4">
+      <div className="flex flex-col gap-2">
+        <p className="text-sm text-muted-foreground">Section one content.</p>
+        <Divider />
+        <p className="text-sm text-muted-foreground">Section two content.</p>
+      </div>
+      <div className="flex items-center gap-2" style={{ height: "2rem" }}>
+        <span className="text-sm">Left item</span>
+        <Divider orientation="vertical" />
+        <span className="text-sm">Right item</span>
+      </div>
+    </div>
+  );
+}`;
+
+const SKELETON_CODE = `import { Skeleton } from "@heroui/react";
+
+export function Example() {
+  return (
+    <div className="flex items-center gap-4">
+      <Skeleton className="h-12 w-12 rounded-full" />
+      <div className="flex flex-col gap-2">
+        <Skeleton className="h-4 w-48 rounded" />
+        <Skeleton className="h-4 w-36 rounded" />
+        <Skeleton className="h-4 w-24 rounded" />
+      </div>
+    </div>
+  );
+}`;
+
+const TABLE_CODE = `import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell } from "@heroui/react";
+
+const rows = [
+  { name: "Alice Martin", email: "alice@example.com", role: "Admin" },
+  { name: "Bob Chen",     email: "bob@example.com",   role: "Editor" },
+  { name: "Carol White",  email: "carol@example.com", role: "Viewer" },
+];
+
+export function Example() {
+  return (
+    <Table aria-label="Team members">
+      <TableHeader>
+        <TableColumn>NAME</TableColumn>
+        <TableColumn>EMAIL</TableColumn>
+        <TableColumn>ROLE</TableColumn>
+      </TableHeader>
+      <TableBody>
+        {rows.map((row) => (
+          <TableRow key={row.email}>
+            <TableCell>{row.name}</TableCell>
+            <TableCell>{row.email}</TableCell>
+            <TableCell>{row.role}</TableCell>
+          </TableRow>
+        ))}
+      </TableBody>
+    </Table>
+  );
+}`;
+
+const TEAM = [
+  { name: "Alice Martin", email: "alice@example.com", role: "Admin" },
+  { name: "Bob Chen", email: "bob@example.com", role: "Editor" },
+  { name: "Carol White", email: "carol@example.com", role: "Viewer" },
+];
+
+export default function DisplayPage() {
+  return (
+    <div className="flex flex-col gap-16">
+      <div>
+        <h1 className="text-3xl font-bold tracking-tight text-foreground">
+          Display
+        </h1>
+        <p className="mt-2 text-muted-foreground">
+          Read-only visual elements for presenting content — cards, badges,
+          avatars, dividers, skeletons, and tables. All powered by HeroUI.
+        </p>
+      </div>
+
+      <section className="flex flex-col gap-4" id="card">
+        <div className="border-l-2 border-primary/40 pl-3">
+          <h2 className="text-xl font-semibold text-foreground">Card</h2>
+          <p className="mt-1 text-sm text-muted-foreground">
+            HeroUI{" "}
+            <code className="rounded bg-muted px-1 py-0.5 text-xs">Card</code>{" "}
+            with{" "}
+            <code className="rounded bg-muted px-1 py-0.5 text-xs">CardHeader</code>,{" "}
+            <code className="rounded bg-muted px-1 py-0.5 text-xs">CardBody</code>, and{" "}
+            <code className="rounded bg-muted px-1 py-0.5 text-xs">CardFooter</code>{" "}
+            sub-components. Use{" "}
+            <code className="rounded bg-muted px-1 py-0.5 text-xs">shadow</code>{" "}
+            and{" "}
+            <code className="rounded bg-muted px-1 py-0.5 text-xs">isHoverable</code>{" "}
+            props for interaction.
+          </p>
+        </div>
+        <div className="rounded-lg border border-border bg-muted/50 p-8">
+          <Card className="w-80">
+            <CardHeader className="flex flex-col items-start gap-1">
+              <h3 className="text-lg font-semibold text-foreground">
+                Project Alpha
+              </h3>
+              <p className="text-sm text-muted-foreground">
+                A next-generation web application.
+              </p>
+            </CardHeader>
+            <CardBody>
+              <p className="text-sm text-muted-foreground">
+                This project aims to redefine how teams collaborate in real
+                time.
+              </p>
+            </CardBody>
+            <CardFooter>
+              <button className="rounded-md border border-border px-4 py-2 text-sm font-medium text-foreground transition hover:bg-accent">
+                View details
+              </button>
+            </CardFooter>
+          </Card>
+        </div>
+        <CodeBlock
+          code={CARD_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="Card.tsx"
+          language="tsx"
+        />
+      </section>
+
+      <section className="flex flex-col gap-4" id="badge">
+        <div className="border-l-2 border-primary/40 pl-3">
+          <h2 className="text-xl font-semibold text-foreground">Badge</h2>
+          <p className="mt-1 text-sm text-muted-foreground">
+            HeroUI{" "}
+            <code className="rounded bg-muted px-1 py-0.5 text-xs">Badge</code>{" "}
+            wraps a child element and renders a floating label. Use the{" "}
+            <code className="rounded bg-muted px-1 py-0.5 text-xs">color</code>{" "}
+            and{" "}
+            <code className="rounded bg-muted px-1 py-0.5 text-xs">content</code>{" "}
+            props.
+          </p>
+        </div>
+        <div className="rounded-lg border border-border bg-muted/50 p-8">
+          <div className="flex flex-wrap gap-6">
+            <Badge color="primary" content="5">
+              <Avatar name="JD" />
+            </Badge>
+            <Badge color="danger" content="!" shape="circle">
+              <Avatar name="BC" />
+            </Badge>
+            <Badge color="success" content="New">
+              <Avatar name="CW" />
+            </Badge>
+            <Badge color="warning" content="3" isDot>
+              <Avatar name="DK" />
+            </Badge>
+          </div>
+        </div>
+        <CodeBlock
+          code={BADGE_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="Badge.tsx"
+          language="tsx"
+        />
+      </section>
+
+      <section className="flex flex-col gap-4" id="avatar">
+        <div className="border-l-2 border-primary/40 pl-3">
+          <h2 className="text-xl font-semibold text-foreground">Avatar</h2>
+          <p className="mt-1 text-sm text-muted-foreground">
+            HeroUI{" "}
+            <code className="rounded bg-muted px-1 py-0.5 text-xs">Avatar</code>{" "}
+            — use the{" "}
+            <code className="rounded bg-muted px-1 py-0.5 text-xs">src</code>{" "}
+            prop for images or{" "}
+            <code className="rounded bg-muted px-1 py-0.5 text-xs">name</code>{" "}
+            for initials fallback. Sizes:{" "}
+            <code className="rounded bg-muted px-1 py-0.5 text-xs">sm</code>,{" "}
+            <code className="rounded bg-muted px-1 py-0.5 text-xs">md</code>,{" "}
+            <code className="rounded bg-muted px-1 py-0.5 text-xs">lg</code>.
+          </p>
+        </div>
+        <div className="rounded-lg border border-border bg-muted/50 p-8">
+          <div className="flex items-center gap-4">
+            <Avatar
+              name="Jane Doe"
+              size="lg"
+              src="https://i.pravatar.cc/150?img=1"
+            />
+            <Avatar color="primary" name="JD" size="lg" />
+            <Avatar color="secondary" name="SM" />
+            <Avatar color="warning" name="XS" size="sm" />
+          </div>
+        </div>
+        <CodeBlock
+          code={AVATAR_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="Avatar.tsx"
+          language="tsx"
+        />
+      </section>
+
+      <section className="flex flex-col gap-4" id="separator">
+        <div className="border-l-2 border-primary/40 pl-3">
+          <h2 className="text-xl font-semibold text-foreground">Separator</h2>
+          <p className="mt-1 text-sm text-muted-foreground">
+            HeroUI{" "}
+            <code className="rounded bg-muted px-1 py-0.5 text-xs">Divider</code>{" "}
+            — use{" "}
+            <code className="rounded bg-muted px-1 py-0.5 text-xs">orientation="vertical"</code>{" "}
+            for inline separators.
+          </p>
+        </div>
+        <div className="rounded-lg border border-border bg-muted/50 p-8">
+          <div className="flex flex-col gap-6">
+            <div className="flex flex-col gap-2">
+              <p className="text-sm text-muted-foreground">
+                Section one content.
+              </p>
+              <Divider />
+              <p className="text-sm text-muted-foreground">
+                Section two content.
+              </p>
+            </div>
+            <div className="flex items-center gap-2" style={{ height: "2rem" }}>
+              <span className="text-sm">Left item</span>
+              <Divider orientation="vertical" />
+              <span className="text-sm">Right item</span>
+            </div>
+          </div>
+        </div>
+        <CodeBlock
+          code={DIVIDER_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="Separator.tsx"
+          language="tsx"
+        />
+      </section>
+
+      <section className="flex flex-col gap-4" id="skeleton">
+        <div className="border-l-2 border-primary/40 pl-3">
+          <h2 className="text-xl font-semibold text-foreground">Skeleton</h2>
+          <p className="mt-1 text-sm text-muted-foreground">
+            HeroUI{" "}
+            <code className="rounded bg-muted px-1 py-0.5 text-xs">Skeleton</code>{" "}
+            — animated loading placeholder. Apply{" "}
+            <code className="rounded bg-muted px-1 py-0.5 text-xs">className</code>{" "}
+            for shape and size. Use{" "}
+            <code className="rounded bg-muted px-1 py-0.5 text-xs">isLoaded</code>{" "}
+            to reveal content when ready.
+          </p>
+        </div>
+        <div className="rounded-lg border border-border bg-muted/50 p-8">
+          <div className="flex flex-col gap-6">
+            <div className="flex items-center gap-4">
+              <Skeleton className="h-12 w-12 rounded-full" />
+              <div className="flex flex-col gap-2">
+                <Skeleton className="h-4 w-48 rounded" />
+                <Skeleton className="h-4 w-36 rounded" />
+                <Skeleton className="h-4 w-24 rounded" />
+              </div>
+            </div>
+            <div className="flex flex-col gap-2">
+              <Skeleton className="h-6 w-32 rounded" />
+              <Skeleton className="h-4 w-full rounded" />
+              <Skeleton className="h-4 w-full rounded" />
+              <Skeleton className="h-4 w-2/3 rounded" />
+            </div>
+          </div>
+        </div>
+        <CodeBlock
+          code={SKELETON_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="Skeleton.tsx"
+          language="tsx"
+        />
+      </section>
+
+      <section className="flex flex-col gap-4" id="table">
+        <div className="border-l-2 border-primary/40 pl-3">
+          <h2 className="text-xl font-semibold text-foreground">Table</h2>
+          <p className="mt-1 text-sm text-muted-foreground">
+            HeroUI{" "}
+            <code className="rounded bg-muted px-1 py-0.5 text-xs">Table</code>{" "}
+            — structured with{" "}
+            <code className="rounded bg-muted px-1 py-0.5 text-xs">TableHeader</code>,{" "}
+            <code className="rounded bg-muted px-1 py-0.5 text-xs">TableColumn</code>,{" "}
+            <code className="rounded bg-muted px-1 py-0.5 text-xs">TableBody</code>,{" "}
+            <code className="rounded bg-muted px-1 py-0.5 text-xs">TableRow</code>, and{" "}
+            <code className="rounded bg-muted px-1 py-0.5 text-xs">TableCell</code>.
+          </p>
+        </div>
+        <div className="rounded-lg border border-border bg-muted/50 p-8">
+          <Table aria-label="Team members">
+            <TableHeader>
+              <TableColumn>NAME</TableColumn>
+              <TableColumn>EMAIL</TableColumn>
+              <TableColumn>ROLE</TableColumn>
+            </TableHeader>
+            <TableBody>
+              {TEAM.map(({ name, email, role }) => (
+                <TableRow key={email}>
+                  <TableCell>{name}</TableCell>
+                  <TableCell>{email}</TableCell>
+                  <TableCell>{role}</TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </div>
+        <CodeBlock
+          code={TABLE_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="Table.tsx"
+          language="tsx"
+        />
+      </section>
+    </div>
+  );
+}

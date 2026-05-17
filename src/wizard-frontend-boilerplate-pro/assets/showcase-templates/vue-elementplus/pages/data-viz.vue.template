@@ -1,0 +1,278 @@
+<script setup lang="ts">
+import { computed, ref } from "vue";
+
+import { Bar, BarChart, CartesianGrid, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "vue-chartjs";
+import {
+  BarElement,
+  CategoryScale,
+  Chart as ChartJS,
+  Legend,
+  LinearScale,
+  LineElement,
+  PointElement,
+  Title,
+  Tooltip as ChartTooltip,
+} from "chart.js";
+
+import CodeBlock from "@/components/CodeBlock.vue";
+
+ChartJS.register(
+  BarElement,
+  CategoryScale,
+  Legend,
+  LinearScale,
+  LineElement,
+  PointElement,
+  Title,
+  ChartTooltip,
+);
+
+interface TableRow {
+  change: string;
+  name: string;
+  revenue: string;
+  status: string;
+}
+
+const TABLE_ROWS: TableRow[] = [
+  { change: "+8%", name: "Alice Martin", revenue: "$12,400", status: "Active" },
+  { change: "+3%", name: "Bob Chen", revenue: "$9,800", status: "Active" },
+  { change: "-2%", name: "Carol White", revenue: "$6,200", status: "Paused" },
+  { change: "+14%", name: "Dan Kim", revenue: "$15,100", status: "Active" },
+  { change: "-6%", name: "Eve Torres", revenue: "$4,300", status: "Paused" },
+];
+
+const sortAsc = ref(true);
+const sortedRows = computed(() =>
+  [...TABLE_ROWS].sort((a, b) =>
+    sortAsc.value ? a.name.localeCompare(b.name) : b.name.localeCompare(a.name),
+  ),
+);
+
+const selectedDate = ref<Date | null>(null);
+
+const barChartData = {
+  datasets: [
+    {
+      backgroundColor: "rgba(59, 130, 246, 0.7)",
+      data: [4200, 5800, 3900, 7100, 6400, 8200],
+      label: "Revenue",
+    },
+  ],
+  labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
+};
+
+const barChartOptions = {
+  plugins: { legend: { display: false } },
+  responsive: true,
+  scales: {
+    x: { grid: { display: false } },
+    y: { beginAtZero: true },
+  },
+};
+
+const lineChartData = {
+  datasets: [
+    {
+      borderColor: "#3b82f6",
+      data: [320, 410, 280, 540, 490, 620],
+      fill: false,
+      label: "New Users",
+      tension: 0.4,
+    },
+  ],
+  labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
+};
+
+const lineChartOptions = {
+  plugins: { legend: { display: false } },
+  responsive: true,
+  scales: {
+    x: { grid: { display: false } },
+    y: { beginAtZero: true },
+  },
+};
+
+const CHART_CODE = `<script setup lang="ts">
+import { Bar } from "vue-chartjs";
+import { BarElement, CategoryScale, Chart as ChartJS, LinearScale, Tooltip } from "chart.js";
+
+// Register required Chart.js modules
+ChartJS.register(BarElement, CategoryScale, LinearScale, Tooltip);
+
+// npm install vue-chartjs chart.js
+const data = {
+  labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
+  datasets: [{ label: "Revenue", data: [4200, 5800, 3900, 7100, 6400, 8200], backgroundColor: "rgba(59,130,246,0.7)" }],
+};
+const options = { responsive: true, plugins: { legend: { display: false } } };
+<\/script>
+
+<template>
+  <Bar :data="data" :options="options" />
+</template>`;
+
+const DATA_TABLE_CODE = `<script setup lang="ts">
+import { ref } from "vue";
+
+interface Row { change: string; name: string; revenue: string; status: string; }
+
+const rows: Row[] = [
+  { change: "+8%", name: "Alice Martin", revenue: "$12,400", status: "Active" },
+  { change: "+3%", name: "Bob Chen",     revenue: "$9,800",  status: "Active" },
+  { change: "-2%", name: "Carol White",  revenue: "$6,200",  status: "Paused" },
+];
+<\/script>
+
+<template>
+  <el-table :data="rows" stripe border @sort-change="({ order }) => console.log(order)">
+    <el-table-column prop="name" label="Name" sortable />
+    <el-table-column prop="status" label="Status" />
+    <el-table-column prop="revenue" label="Revenue" sortable />
+    <el-table-column prop="change" label="Change" sortable />
+  </el-table>
+</template>`;
+
+const CALENDAR_CODE = `<script setup lang="ts">
+import { ref } from "vue";
+const date = ref(null);
+<\/script>
+
+<template>
+  <el-date-picker
+    v-model="date"
+    type="date"
+    placeholder="Pick a date"
+    style="width: 100%"
+  />
+</template>`;
+</script>
+
+<template>
+  <div class="flex flex-col gap-16">
+    <div>
+      <h1 class="text-3xl font-bold tracking-tight text-foreground">Data Visualization</h1>
+      <p class="mt-2 text-muted-foreground">
+        Components for presenting structured and visual data — charts via
+        <code class="rounded bg-muted px-1 py-0.5 text-xs">vue-chartjs</code>, sortable tables via
+        <code class="rounded bg-muted px-1 py-0.5 text-xs">el-table</code>, and date picking via
+        <code class="rounded bg-muted px-1 py-0.5 text-xs">el-date-picker</code>.
+      </p>
+    </div>
+
+    <section class="flex flex-col gap-4" id="chart">
+      <div class="border-l-2 border-primary/40 pl-3">
+        <h2 class="text-xl font-semibold text-foreground">Chart</h2>
+        <p class="mt-1 text-sm text-muted-foreground">
+          Bar and line charts via
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">vue-chartjs</code> +
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">chart.js</code>. Element Plus has no
+          native chart component. Install: <code class="font-mono text-xs">npm install vue-chartjs chart.js</code>.
+          For echarts-based charts use <code class="font-mono text-xs">vue-echarts</code> instead.
+        </p>
+      </div>
+      <div class="rounded-lg border border-border bg-muted/50 p-8">
+        <div class="flex flex-col gap-8">
+          <div>
+            <p class="mb-3 text-sm font-medium text-foreground">Monthly Revenue</p>
+            <Bar :data="barChartData" :options="barChartOptions" style="max-height: 220px" />
+          </div>
+          <div>
+            <p class="mb-3 text-sm font-medium text-foreground">New Users</p>
+            <Line :data="lineChartData" :options="lineChartOptions" style="max-height: 180px" />
+          </div>
+        </div>
+      </div>
+      <CodeBlock
+        :code="CHART_CODE"
+        :collapsible="true"
+        :default-open="false"
+        filename="Chart.vue"
+        language="vue"
+      />
+    </section>
+
+    <section class="flex flex-col gap-4" id="data-table">
+      <div class="border-l-2 border-primary/40 pl-3">
+        <h2 class="text-xl font-semibold text-foreground">DataTable</h2>
+        <p class="mt-1 text-sm text-muted-foreground">
+          A feature-rich sortable table via
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">el-table</code>. Add
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">sortable</code> to any
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">el-table-column</code> and handle
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">@sort-change</code> on the table.
+        </p>
+      </div>
+      <div class="rounded-lg border border-border bg-muted/50 p-8">
+        <el-table
+          :data="sortedRows"
+          border
+          stripe
+          style="width: 100%"
+          @sort-change="({ prop, order }) => { if (prop === 'name') sortAsc = order === 'ascending' }"
+        >
+          <el-table-column label="Name" prop="name" sortable="custom" />
+          <el-table-column label="Status" prop="status">
+            <template #default="{ row }">
+              <el-tag
+                :type="row.status === 'Active' ? 'success' : 'info'"
+                size="small"
+              >
+                {{ row.status }}
+              </el-tag>
+            </template>
+          </el-table-column>
+          <el-table-column label="Revenue" prop="revenue" />
+          <el-table-column label="Change" prop="change">
+            <template #default="{ row }">
+              <span :class="row.change.startsWith('+') ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400'" class="font-medium">
+                {{ row.change }}
+              </span>
+            </template>
+          </el-table-column>
+        </el-table>
+      </div>
+      <CodeBlock
+        :code="DATA_TABLE_CODE"
+        :collapsible="true"
+        :default-open="false"
+        filename="DataTable.vue"
+        language="vue"
+      />
+    </section>
+
+    <section class="flex flex-col gap-4" id="calendar">
+      <div class="border-l-2 border-primary/40 pl-3">
+        <h2 class="text-xl font-semibold text-foreground">Calendar</h2>
+        <p class="mt-1 text-sm text-muted-foreground">
+          A date picker via
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">el-date-picker</code>. Use
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">type="date"</code> for a single date,
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">"daterange"</code> for a range, or
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">"month"</code> for month selection.
+        </p>
+      </div>
+      <div class="rounded-lg border border-border bg-muted/50 p-8">
+        <div class="flex flex-col items-start gap-3">
+          <el-date-picker
+            v-model="selectedDate"
+            placeholder="Pick a date"
+            style="width: 220px"
+            type="date"
+          />
+          <p v-if="selectedDate" class="text-sm text-muted-foreground">
+            Selected: {{ new Date(selectedDate).toLocaleDateString() }}
+          </p>
+          <p v-else class="text-sm text-muted-foreground">No date selected.</p>
+        </div>
+      </div>
+      <CodeBlock
+        :code="CALENDAR_CODE"
+        :collapsible="true"
+        :default-open="false"
+        filename="Calendar.vue"
+        language="vue"
+      />
+    </section>
+  </div>
+</template>

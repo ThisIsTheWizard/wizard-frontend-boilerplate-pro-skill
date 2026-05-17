@@ -1,0 +1,351 @@
+"use client";
+
+import { useState } from "react";
+import {
+  Drawer,
+  DrawerBody,
+  DrawerContent,
+  DrawerFooter,
+  DrawerHeader,
+  Dropdown,
+  DropdownItem,
+  DropdownMenu,
+  DropdownTrigger,
+  Modal,
+  ModalBody,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+  useDisclosure,
+} from "@heroui/react";
+
+import { CodeBlock } from "@/components/ui/code-block";
+
+const POPOVER_CODE = `import { Popover, PopoverTrigger, PopoverContent } from "@heroui/react";
+
+export function Example() {
+  return (
+    <Popover placement="bottom-start">
+      <PopoverTrigger>
+        <button className="rounded-md border border-border px-3 py-1.5 text-sm font-medium text-foreground hover:bg-accent">
+          Open Popover
+        </button>
+      </PopoverTrigger>
+      <PopoverContent className="w-64 p-4">
+        <p className="text-sm font-medium text-foreground">Quick info</p>
+        <p className="mt-1 text-sm text-muted-foreground">
+          This is a popover panel with contextual information or actions.
+        </p>
+      </PopoverContent>
+    </Popover>
+  );
+}`;
+
+const DROPDOWN_CODE = `import { Dropdown, DropdownTrigger, DropdownMenu, DropdownItem } from "@heroui/react";
+
+export function Example() {
+  return (
+    <Dropdown>
+      <DropdownTrigger>
+        <button className="rounded-md border border-border px-3 py-1.5 text-sm font-medium text-foreground hover:bg-accent">
+          Options ▾
+        </button>
+      </DropdownTrigger>
+      <DropdownMenu aria-label="Account actions">
+        <DropdownItem key="profile">Profile</DropdownItem>
+        <DropdownItem key="settings">Settings</DropdownItem>
+        <DropdownItem key="logout" color="danger" className="text-danger">
+          Sign out
+        </DropdownItem>
+      </DropdownMenu>
+    </Dropdown>
+  );
+}`;
+
+const MODAL_CODE = `import { useDisclosure, Modal, ModalContent, ModalHeader, ModalBody, ModalFooter } from "@heroui/react";
+
+export function Example() {
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
+  return (
+    <>
+      <button onClick={onOpen} className="rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:opacity-90">
+        Open Modal
+      </button>
+      <Modal isOpen={isOpen} onClose={onClose}>
+        <ModalContent>
+          <ModalHeader>Delete project?</ModalHeader>
+          <ModalBody>
+            <p className="text-sm text-muted-foreground">
+              This action cannot be undone. All data will be permanently removed.
+            </p>
+          </ModalBody>
+          <ModalFooter>
+            <button onClick={onClose} className="rounded-md border border-border px-4 py-2 text-sm font-medium text-foreground hover:bg-accent">
+              Cancel
+            </button>
+            <button onClick={onClose} className="rounded-md bg-destructive px-4 py-2 text-sm font-medium text-white hover:opacity-90">
+              Delete
+            </button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
+    </>
+  );
+}`;
+
+const DRAWER_CODE = `import { useDisclosure, Drawer, DrawerContent, DrawerHeader, DrawerBody, DrawerFooter } from "@heroui/react";
+
+export function Example() {
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
+  return (
+    <>
+      <button onClick={onOpen} className="rounded-md border border-border px-4 py-2 text-sm font-medium text-foreground hover:bg-accent">
+        Open Sheet
+      </button>
+      <Drawer isOpen={isOpen} onClose={onClose} placement="right">
+        <DrawerContent>
+          <DrawerHeader>Edit Profile</DrawerHeader>
+          <DrawerBody>
+            <p className="text-sm text-muted-foreground">
+              Make changes to your profile here. Click save when you are done.
+            </p>
+          </DrawerBody>
+          <DrawerFooter>
+            <button onClick={onClose} className="rounded-md border border-border px-4 py-2 text-sm font-medium text-foreground hover:bg-accent">
+              Close
+            </button>
+          </DrawerFooter>
+        </DrawerContent>
+      </Drawer>
+    </>
+  );
+}`;
+
+export default function OverlayPage() {
+  const modal = useDisclosure();
+  const drawer = useDisclosure();
+
+  return (
+    <div className="flex flex-col gap-16">
+      <div>
+        <h1 className="text-3xl font-bold tracking-tight text-foreground">
+          Overlay
+        </h1>
+        <p className="mt-2 text-muted-foreground">
+          Floating and slide-over components — HeroUI{" "}
+          <code className="rounded bg-muted px-1 py-0.5 text-xs">Popover</code>,{" "}
+          <code className="rounded bg-muted px-1 py-0.5 text-xs">Dropdown</code>,{" "}
+          <code className="rounded bg-muted px-1 py-0.5 text-xs">Modal</code>, and{" "}
+          <code className="rounded bg-muted px-1 py-0.5 text-xs">Drawer</code>. All
+          support{" "}
+          <code className="rounded bg-muted px-1 py-0.5 text-xs">useDisclosure()</code>{" "}
+          for open/close state.
+        </p>
+      </div>
+
+      <section className="flex flex-col gap-4" id="popover">
+        <div className="border-l-2 border-primary/40 pl-3">
+          <h2 className="text-xl font-semibold text-foreground">Popover</h2>
+          <p className="mt-1 text-sm text-muted-foreground">
+            HeroUI{" "}
+            <code className="rounded bg-muted px-1 py-0.5 text-xs">Popover</code>{" "}
+            +{" "}
+            <code className="rounded bg-muted px-1 py-0.5 text-xs">PopoverTrigger</code>{" "}
+            +{" "}
+            <code className="rounded bg-muted px-1 py-0.5 text-xs">PopoverContent</code>{" "}
+            — automatic positioning with the{" "}
+            <code className="rounded bg-muted px-1 py-0.5 text-xs">placement</code>{" "}
+            prop.
+          </p>
+        </div>
+        <div className="rounded-lg border border-border bg-muted/50 p-8">
+          <Popover placement="bottom-start">
+            <PopoverTrigger>
+              <button className="rounded-md border border-border px-3 py-1.5 text-sm font-medium text-foreground transition hover:bg-accent">
+                Open Popover
+              </button>
+            </PopoverTrigger>
+            <PopoverContent className="w-64 p-4">
+              <p className="text-sm font-medium text-foreground">Quick info</p>
+              <p className="mt-1 text-sm text-muted-foreground">
+                This is a popover panel with contextual information or actions.
+              </p>
+            </PopoverContent>
+          </Popover>
+        </div>
+        <CodeBlock
+          code={POPOVER_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="Popover.tsx"
+          language="tsx"
+        />
+      </section>
+
+      <section className="flex flex-col gap-4" id="dropdown-menu">
+        <div className="border-l-2 border-primary/40 pl-3">
+          <h2 className="text-xl font-semibold text-foreground">
+            DropdownMenu
+          </h2>
+          <p className="mt-1 text-sm text-muted-foreground">
+            HeroUI{" "}
+            <code className="rounded bg-muted px-1 py-0.5 text-xs">Dropdown</code>{" "}
+            +{" "}
+            <code className="rounded bg-muted px-1 py-0.5 text-xs">DropdownTrigger</code>{" "}
+            +{" "}
+            <code className="rounded bg-muted px-1 py-0.5 text-xs">DropdownMenu</code>{" "}
+            +{" "}
+            <code className="rounded bg-muted px-1 py-0.5 text-xs">DropdownItem</code>{" "}
+            — each item has a unique{" "}
+            <code className="rounded bg-muted px-1 py-0.5 text-xs">key</code>{" "}
+            prop.
+          </p>
+        </div>
+        <div className="rounded-lg border border-border bg-muted/50 p-8">
+          <Dropdown>
+            <DropdownTrigger>
+              <button className="rounded-md border border-border px-3 py-1.5 text-sm font-medium text-foreground transition hover:bg-accent">
+                Options ▾
+              </button>
+            </DropdownTrigger>
+            <DropdownMenu aria-label="Account actions">
+              <DropdownItem key="profile">Profile</DropdownItem>
+              <DropdownItem key="settings">Settings</DropdownItem>
+              <DropdownItem key="billing">Billing</DropdownItem>
+              <DropdownItem
+                className="text-danger"
+                color="danger"
+                key="logout"
+              >
+                Sign out
+              </DropdownItem>
+            </DropdownMenu>
+          </Dropdown>
+        </div>
+        <CodeBlock
+          code={DROPDOWN_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="DropdownMenu.tsx"
+          language="tsx"
+        />
+      </section>
+
+      <section className="flex flex-col gap-4" id="modal">
+        <div className="border-l-2 border-primary/40 pl-3">
+          <h2 className="text-xl font-semibold text-foreground">Modal</h2>
+          <p className="mt-1 text-sm text-muted-foreground">
+            HeroUI{" "}
+            <code className="rounded bg-muted px-1 py-0.5 text-xs">Modal</code>{" "}
+            — manages focus trap, scroll lock, and ARIA automatically. Use{" "}
+            <code className="rounded bg-muted px-1 py-0.5 text-xs">useDisclosure()</code>{" "}
+            for state.{" "}
+            <code className="rounded bg-muted px-1 py-0.5 text-xs">ModalContent</code>{" "}
+            must wrap all sub-components.
+          </p>
+        </div>
+        <div className="rounded-lg border border-border bg-muted/50 p-8">
+          <button
+            className="rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition hover:opacity-90"
+            onClick={modal.onOpen}
+            type="button"
+          >
+            Open Modal
+          </button>
+          <Modal isOpen={modal.isOpen} onClose={modal.onClose}>
+            <ModalContent>
+              <ModalHeader>Delete project?</ModalHeader>
+              <ModalBody>
+                <p className="text-sm text-muted-foreground">
+                  This action cannot be undone. All data will be permanently
+                  removed.
+                </p>
+              </ModalBody>
+              <ModalFooter>
+                <button
+                  className="rounded-md border border-border px-4 py-2 text-sm font-medium text-foreground transition hover:bg-accent"
+                  onClick={modal.onClose}
+                  type="button"
+                >
+                  Cancel
+                </button>
+                <button
+                  className="rounded-md bg-destructive px-4 py-2 text-sm font-medium text-white transition hover:opacity-90"
+                  onClick={modal.onClose}
+                  type="button"
+                >
+                  Delete
+                </button>
+              </ModalFooter>
+            </ModalContent>
+          </Modal>
+        </div>
+        <CodeBlock
+          code={MODAL_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="Modal.tsx"
+          language="tsx"
+        />
+      </section>
+
+      <section className="flex flex-col gap-4" id="drawer">
+        <div className="border-l-2 border-primary/40 pl-3">
+          <h2 className="text-xl font-semibold text-foreground">Drawer</h2>
+          <p className="mt-1 text-sm text-muted-foreground">
+            HeroUI{" "}
+            <code className="rounded bg-muted px-1 py-0.5 text-xs">Drawer</code>{" "}
+            — a slide-over panel from any edge. Use the{" "}
+            <code className="rounded bg-muted px-1 py-0.5 text-xs">placement</code>{" "}
+            prop: left, right, top, bottom.
+          </p>
+        </div>
+        <div className="rounded-lg border border-border bg-muted/50 p-8">
+          <button
+            className="rounded-md border border-border px-4 py-2 text-sm font-medium text-foreground transition hover:bg-accent"
+            onClick={drawer.onOpen}
+            type="button"
+          >
+            Open Sheet
+          </button>
+          <Drawer
+            isOpen={drawer.isOpen}
+            placement="right"
+            onClose={drawer.onClose}
+          >
+            <DrawerContent>
+              <DrawerHeader>Edit Profile</DrawerHeader>
+              <DrawerBody>
+                <p className="text-sm text-muted-foreground">
+                  Make changes to your profile here. Click close when you are
+                  done.
+                </p>
+              </DrawerBody>
+              <DrawerFooter>
+                <button
+                  className="rounded-md border border-border px-4 py-2 text-sm font-medium text-foreground transition hover:bg-accent"
+                  onClick={drawer.onClose}
+                  type="button"
+                >
+                  Close
+                </button>
+              </DrawerFooter>
+            </DrawerContent>
+          </Drawer>
+        </div>
+        <CodeBlock
+          code={DRAWER_CODE}
+          collapsible
+          defaultOpen={false}
+          filename="Drawer.tsx"
+          language="tsx"
+        />
+      </section>
+    </div>
+  );
+}

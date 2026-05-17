@@ -1,0 +1,218 @@
+<script setup lang="ts">
+import { ref } from "vue";
+
+import CodeBlock from "@/components/CodeBlock.vue";
+
+const activeTab = ref("account");
+const currentPage = ref(1);
+const activeMenu = ref("dashboard");
+
+const TABS_CODE = `<script setup lang="ts">
+import { ref } from "vue";
+const activeTab = ref("account");
+<\/script>
+
+<template>
+  <el-tabs v-model="activeTab">
+    <el-tab-pane label="Account" name="account">
+      <p class="text-sm text-muted-foreground">Manage your account settings and preferences.</p>
+    </el-tab-pane>
+    <el-tab-pane label="Password" name="password">
+      <p class="text-sm text-muted-foreground">Change your password and security options.</p>
+    </el-tab-pane>
+    <el-tab-pane label="Notifications" name="notifications">
+      <p class="text-sm text-muted-foreground">Configure how you receive notifications.</p>
+    </el-tab-pane>
+  </el-tabs>
+</template>`;
+
+const BREADCRUMB_CODE = `<template>
+  <el-breadcrumb separator="/">
+    <el-breadcrumb-item :to="{ path: '/' }">Home</el-breadcrumb-item>
+    <el-breadcrumb-item :to="{ path: '/library' }">Library</el-breadcrumb-item>
+    <el-breadcrumb-item>Navigation</el-breadcrumb-item>
+  </el-breadcrumb>
+</template>`;
+
+const PAGINATION_CODE = `<script setup lang="ts">
+import { ref } from "vue";
+const currentPage = ref(1);
+<\/script>
+
+<template>
+  <el-pagination
+    v-model:current-page="currentPage"
+    :page-size="10"
+    :total="100"
+    layout="total, prev, pager, next"
+  />
+</template>`;
+
+const NAV_MENU_CODE = `<script setup lang="ts">
+import { ref } from "vue";
+const active = ref("dashboard");
+<\/script>
+
+<template>
+  <el-menu :default-active="active" mode="horizontal" @select="active = $event">
+    <el-menu-item index="dashboard">Dashboard</el-menu-item>
+    <el-menu-item index="projects">Projects</el-menu-item>
+    <el-sub-menu index="resources">
+      <template #title>Resources</template>
+      <el-menu-item index="docs">Docs</el-menu-item>
+      <el-menu-item index="blog">Blog</el-menu-item>
+    </el-sub-menu>
+    <el-menu-item index="settings">Settings</el-menu-item>
+  </el-menu>
+</template>`;
+</script>
+
+<template>
+  <div class="flex flex-col gap-16">
+    <div>
+      <h1 class="text-3xl font-bold tracking-tight text-foreground">Navigation</h1>
+      <p class="mt-2 text-muted-foreground">
+        Components for moving between pages and sections — tabs, breadcrumbs, pagination, and menus.
+      </p>
+    </div>
+
+    <section class="flex flex-col gap-4" id="tabs">
+      <div class="border-l-2 border-primary/40 pl-3">
+        <h2 class="text-xl font-semibold text-foreground">Tabs</h2>
+        <p class="mt-1 text-sm text-muted-foreground">
+          A tabbed interface via
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">el-tabs</code> +
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">el-tab-pane</code>. Bind
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">v-model</code> to the active tab name.
+          Use <code class="rounded bg-muted px-1 py-0.5 text-xs">type="card"</code> or
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">type="border-card"</code> for variants.
+        </p>
+      </div>
+      <div class="rounded-lg border border-border bg-muted/50 p-8">
+        <el-tabs v-model="activeTab">
+          <el-tab-pane label="Account" name="account">
+            <p class="mt-3 text-sm text-muted-foreground">
+              Manage your account settings and preferences.
+            </p>
+          </el-tab-pane>
+          <el-tab-pane label="Password" name="password">
+            <p class="mt-3 text-sm text-muted-foreground">
+              Change your password and security options.
+            </p>
+          </el-tab-pane>
+          <el-tab-pane label="Notifications" name="notifications">
+            <p class="mt-3 text-sm text-muted-foreground">
+              Configure how you receive notifications.
+            </p>
+          </el-tab-pane>
+          <el-tab-pane label="Billing" name="billing">
+            <p class="mt-3 text-sm text-muted-foreground">
+              Manage your billing information and subscription.
+            </p>
+          </el-tab-pane>
+        </el-tabs>
+      </div>
+      <CodeBlock
+        :code="TABS_CODE"
+        collapsible
+        :default-open="false"
+        filename="Tabs.vue"
+        language="vue"
+      />
+    </section>
+
+    <section class="flex flex-col gap-4" id="breadcrumb">
+      <div class="border-l-2 border-primary/40 pl-3">
+        <h2 class="text-xl font-semibold text-foreground">Breadcrumb</h2>
+        <p class="mt-1 text-sm text-muted-foreground">
+          A landmark trail via
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">el-breadcrumb</code> +
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">el-breadcrumb-item</code>. Use the
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">:to</code> prop for router-link items.
+        </p>
+      </div>
+      <div class="rounded-lg border border-border bg-muted/50 p-8">
+        <el-breadcrumb separator="/">
+          <el-breadcrumb-item :to="{ path: '/' }">Home</el-breadcrumb-item>
+          <el-breadcrumb-item :to="{ path: '/library' }">Library</el-breadcrumb-item>
+          <el-breadcrumb-item :to="{ path: '/library/navigation' }">Navigation</el-breadcrumb-item>
+          <el-breadcrumb-item>Breadcrumb</el-breadcrumb-item>
+        </el-breadcrumb>
+      </div>
+      <CodeBlock
+        :code="BREADCRUMB_CODE"
+        collapsible
+        :default-open="false"
+        filename="Breadcrumb.vue"
+        language="vue"
+      />
+    </section>
+
+    <section class="flex flex-col gap-4" id="pagination">
+      <div class="border-l-2 border-primary/40 pl-3">
+        <h2 class="text-xl font-semibold text-foreground">Pagination</h2>
+        <p class="mt-1 text-sm text-muted-foreground">
+          Page navigation via
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">el-pagination</code>. Bind
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">v-model:current-page</code> and pass
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">:total</code> +
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">:page-size</code>. Control which
+          controls appear via
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">layout</code>.
+        </p>
+      </div>
+      <div class="rounded-lg border border-border bg-muted/50 p-8">
+        <el-pagination
+          v-model:current-page="currentPage"
+          :page-size="10"
+          :total="100"
+          layout="total, prev, pager, next, jumper"
+        />
+      </div>
+      <CodeBlock
+        :code="PAGINATION_CODE"
+        collapsible
+        :default-open="false"
+        filename="Pagination.vue"
+        language="vue"
+      />
+    </section>
+
+    <section class="flex flex-col gap-4" id="navigation-menu">
+      <div class="border-l-2 border-primary/40 pl-3">
+        <h2 class="text-xl font-semibold text-foreground">NavigationMenu</h2>
+        <p class="mt-1 text-sm text-muted-foreground">
+          A horizontal or vertical menu via
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">el-menu</code> +
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">el-menu-item</code>. Use
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">el-sub-menu</code> for dropdown groups.
+          Set <code class="rounded bg-muted px-1 py-0.5 text-xs">mode="horizontal"</code> for a
+          top-nav bar.
+        </p>
+      </div>
+      <div class="rounded-lg border border-border bg-muted/50 p-8">
+        <el-menu
+          :default-active="activeMenu"
+          mode="horizontal"
+          @select="activeMenu = $event"
+        >
+          <el-menu-item index="dashboard">Dashboard</el-menu-item>
+          <el-menu-item index="projects">Projects</el-menu-item>
+          <el-sub-menu index="resources">
+            <template #title>Resources</template>
+            <el-menu-item index="docs">Docs</el-menu-item>
+            <el-menu-item index="blog">Blog</el-menu-item>
+          </el-sub-menu>
+          <el-menu-item index="settings">Settings</el-menu-item>
+        </el-menu>
+      </div>
+      <CodeBlock
+        :code="NAV_MENU_CODE"
+        collapsible
+        :default-open="false"
+        filename="NavigationMenu.vue"
+        language="vue"
+      />
+    </section>
+  </div>
+</template>

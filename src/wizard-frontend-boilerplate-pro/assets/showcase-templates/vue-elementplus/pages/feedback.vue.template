@@ -1,0 +1,276 @@
+<script setup lang="ts">
+import { ref } from "vue";
+import { ElMessage } from "element-plus";
+
+import CodeBlock from "@/components/CodeBlock.vue";
+
+const dialogVisible = ref(false);
+
+function showMessage(type: "success" | "warning" | "error" | "info", message: string) {
+  ElMessage({ duration: 3000, message, type });
+}
+
+const ALERT_CODE = `<template>
+  <div class="flex flex-col gap-3">
+    <el-alert title="Info" type="info" description="Your session expires in 30 minutes." show-icon :closable="false" />
+    <el-alert title="Success" type="success" description="Your changes have been saved." show-icon :closable="false" />
+    <el-alert title="Warning" type="warning" description="This will affect all team members." show-icon :closable="false" />
+    <el-alert title="Error" type="error" description="Something went wrong. Please try again." show-icon :closable="false" />
+  </div>
+</template>`;
+
+const TOAST_CODE = `<script setup lang="ts">
+// ElMessage must be imported even with auto-import — it is a function, not a component
+import { ElMessage } from "element-plus";
+<\/script>
+
+<template>
+  <div class="flex flex-wrap gap-2">
+    <el-button @click="ElMessage.success('Profile saved successfully.')">Success</el-button>
+    <el-button @click="ElMessage.warning('Unsaved changes detected.')">Warning</el-button>
+    <el-button @click="ElMessage.error('Something went wrong.')">Error</el-button>
+    <el-button @click="ElMessage.info('Informational message.')">Info</el-button>
+  </div>
+</template>`;
+
+const PROGRESS_CODE = `<template>
+  <div class="flex flex-col gap-4">
+    <el-progress :percentage="25" />
+    <el-progress :percentage="60" status="success" />
+    <el-progress :percentage="100" status="success" />
+    <el-progress :percentage="50" type="circle" />
+    <el-progress :percentage="80" type="dashboard" />
+  </div>
+</template>`;
+
+const TOOLTIP_CODE = `<template>
+  <div class="flex flex-wrap items-center gap-4">
+    <el-tooltip content="Tooltip on top" placement="top" effect="dark">
+      <el-button>Top</el-button>
+    </el-tooltip>
+    <el-tooltip content="Tooltip on right" placement="right" effect="dark">
+      <el-button>Right</el-button>
+    </el-tooltip>
+    <el-tooltip content="Tooltip on bottom" placement="bottom" effect="dark">
+      <el-button>Bottom</el-button>
+    </el-tooltip>
+    <el-tooltip content="Tooltip on left" placement="left" effect="dark">
+      <el-button>Left</el-button>
+    </el-tooltip>
+  </div>
+</template>`;
+
+const DIALOG_CODE = `<script setup lang="ts">
+import { ref } from "vue";
+const visible = ref(false);
+<\/script>
+
+<template>
+  <el-button @click="visible = true">Open dialog</el-button>
+  <el-dialog v-model="visible" title="Confirm action" width="28rem">
+    <p class="text-sm text-muted-foreground">
+      This action cannot be undone. Are you sure you want to proceed?
+    </p>
+    <template #footer>
+      <el-button @click="visible = false">Cancel</el-button>
+      <el-button type="primary" @click="visible = false">Confirm</el-button>
+    </template>
+  </el-dialog>
+</template>`;
+</script>
+
+<template>
+  <div class="flex flex-col gap-16">
+    <div>
+      <h1 class="text-3xl font-bold tracking-tight text-foreground">Feedback</h1>
+      <p class="mt-2 text-muted-foreground">
+        Status indicators, notifications, and modal interactions — alerts, toasts, dialogs, and
+        progress bars.
+      </p>
+    </div>
+
+    <section class="flex flex-col gap-4" id="alert">
+      <div class="border-l-2 border-primary/40 pl-3">
+        <h2 class="text-xl font-semibold text-foreground">Alert</h2>
+        <p class="mt-1 text-sm text-muted-foreground">
+          An inline status banner via
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">el-alert</code>. Use the
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">type</code> prop: success, warning, info,
+          error. Add
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">show-icon</code> for a leading icon.
+        </p>
+      </div>
+      <div class="rounded-lg border border-border bg-muted/50 p-8">
+        <div class="flex flex-col gap-3">
+          <el-alert
+            :closable="false"
+            description="Your session expires in 30 minutes."
+            show-icon
+            title="Info"
+            type="info"
+          />
+          <el-alert
+            :closable="false"
+            description="Your changes have been saved."
+            show-icon
+            title="Success"
+            type="success"
+          />
+          <el-alert
+            :closable="false"
+            description="This will affect all team members."
+            show-icon
+            title="Warning"
+            type="warning"
+          />
+          <el-alert
+            :closable="false"
+            description="Something went wrong. Please try again."
+            show-icon
+            title="Error"
+            type="error"
+          />
+        </div>
+      </div>
+      <CodeBlock
+        :code="ALERT_CODE"
+        collapsible
+        :default-open="false"
+        filename="Alert.vue"
+        language="vue"
+      />
+    </section>
+
+    <section class="flex flex-col gap-4" id="toast">
+      <div class="border-l-2 border-primary/40 pl-3">
+        <h2 class="text-xl font-semibold text-foreground">Toast</h2>
+        <p class="mt-1 text-sm text-muted-foreground">
+          Transient notifications via the
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">ElMessage</code> function. Import it
+          explicitly — it is a function, not a component, so auto-import won't resolve it.
+        </p>
+      </div>
+      <div class="rounded-lg border border-border bg-muted/50 p-8">
+        <div class="flex flex-wrap gap-2">
+          <el-button type="success" @click="showMessage('success', 'Profile saved successfully.')">
+            Success
+          </el-button>
+          <el-button type="warning" @click="showMessage('warning', 'Unsaved changes detected.')">
+            Warning
+          </el-button>
+          <el-button type="danger" @click="showMessage('error', 'Something went wrong.')">
+            Error
+          </el-button>
+          <el-button type="info" @click="showMessage('info', 'Informational message.')">
+            Info
+          </el-button>
+        </div>
+      </div>
+      <CodeBlock
+        :code="TOAST_CODE"
+        collapsible
+        :default-open="false"
+        filename="Toast.vue"
+        language="vue"
+      />
+    </section>
+
+    <section class="flex flex-col gap-4" id="progress">
+      <div class="border-l-2 border-primary/40 pl-3">
+        <h2 class="text-xl font-semibold text-foreground">Progress</h2>
+        <p class="mt-1 text-sm text-muted-foreground">
+          A completion bar via
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">el-progress</code>. Pass
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">:percentage</code> (0–100). Use
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">type</code>: line (default), circle, or
+          dashboard.
+        </p>
+      </div>
+      <div class="rounded-lg border border-border bg-muted/50 p-8">
+        <div class="flex max-w-sm flex-col gap-4">
+          <el-progress :percentage="25" />
+          <el-progress :percentage="60" />
+          <el-progress :percentage="100" status="success" />
+          <div class="flex items-center gap-6">
+            <el-progress :percentage="50" type="circle" />
+            <el-progress :percentage="80" type="dashboard" />
+          </div>
+        </div>
+      </div>
+      <CodeBlock
+        :code="PROGRESS_CODE"
+        collapsible
+        :default-open="false"
+        filename="Progress.vue"
+        language="vue"
+      />
+    </section>
+
+    <section class="flex flex-col gap-4" id="tooltip">
+      <div class="border-l-2 border-primary/40 pl-3">
+        <h2 class="text-xl font-semibold text-foreground">Tooltip</h2>
+        <p class="mt-1 text-sm text-muted-foreground">
+          A floating label via
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">el-tooltip</code>. Use
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">placement</code> for position and
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">effect</code> (dark/light) for style.
+        </p>
+      </div>
+      <div class="rounded-lg border border-border bg-muted/50 p-8">
+        <div class="flex flex-wrap items-center gap-4">
+          <el-tooltip content="Tooltip on top" effect="dark" placement="top">
+            <el-button>Top</el-button>
+          </el-tooltip>
+          <el-tooltip content="Tooltip on right" effect="dark" placement="right">
+            <el-button>Right</el-button>
+          </el-tooltip>
+          <el-tooltip content="Tooltip on bottom" effect="dark" placement="bottom">
+            <el-button>Bottom</el-button>
+          </el-tooltip>
+          <el-tooltip content="Tooltip on left" effect="dark" placement="left">
+            <el-button>Left</el-button>
+          </el-tooltip>
+        </div>
+      </div>
+      <CodeBlock
+        :code="TOOLTIP_CODE"
+        collapsible
+        :default-open="false"
+        filename="Tooltip.vue"
+        language="vue"
+      />
+    </section>
+
+    <section class="flex flex-col gap-4" id="dialog">
+      <div class="border-l-2 border-primary/40 pl-3">
+        <h2 class="text-xl font-semibold text-foreground">Dialog</h2>
+        <p class="mt-1 text-sm text-muted-foreground">
+          A modal overlay via
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">el-dialog</code>. Bind
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">v-model</code> to a boolean ref and use
+          the <code class="rounded bg-muted px-1 py-0.5 text-xs">#footer</code> slot for action
+          buttons.
+        </p>
+      </div>
+      <div class="rounded-lg border border-border bg-muted/50 p-8">
+        <el-button @click="dialogVisible = true">Open dialog</el-button>
+        <el-dialog v-model="dialogVisible" title="Confirm action" width="28rem">
+          <p class="text-sm text-muted-foreground">
+            This action cannot be undone. Are you sure you want to proceed?
+          </p>
+          <template #footer>
+            <el-button @click="dialogVisible = false">Cancel</el-button>
+            <el-button type="primary" @click="dialogVisible = false">Confirm</el-button>
+          </template>
+        </el-dialog>
+      </div>
+      <CodeBlock
+        :code="DIALOG_CODE"
+        collapsible
+        :default-open="false"
+        filename="Dialog.vue"
+        language="vue"
+      />
+    </section>
+  </div>
+</template>

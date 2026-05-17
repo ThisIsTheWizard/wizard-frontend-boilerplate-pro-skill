@@ -1,0 +1,210 @@
+<script setup lang="ts">
+import { ref } from "vue";
+
+import CodeBlock from "@/components/CodeBlock.vue";
+
+const dialogVisible = ref(false);
+const drawerVisible = ref(false);
+
+const POPOVER_CODE = `<template>
+  <el-popover
+    placement="bottom-start"
+    title="Quick info"
+    :width="240"
+    trigger="click"
+    content="This is a popover panel with contextual information or actions."
+  >
+    <template #reference>
+      <el-button>Open Popover</el-button>
+    </template>
+  </el-popover>
+</template>`;
+
+const DROPDOWN_CODE = `<template>
+  <el-dropdown @command="handleCommand">
+    <el-button>
+      Options <el-icon class="el-icon--right"><arrow-down /></el-icon>
+    </el-button>
+    <template #dropdown>
+      <el-dropdown-menu>
+        <el-dropdown-item command="profile">Profile</el-dropdown-item>
+        <el-dropdown-item command="settings">Settings</el-dropdown-item>
+        <el-dropdown-item command="billing">Billing</el-dropdown-item>
+        <el-dropdown-item command="logout" divided>Sign out</el-dropdown-item>
+      </el-dropdown-menu>
+    </template>
+  </el-dropdown>
+</template>`;
+
+const DIALOG_CODE = `<script setup lang="ts">
+import { ref } from "vue";
+const visible = ref(false);
+<\/script>
+
+<template>
+  <el-button @click="visible = true">Open Modal</el-button>
+  <el-dialog v-model="visible" title="Delete project?" width="28rem">
+    <p class="text-sm text-muted-foreground">
+      This action cannot be undone. All data will be permanently removed.
+    </p>
+    <template #footer>
+      <el-button @click="visible = false">Cancel</el-button>
+      <el-button type="danger" @click="visible = false">Delete</el-button>
+    </template>
+  </el-dialog>
+</template>`;
+
+const DRAWER_CODE = `<script setup lang="ts">
+import { ref } from "vue";
+const visible = ref(false);
+<\/script>
+
+<template>
+  <el-button @click="visible = true">Open Sheet</el-button>
+  <el-drawer v-model="visible" title="Edit profile" direction="rtl" size="320px">
+    <p class="text-sm text-muted-foreground">
+      Make changes to your profile here. Click save when you are done.
+    </p>
+    <template #footer>
+      <el-button @click="visible = false">Close</el-button>
+      <el-button type="primary" @click="visible = false">Save</el-button>
+    </template>
+  </el-drawer>
+</template>`;
+
+function handleDropdownCommand(command: string) {
+  console.log("Dropdown command:", command);
+}
+</script>
+
+<template>
+  <div class="flex flex-col gap-16">
+    <div>
+      <h1 class="text-3xl font-bold tracking-tight text-foreground">Overlay</h1>
+      <p class="mt-2 text-muted-foreground">
+        Floating UI components that render above the main content — popovers, dropdown menus,
+        dialogs, and drawers.
+      </p>
+    </div>
+
+    <section class="flex flex-col gap-4" id="popover">
+      <div class="border-l-2 border-primary/40 pl-3">
+        <h2 class="text-xl font-semibold text-foreground">Popover</h2>
+        <p class="mt-1 text-sm text-muted-foreground">
+          A non-modal floating panel via
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">el-popover</code>. Use the
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">#reference</code> slot for the trigger
+          element. Supports
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">trigger</code>: click, hover, or focus.
+        </p>
+      </div>
+      <div class="rounded-lg border border-border bg-muted/50 p-8">
+        <el-popover
+          :width="240"
+          content="This is a popover panel with contextual information or actions."
+          placement="bottom-start"
+          title="Quick info"
+          trigger="click"
+        >
+          <template #reference>
+            <el-button>Open Popover</el-button>
+          </template>
+        </el-popover>
+      </div>
+      <CodeBlock
+        :code="POPOVER_CODE"
+        :collapsible="true"
+        :default-open="false"
+        filename="Popover.vue"
+        language="vue"
+      />
+    </section>
+
+    <section class="flex flex-col gap-4" id="dropdown-menu">
+      <div class="border-l-2 border-primary/40 pl-3">
+        <h2 class="text-xl font-semibold text-foreground">DropdownMenu</h2>
+        <p class="mt-1 text-sm text-muted-foreground">
+          A contextual menu via
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">el-dropdown</code> +
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">el-dropdown-menu</code> +
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">el-dropdown-item</code>. Handle
+          selection via
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">@command</code>.
+        </p>
+      </div>
+      <div class="rounded-lg border border-border bg-muted/50 p-8">
+        <el-dropdown @command="handleDropdownCommand">
+          <el-button>Options ▾</el-button>
+          <template #dropdown>
+            <el-dropdown-menu>
+              <el-dropdown-item command="profile">Profile</el-dropdown-item>
+              <el-dropdown-item command="settings">Settings</el-dropdown-item>
+              <el-dropdown-item command="billing">Billing</el-dropdown-item>
+              <el-dropdown-item command="logout" divided>Sign out</el-dropdown-item>
+            </el-dropdown-menu>
+          </template>
+        </el-dropdown>
+      </div>
+      <CodeBlock
+        :code="DROPDOWN_CODE"
+        :collapsible="true"
+        :default-open="false"
+        filename="DropdownMenu.vue"
+        language="vue"
+      />
+    </section>
+
+    <section class="flex flex-col gap-4" id="sheet">
+      <div class="border-l-2 border-primary/40 pl-3">
+        <h2 class="text-xl font-semibold text-foreground">Sheet</h2>
+        <p class="mt-1 text-sm text-muted-foreground">
+          A modal via
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">el-dialog</code> and a slide-over panel
+          via <code class="rounded bg-muted px-1 py-0.5 text-xs">el-drawer</code>. Use
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">direction</code>: rtl (right), ltr
+          (left), ttb (top), btt (bottom).
+        </p>
+      </div>
+      <div class="rounded-lg border border-border bg-muted/50 p-8">
+        <div class="flex gap-2">
+          <el-button @click="dialogVisible = true">Open Dialog</el-button>
+          <el-button @click="drawerVisible = true">Open Sheet</el-button>
+        </div>
+
+        <el-dialog v-model="dialogVisible" title="Delete project?" width="28rem">
+          <p class="text-sm text-muted-foreground">
+            This action cannot be undone. All data will be permanently removed.
+          </p>
+          <template #footer>
+            <el-button @click="dialogVisible = false">Cancel</el-button>
+            <el-button type="danger" @click="dialogVisible = false">Delete</el-button>
+          </template>
+        </el-dialog>
+
+        <el-drawer v-model="drawerVisible" direction="rtl" size="320px" title="Edit profile">
+          <p class="text-sm text-muted-foreground">
+            Make changes to your profile here. Click save when you are done.
+          </p>
+          <template #footer>
+            <el-button @click="drawerVisible = false">Close</el-button>
+            <el-button type="primary" @click="drawerVisible = false">Save</el-button>
+          </template>
+        </el-drawer>
+      </div>
+      <CodeBlock
+        :code="DIALOG_CODE"
+        :collapsible="true"
+        :default-open="false"
+        filename="Dialog.vue"
+        language="vue"
+      />
+      <CodeBlock
+        :code="DRAWER_CODE"
+        :collapsible="true"
+        :default-open="false"
+        filename="Drawer.vue"
+        language="vue"
+      />
+    </section>
+  </div>
+</template>

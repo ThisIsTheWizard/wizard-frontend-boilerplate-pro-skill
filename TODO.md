@@ -162,22 +162,22 @@
 - [x] `assets/showcase-templates/vue-headlessui/` — 8 files
 
 ## 27. NextUI / HeroUI — reference file + templates
-- [ ] Write `references/ui-library/heroui.md`
+- [x] Write `references/ui-library/heroui.md`
   - `@heroui/react` install, `HeroUIProvider` wiring, Tailwind config
   - Theming bridge: map existing CSS variable tokens to HeroUI theme config
   - React/Next.js only constraint noted
-- [ ] `assets/showcase-templates/react-heroui/` — 8 files
+- [x] `assets/showcase-templates/react-heroui/` — 8 files
 
 ## 28. Element Plus — reference file + templates
-- [ ] Write `references/ui-library/elementplus.md`
+- [x] Write `references/ui-library/elementplus.md`
   - `element-plus` install, auto-import setup (`unplugin-vue-components`)
   - SCSS variable override strategy for theming bridge to CSS tokens
   - Vue/Nuxt only constraint noted; echarts pairing for Chart slot
-- [ ] `assets/showcase-templates/vue-elementplus/` — 8 files
+- [x] `assets/showcase-templates/vue-elementplus/` — 8 files
 
 ## 29. Multi-library end-to-end validation
-- [x] Simulated run: Next.js + shadcn/ui — all 6 routes render, dark mode works
-- [x] Simulated run: Next.js + MUI — theme bridge verified, SSR no flash
-- [x] Simulated run: Vue + Bootstrap — all routes render, responsive
-- [x] Confirm Phase 1 menu hides Vue-incompatible libraries when Vue is selected
-- [x] Confirm existing `custom` path still works unchanged
+- [ ] Simulated run: Next.js + shadcn/ui — all 6 routes render, dark mode works
+- [ ] Simulated run: Next.js + MUI — theme bridge verified, SSR no flash
+- [ ] Simulated run: Vue + Bootstrap — all routes render, responsive
+- [ ] Confirm Phase 1 menu hides Vue-incompatible libraries when Vue is selected
+- [ ] Confirm existing `custom` path still works unchanged
