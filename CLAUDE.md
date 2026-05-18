@@ -78,8 +78,6 @@ Apply these consistently. Do not leave files that would fail any of these checks
 
 ## Reference files
 
-- `PLAN.md` — architecture decisions and full skill structure (source of truth for build decisions)
-- `TODO.md` — ordered build checklist, one item per session
 - `src/wizard-frontend-boilerplate-pro/SKILL.md` — the skill entry point itself
 - `docs/architecture.md` — three-location pattern and symlink setup
 - `docs/development.md` — how to add presets, update references, run validation
