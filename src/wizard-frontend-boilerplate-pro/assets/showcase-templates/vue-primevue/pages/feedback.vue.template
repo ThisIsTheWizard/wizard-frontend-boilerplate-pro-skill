@@ -106,23 +106,23 @@ const visible = ref(false);
 
     <div>
       <h1 class="text-3xl font-bold tracking-tight text-foreground">Feedback</h1>
-      <p class="mt-2 text-muted-foreground">
+      <p class="mt-2 text-base leading-relaxed text-muted-foreground">
         Status indicators, notifications, and modal interactions — alerts, toasts, dialogs, and
         progress.
       </p>
     </div>
 
     <section class="flex flex-col gap-4" id="alert">
-      <div class="border-l-2 border-primary/40 pl-3">
+      <div class="border-l-[3px] border-primary/60 pl-4">
         <h2 class="text-xl font-semibold text-foreground">Alert</h2>
-        <p class="mt-1 text-sm text-muted-foreground">
+        <p class="mt-1 text-sm leading-relaxed text-muted-foreground">
           An inline message banner via
           <code class="rounded bg-muted px-1 py-0.5 text-xs">Message</code>. Use the
           <code class="rounded bg-muted px-1 py-0.5 text-xs">severity</code> prop: info, success,
           warn, error.
         </p>
       </div>
-      <div class="rounded-lg border border-border bg-muted/50 p-8">
+      <div class="rounded-xl border border-border/60 bg-muted/30 p-8 shadow-sm">
         <div class="flex flex-col gap-3">
           <Message severity="info">Heads up — you can add components using the CLI.</Message>
           <Message severity="success">Profile saved successfully.</Message>
@@ -140,9 +140,9 @@ const visible = ref(false);
     </section>
 
     <section class="flex flex-col gap-4" id="toast">
-      <div class="border-l-2 border-primary/40 pl-3">
+      <div class="border-l-[3px] border-primary/60 pl-4">
         <h2 class="text-xl font-semibold text-foreground">Toast</h2>
-        <p class="mt-1 text-sm text-muted-foreground">
+        <p class="mt-1 text-sm leading-relaxed text-muted-foreground">
           Transient notifications via
           <code class="rounded bg-muted px-1 py-0.5 text-xs">useToast()</code>. Requires
           <code class="rounded bg-muted px-1 py-0.5 text-xs">app.use(ToastService)</code> in
@@ -150,7 +150,7 @@ const visible = ref(false);
           <code class="rounded bg-muted px-1 py-0.5 text-xs">&lt;Toast /&gt;</code> in the layout.
         </p>
       </div>
-      <div class="rounded-lg border border-border bg-muted/50 p-8">
+      <div class="rounded-xl border border-border/60 bg-muted/30 p-8 shadow-sm">
         <div class="flex flex-wrap gap-2">
           <Button
             label="Info"
@@ -184,16 +184,16 @@ const visible = ref(false);
     </section>
 
     <section class="flex flex-col gap-4" id="progress">
-      <div class="border-l-2 border-primary/40 pl-3">
+      <div class="border-l-[3px] border-primary/60 pl-4">
         <h2 class="text-xl font-semibold text-foreground">Progress</h2>
-        <p class="mt-1 text-sm text-muted-foreground">
+        <p class="mt-1 text-sm leading-relaxed text-muted-foreground">
           A horizontal bar showing completion via
           <code class="rounded bg-muted px-1 py-0.5 text-xs">ProgressBar</code>. Pass
           <code class="rounded bg-muted px-1 py-0.5 text-xs">:value</code> (0–100) or use
           <code class="rounded bg-muted px-1 py-0.5 text-xs">mode="indeterminate"</code>.
         </p>
       </div>
-      <div class="rounded-lg border border-border bg-muted/50 p-8">
+      <div class="rounded-xl border border-border/60 bg-muted/30 p-8 shadow-sm">
         <div class="flex flex-col gap-4">
           <ProgressBar :value="25" />
           <ProgressBar :value="60" />
@@ -211,9 +211,9 @@ const visible = ref(false);
     </section>
 
     <section class="flex flex-col gap-4" id="tooltip">
-      <div class="border-l-2 border-primary/40 pl-3">
+      <div class="border-l-[3px] border-primary/60 pl-4">
         <h2 class="text-xl font-semibold text-foreground">Tooltip</h2>
-        <p class="mt-1 text-sm text-muted-foreground">
+        <p class="mt-1 text-sm leading-relaxed text-muted-foreground">
           A floating label on hover via the
           <code class="rounded bg-muted px-1 py-0.5 text-xs">v-tooltip</code> directive. Use
           position modifiers:
@@ -223,7 +223,7 @@ const visible = ref(false);
           <code class="rounded bg-muted px-1 py-0.5 text-xs">.left</code>.
         </p>
       </div>
-      <div class="rounded-lg border border-border bg-muted/50 p-8">
+      <div class="rounded-xl border border-border/60 bg-muted/30 p-8 shadow-sm">
         <div class="flex flex-wrap items-center gap-4">
           <Button
             v-tooltip.top="'Tooltip on top'"
@@ -261,9 +261,9 @@ const visible = ref(false);
     </section>
 
     <section class="flex flex-col gap-4" id="dialog">
-      <div class="border-l-2 border-primary/40 pl-3">
+      <div class="border-l-[3px] border-primary/60 pl-4">
         <h2 class="text-xl font-semibold text-foreground">Dialog</h2>
-        <p class="mt-1 text-sm text-muted-foreground">
+        <p class="mt-1 text-sm leading-relaxed text-muted-foreground">
           A modal overlay via
           <code class="rounded bg-muted px-1 py-0.5 text-xs">Dialog</code>. Bind
           <code class="rounded bg-muted px-1 py-0.5 text-xs">v-model:visible</code> and use the
@@ -271,7 +271,7 @@ const visible = ref(false);
           buttons.
         </p>
       </div>
-      <div class="rounded-lg border border-border bg-muted/50 p-8">
+      <div class="rounded-xl border border-border/60 bg-muted/30 p-8 shadow-sm">
         <Button label="Open dialog" @click="dialogVisible = true" />
         <Dialog
           v-model:visible="dialogVisible"

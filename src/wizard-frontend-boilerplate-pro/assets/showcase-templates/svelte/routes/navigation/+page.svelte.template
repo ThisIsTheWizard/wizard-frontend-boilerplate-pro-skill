@@ -169,23 +169,26 @@
 </script>
 
 <div class="flex flex-col gap-16">
-  <div>
-    <h1 class="text-3xl font-bold tracking-tight text-foreground">Navigation</h1>
-    <p class="mt-2 text-muted-foreground">
+  <div class="flex flex-col gap-3">
+    <div class="flex items-center gap-2">
+      <span class="inline-flex items-center rounded-full border border-primary/20 bg-primary/10 px-2.5 py-0.5 text-[11px] font-medium uppercase tracking-wider text-primary">Components</span>
+    </div>
+    <h1 class="text-4xl font-bold tracking-tight text-foreground">Navigation</h1>
+    <p class="max-w-2xl text-base text-muted-foreground">
       Route navigation, tabbed interfaces, and paginated content — tabs,
       breadcrumbs, and menus.
     </p>
   </div>
 
   <section class="flex flex-col gap-4" id="tabs">
-    <div class="border-l-2 border-primary/40 pl-3">
-      <h2 class="text-xl font-semibold text-foreground">Tabs</h2>
-      <p class="mt-1 text-sm text-muted-foreground">
+    <div class="flex flex-col gap-1 border-l-2 border-primary/50 pl-4">
+      <h2 class="text-xl font-semibold tracking-tight text-foreground">Tabs</h2>
+      <p class="text-sm text-muted-foreground">
         Organises related content into switchable panels with accessible keyboard
         navigation.
       </p>
     </div>
-    <div class="rounded-lg border border-border bg-muted/50 p-8">
+    <div class="rounded-xl border border-border/60 bg-muted/30 p-8 shadow-sm">
       <Tabs onvaluechange={(val) => (tabValue = val)} value={tabValue}>
         <TabsList>
           <TabsTrigger value="account">Account</TabsTrigger>
@@ -219,14 +222,14 @@
   </section>
 
   <section class="flex flex-col gap-4" id="breadcrumb">
-    <div class="border-l-2 border-primary/40 pl-3">
-      <h2 class="text-xl font-semibold text-foreground">Breadcrumb</h2>
-      <p class="mt-1 text-sm text-muted-foreground">
+    <div class="flex flex-col gap-1 border-l-2 border-primary/50 pl-4">
+      <h2 class="text-xl font-semibold tracking-tight text-foreground">Breadcrumb</h2>
+      <p class="text-sm text-muted-foreground">
         Shows the user's current location within a site hierarchy with accessible
         landmark navigation.
       </p>
     </div>
-    <div class="rounded-lg border border-border bg-muted/50 p-8">
+    <div class="rounded-xl border border-border/60 bg-muted/30 p-8 shadow-sm">
       <Breadcrumb>
         <BreadcrumbList>
           <BreadcrumbItem>
@@ -253,14 +256,14 @@
   </section>
 
   <section class="flex flex-col gap-4" id="pagination">
-    <div class="border-l-2 border-primary/40 pl-3">
+    <div class="flex flex-col gap-1 border-l-2 border-primary/50 pl-4">
       <h2 class="text-xl font-semibold text-foreground">Pagination</h2>
       <p class="mt-1 text-sm text-muted-foreground">
         Splits large datasets across multiple pages with Previous, Next, and
         numbered page links.
       </p>
     </div>
-    <div class="rounded-lg border border-border bg-muted/50 p-8">
+    <div class="rounded-xl border border-border/60 bg-muted/30 p-8 shadow-sm">
       <Pagination>
         <PaginationContent>
           <PaginationItem>
@@ -323,14 +326,14 @@
   </section>
 
   <section class="flex flex-col gap-4" id="navigation-menu">
-    <div class="border-l-2 border-primary/40 pl-3">
+    <div class="flex flex-col gap-1 border-l-2 border-primary/50 pl-4">
       <h2 class="text-xl font-semibold text-foreground">NavigationMenu</h2>
       <p class="mt-1 text-sm text-muted-foreground">
         A top-level navigation bar with accessible flyout submenus and keyboard
         navigation.
       </p>
     </div>
-    <div class="rounded-lg border border-border bg-muted/50 p-8">
+    <div class="rounded-xl border border-border/60 bg-muted/30 p-8 shadow-sm">
       <NavigationMenu>
         <NavigationMenuList>
           <NavigationMenuItem>

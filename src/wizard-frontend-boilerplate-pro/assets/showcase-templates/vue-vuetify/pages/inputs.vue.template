@@ -127,15 +127,15 @@ const enabled = ref(false);
   <div class="flex flex-col gap-16">
     <div>
       <h1 class="text-3xl font-bold tracking-tight text-foreground">Inputs</h1>
-      <p class="mt-2 text-muted-foreground">
+      <p class="mt-2 text-base leading-relaxed text-muted-foreground">
         Form controls for collecting user input — buttons, text fields, selections, and toggles.
       </p>
     </div>
 
     <section class="flex flex-col gap-4" id="button">
-      <div class="border-l-2 border-primary/40 pl-3">
+      <div class="border-l-[3px] border-primary/60 pl-4">
         <h2 class="text-xl font-semibold text-foreground">Button</h2>
-        <p class="mt-1 text-sm text-muted-foreground">
+        <p class="mt-1 text-sm leading-relaxed text-muted-foreground">
           Triggers an action via
           <code class="rounded bg-muted px-1 py-0.5 text-xs">v-btn</code>. Use the
           <code class="rounded bg-muted px-1 py-0.5 text-xs">color</code> and
@@ -143,7 +143,7 @@ const enabled = ref(false);
           text, tonal, elevated, plain).
         </p>
       </div>
-      <div class="rounded-lg border border-border bg-muted/50 p-8">
+      <div class="rounded-xl border border-border/60 bg-muted/30 p-8 shadow-sm">
         <div class="flex flex-col gap-4">
           <div class="flex flex-wrap gap-2">
             <v-btn color="primary">Primary</v-btn>
@@ -174,9 +174,9 @@ const enabled = ref(false);
     </section>
 
     <section class="flex flex-col gap-4" id="input">
-      <div class="border-l-2 border-primary/40 pl-3">
+      <div class="border-l-[3px] border-primary/60 pl-4">
         <h2 class="text-xl font-semibold text-foreground">Input</h2>
-        <p class="mt-1 text-sm text-muted-foreground">
+        <p class="mt-1 text-sm leading-relaxed text-muted-foreground">
           A text field via
           <code class="rounded bg-muted px-1 py-0.5 text-xs">v-text-field</code>. Use
           <code class="rounded bg-muted px-1 py-0.5 text-xs">variant</code> (outlined/filled/
@@ -184,7 +184,7 @@ const enabled = ref(false);
           <code class="rounded bg-muted px-1 py-0.5 text-xs">persistent-hint</code> for helper text.
         </p>
       </div>
-      <div class="rounded-lg border border-border bg-muted/50 p-8">
+      <div class="rounded-xl border border-border/60 bg-muted/30 p-8 shadow-sm">
         <div class="flex max-w-sm flex-col gap-4">
           <v-text-field
             v-model="emailVal"
@@ -208,16 +208,16 @@ const enabled = ref(false);
     </section>
 
     <section class="flex flex-col gap-4" id="textarea">
-      <div class="border-l-2 border-primary/40 pl-3">
+      <div class="border-l-[3px] border-primary/60 pl-4">
         <h2 class="text-xl font-semibold text-foreground">Textarea</h2>
-        <p class="mt-1 text-sm text-muted-foreground">
+        <p class="mt-1 text-sm leading-relaxed text-muted-foreground">
           A multi-line text input via
           <code class="rounded bg-muted px-1 py-0.5 text-xs">v-textarea</code>. Use
           <code class="rounded bg-muted px-1 py-0.5 text-xs">auto-grow</code> to expand with
           content.
         </p>
       </div>
-      <div class="rounded-lg border border-border bg-muted/50 p-8">
+      <div class="rounded-xl border border-border/60 bg-muted/30 p-8 shadow-sm">
         <div class="flex max-w-sm flex-col">
           <v-textarea
             v-model="textareaVal"
@@ -240,9 +240,9 @@ const enabled = ref(false);
     </section>
 
     <section class="flex flex-col gap-4" id="select">
-      <div class="border-l-2 border-primary/40 pl-3">
+      <div class="border-l-[3px] border-primary/60 pl-4">
         <h2 class="text-xl font-semibold text-foreground">Select</h2>
-        <p class="mt-1 text-sm text-muted-foreground">
+        <p class="mt-1 text-sm leading-relaxed text-muted-foreground">
           A dropdown via
           <code class="rounded bg-muted px-1 py-0.5 text-xs">v-select</code>. Pass
           <code class="rounded bg-muted px-1 py-0.5 text-xs">:items</code> as a string array or
@@ -250,7 +250,7 @@ const enabled = ref(false);
           <code class="rounded bg-muted px-1 py-0.5 text-xs">item-value</code>.
         </p>
       </div>
-      <div class="rounded-lg border border-border bg-muted/50 p-8">
+      <div class="rounded-xl border border-border/60 bg-muted/30 p-8 shadow-sm">
         <div class="flex max-w-sm flex-col gap-4">
           <v-select
             v-model="selectVal"
@@ -272,16 +272,16 @@ const enabled = ref(false);
     </section>
 
     <section class="flex flex-col gap-4" id="checkbox">
-      <div class="border-l-2 border-primary/40 pl-3">
+      <div class="border-l-[3px] border-primary/60 pl-4">
         <h2 class="text-xl font-semibold text-foreground">Checkbox</h2>
-        <p class="mt-1 text-sm text-muted-foreground">
+        <p class="mt-1 text-sm leading-relaxed text-muted-foreground">
           A binary toggle via
           <code class="rounded bg-muted px-1 py-0.5 text-xs">v-checkbox</code>. Use
           <code class="rounded bg-muted px-1 py-0.5 text-xs">hide-details</code> to suppress the
           helper text slot.
         </p>
       </div>
-      <div class="rounded-lg border border-border bg-muted/50 p-8">
+      <div class="rounded-xl border border-border/60 bg-muted/30 p-8 shadow-sm">
         <div class="flex flex-col gap-1">
           <v-checkbox
             v-model="checkboxVal"
@@ -312,16 +312,16 @@ const enabled = ref(false);
     </section>
 
     <section class="flex flex-col gap-4" id="radio-group">
-      <div class="border-l-2 border-primary/40 pl-3">
+      <div class="border-l-[3px] border-primary/60 pl-4">
         <h2 class="text-xl font-semibold text-foreground">RadioGroup</h2>
-        <p class="mt-1 text-sm text-muted-foreground">
+        <p class="mt-1 text-sm leading-relaxed text-muted-foreground">
           Mutually exclusive options via
           <code class="rounded bg-muted px-1 py-0.5 text-xs">v-radio-group</code> +
           <code class="rounded bg-muted px-1 py-0.5 text-xs">v-radio</code>. Bind
           <code class="rounded bg-muted px-1 py-0.5 text-xs">v-model</code> on the group.
         </p>
       </div>
-      <div class="rounded-lg border border-border bg-muted/50 p-8">
+      <div class="rounded-xl border border-border/60 bg-muted/30 p-8 shadow-sm">
         <v-radio-group v-model="plan" color="primary" hide-details>
           <v-radio label="Free" value="free" />
           <v-radio label="Pro" value="pro" />
@@ -338,9 +338,9 @@ const enabled = ref(false);
     </section>
 
     <section class="flex flex-col gap-4" id="switch">
-      <div class="border-l-2 border-primary/40 pl-3">
+      <div class="border-l-[3px] border-primary/60 pl-4">
         <h2 class="text-xl font-semibold text-foreground">Switch</h2>
-        <p class="mt-1 text-sm text-muted-foreground">
+        <p class="mt-1 text-sm leading-relaxed text-muted-foreground">
           An on/off toggle via
           <code class="rounded bg-muted px-1 py-0.5 text-xs">v-switch</code>. Use
           <code class="rounded bg-muted px-1 py-0.5 text-xs">color</code> to style the active state
@@ -348,7 +348,7 @@ const enabled = ref(false);
           layout.
         </p>
       </div>
-      <div class="rounded-lg border border-border bg-muted/50 p-8">
+      <div class="rounded-xl border border-border/60 bg-muted/30 p-8 shadow-sm">
         <div class="flex flex-col gap-1">
           <v-switch
             v-model="switchVal"

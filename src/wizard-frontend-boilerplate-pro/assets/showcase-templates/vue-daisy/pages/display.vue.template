@@ -137,7 +137,7 @@ const TABLE_CODE = `<template>
           and <code class="kbd kbd-sm">card-actions</code> sub-elements.
         </p>
       </div>
-      <div class="bg-base-200 rounded-box p-4 mb-3">
+      <div class="bg-base-200 rounded-box p-4 mb-3 shadow-sm">
         <div class="card bg-base-100 shadow-sm" style="max-width: 320px">
           <div class="card-body">
             <h2 class="card-title">Project Alpha</h2>
@@ -164,7 +164,7 @@ const TABLE_CODE = `<template>
           and <code class="kbd kbd-sm">badge-outline</code> variants.
         </p>
       </div>
-      <div class="bg-base-200 rounded-box p-4 mb-3">
+      <div class="bg-base-200 rounded-box p-4 mb-3 shadow-sm">
         <div class="flex flex-wrap gap-2">
           <span class="badge badge-primary">Primary</span>
           <span class="badge badge-secondary">Secondary</span>
@@ -191,7 +191,7 @@ const TABLE_CODE = `<template>
           <code class="kbd kbd-sm">online</code> for a presence dot.
         </p>
       </div>
-      <div class="bg-base-200 rounded-box p-4 mb-3">
+      <div class="bg-base-200 rounded-box p-4 mb-3 shadow-sm">
         <div class="flex items-center gap-4">
           <div class="avatar placeholder">
             <div class="bg-primary text-primary-content rounded-full w-8">
@@ -229,7 +229,7 @@ const TABLE_CODE = `<template>
           Vertical: <code class="kbd kbd-sm">divider divider-horizontal</code> inside a flex row.
         </p>
       </div>
-      <div class="bg-base-200 rounded-box p-4 mb-3">
+      <div class="bg-base-200 rounded-box p-4 mb-3 shadow-sm">
         <div class="flex flex-col gap-3">
           <div>
             <p class="text-base-content/60 text-sm mb-0">Section one content.</p>
@@ -257,7 +257,7 @@ const TABLE_CODE = `<template>
           Size with standard Tailwind dimensions.
         </p>
       </div>
-      <div class="bg-base-200 rounded-box p-4 mb-3">
+      <div class="bg-base-200 rounded-box p-4 mb-3 shadow-sm">
         <div class="flex flex-col gap-4" style="max-width: 320px">
           <div class="flex items-center gap-4">
             <div class="skeleton w-12 h-12 rounded-full shrink-0" />
@@ -288,7 +288,7 @@ const TABLE_CODE = `<template>
           inside an <code class="kbd kbd-sm">overflow-x-auto</code> wrapper.
         </p>
       </div>
-      <div class="bg-base-200 rounded-box p-4 mb-3">
+      <div class="bg-base-200 rounded-box p-4 mb-3 shadow-sm">
         <div class="overflow-x-auto">
           <table class="table table-zebra">
             <thead>

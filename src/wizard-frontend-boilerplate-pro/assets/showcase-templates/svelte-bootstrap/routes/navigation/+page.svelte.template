@@ -125,8 +125,9 @@
 
 <div class="d-flex flex-column gap-4">
   <div>
-    <h1 class="h4 mb-1">Navigation</h1>
-    <p class="text-body-secondary">
+    <span class="badge border border-primary-subtle text-primary bg-primary-subtle mb-2 text-uppercase fw-medium" style="letter-spacing: 0.06em; font-size: 0.65rem;">Components</span>
+    <h1 class="display-5 fw-bold mb-1">Navigation</h1>
+    <p class="text-body-secondary col-lg-8">
       Route navigation, tabbed interfaces, and paginated content — tabs, breadcrumbs, navbars, and
       pagination.
     </p>
@@ -141,7 +142,7 @@
         <code>TabContent</code>/<code>TabPane</code>.
       </p>
     </div>
-    <div class="p-4 rounded-3 border bg-body-tertiary mb-3">
+    <div class="rounded-3 border border-secondary-subtle bg-body-secondary p-4 p-md-5 shadow-sm mb-3">
       <Nav tabs>
         <NavItem>
           <NavLink active={activeTab === "account"} onclick={() => (activeTab = "account")}>
@@ -199,7 +200,7 @@
         <code>active</code>.
       </p>
     </div>
-    <div class="p-4 rounded-3 border bg-body-tertiary mb-3">
+    <div class="rounded-3 border border-secondary-subtle bg-body-secondary p-4 p-md-5 shadow-sm mb-3">
       <div class="d-flex flex-column gap-3">
         <Breadcrumb>
           <BreadcrumbItem href="#">Home</BreadcrumbItem>
@@ -232,7 +233,7 @@
         Splits large datasets across multiple pages with Previous, Next, and numbered page links.
       </p>
     </div>
-    <div class="p-4 rounded-3 border bg-body-tertiary mb-3">
+    <div class="rounded-3 border border-secondary-subtle bg-body-secondary p-4 p-md-5 shadow-sm mb-3">
       <div class="d-flex flex-column gap-3">
         <!-- Full page list (trimmed for readability) -->
         <Pagination>
@@ -299,7 +300,7 @@
         <code>expand</code>.
       </p>
     </div>
-    <div class="p-4 rounded-3 border bg-body-tertiary mb-3">
+    <div class="rounded-3 border border-secondary-subtle bg-body-secondary p-4 p-md-5 shadow-sm mb-3">
       <div class="d-flex flex-column gap-3">
         <!-- Light navbar -->
         <Navbar class="border rounded-3 px-3" color="body-tertiary" expand="md" light>

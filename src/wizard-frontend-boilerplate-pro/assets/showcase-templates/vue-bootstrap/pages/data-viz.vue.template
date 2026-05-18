@@ -182,7 +182,7 @@ const selectedDate = ref(null);
           charting. The preview below is a custom bar chart built with Bootstrap utility classes.
         </p>
       </div>
-      <div class="p-4 rounded-3 border bg-body-tertiary mb-3">
+      <div class="p-4 rounded-3 border bg-body-tertiary mb-3 shadow-sm">
         <!-- Custom bar chart preview using Bootstrap utilities -->
         <div
           aria-label="Bar chart showing desktop and mobile traffic over six months"
@@ -256,7 +256,7 @@ const selectedDate = ref(null);
           <code>responsive</code> for styling.
         </p>
       </div>
-      <div class="p-4 rounded-3 border bg-body-tertiary mb-3">
+      <div class="p-4 rounded-3 border bg-body-tertiary mb-3 shadow-sm">
         <BTable
           :fields="tableFields"
           :items="tableItems"
@@ -288,7 +288,7 @@ const selectedDate = ref(null);
           minimal custom calendar built with Bootstrap utilities.
         </p>
       </div>
-      <div class="p-4 rounded-3 border bg-body-tertiary mb-3">
+      <div class="p-4 rounded-3 border bg-body-tertiary mb-3 shadow-sm">
         <!-- Minimal custom calendar preview -->
         <div class="border rounded-3 p-3" style="max-width: 320px">
           <!-- Month navigation -->

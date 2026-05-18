@@ -176,31 +176,74 @@ export function Example() {
   );
 }`;
 
+function HashIcon() {
+  return (
+    <svg
+      aria-hidden="true"
+      fill="none"
+      height="16"
+      stroke="currentColor"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth="2"
+      viewBox="0 0 24 24"
+      width="16"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <line x1="4" x2="20" y1="9" y2="9" />
+      <line x1="4" x2="20" y1="15" y2="15" />
+      <line x1="10" x2="8" y1="3" y2="21" />
+      <line x1="16" x2="14" y1="3" y2="21" />
+    </svg>
+  );
+}
+
+const PREVIEW_STYLE = {
+  backgroundImage:
+    "radial-gradient(circle at center, hsl(var(--border)) 1px, transparent 1px)",
+  backgroundSize: "20px 20px",
+};
+
 export default function NavigationPage() {
   const [currentPage, setCurrentPage] = useState(1);
   const [tabValue, setTabValue] = useState("account");
 
   return (
     <div className="flex flex-col gap-16">
-      <div>
-        <h1 className="text-3xl font-bold tracking-tight text-foreground">
+      <div className="flex flex-col gap-3 border-b border-border pb-8">
+        <span className="inline-flex w-fit items-center rounded-full border border-primary/20 bg-primary/5 px-3 py-1 text-xs font-medium uppercase tracking-wider text-primary">
+          Navigation
+        </span>
+        <h1 className="text-4xl font-bold tracking-tight text-foreground">
           Navigation
         </h1>
-        <p className="mt-2 text-muted-foreground">
+        <p className="max-w-2xl text-muted-foreground">
           Route navigation, tabbed interfaces, and paginated content — tabs,
           breadcrumbs, and menus.
         </p>
       </div>
 
-      <section className="flex flex-col gap-4" id="tabs">
-        <div className="border-l-2 border-primary/40 pl-3">
-          <h2 className="text-xl font-semibold text-foreground">Tabs</h2>
-          <p className="mt-1 text-sm text-muted-foreground">
+      <section className="group flex flex-col gap-6" id="tabs">
+        <div className="flex flex-col gap-2 border-l-2 border-primary/60 pl-4">
+          <div className="flex items-center gap-2">
+            <h2 className="text-xl font-semibold text-foreground">Tabs</h2>
+            <a
+              aria-label="Anchor link to Tabs section"
+              className="cursor-pointer text-muted-foreground opacity-0 transition-opacity duration-150 group-hover:opacity-50 hover:!opacity-100"
+              href="#tabs"
+            >
+              <HashIcon />
+            </a>
+          </div>
+          <p className="text-sm text-muted-foreground">
             Organises related content into switchable panels with accessible
             keyboard navigation.
           </p>
         </div>
-        <div className="rounded-lg border border-border bg-muted/50 p-8">
+        <div
+          className="rounded-xl border border-border bg-background/60 p-8 shadow-sm"
+          style={PREVIEW_STYLE}
+        >
           <Tabs onValueChange={setTabValue} value={tabValue}>
             <TabsList>
               <TabsTrigger value="account">Account</TabsTrigger>
@@ -233,15 +276,27 @@ export default function NavigationPage() {
         />
       </section>
 
-      <section className="flex flex-col gap-4" id="breadcrumb">
-        <div className="border-l-2 border-primary/40 pl-3">
-          <h2 className="text-xl font-semibold text-foreground">Breadcrumb</h2>
-          <p className="mt-1 text-sm text-muted-foreground">
-            Shows the user's current location within a site hierarchy with
+      <section className="group flex flex-col gap-6" id="breadcrumb">
+        <div className="flex flex-col gap-2 border-l-2 border-primary/60 pl-4">
+          <div className="flex items-center gap-2">
+            <h2 className="text-xl font-semibold text-foreground">Breadcrumb</h2>
+            <a
+              aria-label="Anchor link to Breadcrumb section"
+              className="cursor-pointer text-muted-foreground opacity-0 transition-opacity duration-150 group-hover:opacity-50 hover:!opacity-100"
+              href="#breadcrumb"
+            >
+              <HashIcon />
+            </a>
+          </div>
+          <p className="text-sm text-muted-foreground">
+            Shows the user&apos;s current location within a site hierarchy with
             accessible landmark navigation.
           </p>
         </div>
-        <div className="rounded-lg border border-border bg-muted/50 p-8">
+        <div
+          className="rounded-xl border border-border bg-background/60 p-8 shadow-sm"
+          style={PREVIEW_STYLE}
+        >
           <Breadcrumb>
             <BreadcrumbList>
               <BreadcrumbItem>
@@ -267,15 +322,27 @@ export default function NavigationPage() {
         />
       </section>
 
-      <section className="flex flex-col gap-4" id="pagination">
-        <div className="border-l-2 border-primary/40 pl-3">
-          <h2 className="text-xl font-semibold text-foreground">Pagination</h2>
-          <p className="mt-1 text-sm text-muted-foreground">
+      <section className="group flex flex-col gap-6" id="pagination">
+        <div className="flex flex-col gap-2 border-l-2 border-primary/60 pl-4">
+          <div className="flex items-center gap-2">
+            <h2 className="text-xl font-semibold text-foreground">Pagination</h2>
+            <a
+              aria-label="Anchor link to Pagination section"
+              className="cursor-pointer text-muted-foreground opacity-0 transition-opacity duration-150 group-hover:opacity-50 hover:!opacity-100"
+              href="#pagination"
+            >
+              <HashIcon />
+            </a>
+          </div>
+          <p className="text-sm text-muted-foreground">
             Splits large datasets across multiple pages with Previous, Next, and
             numbered page links.
           </p>
         </div>
-        <div className="rounded-lg border border-border bg-muted/50 p-8">
+        <div
+          className="rounded-xl border border-border bg-background/60 p-8 shadow-sm"
+          style={PREVIEW_STYLE}
+        >
           <Pagination>
             <PaginationContent>
               <PaginationItem>
@@ -337,17 +404,29 @@ export default function NavigationPage() {
         />
       </section>
 
-      <section className="flex flex-col gap-4" id="navigation-menu">
-        <div className="border-l-2 border-primary/40 pl-3">
-          <h2 className="text-xl font-semibold text-foreground">
-            NavigationMenu
-          </h2>
-          <p className="mt-1 text-sm text-muted-foreground">
+      <section className="group flex flex-col gap-6" id="navigation-menu">
+        <div className="flex flex-col gap-2 border-l-2 border-primary/60 pl-4">
+          <div className="flex items-center gap-2">
+            <h2 className="text-xl font-semibold text-foreground">
+              NavigationMenu
+            </h2>
+            <a
+              aria-label="Anchor link to NavigationMenu section"
+              className="cursor-pointer text-muted-foreground opacity-0 transition-opacity duration-150 group-hover:opacity-50 hover:!opacity-100"
+              href="#navigation-menu"
+            >
+              <HashIcon />
+            </a>
+          </div>
+          <p className="text-sm text-muted-foreground">
             A top-level navigation bar with accessible flyout submenus and
             keyboard navigation.
           </p>
         </div>
-        <div className="rounded-lg border border-border bg-muted/50 p-8">
+        <div
+          className="rounded-xl border border-border bg-background/60 p-8 shadow-sm"
+          style={PREVIEW_STYLE}
+        >
           <NavigationMenu>
             <NavigationMenuList>
               <NavigationMenuItem>

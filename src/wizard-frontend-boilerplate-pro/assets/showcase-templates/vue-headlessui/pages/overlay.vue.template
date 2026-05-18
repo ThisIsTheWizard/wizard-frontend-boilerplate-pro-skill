@@ -28,7 +28,7 @@ import { Popover, PopoverButton, PopoverPanel } from "@headlessui/vue";
     </PopoverButton>
     <PopoverPanel anchor="bottom start" class="z-50 w-64 rounded-lg border border-border bg-surface p-4 shadow-lg [--anchor-gap:4px]">
       <p class="text-sm font-medium text-foreground">Quick info</p>
-      <p class="mt-1 text-sm text-muted-foreground">This is a popover panel with contextual information or actions.</p>
+      <p class="mt-1 text-sm leading-relaxed text-muted-foreground">This is a popover panel with contextual information or actions.</p>
     </PopoverPanel>
   </Popover>
 </template>`;
@@ -96,26 +96,26 @@ const sheetOpen = ref(false);
   <div class="flex flex-col gap-16">
     <div>
       <h1 class="text-3xl font-bold tracking-tight text-foreground">Overlay</h1>
-      <p class="mt-2 text-muted-foreground">
+      <p class="mt-2 text-base leading-relaxed text-muted-foreground">
         Floating and slide-over components — all powered by Headless UI <code class="rounded bg-muted px-1 py-0.5 text-xs">Popover</code>, <code class="rounded bg-muted px-1 py-0.5 text-xs">Menu</code>, and <code class="rounded bg-muted px-1 py-0.5 text-xs">Dialog</code>.
       </p>
     </div>
 
     <section class="flex flex-col gap-4" id="popover">
-      <div class="border-l-2 border-primary/40 pl-3">
+      <div class="border-l-[3px] border-primary/60 pl-4">
         <h2 class="text-xl font-semibold text-foreground">Popover</h2>
-        <p class="mt-1 text-sm text-muted-foreground">
+        <p class="mt-1 text-sm leading-relaxed text-muted-foreground">
           Headless UI <code class="rounded bg-muted px-1 py-0.5 text-xs">Popover</code> with <code class="rounded bg-muted px-1 py-0.5 text-xs">anchor</code> prop — manages focus and keyboard dismissal.
         </p>
       </div>
-      <div class="rounded-lg border border-border bg-muted/50 p-8">
+      <div class="rounded-xl border border-border/60 bg-muted/30 p-8 shadow-sm">
         <Popover class="relative">
           <PopoverButton class="rounded-md border border-border px-3 py-1.5 text-sm font-medium text-foreground transition hover:bg-accent focus:outline-none">
             Open Popover
           </PopoverButton>
           <PopoverPanel anchor="bottom start" class="z-50 w-64 rounded-lg border border-border bg-surface p-4 shadow-lg [--anchor-gap:4px]">
             <p class="text-sm font-medium text-foreground">Quick info</p>
-            <p class="mt-1 text-sm text-muted-foreground">This is a popover panel with contextual information or actions.</p>
+            <p class="mt-1 text-sm leading-relaxed text-muted-foreground">This is a popover panel with contextual information or actions.</p>
           </PopoverPanel>
         </Popover>
       </div>
@@ -123,13 +123,13 @@ const sheetOpen = ref(false);
     </section>
 
     <section class="flex flex-col gap-4" id="dropdown-menu">
-      <div class="border-l-2 border-primary/40 pl-3">
+      <div class="border-l-[3px] border-primary/60 pl-4">
         <h2 class="text-xl font-semibold text-foreground">DropdownMenu</h2>
-        <p class="mt-1 text-sm text-muted-foreground">
+        <p class="mt-1 text-sm leading-relaxed text-muted-foreground">
           Headless UI <code class="rounded bg-muted px-1 py-0.5 text-xs">Menu</code> — roving focus list with <code class="rounded bg-muted px-1 py-0.5 text-xs">v-slot="{ active }"</code> styling.
         </p>
       </div>
-      <div class="rounded-lg border border-border bg-muted/50 p-8">
+      <div class="rounded-xl border border-border/60 bg-muted/30 p-8 shadow-sm">
         <Menu as="div" class="relative">
           <MenuButton class="rounded-md border border-border px-3 py-1.5 text-sm font-medium text-foreground transition hover:bg-accent focus:outline-none">
             Options ▾
@@ -154,13 +154,13 @@ const sheetOpen = ref(false);
     </section>
 
     <section class="flex flex-col gap-4" id="sheet">
-      <div class="border-l-2 border-primary/40 pl-3">
+      <div class="border-l-[3px] border-primary/60 pl-4">
         <h2 class="text-xl font-semibold text-foreground">Sheet</h2>
-        <p class="mt-1 text-sm text-muted-foreground">
+        <p class="mt-1 text-sm leading-relaxed text-muted-foreground">
           A slide-over panel using Headless UI <code class="rounded bg-muted px-1 py-0.5 text-xs">Dialog</code> + <code class="rounded bg-muted px-1 py-0.5 text-xs">TransitionChild</code> with <code class="rounded bg-muted px-1 py-0.5 text-xs">translate-x</code> enter/leave.
         </p>
       </div>
-      <div class="rounded-lg border border-border bg-muted/50 p-8">
+      <div class="rounded-xl border border-border/60 bg-muted/30 p-8 shadow-sm">
         <button class="rounded-md border border-border px-4 py-2 text-sm font-medium text-foreground transition hover:bg-accent" type="button" @click="sheetOpen = true">
           Open Sheet
         </button>

@@ -136,7 +136,7 @@ const notifications = ref(false);
           Triggers an action or event with support for multiple visual variants and sizes.
         </p>
       </div>
-      <div class="p-4 rounded-3 border bg-body-tertiary mb-3">
+      <div class="p-4 rounded-3 border bg-body-tertiary mb-3 shadow-sm">
         <div class="d-flex flex-column gap-3">
           <div class="d-flex flex-wrap gap-2">
             <BButton variant="primary">Primary</BButton>
@@ -173,7 +173,7 @@ const notifications = ref(false);
           <code>BFormGroup</code> and <code>BFormText</code> for accessible labelling.
         </p>
       </div>
-      <div class="p-4 rounded-3 border bg-body-tertiary mb-3">
+      <div class="p-4 rounded-3 border bg-body-tertiary mb-3 shadow-sm">
         <div style="max-width: 24rem">
           <BFormGroup id="email-demo-group" label="Email address" label-for="email-demo">
             <BFormInput
@@ -221,7 +221,7 @@ const notifications = ref(false);
           A multi-line text input. Compose with <code>BFormGroup</code> for accessible labelling.
         </p>
       </div>
-      <div class="p-4 rounded-3 border bg-body-tertiary mb-3">
+      <div class="p-4 rounded-3 border bg-body-tertiary mb-3 shadow-sm">
         <div style="max-width: 24rem">
           <BFormGroup id="bio-demo-group" label="Bio" label-for="bio-demo">
             <BFormTextarea id="bio-demo" placeholder="Tell us about yourself…" :rows="4" />
@@ -248,7 +248,7 @@ const notifications = ref(false);
           A native dropdown using <code>BFormSelect</code> with an <code>:options</code> array.
         </p>
       </div>
-      <div class="p-4 rounded-3 border bg-body-tertiary mb-3">
+      <div class="p-4 rounded-3 border bg-body-tertiary mb-3 shadow-sm">
         <div style="max-width: 24rem">
           <BFormGroup id="framework-demo-group" label="Framework" label-for="framework-demo">
             <BFormSelect
@@ -295,7 +295,7 @@ const notifications = ref(false);
           A binary toggle using <code>BFormCheckbox</code> with <code>v-model</code>.
         </p>
       </div>
-      <div class="p-4 rounded-3 border bg-body-tertiary mb-3">
+      <div class="p-4 rounded-3 border bg-body-tertiary mb-3 shadow-sm">
         <div class="d-flex flex-column gap-2">
           <BFormCheckbox v-model="checked">Accept terms and conditions</BFormCheckbox>
           <BFormCheckbox v-model="checkedDefault">Checked by default</BFormCheckbox>
@@ -322,7 +322,7 @@ const notifications = ref(false);
           <code>:options</code> array and <code>v-model</code>.
         </p>
       </div>
-      <div class="p-4 rounded-3 border bg-body-tertiary mb-3">
+      <div class="p-4 rounded-3 border bg-body-tertiary mb-3 shadow-sm">
         <BFormRadioGroup
           v-model="plan"
           :options="[
@@ -353,7 +353,7 @@ const notifications = ref(false);
           <code>:switch="true"</code> prop.
         </p>
       </div>
-      <div class="p-4 rounded-3 border bg-body-tertiary mb-3">
+      <div class="p-4 rounded-3 border bg-body-tertiary mb-3 shadow-sm">
         <div class="d-flex flex-column gap-2">
           <BFormCheckbox :switch="true">Email notifications</BFormCheckbox>
           <BFormCheckbox :switch="true" :model-value="true">Marketing emails</BFormCheckbox>

@@ -158,7 +158,7 @@ const show = ref(false);
           <code>danger</code> variants, and <code>dismissible</code> prop.
         </p>
       </div>
-      <div class="p-4 rounded-3 border bg-body-tertiary mb-3">
+      <div class="p-4 rounded-3 border bg-body-tertiary mb-3 shadow-sm">
         <div class="d-flex flex-column gap-2">
           <BAlert v-model:show="showInfo" variant="info">
             <strong>Heads up!</strong> You can add components to your app using the CLI.
@@ -194,7 +194,7 @@ const show = ref(false);
           <code>BToastContainer</code>. Place the container once in your root layout.
         </p>
       </div>
-      <div class="p-4 rounded-3 border bg-body-tertiary mb-3">
+      <div class="p-4 rounded-3 border bg-body-tertiary mb-3 shadow-sm">
         <BToastContainer class="p-3" position="top-end">
           <BToast
             v-model:show="showToast"
@@ -251,7 +251,7 @@ const show = ref(false);
           <code>animated</code> prop.
         </p>
       </div>
-      <div class="p-4 rounded-3 border bg-body-tertiary mb-3">
+      <div class="p-4 rounded-3 border bg-body-tertiary mb-3 shadow-sm">
         <div class="d-flex flex-column gap-3" style="max-width: 32rem">
           <BProgress :max="100">
             <BProgressBar :value="25" />
@@ -288,7 +288,7 @@ const show = ref(false);
           <code>bottom</code>, and <code>left</code> placements.
         </p>
       </div>
-      <div class="p-4 rounded-3 border bg-body-tertiary mb-3">
+      <div class="p-4 rounded-3 border bg-body-tertiary mb-3 shadow-sm">
         <div class="d-flex flex-wrap align-items-center gap-3">
           <BButton id="tt-top" variant="outline-secondary">Top</BButton>
           <BTooltip placement="top" target="tt-top">Tooltip on top</BTooltip>
@@ -324,7 +324,7 @@ const show = ref(false);
           The <code>centered</code> prop vertically centers the dialog.
         </p>
       </div>
-      <div class="p-4 rounded-3 border bg-body-tertiary mb-3">
+      <div class="p-4 rounded-3 border bg-body-tertiary mb-3 shadow-sm">
         <BButton variant="primary" @click="showModal = true">Open dialog</BButton>
 
         <BModal

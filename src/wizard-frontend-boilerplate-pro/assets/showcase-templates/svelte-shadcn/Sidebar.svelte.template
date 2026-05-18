@@ -117,7 +117,9 @@
 </script>
 
 <nav aria-label="Component library navigation" class="flex h-full flex-col">
-  <div class="flex h-14 shrink-0 items-center gap-2.5 border-b border-border px-4">
+  <div
+    class="flex h-14 shrink-0 items-center gap-2.5 border-b border-border bg-gradient-to-b from-primary/[0.06] to-transparent px-4"
+  >
     <svg
       aria-hidden="true"
       class="text-primary"
@@ -133,7 +135,7 @@
       <rect fill="currentColor" height="7" opacity="0.3" rx="1.5" width="7" x="11" y="11" />
     </svg>
     <a
-      class="text-sm font-semibold text-foreground transition-colors hover:text-primary"
+      class="text-sm font-bold text-foreground transition-colors hover:text-primary"
       href="/library"
       onclick={onNavigate}
     >
@@ -145,8 +147,10 @@
     {#each NAV_ITEMS as { category, components, slug }}
       <div class="px-2 py-0.5">
         <a
-          class="flex cursor-pointer items-center gap-2.5 rounded-md px-2 py-1.5 text-sm font-medium transition-colors hover:bg-accent hover:text-foreground
-            {activeSlug === slug ? 'bg-primary/10 text-primary' : 'text-muted-foreground'}"
+          class="flex cursor-pointer items-center gap-2.5 rounded-lg px-2 py-1.5 text-sm font-medium transition-colors hover:bg-accent hover:text-foreground
+            {activeSlug === slug
+            ? 'border-l-2 border-primary bg-primary/10 pl-1.5 text-primary'
+            : 'text-muted-foreground'}"
           href="/library/{slug}"
           onclick={onNavigate}
         >
@@ -155,7 +159,9 @@
           <span class="flex-1">{category}</span>
           <span
             class="rounded-full px-1.5 py-0.5 text-[10px] font-medium tabular-nums
-              {activeSlug === slug ? 'bg-primary/20 text-primary' : 'bg-muted text-muted-foreground'}"
+              {activeSlug === slug
+              ? 'bg-primary/20 text-primary'
+              : 'bg-muted/80 text-muted-foreground/70'}"
           >
             {components.length}
           </span>
@@ -165,9 +171,9 @@
           {#each components as component}
             {@const componentSlug = toSlug(component)}
             <a
-              class="block cursor-pointer rounded-md px-2 py-1 text-sm transition-colors hover:bg-accent/60 hover:text-foreground
+              class="block cursor-pointer rounded-lg px-2 py-1 text-sm transition-colors hover:bg-accent/60 hover:text-foreground
                 {activeSlug === slug && activeAnchor === componentSlug
-                  ? 'bg-accent/80 font-medium text-foreground'
+                  ? 'bg-primary/10 font-medium text-primary'
                   : 'text-muted-foreground'}"
               href="/library/{slug}#{componentSlug}"
               onclick={onNavigate}
@@ -181,6 +187,9 @@
   </div>
 
   <div class="shrink-0 border-t border-border px-4 py-3">
-    <p class="text-[11px] text-muted-foreground">{totalComponents} components</p>
+    <p class="flex items-center gap-1.5 text-[11px] text-muted-foreground">
+      {totalComponents} components
+      <span class="rounded-full bg-primary/10 px-1.5 py-0.5 text-[10px] font-medium text-primary">v1</span>
+    </p>
   </div>
 </nav>

@@ -72,16 +72,17 @@
 
 <div class="flex flex-col gap-4">
   <div>
-    <h1 class="text-xl font-semibold mb-1">Overlay</h1>
-    <p class="text-base-content/60 text-sm">
+    <div class="badge badge-outline badge-sm gap-1 uppercase tracking-wider text-xs font-medium mb-3" style="border-color: oklch(var(--p)/0.3); color: oklch(var(--p)); background: oklch(var(--p)/0.08)">Components</div>
+    <h1 class="text-4xl font-bold mb-2">Overlay</h1>
+    <p class="text-base-content opacity-70 max-w-2xl text-base">
       Floating and layered UI — tooltips, dropdown menus, and side drawers.
     </p>
   </div>
 
   <!-- Tooltip -->
   <section id="tooltip" class="mb-2">
-    <div class="mb-2 pl-3" style="border-left: 3px solid var(--color-primary)">
-      <h5 class="font-semibold mb-1">Tooltip</h5>
+    <div class="mb-2 border-l-2 border-primary pl-4">
+      <h2 class="text-xl font-semibold mb-1">Tooltip</h5>
       <p class="text-base-content/60 text-sm mb-0">
         Pure-CSS tooltip via <code class="kbd kbd-sm">tooltip</code> wrapper and
         <code class="kbd kbd-sm">data-tip</code>. Add
@@ -89,7 +90,7 @@
         modifiers like <code class="kbd kbd-sm">tooltip-primary</code>.
       </p>
     </div>
-    <div class="bg-base-200 rounded-box p-4 mb-3">
+    <div class="rounded-xl border border-base-300 bg-base-200/60 p-8 shadow-sm mb-3">
       <div class="flex flex-wrap gap-4">
         <div class="tooltip tooltip-top" data-tip="Tooltip on top">
           <button class="btn btn-primary btn-sm" type="button">Hover me</button>
@@ -112,14 +113,14 @@
 
   <!-- Dropdown -->
   <section id="dropdown" class="mb-2">
-    <div class="mb-2 pl-3" style="border-left: 3px solid var(--color-primary)">
-      <h5 class="font-semibold mb-1">Dropdown</h5>
+    <div class="mb-2 border-l-2 border-primary pl-4">
+      <h2 class="text-xl font-semibold mb-1">Dropdown</h5>
       <p class="text-base-content/60 text-sm mb-0">
         CSS-driven dropdown using <code class="kbd kbd-sm">dropdown</code> wrapper and
         <code class="kbd kbd-sm">dropdown-content menu</code>. No JS needed — opens on focus.
       </p>
     </div>
-    <div class="bg-base-200 rounded-box p-4 mb-3">
+    <div class="rounded-xl border border-base-300 bg-base-200/60 p-8 shadow-sm mb-3">
       <div class="flex flex-wrap gap-4">
         <div class="dropdown">
           <div class="btn btn-primary btn-sm" role="button" tabindex="0">Actions ▾</div>
@@ -148,8 +149,8 @@
 
   <!-- Drawer -->
   <section id="drawer" class="mb-2">
-    <div class="mb-2 pl-3" style="border-left: 3px solid var(--color-primary)">
-      <h5 class="font-semibold mb-1">Drawer</h5>
+    <div class="mb-2 border-l-2 border-primary pl-4">
+      <h2 class="text-xl font-semibold mb-1">Drawer</h5>
       <p class="text-base-content/60 text-sm mb-0">
         Slide-in side panel using <code class="kbd kbd-sm">drawer</code>,
         <code class="kbd kbd-sm">drawer-toggle</code> (hidden checkbox bound via
@@ -157,7 +158,7 @@
         <code class="kbd kbd-sm">drawer-side</code> + <code class="kbd kbd-sm">drawer-overlay</code>.
       </p>
     </div>
-    <div class="bg-base-200 rounded-box p-4 mb-3">
+    <div class="rounded-xl border border-base-300 bg-base-200/60 p-8 shadow-sm mb-3">
       <div class="drawer" style="max-width: 480px; width: 100%">
         <input
           bind:checked={drawerOpen}

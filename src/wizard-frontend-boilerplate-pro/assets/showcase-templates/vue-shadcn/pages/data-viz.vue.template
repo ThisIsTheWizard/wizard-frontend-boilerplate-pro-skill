@@ -140,21 +140,21 @@ const selectedDate = ref<Date | undefined>(undefined);
   <div class="flex flex-col gap-16">
     <div>
       <h1 class="text-3xl font-bold tracking-tight text-foreground">Data Visualization</h1>
-      <p class="mt-2 text-muted-foreground">
+      <p class="mt-2 text-base leading-relaxed text-muted-foreground">
         Components for presenting structured and visual data — charts, data tables, and calendars.
       </p>
     </div>
 
     <section class="flex flex-col gap-4" id="chart">
-      <div class="border-l-2 border-primary/40 pl-3">
+      <div class="border-l-[3px] border-primary/60 pl-4">
         <h2 class="text-xl font-semibold text-foreground">Chart</h2>
-        <p class="mt-1 text-sm text-muted-foreground">
+        <p class="mt-1 text-sm leading-relaxed text-muted-foreground">
           A theming wrapper around your chart library (e.g.
           <code class="font-mono text-xs">vue-chartjs</code>) that applies CSS color tokens and
           provides consistent tooltip and legend sub-components.
         </p>
       </div>
-      <div class="rounded-lg border border-border bg-muted/50 p-8">
+      <div class="rounded-xl border border-border/60 bg-muted/30 p-8 shadow-sm">
         <!-- ChartContainer wraps the chart library component in a slot. -->
         <!-- Replace the placeholder below with e.g. <BarChart :data="chartData" ... /> -->
         <ChartContainer :config="chartConfig" class="h-64 w-full">
@@ -192,15 +192,15 @@ const selectedDate = ref<Date | undefined>(undefined);
     </section>
 
     <section class="flex flex-col gap-4" id="data-table">
-      <div class="border-l-2 border-primary/40 pl-3">
+      <div class="border-l-[3px] border-primary/60 pl-4">
         <h2 class="text-xl font-semibold text-foreground">DataTable</h2>
-        <p class="mt-1 text-sm text-muted-foreground">
+        <p class="mt-1 text-sm leading-relaxed text-muted-foreground">
           A feature-rich table powered by
           <code class="font-mono text-xs">@tanstack/vue-table</code> with sorting, filtering, column
           visibility, and built-in pagination.
         </p>
       </div>
-      <div class="rounded-lg border border-border bg-muted/50 p-8">
+      <div class="rounded-xl border border-border/60 bg-muted/30 p-8 shadow-sm">
         <DataTable
           :columns="columns"
           :data="tableData"
@@ -218,14 +218,14 @@ const selectedDate = ref<Date | undefined>(undefined);
     </section>
 
     <section class="flex flex-col gap-4" id="calendar">
-      <div class="border-l-2 border-primary/40 pl-3">
+      <div class="border-l-[3px] border-primary/60 pl-4">
         <h2 class="text-xl font-semibold text-foreground">Calendar</h2>
-        <p class="mt-1 text-sm text-muted-foreground">
+        <p class="mt-1 text-sm leading-relaxed text-muted-foreground">
           A date picker grid with keyboard navigation, single/range/multiple selection, and
           <code class="font-mono text-xs">date-fns</code> locale support.
         </p>
       </div>
-      <div class="rounded-lg border border-border bg-muted/50 p-8">
+      <div class="rounded-xl border border-border/60 bg-muted/30 p-8 shadow-sm">
         <div class="flex flex-col items-start gap-4">
           <Calendar
             :selected="selectedDate"

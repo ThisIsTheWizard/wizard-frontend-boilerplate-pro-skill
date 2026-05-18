@@ -152,7 +152,7 @@ const date = ref(null);
   <div class="flex flex-col gap-16">
     <div>
       <h1 class="text-3xl font-bold tracking-tight text-foreground">Data Visualization</h1>
-      <p class="mt-2 text-muted-foreground">
+      <p class="mt-2 text-base leading-relaxed text-muted-foreground">
         Components for presenting structured and visual data — charts via
         <code class="rounded bg-muted px-1 py-0.5 text-xs">vue-chartjs</code>, sortable tables via
         <code class="rounded bg-muted px-1 py-0.5 text-xs">el-table</code>, and date picking via
@@ -161,9 +161,9 @@ const date = ref(null);
     </div>
 
     <section class="flex flex-col gap-4" id="chart">
-      <div class="border-l-2 border-primary/40 pl-3">
+      <div class="border-l-[3px] border-primary/60 pl-4">
         <h2 class="text-xl font-semibold text-foreground">Chart</h2>
-        <p class="mt-1 text-sm text-muted-foreground">
+        <p class="mt-1 text-sm leading-relaxed text-muted-foreground">
           Bar and line charts via
           <code class="rounded bg-muted px-1 py-0.5 text-xs">vue-chartjs</code> +
           <code class="rounded bg-muted px-1 py-0.5 text-xs">chart.js</code>. Element Plus has no
@@ -171,7 +171,7 @@ const date = ref(null);
           For echarts-based charts use <code class="font-mono text-xs">vue-echarts</code> instead.
         </p>
       </div>
-      <div class="rounded-lg border border-border bg-muted/50 p-8">
+      <div class="rounded-xl border border-border/60 bg-muted/30 p-8 shadow-sm">
         <div class="flex flex-col gap-8">
           <div>
             <p class="mb-3 text-sm font-medium text-foreground">Monthly Revenue</p>
@@ -193,9 +193,9 @@ const date = ref(null);
     </section>
 
     <section class="flex flex-col gap-4" id="data-table">
-      <div class="border-l-2 border-primary/40 pl-3">
+      <div class="border-l-[3px] border-primary/60 pl-4">
         <h2 class="text-xl font-semibold text-foreground">DataTable</h2>
-        <p class="mt-1 text-sm text-muted-foreground">
+        <p class="mt-1 text-sm leading-relaxed text-muted-foreground">
           A feature-rich sortable table via
           <code class="rounded bg-muted px-1 py-0.5 text-xs">el-table</code>. Add
           <code class="rounded bg-muted px-1 py-0.5 text-xs">sortable</code> to any
@@ -203,7 +203,7 @@ const date = ref(null);
           <code class="rounded bg-muted px-1 py-0.5 text-xs">@sort-change</code> on the table.
         </p>
       </div>
-      <div class="rounded-lg border border-border bg-muted/50 p-8">
+      <div class="rounded-xl border border-border/60 bg-muted/30 p-8 shadow-sm">
         <el-table
           :data="sortedRows"
           border
@@ -242,9 +242,9 @@ const date = ref(null);
     </section>
 
     <section class="flex flex-col gap-4" id="calendar">
-      <div class="border-l-2 border-primary/40 pl-3">
+      <div class="border-l-[3px] border-primary/60 pl-4">
         <h2 class="text-xl font-semibold text-foreground">Calendar</h2>
-        <p class="mt-1 text-sm text-muted-foreground">
+        <p class="mt-1 text-sm leading-relaxed text-muted-foreground">
           A date picker via
           <code class="rounded bg-muted px-1 py-0.5 text-xs">el-date-picker</code>. Use
           <code class="rounded bg-muted px-1 py-0.5 text-xs">type="date"</code> for a single date,
@@ -252,7 +252,7 @@ const date = ref(null);
           <code class="rounded bg-muted px-1 py-0.5 text-xs">"month"</code> for month selection.
         </p>
       </div>
-      <div class="rounded-lg border border-border bg-muted/50 p-8">
+      <div class="rounded-xl border border-border/60 bg-muted/30 p-8 shadow-sm">
         <div class="flex flex-col items-start gap-3">
           <el-date-picker
             v-model="selectedDate"

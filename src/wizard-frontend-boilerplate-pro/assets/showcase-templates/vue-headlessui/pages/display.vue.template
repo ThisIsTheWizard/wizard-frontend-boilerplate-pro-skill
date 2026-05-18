@@ -89,17 +89,17 @@ const TEAM = [
   <div class="flex flex-col gap-16">
     <div>
       <h1 class="text-3xl font-bold tracking-tight text-foreground">Display</h1>
-      <p class="mt-2 text-muted-foreground">
+      <p class="mt-2 text-base leading-relaxed text-muted-foreground">
         Read-only visual elements styled with Tailwind — Headless UI provides no display primitives.
       </p>
     </div>
 
     <section class="flex flex-col gap-4" id="card">
-      <div class="border-l-2 border-primary/40 pl-3">
+      <div class="border-l-[3px] border-primary/60 pl-4">
         <h2 class="text-xl font-semibold text-foreground">Card</h2>
-        <p class="mt-1 text-sm text-muted-foreground">A surface for grouping related content — pure Tailwind implementation.</p>
+        <p class="mt-1 text-sm leading-relaxed text-muted-foreground">A surface for grouping related content — pure Tailwind implementation.</p>
       </div>
-      <div class="rounded-lg border border-border bg-muted/50 p-8">
+      <div class="rounded-xl border border-border/60 bg-muted/30 p-8 shadow-sm">
         <div class="w-80 rounded-xl border border-border bg-surface p-6 shadow-sm">
           <div class="mb-1 text-lg font-semibold text-foreground">Project Alpha</div>
           <div class="mb-4 text-sm text-muted-foreground">A next-generation web application.</div>
@@ -113,11 +113,11 @@ const TEAM = [
     </section>
 
     <section class="flex flex-col gap-4" id="badge">
-      <div class="border-l-2 border-primary/40 pl-3">
+      <div class="border-l-[3px] border-primary/60 pl-4">
         <h2 class="text-xl font-semibold text-foreground">Badge</h2>
-        <p class="mt-1 text-sm text-muted-foreground">A compact label for status or category — plain <code class="rounded bg-muted px-1 py-0.5 text-xs">span</code> with Tailwind variants.</p>
+        <p class="mt-1 text-sm leading-relaxed text-muted-foreground">A compact label for status or category — plain <code class="rounded bg-muted px-1 py-0.5 text-xs">span</code> with Tailwind variants.</p>
       </div>
-      <div class="rounded-lg border border-border bg-muted/50 p-8">
+      <div class="rounded-xl border border-border/60 bg-muted/30 p-8 shadow-sm">
         <div class="flex flex-wrap gap-2">
           <span class="inline-flex items-center rounded-full bg-primary px-2.5 py-0.5 text-xs font-medium text-primary-foreground">Default</span>
           <span class="inline-flex items-center rounded-full bg-muted px-2.5 py-0.5 text-xs font-medium text-muted-foreground">Secondary</span>
@@ -129,11 +129,11 @@ const TEAM = [
     </section>
 
     <section class="flex flex-col gap-4" id="avatar">
-      <div class="border-l-2 border-primary/40 pl-3">
+      <div class="border-l-[3px] border-primary/60 pl-4">
         <h2 class="text-xl font-semibold text-foreground">Avatar</h2>
-        <p class="mt-1 text-sm text-muted-foreground">A circular user representation with image or initials fallback.</p>
+        <p class="mt-1 text-sm leading-relaxed text-muted-foreground">A circular user representation with image or initials fallback.</p>
       </div>
-      <div class="rounded-lg border border-border bg-muted/50 p-8">
+      <div class="rounded-xl border border-border/60 bg-muted/30 p-8 shadow-sm">
         <div class="flex items-center gap-4">
           <div class="flex h-10 w-10 items-center justify-center overflow-hidden rounded-full bg-muted">
             <img alt="Jane Doe" class="h-full w-full object-cover" src="https://i.pravatar.cc/150?img=1" />
@@ -147,11 +147,11 @@ const TEAM = [
     </section>
 
     <section class="flex flex-col gap-4" id="separator">
-      <div class="border-l-2 border-primary/40 pl-3">
+      <div class="border-l-[3px] border-primary/60 pl-4">
         <h2 class="text-xl font-semibold text-foreground">Separator</h2>
-        <p class="mt-1 text-sm text-muted-foreground">A thin dividing line — <code class="rounded bg-muted px-1 py-0.5 text-xs">hr</code> or a <code class="rounded bg-muted px-1 py-0.5 text-xs">div</code> with <code class="rounded bg-muted px-1 py-0.5 text-xs">bg-border</code>.</p>
+        <p class="mt-1 text-sm leading-relaxed text-muted-foreground">A thin dividing line — <code class="rounded bg-muted px-1 py-0.5 text-xs">hr</code> or a <code class="rounded bg-muted px-1 py-0.5 text-xs">div</code> with <code class="rounded bg-muted px-1 py-0.5 text-xs">bg-border</code>.</p>
       </div>
-      <div class="rounded-lg border border-border bg-muted/50 p-8">
+      <div class="rounded-xl border border-border/60 bg-muted/30 p-8 shadow-sm">
         <div class="flex flex-col gap-6">
           <div class="flex flex-col gap-2">
             <p class="text-sm text-muted-foreground">Section one content.</p>
@@ -169,11 +169,11 @@ const TEAM = [
     </section>
 
     <section class="flex flex-col gap-4" id="skeleton">
-      <div class="border-l-2 border-primary/40 pl-3">
+      <div class="border-l-[3px] border-primary/60 pl-4">
         <h2 class="text-xl font-semibold text-foreground">Skeleton</h2>
-        <p class="mt-1 text-sm text-muted-foreground">Animated placeholder blocks using <code class="rounded bg-muted px-1 py-0.5 text-xs">animate-pulse</code>.</p>
+        <p class="mt-1 text-sm leading-relaxed text-muted-foreground">Animated placeholder blocks using <code class="rounded bg-muted px-1 py-0.5 text-xs">animate-pulse</code>.</p>
       </div>
-      <div class="rounded-lg border border-border bg-muted/50 p-8">
+      <div class="rounded-xl border border-border/60 bg-muted/30 p-8 shadow-sm">
         <div class="flex flex-col gap-6">
           <div class="flex items-center gap-4">
             <div class="h-12 w-12 animate-pulse rounded-full bg-muted" />
@@ -195,11 +195,11 @@ const TEAM = [
     </section>
 
     <section class="flex flex-col gap-4" id="table">
-      <div class="border-l-2 border-primary/40 pl-3">
+      <div class="border-l-[3px] border-primary/60 pl-4">
         <h2 class="text-xl font-semibold text-foreground">Table</h2>
-        <p class="mt-1 text-sm text-muted-foreground">A structured grid for tabular data — semantic HTML with Tailwind token classes.</p>
+        <p class="mt-1 text-sm leading-relaxed text-muted-foreground">A structured grid for tabular data — semantic HTML with Tailwind token classes.</p>
       </div>
-      <div class="rounded-lg border border-border bg-muted/50 p-8">
+      <div class="rounded-xl border border-border/60 bg-muted/30 p-8 shadow-sm">
         <div class="overflow-x-auto">
           <table class="w-full text-sm">
             <caption class="mb-2 text-sm text-muted-foreground">Team members list</caption>

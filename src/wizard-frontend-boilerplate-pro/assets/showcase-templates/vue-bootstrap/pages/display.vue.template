@@ -169,7 +169,7 @@ const fields = [
           A surface for grouping related content with an optional header, body, and footer.
         </p>
       </div>
-      <div class="p-4 rounded-3 border bg-body-tertiary mb-3">
+      <div class="p-4 rounded-3 border bg-body-tertiary mb-3 shadow-sm">
         <BCard style="width: 20rem">
           <BCardHeader>
             <BCardTitle>Project Alpha</BCardTitle>
@@ -203,7 +203,7 @@ const fields = [
           A compact label for status, category, or count. Use <code>pill</code> for rounded corners.
         </p>
       </div>
-      <div class="p-4 rounded-3 border bg-body-tertiary mb-3">
+      <div class="p-4 rounded-3 border bg-body-tertiary mb-3 shadow-sm">
         <div class="d-flex flex-wrap gap-2">
           <BBadge variant="primary">Primary</BBadge>
           <BBadge variant="success">Success</BBadge>
@@ -233,7 +233,7 @@ const fields = [
           <code>rounded-circle</code> image or a <code>div</code> with initials as fallback.
         </p>
       </div>
-      <div class="p-4 rounded-3 border bg-body-tertiary mb-3">
+      <div class="p-4 rounded-3 border bg-body-tertiary mb-3 shadow-sm">
         <div class="d-flex align-items-center gap-3">
           <img
             alt="Jane Doe"
@@ -281,7 +281,7 @@ const fields = [
           <code>.vr</code> vertically.
         </p>
       </div>
-      <div class="p-4 rounded-3 border bg-body-tertiary mb-3">
+      <div class="p-4 rounded-3 border bg-body-tertiary mb-3 shadow-sm">
         <div class="d-flex flex-column gap-4">
           <div>
             <p class="text-body-secondary small mb-2">Section one content.</p>
@@ -315,7 +315,7 @@ const fields = [
           <code>animation="glow"</code> that mimic content layout during loading.
         </p>
       </div>
-      <div class="p-4 rounded-3 border bg-body-tertiary mb-3">
+      <div class="p-4 rounded-3 border bg-body-tertiary mb-3 shadow-sm">
         <div class="d-flex align-items-center gap-3">
           <div
             class="rounded-circle placeholder"
@@ -349,7 +349,7 @@ const fields = [
           <code>responsive</code> props.
         </p>
       </div>
-      <div class="p-4 rounded-3 border bg-body-tertiary mb-3">
+      <div class="p-4 rounded-3 border bg-body-tertiary mb-3 shadow-sm">
         <BTable
           :fields="tableFields"
           :items="tableItems"

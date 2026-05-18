@@ -86,15 +86,15 @@ const NAV_MENU_CODE = `<template>
   <div class="flex flex-col gap-16">
     <div>
       <h1 class="text-3xl font-bold tracking-tight text-foreground">Navigation</h1>
-      <p class="mt-2 text-muted-foreground">
+      <p class="mt-2 text-base leading-relaxed text-muted-foreground">
         Components for moving between pages and sections — tabs, breadcrumbs, pagination, and menus.
       </p>
     </div>
 
     <section class="flex flex-col gap-4" id="tabs">
-      <div class="border-l-2 border-primary/40 pl-3">
+      <div class="border-l-[3px] border-primary/60 pl-4">
         <h2 class="text-xl font-semibold text-foreground">Tabs</h2>
-        <p class="mt-1 text-sm text-muted-foreground">
+        <p class="mt-1 text-sm leading-relaxed text-muted-foreground">
           A tabbed interface via
           <code class="rounded bg-muted px-1 py-0.5 text-xs">v-tabs</code> +
           <code class="rounded bg-muted px-1 py-0.5 text-xs">v-tab</code> +
@@ -103,7 +103,7 @@ const NAV_MENU_CODE = `<template>
           <code class="rounded bg-muted px-1 py-0.5 text-xs">v-model</code> between tabs and window.
         </p>
       </div>
-      <div class="rounded-lg border border-border bg-muted/50 p-8">
+      <div class="rounded-xl border border-border/60 bg-muted/30 p-8 shadow-sm">
         <v-tabs v-model="activeTab" color="primary">
           <v-tab value="account">Account</v-tab>
           <v-tab value="password">Password</v-tab>
@@ -133,9 +133,9 @@ const NAV_MENU_CODE = `<template>
     </section>
 
     <section class="flex flex-col gap-4" id="breadcrumb">
-      <div class="border-l-2 border-primary/40 pl-3">
+      <div class="border-l-[3px] border-primary/60 pl-4">
         <h2 class="text-xl font-semibold text-foreground">Breadcrumb</h2>
-        <p class="mt-1 text-sm text-muted-foreground">
+        <p class="mt-1 text-sm leading-relaxed text-muted-foreground">
           A landmark trail via
           <code class="rounded bg-muted px-1 py-0.5 text-xs">v-breadcrumbs</code>. Pass
           <code class="rounded bg-muted px-1 py-0.5 text-xs">:items</code> as an array of
@@ -143,7 +143,7 @@ const NAV_MENU_CODE = `<template>
           objects.
         </p>
       </div>
-      <div class="rounded-lg border border-border bg-muted/50 p-8">
+      <div class="rounded-xl border border-border/60 bg-muted/30 p-8 shadow-sm">
         <v-breadcrumbs :items="BREADCRUMB_ITEMS" />
       </div>
       <CodeBlock
@@ -156,16 +156,16 @@ const NAV_MENU_CODE = `<template>
     </section>
 
     <section class="flex flex-col gap-4" id="pagination">
-      <div class="border-l-2 border-primary/40 pl-3">
+      <div class="border-l-[3px] border-primary/60 pl-4">
         <h2 class="text-xl font-semibold text-foreground">Pagination</h2>
-        <p class="mt-1 text-sm text-muted-foreground">
+        <p class="mt-1 text-sm leading-relaxed text-muted-foreground">
           Page navigation via
           <code class="rounded bg-muted px-1 py-0.5 text-xs">v-pagination</code>. Bind
           <code class="rounded bg-muted px-1 py-0.5 text-xs">v-model</code> (1-indexed page) and
           pass <code class="rounded bg-muted px-1 py-0.5 text-xs">:length</code> for total pages.
         </p>
       </div>
-      <div class="rounded-lg border border-border bg-muted/50 p-8">
+      <div class="rounded-xl border border-border/60 bg-muted/30 p-8 shadow-sm">
         <v-pagination v-model="currentPage" color="primary" :length="10" rounded="circle" />
       </div>
       <CodeBlock
@@ -178,9 +178,9 @@ const NAV_MENU_CODE = `<template>
     </section>
 
     <section class="flex flex-col gap-4" id="navigation-menu">
-      <div class="border-l-2 border-primary/40 pl-3">
+      <div class="border-l-[3px] border-primary/60 pl-4">
         <h2 class="text-xl font-semibold text-foreground">NavigationMenu</h2>
-        <p class="mt-1 text-sm text-muted-foreground">
+        <p class="mt-1 text-sm leading-relaxed text-muted-foreground">
           A horizontal menu bar built with
           <code class="rounded bg-muted px-1 py-0.5 text-xs">v-menu</code> +
           <code class="rounded bg-muted px-1 py-0.5 text-xs">v-list</code>. Use the
@@ -188,7 +188,7 @@ const NAV_MENU_CODE = `<template>
           trigger each dropdown.
         </p>
       </div>
-      <div class="rounded-lg border border-border bg-muted/50 p-8">
+      <div class="rounded-xl border border-border/60 bg-muted/30 p-8 shadow-sm">
         <div class="flex items-center gap-1">
           <v-menu>
             <template #activator="{ props }">

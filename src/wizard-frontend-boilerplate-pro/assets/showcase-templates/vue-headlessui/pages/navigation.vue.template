@@ -98,19 +98,19 @@ const page = ref(1);
   <div class="flex flex-col gap-16">
     <div>
       <h1 class="text-3xl font-bold tracking-tight text-foreground">Navigation</h1>
-      <p class="mt-2 text-muted-foreground">
+      <p class="mt-2 text-base leading-relaxed text-muted-foreground">
         Navigational components — Headless UI provides accessible Tabs; Breadcrumb, Pagination, and NavigationMenu are pure Tailwind.
       </p>
     </div>
 
     <section class="flex flex-col gap-4" id="tabs">
-      <div class="border-l-2 border-primary/40 pl-3">
+      <div class="border-l-[3px] border-primary/60 pl-4">
         <h2 class="text-xl font-semibold text-foreground">Tabs</h2>
-        <p class="mt-1 text-sm text-muted-foreground">
+        <p class="mt-1 text-sm leading-relaxed text-muted-foreground">
           Headless UI <code class="rounded bg-muted px-1 py-0.5 text-xs">TabGroup</code> — keyboard navigable with <code class="rounded bg-muted px-1 py-0.5 text-xs">v-slot="{ selected }"</code> state styling.
         </p>
       </div>
-      <div class="rounded-lg border border-border bg-muted/50 p-8">
+      <div class="rounded-xl border border-border/60 bg-muted/30 p-8 shadow-sm">
         <div class="max-w-md">
           <TabGroup>
             <TabList class="flex gap-1 rounded-lg bg-muted p-1">
@@ -132,13 +132,13 @@ const page = ref(1);
     </section>
 
     <section class="flex flex-col gap-4" id="breadcrumb">
-      <div class="border-l-2 border-primary/40 pl-3">
+      <div class="border-l-[3px] border-primary/60 pl-4">
         <h2 class="text-xl font-semibold text-foreground">Breadcrumb</h2>
-        <p class="mt-1 text-sm text-muted-foreground">
+        <p class="mt-1 text-sm leading-relaxed text-muted-foreground">
           A hierarchical path indicator using a semantic <code class="rounded bg-muted px-1 py-0.5 text-xs">nav</code> + <code class="rounded bg-muted px-1 py-0.5 text-xs">ol</code>.
         </p>
       </div>
-      <div class="rounded-lg border border-border bg-muted/50 p-8">
+      <div class="rounded-xl border border-border/60 bg-muted/30 p-8 shadow-sm">
         <nav aria-label="Breadcrumb">
           <ol class="flex items-center gap-1 text-sm">
             <li v-for="(crumb, i) in CRUMBS" :key="crumb.label" class="flex items-center gap-1">
@@ -153,13 +153,13 @@ const page = ref(1);
     </section>
 
     <section class="flex flex-col gap-4" id="pagination">
-      <div class="border-l-2 border-primary/40 pl-3">
+      <div class="border-l-[3px] border-primary/60 pl-4">
         <h2 class="text-xl font-semibold text-foreground">Pagination</h2>
-        <p class="mt-1 text-sm text-muted-foreground">
+        <p class="mt-1 text-sm leading-relaxed text-muted-foreground">
           A page selector with Previous/Next controls — plain Tailwind with <code class="rounded bg-muted px-1 py-0.5 text-xs">aria-current="page"</code>.
         </p>
       </div>
-      <div class="rounded-lg border border-border bg-muted/50 p-8">
+      <div class="rounded-xl border border-border/60 bg-muted/30 p-8 shadow-sm">
         <nav aria-label="Pagination" class="flex items-center gap-1">
           <button
             :disabled="page === 1"
@@ -193,13 +193,13 @@ const page = ref(1);
     </section>
 
     <section class="flex flex-col gap-4" id="navigation-menu">
-      <div class="border-l-2 border-primary/40 pl-3">
+      <div class="border-l-[3px] border-primary/60 pl-4">
         <h2 class="text-xl font-semibold text-foreground">NavigationMenu</h2>
-        <p class="mt-1 text-sm text-muted-foreground">
+        <p class="mt-1 text-sm leading-relaxed text-muted-foreground">
           A top-level site navigation bar with active link highlighting — plain semantic HTML with Tailwind.
         </p>
       </div>
-      <div class="rounded-lg border border-border bg-muted/50 p-8">
+      <div class="rounded-xl border border-border/60 bg-muted/30 p-8 shadow-sm">
         <nav aria-label="Main navigation">
           <ul class="flex items-center gap-1">
             <li v-for="(link, i) in NAV_LINKS" :key="link">

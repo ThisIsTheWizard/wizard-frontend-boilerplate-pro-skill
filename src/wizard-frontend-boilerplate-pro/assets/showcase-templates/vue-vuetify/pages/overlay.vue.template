@@ -67,16 +67,16 @@ const visible = ref(false);
   <div class="flex flex-col gap-16">
     <div>
       <h1 class="text-3xl font-bold tracking-tight text-foreground">Overlay</h1>
-      <p class="mt-2 text-muted-foreground">
+      <p class="mt-2 text-base leading-relaxed text-muted-foreground">
         Floating UI components that render above the main content — popovers, dropdown menus, and
         sheets.
       </p>
     </div>
 
     <section class="flex flex-col gap-4" id="popover">
-      <div class="border-l-2 border-primary/40 pl-3">
+      <div class="border-l-[3px] border-primary/60 pl-4">
         <h2 class="text-xl font-semibold text-foreground">Popover</h2>
-        <p class="mt-1 text-sm text-muted-foreground">
+        <p class="mt-1 text-sm leading-relaxed text-muted-foreground">
           A non-modal floating panel via
           <code class="rounded bg-muted px-1 py-0.5 text-xs">v-menu</code> with
           <code class="rounded bg-muted px-1 py-0.5 text-xs">:close-on-content-click="false"</code>.
@@ -84,7 +84,7 @@ const visible = ref(false);
           slot to bind the trigger.
         </p>
       </div>
-      <div class="rounded-lg border border-border bg-muted/50 p-8">
+      <div class="rounded-xl border border-border/60 bg-muted/30 p-8 shadow-sm">
         <v-menu v-model="popoverVisible" :close-on-content-click="false">
           <template #activator="{ props }">
             <v-btn v-bind="props" color="primary" variant="outlined">Open Popover</v-btn>
@@ -111,9 +111,9 @@ const visible = ref(false);
     </section>
 
     <section class="flex flex-col gap-4" id="dropdown-menu">
-      <div class="border-l-2 border-primary/40 pl-3">
+      <div class="border-l-[3px] border-primary/60 pl-4">
         <h2 class="text-xl font-semibold text-foreground">DropdownMenu</h2>
-        <p class="mt-1 text-sm text-muted-foreground">
+        <p class="mt-1 text-sm leading-relaxed text-muted-foreground">
           A contextual popup menu via
           <code class="rounded bg-muted px-1 py-0.5 text-xs">v-menu</code> +
           <code class="rounded bg-muted px-1 py-0.5 text-xs">v-list</code>. Closes on item click by
@@ -121,7 +121,7 @@ const visible = ref(false);
           is true by default).
         </p>
       </div>
-      <div class="rounded-lg border border-border bg-muted/50 p-8">
+      <div class="rounded-xl border border-border/60 bg-muted/30 p-8 shadow-sm">
         <v-menu>
           <template #activator="{ props }">
             <v-btn v-bind="props" color="primary" variant="outlined">Options</v-btn>
@@ -144,9 +144,9 @@ const visible = ref(false);
     </section>
 
     <section class="flex flex-col gap-4" id="sheet">
-      <div class="border-l-2 border-primary/40 pl-3">
+      <div class="border-l-[3px] border-primary/60 pl-4">
         <h2 class="text-xl font-semibold text-foreground">Sheet</h2>
-        <p class="mt-1 text-sm text-muted-foreground">
+        <p class="mt-1 text-sm leading-relaxed text-muted-foreground">
           A slide-in panel via
           <code class="rounded bg-muted px-1 py-0.5 text-xs">v-navigation-drawer</code> with
           <code class="rounded bg-muted px-1 py-0.5 text-xs">temporary</code> and
@@ -154,7 +154,7 @@ const visible = ref(false);
           <code class="rounded bg-muted px-1 py-0.5 text-xs">v-model</code> to show/hide.
         </p>
       </div>
-      <div class="rounded-lg border border-border bg-muted/50 p-8">
+      <div class="rounded-xl border border-border/60 bg-muted/30 p-8 shadow-sm">
         <v-btn color="primary" variant="outlined" @click="drawerVisible = true">Open Sheet</v-btn>
         <v-navigation-drawer v-model="drawerVisible" location="right" temporary width="320">
           <div class="flex h-full flex-col gap-4 p-6">

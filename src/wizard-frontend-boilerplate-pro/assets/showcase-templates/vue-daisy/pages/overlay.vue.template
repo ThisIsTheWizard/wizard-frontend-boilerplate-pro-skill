@@ -99,7 +99,7 @@ const drawerOpen = ref(false);
           or colour modifiers like <code class="kbd kbd-sm">tooltip-primary</code>.
         </p>
       </div>
-      <div class="bg-base-200 rounded-box p-4 mb-3">
+      <div class="bg-base-200 rounded-box p-4 mb-3 shadow-sm">
         <div class="flex flex-wrap gap-4">
           <div class="tooltip tooltip-top" data-tip="Tooltip on top">
             <button class="btn btn-primary btn-sm" type="button">Hover me</button>
@@ -130,7 +130,7 @@ const drawerOpen = ref(false);
           <code class="kbd kbd-sm">dropdown-end</code> aligns it to the right.
         </p>
       </div>
-      <div class="bg-base-200 rounded-box p-4 mb-3">
+      <div class="bg-base-200 rounded-box p-4 mb-3 shadow-sm">
         <div class="flex flex-wrap gap-4">
           <div class="dropdown">
             <div class="btn btn-primary btn-sm" role="button" tabindex="0">Actions ▾</div>
@@ -168,7 +168,7 @@ const drawerOpen = ref(false);
           Control open/close state via <code class="kbd kbd-sm">v-model</code> on the checkbox.
         </p>
       </div>
-      <div class="bg-base-200 rounded-box p-4 mb-3">
+      <div class="bg-base-200 rounded-box p-4 mb-3 shadow-sm">
         <div class="drawer" style="max-width: 480px; width: 100%">
           <input
             id="demo-drawer-vue"

@@ -164,22 +164,22 @@ const selected = ref(null);
   <div class="flex flex-col gap-16">
     <div>
       <h1 class="text-3xl font-bold tracking-tight text-foreground">Data Visualization</h1>
-      <p class="mt-2 text-muted-foreground">
+      <p class="mt-2 text-base leading-relaxed text-muted-foreground">
         Components for presenting structured and visual data — charts, data tables, and calendars.
       </p>
     </div>
 
     <section class="flex flex-col gap-4" id="chart">
-      <div class="border-l-2 border-primary/40 pl-3">
+      <div class="border-l-[3px] border-primary/60 pl-4">
         <h2 class="text-xl font-semibold text-foreground">Chart</h2>
-        <p class="mt-1 text-sm text-muted-foreground">
+        <p class="mt-1 text-sm leading-relaxed text-muted-foreground">
           Vuetify has no chart component. Use
           <code class="font-mono text-xs">chart.js</code> +
           <code class="font-mono text-xs">vue-chartjs</code> directly. Install:
           <code class="font-mono text-xs">npm install chart.js vue-chartjs</code>.
         </p>
       </div>
-      <div class="rounded-lg border border-border bg-muted/50 p-8">
+      <div class="rounded-xl border border-border/60 bg-muted/30 p-8 shadow-sm">
         <Line :data="chartData" :options="chartOptions" />
       </div>
       <CodeBlock
@@ -192,9 +192,9 @@ const selected = ref(null);
     </section>
 
     <section class="flex flex-col gap-4" id="data-table">
-      <div class="border-l-2 border-primary/40 pl-3">
+      <div class="border-l-[3px] border-primary/60 pl-4">
         <h2 class="text-xl font-semibold text-foreground">DataTable</h2>
-        <p class="mt-1 text-sm text-muted-foreground">
+        <p class="mt-1 text-sm leading-relaxed text-muted-foreground">
           A feature-rich table via
           <code class="rounded bg-muted px-1 py-0.5 text-xs">v-data-table</code>. Pass
           <code class="rounded bg-muted px-1 py-0.5 text-xs">:headers</code> with
@@ -202,7 +202,7 @@ const selected = ref(null);
           and <code class="rounded bg-muted px-1 py-0.5 text-xs">:items</code> for data.
         </p>
       </div>
-      <div class="rounded-lg border border-border bg-muted/50 p-8">
+      <div class="rounded-xl border border-border/60 bg-muted/30 p-8 shadow-sm">
         <v-data-table :headers="headers" :items="tableData" />
       </div>
       <CodeBlock
@@ -215,16 +215,16 @@ const selected = ref(null);
     </section>
 
     <section class="flex flex-col gap-4" id="calendar">
-      <div class="border-l-2 border-primary/40 pl-3">
+      <div class="border-l-[3px] border-primary/60 pl-4">
         <h2 class="text-xl font-semibold text-foreground">Calendar</h2>
-        <p class="mt-1 text-sm text-muted-foreground">
+        <p class="mt-1 text-sm leading-relaxed text-muted-foreground">
           Vuetify Labs provides
           <code class="rounded bg-muted px-1 py-0.5 text-xs">VDatePicker</code>. Import from
           <code class="font-mono text-xs">vuetify/labs/VDatePicker</code> and register it in your
           Vuetify config. The API may change in stable releases.
         </p>
       </div>
-      <div class="rounded-lg border border-border bg-muted/50 p-8">
+      <div class="rounded-xl border border-border/60 bg-muted/30 p-8 shadow-sm">
         <div class="flex flex-col items-start gap-3">
           <v-date-picker v-model="selectedDate" />
           <p v-if="selectedDate" class="text-sm text-muted-foreground">

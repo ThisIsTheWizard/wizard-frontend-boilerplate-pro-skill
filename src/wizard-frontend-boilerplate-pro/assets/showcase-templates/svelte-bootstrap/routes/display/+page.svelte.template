@@ -134,8 +134,9 @@
 
 <div class="d-flex flex-column gap-4">
   <div>
-    <h1 class="h4 mb-1">Display</h1>
-    <p class="text-body-secondary">
+    <span class="badge border border-primary-subtle text-primary bg-primary-subtle mb-2 text-uppercase fw-medium" style="letter-spacing: 0.06em; font-size: 0.65rem;">Components</span>
+    <h1 class="display-5 fw-bold mb-1">Display</h1>
+    <p class="text-body-secondary col-lg-8">
       Read-only visual elements for presenting content — cards, badges, avatars, and data tables.
     </p>
   </div>
@@ -148,7 +149,7 @@
         A surface for grouping related content with an optional header, body, and footer.
       </p>
     </div>
-    <div class="p-4 rounded-3 border bg-body-tertiary mb-3">
+    <div class="rounded-3 border border-secondary-subtle bg-body-secondary p-4 p-md-5 shadow-sm mb-3">
       <Card style="max-width: 320px;">
         <CardHeader>Featured</CardHeader>
         <CardBody>
@@ -183,7 +184,7 @@
         and a <code>pill</code> variant.
       </p>
     </div>
-    <div class="p-4 rounded-3 border bg-body-tertiary mb-3">
+    <div class="rounded-3 border border-secondary-subtle bg-body-secondary p-4 p-md-5 shadow-sm mb-3">
       <div class="d-flex flex-wrap gap-2">
         <Badge color="primary">Primary</Badge>
         <Badge color="secondary">Secondary</Badge>
@@ -216,7 +217,7 @@
         styled <code>div</code> with initials as the fallback.
       </p>
     </div>
-    <div class="p-4 rounded-3 border bg-body-tertiary mb-3">
+    <div class="rounded-3 border border-secondary-subtle bg-body-secondary p-4 p-md-5 shadow-sm mb-3">
       <div class="d-flex align-items-center gap-3 flex-wrap">
         <!-- With image -->
         <img
@@ -268,7 +269,7 @@
         <code>PlaceholderButton</code> components with <code>animation="glow"</code>.
       </p>
     </div>
-    <div class="p-4 rounded-3 border bg-body-tertiary mb-3">
+    <div class="rounded-3 border border-secondary-subtle bg-body-secondary p-4 p-md-5 shadow-sm mb-3">
       <div class="d-flex flex-column gap-4">
         <!-- Inline skeleton -->
         <div class="d-flex align-items-center gap-3">
@@ -316,7 +317,7 @@
         <code>hover</code>, and <code>responsive</code> props.
       </p>
     </div>
-    <div class="p-4 rounded-3 border bg-body-tertiary mb-3">
+    <div class="rounded-3 border border-secondary-subtle bg-body-secondary p-4 p-md-5 shadow-sm mb-3">
       <Table hover responsive striped>
         <thead>
           <tr>

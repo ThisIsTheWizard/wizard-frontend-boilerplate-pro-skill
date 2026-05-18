@@ -102,22 +102,23 @@
 
 <div class="flex flex-col gap-4">
   <div>
-    <h1 class="text-xl font-semibold mb-1">Inputs</h1>
-    <p class="text-base-content/60 text-sm">
+    <div class="badge badge-outline badge-sm gap-1 uppercase tracking-wider text-xs font-medium mb-3" style="border-color: oklch(var(--p)/0.3); color: oklch(var(--p)); background: oklch(var(--p)/0.08)">Components</div>
+    <h1 class="text-4xl font-bold mb-2">Inputs</h1>
+    <p class="text-base-content opacity-70 max-w-2xl text-base">
       Form controls for collecting user input — buttons, text fields, selections, and toggles.
     </p>
   </div>
 
   <!-- Button -->
   <section id="button" class="mb-2">
-    <div class="mb-2 pl-3" style="border-left: 3px solid var(--color-primary)">
-      <h5 class="font-semibold mb-1">Button</h5>
+    <div class="mb-2 border-l-2 border-primary pl-4">
+      <h2 class="text-xl font-semibold mb-1">Button</h5>
       <p class="text-base-content/60 text-sm mb-0">
         DaisyUI's <code class="kbd kbd-sm">btn</code> with colour modifiers, size modifiers,
         and disabled state. No import needed — purely CSS classes.
       </p>
     </div>
-    <div class="bg-base-200 rounded-box p-4 mb-3">
+    <div class="rounded-xl border border-base-300 bg-base-200/60 p-8 shadow-sm mb-3">
       <div class="flex flex-col gap-2">
         <div class="flex flex-wrap gap-2">
           <button class="btn btn-primary" type="button">Primary</button>
@@ -141,15 +142,15 @@
 
   <!-- Input -->
   <section id="input" class="mb-2">
-    <div class="mb-2 pl-3" style="border-left: 3px solid var(--color-primary)">
-      <h5 class="font-semibold mb-1">Input</h5>
+    <div class="mb-2 border-l-2 border-primary pl-4">
+      <h2 class="text-xl font-semibold mb-1">Input</h5>
       <p class="text-base-content/60 text-sm mb-0">
         Text field using <code class="kbd kbd-sm">input input-bordered</code>.
         Wrap in <code class="kbd kbd-sm">form-control</code> for label/helper slots.
         Add <code class="kbd kbd-sm">input-error</code> for validation.
       </p>
     </div>
-    <div class="bg-base-200 rounded-box p-4 mb-3">
+    <div class="rounded-xl border border-base-300 bg-base-200/60 p-8 shadow-sm mb-3">
       <div class="flex flex-col gap-3" style="max-width: 360px">
         <label class="form-control w-full">
           <div class="label"><span class="label-text">Email address</span></div>
@@ -178,14 +179,14 @@
 
   <!-- Textarea -->
   <section id="textarea" class="mb-2">
-    <div class="mb-2 pl-3" style="border-left: 3px solid var(--color-primary)">
-      <h5 class="font-semibold mb-1">Textarea</h5>
+    <div class="mb-2 border-l-2 border-primary pl-4">
+      <h2 class="text-xl font-semibold mb-1">Textarea</h5>
       <p class="text-base-content/60 text-sm mb-0">
         Multi-line input using <code class="kbd kbd-sm">textarea textarea-bordered</code>.
         Add <code class="kbd kbd-sm">textarea-error</code> for validation.
       </p>
     </div>
-    <div class="bg-base-200 rounded-box p-4 mb-3">
+    <div class="rounded-xl border border-base-300 bg-base-200/60 p-8 shadow-sm mb-3">
       <div class="flex flex-col gap-3" style="max-width: 360px">
         <label class="form-control w-full">
           <div class="label"><span class="label-text">Bio</span></div>
@@ -210,14 +211,14 @@
 
   <!-- Select -->
   <section id="select" class="mb-2">
-    <div class="mb-2 pl-3" style="border-left: 3px solid var(--color-primary)">
-      <h5 class="font-semibold mb-1">Select</h5>
+    <div class="mb-2 border-l-2 border-primary pl-4">
+      <h2 class="text-xl font-semibold mb-1">Select</h5>
       <p class="text-base-content/60 text-sm mb-0">
         Native <code class="kbd kbd-sm">&lt;select&gt;</code> styled with
         <code class="kbd kbd-sm">select select-bordered</code>.
       </p>
     </div>
-    <div class="bg-base-200 rounded-box p-4 mb-3">
+    <div class="rounded-xl border border-base-300 bg-base-200/60 p-8 shadow-sm mb-3">
       <div class="flex flex-col gap-3" style="max-width: 360px">
         <label class="form-control w-full">
           <div class="label"><span class="label-text">Framework</span></div>
@@ -244,13 +245,13 @@
 
   <!-- Checkbox -->
   <section id="checkbox" class="mb-2">
-    <div class="mb-2 pl-3" style="border-left: 3px solid var(--color-primary)">
-      <h5 class="font-semibold mb-1">Checkbox</h5>
+    <div class="mb-2 border-l-2 border-primary pl-4">
+      <h2 class="text-xl font-semibold mb-1">Checkbox</h5>
       <p class="text-base-content/60 text-sm mb-0">
         Binary toggle using <code class="kbd kbd-sm">checkbox checkbox-primary</code>.
       </p>
     </div>
-    <div class="bg-base-200 rounded-box p-4 mb-3">
+    <div class="rounded-xl border border-base-300 bg-base-200/60 p-8 shadow-sm mb-3">
       <div class="flex flex-col gap-3">
         <label class="flex items-center gap-3 cursor-pointer">
           <input class="checkbox checkbox-primary" type="checkbox" />
@@ -273,14 +274,14 @@
 
   <!-- RadioGroup -->
   <section id="radio-group" class="mb-2">
-    <div class="mb-2 pl-3" style="border-left: 3px solid var(--color-primary)">
-      <h5 class="font-semibold mb-1">RadioGroup</h5>
+    <div class="mb-2 border-l-2 border-primary pl-4">
+      <h2 class="text-xl font-semibold mb-1">RadioGroup</h5>
       <p class="text-base-content/60 text-sm mb-0">
         Mutually exclusive options using <code class="kbd kbd-sm">radio radio-primary</code>
         bound with <code class="kbd kbd-sm">bind:group</code>.
       </p>
     </div>
-    <div class="bg-base-200 rounded-box p-4 mb-3">
+    <div class="rounded-xl border border-base-300 bg-base-200/60 p-8 shadow-sm mb-3">
       <div class="flex flex-col gap-2">
         <span class="label-text font-medium">Plan</span>
         {#each ["free", "pro", "enterprise"] as value}
@@ -298,13 +299,13 @@
 
   <!-- Toggle -->
   <section id="toggle" class="mb-2">
-    <div class="mb-2 pl-3" style="border-left: 3px solid var(--color-primary)">
-      <h5 class="font-semibold mb-1">Toggle</h5>
+    <div class="mb-2 border-l-2 border-primary pl-4">
+      <h2 class="text-xl font-semibold mb-1">Toggle</h5>
       <p class="text-base-content/60 text-sm mb-0">
         On/off slide control using <code class="kbd kbd-sm">toggle toggle-primary</code>.
       </p>
     </div>
-    <div class="bg-base-200 rounded-box p-4 mb-3">
+    <div class="rounded-xl border border-base-300 bg-base-200/60 p-8 shadow-sm mb-3">
       <div class="flex flex-col gap-3">
         <label class="flex items-center gap-3 cursor-pointer">
           <input class="toggle toggle-primary" type="checkbox" />

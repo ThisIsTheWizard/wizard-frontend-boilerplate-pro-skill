@@ -97,8 +97,9 @@
 
 <div class="d-flex flex-column gap-4">
   <div>
-    <h1 class="h4 mb-1">Overlay</h1>
-    <p class="text-body-secondary">
+    <span class="badge border border-primary-subtle text-primary bg-primary-subtle mb-2 text-uppercase fw-medium" style="letter-spacing: 0.06em; font-size: 0.65rem;">Components</span>
+    <h1 class="display-5 fw-bold mb-1">Overlay</h1>
+    <p class="text-body-secondary col-lg-8">
       Floating panels, dropdown menus, and slide-over sheets for contextual interactions.
     </p>
   </div>
@@ -112,7 +113,7 @@
         <code>placement</code> to control which side it appears.
       </p>
     </div>
-    <div class="p-4 rounded-3 border bg-body-tertiary mb-3">
+    <div class="rounded-3 border border-secondary-subtle bg-body-secondary p-4 p-md-5 shadow-sm mb-3">
       <div class="d-flex flex-wrap gap-3">
         <Button
           color="outline-secondary"
@@ -167,7 +168,7 @@
         actions.
       </p>
     </div>
-    <div class="p-4 rounded-3 border bg-body-tertiary mb-3">
+    <div class="rounded-3 border border-secondary-subtle bg-body-secondary p-4 p-md-5 shadow-sm mb-3">
       <div class="d-flex flex-wrap gap-3">
         <!-- Standard dropdown -->
         <Dropdown isOpen={dropdownOpen} toggle={() => (dropdownOpen = !dropdownOpen)}>
@@ -215,7 +216,7 @@
         <code>isOpen</code>/<code>toggle</code> and positioned via <code>placement</code>.
       </p>
     </div>
-    <div class="p-4 rounded-3 border bg-body-tertiary mb-3">
+    <div class="rounded-3 border border-secondary-subtle bg-body-secondary p-4 p-md-5 shadow-sm mb-3">
       <div class="d-flex flex-wrap gap-2">
         <Button color="outline-secondary" onclick={() => (showOffcanvas = true)}>
           Open Offcanvas (end)

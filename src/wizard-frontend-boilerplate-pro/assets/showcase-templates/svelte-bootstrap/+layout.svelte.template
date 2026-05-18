@@ -79,8 +79,8 @@
     <div class="d-none d-md-block" style="margin-left: 256px;"></div>
 
     <header
-      class="sticky-top border-bottom bg-body d-flex align-items-center gap-3 px-4"
-      style="height: 56px; z-index: 99; backdrop-filter: blur(8px);"
+      class="sticky-top border-bottom border-secondary-subtle bg-body d-flex align-items-center gap-3 px-4"
+      style="height: 56px; z-index: 99; backdrop-filter: blur(12px);"
     >
       <!-- Mobile hamburger -->
       <button
@@ -202,7 +202,7 @@
     </header>
 
     <main
-      class="flex-grow-1 p-4 p-md-5"
+      class="flex-grow-1 p-4 p-md-5 p-lg-5"
       style="margin-left: 0; padding-top: 1.5rem !important;"
     >
       <div style="max-width: 900px; margin: 0 auto;">

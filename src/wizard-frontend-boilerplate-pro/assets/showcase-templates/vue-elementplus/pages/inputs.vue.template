@@ -118,15 +118,15 @@ const enabled = ref(false);
   <div class="flex flex-col gap-16">
     <div>
       <h1 class="text-3xl font-bold tracking-tight text-foreground">Inputs</h1>
-      <p class="mt-2 text-muted-foreground">
+      <p class="mt-2 text-base leading-relaxed text-muted-foreground">
         Form controls built with Element Plus — buttons, text fields, selections, and toggles.
       </p>
     </div>
 
     <section class="flex flex-col gap-4" id="button">
-      <div class="border-l-2 border-primary/40 pl-3">
+      <div class="border-l-[3px] border-primary/60 pl-4">
         <h2 class="text-xl font-semibold text-foreground">Button</h2>
-        <p class="mt-1 text-sm text-muted-foreground">
+        <p class="mt-1 text-sm leading-relaxed text-muted-foreground">
           Element Plus
           <code class="rounded bg-muted px-1 py-0.5 text-xs">el-button</code>. Use the
           <code class="rounded bg-muted px-1 py-0.5 text-xs">type</code> prop for colour variants:
@@ -136,7 +136,7 @@ const enabled = ref(false);
           <code class="rounded bg-muted px-1 py-0.5 text-xs">circle</code> for appearance.
         </p>
       </div>
-      <div class="rounded-lg border border-border bg-muted/50 p-8">
+      <div class="rounded-xl border border-border/60 bg-muted/30 p-8 shadow-sm">
         <div class="flex flex-col gap-4">
           <div class="flex flex-wrap gap-2">
             <el-button type="primary">Primary</el-button>
@@ -168,16 +168,16 @@ const enabled = ref(false);
     </section>
 
     <section class="flex flex-col gap-4" id="input">
-      <div class="border-l-2 border-primary/40 pl-3">
+      <div class="border-l-[3px] border-primary/60 pl-4">
         <h2 class="text-xl font-semibold text-foreground">Input</h2>
-        <p class="mt-1 text-sm text-muted-foreground">
+        <p class="mt-1 text-sm leading-relaxed text-muted-foreground">
           A single-line text field via
           <code class="rounded bg-muted px-1 py-0.5 text-xs">el-input</code>. Use
           <code class="rounded bg-muted px-1 py-0.5 text-xs">clearable</code> for a clear button and
           <code class="rounded bg-muted px-1 py-0.5 text-xs">show-password</code> for password fields.
         </p>
       </div>
-      <div class="rounded-lg border border-border bg-muted/50 p-8">
+      <div class="rounded-xl border border-border/60 bg-muted/30 p-8 shadow-sm">
         <div class="flex max-w-sm flex-col gap-4">
           <div class="flex flex-col gap-1.5">
             <label class="text-sm font-medium text-foreground" for="email-demo">Email address</label>
@@ -208,16 +208,16 @@ const enabled = ref(false);
     </section>
 
     <section class="flex flex-col gap-4" id="textarea">
-      <div class="border-l-2 border-primary/40 pl-3">
+      <div class="border-l-[3px] border-primary/60 pl-4">
         <h2 class="text-xl font-semibold text-foreground">Textarea</h2>
-        <p class="mt-1 text-sm text-muted-foreground">
+        <p class="mt-1 text-sm leading-relaxed text-muted-foreground">
           A multi-line input via
           <code class="rounded bg-muted px-1 py-0.5 text-xs">el-input type="textarea"</code>. Use
           <code class="rounded bg-muted px-1 py-0.5 text-xs">:rows</code> for fixed height or
           <code class="rounded bg-muted px-1 py-0.5 text-xs">autosize</code> to grow with content.
         </p>
       </div>
-      <div class="rounded-lg border border-border bg-muted/50 p-8">
+      <div class="rounded-xl border border-border/60 bg-muted/30 p-8 shadow-sm">
         <div class="flex max-w-sm flex-col gap-1.5">
           <label class="text-sm font-medium text-foreground" for="bio-demo">Bio</label>
           <el-input
@@ -240,9 +240,9 @@ const enabled = ref(false);
     </section>
 
     <section class="flex flex-col gap-4" id="select">
-      <div class="border-l-2 border-primary/40 pl-3">
+      <div class="border-l-[3px] border-primary/60 pl-4">
         <h2 class="text-xl font-semibold text-foreground">Select</h2>
-        <p class="mt-1 text-sm text-muted-foreground">
+        <p class="mt-1 text-sm leading-relaxed text-muted-foreground">
           A dropdown via
           <code class="rounded bg-muted px-1 py-0.5 text-xs">el-select</code> +
           <code class="rounded bg-muted px-1 py-0.5 text-xs">el-option</code>. Add
@@ -250,7 +250,7 @@ const enabled = ref(false);
           <code class="rounded bg-muted px-1 py-0.5 text-xs">clearable</code> for a reset button.
         </p>
       </div>
-      <div class="rounded-lg border border-border bg-muted/50 p-8">
+      <div class="rounded-xl border border-border/60 bg-muted/30 p-8 shadow-sm">
         <div class="flex max-w-sm flex-col gap-4">
           <div class="flex flex-col gap-1.5">
             <label class="text-sm font-medium text-foreground" for="framework-demo">
@@ -291,16 +291,16 @@ const enabled = ref(false);
     </section>
 
     <section class="flex flex-col gap-4" id="checkbox">
-      <div class="border-l-2 border-primary/40 pl-3">
+      <div class="border-l-[3px] border-primary/60 pl-4">
         <h2 class="text-xl font-semibold text-foreground">Checkbox</h2>
-        <p class="mt-1 text-sm text-muted-foreground">
+        <p class="mt-1 text-sm leading-relaxed text-muted-foreground">
           A binary toggle via
           <code class="rounded bg-muted px-1 py-0.5 text-xs">el-checkbox</code>. Use
           <code class="rounded bg-muted px-1 py-0.5 text-xs">el-checkbox-group</code> for multi-value
           groups.
         </p>
       </div>
-      <div class="rounded-lg border border-border bg-muted/50 p-8">
+      <div class="rounded-xl border border-border/60 bg-muted/30 p-8 shadow-sm">
         <div class="flex flex-col gap-3">
           <el-checkbox v-model="checkboxVal">Accept terms and conditions</el-checkbox>
           <el-checkbox v-model="checkboxChecked">Checked by default</el-checkbox>
@@ -317,16 +317,16 @@ const enabled = ref(false);
     </section>
 
     <section class="flex flex-col gap-4" id="radio-group">
-      <div class="border-l-2 border-primary/40 pl-3">
+      <div class="border-l-[3px] border-primary/60 pl-4">
         <h2 class="text-xl font-semibold text-foreground">RadioGroup</h2>
-        <p class="mt-1 text-sm text-muted-foreground">
+        <p class="mt-1 text-sm leading-relaxed text-muted-foreground">
           Mutually exclusive options via
           <code class="rounded bg-muted px-1 py-0.5 text-xs">el-radio-group</code> +
           <code class="rounded bg-muted px-1 py-0.5 text-xs">el-radio</code>. Bind
           <code class="rounded bg-muted px-1 py-0.5 text-xs">v-model</code> on the group.
         </p>
       </div>
-      <div class="rounded-lg border border-border bg-muted/50 p-8">
+      <div class="rounded-xl border border-border/60 bg-muted/30 p-8 shadow-sm">
         <el-radio-group v-model="plan" class="flex flex-col gap-2">
           <el-radio value="free">Free</el-radio>
           <el-radio value="pro">Pro</el-radio>
@@ -343,9 +343,9 @@ const enabled = ref(false);
     </section>
 
     <section class="flex flex-col gap-4" id="switch">
-      <div class="border-l-2 border-primary/40 pl-3">
+      <div class="border-l-[3px] border-primary/60 pl-4">
         <h2 class="text-xl font-semibold text-foreground">Switch</h2>
-        <p class="mt-1 text-sm text-muted-foreground">
+        <p class="mt-1 text-sm leading-relaxed text-muted-foreground">
           An on/off toggle via
           <code class="rounded bg-muted px-1 py-0.5 text-xs">el-switch</code>. Supports
           <code class="rounded bg-muted px-1 py-0.5 text-xs">active-text</code>,
@@ -353,7 +353,7 @@ const enabled = ref(false);
           <code class="rounded bg-muted px-1 py-0.5 text-xs">active-color</code> customisation.
         </p>
       </div>
-      <div class="rounded-lg border border-border bg-muted/50 p-8">
+      <div class="rounded-xl border border-border/60 bg-muted/30 p-8 shadow-sm">
         <div class="flex flex-col gap-3">
           <div class="flex items-center gap-2">
             <el-switch v-model="switchVal" />

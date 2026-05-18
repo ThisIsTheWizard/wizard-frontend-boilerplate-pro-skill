@@ -127,7 +127,7 @@ const NAVBAR_CODE = `<template>
           <code class="kbd kbd-sm">tab-active</code>.
         </p>
       </div>
-      <div class="bg-base-200 rounded-box p-4 mb-3">
+      <div class="bg-base-200 rounded-box p-4 mb-3 shadow-sm">
         <div>
           <div class="tabs tabs-bordered" role="tablist">
             <button
@@ -161,7 +161,7 @@ const NAVBAR_CODE = `<template>
           <code class="kbd kbd-sm">&lt;a&gt;</code>; the current page is plain text.
         </p>
       </div>
-      <div class="bg-base-200 rounded-box p-4 mb-3">
+      <div class="bg-base-200 rounded-box p-4 mb-3 shadow-sm">
         <div class="flex flex-col gap-3">
           <div class="breadcrumbs text-sm">
             <ul>
@@ -195,7 +195,7 @@ const NAVBAR_CODE = `<template>
           Currently on page <strong>{{ page }}</strong>.
         </p>
       </div>
-      <div class="bg-base-200 rounded-box p-4 mb-3">
+      <div class="bg-base-200 rounded-box p-4 mb-3 shadow-sm">
         <div class="join">
           <button class="join-item btn btn-sm" type="button" @click="page = Math.max(1, page - 1)">«</button>
           <button
@@ -226,7 +226,7 @@ const NAVBAR_CODE = `<template>
           <code class="kbd kbd-sm">menu menu-horizontal</code> for desktop links.
         </p>
       </div>
-      <div class="bg-base-200 rounded-box p-4 mb-3">
+      <div class="bg-base-200 rounded-box p-4 mb-3 shadow-sm">
         <div class="navbar bg-base-100 border border-base-300 rounded-box">
           <div class="navbar-start">
             <a class="btn btn-ghost text-lg font-bold">Brand</a>

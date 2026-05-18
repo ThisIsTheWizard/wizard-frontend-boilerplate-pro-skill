@@ -144,20 +144,20 @@ const marketing = ref(true);
   <div class="flex flex-col gap-16">
     <div>
       <h1 class="text-3xl font-bold tracking-tight text-foreground">Inputs</h1>
-      <p class="mt-2 text-muted-foreground">
+      <p class="mt-2 text-base leading-relaxed text-muted-foreground">
         Form controls using Headless UI primitives (Listbox, RadioGroup, Switch) and native HTML
         inputs styled with Tailwind.
       </p>
     </div>
 
     <section class="flex flex-col gap-4" id="button">
-      <div class="border-l-2 border-primary/40 pl-3">
+      <div class="border-l-[3px] border-primary/60 pl-4">
         <h2 class="text-xl font-semibold text-foreground">Button</h2>
-        <p class="mt-1 text-sm text-muted-foreground">
+        <p class="mt-1 text-sm leading-relaxed text-muted-foreground">
           Plain HTML buttons — Headless UI has no Button primitive; use the native element directly.
         </p>
       </div>
-      <div class="rounded-lg border border-border bg-muted/50 p-8">
+      <div class="rounded-xl border border-border/60 bg-muted/30 p-8 shadow-sm">
         <div class="flex flex-col gap-4">
           <div class="flex flex-wrap gap-2">
             <button class="rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition hover:opacity-90">Primary</button>
@@ -178,13 +178,13 @@ const marketing = ref(true);
     </section>
 
     <section class="flex flex-col gap-4" id="input">
-      <div class="border-l-2 border-primary/40 pl-3">
+      <div class="border-l-[3px] border-primary/60 pl-4">
         <h2 class="text-xl font-semibold text-foreground">Input</h2>
-        <p class="mt-1 text-sm text-muted-foreground">
+        <p class="mt-1 text-sm leading-relaxed text-muted-foreground">
           Native <code class="rounded bg-muted px-1 py-0.5 text-xs">input</code> with Tailwind — Headless UI v1 (Vue) has no Input primitive.
         </p>
       </div>
-      <div class="rounded-lg border border-border bg-muted/50 p-8">
+      <div class="rounded-xl border border-border/60 bg-muted/30 p-8 shadow-sm">
         <div class="flex max-w-sm flex-col gap-4">
           <div class="flex flex-col gap-1.5">
             <label class="text-sm font-medium text-foreground" for="email-demo">Email address</label>
@@ -206,13 +206,13 @@ const marketing = ref(true);
     </section>
 
     <section class="flex flex-col gap-4" id="textarea">
-      <div class="border-l-2 border-primary/40 pl-3">
+      <div class="border-l-[3px] border-primary/60 pl-4">
         <h2 class="text-xl font-semibold text-foreground">Textarea</h2>
-        <p class="mt-1 text-sm text-muted-foreground">
+        <p class="mt-1 text-sm leading-relaxed text-muted-foreground">
           Native <code class="rounded bg-muted px-1 py-0.5 text-xs">textarea</code> with Tailwind.
         </p>
       </div>
-      <div class="rounded-lg border border-border bg-muted/50 p-8">
+      <div class="rounded-xl border border-border/60 bg-muted/30 p-8 shadow-sm">
         <div class="flex max-w-sm flex-col gap-4">
           <div class="flex flex-col gap-1.5">
             <label class="text-sm font-medium text-foreground" for="bio-demo">Bio</label>
@@ -230,13 +230,13 @@ const marketing = ref(true);
     </section>
 
     <section class="flex flex-col gap-4" id="select">
-      <div class="border-l-2 border-primary/40 pl-3">
+      <div class="border-l-[3px] border-primary/60 pl-4">
         <h2 class="text-xl font-semibold text-foreground">Select</h2>
-        <p class="mt-1 text-sm text-muted-foreground">
+        <p class="mt-1 text-sm leading-relaxed text-muted-foreground">
           Headless UI <code class="rounded bg-muted px-1 py-0.5 text-xs">Listbox</code> — accessible dropdown with keyboard navigation.
         </p>
       </div>
-      <div class="rounded-lg border border-border bg-muted/50 p-8">
+      <div class="rounded-xl border border-border/60 bg-muted/30 p-8 shadow-sm">
         <div class="flex max-w-sm flex-col gap-4">
           <div class="flex flex-col gap-1.5">
             <label class="text-sm font-medium text-foreground">Framework</label>
@@ -267,13 +267,13 @@ const marketing = ref(true);
     </section>
 
     <section class="flex flex-col gap-4" id="checkbox">
-      <div class="border-l-2 border-primary/40 pl-3">
+      <div class="border-l-[3px] border-primary/60 pl-4">
         <h2 class="text-xl font-semibold text-foreground">Checkbox</h2>
-        <p class="mt-1 text-sm text-muted-foreground">
+        <p class="mt-1 text-sm leading-relaxed text-muted-foreground">
           Native <code class="rounded bg-muted px-1 py-0.5 text-xs">input[type=checkbox]</code> — Headless UI Vue v1 has no Checkbox primitive.
         </p>
       </div>
-      <div class="rounded-lg border border-border bg-muted/50 p-8">
+      <div class="rounded-xl border border-border/60 bg-muted/30 p-8 shadow-sm">
         <div class="flex flex-col gap-3">
           <label class="flex cursor-pointer items-center gap-2">
             <input v-model="termsChecked" class="h-4 w-4 rounded border border-border accent-primary" type="checkbox" />
@@ -293,13 +293,13 @@ const marketing = ref(true);
     </section>
 
     <section class="flex flex-col gap-4" id="radio-group">
-      <div class="border-l-2 border-primary/40 pl-3">
+      <div class="border-l-[3px] border-primary/60 pl-4">
         <h2 class="text-xl font-semibold text-foreground">RadioGroup</h2>
-        <p class="mt-1 text-sm text-muted-foreground">
+        <p class="mt-1 text-sm leading-relaxed text-muted-foreground">
           Headless UI <code class="rounded bg-muted px-1 py-0.5 text-xs">RadioGroup</code> + <code class="rounded bg-muted px-1 py-0.5 text-xs">RadioGroupOption</code> with arrow-key navigation.
         </p>
       </div>
-      <div class="rounded-lg border border-border bg-muted/50 p-8">
+      <div class="rounded-xl border border-border/60 bg-muted/30 p-8 shadow-sm">
         <RadioGroup v-model="plan" class="flex flex-col gap-2">
           <RadioGroupOption
             v-for="p in PLANS"
@@ -320,13 +320,13 @@ const marketing = ref(true);
     </section>
 
     <section class="flex flex-col gap-4" id="switch">
-      <div class="border-l-2 border-primary/40 pl-3">
+      <div class="border-l-[3px] border-primary/60 pl-4">
         <h2 class="text-xl font-semibold text-foreground">Switch</h2>
-        <p class="mt-1 text-sm text-muted-foreground">
+        <p class="mt-1 text-sm leading-relaxed text-muted-foreground">
           Headless UI <code class="rounded bg-muted px-1 py-0.5 text-xs">Switch</code> — toggle styled via <code class="rounded bg-muted px-1 py-0.5 text-xs">v-model</code> and <code class="rounded bg-muted px-1 py-0.5 text-xs">translate-x</code>.
         </p>
       </div>
-      <div class="rounded-lg border border-border bg-muted/50 p-8">
+      <div class="rounded-xl border border-border/60 bg-muted/30 p-8 shadow-sm">
         <div class="flex flex-col gap-3">
           <label class="flex cursor-pointer items-center gap-2">
             <Switch

@@ -123,15 +123,15 @@ const rows = [
   <div class="flex flex-col gap-16">
     <div>
       <h1 class="text-3xl font-bold tracking-tight text-foreground">Display</h1>
-      <p class="mt-2 text-muted-foreground">
+      <p class="mt-2 text-base leading-relaxed text-muted-foreground">
         Read-only visual elements for presenting content — cards, badges, avatars, and data tables.
       </p>
     </div>
 
     <section class="flex flex-col gap-4" id="card">
-      <div class="border-l-2 border-primary/40 pl-3">
+      <div class="border-l-[3px] border-primary/60 pl-4">
         <h2 class="text-xl font-semibold text-foreground">Card</h2>
-        <p class="mt-1 text-sm text-muted-foreground">
+        <p class="mt-1 text-sm leading-relaxed text-muted-foreground">
           A surface for grouping related content. PrimeVue's
           <code class="rounded bg-muted px-1 py-0.5 text-xs">Card</code> uses named slots:
           <code class="rounded bg-muted px-1 py-0.5 text-xs">#title</code>,
@@ -140,7 +140,7 @@ const rows = [
           <code class="rounded bg-muted px-1 py-0.5 text-xs">#footer</code>.
         </p>
       </div>
-      <div class="rounded-lg border border-border bg-muted/50 p-8">
+      <div class="rounded-xl border border-border/60 bg-muted/30 p-8 shadow-sm">
         <Card class="w-80">
           <template #title>Project Alpha</template>
           <template #subtitle>A next-generation web application.</template>
@@ -164,16 +164,16 @@ const rows = [
     </section>
 
     <section class="flex flex-col gap-4" id="badge">
-      <div class="border-l-2 border-primary/40 pl-3">
+      <div class="border-l-[3px] border-primary/60 pl-4">
         <h2 class="text-xl font-semibold text-foreground">Badge</h2>
-        <p class="mt-1 text-sm text-muted-foreground">
+        <p class="mt-1 text-sm leading-relaxed text-muted-foreground">
           A compact label for status or category via
           <code class="rounded bg-muted px-1 py-0.5 text-xs">Tag</code>. Use the
           <code class="rounded bg-muted px-1 py-0.5 text-xs">severity</code> prop: primary, success,
           info, warn, danger, secondary, contrast.
         </p>
       </div>
-      <div class="rounded-lg border border-border bg-muted/50 p-8">
+      <div class="rounded-xl border border-border/60 bg-muted/30 p-8 shadow-sm">
         <div class="flex flex-wrap gap-2">
           <Tag severity="primary" value="Primary" />
           <Tag severity="success" value="Success" />
@@ -194,16 +194,16 @@ const rows = [
     </section>
 
     <section class="flex flex-col gap-4" id="avatar">
-      <div class="border-l-2 border-primary/40 pl-3">
+      <div class="border-l-[3px] border-primary/60 pl-4">
         <h2 class="text-xl font-semibold text-foreground">Avatar</h2>
-        <p class="mt-1 text-sm text-muted-foreground">
+        <p class="mt-1 text-sm leading-relaxed text-muted-foreground">
           A circular or square user image via
           <code class="rounded bg-muted px-1 py-0.5 text-xs">Avatar</code>. Use the
           <code class="rounded bg-muted px-1 py-0.5 text-xs">image</code> prop or
           <code class="rounded bg-muted px-1 py-0.5 text-xs">label</code> for initials fallback.
         </p>
       </div>
-      <div class="rounded-lg border border-border bg-muted/50 p-8">
+      <div class="rounded-xl border border-border/60 bg-muted/30 p-8 shadow-sm">
         <div class="flex items-center gap-4">
           <Avatar image="https://i.pravatar.cc/150?img=1" shape="circle" size="large" />
           <Avatar label="JD" shape="circle" size="large" />
@@ -221,16 +221,16 @@ const rows = [
     </section>
 
     <section class="flex flex-col gap-4" id="separator">
-      <div class="border-l-2 border-primary/40 pl-3">
+      <div class="border-l-[3px] border-primary/60 pl-4">
         <h2 class="text-xl font-semibold text-foreground">Separator</h2>
-        <p class="mt-1 text-sm text-muted-foreground">
+        <p class="mt-1 text-sm leading-relaxed text-muted-foreground">
           A thin dividing line via
           <code class="rounded bg-muted px-1 py-0.5 text-xs">Divider</code>. Use
           <code class="rounded bg-muted px-1 py-0.5 text-xs">layout="vertical"</code> for inline
           separators.
         </p>
       </div>
-      <div class="rounded-lg border border-border bg-muted/50 p-8">
+      <div class="rounded-xl border border-border/60 bg-muted/30 p-8 shadow-sm">
         <div class="flex flex-col gap-6">
           <div class="flex flex-col gap-2">
             <p class="text-sm text-muted-foreground">Section one content.</p>
@@ -254,15 +254,15 @@ const rows = [
     </section>
 
     <section class="flex flex-col gap-4" id="skeleton">
-      <div class="border-l-2 border-primary/40 pl-3">
+      <div class="border-l-[3px] border-primary/60 pl-4">
         <h2 class="text-xl font-semibold text-foreground">Skeleton</h2>
-        <p class="mt-1 text-sm text-muted-foreground">
+        <p class="mt-1 text-sm leading-relaxed text-muted-foreground">
           Animated placeholder blocks for loading states. Use
           <code class="rounded bg-muted px-1 py-0.5 text-xs">shape="circle"</code> for avatar
           placeholders.
         </p>
       </div>
-      <div class="rounded-lg border border-border bg-muted/50 p-8">
+      <div class="rounded-xl border border-border/60 bg-muted/30 p-8 shadow-sm">
         <div class="flex items-center gap-4">
           <Skeleton height="3rem" shape="circle" width="3rem" />
           <div class="flex flex-col gap-2">
@@ -282,9 +282,9 @@ const rows = [
     </section>
 
     <section class="flex flex-col gap-4" id="table">
-      <div class="border-l-2 border-primary/40 pl-3">
+      <div class="border-l-[3px] border-primary/60 pl-4">
         <h2 class="text-xl font-semibold text-foreground">Table</h2>
-        <p class="mt-1 text-sm text-muted-foreground">
+        <p class="mt-1 text-sm leading-relaxed text-muted-foreground">
           A structured grid via
           <code class="rounded bg-muted px-1 py-0.5 text-xs">DataTable</code> +
           <code class="rounded bg-muted px-1 py-0.5 text-xs">Column</code>. Bind
@@ -293,7 +293,7 @@ const rows = [
           <code class="rounded bg-muted px-1 py-0.5 text-xs">header</code> on each column.
         </p>
       </div>
-      <div class="rounded-lg border border-border bg-muted/50 p-8">
+      <div class="rounded-xl border border-border/60 bg-muted/30 p-8 shadow-sm">
         <DataTable :value="TABLE_ROWS" table-style="min-width: 20rem">
           <Column field="name" header="Name" />
           <Column field="email" header="Email" />

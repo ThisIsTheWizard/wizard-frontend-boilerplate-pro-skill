@@ -87,23 +87,24 @@
 
 <div class="flex flex-col gap-4">
   <div>
-    <h1 class="text-xl font-semibold mb-1">Navigation</h1>
-    <p class="text-base-content/60 text-sm">
+    <div class="badge badge-outline badge-sm gap-1 uppercase tracking-wider text-xs font-medium mb-3" style="border-color: oklch(var(--p)/0.3); color: oklch(var(--p)); background: oklch(var(--p)/0.08)">Components</div>
+    <h1 class="text-4xl font-bold mb-2">Navigation</h1>
+    <p class="text-base-content opacity-70 max-w-2xl text-base">
       Components for moving users through content — tabs, breadcrumbs, pagination, and navbars.
     </p>
   </div>
 
   <!-- Tabs -->
   <section id="tabs" class="mb-2">
-    <div class="mb-2 pl-3" style="border-left: 3px solid var(--color-primary)">
-      <h5 class="font-semibold mb-1">Tabs</h5>
+    <div class="mb-2 border-l-2 border-primary pl-4">
+      <h2 class="text-xl font-semibold mb-1">Tabs</h5>
       <p class="text-base-content/60 text-sm mb-0">
         Tab strip using <code class="kbd kbd-sm">tabs tabs-bordered</code> with
         <code class="kbd kbd-sm">tab</code> buttons. Mark active with
         <code class="kbd kbd-sm">tab-active</code>.
       </p>
     </div>
-    <div class="bg-base-200 rounded-box p-4 mb-3">
+    <div class="rounded-xl border border-base-300 bg-base-200/60 p-8 shadow-sm mb-3">
       <div>
         <div class="tabs tabs-bordered" role="tablist">
           {#each TABS_LIST as { id, label }}
@@ -127,15 +128,15 @@
 
   <!-- Breadcrumbs -->
   <section id="breadcrumbs" class="mb-2">
-    <div class="mb-2 pl-3" style="border-left: 3px solid var(--color-primary)">
-      <h5 class="font-semibold mb-1">Breadcrumbs</h5>
+    <div class="mb-2 border-l-2 border-primary pl-4">
+      <h2 class="text-xl font-semibold mb-1">Breadcrumbs</h5>
       <p class="text-base-content/60 text-sm mb-0">
         Hierarchical path using <code class="kbd kbd-sm">breadcrumbs</code> wrapping a
         <code class="kbd kbd-sm">&lt;ul&gt;</code>. Current page is plain text; ancestors use
         <code class="kbd kbd-sm">&lt;a&gt;</code>.
       </p>
     </div>
-    <div class="bg-base-200 rounded-box p-4 mb-3">
+    <div class="rounded-xl border border-base-300 bg-base-200/60 p-8 shadow-sm mb-3">
       <div class="flex flex-col gap-3">
         <div class="breadcrumbs text-sm">
           <ul>
@@ -160,8 +161,8 @@
 
   <!-- Pagination -->
   <section id="pagination" class="mb-2">
-    <div class="mb-2 pl-3" style="border-left: 3px solid var(--color-primary)">
-      <h5 class="font-semibold mb-1">Pagination</h5>
+    <div class="mb-2 border-l-2 border-primary pl-4">
+      <h2 class="text-xl font-semibold mb-1">Pagination</h5>
       <p class="text-base-content/60 text-sm mb-0">
         Page navigator using <code class="kbd kbd-sm">join</code> with
         <code class="kbd kbd-sm">join-item btn btn-sm</code>. Apply
@@ -169,7 +170,7 @@
         Currently on page <strong>{page}</strong>.
       </p>
     </div>
-    <div class="bg-base-200 rounded-box p-4 mb-3">
+    <div class="rounded-xl border border-base-300 bg-base-200/60 p-8 shadow-sm mb-3">
       <div class="join">
         <button class="join-item btn btn-sm" onclick={() => { page = Math.max(1, page - 1); }} type="button">«</button>
         {#each [1, 2, 3, 4, 5] as n}
@@ -189,8 +190,8 @@
 
   <!-- Navbar -->
   <section id="navbar" class="mb-2">
-    <div class="mb-2 pl-3" style="border-left: 3px solid var(--color-primary)">
-      <h5 class="font-semibold mb-1">Navbar</h5>
+    <div class="mb-2 border-l-2 border-primary pl-4">
+      <h2 class="text-xl font-semibold mb-1">Navbar</h5>
       <p class="text-base-content/60 text-sm mb-0">
         Responsive header using <code class="kbd kbd-sm">navbar</code> with
         <code class="kbd kbd-sm">navbar-start</code> and
@@ -198,7 +199,7 @@
         <code class="kbd kbd-sm">menu menu-horizontal</code> for desktop links.
       </p>
     </div>
-    <div class="bg-base-200 rounded-box p-4 mb-3">
+    <div class="rounded-xl border border-base-300 bg-base-200/60 p-8 shadow-sm mb-3">
       <div class="navbar bg-base-100 border border-base-300 rounded-box">
         <div class="navbar-start">
           <a class="btn btn-ghost text-lg font-bold">Brand</a>

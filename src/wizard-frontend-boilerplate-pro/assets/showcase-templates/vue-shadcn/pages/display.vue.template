@@ -149,21 +149,21 @@ import {
   <div class="flex flex-col gap-16">
     <div>
       <h1 class="text-3xl font-bold tracking-tight text-foreground">Display</h1>
-      <p class="mt-2 text-muted-foreground">
+      <p class="mt-2 text-base leading-relaxed text-muted-foreground">
         Read-only visual elements for presenting content — cards, badges,
         avatars, and data tables.
       </p>
     </div>
 
     <section class="flex flex-col gap-4" id="card">
-      <div class="border-l-2 border-primary/40 pl-3">
+      <div class="border-l-[3px] border-primary/60 pl-4">
         <h2 class="text-xl font-semibold text-foreground">Card</h2>
-        <p class="mt-1 text-sm text-muted-foreground">
+        <p class="mt-1 text-sm leading-relaxed text-muted-foreground">
           A surface for grouping related content with an optional header,
           body, and footer.
         </p>
       </div>
-      <div class="rounded-lg border border-border bg-muted/50 p-8">
+      <div class="rounded-xl border border-border/60 bg-muted/30 p-8 shadow-sm">
         <Card class="w-80">
           <CardHeader>
             <CardTitle>Project Alpha</CardTitle>
@@ -189,13 +189,13 @@ import {
     </section>
 
     <section class="flex flex-col gap-4" id="badge">
-      <div class="border-l-2 border-primary/40 pl-3">
+      <div class="border-l-[3px] border-primary/60 pl-4">
         <h2 class="text-xl font-semibold text-foreground">Badge</h2>
-        <p class="mt-1 text-sm text-muted-foreground">
+        <p class="mt-1 text-sm leading-relaxed text-muted-foreground">
           A compact label for status, category, or count with four visual variants.
         </p>
       </div>
-      <div class="rounded-lg border border-border bg-muted/50 p-8">
+      <div class="rounded-xl border border-border/60 bg-muted/30 p-8 shadow-sm">
         <div class="flex flex-wrap gap-2">
           <Badge>Default</Badge>
           <Badge variant="secondary">Secondary</Badge>
@@ -213,16 +213,16 @@ import {
     </section>
 
     <section class="flex flex-col gap-4" id="avatar">
-      <div class="border-l-2 border-primary/40 pl-3">
+      <div class="border-l-[3px] border-primary/60 pl-4">
         <h2 class="text-xl font-semibold text-foreground">Avatar</h2>
-        <p class="mt-1 text-sm text-muted-foreground">
+        <p class="mt-1 text-sm leading-relaxed text-muted-foreground">
           A circular user image using
           <code class="rounded bg-muted px-1 py-0.5 text-xs">AvatarImage</code> +
           <code class="rounded bg-muted px-1 py-0.5 text-xs">AvatarFallback</code>
           sub-components. The fallback renders when the image fails to load.
         </p>
       </div>
-      <div class="rounded-lg border border-border bg-muted/50 p-8">
+      <div class="rounded-xl border border-border/60 bg-muted/30 p-8 shadow-sm">
         <div class="flex items-center gap-4">
           <Avatar>
             <AvatarImage alt="Jane Doe" src="https://i.pravatar.cc/150?img=1" />
@@ -249,14 +249,14 @@ import {
     </section>
 
     <section class="flex flex-col gap-4" id="separator">
-      <div class="border-l-2 border-primary/40 pl-3">
+      <div class="border-l-[3px] border-primary/60 pl-4">
         <h2 class="text-xl font-semibold text-foreground">Separator</h2>
-        <p class="mt-1 text-sm text-muted-foreground">
+        <p class="mt-1 text-sm leading-relaxed text-muted-foreground">
           A thin dividing line for separating sections, available in
           horizontal and vertical orientations.
         </p>
       </div>
-      <div class="rounded-lg border border-border bg-muted/50 p-8">
+      <div class="rounded-xl border border-border/60 bg-muted/30 p-8 shadow-sm">
         <div class="flex flex-col gap-6">
           <div class="flex flex-col gap-2">
             <p class="text-sm text-muted-foreground">Section one content.</p>
@@ -280,14 +280,14 @@ import {
     </section>
 
     <section class="flex flex-col gap-4" id="skeleton">
-      <div class="border-l-2 border-primary/40 pl-3">
+      <div class="border-l-[3px] border-primary/60 pl-4">
         <h2 class="text-xl font-semibold text-foreground">Skeleton</h2>
-        <p class="mt-1 text-sm text-muted-foreground">
+        <p class="mt-1 text-sm leading-relaxed text-muted-foreground">
           Animated placeholder blocks that mimic content layout during
           loading states.
         </p>
       </div>
-      <div class="rounded-lg border border-border bg-muted/50 p-8">
+      <div class="rounded-xl border border-border/60 bg-muted/30 p-8 shadow-sm">
         <div class="flex items-center gap-4">
           <Skeleton class="h-12 w-12 rounded-full" />
           <div class="flex flex-col gap-2">
@@ -307,13 +307,13 @@ import {
     </section>
 
     <section class="flex flex-col gap-4" id="table">
-      <div class="border-l-2 border-primary/40 pl-3">
+      <div class="border-l-[3px] border-primary/60 pl-4">
         <h2 class="text-xl font-semibold text-foreground">Table</h2>
-        <p class="mt-1 text-sm text-muted-foreground">
+        <p class="mt-1 text-sm leading-relaxed text-muted-foreground">
           A structured grid for tabular data with header, body, and optional caption.
         </p>
       </div>
-      <div class="rounded-lg border border-border bg-muted/50 p-8">
+      <div class="rounded-xl border border-border/60 bg-muted/30 p-8 shadow-sm">
         <Table>
           <TableCaption>Team members list</TableCaption>
           <TableHeader>

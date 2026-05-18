@@ -82,23 +82,24 @@
 
 <div class="flex flex-col gap-4">
   <div>
-    <h1 class="text-xl font-semibold mb-1">Display</h1>
-    <p class="text-base-content/60 text-sm">
+    <div class="badge badge-outline badge-sm gap-1 uppercase tracking-wider text-xs font-medium mb-3" style="border-color: oklch(var(--p)/0.3); color: oklch(var(--p)); background: oklch(var(--p)/0.08)">Components</div>
+    <h1 class="text-4xl font-bold mb-2">Display</h1>
+    <p class="text-base-content opacity-70 max-w-2xl text-base">
       Read-only visual elements — cards, badges, avatars, and data tables.
     </p>
   </div>
 
   <!-- Card -->
   <section id="card" class="mb-2">
-    <div class="mb-2 pl-3" style="border-left: 3px solid var(--color-primary)">
-      <h5 class="font-semibold mb-1">Card</h5>
+    <div class="mb-2 border-l-2 border-primary pl-4">
+      <h2 class="text-xl font-semibold mb-1">Card</h5>
       <p class="text-base-content/60 text-sm mb-0">
         Surface using <code class="kbd kbd-sm">card bg-base-100</code> with
         <code class="kbd kbd-sm">card-body</code>, <code class="kbd kbd-sm">card-title</code>,
         and <code class="kbd kbd-sm">card-actions</code>.
       </p>
     </div>
-    <div class="bg-base-200 rounded-box p-4 mb-3">
+    <div class="rounded-xl border border-base-300 bg-base-200/60 p-8 shadow-sm mb-3">
       <div class="card bg-base-100 shadow-sm" style="max-width: 320px">
         <div class="card-body">
           <h2 class="card-title">Project Alpha</h2>
@@ -116,13 +117,13 @@
 
   <!-- Badge -->
   <section id="badge" class="mb-2">
-    <div class="mb-2 pl-3" style="border-left: 3px solid var(--color-primary)">
-      <h5 class="font-semibold mb-1">Badge</h5>
+    <div class="mb-2 border-l-2 border-primary pl-4">
+      <h2 class="text-xl font-semibold mb-1">Badge</h5>
       <p class="text-base-content/60 text-sm mb-0">
         Compact label using <code class="kbd kbd-sm">badge</code> with semantic colour and outline variants.
       </p>
     </div>
-    <div class="bg-base-200 rounded-box p-4 mb-3">
+    <div class="rounded-xl border border-base-300 bg-base-200/60 p-8 shadow-sm mb-3">
       <div class="flex flex-wrap gap-2">
         <span class="badge badge-primary">Primary</span>
         <span class="badge badge-secondary">Secondary</span>
@@ -141,14 +142,14 @@
 
   <!-- Avatar -->
   <section id="avatar" class="mb-2">
-    <div class="mb-2 pl-3" style="border-left: 3px solid var(--color-primary)">
-      <h5 class="font-semibold mb-1">Avatar</h5>
+    <div class="mb-2 border-l-2 border-primary pl-4">
+      <h2 class="text-xl font-semibold mb-1">Avatar</h5>
       <p class="text-base-content/60 text-sm mb-0">
         DaisyUI's <code class="kbd kbd-sm">avatar placeholder</code> pattern sized via <code class="kbd kbd-sm">w-*</code>.
         Add <code class="kbd kbd-sm">online</code> for a presence dot.
       </p>
     </div>
-    <div class="bg-base-200 rounded-box p-4 mb-3">
+    <div class="rounded-xl border border-base-300 bg-base-200/60 p-8 shadow-sm mb-3">
       <div class="flex items-center gap-4">
         <div class="avatar placeholder">
           <div class="bg-primary text-primary-content rounded-full w-8">
@@ -179,14 +180,14 @@
 
   <!-- Separator -->
   <section id="separator" class="mb-2">
-    <div class="mb-2 pl-3" style="border-left: 3px solid var(--color-primary)">
-      <h5 class="font-semibold mb-1">Separator</h5>
+    <div class="mb-2 border-l-2 border-primary pl-4">
+      <h2 class="text-xl font-semibold mb-1">Separator</h5>
       <p class="text-base-content/60 text-sm mb-0">
         <code class="kbd kbd-sm">divider</code> for horizontal;
         <code class="kbd kbd-sm">divider divider-horizontal</code> for vertical inside a flex row.
       </p>
     </div>
-    <div class="bg-base-200 rounded-box p-4 mb-3">
+    <div class="rounded-xl border border-base-300 bg-base-200/60 p-8 shadow-sm mb-3">
       <div class="flex flex-col gap-3">
         <div>
           <p class="text-base-content/60 text-sm mb-0">Section one content.</p>
@@ -207,13 +208,13 @@
 
   <!-- Skeleton -->
   <section id="skeleton" class="mb-2">
-    <div class="mb-2 pl-3" style="border-left: 3px solid var(--color-primary)">
-      <h5 class="font-semibold mb-1">Skeleton</h5>
+    <div class="mb-2 border-l-2 border-primary pl-4">
+      <h2 class="text-xl font-semibold mb-1">Skeleton</h5>
       <p class="text-base-content/60 text-sm mb-0">
         Animated placeholders using the <code class="kbd kbd-sm">skeleton</code> class with Tailwind dimensions.
       </p>
     </div>
-    <div class="bg-base-200 rounded-box p-4 mb-3">
+    <div class="rounded-xl border border-base-300 bg-base-200/60 p-8 shadow-sm mb-3">
       <div class="flex flex-col gap-4" style="max-width: 320px">
         <div class="flex items-center gap-4">
           <div class="skeleton w-12 h-12 rounded-full shrink-0"></div>
@@ -237,14 +238,14 @@
 
   <!-- Table -->
   <section id="table" class="mb-2">
-    <div class="mb-2 pl-3" style="border-left: 3px solid var(--color-primary)">
-      <h5 class="font-semibold mb-1">Table</h5>
+    <div class="mb-2 border-l-2 border-primary pl-4">
+      <h2 class="text-xl font-semibold mb-1">Table</h5>
       <p class="text-base-content/60 text-sm mb-0">
         Structured grid using <code class="kbd kbd-sm">table table-zebra</code>
         inside an <code class="kbd kbd-sm">overflow-x-auto</code> wrapper.
       </p>
     </div>
-    <div class="bg-base-200 rounded-box p-4 mb-3">
+    <div class="rounded-xl border border-base-300 bg-base-200/60 p-8 shadow-sm mb-3">
       <div class="overflow-x-auto">
         <table class="table table-zebra">
           <thead>

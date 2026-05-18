@@ -158,28 +158,71 @@ export function Example() {
   );
 }`;
 
+function HashIcon() {
+  return (
+    <svg
+      aria-hidden="true"
+      fill="none"
+      height="16"
+      stroke="currentColor"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth="2"
+      viewBox="0 0 24 24"
+      width="16"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <line x1="4" x2="20" y1="9" y2="9" />
+      <line x1="4" x2="20" y1="15" y2="15" />
+      <line x1="10" x2="8" y1="3" y2="21" />
+      <line x1="16" x2="14" y1="3" y2="21" />
+    </svg>
+  );
+}
+
+const PREVIEW_STYLE = {
+  backgroundImage:
+    "radial-gradient(circle at center, hsl(var(--border)) 1px, transparent 1px)",
+  backgroundSize: "20px 20px",
+};
+
 export default function DisplayPage() {
   return (
     <div className="flex flex-col gap-16">
-      <div>
-        <h1 className="text-3xl font-bold tracking-tight text-foreground">
+      <div className="flex flex-col gap-3 border-b border-border pb-8">
+        <span className="inline-flex w-fit items-center rounded-full border border-primary/20 bg-primary/5 px-3 py-1 text-xs font-medium uppercase tracking-wider text-primary">
+          Display
+        </span>
+        <h1 className="text-4xl font-bold tracking-tight text-foreground">
           Display
         </h1>
-        <p className="mt-2 text-muted-foreground">
+        <p className="max-w-2xl text-muted-foreground">
           Read-only visual elements for presenting content — cards, badges,
           avatars, and data tables.
         </p>
       </div>
 
-      <section className="flex flex-col gap-4" id="card">
-        <div className="border-l-2 border-primary/40 pl-3">
-          <h2 className="text-xl font-semibold text-foreground">Card</h2>
-          <p className="mt-1 text-sm text-muted-foreground">
+      <section className="group flex flex-col gap-6" id="card">
+        <div className="flex flex-col gap-2 border-l-2 border-primary/60 pl-4">
+          <div className="flex items-center gap-2">
+            <h2 className="text-xl font-semibold text-foreground">Card</h2>
+            <a
+              aria-label="Anchor link to Card section"
+              className="cursor-pointer text-muted-foreground opacity-0 transition-opacity duration-150 group-hover:opacity-50 hover:!opacity-100"
+              href="#card"
+            >
+              <HashIcon />
+            </a>
+          </div>
+          <p className="text-sm text-muted-foreground">
             A surface for grouping related content with an optional header,
             body, and footer.
           </p>
         </div>
-        <div className="rounded-lg border border-border bg-muted/50 p-8">
+        <div
+          className="rounded-xl border border-border bg-background/60 p-8 shadow-sm"
+          style={PREVIEW_STYLE}
+        >
           <Card className="w-80">
             <CardHeader>
               <CardTitle>Project Alpha</CardTitle>
@@ -207,15 +250,27 @@ export default function DisplayPage() {
         />
       </section>
 
-      <section className="flex flex-col gap-4" id="badge">
-        <div className="border-l-2 border-primary/40 pl-3">
-          <h2 className="text-xl font-semibold text-foreground">Badge</h2>
-          <p className="mt-1 text-sm text-muted-foreground">
+      <section className="group flex flex-col gap-6" id="badge">
+        <div className="flex flex-col gap-2 border-l-2 border-primary/60 pl-4">
+          <div className="flex items-center gap-2">
+            <h2 className="text-xl font-semibold text-foreground">Badge</h2>
+            <a
+              aria-label="Anchor link to Badge section"
+              className="cursor-pointer text-muted-foreground opacity-0 transition-opacity duration-150 group-hover:opacity-50 hover:!opacity-100"
+              href="#badge"
+            >
+              <HashIcon />
+            </a>
+          </div>
+          <p className="text-sm text-muted-foreground">
             A compact label for status, category, or count with four visual
             variants.
           </p>
         </div>
-        <div className="rounded-lg border border-border bg-muted/50 p-8">
+        <div
+          className="rounded-xl border border-border bg-background/60 p-8 shadow-sm"
+          style={PREVIEW_STYLE}
+        >
           <div className="flex flex-wrap gap-2">
             <Badge>Default</Badge>
             <Badge variant="secondary">Secondary</Badge>
@@ -232,15 +287,27 @@ export default function DisplayPage() {
         />
       </section>
 
-      <section className="flex flex-col gap-4" id="avatar">
-        <div className="border-l-2 border-primary/40 pl-3">
-          <h2 className="text-xl font-semibold text-foreground">Avatar</h2>
-          <p className="mt-1 text-sm text-muted-foreground">
+      <section className="group flex flex-col gap-6" id="avatar">
+        <div className="flex flex-col gap-2 border-l-2 border-primary/60 pl-4">
+          <div className="flex items-center gap-2">
+            <h2 className="text-xl font-semibold text-foreground">Avatar</h2>
+            <a
+              aria-label="Anchor link to Avatar section"
+              className="cursor-pointer text-muted-foreground opacity-0 transition-opacity duration-150 group-hover:opacity-50 hover:!opacity-100"
+              href="#avatar"
+            >
+              <HashIcon />
+            </a>
+          </div>
+          <p className="text-sm text-muted-foreground">
             A circular user image that falls back to initials when no src is
             available, with small, default, and large sizes.
           </p>
         </div>
-        <div className="rounded-lg border border-border bg-muted/50 p-8">
+        <div
+          className="rounded-xl border border-border bg-background/60 p-8 shadow-sm"
+          style={PREVIEW_STYLE}
+        >
           <div className="flex items-center gap-4">
             <Avatar
               alt="Jane Doe"
@@ -260,15 +327,27 @@ export default function DisplayPage() {
         />
       </section>
 
-      <section className="flex flex-col gap-4" id="separator">
-        <div className="border-l-2 border-primary/40 pl-3">
-          <h2 className="text-xl font-semibold text-foreground">Separator</h2>
-          <p className="mt-1 text-sm text-muted-foreground">
+      <section className="group flex flex-col gap-6" id="separator">
+        <div className="flex flex-col gap-2 border-l-2 border-primary/60 pl-4">
+          <div className="flex items-center gap-2">
+            <h2 className="text-xl font-semibold text-foreground">Separator</h2>
+            <a
+              aria-label="Anchor link to Separator section"
+              className="cursor-pointer text-muted-foreground opacity-0 transition-opacity duration-150 group-hover:opacity-50 hover:!opacity-100"
+              href="#separator"
+            >
+              <HashIcon />
+            </a>
+          </div>
+          <p className="text-sm text-muted-foreground">
             A thin dividing line for separating sections, available in
             horizontal and vertical orientations.
           </p>
         </div>
-        <div className="rounded-lg border border-border bg-muted/50 p-8">
+        <div
+          className="rounded-xl border border-border bg-background/60 p-8 shadow-sm"
+          style={PREVIEW_STYLE}
+        >
           <div className="flex flex-col gap-6">
             <div className="flex flex-col gap-2">
               <p className="text-sm text-muted-foreground">
@@ -295,15 +374,27 @@ export default function DisplayPage() {
         />
       </section>
 
-      <section className="flex flex-col gap-4" id="skeleton">
-        <div className="border-l-2 border-primary/40 pl-3">
-          <h2 className="text-xl font-semibold text-foreground">Skeleton</h2>
-          <p className="mt-1 text-sm text-muted-foreground">
+      <section className="group flex flex-col gap-6" id="skeleton">
+        <div className="flex flex-col gap-2 border-l-2 border-primary/60 pl-4">
+          <div className="flex items-center gap-2">
+            <h2 className="text-xl font-semibold text-foreground">Skeleton</h2>
+            <a
+              aria-label="Anchor link to Skeleton section"
+              className="cursor-pointer text-muted-foreground opacity-0 transition-opacity duration-150 group-hover:opacity-50 hover:!opacity-100"
+              href="#skeleton"
+            >
+              <HashIcon />
+            </a>
+          </div>
+          <p className="text-sm text-muted-foreground">
             Animated placeholder blocks that mimic content layout during
             loading states.
           </p>
         </div>
-        <div className="rounded-lg border border-border bg-muted/50 p-8">
+        <div
+          className="rounded-xl border border-border bg-background/60 p-8 shadow-sm"
+          style={PREVIEW_STYLE}
+        >
           <div className="flex items-center gap-4">
             <Skeleton className="h-12 w-12 rounded-full" />
             <div className="flex flex-col gap-2">
@@ -322,15 +413,27 @@ export default function DisplayPage() {
         />
       </section>
 
-      <section className="flex flex-col gap-4" id="table">
-        <div className="border-l-2 border-primary/40 pl-3">
-          <h2 className="text-xl font-semibold text-foreground">Table</h2>
-          <p className="mt-1 text-sm text-muted-foreground">
+      <section className="group flex flex-col gap-6" id="table">
+        <div className="flex flex-col gap-2 border-l-2 border-primary/60 pl-4">
+          <div className="flex items-center gap-2">
+            <h2 className="text-xl font-semibold text-foreground">Table</h2>
+            <a
+              aria-label="Anchor link to Table section"
+              className="cursor-pointer text-muted-foreground opacity-0 transition-opacity duration-150 group-hover:opacity-50 hover:!opacity-100"
+              href="#table"
+            >
+              <HashIcon />
+            </a>
+          </div>
+          <p className="text-sm text-muted-foreground">
             A structured grid for tabular data with header, body, and optional
             caption.
           </p>
         </div>
-        <div className="rounded-lg border border-border bg-muted/50 p-8">
+        <div
+          className="rounded-xl border border-border bg-background/60 p-8 shadow-sm"
+          style={PREVIEW_STYLE}
+        >
           <Table>
             <TableCaption>Team members list</TableCaption>
             <TableHeader>

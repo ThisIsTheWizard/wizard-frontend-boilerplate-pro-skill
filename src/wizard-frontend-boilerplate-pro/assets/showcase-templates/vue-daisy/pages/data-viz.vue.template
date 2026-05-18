@@ -140,7 +140,7 @@ import "v-calendar/style.css";`;
           in sync with the active DaisyUI theme.
         </p>
       </div>
-      <div class="bg-base-200 rounded-box p-4 mb-3">
+      <div class="bg-base-200 rounded-box p-4 mb-3 shadow-sm">
         <ResponsiveContainer :height="256" width="100%">
           <LineChart :data="CHART_DATA">
             <CartesianGrid stroke-dasharray="3 3" />
@@ -167,7 +167,7 @@ import "v-calendar/style.css";`;
           Click column headers to toggle order.
         </p>
       </div>
-      <div class="bg-base-200 rounded-box p-4 mb-3">
+      <div class="bg-base-200 rounded-box p-4 mb-3 shadow-sm">
         <div class="overflow-x-auto">
           <table class="table table-zebra">
             <thead>
@@ -207,7 +207,7 @@ import "v-calendar/style.css";`;
         </p>
         <code class="text-xs mt-1 block">npm install v-calendar @popperjs/core</code>
       </div>
-      <div class="bg-base-200 rounded-box p-4 mb-3">
+      <div class="bg-base-200 rounded-box p-4 mb-3 shadow-sm">
         <p class="text-base-content/60 text-sm mb-0">
           Calendar preview omitted — <code class="kbd kbd-sm">v-calendar</code> requires
           importing its CSS alongside the component. See the code snippet below for the

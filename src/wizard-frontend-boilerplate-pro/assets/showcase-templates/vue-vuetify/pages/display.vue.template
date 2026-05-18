@@ -94,15 +94,15 @@ const TABLE_CODE = `<template>
   <div class="flex flex-col gap-16">
     <div>
       <h1 class="text-3xl font-bold tracking-tight text-foreground">Display</h1>
-      <p class="mt-2 text-muted-foreground">
+      <p class="mt-2 text-base leading-relaxed text-muted-foreground">
         Read-only visual elements for presenting content — cards, badges, avatars, and data tables.
       </p>
     </div>
 
     <section class="flex flex-col gap-4" id="card">
-      <div class="border-l-2 border-primary/40 pl-3">
+      <div class="border-l-[3px] border-primary/60 pl-4">
         <h2 class="text-xl font-semibold text-foreground">Card</h2>
-        <p class="mt-1 text-sm text-muted-foreground">
+        <p class="mt-1 text-sm leading-relaxed text-muted-foreground">
           A surface for grouping related content via
           <code class="rounded bg-muted px-1 py-0.5 text-xs">v-card</code> with
           <code class="rounded bg-muted px-1 py-0.5 text-xs">v-card-title</code>,
@@ -111,7 +111,7 @@ const TABLE_CODE = `<template>
           <code class="rounded bg-muted px-1 py-0.5 text-xs">v-card-actions</code> slots.
         </p>
       </div>
-      <div class="rounded-lg border border-border bg-muted/50 p-8">
+      <div class="rounded-xl border border-border/60 bg-muted/30 p-8 shadow-sm">
         <v-card class="w-80" variant="elevated">
           <v-card-title>Project Alpha</v-card-title>
           <v-card-subtitle>A next-generation web application.</v-card-subtitle>
@@ -135,9 +135,9 @@ const TABLE_CODE = `<template>
     </section>
 
     <section class="flex flex-col gap-4" id="badge">
-      <div class="border-l-2 border-primary/40 pl-3">
+      <div class="border-l-[3px] border-primary/60 pl-4">
         <h2 class="text-xl font-semibold text-foreground">Badge</h2>
-        <p class="mt-1 text-sm text-muted-foreground">
+        <p class="mt-1 text-sm leading-relaxed text-muted-foreground">
           A compact label for status or category via
           <code class="rounded bg-muted px-1 py-0.5 text-xs">v-chip</code>. Use the
           <code class="rounded bg-muted px-1 py-0.5 text-xs">color</code> and
@@ -145,7 +145,7 @@ const TABLE_CODE = `<template>
           outlined, text, tonal).
         </p>
       </div>
-      <div class="rounded-lg border border-border bg-muted/50 p-8">
+      <div class="rounded-xl border border-border/60 bg-muted/30 p-8 shadow-sm">
         <div class="flex flex-wrap gap-2">
           <v-chip color="primary">Primary</v-chip>
           <v-chip color="success">Success</v-chip>
@@ -167,9 +167,9 @@ const TABLE_CODE = `<template>
     </section>
 
     <section class="flex flex-col gap-4" id="avatar">
-      <div class="border-l-2 border-primary/40 pl-3">
+      <div class="border-l-[3px] border-primary/60 pl-4">
         <h2 class="text-xl font-semibold text-foreground">Avatar</h2>
-        <p class="mt-1 text-sm text-muted-foreground">
+        <p class="mt-1 text-sm leading-relaxed text-muted-foreground">
           A user image or initials via
           <code class="rounded bg-muted px-1 py-0.5 text-xs">v-avatar</code>. Use the
           <code class="rounded bg-muted px-1 py-0.5 text-xs">image</code> prop or slot content for
@@ -177,7 +177,7 @@ const TABLE_CODE = `<template>
           background.
         </p>
       </div>
-      <div class="rounded-lg border border-border bg-muted/50 p-8">
+      <div class="rounded-xl border border-border/60 bg-muted/30 p-8 shadow-sm">
         <div class="flex items-center gap-4">
           <v-avatar image="https://i.pravatar.cc/150?img=1" size="large" />
           <v-avatar color="primary" size="large">JD</v-avatar>
@@ -195,16 +195,16 @@ const TABLE_CODE = `<template>
     </section>
 
     <section class="flex flex-col gap-4" id="separator">
-      <div class="border-l-2 border-primary/40 pl-3">
+      <div class="border-l-[3px] border-primary/60 pl-4">
         <h2 class="text-xl font-semibold text-foreground">Separator</h2>
-        <p class="mt-1 text-sm text-muted-foreground">
+        <p class="mt-1 text-sm leading-relaxed text-muted-foreground">
           A thin dividing line via
           <code class="rounded bg-muted px-1 py-0.5 text-xs">v-divider</code>. Add the
           <code class="rounded bg-muted px-1 py-0.5 text-xs">vertical</code> prop for inline
           separators.
         </p>
       </div>
-      <div class="rounded-lg border border-border bg-muted/50 p-8">
+      <div class="rounded-xl border border-border/60 bg-muted/30 p-8 shadow-sm">
         <div class="flex flex-col gap-6">
           <div class="flex flex-col gap-2">
             <p class="text-sm text-muted-foreground">Section one content.</p>
@@ -228,16 +228,16 @@ const TABLE_CODE = `<template>
     </section>
 
     <section class="flex flex-col gap-4" id="skeleton">
-      <div class="border-l-2 border-primary/40 pl-3">
+      <div class="border-l-[3px] border-primary/60 pl-4">
         <h2 class="text-xl font-semibold text-foreground">Skeleton</h2>
-        <p class="mt-1 text-sm text-muted-foreground">
+        <p class="mt-1 text-sm leading-relaxed text-muted-foreground">
           Animated placeholder blocks via
           <code class="rounded bg-muted px-1 py-0.5 text-xs">v-skeleton-loader</code>. Use the
           <code class="rounded bg-muted px-1 py-0.5 text-xs">type</code> prop: card, list-item,
           avatar, text, image, table.
         </p>
       </div>
-      <div class="rounded-lg border border-border bg-muted/50 p-8">
+      <div class="rounded-xl border border-border/60 bg-muted/30 p-8 shadow-sm">
         <div class="flex flex-col gap-3">
           <v-skeleton-loader type="list-item-avatar-two-line" />
           <v-skeleton-loader max-width="300" type="card" />
@@ -253,16 +253,16 @@ const TABLE_CODE = `<template>
     </section>
 
     <section class="flex flex-col gap-4" id="table">
-      <div class="border-l-2 border-primary/40 pl-3">
+      <div class="border-l-[3px] border-primary/60 pl-4">
         <h2 class="text-xl font-semibold text-foreground">Table</h2>
-        <p class="mt-1 text-sm text-muted-foreground">
+        <p class="mt-1 text-sm leading-relaxed text-muted-foreground">
           A styled table wrapper via
           <code class="rounded bg-muted px-1 py-0.5 text-xs">v-table</code>. Use standard HTML
           <code class="rounded bg-muted px-1 py-0.5 text-xs">thead</code> /
           <code class="rounded bg-muted px-1 py-0.5 text-xs">tbody</code> inside.
         </p>
       </div>
-      <div class="rounded-lg border border-border bg-muted/50 p-8">
+      <div class="rounded-xl border border-border/60 bg-muted/30 p-8 shadow-sm">
         <v-table density="comfortable">
           <thead>
             <tr>

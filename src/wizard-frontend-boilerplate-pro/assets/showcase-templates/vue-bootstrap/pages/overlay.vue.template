@@ -91,7 +91,7 @@ const show = ref(false);
           <code>triggers="click"</code>.
         </p>
       </div>
-      <div class="p-4 rounded-3 border bg-body-tertiary mb-3">
+      <div class="p-4 rounded-3 border bg-body-tertiary mb-3 shadow-sm">
         <BButton id="popover-demo-btn" variant="outline-secondary">Open Popover</BButton>
 
         <BPopover target="popover-demo-btn" title="Popover title" triggers="click">
@@ -122,7 +122,7 @@ const show = ref(false);
           <code>BDropdownDivider</code>.
         </p>
       </div>
-      <div class="p-4 rounded-3 border bg-body-tertiary mb-3">
+      <div class="p-4 rounded-3 border bg-body-tertiary mb-3 shadow-sm">
         <BDropdown text="Account" variant="outline-secondary">
           <BDropdownHeader>My Account</BDropdownHeader>
           <BDropdownItem>Profile</BDropdownItem>
@@ -153,7 +153,7 @@ const show = ref(false);
           focus trap and ARIA dialog semantics.
         </p>
       </div>
-      <div class="p-4 rounded-3 border bg-body-tertiary mb-3">
+      <div class="p-4 rounded-3 border bg-body-tertiary mb-3 shadow-sm">
         <BButton variant="outline-secondary" @click="showOffcanvas = true">Open Sheet</BButton>
 
         <BOffcanvas v-model:show="showOffcanvas" placement="end" title="Edit profile">

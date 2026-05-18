@@ -128,21 +128,21 @@ const sheetOpen = ref(false);
   <div class="flex flex-col gap-16">
     <div>
       <h1 class="text-3xl font-bold tracking-tight text-foreground">Overlay</h1>
-      <p class="mt-2 text-muted-foreground">
+      <p class="mt-2 text-base leading-relaxed text-muted-foreground">
         Floating UI components that render above the main content — popovers, dropdown menus, and
         sheets.
       </p>
     </div>
 
     <section class="flex flex-col gap-4" id="popover">
-      <div class="border-l-2 border-primary/40 pl-3">
+      <div class="border-l-[3px] border-primary/60 pl-4">
         <h2 class="text-xl font-semibold text-foreground">Popover</h2>
-        <p class="mt-1 text-sm text-muted-foreground">
+        <p class="mt-1 text-sm leading-relaxed text-muted-foreground">
           A non-modal floating panel anchored to a trigger element, dismissed by clicking outside or
           pressing Escape.
         </p>
       </div>
-      <div class="rounded-lg border border-border bg-muted/50 p-8">
+      <div class="rounded-xl border border-border/60 bg-muted/30 p-8 shadow-sm">
         <Popover :open="popoverOpen" @openChange="val => (popoverOpen = val)">
           <PopoverTrigger as-child>
             <Button variant="outline" @click="popoverOpen = true">Open Popover</Button>
@@ -172,14 +172,14 @@ const sheetOpen = ref(false);
     </section>
 
     <section class="flex flex-col gap-4" id="dropdown-menu">
-      <div class="border-l-2 border-primary/40 pl-3">
+      <div class="border-l-[3px] border-primary/60 pl-4">
         <h2 class="text-xl font-semibold text-foreground">DropdownMenu</h2>
-        <p class="mt-1 text-sm text-muted-foreground">
+        <p class="mt-1 text-sm leading-relaxed text-muted-foreground">
           A contextual menu with keyboard navigation, separators, and support for labels and nested
           items.
         </p>
       </div>
-      <div class="rounded-lg border border-border bg-muted/50 p-8">
+      <div class="rounded-xl border border-border/60 bg-muted/30 p-8 shadow-sm">
         <DropdownMenu :open="dropdownOpen" @openChange="val => (dropdownOpen = val)">
           <DropdownMenuTrigger as-child>
             <Button variant="outline">Options</Button>
@@ -203,13 +203,13 @@ const sheetOpen = ref(false);
     </section>
 
     <section class="flex flex-col gap-4" id="sheet">
-      <div class="border-l-2 border-primary/40 pl-3">
+      <div class="border-l-[3px] border-primary/60 pl-4">
         <h2 class="text-xl font-semibold text-foreground">Sheet</h2>
-        <p class="mt-1 text-sm text-muted-foreground">
+        <p class="mt-1 text-sm leading-relaxed text-muted-foreground">
           A slide-in panel from any screen edge with focus trap and ARIA dialog semantics.
         </p>
       </div>
-      <div class="rounded-lg border border-border bg-muted/50 p-8">
+      <div class="rounded-xl border border-border/60 bg-muted/30 p-8 shadow-sm">
         <Sheet :open="sheetOpen" @openChange="val => (sheetOpen = val)">
           <SheetTrigger as-child>
             <Button variant="outline" @click="sheetOpen = true">Open Sheet</Button>

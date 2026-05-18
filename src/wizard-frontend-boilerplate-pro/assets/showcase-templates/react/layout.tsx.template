@@ -14,15 +14,15 @@ function LogoIcon() {
     <svg
       aria-hidden="true"
       fill="none"
-      height="20"
+      height="22"
       viewBox="0 0 20 20"
-      width="20"
+      width="22"
       xmlns="http://www.w3.org/2000/svg"
     >
       <rect
         fill="currentColor"
         height="7"
-        opacity="0.9"
+        opacity="1"
         rx="1.5"
         width="7"
         x="2"
@@ -31,7 +31,7 @@ function LogoIcon() {
       <rect
         fill="currentColor"
         height="7"
-        opacity="0.6"
+        opacity="0.65"
         rx="1.5"
         width="7"
         x="11"
@@ -40,7 +40,7 @@ function LogoIcon() {
       <rect
         fill="currentColor"
         height="7"
-        opacity="0.6"
+        opacity="0.65"
         rx="1.5"
         width="7"
         x="2"
@@ -79,13 +79,13 @@ function MenuIcon() {
     <svg
       aria-hidden="true"
       fill="none"
-      height="24"
+      height="20"
       stroke="currentColor"
       strokeLinecap="round"
       strokeLinejoin="round"
       strokeWidth="2"
       viewBox="0 0 24 24"
-      width="24"
+      width="20"
       xmlns="http://www.w3.org/2000/svg"
     >
       <line x1="4" x2="20" y1="6" y2="6" />
@@ -100,13 +100,13 @@ function MoonIcon() {
     <svg
       aria-hidden="true"
       fill="none"
-      height="18"
+      height="17"
       stroke="currentColor"
       strokeLinecap="round"
       strokeLinejoin="round"
       strokeWidth="2"
       viewBox="0 0 24 24"
-      width="18"
+      width="17"
       xmlns="http://www.w3.org/2000/svg"
     >
       <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" />
@@ -119,13 +119,13 @@ function SunIcon() {
     <svg
       aria-hidden="true"
       fill="none"
-      height="18"
+      height="17"
       stroke="currentColor"
       strokeLinecap="round"
       strokeLinejoin="round"
       strokeWidth="2"
       viewBox="0 0 24 24"
-      width="18"
+      width="17"
       xmlns="http://www.w3.org/2000/svg"
     >
       <circle cx="12" cy="12" r="4" />
@@ -145,14 +145,14 @@ export default function LibraryLayout({ children }: { children: ReactNode }) {
       {sidebarOpen && (
         <div
           aria-hidden="true"
-          className="fixed inset-0 z-30 bg-black/50 md:hidden"
+          className="fixed inset-0 z-30 bg-black/40 backdrop-blur-sm transition-opacity md:hidden"
           onClick={closeSidebar}
         />
       )}
 
       <aside
         className={cn(
-          "fixed inset-y-0 left-0 z-40 w-64 border-r border-border bg-surface transition-transform duration-200 ease-in-out md:translate-x-0",
+          "fixed inset-y-0 left-0 z-40 w-64 border-r border-border bg-surface shadow-lg transition-transform duration-200 ease-in-out md:shadow-none md:translate-x-0",
           sidebarOpen ? "translate-x-0" : "-translate-x-full",
         )}
       >
@@ -160,11 +160,11 @@ export default function LibraryLayout({ children }: { children: ReactNode }) {
       </aside>
 
       <div className="flex min-h-screen flex-1 flex-col md:pl-64">
-        <header className="sticky top-0 z-30 flex h-14 items-center gap-3 border-b border-border bg-background/95 px-4 backdrop-blur-sm supports-[backdrop-filter]:bg-background/60">
+        <header className="sticky top-0 z-30 flex h-16 items-center gap-3 border-b border-border bg-background/90 px-4 backdrop-blur-md supports-[backdrop-filter]:bg-background/70">
           <button
             aria-expanded={sidebarOpen}
             aria-label="Open navigation menu"
-            className="inline-flex cursor-pointer items-center justify-center rounded-md p-2 text-foreground hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring md:hidden"
+            className="inline-flex cursor-pointer items-center justify-center rounded-lg p-2 text-muted-foreground transition-colors duration-150 hover:bg-accent hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring md:hidden"
             onClick={() => setSidebarOpen(true)}
             type="button"
           >
@@ -172,7 +172,7 @@ export default function LibraryLayout({ children }: { children: ReactNode }) {
           </button>
 
           <Link
-            className="flex items-center gap-2 text-sm font-semibold text-foreground transition-colors hover:text-primary md:hidden"
+            className="flex items-center gap-2.5 text-sm font-semibold text-foreground transition-colors duration-150 hover:text-primary md:hidden"
             href="/library"
           >
             <span className="text-primary">
@@ -185,7 +185,7 @@ export default function LibraryLayout({ children }: { children: ReactNode }) {
 
           <a
             aria-label="GitHub repository"
-            className="inline-flex cursor-pointer items-center gap-1.5 rounded-md px-3 py-1.5 text-sm text-muted-foreground transition-colors hover:bg-accent hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+            className="inline-flex cursor-pointer items-center gap-1.5 rounded-lg px-3 py-1.5 text-sm text-muted-foreground transition-colors duration-150 hover:bg-accent hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
             href="#"
             rel="noopener noreferrer"
             target="_blank"
@@ -200,7 +200,7 @@ export default function LibraryLayout({ children }: { children: ReactNode }) {
             aria-label={
               theme === "dark" ? "Switch to light mode" : "Switch to dark mode"
             }
-            className="inline-flex cursor-pointer items-center justify-center rounded-md p-2 text-muted-foreground transition-colors hover:bg-accent hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+            className="inline-flex cursor-pointer items-center justify-center rounded-lg p-2 text-muted-foreground transition-colors duration-150 hover:bg-accent hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
             onClick={toggleTheme}
             type="button"
           >
@@ -208,7 +208,7 @@ export default function LibraryLayout({ children }: { children: ReactNode }) {
           </button>
         </header>
 
-        <main className="flex-1 p-6 md:p-8">{children}</main>
+        <main className="flex-1 p-6 md:p-10">{children}</main>
       </div>
     </div>
   );

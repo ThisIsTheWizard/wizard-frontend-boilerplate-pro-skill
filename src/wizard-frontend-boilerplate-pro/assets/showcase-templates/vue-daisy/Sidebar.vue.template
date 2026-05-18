@@ -107,7 +107,7 @@ function handleNavigate() {
     <!-- Header -->
     <div
       class="flex items-center gap-2 px-3 border-b border-base-300 flex-shrink-0"
-      style="height: 56px"
+      style="height: 64px; background: linear-gradient(to right, oklch(var(--p) / 0.06), transparent)"
     >
       <span class="text-primary">
         <svg fill="none" height="20" viewBox="0 0 20 20" width="20">

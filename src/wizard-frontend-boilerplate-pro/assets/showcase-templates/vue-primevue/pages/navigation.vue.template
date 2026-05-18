@@ -121,15 +121,15 @@ const model = [
   <div class="flex flex-col gap-16">
     <div>
       <h1 class="text-3xl font-bold tracking-tight text-foreground">Navigation</h1>
-      <p class="mt-2 text-muted-foreground">
+      <p class="mt-2 text-base leading-relaxed text-muted-foreground">
         Components for moving between pages and sections — tabs, breadcrumbs, pagination, and menus.
       </p>
     </div>
 
     <section class="flex flex-col gap-4" id="tabs">
-      <div class="border-l-2 border-primary/40 pl-3">
+      <div class="border-l-[3px] border-primary/60 pl-4">
         <h2 class="text-xl font-semibold text-foreground">Tabs</h2>
-        <p class="mt-1 text-sm text-muted-foreground">
+        <p class="mt-1 text-sm leading-relaxed text-muted-foreground">
           A tabbed interface via
           <code class="rounded bg-muted px-1 py-0.5 text-xs">Tabs</code> +
           <code class="rounded bg-muted px-1 py-0.5 text-xs">TabList</code> +
@@ -139,7 +139,7 @@ const model = [
           <code class="rounded bg-muted px-1 py-0.5 text-xs">v-model:value</code> on the root.
         </p>
       </div>
-      <div class="rounded-lg border border-border bg-muted/50 p-8">
+      <div class="rounded-xl border border-border/60 bg-muted/30 p-8 shadow-sm">
         <Tabs v-model:value="activeTab">
           <TabList>
             <Tab value="account">Account</Tab>
@@ -175,9 +175,9 @@ const model = [
     </section>
 
     <section class="flex flex-col gap-4" id="breadcrumb">
-      <div class="border-l-2 border-primary/40 pl-3">
+      <div class="border-l-[3px] border-primary/60 pl-4">
         <h2 class="text-xl font-semibold text-foreground">Breadcrumb</h2>
-        <p class="mt-1 text-sm text-muted-foreground">
+        <p class="mt-1 text-sm leading-relaxed text-muted-foreground">
           A landmark trail via
           <code class="rounded bg-muted px-1 py-0.5 text-xs">Breadcrumb</code>. Pass a
           <code class="rounded bg-muted px-1 py-0.5 text-xs">:home</code> item and a
@@ -185,7 +185,7 @@ const model = [
           <code class="rounded bg-muted px-1 py-0.5 text-xs">{ label, url }</code> objects.
         </p>
       </div>
-      <div class="rounded-lg border border-border bg-muted/50 p-8">
+      <div class="rounded-xl border border-border/60 bg-muted/30 p-8 shadow-sm">
         <Breadcrumb :home="BREADCRUMB_HOME" :model="BREADCRUMB_ITEMS" />
       </div>
       <CodeBlock
@@ -198,9 +198,9 @@ const model = [
     </section>
 
     <section class="flex flex-col gap-4" id="pagination">
-      <div class="border-l-2 border-primary/40 pl-3">
+      <div class="border-l-[3px] border-primary/60 pl-4">
         <h2 class="text-xl font-semibold text-foreground">Pagination</h2>
-        <p class="mt-1 text-sm text-muted-foreground">
+        <p class="mt-1 text-sm leading-relaxed text-muted-foreground">
           Page navigation via
           <code class="rounded bg-muted px-1 py-0.5 text-xs">Paginator</code>. Bind
           <code class="rounded bg-muted px-1 py-0.5 text-xs">v-model:first</code> (byte offset) and
@@ -208,7 +208,7 @@ const model = [
           <code class="rounded bg-muted px-1 py-0.5 text-xs">:totalRecords</code>.
         </p>
       </div>
-      <div class="rounded-lg border border-border bg-muted/50 p-8">
+      <div class="rounded-xl border border-border/60 bg-muted/30 p-8 shadow-sm">
         <Paginator v-model:first="paginatorFirst" :rows="10" :total-records="100" />
       </div>
       <CodeBlock
@@ -221,9 +221,9 @@ const model = [
     </section>
 
     <section class="flex flex-col gap-4" id="navigation-menu">
-      <div class="border-l-2 border-primary/40 pl-3">
+      <div class="border-l-[3px] border-primary/60 pl-4">
         <h2 class="text-xl font-semibold text-foreground">NavigationMenu</h2>
-        <p class="mt-1 text-sm text-muted-foreground">
+        <p class="mt-1 text-sm leading-relaxed text-muted-foreground">
           A horizontal menu bar via
           <code class="rounded bg-muted px-1 py-0.5 text-xs">Menubar</code>. Pass a
           <code class="rounded bg-muted px-1 py-0.5 text-xs">:model</code> array where each item
@@ -231,7 +231,7 @@ const model = [
           <code class="rounded bg-muted px-1 py-0.5 text-xs">items</code> for dropdowns.
         </p>
       </div>
-      <div class="rounded-lg border border-border bg-muted/50 p-8">
+      <div class="rounded-xl border border-border/60 bg-muted/30 p-8 shadow-sm">
         <Menubar :model="MENU_MODEL" />
       </div>
       <CodeBlock

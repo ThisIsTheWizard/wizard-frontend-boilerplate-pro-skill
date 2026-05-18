@@ -22,22 +22,39 @@ function LogoIcon() {
     <svg
       aria-hidden="true"
       fill="none"
-      height="20"
+      height="22"
       viewBox="0 0 20 20"
-      width="20"
+      width="22"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <rect fill="currentColor" height="7" opacity="0.9" rx="1.5" width="7" x="2" y="2" />
-      <rect fill="currentColor" height="7" opacity="0.6" rx="1.5" width="7" x="11" y="2" />
-      <rect fill="currentColor" height="7" opacity="0.6" rx="1.5" width="7" x="2" y="11" />
+      <rect fill="currentColor" height="7" opacity="1" rx="1.5" width="7" x="2" y="2" />
+      <rect fill="currentColor" height="7" opacity="0.65" rx="1.5" width="7" x="11" y="2" />
+      <rect fill="currentColor" height="7" opacity="0.65" rx="1.5" width="7" x="2" y="11" />
       <rect fill="currentColor" height="7" opacity="0.3" rx="1.5" width="7" x="11" y="11" />
+    </svg>
+  );
+}
+
+function SearchIcon() {
+  return (
+    <svg aria-hidden="true" fill="none" height="14" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.75" viewBox="0 0 24 24" width="14" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="11" cy="11" r="8" />
+      <path d="m21 21-4.35-4.35" />
+    </svg>
+  );
+}
+
+function XIcon() {
+  return (
+    <svg aria-hidden="true" fill="none" height="12" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" viewBox="0 0 24 24" width="12" xmlns="http://www.w3.org/2000/svg">
+      <path d="M18 6 6 18M6 6l12 12" />
     </svg>
   );
 }
 
 function BarChartIcon() {
   return (
-    <svg aria-hidden="true" fill="none" height="16" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.75" viewBox="0 0 24 24" width="16" xmlns="http://www.w3.org/2000/svg">
+    <svg aria-hidden="true" fill="none" height="15" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.75" viewBox="0 0 24 24" width="15" xmlns="http://www.w3.org/2000/svg">
       <rect height="12" rx="1" width="4" x="3" y="9" />
       <rect height="18" rx="1" width="4" x="10" y="3" />
       <rect height="8" rx="1" width="4" x="17" y="13" />
@@ -47,7 +64,7 @@ function BarChartIcon() {
 
 function SquaresIcon() {
   return (
-    <svg aria-hidden="true" fill="none" height="16" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.75" viewBox="0 0 24 24" width="16" xmlns="http://www.w3.org/2000/svg">
+    <svg aria-hidden="true" fill="none" height="15" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.75" viewBox="0 0 24 24" width="15" xmlns="http://www.w3.org/2000/svg">
       <rect height="7" rx="1.5" width="7" x="3" y="3" />
       <rect height="7" rx="1.5" width="7" x="14" y="3" />
       <rect height="7" rx="1.5" width="7" x="3" y="14" />
@@ -58,7 +75,7 @@ function SquaresIcon() {
 
 function BellIcon() {
   return (
-    <svg aria-hidden="true" fill="none" height="16" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.75" viewBox="0 0 24 24" width="16" xmlns="http://www.w3.org/2000/svg">
+    <svg aria-hidden="true" fill="none" height="15" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.75" viewBox="0 0 24 24" width="15" xmlns="http://www.w3.org/2000/svg">
       <path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9" />
       <path d="M10.3 21a1.94 1.94 0 0 0 3.4 0" />
     </svg>
@@ -67,7 +84,7 @@ function BellIcon() {
 
 function CursorIcon() {
   return (
-    <svg aria-hidden="true" fill="none" height="16" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.75" viewBox="0 0 24 24" width="16" xmlns="http://www.w3.org/2000/svg">
+    <svg aria-hidden="true" fill="none" height="15" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.75" viewBox="0 0 24 24" width="15" xmlns="http://www.w3.org/2000/svg">
       <path d="m4 4 7.07 17 2.51-7.39L21 11.07z" />
     </svg>
   );
@@ -75,7 +92,7 @@ function CursorIcon() {
 
 function CompassIcon() {
   return (
-    <svg aria-hidden="true" fill="none" height="16" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.75" viewBox="0 0 24 24" width="16" xmlns="http://www.w3.org/2000/svg">
+    <svg aria-hidden="true" fill="none" height="15" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.75" viewBox="0 0 24 24" width="15" xmlns="http://www.w3.org/2000/svg">
       <circle cx="12" cy="12" r="10" />
       <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76" />
     </svg>
@@ -84,7 +101,7 @@ function CompassIcon() {
 
 function LayersIcon() {
   return (
-    <svg aria-hidden="true" fill="none" height="16" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.75" viewBox="0 0 24 24" width="16" xmlns="http://www.w3.org/2000/svg">
+    <svg aria-hidden="true" fill="none" height="15" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.75" viewBox="0 0 24 24" width="15" xmlns="http://www.w3.org/2000/svg">
       <polygon points="12 2 2 7 12 12 22 7 12 2" />
       <polyline points="2 17 12 22 22 17" />
       <polyline points="2 12 12 17 22 12" />
@@ -131,6 +148,11 @@ const NAV_ITEMS: NavItem[] = [
   },
 ];
 
+const TOTAL_COMPONENTS = NAV_ITEMS.reduce(
+  (acc, { components }) => acc + components.length,
+  0,
+);
+
 function toSlug(name: string): string {
   return name
     .replace(/[A-Z]/g, (char, offset: number) => (offset > 0 ? `-${char}` : char))
@@ -140,10 +162,31 @@ function toSlug(name: string): string {
 export function Sidebar({ onNavigate }: SidebarProps) {
   const pathname = usePathname();
   const [activeAnchor, setActiveAnchor] = useState("");
+  const [filterQuery, setFilterQuery] = useState("");
 
   const activeSlug = pathname.startsWith("/library/")
     ? pathname.slice("/library/".length)
     : "";
+
+  const filteredNavItems =
+    filterQuery.trim() === ""
+      ? NAV_ITEMS
+      : NAV_ITEMS.flatMap(({ category, components, icon, slug }) => {
+          const q = filterQuery.toLowerCase();
+          const categoryMatches = category.toLowerCase().includes(q);
+          const matchedComponents = components.filter((c) =>
+            c.toLowerCase().includes(q),
+          );
+          if (!categoryMatches && matchedComponents.length === 0) return [];
+          return [
+            {
+              category,
+              components: categoryMatches ? components : matchedComponents,
+              icon,
+              slug,
+            },
+          ];
+        });
 
   useEffect(() => {
     setActiveAnchor("");
@@ -171,81 +214,129 @@ export function Sidebar({ onNavigate }: SidebarProps) {
       aria-label="Component library navigation"
       className="flex h-full flex-col"
     >
-      <div className="flex h-14 shrink-0 items-center gap-2.5 border-b border-border px-4">
+      <div className="flex h-16 shrink-0 items-center gap-2.5 border-b border-border px-4">
         <span className="text-primary">
           <LogoIcon />
         </span>
-        <Link
-          className="text-sm font-semibold text-foreground transition-colors hover:text-primary"
-          href="/library"
-          onClick={onNavigate}
-        >
-          Component Library
-        </Link>
+        <div className="flex flex-col gap-0">
+          <Link
+            className="text-sm font-semibold leading-tight text-foreground transition-colors duration-150 hover:text-primary"
+            href="/library"
+            onClick={onNavigate}
+          >
+            Component Library
+          </Link>
+          <span className="text-[10px] leading-tight text-muted-foreground">
+            shadcn/ui · Next.js · Tailwind
+          </span>
+        </div>
       </div>
 
-      <div className="flex-1 overflow-y-auto py-3">
-        {NAV_ITEMS.map(({ category, components, icon: Icon, slug }) => {
-          const isCategoryActive = activeSlug === slug;
+      <div className="shrink-0 border-b border-border p-2">
+        <div className="relative flex items-center">
+          <span className="pointer-events-none absolute left-2.5 text-muted-foreground">
+            <SearchIcon />
+          </span>
+          <input
+            aria-label="Filter components"
+            className="h-8 w-full rounded-md border border-border bg-muted/40 pl-8 pr-7 text-xs text-foreground placeholder:text-muted-foreground focus:border-primary/50 focus:bg-background focus:outline-none focus:ring-1 focus:ring-primary/30 transition-colors duration-150"
+            onChange={(e) => setFilterQuery(e.target.value)}
+            placeholder="Filter components…"
+            type="search"
+            value={filterQuery}
+          />
+          {filterQuery && (
+            <button
+              aria-label="Clear filter"
+              className="absolute right-2 cursor-pointer text-muted-foreground transition-colors duration-150 hover:text-foreground focus-visible:outline-none"
+              onClick={() => setFilterQuery("")}
+              type="button"
+            >
+              <XIcon />
+            </button>
+          )}
+        </div>
+      </div>
 
-          return (
-            <div className="px-2 py-0.5" key={slug}>
-              <Link
-                className={cn(
-                  "flex cursor-pointer items-center gap-2.5 rounded-md px-2 py-1.5 text-sm font-medium transition-colors hover:bg-accent hover:text-foreground",
-                  isCategoryActive
-                    ? "bg-primary/10 text-primary"
-                    : "text-muted-foreground",
-                )}
-                href={`/library/${slug}`}
-                onClick={onNavigate}
-              >
-                <Icon />
-                <span className="flex-1">{category}</span>
-                <span
+      <div className="flex-1 overflow-y-auto py-2">
+        {filteredNavItems.length === 0 ? (
+          <p className="px-4 py-6 text-center text-xs text-muted-foreground">
+            No components match &ldquo;{filterQuery}&rdquo;
+          </p>
+        ) : (
+          filteredNavItems.map(({ category, components, icon: Icon, slug }) => {
+            const isCategoryActive = activeSlug === slug;
+
+            return (
+              <div className="px-2 py-0.5" key={slug}>
+                <Link
                   className={cn(
-                    "rounded-full px-1.5 py-0.5 text-[10px] font-medium tabular-nums",
+                    "flex cursor-pointer items-center gap-2.5 rounded-md px-2 py-1.5 text-sm font-medium transition-colors duration-150 hover:bg-accent hover:text-foreground",
                     isCategoryActive
-                      ? "bg-primary/20 text-primary"
-                      : "bg-muted text-muted-foreground",
+                      ? "bg-primary/10 text-primary ring-inset ring-1 ring-primary/20"
+                      : "text-muted-foreground",
                   )}
+                  href={`/library/${slug}`}
+                  onClick={onNavigate}
                 >
-                  {components.length}
-                </span>
-              </Link>
+                  <Icon />
+                  <span className="flex-1">{category}</span>
+                  <span
+                    className={cn(
+                      "rounded-full px-1.5 py-0.5 text-[10px] font-semibold tabular-nums",
+                      isCategoryActive
+                        ? "bg-primary text-primary-foreground"
+                        : "bg-muted text-muted-foreground",
+                    )}
+                  >
+                    {components.length}
+                  </span>
+                </Link>
 
-              <div className="ml-4 mt-0.5 space-y-0.5 border-l border-border pl-3">
-                {components.map((component) => {
-                  const componentSlug = toSlug(component);
-                  const isAnchorActive =
-                    isCategoryActive && activeAnchor === componentSlug;
+                <div className="ml-4 mt-0.5 space-y-0.5 border-l border-border pl-3">
+                  {components.map((component) => {
+                    const componentSlug = toSlug(component);
+                    const isAnchorActive =
+                      isCategoryActive && activeAnchor === componentSlug;
 
-                  return (
-                    <Link
-                      className={cn(
-                        "block cursor-pointer rounded-md px-2 py-1 text-sm transition-colors hover:bg-accent/60 hover:text-foreground",
-                        isAnchorActive
-                          ? "bg-accent/80 font-medium text-foreground"
-                          : "text-muted-foreground",
-                      )}
-                      href={`/library/${slug}#${componentSlug}`}
-                      key={componentSlug}
-                      onClick={onNavigate}
-                    >
-                      {component}
-                    </Link>
-                  );
-                })}
+                    return (
+                      <Link
+                        className={cn(
+                          "block cursor-pointer rounded-md px-2 py-1 text-[13px] transition-colors duration-150 hover:bg-accent/60 hover:text-foreground",
+                          isAnchorActive
+                            ? "bg-accent font-medium text-foreground"
+                            : "text-muted-foreground",
+                        )}
+                        href={`/library/${slug}#${componentSlug}`}
+                        key={componentSlug}
+                        onClick={onNavigate}
+                      >
+                        {component}
+                      </Link>
+                    );
+                  })}
+                </div>
               </div>
-            </div>
-          );
-        })}
+            );
+          })
+        )}
       </div>
 
       <div className="shrink-0 border-t border-border px-4 py-3">
-        <p className="text-[11px] text-muted-foreground">
-          {NAV_ITEMS.reduce((acc, { components }) => acc + components.length, 0)} components
-        </p>
+        <div className="flex items-center justify-between">
+          <p className="text-[11px] text-muted-foreground">
+            <span className="font-medium text-foreground">{TOTAL_COMPONENTS}</span>{" "}
+            components
+          </p>
+          <a
+            className="cursor-pointer text-[11px] text-muted-foreground transition-colors duration-150 hover:text-foreground"
+            href="#"
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            View source
+          </a>
+        </div>
       </div>
     </nav>
   );

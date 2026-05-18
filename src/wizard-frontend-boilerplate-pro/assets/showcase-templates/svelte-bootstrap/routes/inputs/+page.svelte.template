@@ -114,8 +114,9 @@
 
 <div class="d-flex flex-column gap-4">
   <div>
-    <h1 class="h4 mb-1">Inputs</h1>
-    <p class="text-body-secondary">
+    <span class="badge border border-primary-subtle text-primary bg-primary-subtle mb-2 text-uppercase fw-medium" style="letter-spacing: 0.06em; font-size: 0.65rem;">Components</span>
+    <h1 class="display-5 fw-bold mb-1">Inputs</h1>
+    <p class="text-body-secondary col-lg-8">
       Form controls for collecting user input — buttons, text fields, selections, and toggles.
     </p>
   </div>
@@ -128,7 +129,7 @@
         Triggers an action or event with support for multiple colours, outline variants, and sizes.
       </p>
     </div>
-    <div class="p-4 rounded-3 border bg-body-tertiary mb-3">
+    <div class="rounded-3 border border-secondary-subtle bg-body-secondary p-4 p-md-5 shadow-sm mb-3">
       <div class="d-flex flex-column gap-3">
         <div class="d-flex flex-wrap gap-2">
           <Button color="primary">Primary</Button>
@@ -165,7 +166,7 @@
         accessible labelling.
       </p>
     </div>
-    <div class="p-4 rounded-3 border bg-body-tertiary mb-3">
+    <div class="rounded-3 border border-secondary-subtle bg-body-secondary p-4 p-md-5 shadow-sm mb-3">
       <div style="max-width: 360px;">
         <Form>
           <FormGroup>
@@ -207,7 +208,7 @@
         <code>Input</code> component with a <code>rows</code> prop.
       </p>
     </div>
-    <div class="p-4 rounded-3 border bg-body-tertiary mb-3">
+    <div class="rounded-3 border border-secondary-subtle bg-body-secondary p-4 p-md-5 shadow-sm mb-3">
       <div style="max-width: 360px;">
         <FormGroup>
           <Label for="bio-demo">Bio</Label>
@@ -235,7 +236,7 @@
         elements.
       </p>
     </div>
-    <div class="p-4 rounded-3 border bg-body-tertiary mb-3">
+    <div class="rounded-3 border border-secondary-subtle bg-body-secondary p-4 p-md-5 shadow-sm mb-3">
       <div style="max-width: 360px;">
         <FormGroup>
           <Label for="framework-demo">Framework</Label>
@@ -274,7 +275,7 @@
         matching <code>id</code>/<code>for</code>.
       </p>
     </div>
-    <div class="p-4 rounded-3 border bg-body-tertiary mb-3">
+    <div class="rounded-3 border border-secondary-subtle bg-body-secondary p-4 p-md-5 shadow-sm mb-3">
       <div class="d-flex flex-column gap-2">
         <div class="form-check">
           <Input bind:checked={termsAccepted} id="terms-demo" type="checkbox" />
@@ -309,7 +310,7 @@
         <code>name</code> attribute and <code>bind:group</code>.
       </p>
     </div>
-    <div class="p-4 rounded-3 border bg-body-tertiary mb-3">
+    <div class="rounded-3 border border-secondary-subtle bg-body-secondary p-4 p-md-5 shadow-sm mb-3">
       <div class="d-flex flex-column gap-1">
         <div class="form-check">
           <Input bind:group={plan} id="plan-free" name="plan" type="radio" value="free" />
@@ -351,7 +352,7 @@
         using matching <code>id</code>/<code>for</code>.
       </p>
     </div>
-    <div class="p-4 rounded-3 border bg-body-tertiary mb-3">
+    <div class="rounded-3 border border-secondary-subtle bg-body-secondary p-4 p-md-5 shadow-sm mb-3">
       <div class="d-flex flex-column gap-2">
         <div class="form-check form-switch">
           <Input

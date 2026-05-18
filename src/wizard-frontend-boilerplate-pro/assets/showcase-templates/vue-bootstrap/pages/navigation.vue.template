@@ -108,7 +108,7 @@ import { BNav, BNavItem, BNavbar, BNavbarBrand } from "bootstrap-vue-next";
           <code>v-model</code> for the active index and a <code>title</code> prop per tab.
         </p>
       </div>
-      <div class="p-4 rounded-3 border bg-body-tertiary mb-3">
+      <div class="p-4 rounded-3 border bg-body-tertiary mb-3 shadow-sm">
         <BTabs v-model="activeTab">
           <BTab title="Account">
             <p class="pt-3 text-body-secondary small">
@@ -147,7 +147,7 @@ import { BNav, BNavItem, BNavbar, BNavbarBrand } from "bootstrap-vue-next";
           with <code>text</code>, <code>href</code>, and <code>active</code> properties.
         </p>
       </div>
-      <div class="p-4 rounded-3 border bg-body-tertiary mb-3">
+      <div class="p-4 rounded-3 border bg-body-tertiary mb-3 shadow-sm">
         <BBreadcrumb :items="breadcrumbItems" />
       </div>
       <CodeBlock
@@ -170,7 +170,7 @@ import { BNav, BNavItem, BNavbar, BNavbarBrand } from "bootstrap-vue-next";
           <code>v-model</code>, <code>:total-rows</code>, and <code>:per-page</code>.
         </p>
       </div>
-      <div class="p-4 rounded-3 border bg-body-tertiary mb-3">
+      <div class="p-4 rounded-3 border bg-body-tertiary mb-3 shadow-sm">
         <BPagination
           v-model="currentPage"
           :per-page="10"
@@ -201,7 +201,7 @@ import { BNav, BNavItem, BNavbar, BNavbarBrand } from "bootstrap-vue-next";
           <code>BNav</code>, and <code>BNavItem</code> for site-level navigation.
         </p>
       </div>
-      <div class="p-4 rounded-3 border bg-body-tertiary mb-3">
+      <div class="p-4 rounded-3 border bg-body-tertiary mb-3 shadow-sm">
         <BNavbar class="bg-body rounded border px-3" toggleable="md">
           <BNavbarBrand href="#">MyApp</BNavbarBrand>
           <BNav class="ms-auto" navbar>

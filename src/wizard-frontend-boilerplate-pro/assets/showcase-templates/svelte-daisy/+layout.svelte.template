@@ -27,7 +27,7 @@
   <!-- Desktop sidebar (fixed) -->
   <aside
     class="hidden md:flex flex-col border-r border-base-300 bg-base-200"
-    style="height: 100vh; left: 0; overflow-y: auto; position: fixed; top: 0; width: 256px; z-index: 100;"
+    style="backdrop-filter: blur(12px); height: 100vh; left: 0; overflow-y: auto; position: fixed; top: 0; width: 256px; z-index: 100;"
   >
     <Sidebar onNavigate={closeSidebar} />
   </aside>
@@ -36,7 +36,7 @@
   {#if sidebarOpen}
     <div class="fixed inset-0 z-40 flex md:hidden">
       <div
-        class="fixed inset-0 bg-black/40"
+        class="fixed inset-0 bg-black/60 backdrop-blur-sm"
         onclick={() => { sidebarOpen = false; }}
         role="presentation"
       ></div>
@@ -53,8 +53,8 @@
   <div class="flex flex-col flex-grow min-w-0 md:ml-64">
     <!-- Sticky header -->
     <header
-      class="sticky top-0 z-30 flex items-center gap-2 px-3 bg-base-100 border-b border-base-300"
-      style="height: 56px;"
+      class="sticky top-0 z-30 flex items-center gap-2 px-3 bg-base-100/90 border-b border-base-300"
+      style="backdrop-filter: blur(12px); height: 56px;"
     >
       <!-- Hamburger — mobile only -->
       <button
@@ -100,7 +100,7 @@
     </header>
 
     <!-- Page content -->
-    <main class="flex-grow p-4 md:p-8">
+    <main class="flex-grow p-6 md:p-8 lg:p-10">
       {@render children?.()}
     </main>
   </div>

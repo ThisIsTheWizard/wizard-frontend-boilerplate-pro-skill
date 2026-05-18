@@ -140,6 +140,34 @@ const PLAN_OPTIONS = [
   { label: "Enterprise", value: "enterprise" },
 ];
 
+function HashIcon() {
+  return (
+    <svg
+      aria-hidden="true"
+      fill="none"
+      height="16"
+      stroke="currentColor"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth="2"
+      viewBox="0 0 24 24"
+      width="16"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <line x1="4" x2="20" y1="9" y2="9" />
+      <line x1="4" x2="20" y1="15" y2="15" />
+      <line x1="10" x2="8" y1="3" y2="21" />
+      <line x1="16" x2="14" y1="3" y2="21" />
+    </svg>
+  );
+}
+
+const PREVIEW_STYLE = {
+  backgroundImage:
+    "radial-gradient(circle at center, hsl(var(--border)) 1px, transparent 1px)",
+  backgroundSize: "20px 20px",
+};
+
 export default function InputsPage() {
   const [checkboxChecked, setCheckboxChecked] = useState(false);
   const [framework, setFramework] = useState("");
@@ -148,25 +176,40 @@ export default function InputsPage() {
 
   return (
     <div className="flex flex-col gap-16">
-      <div>
-        <h1 className="text-3xl font-bold tracking-tight text-foreground">
+      <div className="flex flex-col gap-3 border-b border-border pb-8">
+        <span className="inline-flex w-fit items-center rounded-full border border-primary/20 bg-primary/5 px-3 py-1 text-xs font-medium uppercase tracking-wider text-primary">
+          Inputs
+        </span>
+        <h1 className="text-4xl font-bold tracking-tight text-foreground">
           Inputs
         </h1>
-        <p className="mt-2 text-muted-foreground">
+        <p className="max-w-2xl text-muted-foreground">
           Form controls for collecting user input — buttons, text fields,
           selections, and toggles.
         </p>
       </div>
 
-      <section className="flex flex-col gap-4" id="button">
-        <div className="border-l-2 border-primary/40 pl-3">
-          <h2 className="text-xl font-semibold text-foreground">Button</h2>
-          <p className="mt-1 text-sm text-muted-foreground">
+      <section className="group flex flex-col gap-6" id="button">
+        <div className="flex flex-col gap-2 border-l-2 border-primary/60 pl-4">
+          <div className="flex items-center gap-2">
+            <h2 className="text-xl font-semibold text-foreground">Button</h2>
+            <a
+              aria-label="Anchor link to Button section"
+              className="cursor-pointer text-muted-foreground opacity-0 transition-opacity duration-150 group-hover:opacity-50 hover:!opacity-100"
+              href="#button"
+            >
+              <HashIcon />
+            </a>
+          </div>
+          <p className="text-sm text-muted-foreground">
             Triggers an action or event with support for multiple visual variants
             and sizes.
           </p>
         </div>
-        <div className="rounded-lg border border-border bg-muted/50 p-8">
+        <div
+          className="rounded-xl border border-border bg-background/60 p-8 shadow-sm"
+          style={PREVIEW_STYLE}
+        >
           <div className="flex flex-col gap-4">
             <div className="flex flex-wrap gap-2">
               <Button>Default</Button>
@@ -194,15 +237,27 @@ export default function InputsPage() {
         />
       </section>
 
-      <section className="flex flex-col gap-4" id="input">
-        <div className="border-l-2 border-primary/40 pl-3">
-          <h2 className="text-xl font-semibold text-foreground">Input</h2>
-          <p className="mt-1 text-sm text-muted-foreground">
+      <section className="group flex flex-col gap-6" id="input">
+        <div className="flex flex-col gap-2 border-l-2 border-primary/60 pl-4">
+          <div className="flex items-center gap-2">
+            <h2 className="text-xl font-semibold text-foreground">Input</h2>
+            <a
+              aria-label="Anchor link to Input section"
+              className="cursor-pointer text-muted-foreground opacity-0 transition-opacity duration-150 group-hover:opacity-50 hover:!opacity-100"
+              href="#input"
+            >
+              <HashIcon />
+            </a>
+          </div>
+          <p className="text-sm text-muted-foreground">
             A single-line text field with optional label, helper text, and error
             state.
           </p>
         </div>
-        <div className="rounded-lg border border-border bg-muted/50 p-8">
+        <div
+          className="rounded-xl border border-border bg-background/60 p-8 shadow-sm"
+          style={PREVIEW_STYLE}
+        >
           <div className="flex max-w-sm flex-col gap-4">
             <Input
               helperText="We'll never share your email."
@@ -234,15 +289,27 @@ export default function InputsPage() {
         />
       </section>
 
-      <section className="flex flex-col gap-4" id="textarea">
-        <div className="border-l-2 border-primary/40 pl-3">
-          <h2 className="text-xl font-semibold text-foreground">Textarea</h2>
-          <p className="mt-1 text-sm text-muted-foreground">
+      <section className="group flex flex-col gap-6" id="textarea">
+        <div className="flex flex-col gap-2 border-l-2 border-primary/60 pl-4">
+          <div className="flex items-center gap-2">
+            <h2 className="text-xl font-semibold text-foreground">Textarea</h2>
+            <a
+              aria-label="Anchor link to Textarea section"
+              className="cursor-pointer text-muted-foreground opacity-0 transition-opacity duration-150 group-hover:opacity-50 hover:!opacity-100"
+              href="#textarea"
+            >
+              <HashIcon />
+            </a>
+          </div>
+          <p className="text-sm text-muted-foreground">
             A multi-line text input with label, helper text, and optional
             auto-resize.
           </p>
         </div>
-        <div className="rounded-lg border border-border bg-muted/50 p-8">
+        <div
+          className="rounded-xl border border-border bg-background/60 p-8 shadow-sm"
+          style={PREVIEW_STYLE}
+        >
           <div className="flex max-w-sm flex-col gap-4">
             <Textarea
               helperText="Describe your project in a few sentences."
@@ -268,15 +335,27 @@ export default function InputsPage() {
         />
       </section>
 
-      <section className="flex flex-col gap-4" id="select">
-        <div className="border-l-2 border-primary/40 pl-3">
-          <h2 className="text-xl font-semibold text-foreground">Select</h2>
-          <p className="mt-1 text-sm text-muted-foreground">
+      <section className="group flex flex-col gap-6" id="select">
+        <div className="flex flex-col gap-2 border-l-2 border-primary/60 pl-4">
+          <div className="flex items-center gap-2">
+            <h2 className="text-xl font-semibold text-foreground">Select</h2>
+            <a
+              aria-label="Anchor link to Select section"
+              className="cursor-pointer text-muted-foreground opacity-0 transition-opacity duration-150 group-hover:opacity-50 hover:!opacity-100"
+              href="#select"
+            >
+              <HashIcon />
+            </a>
+          </div>
+          <p className="text-sm text-muted-foreground">
             A dropdown for picking a single value from a list, with keyboard
             navigation and ARIA listbox semantics.
           </p>
         </div>
-        <div className="rounded-lg border border-border bg-muted/50 p-8">
+        <div
+          className="rounded-xl border border-border bg-background/60 p-8 shadow-sm"
+          style={PREVIEW_STYLE}
+        >
           <div className="flex max-w-sm flex-col gap-4">
             <Select
               label="Framework"
@@ -302,15 +381,27 @@ export default function InputsPage() {
         />
       </section>
 
-      <section className="flex flex-col gap-4" id="checkbox">
-        <div className="border-l-2 border-primary/40 pl-3">
-          <h2 className="text-xl font-semibold text-foreground">Checkbox</h2>
-          <p className="mt-1 text-sm text-muted-foreground">
+      <section className="group flex flex-col gap-6" id="checkbox">
+        <div className="flex flex-col gap-2 border-l-2 border-primary/60 pl-4">
+          <div className="flex items-center gap-2">
+            <h2 className="text-xl font-semibold text-foreground">Checkbox</h2>
+            <a
+              aria-label="Anchor link to Checkbox section"
+              className="cursor-pointer text-muted-foreground opacity-0 transition-opacity duration-150 group-hover:opacity-50 hover:!opacity-100"
+              href="#checkbox"
+            >
+              <HashIcon />
+            </a>
+          </div>
+          <p className="text-sm text-muted-foreground">
             A binary toggle supporting checked, unchecked, and indeterminate
             states with full keyboard and ARIA support.
           </p>
         </div>
-        <div className="rounded-lg border border-border bg-muted/50 p-8">
+        <div
+          className="rounded-xl border border-border bg-background/60 p-8 shadow-sm"
+          style={PREVIEW_STYLE}
+        >
           <div className="flex flex-col gap-3">
             <Checkbox
               checked={checkboxChecked}
@@ -340,15 +431,27 @@ export default function InputsPage() {
         />
       </section>
 
-      <section className="flex flex-col gap-4" id="radio-group">
-        <div className="border-l-2 border-primary/40 pl-3">
-          <h2 className="text-xl font-semibold text-foreground">RadioGroup</h2>
-          <p className="mt-1 text-sm text-muted-foreground">
+      <section className="group flex flex-col gap-6" id="radio-group">
+        <div className="flex flex-col gap-2 border-l-2 border-primary/60 pl-4">
+          <div className="flex items-center gap-2">
+            <h2 className="text-xl font-semibold text-foreground">RadioGroup</h2>
+            <a
+              aria-label="Anchor link to RadioGroup section"
+              className="cursor-pointer text-muted-foreground opacity-0 transition-opacity duration-150 group-hover:opacity-50 hover:!opacity-100"
+              href="#radio-group"
+            >
+              <HashIcon />
+            </a>
+          </div>
+          <p className="text-sm text-muted-foreground">
             A set of mutually exclusive options with arrow-key navigation within
             the group.
           </p>
         </div>
-        <div className="rounded-lg border border-border bg-muted/50 p-8">
+        <div
+          className="rounded-xl border border-border bg-background/60 p-8 shadow-sm"
+          style={PREVIEW_STYLE}
+        >
           <div className="flex flex-col gap-6 sm:flex-row sm:gap-16">
             <RadioGroup
               label="Plan (vertical)"
@@ -374,15 +477,27 @@ export default function InputsPage() {
         />
       </section>
 
-      <section className="flex flex-col gap-4" id="switch">
-        <div className="border-l-2 border-primary/40 pl-3">
-          <h2 className="text-xl font-semibold text-foreground">Switch</h2>
-          <p className="mt-1 text-sm text-muted-foreground">
+      <section className="group flex flex-col gap-6" id="switch">
+        <div className="flex flex-col gap-2 border-l-2 border-primary/60 pl-4">
+          <div className="flex items-center gap-2">
+            <h2 className="text-xl font-semibold text-foreground">Switch</h2>
+            <a
+              aria-label="Anchor link to Switch section"
+              className="cursor-pointer text-muted-foreground opacity-0 transition-opacity duration-150 group-hover:opacity-50 hover:!opacity-100"
+              href="#switch"
+            >
+              <HashIcon />
+            </a>
+          </div>
+          <p className="text-sm text-muted-foreground">
             An on/off toggle for binary settings, announced as a switch by
             assistive technologies.
           </p>
         </div>
-        <div className="rounded-lg border border-border bg-muted/50 p-8">
+        <div
+          className="rounded-xl border border-border bg-background/60 p-8 shadow-sm"
+          style={PREVIEW_STYLE}
+        >
           <div className="flex flex-col gap-3">
             <Switch
               checked={notifications}

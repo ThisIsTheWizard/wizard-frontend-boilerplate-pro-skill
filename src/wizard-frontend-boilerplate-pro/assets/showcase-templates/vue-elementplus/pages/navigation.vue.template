@@ -71,15 +71,15 @@ const active = ref("dashboard");
   <div class="flex flex-col gap-16">
     <div>
       <h1 class="text-3xl font-bold tracking-tight text-foreground">Navigation</h1>
-      <p class="mt-2 text-muted-foreground">
+      <p class="mt-2 text-base leading-relaxed text-muted-foreground">
         Components for moving between pages and sections — tabs, breadcrumbs, pagination, and menus.
       </p>
     </div>
 
     <section class="flex flex-col gap-4" id="tabs">
-      <div class="border-l-2 border-primary/40 pl-3">
+      <div class="border-l-[3px] border-primary/60 pl-4">
         <h2 class="text-xl font-semibold text-foreground">Tabs</h2>
-        <p class="mt-1 text-sm text-muted-foreground">
+        <p class="mt-1 text-sm leading-relaxed text-muted-foreground">
           A tabbed interface via
           <code class="rounded bg-muted px-1 py-0.5 text-xs">el-tabs</code> +
           <code class="rounded bg-muted px-1 py-0.5 text-xs">el-tab-pane</code>. Bind
@@ -88,7 +88,7 @@ const active = ref("dashboard");
           <code class="rounded bg-muted px-1 py-0.5 text-xs">type="border-card"</code> for variants.
         </p>
       </div>
-      <div class="rounded-lg border border-border bg-muted/50 p-8">
+      <div class="rounded-xl border border-border/60 bg-muted/30 p-8 shadow-sm">
         <el-tabs v-model="activeTab">
           <el-tab-pane label="Account" name="account">
             <p class="mt-3 text-sm text-muted-foreground">
@@ -122,16 +122,16 @@ const active = ref("dashboard");
     </section>
 
     <section class="flex flex-col gap-4" id="breadcrumb">
-      <div class="border-l-2 border-primary/40 pl-3">
+      <div class="border-l-[3px] border-primary/60 pl-4">
         <h2 class="text-xl font-semibold text-foreground">Breadcrumb</h2>
-        <p class="mt-1 text-sm text-muted-foreground">
+        <p class="mt-1 text-sm leading-relaxed text-muted-foreground">
           A landmark trail via
           <code class="rounded bg-muted px-1 py-0.5 text-xs">el-breadcrumb</code> +
           <code class="rounded bg-muted px-1 py-0.5 text-xs">el-breadcrumb-item</code>. Use the
           <code class="rounded bg-muted px-1 py-0.5 text-xs">:to</code> prop for router-link items.
         </p>
       </div>
-      <div class="rounded-lg border border-border bg-muted/50 p-8">
+      <div class="rounded-xl border border-border/60 bg-muted/30 p-8 shadow-sm">
         <el-breadcrumb separator="/">
           <el-breadcrumb-item :to="{ path: '/' }">Home</el-breadcrumb-item>
           <el-breadcrumb-item :to="{ path: '/library' }">Library</el-breadcrumb-item>
@@ -149,9 +149,9 @@ const active = ref("dashboard");
     </section>
 
     <section class="flex flex-col gap-4" id="pagination">
-      <div class="border-l-2 border-primary/40 pl-3">
+      <div class="border-l-[3px] border-primary/60 pl-4">
         <h2 class="text-xl font-semibold text-foreground">Pagination</h2>
-        <p class="mt-1 text-sm text-muted-foreground">
+        <p class="mt-1 text-sm leading-relaxed text-muted-foreground">
           Page navigation via
           <code class="rounded bg-muted px-1 py-0.5 text-xs">el-pagination</code>. Bind
           <code class="rounded bg-muted px-1 py-0.5 text-xs">v-model:current-page</code> and pass
@@ -161,7 +161,7 @@ const active = ref("dashboard");
           <code class="rounded bg-muted px-1 py-0.5 text-xs">layout</code>.
         </p>
       </div>
-      <div class="rounded-lg border border-border bg-muted/50 p-8">
+      <div class="rounded-xl border border-border/60 bg-muted/30 p-8 shadow-sm">
         <el-pagination
           v-model:current-page="currentPage"
           :page-size="10"
@@ -179,9 +179,9 @@ const active = ref("dashboard");
     </section>
 
     <section class="flex flex-col gap-4" id="navigation-menu">
-      <div class="border-l-2 border-primary/40 pl-3">
+      <div class="border-l-[3px] border-primary/60 pl-4">
         <h2 class="text-xl font-semibold text-foreground">NavigationMenu</h2>
-        <p class="mt-1 text-sm text-muted-foreground">
+        <p class="mt-1 text-sm leading-relaxed text-muted-foreground">
           A horizontal or vertical menu via
           <code class="rounded bg-muted px-1 py-0.5 text-xs">el-menu</code> +
           <code class="rounded bg-muted px-1 py-0.5 text-xs">el-menu-item</code>. Use
@@ -190,7 +190,7 @@ const active = ref("dashboard");
           top-nav bar.
         </p>
       </div>
-      <div class="rounded-lg border border-border bg-muted/50 p-8">
+      <div class="rounded-xl border border-border/60 bg-muted/30 p-8 shadow-sm">
         <el-menu
           :default-active="activeMenu"
           mode="horizontal"

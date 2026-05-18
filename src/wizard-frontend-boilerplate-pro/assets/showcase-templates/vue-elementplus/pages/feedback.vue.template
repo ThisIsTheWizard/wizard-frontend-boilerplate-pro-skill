@@ -83,16 +83,16 @@ const visible = ref(false);
   <div class="flex flex-col gap-16">
     <div>
       <h1 class="text-3xl font-bold tracking-tight text-foreground">Feedback</h1>
-      <p class="mt-2 text-muted-foreground">
+      <p class="mt-2 text-base leading-relaxed text-muted-foreground">
         Status indicators, notifications, and modal interactions — alerts, toasts, dialogs, and
         progress bars.
       </p>
     </div>
 
     <section class="flex flex-col gap-4" id="alert">
-      <div class="border-l-2 border-primary/40 pl-3">
+      <div class="border-l-[3px] border-primary/60 pl-4">
         <h2 class="text-xl font-semibold text-foreground">Alert</h2>
-        <p class="mt-1 text-sm text-muted-foreground">
+        <p class="mt-1 text-sm leading-relaxed text-muted-foreground">
           An inline status banner via
           <code class="rounded bg-muted px-1 py-0.5 text-xs">el-alert</code>. Use the
           <code class="rounded bg-muted px-1 py-0.5 text-xs">type</code> prop: success, warning, info,
@@ -100,7 +100,7 @@ const visible = ref(false);
           <code class="rounded bg-muted px-1 py-0.5 text-xs">show-icon</code> for a leading icon.
         </p>
       </div>
-      <div class="rounded-lg border border-border bg-muted/50 p-8">
+      <div class="rounded-xl border border-border/60 bg-muted/30 p-8 shadow-sm">
         <div class="flex flex-col gap-3">
           <el-alert
             :closable="false"
@@ -142,15 +142,15 @@ const visible = ref(false);
     </section>
 
     <section class="flex flex-col gap-4" id="toast">
-      <div class="border-l-2 border-primary/40 pl-3">
+      <div class="border-l-[3px] border-primary/60 pl-4">
         <h2 class="text-xl font-semibold text-foreground">Toast</h2>
-        <p class="mt-1 text-sm text-muted-foreground">
+        <p class="mt-1 text-sm leading-relaxed text-muted-foreground">
           Transient notifications via the
           <code class="rounded bg-muted px-1 py-0.5 text-xs">ElMessage</code> function. Import it
           explicitly — it is a function, not a component, so auto-import won't resolve it.
         </p>
       </div>
-      <div class="rounded-lg border border-border bg-muted/50 p-8">
+      <div class="rounded-xl border border-border/60 bg-muted/30 p-8 shadow-sm">
         <div class="flex flex-wrap gap-2">
           <el-button type="success" @click="showMessage('success', 'Profile saved successfully.')">
             Success
@@ -176,9 +176,9 @@ const visible = ref(false);
     </section>
 
     <section class="flex flex-col gap-4" id="progress">
-      <div class="border-l-2 border-primary/40 pl-3">
+      <div class="border-l-[3px] border-primary/60 pl-4">
         <h2 class="text-xl font-semibold text-foreground">Progress</h2>
-        <p class="mt-1 text-sm text-muted-foreground">
+        <p class="mt-1 text-sm leading-relaxed text-muted-foreground">
           A completion bar via
           <code class="rounded bg-muted px-1 py-0.5 text-xs">el-progress</code>. Pass
           <code class="rounded bg-muted px-1 py-0.5 text-xs">:percentage</code> (0–100). Use
@@ -186,7 +186,7 @@ const visible = ref(false);
           dashboard.
         </p>
       </div>
-      <div class="rounded-lg border border-border bg-muted/50 p-8">
+      <div class="rounded-xl border border-border/60 bg-muted/30 p-8 shadow-sm">
         <div class="flex max-w-sm flex-col gap-4">
           <el-progress :percentage="25" />
           <el-progress :percentage="60" />
@@ -207,16 +207,16 @@ const visible = ref(false);
     </section>
 
     <section class="flex flex-col gap-4" id="tooltip">
-      <div class="border-l-2 border-primary/40 pl-3">
+      <div class="border-l-[3px] border-primary/60 pl-4">
         <h2 class="text-xl font-semibold text-foreground">Tooltip</h2>
-        <p class="mt-1 text-sm text-muted-foreground">
+        <p class="mt-1 text-sm leading-relaxed text-muted-foreground">
           A floating label via
           <code class="rounded bg-muted px-1 py-0.5 text-xs">el-tooltip</code>. Use
           <code class="rounded bg-muted px-1 py-0.5 text-xs">placement</code> for position and
           <code class="rounded bg-muted px-1 py-0.5 text-xs">effect</code> (dark/light) for style.
         </p>
       </div>
-      <div class="rounded-lg border border-border bg-muted/50 p-8">
+      <div class="rounded-xl border border-border/60 bg-muted/30 p-8 shadow-sm">
         <div class="flex flex-wrap items-center gap-4">
           <el-tooltip content="Tooltip on top" effect="dark" placement="top">
             <el-button>Top</el-button>
@@ -242,9 +242,9 @@ const visible = ref(false);
     </section>
 
     <section class="flex flex-col gap-4" id="dialog">
-      <div class="border-l-2 border-primary/40 pl-3">
+      <div class="border-l-[3px] border-primary/60 pl-4">
         <h2 class="text-xl font-semibold text-foreground">Dialog</h2>
-        <p class="mt-1 text-sm text-muted-foreground">
+        <p class="mt-1 text-sm leading-relaxed text-muted-foreground">
           A modal overlay via
           <code class="rounded bg-muted px-1 py-0.5 text-xs">el-dialog</code>. Bind
           <code class="rounded bg-muted px-1 py-0.5 text-xs">v-model</code> to a boolean ref and use
@@ -252,7 +252,7 @@ const visible = ref(false);
           buttons.
         </p>
       </div>
-      <div class="rounded-lg border border-border bg-muted/50 p-8">
+      <div class="rounded-xl border border-border/60 bg-muted/30 p-8 shadow-sm">
         <el-button @click="dialogVisible = true">Open dialog</el-button>
         <el-dialog v-model="dialogVisible" title="Confirm action" width="28rem">
           <p class="text-sm text-muted-foreground">

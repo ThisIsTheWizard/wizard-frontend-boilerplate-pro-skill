@@ -152,7 +152,7 @@ const TOGGLE_CODE = `<template>
           <code class="kbd kbd-sm">btn-outline</code>), size modifiers, and disabled state.
         </p>
       </div>
-      <div class="bg-base-200 rounded-box p-4 mb-3">
+      <div class="bg-base-200 rounded-box p-4 mb-3 shadow-sm">
         <div class="flex flex-col gap-2">
           <div class="flex flex-wrap gap-2">
             <button class="btn btn-primary" type="button">Primary</button>
@@ -184,7 +184,7 @@ const TOGGLE_CODE = `<template>
           Add <code class="kbd kbd-sm">input-error</code> for validation state.
         </p>
       </div>
-      <div class="bg-base-200 rounded-box p-4 mb-3">
+      <div class="bg-base-200 rounded-box p-4 mb-3 shadow-sm">
         <div class="flex flex-col gap-3" style="max-width: 360px">
           <label class="form-control w-full">
             <div class="label"><span class="label-text">Email address</span></div>
@@ -220,7 +220,7 @@ const TOGGLE_CODE = `<template>
           Add <code class="kbd kbd-sm">textarea-error</code> for validation state.
         </p>
       </div>
-      <div class="bg-base-200 rounded-box p-4 mb-3">
+      <div class="bg-base-200 rounded-box p-4 mb-3 shadow-sm">
         <div class="flex flex-col gap-3" style="max-width: 360px">
           <label class="form-control w-full">
             <div class="label"><span class="label-text">Bio</span></div>
@@ -252,7 +252,7 @@ const TOGGLE_CODE = `<template>
           <code class="kbd kbd-sm">select select-bordered</code>.
         </p>
       </div>
-      <div class="bg-base-200 rounded-box p-4 mb-3">
+      <div class="bg-base-200 rounded-box p-4 mb-3 shadow-sm">
         <div class="flex flex-col gap-3" style="max-width: 360px">
           <label class="form-control w-full">
             <div class="label"><span class="label-text">Framework</span></div>
@@ -285,7 +285,7 @@ const TOGGLE_CODE = `<template>
           A binary toggle using <code class="kbd kbd-sm">checkbox checkbox-primary</code>.
         </p>
       </div>
-      <div class="bg-base-200 rounded-box p-4 mb-3">
+      <div class="bg-base-200 rounded-box p-4 mb-3 shadow-sm">
         <div class="flex flex-col gap-3">
           <label class="flex items-center gap-3 cursor-pointer">
             <input class="checkbox checkbox-primary" type="checkbox" />
@@ -315,7 +315,7 @@ const TOGGLE_CODE = `<template>
           with <code class="kbd kbd-sm">v-model</code> binding.
         </p>
       </div>
-      <div class="bg-base-200 rounded-box p-4 mb-3">
+      <div class="bg-base-200 rounded-box p-4 mb-3 shadow-sm">
         <div class="flex flex-col gap-2">
           <span class="label-text font-medium">Plan</span>
           <label v-for="value in ['free', 'pro', 'enterprise']" :key="value" class="flex items-center gap-3 cursor-pointer">
@@ -343,7 +343,7 @@ const TOGGLE_CODE = `<template>
           An on/off slide control using <code class="kbd kbd-sm">toggle toggle-primary</code>.
         </p>
       </div>
-      <div class="bg-base-200 rounded-box p-4 mb-3">
+      <div class="bg-base-200 rounded-box p-4 mb-3 shadow-sm">
         <div class="flex flex-col gap-3">
           <label class="flex items-center gap-3 cursor-pointer">
             <input class="toggle toggle-primary" type="checkbox" />

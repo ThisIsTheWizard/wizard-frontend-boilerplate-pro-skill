@@ -126,17 +126,17 @@ function showToast(message: string) {
   <div class="flex flex-col gap-16">
     <div>
       <h1 class="text-3xl font-bold tracking-tight text-foreground">Feedback</h1>
-      <p class="mt-2 text-muted-foreground">
+      <p class="mt-2 text-base leading-relaxed text-muted-foreground">
         Status indicators and interactive feedback — Dialog and Popover from Headless UI; Alert, Toast, and Progress are pure Tailwind.
       </p>
     </div>
 
     <section class="flex flex-col gap-4" id="alert">
-      <div class="border-l-2 border-primary/40 pl-3">
+      <div class="border-l-[3px] border-primary/60 pl-4">
         <h2 class="text-xl font-semibold text-foreground">Alert</h2>
-        <p class="mt-1 text-sm text-muted-foreground">Inline status messages using <code class="rounded bg-muted px-1 py-0.5 text-xs">role="alert"</code> with semantic colour variants.</p>
+        <p class="mt-1 text-sm leading-relaxed text-muted-foreground">Inline status messages using <code class="rounded bg-muted px-1 py-0.5 text-xs">role="alert"</code> with semantic colour variants.</p>
       </div>
-      <div class="rounded-lg border border-border bg-muted/50 p-8">
+      <div class="rounded-xl border border-border/60 bg-muted/30 p-8 shadow-sm">
         <div class="flex flex-col gap-3">
           <div role="alert" class="flex items-start gap-3 rounded-lg border border-blue-200 bg-blue-50 px-4 py-3 text-sm text-blue-800 dark:border-blue-800 dark:bg-blue-950/30 dark:text-blue-300">
             <span class="mt-0.5 shrink-0">ℹ</span>
@@ -160,11 +160,11 @@ function showToast(message: string) {
     </section>
 
     <section class="flex flex-col gap-4" id="toast">
-      <div class="border-l-2 border-primary/40 pl-3">
+      <div class="border-l-[3px] border-primary/60 pl-4">
         <h2 class="text-xl font-semibold text-foreground">Toast</h2>
-        <p class="mt-1 text-sm text-muted-foreground">Ephemeral notification queue using <code class="rounded bg-muted px-1 py-0.5 text-xs">ref</code> array auto-dismissed after 3 seconds.</p>
+        <p class="mt-1 text-sm leading-relaxed text-muted-foreground">Ephemeral notification queue using <code class="rounded bg-muted px-1 py-0.5 text-xs">ref</code> array auto-dismissed after 3 seconds.</p>
       </div>
-      <div class="rounded-lg border border-border bg-muted/50 p-8">
+      <div class="rounded-xl border border-border/60 bg-muted/30 p-8 shadow-sm">
         <button class="rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition hover:opacity-90" type="button" @click="showToast('Action completed successfully!')">
           Show toast
         </button>
@@ -173,11 +173,11 @@ function showToast(message: string) {
     </section>
 
     <section class="flex flex-col gap-4" id="progress">
-      <div class="border-l-2 border-primary/40 pl-3">
+      <div class="border-l-[3px] border-primary/60 pl-4">
         <h2 class="text-xl font-semibold text-foreground">Progress</h2>
-        <p class="mt-1 text-sm text-muted-foreground">A determinate progress bar using a filled <code class="rounded bg-muted px-1 py-0.5 text-xs">div</code> inside a track.</p>
+        <p class="mt-1 text-sm leading-relaxed text-muted-foreground">A determinate progress bar using a filled <code class="rounded bg-muted px-1 py-0.5 text-xs">div</code> inside a track.</p>
       </div>
-      <div class="rounded-lg border border-border bg-muted/50 p-8">
+      <div class="rounded-xl border border-border/60 bg-muted/30 p-8 shadow-sm">
         <div class="flex max-w-sm flex-col gap-6">
           <div>
             <div class="mb-1 flex items-center justify-between text-sm">
@@ -203,11 +203,11 @@ function showToast(message: string) {
     </section>
 
     <section class="flex flex-col gap-4" id="tooltip">
-      <div class="border-l-2 border-primary/40 pl-3">
+      <div class="border-l-[3px] border-primary/60 pl-4">
         <h2 class="text-xl font-semibold text-foreground">Tooltip</h2>
-        <p class="mt-1 text-sm text-muted-foreground">Contextual hint using Headless UI <code class="rounded bg-muted px-1 py-0.5 text-xs">Popover</code> anchored above its trigger.</p>
+        <p class="mt-1 text-sm leading-relaxed text-muted-foreground">Contextual hint using Headless UI <code class="rounded bg-muted px-1 py-0.5 text-xs">Popover</code> anchored above its trigger.</p>
       </div>
-      <div class="rounded-lg border border-border bg-muted/50 p-8">
+      <div class="rounded-xl border border-border/60 bg-muted/30 p-8 shadow-sm">
         <Popover class="relative inline-block">
           <PopoverButton class="rounded-md border border-border px-3 py-1.5 text-sm transition hover:bg-accent focus:outline-none">
             Hover / click me
@@ -221,11 +221,11 @@ function showToast(message: string) {
     </section>
 
     <section class="flex flex-col gap-4" id="dialog">
-      <div class="border-l-2 border-primary/40 pl-3">
+      <div class="border-l-[3px] border-primary/60 pl-4">
         <h2 class="text-xl font-semibold text-foreground">Dialog</h2>
-        <p class="mt-1 text-sm text-muted-foreground">Headless UI <code class="rounded bg-muted px-1 py-0.5 text-xs">Dialog</code> + <code class="rounded bg-muted px-1 py-0.5 text-xs">TransitionRoot</code> — manages focus trap, scroll lock, and ARIA.</p>
+        <p class="mt-1 text-sm leading-relaxed text-muted-foreground">Headless UI <code class="rounded bg-muted px-1 py-0.5 text-xs">Dialog</code> + <code class="rounded bg-muted px-1 py-0.5 text-xs">TransitionRoot</code> — manages focus trap, scroll lock, and ARIA.</p>
       </div>
-      <div class="rounded-lg border border-border bg-muted/50 p-8">
+      <div class="rounded-xl border border-border/60 bg-muted/30 p-8 shadow-sm">
         <button class="rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition hover:opacity-90" type="button" @click="dialogOpen = true">
           Open dialog
         </button>

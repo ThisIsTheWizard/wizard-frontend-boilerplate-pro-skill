@@ -136,24 +136,27 @@
 </script>
 
 <div class="flex flex-col gap-16">
-  <div>
-    <h1 class="text-3xl font-bold tracking-tight text-foreground">
+  <div class="flex flex-col gap-3">
+    <div class="flex items-center gap-2">
+      <span class="inline-flex items-center rounded-full border border-primary/20 bg-primary/10 px-2.5 py-0.5 text-[11px] font-medium uppercase tracking-wider text-primary">Components</span>
+    </div>
+    <h1 class="text-4xl font-bold tracking-tight text-foreground">
       Data &amp; Visualisation
     </h1>
-    <p class="mt-2 text-muted-foreground">
+    <p class="max-w-2xl text-base text-muted-foreground">
       Charts, interactive tables, and date pickers — built on layerchart, TanStack
       Table, and date-fns.
     </p>
   </div>
 
   <section class="flex flex-col gap-4" id="chart">
-    <div class="border-l-2 border-primary/40 pl-3">
-      <h2 class="text-xl font-semibold text-foreground">Chart</h2>
-      <p class="mt-1 text-sm text-muted-foreground">
+    <div class="flex flex-col gap-1 border-l-2 border-primary/50 pl-4">
+      <h2 class="text-xl font-semibold tracking-tight text-foreground">Chart</h2>
+      <p class="text-sm text-muted-foreground">
         A responsive line chart with tooltip, legend, and semantic colour tokens.
       </p>
     </div>
-    <div class="rounded-lg border border-border bg-muted/50 p-8">
+    <div class="rounded-xl border border-border/60 bg-muted/30 p-8 shadow-sm">
       <ChartContainer class="h-64 w-full" config={chartConfig}>
         <LineChart data={CHART_DATA}>
           <CartesianGrid strokeDasharray="3 3" />
@@ -176,14 +179,14 @@
   </section>
 
   <section class="flex flex-col gap-4" id="data-table">
-    <div class="border-l-2 border-primary/40 pl-3">
-      <h2 class="text-xl font-semibold text-foreground">DataTable</h2>
-      <p class="mt-1 text-sm text-muted-foreground">
+    <div class="flex flex-col gap-1 border-l-2 border-primary/50 pl-4">
+      <h2 class="text-xl font-semibold tracking-tight text-foreground">DataTable</h2>
+      <p class="text-sm text-muted-foreground">
         A fully-featured table with sorting, filtering, and pagination powered by
         TanStack Table.
       </p>
     </div>
-    <div class="rounded-lg border border-border bg-muted/50 p-8">
+    <div class="rounded-xl border border-border/60 bg-muted/30 p-8 shadow-sm">
       <DataTable
         columns={COLUMNS}
         data={TABLE_DATA}
@@ -202,14 +205,14 @@
   </section>
 
   <section class="flex flex-col gap-4" id="calendar">
-    <div class="border-l-2 border-primary/40 pl-3">
+    <div class="flex flex-col gap-1 border-l-2 border-primary/50 pl-4">
       <h2 class="text-xl font-semibold text-foreground">Calendar</h2>
       <p class="mt-1 text-sm text-muted-foreground">
         An interactive date picker supporting single, range, and multiple selection
         modes.
       </p>
     </div>
-    <div class="rounded-lg border border-border bg-muted/50 p-8">
+    <div class="rounded-xl border border-border/60 bg-muted/30 p-8 shadow-sm">
       <div class="flex flex-col gap-4">
         <Calendar
           mode="single"

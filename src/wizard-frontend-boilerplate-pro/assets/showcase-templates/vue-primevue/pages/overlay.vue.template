@@ -107,23 +107,23 @@ const visible = ref(false);
   <div class="flex flex-col gap-16">
     <div>
       <h1 class="text-3xl font-bold tracking-tight text-foreground">Overlay</h1>
-      <p class="mt-2 text-muted-foreground">
+      <p class="mt-2 text-base leading-relaxed text-muted-foreground">
         Floating UI components that render above the main content — popovers, dropdown menus, and
         sheets.
       </p>
     </div>
 
     <section class="flex flex-col gap-4" id="popover">
-      <div class="border-l-2 border-primary/40 pl-3">
+      <div class="border-l-[3px] border-primary/60 pl-4">
         <h2 class="text-xl font-semibold text-foreground">Popover</h2>
-        <p class="mt-1 text-sm text-muted-foreground">
+        <p class="mt-1 text-sm leading-relaxed text-muted-foreground">
           A non-modal floating panel via
           <code class="rounded bg-muted px-1 py-0.5 text-xs">Popover</code>. Get a ref and call
           <code class="rounded bg-muted px-1 py-0.5 text-xs">.toggle(event)</code> to open/close.
           Dismissed by clicking outside or pressing Escape.
         </p>
       </div>
-      <div class="rounded-lg border border-border bg-muted/50 p-8">
+      <div class="rounded-xl border border-border/60 bg-muted/30 p-8 shadow-sm">
         <Button label="Open Popover" outlined severity="primary" @click="togglePopover" />
         <Popover ref="popoverRef">
           <div class="p-3">
@@ -151,16 +151,16 @@ const visible = ref(false);
     </section>
 
     <section class="flex flex-col gap-4" id="dropdown-menu">
-      <div class="border-l-2 border-primary/40 pl-3">
+      <div class="border-l-[3px] border-primary/60 pl-4">
         <h2 class="text-xl font-semibold text-foreground">DropdownMenu</h2>
-        <p class="mt-1 text-sm text-muted-foreground">
+        <p class="mt-1 text-sm leading-relaxed text-muted-foreground">
           A contextual popup menu via
           <code class="rounded bg-muted px-1 py-0.5 text-xs">Menu</code> with
           <code class="rounded bg-muted px-1 py-0.5 text-xs">popup</code> prop. Get a ref and call
           <code class="rounded bg-muted px-1 py-0.5 text-xs">.toggle(event)</code> to open/close.
         </p>
       </div>
-      <div class="rounded-lg border border-border bg-muted/50 p-8">
+      <div class="rounded-xl border border-border/60 bg-muted/30 p-8 shadow-sm">
         <Button label="Options" outlined severity="primary" @click="toggleMenu" />
         <Menu ref="menuRef" :model="MENU_ITEMS" popup />
       </div>
@@ -174,16 +174,16 @@ const visible = ref(false);
     </section>
 
     <section class="flex flex-col gap-4" id="sheet">
-      <div class="border-l-2 border-primary/40 pl-3">
+      <div class="border-l-[3px] border-primary/60 pl-4">
         <h2 class="text-xl font-semibold text-foreground">Sheet</h2>
-        <p class="mt-1 text-sm text-muted-foreground">
+        <p class="mt-1 text-sm leading-relaxed text-muted-foreground">
           A slide-in panel from any screen edge via
           <code class="rounded bg-muted px-1 py-0.5 text-xs">Drawer</code>. Use
           <code class="rounded bg-muted px-1 py-0.5 text-xs">position</code> (left/right/top/bottom)
           and bind <code class="rounded bg-muted px-1 py-0.5 text-xs">v-model:visible</code>.
         </p>
       </div>
-      <div class="rounded-lg border border-border bg-muted/50 p-8">
+      <div class="rounded-xl border border-border/60 bg-muted/30 p-8 shadow-sm">
         <Button label="Open Sheet" outlined severity="primary" @click="drawerVisible = true" />
         <Drawer v-model:visible="drawerVisible" header="Edit profile" position="right">
           <p class="text-sm text-muted-foreground">

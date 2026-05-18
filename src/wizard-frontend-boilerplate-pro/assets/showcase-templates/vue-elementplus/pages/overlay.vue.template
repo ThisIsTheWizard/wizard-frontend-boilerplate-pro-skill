@@ -81,16 +81,16 @@ function handleDropdownCommand(command: string) {
   <div class="flex flex-col gap-16">
     <div>
       <h1 class="text-3xl font-bold tracking-tight text-foreground">Overlay</h1>
-      <p class="mt-2 text-muted-foreground">
+      <p class="mt-2 text-base leading-relaxed text-muted-foreground">
         Floating UI components that render above the main content — popovers, dropdown menus,
         dialogs, and drawers.
       </p>
     </div>
 
     <section class="flex flex-col gap-4" id="popover">
-      <div class="border-l-2 border-primary/40 pl-3">
+      <div class="border-l-[3px] border-primary/60 pl-4">
         <h2 class="text-xl font-semibold text-foreground">Popover</h2>
-        <p class="mt-1 text-sm text-muted-foreground">
+        <p class="mt-1 text-sm leading-relaxed text-muted-foreground">
           A non-modal floating panel via
           <code class="rounded bg-muted px-1 py-0.5 text-xs">el-popover</code>. Use the
           <code class="rounded bg-muted px-1 py-0.5 text-xs">#reference</code> slot for the trigger
@@ -98,7 +98,7 @@ function handleDropdownCommand(command: string) {
           <code class="rounded bg-muted px-1 py-0.5 text-xs">trigger</code>: click, hover, or focus.
         </p>
       </div>
-      <div class="rounded-lg border border-border bg-muted/50 p-8">
+      <div class="rounded-xl border border-border/60 bg-muted/30 p-8 shadow-sm">
         <el-popover
           :width="240"
           content="This is a popover panel with contextual information or actions."
@@ -121,9 +121,9 @@ function handleDropdownCommand(command: string) {
     </section>
 
     <section class="flex flex-col gap-4" id="dropdown-menu">
-      <div class="border-l-2 border-primary/40 pl-3">
+      <div class="border-l-[3px] border-primary/60 pl-4">
         <h2 class="text-xl font-semibold text-foreground">DropdownMenu</h2>
-        <p class="mt-1 text-sm text-muted-foreground">
+        <p class="mt-1 text-sm leading-relaxed text-muted-foreground">
           A contextual menu via
           <code class="rounded bg-muted px-1 py-0.5 text-xs">el-dropdown</code> +
           <code class="rounded bg-muted px-1 py-0.5 text-xs">el-dropdown-menu</code> +
@@ -132,7 +132,7 @@ function handleDropdownCommand(command: string) {
           <code class="rounded bg-muted px-1 py-0.5 text-xs">@command</code>.
         </p>
       </div>
-      <div class="rounded-lg border border-border bg-muted/50 p-8">
+      <div class="rounded-xl border border-border/60 bg-muted/30 p-8 shadow-sm">
         <el-dropdown @command="handleDropdownCommand">
           <el-button>Options ▾</el-button>
           <template #dropdown>
@@ -155,9 +155,9 @@ function handleDropdownCommand(command: string) {
     </section>
 
     <section class="flex flex-col gap-4" id="sheet">
-      <div class="border-l-2 border-primary/40 pl-3">
+      <div class="border-l-[3px] border-primary/60 pl-4">
         <h2 class="text-xl font-semibold text-foreground">Sheet</h2>
-        <p class="mt-1 text-sm text-muted-foreground">
+        <p class="mt-1 text-sm leading-relaxed text-muted-foreground">
           A modal via
           <code class="rounded bg-muted px-1 py-0.5 text-xs">el-dialog</code> and a slide-over panel
           via <code class="rounded bg-muted px-1 py-0.5 text-xs">el-drawer</code>. Use
@@ -165,7 +165,7 @@ function handleDropdownCommand(command: string) {
           (left), ttb (top), btt (bottom).
         </p>
       </div>
-      <div class="rounded-lg border border-border bg-muted/50 p-8">
+      <div class="rounded-xl border border-border/60 bg-muted/30 p-8 shadow-sm">
         <div class="flex gap-2">
           <el-button @click="dialogVisible = true">Open Dialog</el-button>
           <el-button @click="drawerVisible = true">Open Sheet</el-button>
