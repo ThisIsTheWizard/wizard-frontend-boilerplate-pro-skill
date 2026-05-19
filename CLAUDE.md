@@ -62,9 +62,7 @@ there directly. The root holds only repo infrastructure (CI, docs, manifests).
 
 ## Session convention
 
-Each session completes **exactly one TODO item** from `TODO.md`. Do not move to the next item unless the user explicitly starts a new session for it.
-
-Mark the item `[x]` in `TODO.md` when complete.
+Each session should have a clear, scoped goal agreed on at the start. Work on one improvement area at a time and commit when it is complete before moving to the next.
 
 ## Code quality
 
