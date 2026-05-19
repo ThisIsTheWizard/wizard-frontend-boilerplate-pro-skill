@@ -1,6 +1,6 @@
 {
   "name": "wizard-frontend-boilerplate-pro",
-  "description": "Scaffold production-ready frontend apps with Next.js, React, Vue, Nuxt, or SvelteKit. 7-phase interactive workflow: interview, version resolution, scaffold, OKLCH palette generation, 28 UI components, sidebar showcase with collapsible code snippets, and end-to-end verification. Light/dark mode, Tailwind v4, WCAG AA. Pairs with ui-ux-pro-max for enhanced component output.",
+  "description": "Scaffold a fully themed, production-ready frontend app in one session. Supports 5 frameworks (Next.js 15, React+Vite, Vue 3.5+, Nuxt 4, SvelteKit/Svelte 5) and 13 UI libraries (shadcn/ui, MUI, Chakra, Mantine, Ant Design, HeroUI, HeadlessUI, DaisyUI, Bootstrap, Vuetify, PrimeVue, Element Plus, custom Tailwind). 7-phase workflow: interview → version resolution → scaffold → OKLCH palette (8 named presets + custom hex/oklch) → 28 UI components → sidebar showcase with collapsible code snippets → end-to-end verification. Light/dark mode with FOUC prevention, Tailwind v4 (auto-fallback to v3), WCAG AA contrast gate, TypeScript or JavaScript, any package manager. Pairs with ui-ux-pro-max for higher-fidelity components — auto-falls back to built-in Tailwind implementations when absent. Plain CommonMark only; compatible with Claude Code, Cursor, Windsurf, Gemini CLI, and 10+ other agents.",
   "version": "1.0.0",
   "author": {
     "name": "The Wizard"

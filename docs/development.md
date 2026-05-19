@@ -3,6 +3,11 @@
 How to extend, maintain, and validate the `wizard-frontend-boilerplate-pro` skill.
 All paths below are relative to the repo root. All edits go into `src/wizard-frontend-boilerplate-pro/`.
 
+> **Contributing?** See [CONTRIBUTING.md](../CONTRIBUTING.md) instead — it covers the same
+> recipes with contributor-focused checklists and PR instructions. This file adds the
+> maintainer-only sections: theme provider contract, `color-presets.json` regeneration,
+> and the release process.
+
 ---
 
 ## Validation scripts
@@ -18,13 +23,19 @@ bash -n src/wizard-frontend-boilerplate-pro/scripts/locate_ui_ux_pro_max.sh
 # Syntax-check Python scripts
 python3 -m py_compile src/wizard-frontend-boilerplate-pro/scripts/generate_palette.py
 python3 -m py_compile src/wizard-frontend-boilerplate-pro/scripts/verify_contrast.py
+python3 -m py_compile src/wizard-frontend-boilerplate-pro/scripts/validate_templates.py
 
 # WCAG AA gate — all 8 presets must pass
 python3 src/wizard-frontend-boilerplate-pro/scripts/verify_contrast.py \
   src/wizard-frontend-boilerplate-pro/assets/color-presets.json --quiet
+
+# Template coverage — all expected showcase template files present
+python3 src/wizard-frontend-boilerplate-pro/scripts/validate_templates.py --quiet
 ```
 
 CI runs the same commands on every push (see `.github/workflows/python-ci.yml`).
+The full compat matrix (Python 3.10–3.13, Ubuntu + macOS) runs via
+`.github/workflows/compat-matrix.yml`.
 
 ---
 

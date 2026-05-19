@@ -2,44 +2,114 @@
   "name": "wizard-frontend-boilerplate-pro-skill",
   "id": "wizard-frontend-boilerplate-pro-skill",
   "owner": {
-    "name": "ThisIsTheWizard"
+    "name": "TheWizard",
+    "handle": "ThisIsTheWizard",
+    "url": "https://github.com/ThisIsTheWizard"
   },
   "metadata": {
-    "description": "Scaffold production-ready frontend apps with Next.js, React, Vue, Nuxt, or SvelteKit — 28 UI components, OKLCH color palettes, light/dark theming, WCAG AA contrast.",
-    "version": "1.0.0"
+    "displayName": "Wizard Frontend Boilerplate Pro",
+    "tagline": "From prompt to production-ready frontend in one session.",
+    "description": "Scaffold a fully themed, sidebar-navigated component showcase with 28 UI components, OKLCH color palettes, light/dark mode, and WCAG AA contrast — all in one AI session. Supports Next.js 15, React + Vite, Vue 3, Nuxt 4, and SvelteKit with 13 UI library integrations.",
+    "version": "1.0.0",
+    "category": "frontend",
+    "tags": [
+      "scaffold",
+      "boilerplate",
+      "nextjs",
+      "react",
+      "vue",
+      "nuxt",
+      "svelte",
+      "sveltekit",
+      "tailwind",
+      "tailwind-v4",
+      "oklch",
+      "design-tokens",
+      "dark-mode",
+      "light-dark",
+      "wcag",
+      "accessibility",
+      "component-library",
+      "showcase",
+      "shadcn",
+      "mui",
+      "chakra",
+      "mantine",
+      "antd",
+      "heroui",
+      "headlessui",
+      "daisy",
+      "bootstrap",
+      "vuetify",
+      "primevue",
+      "elementplus",
+      "typescript",
+      "color-palette",
+      "theming",
+      "starter"
+    ],
+    "frameworks": ["nextjs", "react", "vue", "nuxt", "svelte"],
+    "license": "MIT",
+    "homepage": "https://github.com/ThisIsTheWizard/wizard-frontend-boilerplate-pro-skill",
+    "repository": "https://github.com/ThisIsTheWizard/wizard-frontend-boilerplate-pro-skill",
+    "features": [
+      "7-phase interactive scaffolding workflow",
+      "28 UI components across 6 categories with live examples and collapsible code snippets",
+      "13 UI library integrations (shadcn/ui, MUI, Chakra, Mantine, Ant Design, HeroUI, HeadlessUI, DaisyUI, Bootstrap, Vuetify, PrimeVue, Element Plus, Custom Tailwind)",
+      "OKLCH color palette generator with 8 named presets + custom hex/OKLCH input",
+      "50–950 color scales for neutral and accent",
+      "WCAG AA contrast verification baked into the palette pipeline",
+      "Light/dark mode with FOUC prevention and localStorage persistence",
+      "Tailwind v4 (default) with automatic v3 fallback for incompatible combinations",
+      "TypeScript or JavaScript, any of four package managers (bun/pnpm/yarn/npm)",
+      "Optional pairing with ui-ux-pro-max skill for higher-fidelity component output",
+      "Plain CommonMark only — compatible with Claude Code, Cursor, Windsurf, Gemini CLI, and more"
+    ],
+    "screenshots": [
+      {
+        "label": "Component showcase — Inputs page",
+        "description": "The /library/inputs route showing Button, Input, Textarea, Select, Checkbox, RadioGroup, and Switch components with collapsible code snippets"
+      },
+      {
+        "label": "Color palette picker",
+        "description": "The 8 built-in OKLCH presets presented during Phase 1 of the interview"
+      },
+      {
+        "label": "Light/dark mode toggle",
+        "description": "Theme toggle in the showcase header, showing the same component set in both light (Modern Slate) and dark mode"
+      },
+      {
+        "label": "Sidebar navigation",
+        "description": "The persistent sidebar linking to all 6 component categories with active-state highlighting"
+      }
+    ],
+    "agents": [
+      "Claude Code",
+      "Cursor",
+      "Windsurf",
+      "Continue",
+      "OpenCode",
+      "Gemini CLI",
+      "Codex",
+      "Aider",
+      "Cline",
+      "Roo Code",
+      "PearAI",
+      "Void",
+      "Zed AI",
+      "Any agent that reads markdown and runs shell commands"
+    ]
   },
   "plugins": [
     {
       "name": "wizard-frontend-boilerplate-pro",
       "source": "./",
-      "description": "A seven-phase scaffolding skill that takes you from zero to a fully themed, component-showcased frontend app in one session. Supports Next.js 15, React + Vite, Vue 3.5+, Nuxt 4, and SvelteKit (Svelte 5). Features 28 UI components across 6 categories, OKLCH palette generator with 8 presets, three-layer CSS variable token system, light/dark mode with FOUC prevention, Tailwind v4 support, and WCAG AA contrast validation. Optional pairing with ui-ux-pro-max for higher-fidelity component output — falls back to built-in Tailwind implementations when absent. Plain CommonMark only, all actions are shell commands or file writes.",
       "version": "1.0.0",
       "author": {
         "name": "The Wizard",
         "handle": "ThisIsTheWizard",
         "url": "https://github.com/ThisIsTheWizard"
       },
-      "keywords": [
-        "frontend",
-        "scaffold",
-        "boilerplate",
-        "nextjs",
-        "react",
-        "vue",
-        "nuxt",
-        "svelte",
-        "sveltekit",
-        "tailwind",
-        "tailwind-v4",
-        "component-library",
-        "showcase",
-        "design-tokens",
-        "oklch",
-        "dark-mode",
-        "wcag",
-        "accessibility"
-      ],
-      "category": "frontend",
       "license": "MIT",
       "homepage": "https://github.com/ThisIsTheWizard/wizard-frontend-boilerplate-pro-skill",
       "repository": "https://github.com/ThisIsTheWizard/wizard-frontend-boilerplate-pro-skill",

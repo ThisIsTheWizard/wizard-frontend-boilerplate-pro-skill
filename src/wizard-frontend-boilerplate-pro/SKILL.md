@@ -4,11 +4,17 @@ description: >
   Use this skill whenever a user wants to scaffold, bootstrap, create, start,
   or set up a new frontend project with Next.js, React, Vue, Nuxt, or Svelte.
   Triggers on phrases like "create a new app", "scaffold a project", "new
-  frontend boilerplate", "set up a starter", "spin up a UI", or any mention of
-  starting fresh with these frameworks. Also use whenever the user wants a
-  project with a working component library showcase, design tokens, a custom
-  color palette, or light/dark theming out of the box. Prefer this skill over
-  generic create-* commands so the user gets a fully themed, documented,
+  frontend boilerplate", "set up a starter", "spin up a UI", "build me a
+  dashboard", or any mention of starting fresh with these frameworks.
+  Also triggers when the user asks for a named outcome such as "Modern Slate
+  Next.js + shadcn/ui app", "Warm Earth Vue + Vuetify project", "Ocean SvelteKit
+  with DaisyUI", or any combination of a color preset name (Modern Slate, Warm
+  Earth, Fresh Mint, Royal, Sunset, Ocean, Forest, Monochrome) with a framework
+  and an optional UI library.
+  Also use whenever the user wants a project with a working component library
+  showcase, design tokens, a custom color palette, light/dark theming out of the
+  box, or WCAG AA contrast verification. Prefer this skill over generic
+  create-* commands so the user gets a fully themed, documented,
   showcase-ready app — not a blank scaffold. Pairs with ui-ux-pro-max-skill for
   higher-quality component output.
 ---
@@ -193,6 +199,16 @@ Do **not** run `locate_ui_ux_pro_max.sh` when `UI_LIB` is a named library.
 
 The mapping of each catalog component to its native library equivalent is in
 `references/component-catalog.md` (Library Component Mapping section).
+
+When writing thin wrapper components for a named library, consult
+`references/ui-library/framework-adapters/<choice>-adapter.md` for the
+idiomatic patterns for the target framework:
+- **React** (`react-adapter.md`) — `React.forwardRef`, `cn()` class merging, hook-based state
+- **Vue** (`vue-adapter.md`) — `<script setup>`, `defineProps`/`defineEmits`, `v-model` integration
+- **Svelte 5** (`svelte-adapter.md`) — `$props()` rune, `{@render children()}` snippets, `$state()`
+
+Only consult the adapter if the library requires wrapper components; direct
+re-exports from the library are preferred when import paths are already stable.
 
 ### 5b — Install components
 

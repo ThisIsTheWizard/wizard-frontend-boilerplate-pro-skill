@@ -1,7 +1,7 @@
 {
   "name": "wizard-frontend-boilerplate-pro",
   "displayName": "Wizard Frontend Boilerplate Pro",
-  "description": "Scaffold production-ready frontend apps with Next.js, React, Vue, Nuxt, or SvelteKit — 28 UI components, OKLCH color palettes, light/dark theming, WCAG AA contrast.",
+  "description": "Scaffold a fully themed, production-ready frontend app in one session. Choose from 5 frameworks (Next.js, React+Vite, Vue 3, Nuxt 4, SvelteKit), 13 UI libraries (shadcn/ui, MUI, Chakra, Mantine, Ant Design, HeroUI, HeadlessUI, DaisyUI, Bootstrap, Vuetify, PrimeVue, Element Plus, or custom Tailwind), and 8 OKLCH color presets. Generates 28 components across 6 categories, a sidebar showcase, light/dark mode with FOUC prevention, and WCAG AA contrast validation — all in one prompt.",
   "version": "1.0.0",
   "author": "The Wizard",
   "license": "MIT",
