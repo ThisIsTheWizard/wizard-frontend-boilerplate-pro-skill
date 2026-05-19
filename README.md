@@ -9,7 +9,7 @@ Covers five frameworks, 13 UI library integrations, 28 components across
 6 categories, an OKLCH color palette generator, and full light/dark theming —
 out of the box. No blank scaffolds.
 
-![Wizard Frontend Boilerplate Pro demo](demo/wizard-boilerplate-demo.png)
+![Wizard Frontend Boilerplate Pro demo](docs/assets/demo.png)
 
 ## What you get
 
