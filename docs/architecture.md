@@ -76,3 +76,53 @@ If the `.claude/skills/` symlink is accidentally removed:
 ln -s ../../src/wizard-frontend-boilerplate-pro \
   .claude/skills/wizard-frontend-boilerplate-pro
 ```
+
+## Cross-platform and symlink-unsupported environments
+
+**Windows (native git without symlinks enabled)**
+
+Git on Windows requires Developer Mode or the `core.symlinks=true` setting to
+check out symlinks correctly. If the symlink resolves as a plain text file
+containing the target path, recreate it manually:
+
+```powershell
+# PowerShell (run as administrator, or in Developer Mode)
+cmd /c mklink /D .claude\skills\wizard-frontend-boilerplate-pro ..\..\src\wizard-frontend-boilerplate-pro
+```
+
+Or enable symlinks globally and re-clone:
+
+```bash
+git config --global core.symlinks true
+```
+
+**WSL (Windows Subsystem for Linux)**
+
+Inside a WSL terminal the `ln -s` command works normally. Use the standard
+Unix form:
+
+```bash
+ln -s ../../src/wizard-frontend-boilerplate-pro \
+  .claude/skills/wizard-frontend-boilerplate-pro
+```
+
+**Git clients that do not support symlinks (e.g. some CI agents)**
+
+Copy the source directory instead of symlinking:
+
+```bash
+cp -r src/wizard-frontend-boilerplate-pro \
+  .claude/skills/wizard-frontend-boilerplate-pro
+```
+
+Note: the copy will not automatically track future edits to `src/`. Run the
+copy command again after making changes if symlinks are unavailable.
+
+**Verification**
+
+Regardless of method, verify the skill resolves correctly:
+
+```bash
+# Should print the path to SKILL.md (not a raw symlink path string)
+cat .claude/skills/wizard-frontend-boilerplate-pro/SKILL.md | head -5
+```
