@@ -24,8 +24,13 @@ jobs:
         run: |
           python3 -m py_compile src/wizard-frontend-boilerplate-pro/scripts/generate_palette.py
           python3 -m py_compile src/wizard-frontend-boilerplate-pro/scripts/verify_contrast.py
+          python3 -m py_compile src/wizard-frontend-boilerplate-pro/scripts/validate_templates.py
 
       - name: Run contrast gate — all 8 presets must pass WCAG AA
         run: |
           python3 src/wizard-frontend-boilerplate-pro/scripts/verify_contrast.py \
             src/wizard-frontend-boilerplate-pro/assets/color-presets.json --quiet
+
+      - name: Template coverage — all expected showcase template files present
+        run: |
+          python3 src/wizard-frontend-boilerplate-pro/scripts/validate_templates.py --quiet

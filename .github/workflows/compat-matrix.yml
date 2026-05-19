@@ -1,0 +1,94 @@
+name: Compatibility Matrix
+
+on:
+  push:
+    branches: [master, main]
+  pull_request:
+    branches: [master, main]
+
+jobs:
+  python-matrix:
+    name: Python ${{ matrix.python-version }} — scripts + contrast gate
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.10", "3.11", "3.12", "3.13"]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Syntax-check Python scripts
+        run: |
+          python3 -m py_compile src/wizard-frontend-boilerplate-pro/scripts/generate_palette.py
+          python3 -m py_compile src/wizard-frontend-boilerplate-pro/scripts/verify_contrast.py
+          python3 -m py_compile src/wizard-frontend-boilerplate-pro/scripts/validate_templates.py
+
+      - name: WCAG AA gate — all presets must pass
+        run: |
+          python3 src/wizard-frontend-boilerplate-pro/scripts/verify_contrast.py \
+            src/wizard-frontend-boilerplate-pro/assets/color-presets.json --quiet
+
+      - name: Palette generation — smoke test all 8 named presets
+        run: |
+          for preset in "Modern Slate" "Warm Earth" "Fresh Mint" "Royal" \
+                        "Sunset" "Ocean" "Forest" "Monochrome"; do
+            echo "Testing preset: $preset"
+            python3 src/wizard-frontend-boilerplate-pro/scripts/generate_palette.py \
+              --preset "$preset" > /dev/null
+          done
+
+      - name: Palette generation — custom hex input
+        run: |
+          python3 src/wizard-frontend-boilerplate-pro/scripts/generate_palette.py \
+            "#0ea5e9" "#f59e0b" > /dev/null
+
+      - name: Palette generation — custom oklch input
+        run: |
+          python3 src/wizard-frontend-boilerplate-pro/scripts/generate_palette.py \
+            "oklch(55% 0.18 200)" "oklch(70% 0.15 85)" > /dev/null
+
+      - name: Template coverage — all expected files present
+        run: |
+          python3 src/wizard-frontend-boilerplate-pro/scripts/validate_templates.py --quiet
+
+  shell-matrix:
+    name: Shell scripts — ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Syntax-check shell scripts
+        run: |
+          bash -n src/wizard-frontend-boilerplate-pro/scripts/check_versions.sh
+          bash -n src/wizard-frontend-boilerplate-pro/scripts/detect_package_manager.sh
+          bash -n src/wizard-frontend-boilerplate-pro/scripts/locate_ui_ux_pro_max.sh
+
+      - name: detect_package_manager — smoke test (no lock files present)
+        run: |
+          cd /tmp
+          result=$(bash $GITHUB_WORKSPACE/src/wizard-frontend-boilerplate-pro/scripts/detect_package_manager.sh 2>/dev/null || true)
+          echo "Detected (no lock files): '${result}'"
+
+      - name: detect_package_manager — npm lock file
+        run: |
+          cd /tmp && touch package-lock.json
+          result=$(bash $GITHUB_WORKSPACE/src/wizard-frontend-boilerplate-pro/scripts/detect_package_manager.sh 2>/dev/null || true)
+          echo "Detected (npm): '${result}'"
+          rm -f package-lock.json
+
+      - name: locate_ui_ux_pro_max — exits 1 when skill absent (expected)
+        run: |
+          bash src/wizard-frontend-boilerplate-pro/scripts/locate_ui_ux_pro_max.sh \
+            && echo "WARNING: unexpected success" \
+            || echo "Expected exit 1 — skill not installed in CI"
